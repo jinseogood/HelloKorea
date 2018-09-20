@@ -5,7 +5,6 @@
 <head>
 <style>
 	textarea{
-		resize:none;
 		width:100%;
 	}
 	input[type=text] {
@@ -32,6 +31,7 @@
    
    
    <section class="container tm-home-section-1" id="more" style = "width:80%; padding:100px">
+   <form action="insertReview.bo" method = "post" encType = "multipart/form-data">
       <div class="row">
          
       </div> 
@@ -42,10 +42,15 @@
 					<div class="col-lg-4 col-md-3 col-sm-3"><hr></div>	
 	  </div>	
       <div id="google-map" style = "text-align:center; width:100%; height:1000px">
+      
+      		<div class="col-lg-12 col-md-12 col-sm-12" style = "">
+      		<div class="row">		
+      		
+			</div>
          	<div class="col-lg-6" style = "align:center">
-              	 <img src="${ contextPath }/resources/img/about-1.jpg" alt="image" style = "width:350px; height:270px" />
+              	 <img src="${ contextPath }/resources/img/about-1.jpg" alt="image" style = "width:100%; height:270px" />
             </div>
-         	<div class="col-lg-6" style = "display:table; padding-bottom:50px">
+         	<div class="col-lg-6" style = "display:table;">
          		<div style = "vertical-align:middle; display:table-cell; height:270px">
          			<span><h1>바이스로이 발리</h1></span>
          			<br>
@@ -54,7 +59,7 @@
          			</div>
          		</div>
         	</div>
-        	
+        	</div>
         	<div class="col-lg-12 col-md-12 col-sm-12"><hr>
            	 	<div style = "text-align:left; padding-bottom:20px; height:500px">
         			<span style = "margin-top:20px"><h3>이 시설에 대한 평가</h3></span>
@@ -78,7 +83,7 @@
             		<br>
             		<div>
             		<span>리뷰내용</span><br>
-            			<textarea placeholder="객실 위치, 편의시설등에 대한 고객님의 경험을 공유하세요." rows="10" cols="50"></textarea>
+            			<textarea style="resize: none;" placeholder="객실 위치, 편의시설등에 대한 고객님의 경험을 공유하세요." rows="10" cols="50"></textarea>
             		</div>
             		<br>
             		<br>
@@ -97,9 +102,10 @@
             	<button type="button" class="btn btn-secondary">사진첨부</button>
         	</div>
         	<div class="col-lg-12 col-md-12 col-sm-12"><hr>
-        		<button type="button" class="btn btn-secondary">확인</button>
+        		<input type="submit" class="btn btn-secondary" value = "확인">
         		<button type="button" class="btn btn-secondary">취소</button>
         	</div>
+        	</form>
    </section>
    
    <!-- white bg -->

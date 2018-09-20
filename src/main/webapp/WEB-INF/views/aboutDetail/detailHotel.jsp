@@ -457,11 +457,11 @@
 	
 	<script>
 		function review(){
- 			location.href="reviewWrite";
+ 			location.href="reviewWrite.bo";
  		}
  	  
     	function reportWrite(){
-    		window.open('reportWrite', 'reportWrite', 'height=580, width=480, top=80, left=400 resizable=none, scrollbars=no')
+    		window.open('reportWrite.bo', 'reportWrite', 'height=580, width=480, top=80, left=400 resizable=none, scrollbars=no')
    		}
 		$(function() {
 

@@ -45,7 +45,7 @@
     
       <section class="category">
         
-          <h2><a href="">가이드라인</a></h2>
+          <h2><a href="#">가이드라인</a></h2>
         
         
           <section class="section">
@@ -407,7 +407,7 @@
     
       <section class="category">
         
-          <h2><a href="/hc/ko/categories/200056877-%EC%82%AC%EC%9D%B4%ED%8A%B8-%EA%B8%B0%EB%8A%A5">사이트 기능</a></h2>
+          <h2><a href="#">사이트 기능</a></h2>
         
         
           <section class="section">
@@ -422,21 +422,21 @@
              
                 
                     
-                    <a href="/hc/ko/articles/200613827-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90-%EB%A6%AC%EC%8A%A4%ED%8C%85%EB%90%9C-%EC%8B%9C%EC%84%A4%EC%97%90-%EB%AC%B8%EC%9D%98%ED%95%A0-%EC%88%98-%EC%9E%88%EA%B2%8C-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EA%B0%80-%EB%8F%84%EC%99%80%EC%A4%84-%EC%88%98-%EC%9E%88%EB%82%98%EC%9A%94-">헬로코리아에 리스팅된 시설에 문의할 수 있게 헬로코리아가 도와줄 수 있나요?</a>
+                    <a href="s_start1">헬로코리아에 리스팅된 시설에 문의할 수 있게 헬로코리아가 도와줄 수 있나요?</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/200613857-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90%EC%84%9C-%EC%96%B4%EB%96%BB%EA%B2%8C-%EA%B2%80%EC%83%89%ED%95%98%EB%82%98%EC%9A%94-">헬로코리아에서 어떻게 검색하나요?</a>
+                    <a href="s_start2">헬로코리아에서 어떻게 검색하나요?</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/200613837-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EA%B0%80-%EB%82%B4%EA%B0%80-%EC%97%AC%ED%96%89%EC%97%90%EC%84%9C-%ED%95%B4%EC%95%BC-%ED%95%A0-%EC%9D%BC%EC%9D%84-%EC%A0%9C%EC%95%88%ED%95%B4%EC%A4%84-%EC%88%98-%EC%9E%88%EB%82%98%EC%9A%94-">헬로코리아가 내가 여행에서 해야 할 일을 제안해줄 수 있나요?</a>
+                    <a href="s_start3">헬로코리아가 내가 여행에서 해야 할 일을 제안해줄 수 있나요?</a>
                   </li>
                 
                   <li >
@@ -648,7 +648,7 @@
     
       <section class="category">
         
-          <h2><a href="/hc/ko/categories/200056857-%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0">커뮤니티</a></h2>
+          <h2><a href="#">커뮤니티</a></h2>
         
         
           <section class="section">
@@ -663,21 +663,21 @@
              
                 
                     
-                    <a href="/hc/ko/articles/206497237-TripCollective%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%EC%9A%94-">TripCollective란 무엇인가요?</a>
+                    <a href="c_memberCenter1">TripCollective란 무엇인가요?</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/200613787-%ED%9A%8C%EC%9B%90-%ED%94%84%EB%A1%9C%ED%95%84%EC%9D%98-%EB%8F%84%EC%8B%9C-%ED%8E%98%EC%9D%B4%EC%A7%80%EB%8A%94-%EB%AD%94%EA%B0%80%EC%9A%94-">회원 프로필의 도시 페이지는 뭔가요?</a>
+                    <a href="c_memberCenter2">회원 프로필의 도시 페이지는 뭔가요?</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/200613737-%EB%82%B4-%EC%97%AC%ED%96%89-%EC%A7%80%EB%8F%84%EC%97%90%EC%84%9C-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%80%EC%9D%84-%EB%B3%80%EA%B2%BD%ED%95%98%EA%B1%B0%EB%82%98-%EC%82%AD%EC%A0%9C%ED%95%98%EB%82%98%EC%9A%94-">내 여행 지도에서 어떻게 핀을 변경하거나 삭제하나요?</a>
+                    <a href="c_memberCenter3">내 여행 지도에서 어떻게 핀을 변경하거나 삭제하나요?</a>
                   </li>
                 
                   <li >
@@ -812,7 +812,7 @@
     
       <section class="category">
         
-          <h2><a href="/hc/ko/categories/200056897-%EA%B8%B0%EC%88%A0-%EC%A7%80%EC%9B%90">기술 지원</a></h2>
+          <h2><a href="#">기술 지원</a></h2>
         
         
           <section class="section">
@@ -827,21 +827,21 @@
              
                 
                     
-                    <a href="/hc/ko/articles/115007770568-%EC%99%9C-%EC%9D%B4%EB%A9%94%EC%9D%BC-%EB%8B%B5%EB%B3%80%EC%9D%B4-%EC%98%A4%EC%A7%80-%EC%95%8A%EB%82%98%EC%9A%94-">왜 이메일 답변이 오지 않나요?</a>
+                    <a href="t_id1">왜 이메일 답변이 오지 않나요?</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/202251228-%ED%8C%A8%EC%8A%A4%EC%9B%8C%EB%93%9C%EA%B0%80-%EB%B3%80%EA%B2%BD%EB%90%98%EC%97%88%EB%8B%A4%EB%8A%94-%ED%99%95%EC%9D%B8-%EC%9D%B4%EB%A9%94%EC%9D%BC%EC%9D%B4-%EB%8F%84%EC%B0%A9%ED%95%9C-%EC%9D%B4%EC%9C%A0%EB%8A%94-%EB%AC%B4%EC%97%87%EC%9E%85%EB%8B%88%EA%B9%8C-">패스워드가 변경되었다는 확인 이메일이 도착한 이유는 무엇입니까?</a>
+                    <a href="t_id2">패스워드가 변경되었다는 확인 이메일이 도착한 이유는 무엇입니까?</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/200938503-%EA%B0%80%EA%B9%8C%EC%9A%B4-%EA%B3%B5%ED%95%AD%EC%9D%84-%EB%B3%80%EA%B2%BD%ED%95%98%EB%A0%A4%EB%A9%B4-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%B4%EC%95%BC-%ED%95%98%EB%82%98%EC%9A%94-">가까운 공항을 변경하려면 어떻게 해야 하나요?</a>
+                    <a href="t_id3">가까운 공항을 변경하려면 어떻게 해야 하나요?</a>
                   </li>
                 
                   <li >
