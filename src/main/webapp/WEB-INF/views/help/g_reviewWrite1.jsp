@@ -96,25 +96,6 @@
 <p><div class="wysiwyg-underline"><strong>헬로코리아에 등록되는 콘텐츠</strong></div>
 <p><span>베케이션 렌탈 리스팅은 다음과 같은 파트너사 사이트를 통해 헬로코리아에 제공됩니다. FlipKey, Holiday Lettings, Niumba, Home Away, HouseTrip 및 Vacation Home Rentals. 렌탈 오너가 이 서비스 중 하나에서 리스팅을 삭제하면 헬로코리아 렌탈 리스팅도 함께 삭제됩니다. 헬로코리아는 헬로코리아에서 등록 취소된 베케이션 렌탈에 대한 리뷰를 게시할 수 없습니다.</span></p>
       </div>
-      <!-- <div class="article-attachments">
-        <ul class="attachments">
-          
-        </ul>
-      </div>
-      <footer class="article-footer clearfix">
-        
-          <div class="article-vote">
-            <span class="article-vote-question">도움이 되었습니까?</span>
-            <div class="article-vote-controls">
-              <a role="button" rel="nofollow" class="article-vote-up" title="네" aria-selected="false" data-auth-action="signin" href="/hc/ko/signin?return_to=https%3A%2F%2Fwww.tripadvisorsupport.com%2Fhc%2Fko%2Farticles%2F200614797-%25EC%2597%25AC%25ED%2596%2589%25EC%259E%2590-%25EB%25A6%25AC%25EB%25B7%25B0-%25EA%25B0%2580%25EC%259D%25B4%25EB%2593%259C%25EB%259D%25BC%25EC%259D%25B8"></a>
-              <a role="button" rel="nofollow" class="article-vote-down" title="아니요" aria-selected="false" data-auth-action="signin" href="/hc/ko/signin?return_to=https%3A%2F%2Fwww.tripadvisorsupport.com%2Fhc%2Fko%2Farticles%2F200614797-%25EC%2597%25AC%25ED%2596%2589%25EC%259E%2590-%25EB%25A6%25AC%25EB%25B7%25B0-%25EA%25B0%2580%25EC%259D%25B4%25EB%2593%259C%25EB%259D%25BC%25EC%259D%25B8"></a>
-            </div>
-         
-          </div>
-        
-       
-      </footer>
-    </div> -->
 
   </article>
     <div class="article-column-related">

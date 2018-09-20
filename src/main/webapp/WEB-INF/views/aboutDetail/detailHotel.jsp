@@ -481,6 +481,13 @@
 	<jsp:include page="../common/footer.jsp"/>
 	
 	<script>
+		function review(){
+ 			location.href="reviewWrite";
+ 		}
+ 	  
+    	function reportWrite(){
+    		window.open('reportWrite', 'reportWrite', 'height=580, width=480, top=80, left=400 resizable=none, scrollbars=no')
+   		}
 		$(function() {
 
 			// https://css-tricks.com/snippets/jquery/smooth-scrolling/
