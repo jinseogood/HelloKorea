@@ -41,6 +41,11 @@ public class SubPageController {
 		return "themeTour/themeTourMain";
 	}
 	
+	@RequestMapping("themeDetail")
+	public String themeDetailView(){
+		return "themeTour/themeTourDetail";
+	}
+	
 	
 
 }
