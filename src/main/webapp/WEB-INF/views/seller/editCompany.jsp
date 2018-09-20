@@ -109,8 +109,8 @@
 					</tr>
 					<tr>
 						<td colspan="5" align="center">
-							<button type="reset">취소</button>
-							<button type="submit">수정</button>
+							<button type="reset" class="btn btn-default">취소</button>&nbsp;&nbsp;
+							<button type="submit" class="btn btn-success">수정</button>
 						</td>
 					</tr>
 				</table>

@@ -25,6 +25,10 @@
     	margin-left:auto;
     	margin-right:auto;
 	}
+	.paging{
+	    padding:1%;
+	    margin-bottom:3%;
+	}
 	#addTable{
 		width:650px;
 	}
@@ -64,6 +68,17 @@
 	}
 	#searchTable thead label{
 		font-weight:normal;
+	}
+	#resultTable{
+		width:100%;
+		padding:5px;
+	}
+	#resultTable tr{
+		border-bottom:1px solid lightgray;
+		height:39px;
+	}
+	#resultTable td{
+		text-align:left;
 	}
 </style>
 </head>
@@ -217,10 +232,33 @@
 		  				</thead>
 			  			<tbody>
 			  				<tr>
-			  					<td colspan="2"></td>
+			  					<td colspan="2">
+			  						<table id="resultTable">
+			  							<tr><td><b>ABC호텔</b><br><font style="font-size:11px;">서울 양천구</font></td></tr>
+			  							<tr><td><b>ABC호텔</b><br><font style="font-size:11px;">서울 양천구</font></td></tr>
+			  							<tr><td><b>ABC호텔</b><br><font style="font-size:11px;">서울 양천구</font></td></tr>
+			  							<tr><td><b>ABC호텔</b><br><font style="font-size:11px;">서울 양천구</font></td></tr>
+			  							<tr><td><b>ABC호텔</b><br><font style="font-size:11px;">서울 양천구</font></td></tr>
+			  							<tr><td><b>ABC호텔</b><br><font style="font-size:11px;">서울 양천구</font></td></tr>
+			  							<tr><td><b>ABC호텔</b><br><font style="font-size:11px;">서울 양천구</font></td></tr>
+			  							<tr><td><b>ABC호텔</b><br><font style="font-size:11px;">서울 양천구</font></td></tr>
+			  							<tr><td><b>ABC호텔</b><br><font style="font-size:11px;">서울 양천구</font></td></tr>
+			  						</table>
+			  					</td>
 			  				</tr>
 			  			</tbody>
 		  			</table>
+		  			<div class="paging" align="center">
+            			<ul class="pagination pagination-sm">
+                			<li><a href="#">&laquo;</a></li>
+                    		<li><a href="#">1</a></li>
+                    		<li><a href="#">2</a></li>
+                    		<li><a href="#">3</a></li>
+                    		<li><a href="#">4</a></li>
+                    		<li><a href="#">5</a></li>
+                    		<li><a href="#">&raquo;</a></li>
+                		</ul>
+            		</div>
 		  		</div>
 		  		<div class="modal-footer" align="center">
 		  		</div>

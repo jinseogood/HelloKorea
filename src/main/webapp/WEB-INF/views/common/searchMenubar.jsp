@@ -22,7 +22,7 @@
 	#menuIconArea{
 		width:135px;
 		height:80px;
-		float:left;
+		float:right;
 	}
 </style>
 </head>
@@ -40,7 +40,6 @@
 		              <i class="fa fa-bars"></i>
 		            </div>
 		            <nav class="tm-nav">
-		            	<!-- <div style="width:502.51px; height:80px;"></div> -->
 				  		<div id="menuIconArea">
 				  			<a onclick="openMsg()">Msg</a>
 				  			<a href="helpView">Help</a>

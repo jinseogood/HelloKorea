@@ -58,6 +58,29 @@
 	    vertical-align: top;
 	    border-bottom: 1px solid #ccc;
 	}
+	
+	#reservationDetailTable{
+		width:500px;
+		line-height: 1.5;
+	}
+	#reservationDetailTable tr{
+		height:30px;
+	}
+	#reservationDetailTable th{
+		padding: 3px;
+	    text-align: center;
+	    vertical-align: middle;
+	    border-right: 3px solid #036;
+	    background: #f3f6f7;
+	}
+	#reservationDetailTable select{
+		margin: 3px;
+	}
+	#reservationDetailTable td{
+	    padding: 3px;
+	    vertical-align: middle;
+	    border: 1px solid #ccc;
+	}
 </style>
 </head>
 <body>
@@ -155,10 +178,69 @@
 	
 	<jsp:include page="../common/footer.jsp"/>
 	
+	<!-- 예약 디테일 -->
+	<div class="modal fade" id="reservationDetailModal" role="dialog">
+		<div class="modal-dialog" align="center">
+	    
+		  	<div class="modal-content" style="width:530px;">
+		  		<div class="modal-header">
+		  			<button type="button" class="close" data-dismiss="modal">&times;</button>
+		  			<h4 class="modal-title">예약 내역</h4>
+		  		</div>
+		  		<div class="modal-body">
+		  			<table id="reservationDetailTable">
+		  				<tr>
+		  					<th>예약자</th>
+		  					<td colspan="3"><p>김진서</p></td>
+		  				</tr>
+		  				<tr>
+		  					<th>기간</th>
+		  					<td colspan="3">
+		  						<p>2018/09/20 - 2018/10/20</p>
+		  					</td>
+		  				</tr>
+		  				<tr>
+		  					<th style="border-right:3px solid orangered;">객실 타입</th>
+		  					<td><p>스위트룸</p></td>
+		  					<th style="border-right:3px solid orangered;">객실 수</th>
+		  					<td><p>1 개</p></td>
+		  				</tr>
+		  				<tr>
+		  					<th style="border-right:3px solid orangered;">객실 타입</th>
+		  					<td><p>일반실</p></td>
+		  					<th style="border-right:3px solid orangered;">객실 수</th>
+		  					<td><p>1 개</p></td>
+		  				</tr>
+		  				<tr>
+		  					<th>인원 수</th>
+		  					<td colspan="3"><p>5 명</p></td>
+		  				</tr>
+		  				<tr>
+		  					<th>금액</th>
+		  					<td><p>380,000 원</p></td>
+		  					<th>상태</th>
+		  					<td>
+		  						<select name="rStatus">
+		  							<option value="wait">결제 대기</option>
+		  							<option value="ok">결제 완료</option>
+		  						</select>
+		  						&nbsp;
+		  						<button type="button" class="btn btn-warning btn-sm">설정</button>
+		  					</td>
+		  				</tr>
+		  			</table>
+		  		</div>
+		  		<div class="modal-footer" align="center">
+		  		</div>
+		  	</div>
+	      
+	  	</div>
+	</div>
+	
 	<script>
 		$(function(){
 			$("#reservationTable td").click(function(){
-				location.href="detailReservation.sell";
+				$(this).attr({"data-toggle":"modal", "data-target":"#reservationDetailModal"});
 			});
 		});
 	</script>
