@@ -27,6 +27,7 @@
 </style>
 </head>
 <body>
+
 	<!-- Header -->
   	<div class="tm-header">
   		<div class="container">
@@ -62,5 +63,6 @@
   	    	window.open('recieveMessageView', 'Hello', 'width=480px, height=580px, top=80px, left=400px');
   	    }
   	</script>
+
 </body>
 </html>
