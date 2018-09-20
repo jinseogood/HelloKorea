@@ -48,6 +48,23 @@
 		  </ul>
 		</div>	
 	</section>
+	<script>
+		$(function(){
+			$.ajax({
+				url:"mainHotel.in",
+				type:"GET",
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+				},
+				error:function(data){
+					console.log("fail..");
+					console.log(data);
+				}
+			});
+		});
+	</script>
+	
 
 	<!-- gray bg -->	
 	<section class="container tm-home-section-1" id="more">
