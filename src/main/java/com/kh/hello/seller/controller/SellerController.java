@@ -34,10 +34,5 @@ public class SellerController {
 	public String editCompanyView(){
 		return "seller/editCompany";
 	}
-	
-	@RequestMapping("detailReservation.sell")
-	public String detailReservationView(){
-		return "seller/detailReservation";
-	}
 
 }
