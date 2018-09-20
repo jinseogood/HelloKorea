@@ -99,4 +99,49 @@ public class HelpPageController {
 	public String g_etcGuide3(){
 		return "help/g_etcGuide3";
 	}
+	
+	@RequestMapping("s_start1")
+	public String s_start1(){
+		return "help/s_start1";
+	}
+	
+	@RequestMapping("s_start2")
+	public String s_start2(){
+		return "help/s_start2";
+	}
+	
+	@RequestMapping("s_start3")
+	public String s_start3(){
+		return "help/s_start3";
+	}
+	
+	@RequestMapping("c_memberCenter1")
+	public String c_memberCenter1(){
+		return "help/c_memberCenter1";
+	}
+	
+	@RequestMapping("c_memberCenter2")
+	public String c_memberCenter2(){
+		return "help/c_memberCenter2";
+	}
+	
+	@RequestMapping("c_memberCenter3")
+	public String c_memberCenter3(){
+		return "help/c_memberCenter3";
+	}
+	
+	@RequestMapping("t_id1")
+	public String t_id1(){
+		return "help/t_id1";
+	}
+	
+	@RequestMapping("t_id2")
+	public String t_id2(){
+		return "help/t_id2";
+	}
+	
+	@RequestMapping("t_id3")
+	public String t_id3(){
+		return "help/t_id3";
+	}
 }

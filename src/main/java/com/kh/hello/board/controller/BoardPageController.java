@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class BoardPageController {
-	@RequestMapping("reviewWrite")
+	@RequestMapping("reviewWrite.bo")
 	public String reviewWrite(){
 		return "board/reviewWrite";
 	}
 	
-	@RequestMapping("reportWrite")
+	@RequestMapping("reportWrite.bo")
 	public String reportWrite(){
 		return "common/reportWrite";
 	}
