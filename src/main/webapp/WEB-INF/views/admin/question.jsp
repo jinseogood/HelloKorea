@@ -68,6 +68,8 @@ table.type09 td {
     
 }
 </style>
+
+
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp"/>
@@ -90,6 +92,14 @@ table.type09 td {
 	
 	</div>
 			<div class="searchArea" align="center">
+			
+			
+			
+
+
+			
+			
+			
  <div class="input-group m-b-10">
                                                   <input type="text" class="form-control">
                                                   <div class="input-group-btn">
@@ -226,10 +236,6 @@ table.type09 td {
                                           </div>
                                       </div>
                                   </div>
-	
-	
-	<script>
-	
-	</script>
+
 </body>
 </html>
