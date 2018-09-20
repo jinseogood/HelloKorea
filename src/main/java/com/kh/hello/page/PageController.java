@@ -25,46 +25,6 @@ public class PageController {
 		return "main/contact";
 	}
 	
-	@RequestMapping("myPageView")
-	public String myPageView(){
-		return "seller/addCompany";
-	}
-	
-	@RequestMapping("companySearch")
-	public String companySearchView(){
-		return "seller/companySearch";
-	}
-	
-	@RequestMapping("addCompany")
-	public String addCompanyView(){
-		return "seller/addCompany";
-	}
-	
-	@RequestMapping("manageProduct")
-	public String manageProductView(){
-		return "seller/manageProduct";
-	}
-	
-	@RequestMapping("reservation")
-	public String reservationView(){
-		return "seller/reservation";
-	}
-	
-	@RequestMapping("manageRevenue")
-	public String manageRevenueView(){
-		return "seller/manageRevenue";
-	}
-	
-	@RequestMapping("editCompany")
-	public String editCompanyView(){
-		return "seller/editCompany";
-	}
-	
-	@RequestMapping("detailReservation")
-	public String detailReservationView(){
-		return "seller/detailReservation";
-	}
-	
 	@RequestMapping("aboutAreaHotel")
 	public String aboutAreaHotel(){
 		return "aboutArea/searchAreaHotel";

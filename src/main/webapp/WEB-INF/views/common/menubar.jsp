@@ -19,8 +19,10 @@
 <link href="${ contextPath }/resources/css/templatemo-style.css" rel="stylesheet">
 <title>Insert title here</title>
 <style>
-	#test{
+	#menuIconArea{
 		width:135px;
+		height:80px;
+		float:left;
 	}
 </style>
 </head>
@@ -29,10 +31,10 @@
   	<div class="tm-header">
   		<div class="container">
   			<div class="row">
-  				<div class="col-lg-6 col-md-4 col-sm-3 tm-site-name-container">
-  					<a href="index.jsp" class="tm-site-name">Holiday</a>	
+  				<div class="col-lg-5 col-md-4 col-sm-3 tm-site-name-container">
+  					<a href="index.jsp" class="tm-site-name">Hello Korea</a>	
   				</div>
-	  			<div class="col-lg-6 col-md-8 col-sm-9">
+	  			<div class="col-lg-7 col-md-8 col-sm-9">
 	  				<div class="mobile-menu-icon">
 		              <i class="fa fa-bars"></i>
 		            </div>
@@ -43,16 +45,16 @@
 							<li><a href="toursView">Our Tours</a></li>
 							<li><a href="contactView">Contact</a></li>
 						</ul>
+				  		<div id="menuIconArea">
+				  			<a onclick="openMsg()">Msg</a>
+				  			<a href="helpView">Help</a>
+							<a href="myPageView.sell">MyPage</a>
+							<a href="myPageView.ad">ADMIN MyPage</a>
+							<div id="google_translate_element"></div>
+				  		</div>
 					</nav>		
 	  			</div>				
   			</div>
-  		</div>
-  		<div id="test">
-  			<a onclick="openMsg()">Msg</a>
-  			<a href="helpView">Help</a>
-			<a href="myPageView">MyPage</a>
-			<a href="myPageView.ad">ADMIN MyPage</a>
-			<div id="google_translate_element"></div>
   		</div>
   	</div>
   	<script>
