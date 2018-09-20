@@ -31,61 +31,11 @@
   
 <jsp:include page="../common/menubar.jsp"/>
 
-<!--   <div class="main-top">
-  
-  <div class="main-top-inner">
-    <div class="logo">
-      <div class="logo-img">
-        <a href="#"><img src="//p1.zdassets.com/hc/theme_assets/380835/200016928/trip_logo_2.svg" />
-        </a>
-      </div>
-    </div>
-    <nav class="user-nav header-version-nav">
-      
-        <div class="dropdown language-selector" aria-haspopup="true">
-          <a class="dropdown-toggle">
-           	 한국어
-          </a>
-          
-        </div>
-      
-      <span class="link-divider"></span>
-      <span class="home-link-span"><a href="#">Hello Korea!!</a></span>
-    </nav>
-  </div>
-</div> -->
 
-<!-- <div class="main-secondary">
-  <nav class="main-secondary-nav">
-    <ul class="top-menu-bar header-version-nav">
-      <li><a class="nav-home" href="#">홈</a>
-      </li>
-      <li><a href="#" class="dropdown-top contact-li">문의하기</a>
-        <ul class="dropdown">
-          <li><a href="http://www.tripadvisor.co.kr/GeneralSupport">일반적인 서포트</a></li>
-          <li><a href="http://www.tripadvisor.co.kr/OwnerSupport">오너 서포트</a></li>
-        </ul>
-      </li>
-      
-   
-    </ul>
-  </nav>
-</div> -->
 <!-- end main top -->
 <header class="header">
   <div class="header-inner clearfix">
     <h1><span class="help">도움말 센터</span></h1>
-  <!--  <div class="search-unit">
-
-<form role="search" class="search-small" data-search="" data-instant="true" autocomplete="off" action="/hc/en-us/search" accept-charset="UTF-8" method="get">
-<div style="margin:0;padding:0;display:inline">
-<input name="utf8" type="hidden" value="✓">
-</div>
-<input type="search" name="query" id="query" placeholder=검색 autocomplete="off">
-<button type="submit" role="submit">검색</button>
-</form>
-</div> -->
-
   </div>
 </header>
 
@@ -99,9 +49,8 @@
         
         
           <section class="section">
-            <h3>
-              
-              <a href="/hc/ko/sections/200154957-%EB%A6%AC%EB%B7%B0-%EC%9E%91%EC%84%B1">리뷰 작성</a>
+            <h3>      
+              <span style = "font-size:20px; padding-bottom:5px">리뷰 작성</span>
             </h3>
             
               <ul class="article-list">
@@ -110,21 +59,21 @@
              
                 
                     
-                    <a href="helpDetailView">여행자 리뷰 가이드라인</a>
+                    <a href="g_reviewWrite1">여행자 리뷰 가이드라인</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/200615067-%EC%82%AC%EC%A7%84-%EB%B0%8F-%EC%98%81%EC%83%81-%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8">사진 및 영상 가이드라인</a>
+                    <a href="g_reviewWrite2">사진 및 영상 가이드라인</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/215955068-%ED%95%AD%EA%B3%B5%EC%82%AC-%EB%A6%AC%EB%B7%B0%EB%8A%94-%EB%AC%B4%EC%97%87%EC%9E%85%EB%8B%88%EA%B9%8C-">항공사 리뷰는 무엇입니까?</a>
+                    <a href="g_reviewWrite3">항공사 리뷰는 무엇입니까?</a>
                   </li>
                 
                   <li >
@@ -160,7 +109,7 @@
           <section class="section">
             <h3>
               
-              <a href="/hc/ko/sections/200154927-%EB%A6%AC%EB%B7%B0%EC%97%90-%EB%8B%B5%EB%B3%80%ED%95%98%EA%B8%B0-">리뷰에 답변하기 </a>
+              <span style = "font-size:20px; padding-bottom:5px">리뷰에 답변하기</span>
             </h3>
             
               <ul class="article-list">
@@ -169,21 +118,21 @@
              
                 
                     
-                    <a href="/hc/ko/articles/115016125728-%EC%98%A4%EB%84%88-%EC%95%8C%EB%A6%BC-%EB%8B%B5%EB%B3%80-%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8">오너 알림 답변 가이드라인</a>
+                    <a href="g_reviewAnswer1">오너 알림 답변 가이드라인</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/219806687-%EC%9A%B4%EC%98%81%EC%9E%90%EC%9D%98-%EB%8B%B5%EB%B3%80%EC%9D%84-%EC%88%98%EC%A0%95%ED%95%98%EA%B1%B0%EB%82%98-%EC%82%AD%EC%A0%9C%ED%95%98%EB%A0%A4%EB%A9%B4-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%B4%EC%95%BC-%ED%95%98%EB%82%98%EC%9A%94-">운영자의 답변을 수정하거나 삭제하려면 어떻게 해야 하나요?</a>
+                    <a href="g_reviewAnswer2">운영자의 답변을 수정하거나 삭제하려면 어떻게 해야 하나요?</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/219764547-%EA%B0%99%EC%9D%80-%EA%B7%B8%EB%A3%B9%EC%97%90-%EC%86%8D%ED%95%B4-%EC%9E%88%EB%8A%94-%EB%91%90-%EB%AA%85%EC%9D%98-%EC%88%99%EB%B0%95%EA%B3%A0%EA%B0%9D%EC%9D%B4-%EA%B0%81%EA%B0%81-%EB%A6%AC%EB%B7%B0%EB%A5%BC-%EC%9E%91%EC%84%B1%ED%96%88%EC%8A%B5%EB%8B%88%EB%8B%A4-%ED%97%88%EC%9A%A9%EC%9D%B4-%EB%90%98%EB%82%98%EC%9A%94-">같은 그룹에 속해 있는 두 명의 숙박고객이 각각 리뷰를 작성했습니다. 허용이 되나요?</a>
+                    <a href="g_reviewAnswer3">같은 그룹에 속해 있는 두 명의 숙박고객이 각각 리뷰를 작성했습니다. 허용이 되나요?</a>
                   </li>
                 
                   <li >
@@ -204,7 +153,7 @@
              
                 
                     
-                    <a href="/hc/ko/articles/200614367-%EC%98%A4%EB%84%88-%EB%98%90%EB%8A%94-%EB%A7%A4%EB%8B%88%EC%A0%80%EA%B0%80-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%9D%98-%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8%EC%97%90-%EC%96%B4%EA%B8%8B%EB%82%98%EB%8A%94-%EB%A6%AC%EB%B7%B0%EB%A5%BC-%EC%8B%A0%EA%B3%A0%ED%95%98%EB%A0%A4%EB%A9%B4-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%B4%EC%95%BC-%ED%95%A9%EB%8B%88%EA%B9%8C-">오너 또는 매니저가 트립어드바이저의 가이드라인에 어긋나는 리뷰를 신고하려면 어떻게 해야 합니까?</a>
+                    <a href="/hc/ko/articles/200614367-%EC%98%A4%EB%84%88-%EB%98%90%EB%8A%94-%EB%A7%A4%EB%8B%88%EC%A0%80%EA%B0%80-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%9D%98-%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8%EC%97%90-%EC%96%B4%EA%B8%8B%EB%82%98%EB%8A%94-%EB%A6%AC%EB%B7%B0%EB%A5%BC-%EC%8B%A0%EA%B3%A0%ED%95%98%EB%A0%A4%EB%A9%B4-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%B4%EC%95%BC-%ED%95%A9%EB%8B%88%EA%B9%8C-">오너 또는 매니저가 헬로코리아의 가이드라인에 어긋나는 리뷰를 신고하려면 어떻게 해야 합니까?</a>
                   </li>
                 
               </ul>
@@ -218,8 +167,8 @@
         
           <section class="section">
             <h3>
+              <span style = "font-size:20px; padding-bottom:5px">리스팅 가이드라인</span>
               
-              <a href="/hc/ko/sections/200154947-%EB%A6%AC%EC%8A%A4%ED%8C%85-%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8">리스팅 가이드라인</a>
             </h3>
             
               <ul class="article-list">
@@ -228,21 +177,21 @@
              
                 
                     
-                    <a href="/hc/ko/articles/200614737-%EB%A6%AC%EC%8A%A4%ED%8C%85%EC%9D%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%EC%9A%94-">리스팅은 무엇인가요?</a>
+                    <a href="g_listingGuide1">리스팅은 무엇인가요?</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/200614677-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EB%8A%94-%EC%96%B4%EB%96%A4-%EC%9E%A5%EC%86%8C%EB%A5%BC-%EB%A6%AC%EC%8A%A4%ED%8C%85%ED%95%A9%EB%8B%88%EA%B9%8C-">트립어드바이저는 어떤 장소를 리스팅합니까?</a>
+                    <a href="g_listingGuide2">헬로코리아는 어떤 장소를 리스팅합니까?</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/200614727-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90-%EC%9E%A5%EC%86%8C-%EB%98%90%EB%8A%94-%EC%8B%9C%EC%84%A4-%EC%B6%94%EA%B0%80%EB%A5%BC-%EC%9A%94%EC%B2%AD%ED%95%98%EB%A0%A4%EB%A9%B4-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%B4%EC%95%BC-%ED%95%A9%EB%8B%88%EA%B9%8C-">트립어드바이저에 장소 또는 시설 추가를 요청하려면 어떻게 해야 합니까?</a>
+                    <a href="g_listingGuide3">헬로코리아에 장소 또는 시설 추가를 요청하려면 어떻게 해야 합니까?</a>
                   </li>
                 
                   <li >
@@ -277,8 +226,8 @@
         
           <section class="section">
             <h3>
+              <span style = "font-size:20px; padding-bottom:5px">리스팅 관리</span>
               
-              <a href="/hc/ko/sections/200154937-%EB%A6%AC%EC%8A%A4%ED%8C%85-%EA%B4%80%EB%A6%AC-">리스팅 관리 </a>
             </h3>
             
               <ul class="article-list">
@@ -287,21 +236,21 @@
              
                 
                     
-                    <a href="/hc/ko/articles/115012547747-%EB%B9%84%EC%A7%80%EB%8B%88%EC%8A%A4-%EC%A0%95%EB%B3%B4-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8%EC%97%90-%EB%8C%80%ED%95%9C-%ED%8C%81-%EB%B0%8F-%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8">비지니스 정보 업데이트에 대한 팁 및 가이드라인</a>
+                    <a href="g_listingControll1">비지니스 정보 업데이트에 대한 팁 및 가이드라인</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/115011046367-%EC%8B%9C%EC%84%A4-%EC%98%81%EC%83%81-%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8">시설 영상 가이드라인</a>
+                    <a href="g_listingControll2">시설 영상 가이드라인</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/200614557-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90-%EC%8B%9C%EC%84%A4%EC%9D%84-%EB%93%B1%EB%A1%9D%ED%95%B4%EC%95%BC-%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0%EB%8A%94-%EB%AC%B4%EC%97%87%EC%9E%85%EB%8B%88%EA%B9%8C-">트립어드바이저에 시설을 등록해야 하는 이유는 무엇입니까?</a>
+                    <a href="g_listingControll3">헬로코리아에 시설을 등록해야 하는 이유는 무엇입니까?</a>
                   </li>
                 
                   <li >
@@ -322,7 +271,7 @@
              
                 
                     
-                    <a href="/hc/ko/articles/200614437-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90-%EC%8B%9C%EC%84%A4%EC%9D%84-%EB%93%B1%EB%A1%9D%ED%95%B4%EC%95%BC-%EC%82%AC%EB%9E%8C%EB%93%A4%EC%9D%B4-%EA%B4%80%EB%A0%A8-%EB%A6%AC%EB%B7%B0%EB%A5%BC-%EC%9E%91%EC%84%B1%ED%95%A0-%EC%88%98-%EC%9E%88%EC%8A%B5%EB%8B%88%EA%B9%8C-">트립어드바이저에 시설을 등록해야 사람들이 관련 리뷰를 작성할 수 있습니까?</a>
+                    <a href="/hc/ko/articles/200614437-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90-%EC%8B%9C%EC%84%A4%EC%9D%84-%EB%93%B1%EB%A1%9D%ED%95%B4%EC%95%BC-%EC%82%AC%EB%9E%8C%EB%93%A4%EC%9D%B4-%EA%B4%80%EB%A0%A8-%EB%A6%AC%EB%B7%B0%EB%A5%BC-%EC%9E%91%EC%84%B1%ED%95%A0-%EC%88%98-%EC%9E%88%EC%8A%B5%EB%8B%88%EA%B9%8C-">헬로코리아에 시설을 등록해야 사람들이 관련 리뷰를 작성할 수 있습니까?</a>
                   </li>
                 
               </ul>
@@ -336,8 +285,8 @@
         
           <section class="section">
             <h3>
-              
-              <a href="/hc/ko/sections/200154967-%EB%B6%80%EC%A0%95-%ED%96%89%EC%9C%84">부정 행위</a>
+              <span style = "font-size:20px; padding-bottom:5px">부정 행위</span>
+             
             </h3>
             
               <ul class="article-list">
@@ -346,28 +295,28 @@
              
                 
                     
-                    <a href="/hc/ko/articles/220896567-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90%EC%84%9C-%EB%A6%AC%EB%B7%B0%EC%97%90-%EB%8C%80%ED%95%B4-%EB%82%98%EC%97%90%EA%B2%8C-%EC%9D%B8%EC%84%BC%ED%8B%B0%EB%B8%8C%EB%A5%BC-%EC%A0%9C%EA%B3%B5%ED%95%98%EB%A0%A4%EA%B3%A0-%ED%95%A9%EB%8B%88%EB%8B%A4-%EB%AC%B8%EC%A0%9C%EA%B0%80-%EC%97%86%EC%8A%B5%EB%8B%88%EA%B9%8C-">트립어드바이저에서 리뷰에 대해 나에게 인센티브를 제공하려고 합니다. 문제가 없습니까?</a>
+                    <a href="g_cheat1">헬로코리아에서 리뷰에 대해 나에게 인센티브를 제공하려고 합니다. 문제가 없습니까?</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/200615037-%EB%B6%80%EC%A0%95-%ED%96%89%EC%9C%84%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%EC%9A%94-">부정 행위란 무엇인가요?</a>
+                    <a href="g_cheat2">부정 행위란 무엇인가요?</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/200614987-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90%EC%84%9C-%EB%A6%AC%EB%B7%B0%EB%A5%BC-%EA%B2%80%ED%86%A0%ED%95%98%EB%82%98%EC%9A%94-">트립어드바이저에서 리뷰를 검토하나요?</a>
+                    <a href="g_cheat3">헬로코리아에서 리뷰를 검토하나요?</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/200614967-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90%EC%84%9C-%EC%8B%A4%EB%AA%85-%EC%9D%B8%EC%A6%9D%EC%9D%B4%EB%82%98-%EC%88%99%EB%B0%95-%EC%A6%9D%EB%AA%85%EC%9D%84-%EC%9A%94%EA%B5%AC%ED%95%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EC%9D%B4%EC%9C%A0%EB%8A%94-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%EC%9A%94-">트립어드바이저에서 실명 인증이나 숙박 증명을 요구하지 않는 이유는 무엇인가요?</a>
+                    <a href="/hc/ko/articles/200614967-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90%EC%84%9C-%EC%8B%A4%EB%AA%85-%EC%9D%B8%EC%A6%9D%EC%9D%B4%EB%82%98-%EC%88%99%EB%B0%95-%EC%A6%9D%EB%AA%85%EC%9D%84-%EC%9A%94%EA%B5%AC%ED%95%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EC%9D%B4%EC%9C%A0%EB%8A%94-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%EC%9A%94-">헬로코리아에서 실명 인증이나 숙박 증명을 요구하지 않는 이유는 무엇인가요?</a>
                   </li>
                 
                   <li >
@@ -395,8 +344,8 @@
         
           <section class="section">
             <h3>
+              <span style = "font-size:20px; padding-bottom:5px">기타 가이드라인</span>
               
-              <a href="/hc/ko/sections/200154977-%EA%B8%B0%ED%83%80-%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8">기타 가이드라인</a>
             </h3>
             
               <ul class="article-list">
@@ -405,21 +354,21 @@
              
                 
                     
-                    <a href="/hc/ko/articles/204291188-%EB%8F%84%EC%9B%80%EC%9D%B4-%EB%90%98%EB%8A%94-%EB%A6%AC%EB%B7%B0-%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8">도움이 되는 리뷰 가이드라인</a>
+                    <a href="g_etcGuide1">도움이 되는 리뷰 가이드라인</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/201996887-%EC%A7%88%EB%AC%B8-%EB%B0%8F-%EB%8B%B5%EB%B3%80-%EA%B0%80%EC%9D%B4%EB%93%9C%EB%9D%BC%EC%9D%B8">질문 및 답변 가이드라인</a>
+                    <a href="g_etcGuide2">질문 및 답변 가이드라인</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/200615057-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80-%EC%BB%A8%ED%85%90%EC%B8%A0%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%9E%88%EB%82%98%EC%9A%94-">트립어드바이저 컨텐츠를 사용할 수 있나요?</a>
+                    <a href="g_etcGuide3">헬로코리아 컨텐츠를 사용할 수 있나요?</a>
                   </li>
                 
                   <li >
@@ -440,7 +389,7 @@
              
                 
                     
-                    <a href="/hc/ko/articles/200615047-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90-%EA%B4%91%EA%B3%A0%EB%A5%BC-%EA%B2%8C%EC%9E%AC%ED%95%98%EB%A0%A4%EB%A9%B4-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%B4%EC%95%BC-%ED%95%A9%EB%8B%88%EA%B9%8C-">트립어드바이저에 광고를 게재하려면 어떻게 해야 합니까?</a>
+                    <a href="/hc/ko/articles/200615047-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90-%EA%B4%91%EA%B3%A0%EB%A5%BC-%EA%B2%8C%EC%9E%AC%ED%95%98%EB%A0%A4%EB%A9%B4-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%B4%EC%95%BC-%ED%95%A9%EB%8B%88%EA%B9%8C-">헬로코리아에 광고를 게재하려면 어떻게 해야 합니까?</a>
                   </li>
                 
               </ul>
@@ -463,8 +412,8 @@
         
           <section class="section">
             <h3>
+              <span style = "font-size:20px; padding-bottom:5px">시작하기</span>
               
-              <a href="/hc/ko/sections/200154867-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0">시작하기</a>
             </h3>
             
               <ul class="article-list">
@@ -473,21 +422,21 @@
              
                 
                     
-                    <a href="/hc/ko/articles/200613827-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90-%EB%A6%AC%EC%8A%A4%ED%8C%85%EB%90%9C-%EC%8B%9C%EC%84%A4%EC%97%90-%EB%AC%B8%EC%9D%98%ED%95%A0-%EC%88%98-%EC%9E%88%EA%B2%8C-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EA%B0%80-%EB%8F%84%EC%99%80%EC%A4%84-%EC%88%98-%EC%9E%88%EB%82%98%EC%9A%94-">트립어드바이저에 리스팅된 시설에 문의할 수 있게 트립어드바이저가 도와줄 수 있나요?</a>
+                    <a href="/hc/ko/articles/200613827-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90-%EB%A6%AC%EC%8A%A4%ED%8C%85%EB%90%9C-%EC%8B%9C%EC%84%A4%EC%97%90-%EB%AC%B8%EC%9D%98%ED%95%A0-%EC%88%98-%EC%9E%88%EA%B2%8C-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EA%B0%80-%EB%8F%84%EC%99%80%EC%A4%84-%EC%88%98-%EC%9E%88%EB%82%98%EC%9A%94-">헬로코리아에 리스팅된 시설에 문의할 수 있게 헬로코리아가 도와줄 수 있나요?</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/200613857-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90%EC%84%9C-%EC%96%B4%EB%96%BB%EA%B2%8C-%EA%B2%80%EC%83%89%ED%95%98%EB%82%98%EC%9A%94-">트립어드바이저에서 어떻게 검색하나요?</a>
+                    <a href="/hc/ko/articles/200613857-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90%EC%84%9C-%EC%96%B4%EB%96%BB%EA%B2%8C-%EA%B2%80%EC%83%89%ED%95%98%EB%82%98%EC%9A%94-">헬로코리아에서 어떻게 검색하나요?</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/200613837-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EA%B0%80-%EB%82%B4%EA%B0%80-%EC%97%AC%ED%96%89%EC%97%90%EC%84%9C-%ED%95%B4%EC%95%BC-%ED%95%A0-%EC%9D%BC%EC%9D%84-%EC%A0%9C%EC%95%88%ED%95%B4%EC%A4%84-%EC%88%98-%EC%9E%88%EB%82%98%EC%9A%94-">트립어드바이저가 내가 여행에서 해야 할 일을 제안해줄 수 있나요?</a>
+                    <a href="/hc/ko/articles/200613837-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EA%B0%80-%EB%82%B4%EA%B0%80-%EC%97%AC%ED%96%89%EC%97%90%EC%84%9C-%ED%95%B4%EC%95%BC-%ED%95%A0-%EC%9D%BC%EC%9D%84-%EC%A0%9C%EC%95%88%ED%95%B4%EC%A4%84-%EC%88%98-%EC%9E%88%EB%82%98%EC%9A%94-">헬로코리아가 내가 여행에서 해야 할 일을 제안해줄 수 있나요?</a>
                   </li>
                 
                   <li >
@@ -501,14 +450,14 @@
              
                 
                     
-                    <a href="/hc/ko/articles/200613847-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%97%AC-%EC%97%AC%ED%96%89%EC%97%90-%EB%8C%80%ED%95%9C-%EC%A1%B0%EC%82%AC%EB%A5%BC-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%8B%9C%EC%9E%91%ED%95%98%EB%82%98%EC%9A%94-">트립어드바이저를 사용하여 여행에 대한 조사를 어떻게 시작하나요?</a>
+                    <a href="/hc/ko/articles/200613847-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%97%AC-%EC%97%AC%ED%96%89%EC%97%90-%EB%8C%80%ED%95%9C-%EC%A1%B0%EC%82%AC%EB%A5%BC-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%8B%9C%EC%9E%91%ED%95%98%EB%82%98%EC%9A%94-">헬로코리아를 사용하여 여행에 대한 조사를 어떻게 시작하나요?</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/200613987-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80-%EC%9D%B8%EA%B8%B0%EB%8F%84-%EC%A7%80%ED%91%9C%EA%B0%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%EC%9A%94-">트립어드바이저 인기도 지표가 무엇인가요?</a>
+                    <a href="/hc/ko/articles/200613987-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80-%EC%9D%B8%EA%B8%B0%EB%8F%84-%EC%A7%80%ED%91%9C%EA%B0%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%EC%9A%94-">헬로코리아 인기도 지표가 무엇인가요?</a>
                   </li>
                 
               </ul>
@@ -522,8 +471,8 @@
         
           <section class="section">
             <h3>
+              <span style = "font-size:20px; padding-bottom:5px">헬로코리아 탐색</span>
               
-              <a href="/hc/ko/sections/200154887-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80-%ED%83%90%EC%83%89">트립어드바이저 탐색</a>
             </h3>
             
               <ul class="article-list">
@@ -546,7 +495,7 @@
              
                 
                     
-                    <a href="/hc/ko/articles/200614037-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80-%EC%95%84%EB%A9%94%EB%A6%AC%EC%B9%B8-%EC%9D%B5%EC%8A%A4%ED%94%84%EB%A0%88%EC%8A%A4-%ED%8C%8C%ED%8A%B8%EB%84%88%EC%89%BD%EC%9D%B4-%EB%AC%B4%EC%97%87%EC%9D%B4%EA%B3%A0-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%B0%B8%EC%97%AC%ED%95%98%EB%82%98%EC%9A%94-">트립어드바이저/아메리칸 익스프레스 파트너쉽이 무엇이고 어떻게 참여하나요?</a>
+                    <a href="/hc/ko/articles/200614037-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80-%EC%95%84%EB%A9%94%EB%A6%AC%EC%B9%B8-%EC%9D%B5%EC%8A%A4%ED%94%84%EB%A0%88%EC%8A%A4-%ED%8C%8C%ED%8A%B8%EB%84%88%EC%89%BD%EC%9D%B4-%EB%AC%B4%EC%97%87%EC%9D%B4%EA%B3%A0-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%B0%B8%EC%97%AC%ED%95%98%EB%82%98%EC%9A%94-">헬로코리아/아메리칸 익스프레스 파트너쉽이 무엇이고 어떻게 참여하나요?</a>
                   </li>
                 
                   <li >
@@ -581,8 +530,8 @@
         
           <section class="section">
             <h3>
+              <span style = "font-size:20px; padding-bottom:5px">항공권</span>
               
-              <a href="/hc/ko/sections/200154877-%ED%95%AD%EA%B3%B5%EA%B6%8C">항공권</a>
             </h3>
             
               <ul class="article-list">
@@ -591,7 +540,7 @@
              
                 
                     
-                    <a href="/hc/ko/articles/115005301328-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90%EC%84%9C%EB%8A%94-%ED%95%AD%EA%B3%B5-%EB%A7%88%EC%9D%BC%EB%A6%AC%EC%A7%80-%ED%94%84%EB%A1%9C%EB%AA%A8%EC%85%98%EC%9D%B4%EB%82%98-%EC%BA%A0%ED%8E%98%EC%9D%B8%EC%9D%84-%EC%A0%9C%EA%B3%B5%ED%95%98%EB%82%98%EC%9A%94-">트립어드바이저에서는 항공 마일리지 프로모션이나 캠페인을 제공하나요?</a>
+                    <a href="/hc/ko/articles/115005301328-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90%EC%84%9C%EB%8A%94-%ED%95%AD%EA%B3%B5-%EB%A7%88%EC%9D%BC%EB%A6%AC%EC%A7%80-%ED%94%84%EB%A1%9C%EB%AA%A8%EC%85%98%EC%9D%B4%EB%82%98-%EC%BA%A0%ED%8E%98%EC%9D%B8%EC%9D%84-%EC%A0%9C%EA%B3%B5%ED%95%98%EB%82%98%EC%9A%94-">헬로코리아에서는 항공 마일리지 프로모션이나 캠페인을 제공하나요?</a>
                   </li>
                 
                   <li >
@@ -605,14 +554,14 @@
              
                 
                     
-                    <a href="/hc/ko/articles/200613887-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90%EC%84%9C-%EA%BC%AD-%EC%95%8C%EB%A7%9E%EC%9D%80-%ED%95%AD%EA%B3%B5%EA%B6%8C%EC%9D%84-%EB%B0%9C%EA%B2%AC%ED%96%88%EB%8A%94%EB%8D%B0-%EA%B3%B5%EA%B8%89%EC%82%AC%EC%9D%98-%EC%9B%B9-%EC%82%AC%EC%9D%B4%ED%8A%B8%EC%97%90-%EC%84%B8%EB%B6%80-%EC%82%AC%ED%95%AD%EC%9D%B4-%EB%B3%80%EA%B2%BD%EB%90%98%EC%97%88%EC%9C%BC%EB%A9%B4-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%98%EB%82%98%EC%9A%94-">트립어드바이저에서 꼭 알맞은 항공권을 발견했는데 공급사의 웹 사이트에 세부 사항이 변경되었으면 어떻게 하나요?</a>
+                    <a href="/hc/ko/articles/200613887-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90%EC%84%9C-%EA%BC%AD-%EC%95%8C%EB%A7%9E%EC%9D%80-%ED%95%AD%EA%B3%B5%EA%B6%8C%EC%9D%84-%EB%B0%9C%EA%B2%AC%ED%96%88%EB%8A%94%EB%8D%B0-%EA%B3%B5%EA%B8%89%EC%82%AC%EC%9D%98-%EC%9B%B9-%EC%82%AC%EC%9D%B4%ED%8A%B8%EC%97%90-%EC%84%B8%EB%B6%80-%EC%82%AC%ED%95%AD%EC%9D%B4-%EB%B3%80%EA%B2%BD%EB%90%98%EC%97%88%EC%9C%BC%EB%A9%B4-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%98%EB%82%98%EC%9A%94-">헬로코리아에서 꼭 알맞은 항공권을 발견했는데 공급사의 웹 사이트에 세부 사항이 변경되었으면 어떻게 하나요?</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/200613917-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80-%ED%95%AD%EA%B3%B5%EA%B6%8C%EC%9D%B4-%EB%AD%94%EA%B0%80%EC%9A%94-">트립어드바이저 항공권이 뭔가요?</a>
+                    <a href="/hc/ko/articles/200613917-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80-%ED%95%AD%EA%B3%B5%EA%B6%8C%EC%9D%B4-%EB%AD%94%EA%B0%80%EC%9A%94-">헬로코리아 항공권이 뭔가요?</a>
                   </li>
                 
                   <li >
@@ -640,8 +589,8 @@
         
           <section class="section">
             <h3>
+              <span style = "font-size:20px; padding-bottom:5px">그린리더</span>
               
-              <a href="/hc/ko/sections/200154897-%EA%B7%B8%EB%A6%B0%EB%A6%AC%EB%8D%94">그린리더</a>
             </h3>
             
               <ul class="article-list">
@@ -671,7 +620,7 @@
              
                 
                     
-                    <a href="/hc/ko/articles/200614147-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80-%EA%B7%B8%EB%A6%B0%EB%A6%AC%EB%8D%94-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%80-%EB%AD%94%EA%B0%80%EC%9A%94-">트립어드바이저 그린리더 프로그램은 뭔가요?</a>
+                    <a href="/hc/ko/articles/200614147-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80-%EA%B7%B8%EB%A6%B0%EB%A6%AC%EB%8D%94-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%80-%EB%AD%94%EA%B0%80%EC%9A%94-">헬로코리아 그린리더 프로그램은 뭔가요?</a>
                   </li>
                 
                   <li >
@@ -704,8 +653,8 @@
         
           <section class="section">
             <h3>
+              <span style = "font-size:20px; padding-bottom:5px">회원 센터</span>
               
-              <a href="/hc/ko/sections/200154857-%ED%9A%8C%EC%9B%90-%EC%84%BC%ED%84%B0">회원 센터</a>
             </h3>
             
               <ul class="article-list">
@@ -763,8 +712,8 @@
         
           <section class="section">
             <h3>
+              <span style = "font-size:20px; padding-bottom:5px">개인 메시지</span>
               
-              <a href="/hc/ko/sections/200154837-%EA%B0%9C%EC%9D%B8-%EB%A9%94%EC%8B%9C%EC%A7%80">개인 메시지</a>
             </h3>
             
               <ul class="article-list">
@@ -773,7 +722,7 @@
              
                 
                     
-                    <a href="/hc/ko/articles/200613577-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EA%B0%80-%EB%A9%94%EC%8B%9C%EC%A7%80%EB%A5%BC-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81%ED%95%98%EB%82%98%EC%9A%94-">트립어드바이저가 메시지를 모니터링하나요?</a>
+                    <a href="/hc/ko/articles/200613577-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EA%B0%80-%EB%A9%94%EC%8B%9C%EC%A7%80%EB%A5%BC-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81%ED%95%98%EB%82%98%EC%9A%94-">헬로코리아가 메시지를 모니터링하나요?</a>
                   </li>
                 
                   <li >
@@ -811,8 +760,8 @@
         
           <section class="section">
             <h3>
-              
-              <a href="/hc/ko/sections/200154917-%EA%B4%80%EC%8B%AC%EB%A6%AC%EC%8A%A4%ED%8A%B8">관심리스트</a>
+              <span style = "font-size:20px; padding-bottom:5px">관심리스트</span>
+             
             </h3>
             
               <ul class="article-list">
@@ -868,8 +817,8 @@
         
           <section class="section">
             <h3>
+              <span style = "font-size:20px; padding-bottom:5px">계정 설정</span>
               
-              <a href="/hc/ko/sections/200154987-%EA%B3%84%EC%A0%95-%EC%84%A4%EC%A0%95">계정 설정</a>
             </h3>
             
               <ul class="article-list">
@@ -927,8 +876,8 @@
         
           <section class="section">
             <h3>
+              <span style = "font-size:20px; padding-bottom:5px">멤버쉽</span>
               
-              <a href="/hc/ko/sections/200155017-%EB%A9%A4%EB%B2%84%EC%89%BD">멤버쉽</a>
             </h3>
             
               <ul class="article-list">
@@ -951,7 +900,7 @@
              
                 
                     
-                    <a href="/hc/ko/articles/200615547-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80-%EC%BD%98%ED%85%8C%EC%8A%A4%ED%8A%B8%EC%99%80-%EA%B2%BD%ED%92%88%EC%97%90-%EB%8C%80%ED%95%B4-%EC%96%B4%EB%96%A4-%EA%B7%9C%EC%B9%99%EC%9D%B4-%EC%9E%88%EB%82%98%EC%9A%94-">트립어드바이저 콘테스트와 경품에 대해 어떤 규칙이 있나요?</a>
+                    <a href="/hc/ko/articles/200615547-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80-%EC%BD%98%ED%85%8C%EC%8A%A4%ED%8A%B8%EC%99%80-%EA%B2%BD%ED%92%88%EC%97%90-%EB%8C%80%ED%95%B4-%EC%96%B4%EB%96%A4-%EA%B7%9C%EC%B9%99%EC%9D%B4-%EC%9E%88%EB%82%98%EC%9A%94-">헬로코리아 콘테스트와 경품에 대해 어떤 규칙이 있나요?</a>
                   </li>
                 
                   <li >
@@ -985,7 +934,7 @@
              
                 
                     
-                    <a href="/hc/ko/articles/200615687-%EC%99%9C-%EB%82%B4-%EC%8B%A4%EB%AA%85%EC%9D%B4%EB%82%98-Facebook-%EC%82%AC%EC%A7%84%EC%9D%B4-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90-%ED%91%9C%EC%8B%9C%EB%90%98%EB%82%98%EC%9A%94-">왜 내 실명이나 Facebook 사진이 트립어드바이저에 표시되나요?</a>
+                    <a href="/hc/ko/articles/200615687-%EC%99%9C-%EB%82%B4-%EC%8B%A4%EB%AA%85%EC%9D%B4%EB%82%98-Facebook-%EC%82%AC%EC%A7%84%EC%9D%B4-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90-%ED%91%9C%EC%8B%9C%EB%90%98%EB%82%98%EC%9A%94-">왜 내 실명이나 Facebook 사진이 헬로코리아에 표시되나요?</a>
                   </li>
                 
                   <li >
@@ -999,21 +948,21 @@
              
                 
                     
-                    <a href="/hc/ko/articles/200615587-%EC%99%9C-%EC%96%B4%EB%96%A4-%EB%A6%AC%EB%B7%B0%EB%8A%94-Facebook%EC%97%90%EC%84%9C-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80-%EB%A6%AC%EB%B7%B0%EC%96%B4-%EB%9D%BC%EA%B3%A0-%ED%91%9C%EC%8B%9C%EB%90%98%EB%82%98%EC%9A%94-">왜 어떤 리뷰는 “Facebook에서 트립어드바이저 리뷰어”라고 표시되나요?</a>
+                    <a href="/hc/ko/articles/200615587-%EC%99%9C-%EC%96%B4%EB%96%A4-%EB%A6%AC%EB%B7%B0%EB%8A%94-Facebook%EC%97%90%EC%84%9C-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80-%EB%A6%AC%EB%B7%B0%EC%96%B4-%EB%9D%BC%EA%B3%A0-%ED%91%9C%EC%8B%9C%EB%90%98%EB%82%98%EC%9A%94-">왜 어떤 리뷰는 “Facebook에서 헬로코리아 리뷰어”라고 표시되나요?</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/200615637-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EA%B0%80-%EA%B0%9C%EC%9D%B8%ED%99%94%EB%90%9C-%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A5%BC-%EC%A0%9C%EA%B3%B5%ED%95%98%EA%B8%B0-%EC%9C%84%ED%95%B4-%EC%96%B4%EB%96%BB%EA%B2%8C-Facebook%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%98%EB%82%98%EC%9A%94-">트립어드바이저가 개인화된 서비스를 제공하기 위해 어떻게 Facebook을 이용하나요? </a>
+                    <a href="/hc/ko/articles/200615637-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EA%B0%80-%EA%B0%9C%EC%9D%B8%ED%99%94%EB%90%9C-%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A5%BC-%EC%A0%9C%EA%B3%B5%ED%95%98%EA%B8%B0-%EC%9C%84%ED%95%B4-%EC%96%B4%EB%96%BB%EA%B2%8C-Facebook%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%98%EB%82%98%EC%9A%94-">헬로코리아가 개인화된 서비스를 제공하기 위해 어떻게 Facebook을 이용하나요? </a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/200615677-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80-Facebook-%EC%95%B1%EC%9D%B4-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%EC%9A%94-">트립어드바이저 Facebook 앱이 무엇인가요?</a>
+                    <a href="/hc/ko/articles/200615677-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80-Facebook-%EC%95%B1%EC%9D%B4-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%EC%9A%94-">헬로코리아 Facebook 앱이 무엇인가요?</a>
                   </li>
                 
               </ul>
@@ -1027,8 +976,8 @@
         
           <section class="section">
             <h3>
+              <span style = "font-size:20px; padding-bottom:5px">모바일</span>
               
-              <a href="/hc/ko/sections/200154997-%EB%AA%A8%EB%B0%94%EC%9D%BC">모바일</a>
             </h3>
             
               <ul class="article-list">
@@ -1044,21 +993,21 @@
              
                 
                     
-                    <a href="/hc/ko/articles/200615337-%ED%9C%B4%EB%8C%80%EC%A0%84%ED%99%94-%EB%98%90%EB%8A%94-%ED%83%9C%EB%B8%94%EB%A6%BF%EC%9C%BC%EB%A1%9C-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%95%A1%EC%84%B8%EC%8A%A4%ED%95%98%EB%82%98%EC%9A%94-">휴대전화 또는 태블릿으로 트립어드바이저에 어떻게 액세스하나요?</a>
+                    <a href="/hc/ko/articles/200615337-%ED%9C%B4%EB%8C%80%EC%A0%84%ED%99%94-%EB%98%90%EB%8A%94-%ED%83%9C%EB%B8%94%EB%A6%BF%EC%9C%BC%EB%A1%9C-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%95%A1%EC%84%B8%EC%8A%A4%ED%95%98%EB%82%98%EC%9A%94-">휴대전화 또는 태블릿으로 헬로코리아에 어떻게 액세스하나요?</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/200615317-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80-%EB%AA%A8%EB%B0%94%EC%9D%BC-%EC%95%B1%EC%9D%80-%EC%96%B4%EB%96%A4-%EC%96%B8%EC%96%B4%EB%A5%BC-%EC%A7%80%EC%9B%90%ED%95%98%EB%82%98%EC%9A%94-">트립어드바이저 모바일 앱은 어떤 언어를 지원하나요?</a>
+                    <a href="/hc/ko/articles/200615317-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80-%EB%AA%A8%EB%B0%94%EC%9D%BC-%EC%95%B1%EC%9D%80-%EC%96%B4%EB%96%A4-%EC%96%B8%EC%96%B4%EB%A5%BC-%EC%A7%80%EC%9B%90%ED%95%98%EB%82%98%EC%9A%94-">헬로코리아 모바일 앱은 어떤 언어를 지원하나요?</a>
                   </li>
                 
                   <li >
              
                 
                     
-                    <a href="/hc/ko/articles/200615327-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80-%EB%AA%A8%EB%B0%94%EC%9D%BC-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%EC%9D%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%EC%9A%94-">트립어드바이저 모바일 애플리케이션은 무엇인가요?</a>
+                    <a href="/hc/ko/articles/200615327-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80-%EB%AA%A8%EB%B0%94%EC%9D%BC-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%EC%9D%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%EC%9A%94-">헬로코리아 모바일 애플리케이션은 무엇인가요?</a>
                   </li>
                 
               </ul>
@@ -1068,8 +1017,8 @@
         
           <section class="section">
             <h3>
+              <span style = "font-size:20px; padding-bottom:5px">사진 및 영상</span>
               
-              <a href="/hc/ko/sections/200155037-%EC%82%AC%EC%A7%84-%EB%B0%8F-%EC%98%81%EC%83%81">사진 및 영상</a>
             </h3>
             
               <ul class="article-list">
@@ -1085,7 +1034,7 @@
              
                 
                     
-                    <a href="/hc/ko/articles/200615707-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90%EC%84%9C-%EC%98%81%EC%83%81%EC%9D%B4-%EC%99%9C-%EC%95%88-%EB%B3%B4%EC%9D%B4%EB%82%98%EC%9A%94-">트립어드바이저에서 영상이 왜 안 보이나요?</a>
+                    <a href="/hc/ko/articles/200615707-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%97%90%EC%84%9C-%EC%98%81%EC%83%81%EC%9D%B4-%EC%99%9C-%EC%95%88-%EB%B3%B4%EC%9D%B4%EB%82%98%EC%9A%94-">헬로코리아에서 영상이 왜 안 보이나요?</a>
                   </li>
                 
                   <li >
@@ -1109,8 +1058,8 @@
         
           <section class="section">
             <h3>
+              <span style = "font-size:20px; padding-bottom:5px">위젯 및 컨텐츠 제휴</span>
               
-              <a href="/hc/ko/sections/200155007-%EC%9C%84%EC%A0%AF-%EB%B0%8F-%EC%BB%A8%ED%85%90%EC%B8%A0-%EC%A0%9C%ED%9C%B4">위젯 및 컨텐츠 제휴</a>
             </h3>
             
               <ul class="article-list">
@@ -1133,7 +1082,7 @@
              
                 
                     
-                    <a href="/hc/ko/articles/200615467-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%9D%98-%EC%9C%84%EC%A0%AF%EC%9D%80-%EB%88%84%EA%B0%80-%EC%82%AC%EC%9A%A9%ED%95%A9%EB%8B%88%EA%B9%8C-">트립어드바이저의 위젯은 누가 사용합니까? </a>
+                    <a href="/hc/ko/articles/200615467-%ED%8A%B8%EB%A6%BD%EC%96%B4%EB%93%9C%EB%B0%94%EC%9D%B4%EC%A0%80%EC%9D%98-%EC%9C%84%EC%A0%AF%EC%9D%80-%EB%88%84%EA%B0%80-%EC%82%AC%EC%9A%A9%ED%95%A9%EB%8B%88%EA%B9%8C-">헬로코리아의 위젯은 누가 사용합니까? </a>
                   </li>
                 
                   <li >
@@ -1179,40 +1128,6 @@
   </main>
 
 <!--   <footer class="footer">
- 
-  <div class="footer-nav">
-    <ul class="top-menu-bar footer-version-nav">
-      <li class="language-li"></li>
-      <li class="footer-contact">
-        <div class="dropdown">
-          <a href="#" class="dropdown-toggle contact-li" data-toggle="contact-panel">문의하기</a>
-        </div>
-        <ul id="contact-panel" class="dropdown dropdown-panel dropdown-menu pull-right" role="menu">
-          <li><a href="http://www.tripadvisor.co.kr/GeneralSupport">일반적인 서포트</a></li>
-          <li><a href="http://www.tripadvisor.co.kr/OwnerSupport">오너 서포트</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="dropdown"><a href="#" class="dropdown-toggle ta-forum-li" data-toggle="forum-panel">트립어드바이저 포럼</a>
-        </div>
-        <ul id="forum-panel" class="dropdown dropdown-panel dropdown-menu pull-right" role="menu">
-          <li><a href="http://www.tripadvisor.com.co.kr/ForumHome">여행 포럼</a></li>
-          <li>트립어드바이저 지원 포럼</li>
-          <li>트립어드바이저를 개선할 수 있도록 도와주세요</li>
-          <li>오너 포럼</li>
-        </ul>
-      </li>
-      
-    </ul>
-
-  
-    <div class="footer-dropdown-panels">
-      contact panel
-
-      forum panel
-    </div>
-
-  </div>
 
 </footer> -->
 
