@@ -133,7 +133,7 @@
                                         <!--chat start-->
                                         <section class="panel">
                                             <header class="panel-heading">
-                                                                                                        안내
+                                                                                                        제휴 해지일 임박 안내
                                             </header>
                                                 <div class="panel-body" id="noti-box">
 
@@ -188,6 +188,22 @@
                                                         <strong>Warning!</strong> Best check yo self, you're not looking too good.
                                                     </div>
 
+
+                                                </div>
+                                        </section>
+
+
+
+                      </div>
+                                    <div class="col-lg-4">
+
+                                        <!--chat start-->
+                                        <section class="panel">
+                                            <header class="panel-heading">
+                                                                                                        기타 안내
+                                            </header>
+                                                <div class="panel-body" id="noti-box" style="height:757px">
+
                                                     <div class="alert alert-block alert-danger">
                                                         <button data-dismiss="alert" class="close close-sm" type="button">
                                                             <i class="fa fa-times"></i>
@@ -213,13 +229,39 @@
                                                         <strong>Warning!</strong> Best check yo self, you're not looking too good.
                                                     </div>
 
+
+                                                    <div class="alert alert-block alert-danger">
+                                                        <button data-dismiss="alert" class="close close-sm" type="button">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                        <strong>Oh snap!</strong> Change a few things up and try submitting again.
+                                                    </div>
+                                                    <div class="alert alert-success">
+                                                        <button data-dismiss="alert" class="close close-sm" type="button">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                        <strong>Well done!</strong> You successfully read this important alert message.
+                                                    </div>
+                                                    <div class="alert alert-info">
+                                                        <button data-dismiss="alert" class="close close-sm" type="button">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                        <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+                                                    </div>
+                                                    <div class="alert alert-warning">
+                                                        <button data-dismiss="alert" class="close close-sm" type="button">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                        <strong>Warning!</strong> Best check yo self, you're not looking too good.
+                                                    </div>
+
+
                                                 </div>
                                         </section>
 
 
 
                       </div>
-
 
                   </div>
                   
@@ -358,31 +400,31 @@
 	
 	        <!-- jQuery 2.0.2 -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-        <script src="js/jquery.min.js" type="text/javascript"></script>
+        <script src="${ contextPath }/resources/js/jquery.min.js" type="text/javascript"></script>
 
         <!-- jQuery UI 1.10.3 -->
-        <script src="js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
+        <script src="${ contextPath }/resources/js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
         <!-- Bootstrap -->
-        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="${ contextPath }/resources/js/bootstrap.min.js" type="text/javascript"></script>
         <!-- daterangepicker -->
-        <script src="js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+        <script src="${ contextPath }/resources/js/daterangepicker.js" type="text/javascript"></script>
 
-        <script src="js/plugins/chart.js" type="text/javascript"></script>
+        <script src="${ contextPath }/resources/js/chart.js" type="text/javascript"></script>
 
         <!-- datepicker
         <script src="js/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>-->
         <!-- Bootstrap WYSIHTML5
         <script src="js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>-->
         <!-- iCheck -->
-        <script src="js/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
+        <script src="${ contextPath }/resources/js/icheck.min.js" type="text/javascript"></script>
         <!-- calendar -->
-        <script src="js/plugins/fullcalendar/fullcalendar.js" type="text/javascript"></script>
+        <script src="${ contextPath }/resources/js/fullcalendar.js" type="text/javascript"></script>
 
         <!-- Director App -->
-        <script src="js/Director/app.js" type="text/javascript"></script>
+        <script src="${ contextPath }/resources/js/app.js" type="text/javascript"></script>
 
         <!-- Director dashboard demo (This is only for demo purposes) -->
-        <script src="js/Director/dashboard.js" type="text/javascript"></script>
+        <script src="${ contextPath }/resources/js/dashboard.js" type="text/javascript"></script>
 
         <!-- Director for demo purposes -->
         <script type="text/javascript">
