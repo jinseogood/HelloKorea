@@ -14,12 +14,12 @@
 	}
 	.titleArea{
     	padding:3%;
-    	width:70%;
+    	width:700px;
     	margin-left:auto;
     	margin-right:auto;
 	}
 	.searchArea{
-	    width:30%;
+	    width:300px;
 	    margin-bottom:5%;
 	    margin-left:auto;
 	    margin-right:auto;
@@ -71,7 +71,7 @@
 				<div class="row">
                 	<div class="col-md-12">
                     	<ul class="breadcrumb">
-                        	<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                        	<li><a href="myPageView.sell"><i class="fa fa-home"></i> Home</a></li>
                             <li class="active">수익 관리</li>
                         </ul>
                     </div>
@@ -94,7 +94,7 @@
             	</div>
 			</div>	
 		
-			<table id="revenueTable" align="center" border="1">
+			<table id="revenueTable" align="center">
 				<thead>
 					<tr>
 						<th width="50px">No</th>
@@ -107,15 +107,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td></td>
+						<th></th>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -123,7 +115,15 @@
 						<td></td>
 					</tr>
 					<tr>
+						<th></th>
 						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<th></th>
 						<td></td>
 						<td></td>
 						<td></td>

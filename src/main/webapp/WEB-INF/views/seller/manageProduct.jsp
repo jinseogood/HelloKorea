@@ -14,12 +14,12 @@
 	}
 	.titleArea{
     	padding:3%;
-    	width:70%;
+    	width:700px;
     	margin-left:auto;
     	margin-right:auto;
 	}
 	.searchArea{
-	    width:30%;
+	    width:300px;
 	    margin-bottom:5%;
 	    margin-left:auto;
 	    margin-right:auto;
@@ -71,7 +71,7 @@
 				<div class="row">
                 	<div class="col-md-12">
                     	<ul class="breadcrumb">
-                        	<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                        	<li><a href="myPageView.sell"><i class="fa fa-home"></i> Home</a></li>
                             <li class="active">상품 관리</li>
                         </ul>
                     </div>
@@ -160,7 +160,7 @@
 	<script>
 		$(function(){
 			$("#productTable td").click(function(){
-				location.href="editCompany";
+				location.href="editCompany.sell";
 			});
 		});
 	</script>

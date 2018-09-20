@@ -74,7 +74,7 @@ table.type09 td {
                         <div class="col-md-12">
                             <!--breadcrumbs start -->
                             <ul class="breadcrumb">
-                                <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                                <li><a href="myPageView.ad"><i class="fa fa-home"></i> Home</a></li>
                                 <li><a href="#">예약내역 관리</a></li>
                                 <li class="active">예약내역 조회</li>
                             </ul>

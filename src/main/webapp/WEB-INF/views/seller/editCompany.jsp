@@ -46,7 +46,7 @@
 				<div class="row">
                 	<div class="col-md-12">
                     	<ul class="breadcrumb">
-                        	<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                        	<li><a href="myPageView.sell"><i class="fa fa-home"></i> Home</a></li>
                             <li class="active">업체 수정</li>
                         </ul>
                     </div>

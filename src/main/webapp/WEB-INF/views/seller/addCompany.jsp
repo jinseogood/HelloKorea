@@ -4,6 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <style>
 	input{
@@ -11,13 +15,13 @@
 	}
 	.content{
 		width:800px;
-		height:1000px;
+		height:800px;
 		margin-left:auto;
 		margin-right:auto;
 	}
 	.titleArea{
     	padding:3%;
-    	width:70%;
+    	width:650px;
     	margin-left:auto;
     	margin-right:auto;
 	}
@@ -33,6 +37,34 @@
 		width:200px;
 		text-align:center;
 	}
+	#searchTable{
+		width:330px;
+		height:450px;
+		line-height: 1.5;
+		text-align:center;
+	}
+	#searchTable tr{
+		height:30px;
+	}
+	#searchTable thead{
+		padding: 10px;
+	    text-align: center;
+	    vertical-align: top;
+	    border-bottom: 3px solid #036;
+	    background: #f3f6f7;
+	}
+	#searchTable select{
+		margin: 3px;
+	}
+	#searchTable tbody{
+	    padding: 10px;
+	    text-align: center;
+	    vertical-align: top;
+	    border: 1px solid #ccc;
+	}
+	#searchTable thead label{
+		font-weight:normal;
+	}
 </style>
 </head>
 <body>
@@ -46,7 +78,7 @@
 				<div class="row">
                 	<div class="col-md-12">
                     	<ul class="breadcrumb">
-                        	<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                        	<li><a href="myPageView.sell"><i class="fa fa-home"></i> Home</a></li>
                             <li class="active">업체 등록</li>
                         </ul>
                     </div>
@@ -82,7 +114,7 @@
 					<tr>
 						<th>상호명</th>
 						<td colspan="3"><input type="text" name="companyName" size="25"></td>
-						<td><button onclick="return companySearch();">검색</button></td>
+						<td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#searchModal">검색</button></td>
 					</tr>
 					<tr>
 						<th>대표자</th>
@@ -125,22 +157,76 @@
 					<tr>
 						<th>등록 기간</th>
 						<td colspan="4">
-							<input type="radio" name="term" id="1month" checked><label for="1month">1개월</label> 
-							<input type="radio" name="term" id="3month"><label for="3month">3개월</label> 
-							<input type="radio" name="term" id="6month"><label for="6month">6개월</label> 
-							<input type="radio" name="term" id="9month"><label for="9month">9개월</label> 
+							<input type="radio" name="term" id="1month" checked><label for="1month">1개월</label>&nbsp;
+							<input type="radio" name="term" id="3month"><label for="3month">3개월</label>&nbsp;
+							<input type="radio" name="term" id="6month"><label for="6month">6개월</label>&nbsp;
+							<input type="radio" name="term" id="9month"><label for="9month">9개월</label>&nbsp;
 							<input type="radio" name="term" id="12month"><label for="12month">12개월</label>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="5" align="center">
-							<button type="reset">취소</button>
-							<button type="submit">등록</button>
+							<button type="reset" class="btn btn-default">취소</button>&nbsp;&nbsp;
+							<button type="submit" class="btn btn-success">등록</button>
 						</td>
 					</tr>
 				</table>
 			</form>
 		</div>
+	</div>
+	
+	<!-- 상호 검색 -->
+	<div class="modal fade" id="searchModal" role="dialog">
+		<div class="modal-dialog" align="center">
+	    
+		  	<div class="modal-content" style="width:360px;">
+		  		<div class="modal-header">
+		  			<button type="button" class="close" data-dismiss="modal">&times;</button>
+		  			<h4 class="modal-title">상호 검색</h4>
+		  		</div>
+		  		<div class="modal-body">
+		  			<table id="searchTable">
+		  				<thead>
+			  				<tr>
+			  					<td width="50%">
+			  						<select id="area" style="width:90%;">
+			  							<option value="0">지역</option>
+			  							<option value="1">서울</option>
+			  							<option value="2">인천</option>
+			  							<option value="3">대전</option>
+			  							<option value="4">대구</option>
+			  							<option value="5">부산</option>
+			  							<option value="6">울산</option>
+			  						</select>
+			  					</td>
+			  					<td width="50%">
+			  						<select id="roomType" style="width:90%;">
+			  							<option value="no">유형</option>
+			  							<option value="hotel">호텔</option>
+			  							<option value="hanok">한옥</option>
+			  							<option value="benekia">베네키아</option>
+			  						</select>
+			  					</td>
+			  				</tr>
+			  				<tr>
+			  					<td colspan="2">
+			  						<input type="text" name="searchText" size="30">&nbsp;&nbsp;
+			  						<button type="button" class="btn btn-warning btn-sm">검색</button>
+			  					</td>
+			  				</tr>
+		  				</thead>
+			  			<tbody>
+			  				<tr>
+			  					<td colspan="2"></td>
+			  				</tr>
+			  			</tbody>
+		  			</table>
+		  		</div>
+		  		<div class="modal-footer" align="center">
+		  		</div>
+		  	</div>
+	      
+	  	</div>
 	</div>
 	
 	<jsp:include page="../common/footer.jsp"/>
@@ -155,10 +241,6 @@
 				$(".comType").show();
 			});
 		});
-		
-		function companySearch(){
-			window.open("companySearch", "상호검색", "width=350, height=400, resizable=no, scrollbars=no, status=no");
-		}
 	</script>
 </body>
 </html>
