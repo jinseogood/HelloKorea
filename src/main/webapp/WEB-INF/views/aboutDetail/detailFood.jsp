@@ -34,7 +34,7 @@
 		<div class="row">
 		</div>
 		<div class="tm-section-header section-margin-top">
-			<div class="col-lg-4 col-md-4 col-sm-4"><h2 class="tm-section-title">아무개호텔</h2></div>
+			<div class="col-lg-4 col-md-4 col-sm-4"><h2 class="tm-section-title">아무개 식당</h2></div>
 			<div class="col-lg-8 col-md-8 col-sm-8"><hr></div>	
 		</div>
 		
@@ -52,29 +52,20 @@
 			</div>
 			<div class="col-lg-5">
 				<div class="contentArea">
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					<input type="button" class="btn" id="payment" value="결제하기"/>
+					음식점 소개영역입니다.<br>
+					음식점 소개영역입니다.<br>
+					음식점 소개영역입니다.<br>
+					음식점 소개영역입니다.<br>
+					음식점 소개영역입니다.<br>
+					음식점 소개영역입니다.<br>
+					음식점 소개영역입니다.<br>
+					음식점 소개영역입니다.<br>
+					음식점 소개영역입니다.<br>
+					음식점 소개영역입니다.<br>
+					음식점 소개영역입니다.<br>
+					음식점 소개영역입니다.<br>
+					음식점 소개영역입니다.<br>
+					음식점 소개영역입니다.<br>
 				</div>
 			</div>
 		</div>
@@ -151,7 +142,7 @@
 	</script>
 	
 	<section class="container tm-home-section-1" id="more">
-		<div class="col-lg-12" >
+		<!-- <div class="col-lg-12" >
 			<table border="1">
 				<thead>
 					<tr>
@@ -176,7 +167,7 @@
 					</tr>
 				</tbody>
 			</table>
-		</div>
+		</div> -->
 	</section>
 	
 	<section class="container tm-home-section-1" id="more">
