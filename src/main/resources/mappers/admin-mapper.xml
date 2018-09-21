@@ -2,24 +2,22 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Message">
+<mapper namespace="Admin">
 
-	<!-- MESSAGE 테이블 값 + 닉네임 -->
-	<!-- <resultMap type="Message" id="messageResultSet">
-		<id property="msgId" column="MSG_ID" />
-		<result property="recieveId" column="RECIEVE_ID" />
-		<result property="sendId" column="SEND_ID" />
-		<result property="nickname" column="NICKNAME" />
-		<result property="title" column="TITLE" />
-		<result property="content" column="CONTENT" />
-		<result property="sendDate" column="SEND_DATE" />
-		<result property="readDate" column="READ_DATE" />
-		<result property="status" column="STATUS" />
-		<result property="mLevel" column="M_LEVEL" />
-		<result property="pDate" column="P_DATE" />
-	</resultMap> -->
+<!-- 예약 내역 관리 -->
+<!-- 예약 내역 조회  테이블 값 -->
+<resultMap type="Reservation" id="reservationResultSet">
+    <id property="oId" column="O_ID"/>
+    <result property="cName" column="C_NAME"/>
+    <result property="paName" column="PA_NAME"/>
+    <result property="rSDate" column="R_SDATE"/>
+    <result property="rEDate" column="R_EDATE"/>
+    <result property="pdDate" column="PD_DATE"/>
+    <result property="pdType" column="PD_TYPE"/>
+</resultMap>
+	
 
-    <!-- 받은 메세지 수 조회용 쿼리문 -->
+    <!-- 예약 내역 수 조회용 쿼리문 -->
     <!-- <select id="selectReMsgListCount" resultType="_int">
         SELECT COUNT(*)
         FROM (SELECT *
@@ -30,7 +28,7 @@
 		      AND MS.STATUS = 'N')
     </select> -->
     
-	<!-- 받은 메세지 리스트 조회용 쿼리문 -->
+	<!-- 예약 내역 리스트 조회용 쿼리문 -->
 	<!-- <select id="selectReMsgList" parameterType="_int" resultMap="messageResultSet">
 		SELECT *
 		FROM MESSAGE MS
@@ -40,6 +38,11 @@
 		AND MS.STATUS = 'N'
 		ORDER BY MSG_ID
 	</select> -->
+	
+	
+	
+	
+	
 	
 	<!-- 메세지 상세 조회용 쿼리문 -->
 	<!-- <select id="selectMsgOne" parameterType="_int" resultMap="messageResultSet">

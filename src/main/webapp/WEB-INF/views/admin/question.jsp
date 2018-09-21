@@ -67,6 +67,7 @@ table.type09 td {
     margin-right:auto;
     
 }
+
 </style>
 
 
@@ -92,14 +93,7 @@ table.type09 td {
 	
 	</div>
 			<div class="searchArea" align="center">
-			
-			
-			
 
-
-			
-			
-			
  <div class="input-group m-b-10">
                                                   <input type="text" class="form-control">
                                                   <div class="input-group-btn">
@@ -107,16 +101,31 @@ table.type09 td {
                                                       <ul class="dropdown-menu pull-right">
                                                           <li><a href="#">문의번호로 조회</a></li>
                                                           <li><a href="#">문의자로 조회</a></li>
+                                                          <li><a href="#">처리건만 조회</a></li>
                                                           <li><a href="#">미처리건만 조회</a></li>
                                                           <li class="divider"></li>
-                                                          <li><a href="#">문의일로 조회</a></li>
+                                                          <li><a onclick="showDatePicker()">문의일로 조회</a></li>
                                                       </ul>
                                                   </div>
                                               </div>
-
-
-
-   
+            <br>
+            
+            <div id="datePicker">
+            <jsp:include page="../common/datePicker.jsp"/>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-white">&nbsp;조회&nbsp;</button>
+            </div>
+            
+            <script>
+             $(function(){
+            	 $("#datePicker").hide();
+            	 
+             });
+             function showDatePicker(){
+            	 $("#datePicker").show();
+            	 
+             }
+            </script>
 </div>	
 
 	<div class="tableArea" align="center">
