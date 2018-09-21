@@ -55,7 +55,7 @@
 				type:"GET",
 				dataType:"json",
 				success:function(data){
-					console.log(data);
+					hotelThumbNail(data);
 				},
 				error:function(data){
 					console.log("fail..");
@@ -63,14 +63,32 @@
 				}
 			});
 		});
+		
+		function hotelThumbNail(data){
+			var rowArea = $("#rowArea #rowArea1");
+			rowArea.html("");
+			var topData = data.response.body.items.item;
+			var count = 0;
+			console.log(topData);
+			for(var i = 0; i < 3; i++){
+				var output = "";
+				var random = Math.floor(Math.random() * 11) + 1;
+				output += "<div class='tm-home-box-1 tm-home-box-1-2 tm-home-box-1-center'>";
+				output += "<img src="+topData[random].firstimage+" alt='image' class='img-responsive0'>";
+				output += "<a href='#'>";
+				output += "<div class='tm-green-gradient-bg tm-city-price-container'>";
+				output += "<span>"+topData[random].title+"</span>";
+				output += "</div></a></div>";
+				rowArea.html(output);
+			}
+		}
 	</script>
 	
 
 	<!-- gray bg -->	
 	<section class="container tm-home-section-1" id="more">
-		<div class="row">
-			
-			<div class="col-lg-4 col-md-4 col-sm-6">
+		<div class="row" id="rowArea">
+			<div class="col-lg-4 col-md-4 col-sm-6" id="rowArea1">
 				<div class="tm-home-box-1 tm-home-box-1-2 tm-home-box-1-center">
 					<img src="${ contextPath }/resources/img/index-01.jpg" alt="image" class="img-responsive0">
 					<a href="#">
@@ -82,7 +100,7 @@
 				</div>				
 			</div>
 
-			<div class="col-lg-4 col-md-4 col-sm-6">
+			<div class="col-lg-4 col-md-4 col-sm-6" id="rowArea1">
 				<div class="tm-home-box-1 tm-home-box-1-2 tm-home-box-1-center">
 					<img src="${ contextPath }/resources/img/index-01.jpg" alt="image" class="img-responsive0">
 					<a href="#">
@@ -93,7 +111,7 @@
 					</a>			
 				</div>				
 			</div>
-			<div class="col-lg-4 col-md-4 col-sm-6">
+			<div class="col-lg-4 col-md-4 col-sm-6" id="rowArea1">
 				<div class="tm-home-box-1 tm-home-box-1-2 tm-home-box-1-right">
 					<img src="${ contextPath }/resources/img/index-02.jpg" alt="image" class="img-responsive0">
 					<a href="#">

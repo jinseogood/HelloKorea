@@ -225,8 +225,8 @@
 			  				</tr>
 			  				<tr>
 			  					<td colspan="2">
-			  						<input type="text" name="searchText" size="30">&nbsp;&nbsp;
-			  						<button type="button" class="btn btn-warning btn-sm">검색</button>
+			  						<input type="text" id="searchText" name="searchText" size="30">&nbsp;&nbsp;
+			  						<button type="button" class="btn btn-warning btn-sm" onclick="return searchCompany();">검색</button>
 			  					</td>
 			  				</tr>
 		  				</thead>
@@ -234,15 +234,7 @@
 			  				<tr>
 			  					<td colspan="2">
 			  						<table id="resultTable">
-			  							<tr><td><b>ABC호텔</b><br><font style="font-size:11px;">서울 양천구</font></td></tr>
-			  							<tr><td><b>ABC호텔</b><br><font style="font-size:11px;">서울 양천구</font></td></tr>
-			  							<tr><td><b>ABC호텔</b><br><font style="font-size:11px;">서울 양천구</font></td></tr>
-			  							<tr><td><b>ABC호텔</b><br><font style="font-size:11px;">서울 양천구</font></td></tr>
-			  							<tr><td><b>ABC호텔</b><br><font style="font-size:11px;">서울 양천구</font></td></tr>
-			  							<tr><td><b>ABC호텔</b><br><font style="font-size:11px;">서울 양천구</font></td></tr>
-			  							<tr><td><b>ABC호텔</b><br><font style="font-size:11px;">서울 양천구</font></td></tr>
-			  							<tr><td><b>ABC호텔</b><br><font style="font-size:11px;">서울 양천구</font></td></tr>
-			  							<tr><td><b>ABC호텔</b><br><font style="font-size:11px;">서울 양천구</font></td></tr>
+			  							
 			  						</table>
 			  					</td>
 			  				</tr>
@@ -272,13 +264,46 @@
 	<script>
 		$(function(){
 			$(".comType").hide();
+			
 			$("#personal").click(function(){
 				$(".comType").hide();
 			});
+			
 			$("#company").click(function(){
 				$(".comType").show();
 			});
 		});
+		
+		function searchCompany(){
+			var area=$("#area").val();
+			var rType=$("#roomType").val();
+			var sText=$("#searchText").val();
+			
+			$.ajax({
+				url:"searchCompany.sell",
+				type:"get",
+				data:{area:area, rType:rType, sText:sText},
+				dataType:"json",
+				success:function(data){
+					console.log(data.response.body.items.item);
+					
+					$tableBody = $("#resultTable");
+					$tableBody.html('');
+					
+					var company=data.response.body.items.item;
+					
+					for(var i=0;i<company.length;i++){
+						var output="";
+						output += "<tr><td><b>" + company[i].title + "</b><br>";
+						output += "<font style='font-size:11px;'>" + company[i].addr1 + "</font></td></tr>";
+						$tableBody.append(output);
+					}
+					
+				}, error:function(data){
+					console.log(data);
+				}
+			});
+		}
 	</script>
 </body>
 </html>

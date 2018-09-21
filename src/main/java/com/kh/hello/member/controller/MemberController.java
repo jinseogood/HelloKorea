@@ -1,0 +1,82 @@
+package com.kh.hello.member.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.kh.hello.member.model.exception.LoginException;
+import com.kh.hello.member.model.service.MemberService;
+import com.kh.hello.member.model.vo.Member;
+
+@Controller
+@SessionAttributes("loginUser")
+public class MemberController {
+	@Autowired
+	private MemberService ms;
+	@Autowired BCryptPasswordEncoder passwordEncoder;
+	
+
+	
+	@RequestMapping(value ="insertUser.me")
+	public String insertMember(Model model,Member m ){
+	
+		String encPassword = passwordEncoder.encode(m.getPassword());
+		
+/*		System.out.println("암호화 : "+encPassword);*/
+		m.setPassword(encPassword);
+		
+		
+		System.out.println(m);
+		
+		int result = ms.insertMember(m);
+		
+		if(result >0){
+			return "main/main";
+			
+		}else{
+			System.out.println("실패");
+			return null;
+		}
+	
+}
+	
+	@RequestMapping(value="insertSeller.me")
+	public String insertSeller(Model model, Member m){
+		
+		String encPassword = passwordEncoder.encode(m.getPassword());
+		
+		System.out.println(m);
+		
+		int result = ms.insertSeller(m);
+		
+		if(result > 0){
+			return "main/main";
+		}
+		
+		return null;
+		
+		
+	}
+	
+	@RequestMapping(value="login.me")
+	public String loginUser(Model model, Member m){
+		
+		try {
+			model.addAttribute("loginUser", ms.loginMember(m));
+			System.out.println("로그인 성공");
+			
+			return "main/main";
+		} catch (LoginException e) {
+			model.addAttribute("msg",e.getMessage());
+		
+			return "common/errorPage";
+		}
+	}
+	
+}
