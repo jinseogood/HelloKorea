@@ -1,0 +1,57 @@
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Member">
+   <resultMap type="Member" id="memberResultSet">
+      <id property="mId" column="M_ID"/>
+      <result property="platformType" column="PLATFORM_TYPE"/>
+      <result property="mType" column="M_TYPE"/>
+      <result property="snsToken" column="SNS_TOKEN"/>
+      <result property="snsId" column="SNS_ID"/>
+      <result property="password" column="PASSWORD"/>
+      <result property="tempPassword" column="TEMP_PASSWORD"/>
+      <result property="registDate" column="REGIST_DATE"/>
+      <result property="status" column="STATUS"/>
+      <result property="email" column="EMAIL"/>
+      <result property="nickname" column="NICKNAME"/>
+      <result property="national" column="NATIONAL"/>
+      <result property="interest" column="INTEREST"/>
+      <result property="snsType" column="SNS_TYPE"/>
+      <result property="phone" column="PHONE"/>
+      <result property="bankNum" column="BANK_NUM"/>
+   </resultMap>
+   
+   <!-- 로그인 정보 조회용 쿼리문 -->
+   <select id="loginCheck" resultMap="memberResultSet" parameterType="Member">
+      SELECT *
+      FROM MEMBER
+      WHERE USER_ID = #{email}
+      AND USER_PWD = #{password}
+      
+   </select>
+   <!-- 회원가입용 메소드 -->
+	<insert id="insertMember" parameterType="Member">
+		INSERT INTO MEMBER (M_ID,PLATFORM_TYPE,M_TYPE,NICKNAME,NATIONAL,INTEREST,EMAIL,PASSWORD,REGIST_DATE,STATUS) 
+		VALUES (SEQ_M_ID.NEXTVAL,'email','1',#{nickname},#{national},#{interest},#{email},#{password},SYSDATE,'Y')
+	</insert>
+	
+	<insert id="insertSeller" parameterType="Member">
+		INSERT INTO MEMBER(M_ID,PLATFORM_TYPE,M_TYPE,REGIST_DATE,STATUS,EMAIL,PASSWORD,NICKNAME,PHONE,BANK_NUM)
+		VALUES (SEQ_M_ID.NEXTVAL,'email','2',SYSDATE,'Y',#{email},#{password},#{nickname},#{phone},#{bankNum})
+	</insert>
+	
+	<select id="selectPwd" resultType="java.lang.String"
+		parameterType="java.lang.String">
+		SELECT PASSWORD FROM MEMBER 
+		WHERE EMAIL = #{email} AND STATUS = 'Y'
+	</select>
+	
+	<select id="selectLoginUser" resultMap="memberResultSet"
+		parameterType="Member">
+		SELECT * FROM MEMBER
+		WHERE EMAIL =#{email} AND STATUS ='Y'
+	</select>
+
+</mapper>

@@ -7,10 +7,12 @@
   
       <typeAliases>
           <typeAlias type="com.kh.hello.message.model.vo.Message" alias="Message"/>
+          <typeAlias type="com.kh.hello.member.model.vo.Member" alias="Member"/>
       </typeAliases>
   
       <mappers>
           <mapper resource="mappers/message-mapper.xml"/>
+          <mapper resource="mappers/member-mapper.xml"/>
       </mappers>
   
   </configuration>
