@@ -34,5 +34,10 @@ public class SellerController {
 	public String editCompanyView(){
 		return "seller/editCompany";
 	}
+	
+	@RequestMapping("paymentDetail.sell")
+	public String paymentDetailView(){
+		return "payment/detailPayment";
+	}
 
 }
