@@ -50,9 +50,13 @@ public class MemberServiceImpl implements MemberService {
 		}
 		
 		
-		
-		
 		return loginUser;
+	}
+
+	@Override
+	public int updateAddUser(Member m) {
+		// TODO Auto-generated method stub
+		return md.updateAddUser(m, sqlSession);
 	}
 
 

@@ -291,24 +291,6 @@
 					<tr>
 						<td><input type="password" name="password" id="userPassword" class="inputStyle"></td>
 					</tr>
-					<tr>
-						<th>NICKNAME</th>
-					</tr>
-					<tr>
-						<td><input type="text" name="nickname" id="nickname" class="inputStyle"></td>
-					</tr>
-					<tr>
-						<th>NATIONAL</th>
-					</tr>
-					<tr>
-						<td><input type="text" name="national" id="national" class="inputStyle"></td>
-					</tr>
-					<tr>
-						<th>INTEREST</th>
-					</tr>
-					<tr>
-						<td><input type="text" name="interest" id="interest" class="inputStyle"></td>
-					</tr>
 				</table>
 				<div align="center">
 					<button>회원가입하기</button>

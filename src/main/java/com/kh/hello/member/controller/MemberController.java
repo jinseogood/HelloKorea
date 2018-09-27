@@ -32,8 +32,6 @@ public class MemberController {
 		m.setPassword(encPassword);
 		
 		
-		System.out.println(m);
-		
 		int result = ms.insertMember(m);
 		
 		if(result >0){
@@ -41,7 +39,7 @@ public class MemberController {
 			
 		}else{
 			System.out.println("실패");
-			return null;
+			return "main/main";
 		}
 	
 }
@@ -77,6 +75,16 @@ public class MemberController {
 		
 			return "common/errorPage";
 		}
+	}
+	@RequestMapping(value="addUser.me")
+	public String updateAddUser(Model model, Member m){
+		
+		
+		int result = ms.updateAddUser(m);
+		return null;
+		
+		
+		
 	}
 	
 }
