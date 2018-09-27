@@ -16,4 +16,7 @@ public interface MemberDao {
 
 	Member selectMember(SqlSessionTemplate sqlSession, Member m);
 
+	int updateAddUser(Member m, SqlSessionTemplate sqlSession);
+
+	
 }

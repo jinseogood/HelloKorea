@@ -31,6 +31,11 @@ public class MemberDaoImpl implements MemberDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("Member.selectLoginUser",m);
 	}
+	@Override
+	public int updateAddUser(Member m, SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("Member.updateAddUser",m);
+	}
 
 	
 
