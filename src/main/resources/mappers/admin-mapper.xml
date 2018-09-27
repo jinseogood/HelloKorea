@@ -18,31 +18,27 @@
 	
 
     <!-- 예약 내역 수 조회용 쿼리문 -->
-    <!-- <select id="selectReMsgListCount" resultType="_int">
+    <select id="selectReservationListCount" resultType="_int">
         SELECT COUNT(*)
-        FROM (SELECT *
-		      FROM MESSAGE MS
-		      JOIN MEMBER M
-		      ON(MS.SEND_ID=M.M_ID)
-		      WHERE MS.RECEIVE_ID = #{mId}
-		      AND MS.STATUS = 'N')
-    </select> -->
+        FROM (SELECT R.O_ID, C.C_NAME, PA.PA_NAME, R.R_SDATE, R.R_EDATE, PD.PD_DATE, PD.PD_TYPE 
+              FROM RESERVATION R
+              JOIN ROOM RO ON(R.R_ID=RO.R_ID)
+              JOIN COMPANY C ON(RO.C_ID=C.C_ID)
+              JOIN PAYMENT PA ON(R.PA_ID = PA.PA_ID)
+              RIGHT OUTER JOIN PAY_DETAIL PD ON(PA.PA_ID = PD.PA_ID)
+              ORDER BY R.O_ID)
+    </select>
     
 	<!-- 예약 내역 리스트 조회용 쿼리문 -->
-	<!-- <select id="selectReMsgList" parameterType="_int" resultMap="messageResultSet">
-		SELECT *
-		FROM MESSAGE MS
-		JOIN MEMBER M
-		ON(MS.SEND_ID=M.M_ID)
-		WHERE MS.RECEIVE_ID = #{mId}
-		AND MS.STATUS = 'N'
-		ORDER BY MSG_ID
-	</select> -->
-	
-	
-	
-	
-	
+	<select id="selectReservationList" resultMap="reservationResultSet">
+		SELECT R.O_ID, C.C_NAME, PA.PA_NAME, R.R_SDATE, R.R_EDATE, PD.PD_DATE, PD.PD_TYPE 
+        FROM RESERVATION R
+        JOIN ROOM RO ON(R.R_ID=RO.R_ID)
+        JOIN COMPANY C ON(RO.C_ID=C.C_ID)
+        JOIN PAYMENT PA ON(R.PA_ID = PA.PA_ID)
+        RIGHT OUTER JOIN PAY_DETAIL PD ON(PA.PA_ID = PD.PA_ID)
+        ORDER BY R.O_ID
+	</select>
 	
 	<!-- 메세지 상세 조회용 쿼리문 -->
 	<!-- <select id="selectMsgOne" parameterType="_int" resultMap="messageResultSet">
