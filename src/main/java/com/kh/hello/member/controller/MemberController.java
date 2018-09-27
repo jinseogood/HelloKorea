@@ -34,8 +34,15 @@ public class MemberController {
 		
 		int result = ms.insertMember(m);
 		
+		int mid = ms.selectMemberSequence();
+		
 		if(result >0){
-			return "main/main";
+			
+			System.out.println("mid : " + mid);
+			
+			model.addAttribute("mid", mid);
+			
+			return "member/addUserInfo";
 			
 		}else{
 			System.out.println("실패");
@@ -49,7 +56,7 @@ public class MemberController {
 		
 		String encPassword = passwordEncoder.encode(m.getPassword());
 		
-		System.out.println(m);
+		/*System.out.println(m);*/
 		
 		int result = ms.insertSeller(m);
 		
@@ -79,9 +86,19 @@ public class MemberController {
 	@RequestMapping(value="addUser.me")
 	public String updateAddUser(Model model, Member m){
 		
+		System.out.println("m : 이거다"+m);
+		
 		
 		int result = ms.updateAddUser(m);
-		return null;
+		
+		if(result >0){
+			return "main/main";
+			
+			
+		}else{
+			return"common/errorPage";
+			
+		}
 		
 		
 		

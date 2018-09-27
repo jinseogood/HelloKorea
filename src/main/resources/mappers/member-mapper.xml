@@ -43,11 +43,10 @@
 	</insert>
 	<update id="updateAddUser">
 		UPDATE MEMBER
-		SET NICKNAME=#{nickname}
-			NATIONAL=#{national}
+		SET NICKNAME=#{nickname},
+			NATIONAL=#{national},
 			INTEREST=#{interest}
-		WHERE EMAIL=#{email}
-			  PASSWORD=#{password}	
+		WHERE M_ID =#{mId}
 	</update>
 	
 	<select id="selectPwd" resultType="java.lang.String"
@@ -60,6 +59,11 @@
 		parameterType="Member">
 		SELECT * FROM MEMBER
 		WHERE EMAIL =#{email} AND STATUS ='Y'
+	</select>
+	
+	<!-- <select id="selectMemberSequence" resultMap="_int"> -->
+	<select id="selectMemberSequence" resultType="_int">
+      SELECT SEQ_M_ID.currval FROM DUAL
 	</select>
 
 </mapper>
