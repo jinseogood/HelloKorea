@@ -8,9 +8,10 @@
 <title>Hello Korea</title>
 <style>
 	.img-responsive0{width:346px; height:346.98px;}
-	.img-responsive1{width:100%; height:auto;}
+	.img-responsive1{width:250px; height:225px;}
 	.img-responsive2{width:100%; height:auto;}
 	.themeBtn{width:250px; height:60px; background-color:#00aef0; color:white;}
+	#themeText{height:164px; overflow:auto; padding:15px 15px 90px;}
 </style>
 </head>
 <body>
@@ -51,11 +52,67 @@
 	<script>
 		$(function(){
 			$.ajax({
-				url:"mainHotel.in",
+				url:"mainHotel1.in",
 				type:"GET",
 				dataType:"json",
 				success:function(data){
-					hotelThumbNail(data);
+					var rowArea = $("#rowArea #rowArea1");
+					rowArea.html("");
+					var firstData = data.response.body.items.item;
+					var output = "";
+					output += "<div class='tm-home-box-1 tm-home-box-1-2 tm-home-box-1-center'>";
+					output += "<img src="+firstData.firstimage+" alt='image' class='img-responsive0'>";
+					output += "<a href='#'>";
+					output += "<div class='tm-green-gradient-bg tm-city-price-container'>";
+					output += "<span>"+firstData.title+"</span>";
+					output += "</div></a></div>";
+					rowArea.html(output);
+				},
+				error:function(data){
+					console.log("1fail..");
+					console.log(data);
+				}
+			});
+			
+			$.ajax({
+				url:"mainHotel2.in",
+				type:"GET",
+				dataType:"json",
+				success:function(data){
+					var rowArea = $("#rowArea #rowArea2");
+					rowArea.html("");
+					var firstData = data.response.body.items.item;
+					var output = "";
+					output += "<div class='tm-home-box-1 tm-home-box-1-2 tm-home-box-1-center'>";
+					output += "<img src="+firstData.firstimage+" alt='image' class='img-responsive0'>";
+					output += "<a href='#'>";
+					output += "<div class='tm-green-gradient-bg tm-city-price-container'>";
+					output += "<span>"+firstData.title+"</span>";
+					output += "</div></a></div>";
+					rowArea.html(output);
+				},
+				error:function(data){
+					console.log("fail..");
+					console.log(data);
+				}
+			});
+			
+			$.ajax({
+				url:"mainHotel3.in",
+				type:"GET",
+				dataType:"json",
+				success:function(data){
+					var rowArea = $("#rowArea #rowArea3");
+					rowArea.html("");
+					var firstData = data.response.body.items.item;
+					var output = "";
+					output += "<div class='tm-home-box-1 tm-home-box-1-2 tm-home-box-1-center'>";
+					output += "<img src="+firstData.firstimage+" alt='image' class='img-responsive0'>";
+					output += "<a href='#'>";
+					output += "<div class='tm-green-gradient-bg tm-city-price-container'>";
+					output += "<span>"+firstData.title+"</span>";
+					output += "</div></a></div>";
+					rowArea.html(output);
 				},
 				error:function(data){
 					console.log("fail..");
@@ -64,28 +121,10 @@
 			});
 		});
 		
-		function hotelThumbNail(data){
-			var rowArea = $("#rowArea #rowArea1");
-			rowArea.html("");
-			var topData = data.response.body.items.item;
-			var count = 0;
-			console.log(topData);
-			for(var i = 0; i < 3; i++){
-				var output = "";
-				var random = Math.floor(Math.random() * 11) + 1;
-				output += "<div class='tm-home-box-1 tm-home-box-1-2 tm-home-box-1-center'>";
-				output += "<img src="+topData[random].firstimage+" alt='image' class='img-responsive0'>";
-				output += "<a href='#'>";
-				output += "<div class='tm-green-gradient-bg tm-city-price-container'>";
-				output += "<span>"+topData[random].title+"</span>";
-				output += "</div></a></div>";
-				rowArea.html(output);
-			}
-		}
 	</script>
 	
 
-	<!-- gray bg -->	
+	<!-- 상단 호텔 3개 부분 -->	
 	<section class="container tm-home-section-1" id="more">
 		<div class="row" id="rowArea">
 			<div class="col-lg-4 col-md-4 col-sm-6" id="rowArea1">
@@ -100,7 +139,7 @@
 				</div>				
 			</div>
 
-			<div class="col-lg-4 col-md-4 col-sm-6" id="rowArea1">
+			<div class="col-lg-4 col-md-4 col-sm-6" id="rowArea2">
 				<div class="tm-home-box-1 tm-home-box-1-2 tm-home-box-1-center">
 					<img src="${ contextPath }/resources/img/index-01.jpg" alt="image" class="img-responsive0">
 					<a href="#">
@@ -111,7 +150,7 @@
 					</a>			
 				</div>				
 			</div>
-			<div class="col-lg-4 col-md-4 col-sm-6" id="rowArea1">
+			<div class="col-lg-4 col-md-4 col-sm-6" id="rowArea3">
 				<div class="tm-home-box-1 tm-home-box-1-2 tm-home-box-1-right">
 					<img src="${ contextPath }/resources/img/index-02.jpg" alt="image" class="img-responsive0">
 					<a href="#">
@@ -124,6 +163,9 @@
 			</div>
 		</div>
 	</section>
+	
+	
+	<!-- 테마여행 view 부분 -->
 	<section class="tm-white-bg section-padding-bottom">
 	<div class="container">
 		<div class="row">				
@@ -133,15 +175,17 @@
 					<div class="col-lg-6 col-md-6 col-sm-6"><h2 class="tm-section-title">테마여행</h2></div>
 					<div class="col-lg-3 col-md-3 col-sm-3"><hr></div>	
 				</div>
-				<div align="right">쇼핑 | 뷰티 | 전통 | 레져 | 한류&nbsp;&nbsp;&nbsp;&nbsp;</div><br>
+				<div align="right">
+					<a href="">쇼핑</a> | <a href="">뷰티</a> | <a href="">전통</a> | <a href="">레져</a> | <a href="">한류</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				</div><br>
 			</div>
 			<div class="col-lg-6">
-					<div class="tm-home-box-3">
+					<div class="tm-home-box-3" id="subContainer1">
 						<div class="tm-home-box-3-img-container">
 							<img src="${ contextPath }/resources/img/index-07.jpg" alt="image" class="img-responsive1">	
 						</div>						
 						<div class="tm-home-box-3-info">
-							<p class="tm-home-box-3-description">Proin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum</p>
+							<p class="tm-home-box-3-description" id="themeText">Proin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum</p>
 					        <div class="tm-home-box-2-container">
 							<a href="#" class="tm-home-box-2-link"><i class="fa fa-heart tm-home-box-2-icon border-right"></i></a>
 							<a href="#" class="tm-home-box-2-link"><span class="tm-home-box-2-description box-3">Travel</span></a>
@@ -151,7 +195,7 @@
 					</div>					
 			     </div>
 			     <div class="col-lg-6">
-			        <div class="tm-home-box-3">
+			        <div class="tm-home-box-3" id="subContainer2">
 						<div class="tm-home-box-3-img-container">
 							<img src="${ contextPath }/resources/img/index-08.jpg" alt="image" class="img-responsive1">	
 						</div>						
@@ -166,7 +210,7 @@
 					</div>
 				</div>
 				<div class="col-lg-6">
-				    <div class="tm-home-box-3">
+				    <div class="tm-home-box-3" id="subContainer3">
 						<div class="tm-home-box-3-img-container">
 							<img src="${ contextPath }/resources/img/index-09.jpg" alt="image" class="img-responsive1">	
 						</div>						
@@ -181,7 +225,7 @@
 					</div>
 			    </div>
 			    <div class="col-lg-6">
-			        <div class="tm-home-box-3">
+			        <div class="tm-home-box-3" id="subContainer4">
 						<div class="tm-home-box-3-img-container">
 							<img src="${ contextPath }/resources/img/index-10.jpg" alt="image" class="img-responsive1">	
 						</div>						
@@ -200,6 +244,113 @@
 		<div class="col-lg-12" align="center">
 			<input type="button" class="btn themeBtn" value="테마여행 더보기" onclick="location.href='${contextPath}/themeMain'">
 		</div>
+		<script>
+			$(function(){
+				$.ajax({
+					url:"mainThemeShopping.tm",
+					type:"GET",
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var themeData = data.response.body.items.item;
+						var containerArea = $("#subContainer1");
+						containerArea.html("");
+						var output = "";
+						output += "<div class='tm-home-box-3-img-container'>";
+						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
+						output += "</div>";
+						output += "<div class='tm-home-box-3-info'>";
+						output += "<p class='tm-home-box-3-description' id='themeText'>"+themeData.overview+"</p>";
+						output += "<div class='tm-home-box-2-container'>";
+						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
+						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3'>"+themeData.title+"</span>";
+						output += "</div></div>";
+						containerArea.html(output);
+					},
+					error:function(data){
+						console.log("fail..");
+						console.log(data);
+					}
+				});
+				$.ajax({
+					url:"mainThemeShopping2.tm",
+					type:"GET",
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var themeData = data.response.body.items.item;
+						var containerArea = $("#subContainer2");
+						containerArea.html("");
+						var output = "";
+						output += "<div class='tm-home-box-3-img-container'>";
+						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
+						output += "</div>";
+						output += "<div class='tm-home-box-3-info'>";
+						output += "<p class='tm-home-box-3-description' id='themeText'>"+themeData.overview+"</p>";
+						output += "<div class='tm-home-box-2-container'>";
+						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
+						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3'>"+themeData.title+"</span>";
+						output += "</div></div>";
+						containerArea.html(output);
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+				$.ajax({
+					url:"mainThemeShopping3.tm",
+					type:"GET",
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var themeData = data.response.body.items.item;
+						var containerArea = $("#subContainer3");
+						containerArea.html("");
+						var output = "";
+						output += "<div class='tm-home-box-3-img-container'>";
+						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
+						output += "</div>";
+						output += "<div class='tm-home-box-3-info'>";
+						output += "<p class='tm-home-box-3-description' id='themeText'>"+themeData.overview+"</p>";
+						output += "<div class='tm-home-box-2-container'>";
+						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
+						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3'>"+themeData.title+"</span>";
+						output += "</div></div>";
+						containerArea.html(output);
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+				$.ajax({
+					url:"mainThemeShopping4.tm",
+					type:"GET",
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var themeData = data.response.body.items.item;
+						var containerArea = $("#subContainer4");
+						containerArea.html("");
+						var output = "";
+						output += "<div class='tm-home-box-3-img-container'>";
+						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
+						output += "</div>";
+						output += "<div class='tm-home-box-3-info'>";
+						output += "<p class='tm-home-box-3-description' id='themeText'>"+themeData.overview+"</p>";
+						output += "<div class='tm-home-box-2-container'>";
+						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
+						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3'>"+themeData.title+"</span>";
+						output += "</div></div>";
+						containerArea.html(output);
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+				
+				
+			});
+		</script>
 	</section>		
 	
 	<!-- white bg -->
