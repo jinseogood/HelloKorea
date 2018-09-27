@@ -98,10 +98,7 @@ table.type09 td {
                                                       </ul>
                                                   </div>
                                               </div>
-
-
-
-   
+  
 </div>	
 
 	<div class="tableArea" align="center">
