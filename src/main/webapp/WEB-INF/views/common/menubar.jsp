@@ -26,6 +26,7 @@
 	}
 	#loginDiv { /* 팝업창 css */
 		top: 0px;
+		
 		position: absolute;
 		width: 450px;
 		height: 420px;
@@ -34,7 +35,7 @@
 		border: none;
 	}
 	
-	button {
+	.btn {
 		width: 300px;
 		height: 50px;
 		margin-top: 10px;
@@ -56,10 +57,7 @@
 		height: 100px;
 	}
 	
-	hr {
-		width: 400px;
-		border: solid #D8D8D8 1px;
-	}
+
 	
 	#topDiv {
 		width: 450px;
@@ -146,14 +144,7 @@
 		margin-top: 5px;
 		margin-bottom: 5px;
 	}
-	
-	#joinBtnDiv {
-		margin-left: auto;
-		margin-right: auto;
-		width: 300px;
-		height: 100px;
-	}
-	
+		
 	#joinBtn1 {
 	   width: 100px;
 	   margin-left: 15px;
@@ -169,12 +160,13 @@
 		top: 0px;
 		position: absolute;
 		width: 450px;
-		height: 500px;
+		height: 420px;
 		display: none;
 		background: white;
 		border: none;
 	}
 	#joinInsert{
+		margin-top:30px;
 		margin-right:auto;
 		margin-left:auto;	
 	}
@@ -231,10 +223,11 @@
 			<label style="width: 180px; font-size: 30px;">Hello Korea</label>
 		</div>
 		<div id="snsBtn">
-			<button>Facebook</button>
-			<button>Google</button>
+			<button class="btn">Facebook</button>
+			<button class="btn">Google</button>
 		</div>
-		<hr>
+		<hr style="	width: 400px;
+		border: solid #D8D8D8 1px;">
 		<div id="email">
 			<button id="emailBtn" data-toggle="modal" data-target="#emailDiv">이메일로계속하기</button>
 		</div>
@@ -259,14 +252,17 @@
 					<td><input type="password" id="userPwd" name="password" class="inputStyle"></td>
 				</tr>
 			</table>
-			<hr>
-			<div id="joinBtnDiv">
-				<button>로그인</button>
+			<hr style="	width: 400px;border: solid #D8D8D8 1px;">
+			<div align="center">
+				<button class="btn">로그인</button>
 			</div>
 		</form>
+		<div align="center">
 		<label>계정이 없으신 가요?
-			<button id="joinBtn" data-toggle="modal" data-target="#joinDiv">회원가입</button>
+			<button id="joinBtn" data-toggle="modal" data-target="#joinDiv"class="btn">회원가입</button>
 		</label>
+		
+		</div>
 	</div>
 
 	<div id="joinDiv" class="modal fade" role="dialog">
@@ -293,12 +289,12 @@
 					</tr>
 				</table>
 				<div align="center">
-					<button>회원가입하기</button>
+					<button class="btn">회원가입하기</button>
 				</div>
 			</form>
 			<div align="center">
 				<label>판매자등록은 여기로
-					<button id="joinBtn1" data-toggle="modal" data-target="#sellerDiv">판매자등록</button>
+					<button class="btn" id="joinBtn1" data-toggle="modal" data-target="#sellerDiv">판매자등록</button>
 				</label>
 			</div>
 		</div>
@@ -342,7 +338,7 @@
 				</tr>
 			</table>
 			<div align="center">
-				<button>판매자회원가입</button>
+				<button class="btn">판매자회원가입</button>
 			</div>
 		</form>
 	</div>

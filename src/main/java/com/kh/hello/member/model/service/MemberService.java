@@ -16,6 +16,10 @@ public interface MemberService {
 	Member loginMember(Member m) throws LoginException;
 
 	int updateAddUser(Member m);
+	
+	
+	//회원시퀀스 
+	int selectMemberSequence();
 
 	
 

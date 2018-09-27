@@ -60,6 +60,15 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
+	
+	//회원시퀀스
+	@Override
+	public int selectMemberSequence() {
+		// TODO Auto-generated method stub
+		return md.selectMemberSequence(sqlSession);
+	}
+
+
 
 
 

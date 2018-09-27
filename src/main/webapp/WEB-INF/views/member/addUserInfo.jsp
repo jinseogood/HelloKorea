@@ -43,7 +43,9 @@ button {
 	<div id="mainDiv">
 		<form action="addUser.me" method="post">
 			<table id="insertTable">
+
 				<tr>
+				<input type="hidden" name="mId" value="${mid}"/>
 					<th>NickName</th>
 				</tr>
 				<tr>
