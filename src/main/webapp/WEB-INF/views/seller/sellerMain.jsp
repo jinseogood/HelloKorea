@@ -83,8 +83,7 @@
 				<div class="sm-st clearfix">
 					<span class="sm-st-icon st-violet"><i class="fa fa-envelope-o"></i></span>
 					<div class="sm-st-info">
-						<span><a href="#">45건</a></span>
-						미해결 문의
+						<span><a href="paymentDetail.sell">결제페이지</a></span>
 					</div>
 				</div>
 			</div>
