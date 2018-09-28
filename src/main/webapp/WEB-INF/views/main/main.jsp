@@ -11,7 +11,9 @@
 	.img-responsive1{width:250px; height:225px;}
 	.img-responsive2{width:100%; height:auto;}
 	.themeBtn{width:250px; height:60px; background-color:#00aef0; color:white;}
-	#themeText{height:164px; overflow:auto; padding:15px 15px 90px;}
+	#themeText{height:164px; overflow:hidden; padding:30px 30px 54px;}
+	.mainSearchArea{font-size:15px; width:152px; height:40px; background-color:#00aef0; color:white;}
+	
 </style>
 </head>
 <body>
@@ -26,7 +28,28 @@
 			    <div class="tm-banner-inner">
 					<h1 class="tm-banner-title">Find <span class="tm-yellow-text">The Best</span> Place</h1>
 					<p class="tm-banner-subtitle">For Your Holidays</p>
-					<input type="text" name="searchArea" class="tm-banner-link"><a href="#more" class="tm-banner-link">검색</a>	
+					<!-- <input type="text" name="searchArea" class="tm-banner-link"> -->
+					<select class="mainSearchArea" name="searchCondition">
+						<option> --- </option>
+						<option value="1">서울</option>
+						<option value="2">인천</option>
+						<option value="3">대전</option>
+						<option value="4">대구</option>
+						<option value="5">광주</option>
+						<option value="6">부산</option>
+						<option value="7">울산</option>
+						<option value="8">세종특별자치시</option>
+						<option value="31">경기도</option>
+						<option value="32">강원도</option>
+						<option value="33">충청북도</option>
+						<option value="34">충청남도</option>
+						<option value="35">경상북도</option>
+						<option value="36">경상남도</option>
+						<option value="37">전라북도</option>
+						<option value="38">전라남도</option>
+						<option value="39">제주도</option>
+					</select>
+					<input type="button" class="tm-banner-link" value="검색">
 				</div>
 				<img src="${ contextPath }/resources/img/banner-1.jpg" alt="Image" />	
 		    </li>
@@ -34,7 +57,28 @@
 			    <div class="tm-banner-inner">
 					<h1 class="tm-banner-title">Lorem <span class="tm-yellow-text">Ipsum</span> Dolor</h1>
 					<p class="tm-banner-subtitle">Wonderful Destinations</p>
-					<input type="text" name="searchArea" class="tm-banner-link"><a href="#more" class="tm-banner-link">검색</a>
+					<!-- <input type="text" name="searchArea" class="tm-banner-link"> -->
+					<select class="mainSearchArea" name="searchCondition">
+						<option> --- </option>
+						<option value="1">서울</option>
+						<option value="2">인천</option>
+						<option value="3">대전</option>
+						<option value="4">대구</option>
+						<option value="5">광주</option>
+						<option value="6">부산</option>
+						<option value="7">울산</option>
+						<option value="8">세종특별자치시</option>
+						<option value="31">경기도</option>
+						<option value="32">강원도</option>
+						<option value="33">충청북도</option>
+						<option value="34">충청남도</option>
+						<option value="35">경상북도</option>
+						<option value="36">경상남도</option>
+						<option value="37">전라북도</option>
+						<option value="38">전라남도</option>
+						<option value="39">제주도</option>
+					</select>
+					<input type="button" class="tm-banner-link" value="검색">
 				</div>
 		      <img src="${ contextPath }/resources/img/banner-2.jpg" alt="Image" />
 		    </li>
@@ -42,12 +86,36 @@
 			    <div class="tm-banner-inner">
 					<h1 class="tm-banner-title">Proin <span class="tm-yellow-text">Gravida</span> Nibhvell</h1>
 					<p class="tm-banner-subtitle">Velit Auctor</p>
-					<input type="text" name="searchArea" class="tm-banner-link"><a href="#more" class="tm-banner-link">검색</a>	
+					<!-- <input type="text" name="searchArea" class="tm-banner-link"> -->
+					<select class="mainSearchArea" name="searchCondition">
+						<option> --- </option>
+						<option value="1">서울</option>
+						<option value="2">인천</option>
+						<option value="3">대전</option>
+						<option value="4">대구</option>
+						<option value="5">광주</option>
+						<option value="6">부산</option>
+						<option value="7">울산</option>
+						<option value="8">세종특별자치시</option>
+						<option value="31">경기도</option>
+						<option value="32">강원도</option>
+						<option value="33">충청북도</option>
+						<option value="34">충청남도</option>
+						<option value="35">경상북도</option>
+						<option value="36">경상남도</option>
+						<option value="37">전라북도</option>
+						<option value="38">전라남도</option>
+						<option value="39">제주도</option>
+					</select>
+					<input type="button" class="tm-banner-link" value="검색">	
 				</div>
 		      <img src="${ contextPath }/resources/img/banner-3.jpg" alt="Image" />
 		    </li>
 		  </ul>
-		</div>	
+		</div>
+		<script>
+			
+		</script>
 	</section>
 	<script>
 		$(function(){
@@ -244,6 +312,7 @@
 		<div class="col-lg-12" align="center">
 			<input type="button" class="btn themeBtn" value="테마여행 더보기" onclick="location.href='${contextPath}/themeMain'">
 		</div>
+		
 		<script>
 			$(function(){
 				$.ajax({
@@ -260,7 +329,11 @@
 						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
 						output += "</div>";
 						output += "<div class='tm-home-box-3-info'>";
-						output += "<p class='tm-home-box-3-description' id='themeText'>"+themeData.overview+"</p>";
+						if(themeData.overview.length > 50){
+							var overviewText = "";
+							overviewText = themeData.overview.substring(0, 110) + "...";
+							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
+						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
 						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3'>"+themeData.title+"</span>";
@@ -286,7 +359,11 @@
 						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
 						output += "</div>";
 						output += "<div class='tm-home-box-3-info'>";
-						output += "<p class='tm-home-box-3-description' id='themeText'>"+themeData.overview+"</p>";
+						if(themeData.overview.length > 1){
+							var overviewText = "";
+							overviewText = themeData.overview.substring(0, 110) + "...";
+							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
+						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
 						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3'>"+themeData.title+"</span>";
@@ -311,7 +388,11 @@
 						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
 						output += "</div>";
 						output += "<div class='tm-home-box-3-info'>";
-						output += "<p class='tm-home-box-3-description' id='themeText'>"+themeData.overview+"</p>";
+						if(themeData.overview.length > 50){
+							var overviewText = "";
+							overviewText = themeData.overview.substring(0, 110) + "...";
+							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
+						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
 						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3'>"+themeData.title+"</span>";
@@ -336,7 +417,11 @@
 						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
 						output += "</div>";
 						output += "<div class='tm-home-box-3-info'>";
-						output += "<p class='tm-home-box-3-description' id='themeText'>"+themeData.overview+"</p>";
+						if(themeData.overview.length > 50){
+							var overviewText = "";
+							overviewText = themeData.overview.substring(0, 110) + "...";
+							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
+						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
 						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3'>"+themeData.title+"</span>";
@@ -352,6 +437,7 @@
 			});
 		</script>
 	</section>		
+	
 	
 	<!-- white bg -->
 	<section class="tm-white-bg section-padding-bottom">

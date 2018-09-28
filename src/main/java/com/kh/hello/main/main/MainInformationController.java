@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.URL;
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,13 +13,12 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller
 public class MainInformationController {
 	
-	@RequestMapping("mainHotel1.in")
+	@RequestMapping(value="mainHotel1.in")
 	public void mainHotelInfo(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -61,7 +59,7 @@ public class MainInformationController {
 	}
 	
 	
-	@RequestMapping("mainHotel2.in")
+	@RequestMapping(value="mainHotel2.in")
 	public void mainHotelInfo2(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -102,7 +100,7 @@ public class MainInformationController {
 	}
 	
 	
-	@RequestMapping("mainHotel3.in")
+	@RequestMapping(value="mainHotel3.in")
 	public void mainHotelInfo3(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -143,7 +141,7 @@ public class MainInformationController {
 	}
 	
 	
-	@RequestMapping("mainThemeShopping.tm")
+	@RequestMapping(value="mainThemeShopping.tm")
 	public void mainThemeShopping(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -183,7 +181,7 @@ public class MainInformationController {
 		json.put("data", data);
 	}
 	
-	@RequestMapping("mainThemeShopping2.tm")
+	@RequestMapping(value="mainThemeShopping2.tm")
 	public void mainThemeShopping2(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -223,7 +221,7 @@ public class MainInformationController {
 		json.put("data", data);
 	}
 	
-	@RequestMapping("mainThemeShopping3.tm")
+	@RequestMapping(value="mainThemeShopping3.tm")
 	public void mainThemeShopping3(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -263,7 +261,7 @@ public class MainInformationController {
 		json.put("data", data);
 	}
 	
-	@RequestMapping("mainThemeShopping4.tm")
+	@RequestMapping(value="mainThemeShopping4.tm")
 	public void mainThemeShopping4(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
