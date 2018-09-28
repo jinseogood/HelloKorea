@@ -45,7 +45,7 @@ public class AdminController {
 			return "admin/reservation";
 
 		//숙박일 검색
-		}else if(searchParam.equals("datepick")){
+		}else if(searchParam.equals("datePick")){
 
 			DatePick d = new DatePick();
 			d.setFromDate(fromDate);
@@ -80,9 +80,59 @@ public class AdminController {
 		}
 	}
 
-	@RequestMapping("reportView.ad")
-	public String reportView(){
-		return "admin/report";
+	//신고 내역 조회
+	@RequestMapping("selectReportList.ad")
+	public String reportView(String searchParam, String searchWord, String fromDate, String toDate, PageInfo p, Model model){
+		
+		if(p.getCurrentPage() == 0){
+			p.setCurrentPage(1);
+		}
+
+		//전체 리스트
+		//if(searchParam == null && searchWord == null){
+
+			int listCount = as.getReportListCount();
+			PageInfo pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);		
+			/*ArrayList<Reservation> list = as.reportList(pi);
+			model.addAttribute("list", list);
+			model.addAttribute("pi", pi);*/
+			return "admin/report";
+
+		//신고일 검색
+			/*}else if(searchParam.equals("datePick")){
+
+			DatePick d = new DatePick();
+			d.setFromDate(fromDate);
+			d.setToDate(toDate);
+			int listCount = as.getSearchDateReservationListCount(d);
+			PageInfo pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
+			ArrayList<Reservation> list = as.searchDateReservationList(d, pi);
+			model.addAttribute("list", list);
+			model.addAttribute("pi", pi);
+			return "admin/report";
+			
+		}else{
+			Reservation r = new Reservation();
+			r.setoId(-99);
+			//신고번호 검색
+			if(searchParam.equals("oId")){
+				r.setoId(Integer.parseInt(searchWord));
+			//신고 대상 검색	
+			}else if(searchParam.equals("cName")){
+				r.setcName(searchWord);
+			//미처리건 검색
+			}else if(searchParam.equals("paName")){
+				r.setPaName(searchWord);
+			}
+			
+			int listCount = as.getSearchReservationListCount(r);
+			PageInfo pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
+			ArrayList<Reservation> list = as.searchReservationList(r, pi);
+			model.addAttribute("list", list);
+			model.addAttribute("pi", pi);
+			return "admin/report";
+		}*/
+		
 	}
 
 	@RequestMapping("questionView.ad")

@@ -20,7 +20,6 @@
 		<result property="pdType" column="PD_TYPE" />
 	</resultMap>
 
-
 	<!-- 예약 내역 수 조회용 쿼리문 -->
 	<select id="selectReservationListCount" resultType="_int">
 		SELECT COUNT(*)
@@ -42,7 +41,7 @@
 		JOIN COMPANY C ON(RO.C_ID=C.C_ID)
 		JOIN PAYMENT PA ON(R.PA_ID = PA.PA_ID)
 		RIGHT OUTER JOIN PAY_DETAIL PD ON(PA.PA_ID = PD.PA_ID)
-		ORDER BY R.O_ID
+		ORDER BY R.O_ID DESC
 	</select>
 
 	<!-- 예약 내역 검색 수 조회용 쿼리문 -->
@@ -89,7 +88,7 @@
 				WHERE PA_NAME LIKE '%' || #{paName}|| '%'
 			</otherwise>
 		</choose>
-		ORDER BY R.O_ID
+		ORDER BY R.O_ID DESC
 	</select>
 	
 	<!-- 예약 내역 날짜 검색 리스트 -->
@@ -116,6 +115,13 @@
 		RIGHT OUTER JOIN PAY_DETAIL PD ON(PA.PA_ID = PD.PA_ID)
         WHERE R_SDATE <![CDATA[>]]>= TO_DATE(#{fromDate})
         AND R_EDATE <![CDATA[<]]>= TO_DATE(#{toDate})
-        ORDER BY R.O_ID
+        ORDER BY R.O_ID DESC
+	</select>
+	
+	<!--  -->
+	<!-- 신고 내역 관리 -->
+	<select id="">
+	    SELECT COUNT(*)
+	    FROM REPORT_HISTORY
 	</select>
 </mapper>

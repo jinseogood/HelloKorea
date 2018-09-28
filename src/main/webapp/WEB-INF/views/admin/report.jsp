@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,8 +39,8 @@
     margin-bottom:5%;
 }
 .searchArea{
-    width:30%;
-    margin-bottom:5%;
+    width:60%; 
+    margin-bottom:6%;
     margin-left:auto;
     margin-right:auto;
 }
@@ -95,7 +96,7 @@ table.type09 td {
                             <!--breadcrumbs start -->
                             <ul class="breadcrumb">
                                 <li><a href="myPageView.ad"><i class="fa fa-home"></i> Home</a></li>
-                                <li><a href="#">일반회원 관리</a></li>
+                                <li><a href="selectReportList.ad">일반회원 관리</a></li>
                                 <li class="active">신고현황</li>
                             </ul>
                             <!--breadcrumbs end -->
@@ -105,24 +106,67 @@ table.type09 td {
 	
 	</div>
 	<div class="searchArea" align="center">
- <div class="input-group m-b-10">
-                                                  <input type="text" class="form-control">
-                                                  <div class="input-group-btn">
-                                                      <button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조회 선택하기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
-                                                      <ul class="dropdown-menu pull-right">
-                                                          <li><a href="#">신고번호로 조회</a></li>
-                                                          <li><a href="#">신고대상으로 조회</a></li>
-                                                          <li><a href="#">미처리건만 조회</a></li>
-                                                          <li class="divider"></li>
-                                                          <li><a href="#">신고일로 조회</a></li>
-                                                      </ul>
-                                                  </div>
-                                              </div>
+ <form action="selectReservationList.ad">
+			<div class="col-xs-8 col-xs-offset-2">
+		    <div class="input-group">
+                <div class="input-group-btn search-panel">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    	<span id="search_concept">검색 카테고리</span> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#oId">신고 번호</a></li>
+                      <li><a href="#cName">신고 대상</a></li>
+                      <li><a href="#paName">미 처리건</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#datePick" onclick="showDatePicker()">신고일</a></li>
+                    </ul>
+                </div>
+                <input type="hidden" name="searchParam" value="all" id="searchParam">         
+                <input type="text" class="form-control" name="searchWord" placeholder="검색어를 입력하세요">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+                </form>
+            </div>
+            
+            
+            <div id="datePicker">
+            <br>
+            <jsp:include page="../common/datePicker.jsp"/>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-white" type="submit">&nbsp;조회&nbsp;</button>
+            <br>
+            </div>
+            
+                </div>
+                </div>
+        </div>
 
-</div>	
+
+	
+	<script>
+	 $(function(){
+    	 $("#datePicker").hide();
+    	 
+     });
+     function showDatePicker(){
+    	 $("#datePicker").show();
+    	 
+     }
+	$(document).ready(function(e){
+	    $('.search-panel .dropdown-menu').find('a').click(function(e) {
+			e.preventDefault();
+			var param = $(this).attr("href").replace("#","");
+			var concept = $(this).text();
+			$('.search-panel span#search_concept').text(concept);
+			$('.input-group #searchParam').val(param);
+		});
+	});
+	
+	</script>
 	
 	<div class="tableArea" align="center">
-<table class="type09">
+<table class="type09" id="reportTable">
     <thead>
     <tr>
         <th>신고번호</th>
@@ -134,38 +178,53 @@ table.type09 td {
     </tr>
     </thead>
     <tbody>
-    <% for(int i = 0; i < 10; i++){ %>
+    <c:forEach var="r" items="${ list }">
     <tr>
-        <th scope="row">
-        <a href="#myModal-1" data-toggle="modal">번호</a>
-        </th>
-        <td>내용</td>
-        <td>내용</td>
-        <td>내용</td>
-        <td>내용</td>
-        <td>내용</td>
+        <th scope="row">${r.rRecordId}</th>
+        <td>${r.rLevelText}</td>
+        <td>${r.rTarget}</td>
+        <td>${r.rDate}</td>
+        <td>${r.reason}</td>
+        <td>${r.resultText}</td>
     </tr>
-    <% } %>
+    </c:forEach>
     
     </tbody>
 </table>
 </div>
 <div class="paging" align="center">
-                                        <ul class="pagination pagination-sm">
-                                        <li><a href="#">&laquo;</a></li>
-                                        <li><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#">6</a></li>
-                                        <li><a href="#">7</a></li>
-                                        <li><a href="#">8</a></li>
-                                        <li><a href="#">9</a></li>
-                                        <li><a href="#">10</a></li>
-                                        <li><a href="#">&raquo;</a></li>
-                                    </ul>
-                                    </div>
+<ul class="pagination pagination-sm">
+<c:if test="${ pi.currentPage <= 1 }">
+<li><a>&laquo;</a></li>
+            </c:if>
+            <c:if test="${ pi.currentPage > 1 }">
+                <c:url var="rlistBack" value="/selectReportList.ad">
+                    <c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
+                </c:url>
+                <li><a href="${ rlistBack }">&laquo;</a></li>
+            </c:if>
+            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                <c:if test="${ p eq pi.currentPage }">
+                <li><a href="#">${ p }</a></li>               
+                </c:if>
+                <c:if test="${ p ne pi.currentPage }">
+                    <c:url var="rlistCheck" value="selectReportList.ad">
+                         <c:param name="currentPage" value="${ p }"/>
+                    </c:url>
+                    <li><a href="${ rlistCheck }">${ p }</a></li>  
+                </c:if>
+            </c:forEach>
+            <c:if test="${ pi.currentPage >= pi.maxPage }">
+                <li><a>&raquo;</a></li>
+            </c:if>
+            <c:if test="${ pi.currentPage < pi.maxPage }">
+                <c:url var="rlistEnd" value="selectReportList.ad">
+                    <c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+                </c:url>
+                <li><a href="${ rlistEnd }">&raquo;</a></li>
+            </c:if>
+            </ul>
+    </div>
 
 
 	</div> 
@@ -254,8 +313,14 @@ table.type09 td {
                                   </div>
 	
 	
+
 	<script>
-	
-	</script>
+	$(function(){
+		$("#reportTable tr").click(function(){
+			
+			$(this).attr({"data-toggle":"modal", "data-target":"#myModal-1"});
+		});
+	});
+</script>
 </body>
 </html>

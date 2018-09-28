@@ -54,6 +54,12 @@ public class AdminServiceImpl implements AdminService{
 	public ArrayList<Reservation> searchDateReservationList(DatePick d, PageInfo pi) {
 		return ad.searchDateReservationList(sqlSession, d, pi);
 	}
+
+	//신고 리스트 카운트용
+	@Override
+	public int getReportListCount() {
+		return ad.getReportListCount(sqlSession);
+	}
 	
 
 

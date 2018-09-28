@@ -83,7 +83,7 @@
 					<ul>
 						<li><a href="selectReservationList.ad" style="padding: 10px 34px 10px 34px;">예약내역
 								관리</a></li>
-						<li><a href="reportView.ad" style="padding: 10px 34px 10px 34px;">일반회원
+						<li><a href="selectReportList.ad" style="padding: 10px 34px 10px 34px;">일반회원
 								관리</a></li>
 						<li><a href="approvalView.ad" style="padding: 10px 34px 10px 34px;">제휴업체
 								관리</a></li>
@@ -104,7 +104,7 @@
 				<dl>
 					<dd>
 						<ul>
-							<li><a href="reportView.ad">신고현황</a></li>
+							<li><a href="selectReportList.ad">신고현황</a></li>
 							<li><a href="questionView.ad">문의현황</a></li>
 							<li><a href="blacklistView.ad">블랙리스트 관리</a></li>
 						</ul>

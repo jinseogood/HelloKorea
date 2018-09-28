@@ -22,4 +22,6 @@ public interface AdminDao {
 
 	ArrayList<Reservation> searchDateReservationList(SqlSessionTemplate sqlSession, DatePick d, PageInfo pi);
 
+	int getReportListCount(SqlSessionTemplate sqlSession);
+
 }
