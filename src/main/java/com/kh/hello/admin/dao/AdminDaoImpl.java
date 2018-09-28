@@ -59,5 +59,11 @@ public class AdminDaoImpl implements AdminDao{
 		return list;
 	}
 
+	//신고 리스트 카운트용
+	@Override
+	public int getReportListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("selectReportListCount");
+	}
+
 
 }

@@ -20,4 +20,6 @@ public interface AdminService {
 
 	ArrayList<Reservation> searchDateReservationList(DatePick d, PageInfo pi);
 
+	int getReportListCount();
+
 }

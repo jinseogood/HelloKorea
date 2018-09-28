@@ -58,7 +58,7 @@
                             <div class="sm-st clearfix">
                                 <span class="sm-st-icon st-red"><i class="fa fa-check-square-o"></i></span>
                                 <div class="sm-st-info">
-                                    <span><a href="reportView.ad">35건</a></span>
+                                    <span><a href="selectReportList.ad">35건</a></span>
                                                                                  미해결 신고
                                 </div>
                             </div>

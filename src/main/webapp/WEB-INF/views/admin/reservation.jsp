@@ -31,7 +31,6 @@
     margin-right:auto;
 }
 
-
 table.type09 {
     width:80%;
     border-collapse: collapse;
@@ -230,7 +229,7 @@ table.type09 td {
                 <li><a>&raquo;</a></li>
             </c:if>
             <c:if test="${ pi.currentPage < pi.maxPage }">
-                <c:url var="rlistEnd" value="selectReservationList.bo">
+                <c:url var="rlistEnd" value="selectReservationList.ad">
                     <c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
                 </c:url>
                 <li><a href="${ rlistEnd }">&raquo;</a></li>
