@@ -35,13 +35,12 @@
 		border: none;
 	}
 	
-	.loginBtn {
+	.loginBtn1 {
 		width: 300px;
 		height: 50px;
 		margin-top: 10px;
 		border: none;
 	}
-	
 	#snsBtn {
 		margin-left: auto;
 		margin-right: auto;
@@ -223,8 +222,8 @@
 			<label style="width: 180px; font-size: 30px;">Hello Korea</label>
 		</div>
 		<div id="snsBtn">
-			<button class="loginBtn">Facebook</button>
-			<button class="loginBtn">Google</button>
+			<button class="loginBtn1">Facebook</button>
+			<button class="loginBtn1">Google</button>
 		</div>
 		<hr style="	width: 400px;
 		border: solid #D8D8D8 1px;">
@@ -254,7 +253,7 @@
 			</table>
 			<hr style="	width: 400px;border: solid #D8D8D8 1px;">
 			<div align="center">
-				<button class="loginBtn">로그인</button>
+				<button class="loginBtn1">로그인</button>
 			</div>
 		</form>
 		<div align="center">
@@ -289,7 +288,7 @@
 					</tr>
 				</table>
 				<div align="center">
-					<button class="loginBtn">회원가입하기</button>
+					<button class="loginBtn1">회원가입하기</button>
 				</div>
 			</form>
 			<div align="center">
@@ -338,7 +337,7 @@
 				</tr>
 			</table>
 			<div align="center">
-				<button class="loginBtn">판매자회원가입</button>
+				<button class="loginBtn1">판매자회원가입</button>
 			</div>
 		</form>
 	</div>

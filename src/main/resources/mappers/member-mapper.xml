@@ -23,7 +23,7 @@
       <result property="bankNum" column="BANK_NUM"/>
    </resultMap>
    
-   <!-- 로그인 정보 조회용 쿼리문 -->
+   <!-- 濡쒓렇???뺣낫 議고쉶??荑쇰━臾?-->
    <select id="loginCheck" resultMap="memberResultSet" parameterType="Member">
       SELECT *
       FROM MEMBER
@@ -31,16 +31,17 @@
       AND USER_PWD = #{password}
       
    </select>
-   <!-- 회원가입용 메소드 -->
+   <!-- ?뚯썝媛?낆슜 硫붿냼??-->
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER (M_ID,PLATFORM_TYPE,M_TYPE,EMAIL,PASSWORD,REGIST_DATE,STATUS) 
 		VALUES (SEQ_M_ID.NEXTVAL,'email','1',#{email},#{password},SYSDATE,'Y')
 	</insert>
 	
 	<insert id="insertSeller" parameterType="Member">
-		INSERT INTO MEMBER(M_ID,PLATFORM_TYPE,M_TYPE,REGIST_DATE,STATUS,EMAIL,PASSWORD,NICKNAME,PHONE,BANK_NUM)
-		VALUES (SEQ_M_ID.NEXTVAL,'email','2',SYSDATE,'Y',#{email},#{password},#{nickname},#{phone},#{bankNum})
+		INSERT INTO MEMBER(M_ID,PLATFORM_TYPE,M_TYPE,REGIST_DATE,STATUS,EMAIL,PASSWORD)
+		VALUES (SEQ_M_ID.NEXTVAL,'email','2',SYSDATE,'Y',#{email},#{password})
 	</insert>
+	
 	<update id="updateAddUser">
 		UPDATE MEMBER
 		SET NICKNAME=#{nickname},
