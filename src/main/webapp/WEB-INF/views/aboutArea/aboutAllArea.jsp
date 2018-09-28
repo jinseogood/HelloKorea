@@ -42,6 +42,9 @@
 		</div>
 	</section>
 		<script>
+			var areaCode = ${param.areaCode};
+			console.log("지역메인 areaCode : " + areaCode);
+		
 		/* Google map
       	------------------------------------------------*/
       	var map = '';

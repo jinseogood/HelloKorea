@@ -13,7 +13,9 @@
 	.themeBtn{width:250px; height:60px; background-color:#00aef0; color:white;}
 	#themeText{height:164px; overflow:hidden; padding:30px 30px 54px;}
 	.mainSearchArea{font-size:15px; width:152px; height:40px; background-color:#00aef0; color:white;}
-	
+	#searchAreaBox{position:absolute; left:835px; top:480px; z-index:3;}
+	.mainSearchArea{width:150px; height:60px;}
+	.areaSearchBtn{height:60px;}
 </style>
 </head>
 <body>
@@ -22,14 +24,8 @@
 	<!-- Banner -->
 	<section class="tm-banner">
 		<!-- Flexslider -->
-		<div class="flexslider flexslider-banner">
-		  <ul class="slides">
-		    <li>
-			    <div class="tm-banner-inner">
-					<h1 class="tm-banner-title">Find <span class="tm-yellow-text">The Best</span> Place</h1>
-					<p class="tm-banner-subtitle">For Your Holidays</p>
-					<!-- <input type="text" name="searchArea" class="tm-banner-link"> -->
-					<select class="mainSearchArea" name="searchCondition">
+		<div id="searchAreaBox">
+			<select class="mainSearchArea" name="searchCondition">
 						<option> --- </option>
 						<option value="1">서울</option>
 						<option value="2">인천</option>
@@ -49,7 +45,17 @@
 						<option value="38">전라남도</option>
 						<option value="39">제주도</option>
 					</select>
-					<input type="button" class="tm-banner-link" value="검색">
+					<input type="button" class="tm-banner-link areaSearchBtn" value="검색">
+		</div>
+		
+		
+		<div class="flexslider flexslider-banner">
+		  <ul class="slides">
+		    <li>
+			    <div class="tm-banner-inner">
+					<h1 class="tm-banner-title">Find <span class="tm-yellow-text">The Best</span> Place</h1>
+					<p class="tm-banner-subtitle">For Your Holidays</p>
+					<!-- <input type="text" name="searchArea" class="tm-banner-link"> -->
 				</div>
 				<img src="${ contextPath }/resources/img/banner-1.jpg" alt="Image" />	
 		    </li>
@@ -58,27 +64,7 @@
 					<h1 class="tm-banner-title">Lorem <span class="tm-yellow-text">Ipsum</span> Dolor</h1>
 					<p class="tm-banner-subtitle">Wonderful Destinations</p>
 					<!-- <input type="text" name="searchArea" class="tm-banner-link"> -->
-					<select class="mainSearchArea" name="searchCondition">
-						<option> --- </option>
-						<option value="1">서울</option>
-						<option value="2">인천</option>
-						<option value="3">대전</option>
-						<option value="4">대구</option>
-						<option value="5">광주</option>
-						<option value="6">부산</option>
-						<option value="7">울산</option>
-						<option value="8">세종특별자치시</option>
-						<option value="31">경기도</option>
-						<option value="32">강원도</option>
-						<option value="33">충청북도</option>
-						<option value="34">충청남도</option>
-						<option value="35">경상북도</option>
-						<option value="36">경상남도</option>
-						<option value="37">전라북도</option>
-						<option value="38">전라남도</option>
-						<option value="39">제주도</option>
-					</select>
-					<input type="button" class="tm-banner-link" value="검색">
+					
 				</div>
 		      <img src="${ contextPath }/resources/img/banner-2.jpg" alt="Image" />
 		    </li>
@@ -87,38 +73,24 @@
 					<h1 class="tm-banner-title">Proin <span class="tm-yellow-text">Gravida</span> Nibhvell</h1>
 					<p class="tm-banner-subtitle">Velit Auctor</p>
 					<!-- <input type="text" name="searchArea" class="tm-banner-link"> -->
-					<select class="mainSearchArea" name="searchCondition">
-						<option> --- </option>
-						<option value="1">서울</option>
-						<option value="2">인천</option>
-						<option value="3">대전</option>
-						<option value="4">대구</option>
-						<option value="5">광주</option>
-						<option value="6">부산</option>
-						<option value="7">울산</option>
-						<option value="8">세종특별자치시</option>
-						<option value="31">경기도</option>
-						<option value="32">강원도</option>
-						<option value="33">충청북도</option>
-						<option value="34">충청남도</option>
-						<option value="35">경상북도</option>
-						<option value="36">경상남도</option>
-						<option value="37">전라북도</option>
-						<option value="38">전라남도</option>
-						<option value="39">제주도</option>
-					</select>
-					<input type="button" class="tm-banner-link" value="검색">	
+						
 				</div>
 		      <img src="${ contextPath }/resources/img/banner-3.jpg" alt="Image" />
 		    </li>
 		  </ul>
 		</div>
-		<script>
-			
-		</script>
+		
 	</section>
 	<script>
 		$(function(){
+			
+			$(".areaSearchBtn").click(function(){
+				var areaCode = $(".mainSearchArea").val();
+				console.log("지역코드 : " + areaCode);
+				location.href="${contextPath}/areaView.main?areaCode="+areaCode;
+			});
+			
+			
 			$.ajax({
 				url:"mainHotel1.in",
 				type:"GET",
