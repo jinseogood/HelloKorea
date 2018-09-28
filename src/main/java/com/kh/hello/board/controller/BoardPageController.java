@@ -14,4 +14,9 @@ public class BoardPageController {
 	public String reportWrite(){
 		return "common/reportWrite";
 	}
+	
+	@RequestMapping("starTest.bo")
+	public String starTest(){
+		return "board/test";
+	}
 }
