@@ -98,7 +98,7 @@
 						<option value="7">울산</option>
 						<option value="8">세종특별자치시</option>
 						<option value="31">경기도</option>
-						<option value="32">강원도</option> 
+						<option value="32">강원도</option>
 						<option value="33">충청북도</option>
 						<option value="34">충청남도</option>
 						<option value="35">경상북도</option>
