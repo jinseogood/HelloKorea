@@ -170,12 +170,6 @@
 		margin-right:auto;
 		margin-left:auto;	
 	}
-	input[type='submit']{
-		width: 300px;
-		height: 50px;
-		margin-top: 10px;
-		border: none;
-	}
 	#loginBtn{
 		width: 100px;
 		margin-left: 15px;
