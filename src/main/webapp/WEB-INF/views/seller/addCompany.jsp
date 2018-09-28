@@ -562,8 +562,8 @@
 				$(".comType").show();
 			});
 			
-			var area=$("#area").click(function(){
-				$("#area").val();
+			$("#area option").click(function(){
+				console.log($("#area").val());
 			});
 			
 			$("#sigungu1").hide();
