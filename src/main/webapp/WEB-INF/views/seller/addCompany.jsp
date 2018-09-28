@@ -101,6 +101,7 @@
 			</div>
 		
 			<form action="" method="post">
+				<input type="hidden" id="contentId" name="contentId" readonly>
 				<table id="addTable" align="center">
 					<tr>
 						<th>구분</th>
@@ -128,16 +129,16 @@
 					</tr>
 					<tr>
 						<th>상호명</th>
-						<td colspan="3"><input type="text" name="companyName" size="25"></td>
+						<td colspan="3"><input type="text" id="companyName" name="companyName" size="33" readonly></td>
 						<td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#searchModal">검색</button></td>
 					</tr>
 					<tr>
-						<th>대표자</th>
-						<td colspan="4"><input type="text" name="companyMaster" size="25"></td>
+						<th>전화번호</th>
+						<td colspan="4"><input type="text" id="companyPhone" name="companyPhone" size="15" readonly></td>
 					</tr>
 					<tr>
 						<th>주소</th>
-						<td colspan="4"><input type="text" name="companyAddress" size="25"></td>
+						<td colspan="4"><input type="text" id="companyAddress" name="companyAddress" size="59" readonly></td>
 					</tr>
 					<tr>
 						<th>객실타입</th>
@@ -203,7 +204,7 @@
 		  			<table id="searchTable">
 		  				<thead>
 			  				<tr>
-			  					<td width="50%">
+			  					<td width="40%">
 			  						<select id="area" style="width:90%;">
 			  							<option value="0">지역 선택</option>
 			  							<option value="1">서울</option>
@@ -214,18 +215,18 @@
 			  							<option value="6">부산</option>
 			  							<option value="7">울산</option>
 			  							<option value="8">세종특별자치시</option>
-			  							<option value="9">경기도</option>
-			  							<option value="10">강원도</option>
-			  							<option value="11">충청북도</option>
-			  							<option value="12">충청남도</option>
-			  							<option value="13">경상북도</option>
-			  							<option value="14">경상남도</option>
-			  							<option value="15">전라북도</option>
-			  							<option value="16">전라남도</option>
-			  							<option value="17">제주도</option>
+			  							<option value="31">경기도</option>
+			  							<option value="32">강원도</option>
+			  							<option value="33">충청북도</option>
+			  							<option value="34">충청남도</option>
+			  							<option value="35">경상북도</option>
+			  							<option value="36">경상남도</option>
+			  							<option value="37">전라북도</option>
+			  							<option value="38">전라남도</option>
+			  							<option value="39">제주도</option>
 			  						</select>
 			  					</td>
-			  					<td width="50%">
+			  					<td width="40%">
 			  						<select id="sigungu1" style="width:90%;">
 			  							<option value="0">시군구 선택</option>
 			  							<option value="1">강남구</option>
@@ -511,17 +512,12 @@
 			  							<option value="4">제주시</option>
 			  						</select>
 			  					</td>
-			  				</tr>
-			  				<tr>
-			  					<td colspan="2">
-			  						<input type="text" id="searchText" name="searchText" size="30">&nbsp;&nbsp;
-			  						<button type="button" class="btn btn-warning btn-sm" onclick="return searchCompany();">검색</button>
-			  					</td>
+			  					<td width="20%"><button type="button" class="btn btn-warning btn-sm" onclick="return searchCompany();">검색</button></td>
 			  				</tr>
 		  				</thead>
 			  			<tbody>
 			  				<tr>
-			  					<td colspan="2">
+			  					<td colspan="3">
 			  						<table id="resultTable">
 			  							
 			  						</table>
@@ -551,6 +547,9 @@
 	<jsp:include page="../common/footer.jsp"/>
 	
 	<script>
+		var area=0;
+		var sigungu=0;
+		
 		$(function(){
 			$(".comType").hide();
 			
@@ -560,10 +559,6 @@
 			
 			$("#company").click(function(){
 				$(".comType").show();
-			});
-			
-			$("#area option").click(function(){
-				console.log($("#area").val());
 			});
 			
 			$("#sigungu1").hide();
@@ -583,336 +578,411 @@
 			$("#sigungu15").hide();
 			$("#sigungu16").hide();
 			$("#sigungu17").hide();
+			
+			$("#area").on("click", function(){
+				area=$("#area").val();
+				
+				console.log("before area : " + area);
+				
+				if(area == 1){
+					$("#sigungu1").show();
+					$("#sigungu2").hide();
+					$("#sigungu3").hide();
+					$("#sigungu4").hide();
+					$("#sigungu5").hide();
+					$("#sigungu6").hide();
+					$("#sigungu7").hide();
+					$("#sigungu8").hide();
+					$("#sigungu9").hide();
+					$("#sigungu10").hide();
+					$("#sigungu11").hide();
+					$("#sigungu12").hide();
+					$("#sigungu13").hide();
+					$("#sigungu14").hide();
+					$("#sigungu15").hide();
+					$("#sigungu16").hide();
+					$("#sigungu17").hide();
+					
+					$("#sigungu1").click(function(){
+						sigungu=$("#sigungu1").val();
+					});
+				}
+				else if(area == 2){
+					$("#sigungu1").hide();
+					$("#sigungu2").show();
+					$("#sigungu3").hide();
+					$("#sigungu4").hide();
+					$("#sigungu5").hide();
+					$("#sigungu6").hide();
+					$("#sigungu7").hide();
+					$("#sigungu8").hide();
+					$("#sigungu9").hide();
+					$("#sigungu10").hide();
+					$("#sigungu11").hide();
+					$("#sigungu12").hide();
+					$("#sigungu13").hide();
+					$("#sigungu14").hide();
+					$("#sigungu15").hide();
+					$("#sigungu16").hide();
+					$("#sigungu17").hide();
+					
+					$("#sigungu2").click(function(){
+						sigungu=$("#sigungu2").val();
+					});
+				}
+				else if(area == 3){
+					$("#sigungu1").hide();
+					$("#sigungu2").hide();
+					$("#sigungu3").show();
+					$("#sigungu4").hide();
+					$("#sigungu5").hide();
+					$("#sigungu6").hide();
+					$("#sigungu7").hide();
+					$("#sigungu8").hide();
+					$("#sigungu9").hide();
+					$("#sigungu10").hide();
+					$("#sigungu11").hide();
+					$("#sigungu12").hide();
+					$("#sigungu13").hide();
+					$("#sigungu14").hide();
+					$("#sigungu15").hide();
+					$("#sigungu16").hide();
+					$("#sigungu17").hide();
+					
+					$("#sigungu3").click(function(){
+						sigungu=$("#sigungu3").val();
+					});
+				}
+				else if(area == 4){
+					$("#sigungu1").hide();
+					$("#sigungu2").hide();
+					$("#sigungu3").hide();
+					$("#sigungu4").show();
+					$("#sigungu5").hide();
+					$("#sigungu6").hide();
+					$("#sigungu7").hide();
+					$("#sigungu8").hide();
+					$("#sigungu9").hide();
+					$("#sigungu10").hide();
+					$("#sigungu11").hide();
+					$("#sigungu12").hide();
+					$("#sigungu13").hide();
+					$("#sigungu14").hide();
+					$("#sigungu15").hide();
+					$("#sigungu16").hide();
+					$("#sigungu17").hide();
+					
+					$("#sigungu4").click(function(){
+						sigungu=$("#sigungu4").val();
+					});
+				}
+				else if(area == 5){
+					$("#sigungu1").hide();
+					$("#sigungu2").hide();
+					$("#sigungu3").hide();
+					$("#sigungu4").hide();
+					$("#sigungu5").show();
+					$("#sigungu6").hide();
+					$("#sigungu7").hide();
+					$("#sigungu8").hide();
+					$("#sigungu9").hide();
+					$("#sigungu10").hide();
+					$("#sigungu11").hide();
+					$("#sigungu12").hide();
+					$("#sigungu13").hide();
+					$("#sigungu14").hide();
+					$("#sigungu15").hide();
+					$("#sigungu16").hide();
+					$("#sigungu17").hide();
+					
+					$("#sigungu5").click(function(){
+						sigungu=$("#sigungu5").val();
+					});
+				}
+				else if(area == 6){
+					$("#sigungu1").hide();
+					$("#sigungu2").hide();
+					$("#sigungu3").hide();
+					$("#sigungu4").hide();
+					$("#sigungu5").hide();
+					$("#sigungu6").show();
+					$("#sigungu7").hide();
+					$("#sigungu8").hide();
+					$("#sigungu9").hide();
+					$("#sigungu10").hide();
+					$("#sigungu11").hide();
+					$("#sigungu12").hide();
+					$("#sigungu13").hide();
+					$("#sigungu14").hide();
+					$("#sigungu15").hide();
+					$("#sigungu16").hide();
+					$("#sigungu17").hide();
+					
+					$("#sigungu6").click(function(){
+						sigungu=$("#sigungu6").val();
+					});
+				}
+				else if(area == 7){
+					$("#sigungu1").hide();
+					$("#sigungu2").hide();
+					$("#sigungu3").hide();
+					$("#sigungu4").hide();
+					$("#sigungu5").hide();
+					$("#sigungu6").hide();
+					$("#sigungu7").show();
+					$("#sigungu8").hide();
+					$("#sigungu9").hide();
+					$("#sigungu10").hide();
+					$("#sigungu11").hide();
+					$("#sigungu12").hide();
+					$("#sigungu13").hide();
+					$("#sigungu14").hide();
+					$("#sigungu15").hide();
+					$("#sigungu16").hide();
+					$("#sigungu17").hide();
+					
+					$("#sigungu7").click(function(){
+						sigungu=$("#sigungu7").val();
+					});
+				}
+				else if(area == 8){
+					$("#sigungu1").hide();
+					$("#sigungu2").hide();
+					$("#sigungu3").hide();
+					$("#sigungu4").hide();
+					$("#sigungu5").hide();
+					$("#sigungu6").hide();
+					$("#sigungu7").hide();
+					$("#sigungu8").show();
+					$("#sigungu9").hide();
+					$("#sigungu10").hide();
+					$("#sigungu11").hide();
+					$("#sigungu12").hide();
+					$("#sigungu13").hide();
+					$("#sigungu14").hide();
+					$("#sigungu15").hide();
+					$("#sigungu16").hide();
+					$("#sigungu17").hide();
+					
+					$("#sigungu8").click(function(){
+						sigungu=$("#sigungu8").val();
+					});
+				}
+				else if(area == 31){
+					$("#sigungu1").hide();
+					$("#sigungu2").hide();
+					$("#sigungu3").hide();
+					$("#sigungu4").hide();
+					$("#sigungu5").hide();
+					$("#sigungu6").hide();
+					$("#sigungu7").hide();
+					$("#sigungu8").hide();
+					$("#sigungu9").show();
+					$("#sigungu10").hide();
+					$("#sigungu11").hide();
+					$("#sigungu12").hide();
+					$("#sigungu13").hide();
+					$("#sigungu14").hide();
+					$("#sigungu15").hide();
+					$("#sigungu16").hide();
+					$("#sigungu17").hide();
+					
+					$("#sigungu9").click(function(){
+						sigungu=$("#sigungu9").val();
+					});
+				}
+				else if(area == 32){
+					$("#sigungu1").hide();
+					$("#sigungu2").hide();
+					$("#sigungu3").hide();
+					$("#sigungu4").hide();
+					$("#sigungu5").hide();
+					$("#sigungu6").hide();
+					$("#sigungu7").hide();
+					$("#sigungu8").hide();
+					$("#sigungu9").hide();
+					$("#sigungu10").show();
+					$("#sigungu11").hide();
+					$("#sigungu12").hide();
+					$("#sigungu13").hide();
+					$("#sigungu14").hide();
+					$("#sigungu15").hide();
+					$("#sigungu16").hide();
+					$("#sigungu17").hide();
+					
+					$("#sigungu10").click(function(){
+						sigungu=$("#sigungu10").val();
+					});
+				}
+				else if(area == 33){
+					$("#sigungu1").hide();
+					$("#sigungu2").hide();
+					$("#sigungu3").hide();
+					$("#sigungu4").hide();
+					$("#sigungu5").hide();
+					$("#sigungu6").hide();
+					$("#sigungu7").hide();
+					$("#sigungu8").hide();
+					$("#sigungu9").hide();
+					$("#sigungu10").hide();
+					$("#sigungu11").show();
+					$("#sigungu12").hide();
+					$("#sigungu13").hide();
+					$("#sigungu14").hide();
+					$("#sigungu15").hide();
+					$("#sigungu16").hide();
+					$("#sigungu17").hide();
+					
+					$("#sigungu11").click(function(){
+						sigungu=$("#sigungu11").val();
+					});
+				}
+				else if(area == 34){
+					$("#sigungu1").hide();
+					$("#sigungu2").hide();
+					$("#sigungu3").hide();
+					$("#sigungu4").hide();
+					$("#sigungu5").hide();
+					$("#sigungu6").hide();
+					$("#sigungu7").hide();
+					$("#sigungu8").hide();
+					$("#sigungu9").hide();
+					$("#sigungu10").hide();
+					$("#sigungu11").hide();
+					$("#sigungu12").show();
+					$("#sigungu13").hide();
+					$("#sigungu14").hide();
+					$("#sigungu15").hide();
+					$("#sigungu16").hide();
+					$("#sigungu17").hide();
+					
+					$("#sigungu12").click(function(){
+						sigungu=$("#sigungu12").val();
+					});
+				}
+				else if(area == 35){
+					$("#sigungu1").hide();
+					$("#sigungu2").hide();
+					$("#sigungu3").hide();
+					$("#sigungu4").hide();
+					$("#sigungu5").hide();
+					$("#sigungu6").hide();
+					$("#sigungu7").hide();
+					$("#sigungu8").hide();
+					$("#sigungu9").hide();
+					$("#sigungu10").hide();
+					$("#sigungu11").hide();
+					$("#sigungu12").hide();
+					$("#sigungu13").show();
+					$("#sigungu14").hide();
+					$("#sigungu15").hide();
+					$("#sigungu16").hide();
+					$("#sigungu17").hide();
+					
+					$("#sigungu13").click(function(){
+						sigungu=$("#sigungu13").val();
+					});
+				}
+				else if(area == 36){
+					$("#sigungu1").hide();
+					$("#sigungu2").hide();
+					$("#sigungu3").hide();
+					$("#sigungu4").hide();
+					$("#sigungu5").hide();
+					$("#sigungu6").hide();
+					$("#sigungu7").hide();
+					$("#sigungu8").hide();
+					$("#sigungu9").hide();
+					$("#sigungu10").hide();
+					$("#sigungu11").hide();
+					$("#sigungu12").hide();
+					$("#sigungu13").hide();
+					$("#sigungu14").show();
+					$("#sigungu15").hide();
+					$("#sigungu16").hide();
+					$("#sigungu17").hide();
+					
+					$("#sigungu14").click(function(){
+						sigungu=$("#sigungu14").val();
+					});
+				}
+				else if(area == 37){
+					$("#sigungu1").hide();
+					$("#sigungu2").hide();
+					$("#sigungu3").hide();
+					$("#sigungu4").hide();
+					$("#sigungu5").hide();
+					$("#sigungu6").hide();
+					$("#sigungu7").hide();
+					$("#sigungu8").hide();
+					$("#sigungu9").hide();
+					$("#sigungu10").hide();
+					$("#sigungu11").hide();
+					$("#sigungu12").hide();
+					$("#sigungu13").hide();
+					$("#sigungu14").hide();
+					$("#sigungu15").show();
+					$("#sigungu16").hide();
+					$("#sigungu17").hide();
+					
+					$("#sigungu15").click(function(){
+						sigungu=$("#sigungu15").val();
+					});
+				}
+				else if(area == 38){
+					$("#sigungu1").hide();
+					$("#sigungu2").hide();
+					$("#sigungu3").hide();
+					$("#sigungu4").hide();
+					$("#sigungu5").hide();
+					$("#sigungu6").hide();
+					$("#sigungu7").hide();
+					$("#sigungu8").hide();
+					$("#sigungu9").hide();
+					$("#sigungu10").hide();
+					$("#sigungu11").hide();
+					$("#sigungu12").hide();
+					$("#sigungu13").hide();
+					$("#sigungu14").hide();
+					$("#sigungu15").hide();
+					$("#sigungu16").show();
+					$("#sigungu17").hide();
+					
+					$("#sigungu16").click(function(){
+						sigungu=$("#sigungu16").val();
+					});
+				}
+				else if(area == 39){
+					$("#sigungu1").hide();
+					$("#sigungu2").hide();
+					$("#sigungu3").hide();
+					$("#sigungu4").hide();
+					$("#sigungu5").hide();
+					$("#sigungu6").hide();
+					$("#sigungu7").hide();
+					$("#sigungu8").hide();
+					$("#sigungu9").hide();
+					$("#sigungu10").hide();
+					$("#sigungu11").hide();
+					$("#sigungu12").hide();
+					$("#sigungu13").hide();
+					$("#sigungu14").hide();
+					$("#sigungu15").hide();
+					$("#sigungu16").hide();
+					$("#sigungu17").show();
+					
+					$("#sigungu17").click(function(){
+						sigungu=$("#sigungu17").val();
+					});
+				}
+				
+			});
+			
 		});
 		
-		function searchCompany(area){
-			var sigungu;
-			
-			console.log(area);
-			
-			if(area == 1){
-				$("#sigungu1").show();
-				$("#sigungu2").hide();
-				$("#sigungu3").hide();
-				$("#sigungu4").hide();
-				$("#sigungu5").hide();
-				$("#sigungu6").hide();
-				$("#sigungu7").hide();
-				$("#sigungu8").hide();
-				$("#sigungu9").hide();
-				$("#sigungu10").hide();
-				$("#sigungu11").hide();
-				$("#sigungu12").hide();
-				$("#sigungu13").hide();
-				$("#sigungu14").hide();
-				$("#sigungu15").hide();
-				$("#sigungu16").hide();
-				$("#sigungu17").hide();
-			}
-			else if(area == 2){
-				$("#sigungu1").hide();
-				$("#sigungu2").show();
-				$("#sigungu3").hide();
-				$("#sigungu4").hide();
-				$("#sigungu5").hide();
-				$("#sigungu6").hide();
-				$("#sigungu7").hide();
-				$("#sigungu8").hide();
-				$("#sigungu9").hide();
-				$("#sigungu10").hide();
-				$("#sigungu11").hide();
-				$("#sigungu12").hide();
-				$("#sigungu13").hide();
-				$("#sigungu14").hide();
-				$("#sigungu15").hide();
-				$("#sigungu16").hide();
-				$("#sigungu17").hide();
-			}
-			else if(area == 3){
-				$("#sigungu1").hide();
-				$("#sigungu2").hide();
-				$("#sigungu3").show();
-				$("#sigungu4").hide();
-				$("#sigungu5").hide();
-				$("#sigungu6").hide();
-				$("#sigungu7").hide();
-				$("#sigungu8").hide();
-				$("#sigungu9").hide();
-				$("#sigungu10").hide();
-				$("#sigungu11").hide();
-				$("#sigungu12").hide();
-				$("#sigungu13").hide();
-				$("#sigungu14").hide();
-				$("#sigungu15").hide();
-				$("#sigungu16").hide();
-				$("#sigungu17").hide();
-			}
-			else if(area == 4){
-				$("#sigungu1").hide();
-				$("#sigungu2").hide();
-				$("#sigungu3").hide();
-				$("#sigungu4").show();
-				$("#sigungu5").hide();
-				$("#sigungu6").hide();
-				$("#sigungu7").hide();
-				$("#sigungu8").hide();
-				$("#sigungu9").hide();
-				$("#sigungu10").hide();
-				$("#sigungu11").hide();
-				$("#sigungu12").hide();
-				$("#sigungu13").hide();
-				$("#sigungu14").hide();
-				$("#sigungu15").hide();
-				$("#sigungu16").hide();
-				$("#sigungu17").hide();
-			}
-			else if(area == 5){
-				$("#sigungu1").hide();
-				$("#sigungu2").hide();
-				$("#sigungu3").hide();
-				$("#sigungu4").hide();
-				$("#sigungu5").show();
-				$("#sigungu6").hide();
-				$("#sigungu7").hide();
-				$("#sigungu8").hide();
-				$("#sigungu9").hide();
-				$("#sigungu10").hide();
-				$("#sigungu11").hide();
-				$("#sigungu12").hide();
-				$("#sigungu13").hide();
-				$("#sigungu14").hide();
-				$("#sigungu15").hide();
-				$("#sigungu16").hide();
-				$("#sigungu17").hide();
-			}
-			else if(area == 6){
-				$("#sigungu1").hide();
-				$("#sigungu2").hide();
-				$("#sigungu3").hide();
-				$("#sigungu4").hide();
-				$("#sigungu5").hide();
-				$("#sigungu6").show();
-				$("#sigungu7").hide();
-				$("#sigungu8").hide();
-				$("#sigungu9").hide();
-				$("#sigungu10").hide();
-				$("#sigungu11").hide();
-				$("#sigungu12").hide();
-				$("#sigungu13").hide();
-				$("#sigungu14").hide();
-				$("#sigungu15").hide();
-				$("#sigungu16").hide();
-				$("#sigungu17").hide();
-			}
-			else if(area == 7){
-				$("#sigungu1").hide();
-				$("#sigungu2").hide();
-				$("#sigungu3").hide();
-				$("#sigungu4").hide();
-				$("#sigungu5").hide();
-				$("#sigungu6").hide();
-				$("#sigungu7").show();
-				$("#sigungu8").hide();
-				$("#sigungu9").hide();
-				$("#sigungu10").hide();
-				$("#sigungu11").hide();
-				$("#sigungu12").hide();
-				$("#sigungu13").hide();
-				$("#sigungu14").hide();
-				$("#sigungu15").hide();
-				$("#sigungu16").hide();
-				$("#sigungu17").hide();
-			}
-			else if(area == 8){
-				$("#sigungu1").hide();
-				$("#sigungu2").hide();
-				$("#sigungu3").hide();
-				$("#sigungu4").hide();
-				$("#sigungu5").hide();
-				$("#sigungu6").hide();
-				$("#sigungu7").hide();
-				$("#sigungu8").show();
-				$("#sigungu9").hide();
-				$("#sigungu10").hide();
-				$("#sigungu11").hide();
-				$("#sigungu12").hide();
-				$("#sigungu13").hide();
-				$("#sigungu14").hide();
-				$("#sigungu15").hide();
-				$("#sigungu16").hide();
-				$("#sigungu17").hide();
-			}
-			else if(area == 9){
-				$("#sigungu1").hide();
-				$("#sigungu2").hide();
-				$("#sigungu3").hide();
-				$("#sigungu4").hide();
-				$("#sigungu5").hide();
-				$("#sigungu6").hide();
-				$("#sigungu7").hide();
-				$("#sigungu8").hide();
-				$("#sigungu9").show();
-				$("#sigungu10").hide();
-				$("#sigungu11").hide();
-				$("#sigungu12").hide();
-				$("#sigungu13").hide();
-				$("#sigungu14").hide();
-				$("#sigungu15").hide();
-				$("#sigungu16").hide();
-				$("#sigungu17").hide();
-			}
-			else if(area == 10){
-				$("#sigungu1").hide();
-				$("#sigungu2").hide();
-				$("#sigungu3").hide();
-				$("#sigungu4").hide();
-				$("#sigungu5").hide();
-				$("#sigungu6").hide();
-				$("#sigungu7").hide();
-				$("#sigungu8").hide();
-				$("#sigungu9").hide();
-				$("#sigungu10").show();
-				$("#sigungu11").hide();
-				$("#sigungu12").hide();
-				$("#sigungu13").hide();
-				$("#sigungu14").hide();
-				$("#sigungu15").hide();
-				$("#sigungu16").hide();
-				$("#sigungu17").hide();
-			}
-			else if(area == 11){
-				$("#sigungu1").hide();
-				$("#sigungu2").hide();
-				$("#sigungu3").hide();
-				$("#sigungu4").hide();
-				$("#sigungu5").hide();
-				$("#sigungu6").hide();
-				$("#sigungu7").hide();
-				$("#sigungu8").hide();
-				$("#sigungu9").hide();
-				$("#sigungu10").hide();
-				$("#sigungu11").show();
-				$("#sigungu12").hide();
-				$("#sigungu13").hide();
-				$("#sigungu14").hide();
-				$("#sigungu15").hide();
-				$("#sigungu16").hide();
-				$("#sigungu17").hide();
-			}
-			else if(area == 12){
-				$("#sigungu1").hide();
-				$("#sigungu2").hide();
-				$("#sigungu3").hide();
-				$("#sigungu4").hide();
-				$("#sigungu5").hide();
-				$("#sigungu6").hide();
-				$("#sigungu7").hide();
-				$("#sigungu8").hide();
-				$("#sigungu9").hide();
-				$("#sigungu10").hide();
-				$("#sigungu11").hide();
-				$("#sigungu12").show();
-				$("#sigungu13").hide();
-				$("#sigungu14").hide();
-				$("#sigungu15").hide();
-				$("#sigungu16").hide();
-				$("#sigungu17").hide();
-			}
-			else if(area == 13){
-				$("#sigungu1").hide();
-				$("#sigungu2").hide();
-				$("#sigungu3").hide();
-				$("#sigungu4").hide();
-				$("#sigungu5").hide();
-				$("#sigungu6").hide();
-				$("#sigungu7").hide();
-				$("#sigungu8").hide();
-				$("#sigungu9").hide();
-				$("#sigungu10").hide();
-				$("#sigungu11").hide();
-				$("#sigungu12").hide();
-				$("#sigungu13").show();
-				$("#sigungu14").hide();
-				$("#sigungu15").hide();
-				$("#sigungu16").hide();
-				$("#sigungu17").hide();
-			}
-			else if(area == 14){
-				$("#sigungu1").hide();
-				$("#sigungu2").hide();
-				$("#sigungu3").hide();
-				$("#sigungu4").hide();
-				$("#sigungu5").hide();
-				$("#sigungu6").hide();
-				$("#sigungu7").hide();
-				$("#sigungu8").hide();
-				$("#sigungu9").hide();
-				$("#sigungu10").hide();
-				$("#sigungu11").hide();
-				$("#sigungu12").hide();
-				$("#sigungu13").hide();
-				$("#sigungu14").show();
-				$("#sigungu15").hide();
-				$("#sigungu16").hide();
-				$("#sigungu17").hide();
-			}
-			else if(area == 15){
-				$("#sigungu1").hide();
-				$("#sigungu2").hide();
-				$("#sigungu3").hide();
-				$("#sigungu4").hide();
-				$("#sigungu5").hide();
-				$("#sigungu6").hide();
-				$("#sigungu7").hide();
-				$("#sigungu8").hide();
-				$("#sigungu9").hide();
-				$("#sigungu10").hide();
-				$("#sigungu11").hide();
-				$("#sigungu12").hide();
-				$("#sigungu13").hide();
-				$("#sigungu14").hide();
-				$("#sigungu15").show();
-				$("#sigungu16").hide();
-				$("#sigungu17").hide();
-			}
-			else if(area == 16){
-				$("#sigungu1").hide();
-				$("#sigungu2").hide();
-				$("#sigungu3").hide();
-				$("#sigungu4").hide();
-				$("#sigungu5").hide();
-				$("#sigungu6").hide();
-				$("#sigungu7").hide();
-				$("#sigungu8").hide();
-				$("#sigungu9").hide();
-				$("#sigungu10").hide();
-				$("#sigungu11").hide();
-				$("#sigungu12").hide();
-				$("#sigungu13").hide();
-				$("#sigungu14").hide();
-				$("#sigungu15").hide();
-				$("#sigungu16").show();
-				$("#sigungu17").hide();
-			}
-			else if(area == 17){
-				$("#sigungu1").hide();
-				$("#sigungu2").hide();
-				$("#sigungu3").hide();
-				$("#sigungu4").hide();
-				$("#sigungu5").hide();
-				$("#sigungu6").hide();
-				$("#sigungu7").hide();
-				$("#sigungu8").hide();
-				$("#sigungu9").hide();
-				$("#sigungu10").hide();
-				$("#sigungu11").hide();
-				$("#sigungu12").hide();
-				$("#sigungu13").hide();
-				$("#sigungu14").hide();
-				$("#sigungu15").hide();
-				$("#sigungu16").hide();
-				$("#sigungu17").show();
-			}
+		function searchCompany(){
+			console.log("area : " + area);
+			console.log("sigungu : " + sigungu);
 			
 			$.ajax({
 				url:"searchCompany.sell",
@@ -920,8 +990,6 @@
 				data:{area:area, sigungu:sigungu},
 				dataType:"json",
 				success:function(data){
-					console.log(data);
-					console.log(typeof(data));
 					console.log(data.response.body.items.item);
 					
 					$tableBody = $("#resultTable");
@@ -929,10 +997,20 @@
 					
 					var company=data.response.body.items.item;
 					
-					for(var i=0;i<company.length;i++){
+					console.log(company.length);
+					
+					if(company.length != "undefined"){
+						for(var i=0;i<company.length;i++){
+							var output="";
+							output += "<tr><td><a onclick=\"valueSetting("+ company[i].contentid + ", '" + company[i].title + "', '" + company[i].tel + "', '" + company[i].addr1 + "');\"><b><font style='font-size:13px;'>" + company[i].title + "</font></b></a><br>";
+							output += "<font style='font-size:11px;'>" + company[i].addr1 + "</font></td></tr>";
+							$tableBody.append(output);
+						}
+					}
+					else{
 						var output="";
-						output += "<tr><td><b><font style='font-size:13px;'>" + company[i].title + "</font></b><br>";
-						output += "<font style='font-size:11px;'>" + company[i].addr1 + "</font></td></tr>";
+						output += "<tr><td><a onclick=\"valueSetting("+ company.contentid + ", '" + company.title + "', '" + company.tel + "', '" + company.addr1 + "');\"><b><font style='font-size:13px;'>" + company[i].title + "</font></b></a><br>";
+						output += "<font style='font-size:11px;'>" + company.addr1 + "</font></td></tr>";
 						$tableBody.append(output);
 					}
 					
@@ -940,6 +1018,19 @@
 					console.log(data);
 				}
 			});
+		}
+		
+		function valueSetting(contentId, title, tel, addr){
+			
+			console.log(contentId);
+			console.log(title);
+			console.log(tel);
+			console.log(addr);
+			
+			$("#contentId").attr("value", contentId);
+			$("#companyName").attr("value", title);
+			$("#companyPhone").attr("value", tel);
+			$("#companyAddress").attr("value", addr);
 		}
 	</script>
 </body>

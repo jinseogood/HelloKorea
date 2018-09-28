@@ -48,18 +48,18 @@ public class SearchController {
 	        bos.close();
 	        
 	        String data = bos.getOut().toString();
-	        
-	        /*JSONObject json = new JSONObject();
-	        json.put("data", data);*/
 	         
 	        PrintWriter out = response.getWriter();
 	        out.println(data);
+	        
+	        JSONObject json = new JSONObject();
+	        json.put("data", data);
 	        
 	        /*System.out.println("controller : " + data);
 	        System.out.println("data length : " + data.length());*/
 	        
 	        System.out.println("area : " + area);
-	        System.out.println("rType : " + sigungu);
+	        System.out.println("sigungu : " + sigungu);
 	        
 			
 		} catch (IOException e) {
