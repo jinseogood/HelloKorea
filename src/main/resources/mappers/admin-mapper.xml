@@ -4,193 +4,118 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Admin">
 
-<!-- 예약 내역 관리 -->
-<!-- 예약 내역 조회  테이블 값 -->
-<resultMap type="Reservation" id="reservationResultSet">
-    <id property="oId" column="O_ID"/>
-    <result property="cName" column="C_NAME"/>
-    <result property="paName" column="PA_NAME"/>
-    <result property="rSDate" column="R_SDATE"/>
-    <result property="rEDate" column="R_EDATE"/>
-    <result property="pdDate" column="PD_DATE"/>
-    <result property="pdType" column="PD_TYPE"/>
-</resultMap>
-	
+	<!-- 예약 내역 관리 -->
+	<!-- 예약 내역 조회 테이블 값 -->
+	<resultMap type="Reservation" id="reservationResultSet">
+		<id property="oId" column="O_ID" />
+		<result property="cName" column="C_NAME" />
+		<result property="paName" column="PA_NAME" />
+		<result property="rSDate" column="R_SDATE" />
+		<result property="rEDate" column="R_EDATE" />
+		<result property="pdDate" column="PD_DATE" />
+		<result property="rType" column="R_TYPE"/>
+		<result property="oRCount" column="O_RCOUNT"/>
+		<result property="people" column="PEOPLE"/>
+		<result property="price" column="PRICE"/>
+		<result property="pdType" column="PD_TYPE" />
+	</resultMap>
 
-    <!-- 예약 내역 수 조회용 쿼리문 -->
-    <select id="selectReservationListCount" resultType="_int">
-        SELECT COUNT(*)
-        FROM (SELECT R.O_ID, C.C_NAME, PA.PA_NAME, R.R_SDATE, R.R_EDATE, PD.PD_DATE, PD.PD_TYPE 
-              FROM RESERVATION R
-              JOIN ROOM RO ON(R.R_ID=RO.R_ID)
-              JOIN COMPANY C ON(RO.C_ID=C.C_ID)
-              JOIN PAYMENT PA ON(R.PA_ID = PA.PA_ID)
-              RIGHT OUTER JOIN PAY_DETAIL PD ON(PA.PA_ID = PD.PA_ID)
-              ORDER BY R.O_ID)
-    </select>
-    
+
+	<!-- 예약 내역 수 조회용 쿼리문 -->
+	<select id="selectReservationListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM (SELECT R.O_ID, C.C_NAME, PA.PA_NAME, R.R_SDATE, R.R_EDATE,
+		PD.PD_DATE, RO.R_TYPE, R.O_RCOUNT, R.PEOPLE, PD.PRICE, PD.PD_TYPE
+		FROM RESERVATION R
+		JOIN ROOM RO ON(R.R_ID=RO.R_ID)
+		JOIN COMPANY C ON(RO.C_ID=C.C_ID)
+		JOIN PAYMENT PA ON(R.PA_ID = PA.PA_ID)
+		RIGHT OUTER JOIN PAY_DETAIL PD ON(PA.PA_ID = PD.PA_ID))
+	</select>
+
 	<!-- 예약 내역 리스트 조회용 쿼리문 -->
 	<select id="selectReservationList" resultMap="reservationResultSet">
-		SELECT R.O_ID, C.C_NAME, PA.PA_NAME, R.R_SDATE, R.R_EDATE, PD.PD_DATE, PD.PD_TYPE 
-        FROM RESERVATION R
-        JOIN ROOM RO ON(R.R_ID=RO.R_ID)
-        JOIN COMPANY C ON(RO.C_ID=C.C_ID)
-        JOIN PAYMENT PA ON(R.PA_ID = PA.PA_ID)
-        RIGHT OUTER JOIN PAY_DETAIL PD ON(PA.PA_ID = PD.PA_ID)
-        ORDER BY R.O_ID
+		SELECT R.O_ID,C.C_NAME, PA.PA_NAME, R.R_SDATE, R.R_EDATE,
+		PD.PD_DATE, RO.R_TYPE, R.O_RCOUNT, R.PEOPLE, PD.PRICE, PD.PD_TYPE
+		FROM RESERVATION R
+		JOIN ROOM RO ON(R.R_ID=RO.R_ID)
+		JOIN COMPANY C ON(RO.C_ID=C.C_ID)
+		JOIN PAYMENT PA ON(R.PA_ID = PA.PA_ID)
+		RIGHT OUTER JOIN PAY_DETAIL PD ON(PA.PA_ID = PD.PA_ID)
+		ORDER BY R.O_ID
+	</select>
+
+	<!-- 예약 내역 검색 수 조회용 쿼리문 -->
+	<select id="selectSearchReservationListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM (SELECT R.O_ID, C.C_NAME, PA.PA_NAME, R.R_SDATE, R.R_EDATE,
+		PD.PD_DATE, RO.R_TYPE, R.O_RCOUNT, R.PEOPLE, PD.PRICE, PD.PD_TYPE
+		FROM RESERVATION R
+		JOIN ROOM RO ON(R.R_ID=RO.R_ID)
+		JOIN COMPANY C ON(RO.C_ID=C.C_ID)
+		JOIN PAYMENT PA ON(R.PA_ID = PA.PA_ID)
+		RIGHT OUTER JOIN PAY_DETAIL PD ON(PA.PA_ID = PD.PA_ID)
+		<choose>
+			<when test="oId != -99">
+				WHERE O_ID = #{oId}
+			</when>
+			<when test="cName != null">
+				WHERE C_NAME LIKE '%' || #{cName} || '%'
+			</when>
+			<otherwise>
+				WHERE PA_NAME LIKE '%' || #{paName}|| '%'
+			</otherwise>
+		</choose>
+		)
+	</select>
+
+	<!-- 예약 내역 검색리스트 조회용 쿼리문 -->
+	<select id="selectSearchReservationList" resultMap="reservationResultSet">
+		SELECT R.O_ID, C.C_NAME, PA.PA_NAME, R.R_SDATE, R.R_EDATE, PD.PD_DATE,
+		RO.R_TYPE, R.O_RCOUNT, R.PEOPLE, PD.PRICE, PD.PD_TYPE
+		FROM RESERVATION R
+		JOIN ROOM RO ON(R.R_ID=RO.R_ID)
+		JOIN COMPANY C ON(RO.C_ID=C.C_ID)
+		JOIN PAYMENT PA ON(R.PA_ID = PA.PA_ID)
+		RIGHT OUTER JOIN PAY_DETAIL PD ON(PA.PA_ID = PD.PA_ID)
+		<choose>
+			<when test="oId != -99">
+				WHERE O_ID = #{oId}
+			</when>
+			<when test="cName != null">
+				WHERE C_NAME LIKE '%' || #{cName} || '%'
+			</when>
+			<otherwise>
+				WHERE PA_NAME LIKE '%' || #{paName}|| '%'
+			</otherwise>
+		</choose>
+		ORDER BY R.O_ID
 	</select>
 	
-	<!-- 메세지 상세 조회용 쿼리문 -->
-	<!-- <select id="selectMsgOne" parameterType="_int" resultMap="messageResultSet">
-		SELECT *
-		FROM MESSAGE MS
-		JOIN MEMBER M
-		ON(MS.SEND_ID=M.M_ID)
-		WHERE MS.MSG_ID = #{msgId}
-	</select> -->
-	
-	<!-- 받은 메세지 읽었을 때 읽은 날짜 업데이트 쿼리문 -->
-	<!-- <update id="updateReadDate" parameterType="_int">
-		UPDATE MESSAGE
-		SET READ_DATE = SYSDATE
-		WHERE MSG_ID = #{msgId}
-	</update> -->
-	
-	<!-- 받은 메세지 삭제 쿼리문 -->
-	<!-- <update id="updateStatus" parameterType="_int">
-		UPDATE MESSAGE
-		SET STATUS = 'Y'
-		WHERE MSG_ID = #{msgId} 
-	</update> -->
-    
-    <!-- 보낸 메세지 개수 조회용 쿼리문 -->
-    <!-- <select id="selectSeMsgListCount" resultType="_int">
-        SELECT COUNT(*)
-        FROM (SELECT *
-		      FROM MESSAGE MS
-		      JOIN MEMBER M
-		      ON(MS.RECEIVE_ID=M.M_ID)
-		      WHERE MS.SEND_ID = #{mId}
-		      AND MS.STATUS = 'N')
-    </select> -->
-    
-    <!-- 보낸 메세지 리스트 조회용 쿼리문  -->
-	<!-- <select id="selectSeMsgList" parameterType="_int" resultMap="messageResultSet">
-		SELECT *
-		FROM MESSAGE MS
-		JOIN MEMBER M
-		ON(MS.RECEIVE_ID=M.M_ID)
-		WHERE MS.SEND_ID = #{mId}
-		AND MS.STATUS = 'N'
-		ORDER BY MSG_ID
-	</select> -->
-	
-	<!-- 메세지 발송(문의 발송, 문의 답변)용 쿼리문 -->
-	<!-- <insert id="insertMsg" parameterType="Message">
-        INSERT INTO MESSAGE
-        VALUES (SEQ_MSG_ID.NEXTVAL, #{recieveId}, #{sendId}, #{title},
-                #{content}, SYSDATE, NULL, 'N', #{mLevel}, NULL)
-    </insert> -->
-    
-    <!-- 문의 처리일 입력 쿼리문  -->
-	<!-- <update id="updatePDate" parameterType="_int">
-		UPDATE MESSAGE
-		SET P_DATE = SYSDATE
-		WHERE MSG_ID = #{msgId} 
-	</update> -->
-	
-	<!-- 문의 번호로 조회 -->
-	<!-- <select id="selectQueOneNo" parameterType="_int" resultMap="messageResultSet">
-		SELECT *
-		FROM MESSAGE MS
-		JOIN MEMBER M
-		ON(MS.SEND_ID=M.M_ID)
-		WHERE MS.MSG_ID = #{msgId}
-        AND MS.RECEIVE_ID = 0
-		AND MS.STATUS = 'N'
-	</select> -->
-	
-	<!-- 문의자로 조회 페이징 -->
-	<!-- <select id="selectQueListNiCount" parameterType="string" resultType="_int">
-		SELECT COUNT(*)
-        FROM (SELECT *
-              FROM MESSAGE MS
-              JOIN MEMBER M
-              ON(MS.SEND_ID=M.M_ID)
-              WHERE M.NICKNAME = #{nickname}
-              AND MS.RECEIVE_ID = 0
-              AND MS.STATUS = 'N')
-	</select> -->
-	
-	<!-- 문의자로 조회 -->
-	<!-- <select id="selectQueListNi" parameterType="string" resultMap="messageResultSet">
-		SELECT *
-        FROM MESSAGE MS
-        JOIN MEMBER M
-        ON(MS.SEND_ID=M.M_ID)
-        WHERE M.NICKNAME = #{nickname}
-        AND MS.RECEIVE_ID = 0
-        AND MS.STATUS = 'N'
-	</select> -->
-	<!-- 처리건만 조회 페이징 -->
-	    <!-- SELECT COUNT(*)
-        FROM (SELECT *
-              FROM MESSAGE MS
-              JOIN MEMBER M
-              ON(MS.SEND_ID=M.M_ID)
-              WHERE MS.P_DATE IS NOT NULL
-              AND MS.RECEIVE_ID = 0
-              AND MS.STATUS = 'N') -->
-	<!-- 처리건만 조회 -->
-	    <!-- SELECT *
-        FROM MESSAGE MS
-        JOIN MEMBER M
-        ON(MS.SEND_ID=M.M_ID)
-        WHERE MS.P_DATE IS NOT NULL
-        AND MS.RECEIVE_ID = 0
-        AND MS.STATUS = 'N' -->
-	<!-- 미처리건만 조회 페이징 -->
-	<!-- <select id="selectQueListNiCount" resultType="_int">
-		SELECT COUNT(*)
-        FROM (SELECT *
-              FROM MESSAGE MS
-              JOIN MEMBER M
-              ON(MS.SEND_ID=M.M_ID)
-              WHERE MS.P_DATE IS NULL
-              AND MS.RECEIVE_ID = 0
-              AND MS.STATUS = 'N')
-	</select> -->
-	
-	<!-- 미처리건만 조회 -->
-	<!-- <select id="selectQueListNi" resultMap="messageResultSet">
-		SELECT *
-        FROM MESSAGE MS
-        JOIN MEMBER M
-        ON(MS.SEND_ID=M.M_ID)
-        WHERE MS.P_DATE IS NULL
-        AND MS.RECEIVE_ID = 0
-        AND MS.STATUS = 'N'
-	</select> -->
-	
-	<!-- 문의일로 조회 페이징 -->
-	    <!-- <select id="selectQueListDaCount" parameterType="DatePick" resultMap="messageResultSet">
-	      SELECT *
-	      FROM(SELECT *
-               FROM MESSAGE MS
-               JOIN MEMBER M
-               ON(MS.SEND_ID=M.M_ID)
-               WHERE MS.RECEIVE_ID = 0
-               AND MS.STATUS = 'N'
-               AND MS.SEND_DATE BETWEEN #{startDate} AND #{endDate})
-	   </select> -->
-	<!-- 문의일로 조회 -->
-	    <!-- <select id="selectQueListDa" parameterType="DatePick" resultMap="messageResultSet">
-	      SELECT *
-          FROM MESSAGE MS
-          JOIN MEMBER M
-          ON(MS.SEND_ID=M.M_ID)
-          WHERE MS.RECEIVE_ID = 0
-          AND MS.STATUS = 'N'
-          AND MS.SEND_DATE BETWEEN #{startDate} AND #{endDate}
-	   </select> --> 
+	<!-- 예약 내역 날짜 검색 리스트 -->
+	<select id="selectSearchDateReservationListCount" resultType="_int">
+	    SELECT COUNT(*)
+		FROM ( SELECT R.O_ID, C.C_NAME, PA.PA_NAME, R.R_SDATE, R.R_EDATE, PD.PD_DATE,
+		       RO.R_TYPE, R.O_RCOUNT, R.PEOPLE, PD.PRICE, PD.PD_TYPE
+		       FROM RESERVATION R
+		       JOIN ROOM RO ON(R.R_ID=RO.R_ID)
+		       JOIN COMPANY C ON(RO.C_ID=C.C_ID)
+		       JOIN PAYMENT PA ON(R.PA_ID = PA.PA_ID)
+		       RIGHT OUTER JOIN PAY_DETAIL PD ON(PA.PA_ID = PD.PA_ID)
+               WHERE R_SDATE <![CDATA[>]]>= TO_DATE(#{fromDate})
+               AND R_EDATE <![CDATA[<]]>= TO_DATE(#{toDate}) )
+	</select>
+	<!-- 예약 내역 날짜 검색 -->
+	<select id="selectSearchDateReservationList" resultMap="reservationResultSet">
+	    SELECT R.O_ID, C.C_NAME, PA.PA_NAME, R.R_SDATE, R.R_EDATE, PD.PD_DATE,
+		RO.R_TYPE, R.O_RCOUNT, R.PEOPLE, PD.PRICE, PD.PD_TYPE
+		FROM RESERVATION R
+		JOIN ROOM RO ON(R.R_ID=RO.R_ID)
+		JOIN COMPANY C ON(RO.C_ID=C.C_ID)
+		JOIN PAYMENT PA ON(R.PA_ID = PA.PA_ID)
+		RIGHT OUTER JOIN PAY_DETAIL PD ON(PA.PA_ID = PD.PA_ID)
+        WHERE R_SDATE <![CDATA[>]]>= TO_DATE(#{fromDate})
+        AND R_EDATE <![CDATA[<]]>= TO_DATE(#{toDate})
+        ORDER BY R.O_ID
+	</select>
 </mapper>

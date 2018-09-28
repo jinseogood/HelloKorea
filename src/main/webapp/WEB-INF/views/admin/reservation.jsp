@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,7 @@
     width:80%;
     margin-left:auto;
     margin-right:auto;
+    height:480px;
 }
 .titleArea{
     padding:3%;
@@ -23,8 +25,8 @@
     margin-bottom:5%;
 }
 .searchArea{
-    width:30%; 
-    margin-bottom:3%;
+    width:60%; 
+    margin-bottom:6%;
     margin-left:auto;
     margin-right:auto;
 }
@@ -61,6 +63,29 @@ table.type09 td {
     border-bottom: 1px solid #ccc;
 }
 
+	
+	#reservationDetailTable{
+		width:500px;
+		line-height: 1.5;
+	}
+	#reservationDetailTable tr{
+		height:30px;
+	}
+	#reservationDetailTable th{
+		padding: 3px;
+	    text-align: center;
+	    vertical-align: middle;
+	    border-right: 3px solid #036;
+	    background: #f3f6f7;
+	}
+	#reservationDetailTable select{
+		margin: 3px;
+	}
+	#reservationDetailTable td{
+	    padding: 3px;
+	    vertical-align: middle;
+	    border: 1px solid #ccc;
+	}
 
 </style>
 </head>
@@ -75,7 +100,7 @@ table.type09 td {
                             <!--breadcrumbs start -->
                             <ul class="breadcrumb">
                                 <li><a href="myPageView.ad"><i class="fa fa-home"></i> Home</a></li>
-                                <li><a href="#">예약내역 관리</a></li>
+                                <li><a href="selectReservationList.ad">예약내역 관리</a></li>
                                 <li class="active">예약내역 조회</li>
                             </ul>
                             <!--breadcrumbs end -->
@@ -85,24 +110,67 @@ table.type09 td {
 	
 	</div>
 			<div class="searchArea" align="center">
- <div class="input-group m-b-10">
-                                                  <input type="text" class="form-control">
-                                                  <div class="input-group-btn">
-                                                      <button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조회 선택하기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
-                                                      <ul class="dropdown-menu pull-right">
-                                                          <li><a href="#">예약번호로 조회</a></li>
-                                                          <li><a href="#">예약처로 조회</a></li>
-                                                          <li><a href="#">예약자로 조회</a></li>
-                                                          <li class="divider"></li>
-                                                          <li><a href="#">숙박일로 조회</a></li>
-                                                      </ul>
-                                                  </div>
-                                              </div>
-  
-</div>	
+			<form action="selectReservationList.ad">
+			<div class="col-xs-8 col-xs-offset-2">
+		    <div class="input-group">
+                <div class="input-group-btn search-panel">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    	<span id="search_concept">검색 카테고리</span> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#oId">예약 번호</a></li>
+                      <li><a href="#cName">예약처</a></li>
+                      <li><a href="#paName">예약자</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#datePick" onclick="showDatePicker()">숙박일</a></li>
+                    </ul>
+                </div>
+                <input type="hidden" name="searchParam" value="all" id="searchParam">         
+                <input type="text" class="form-control" name="searchWord" placeholder="검색어를 입력하세요">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+                </form>
+            </div>
+            
+            
+            <div id="datePicker">
+            <br>
+            <jsp:include page="../common/datePicker.jsp"/>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-white" type="submit">&nbsp;조회&nbsp;</button>
+            <br>
+            </div>
+            
+                </div>
+                </div>
+        </div>
 
+
+	
+	<script>
+	 $(function(){
+    	 $("#datePicker").hide();
+    	 
+     });
+     function showDatePicker(){
+    	 $("#datePicker").show();
+    	 
+     }
+	$(document).ready(function(e){
+	    $('.search-panel .dropdown-menu').find('a').click(function(e) {
+			e.preventDefault();
+			var param = $(this).attr("href").replace("#","");
+			var concept = $(this).text();
+			$('.search-panel span#search_concept').text(concept);
+			$('.input-group #searchParam').val(param);
+		});
+	});
+	
+	</script>
+	
 	<div class="tableArea" align="center">
-<table class="type09">
+<table class="type09" id="reservationTable">
     <thead>
     <tr>
         <th>예약번호</th>
@@ -110,47 +178,155 @@ table.type09 td {
         <th>예약자</th>
         <th>숙박일</th>
         <th>예약일</th>
-        <th>예약상황</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>결제상황</th>
     </tr>
     </thead>
     <tbody>
-    <% for(int i = 0; i < 10; i++){ %>
+    <c:forEach var="r" items="${ list }">
     <tr>
-        <th scope="row">번호</th>
-        <td>내용</td>
-        <td>내용</td>
-        <td>내용</td>
-        <td>내용</td>
-        <td>내용</td>
+        <th scope="row">${ r.oId }</th>
+        <td>${ r.cName }</td>
+        <td>${ r.paName }</td>
+        <td style="font-size:12px">${ r.rSDate } ~ ${ r.rEDate }</td>
+        <td>${ r.pdDate }</td>
+        <td>${ r.rType }</td>
+        <td>${ r.oRCount }</td>
+        <td>${ r.people }</td>
+        <td>${ r.price }</td>
+        <td>${ r.pdType }</td>
     </tr>
-    <% } %>
+    </c:forEach>
     
     </tbody>
 </table>
 </div>
 <div class="paging" align="center">
-                                        <ul class="pagination pagination-sm">
-                                        <li><a href="#">&laquo;</a></li>
-                                        <li><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#">6</a></li>
-                                        <li><a href="#">7</a></li>
-                                        <li><a href="#">8</a></li>
-                                        <li><a href="#">9</a></li>
-                                        <li><a href="#">10</a></li>
-                                        <li><a href="#">&raquo;</a></li>
-                                    </ul>
-                                    </div>
+<ul class="pagination pagination-sm">
+<c:if test="${ pi.currentPage <= 1 }">
+<li><a>&laquo;</a></li>
+            </c:if>
+            <c:if test="${ pi.currentPage > 1 }">
+                <c:url var="rlistBack" value="/selectReservationList.ad">
+                    <c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
+                </c:url>
+                <li><a href="${ rlistBack }">&laquo;</a></li>
+            </c:if>
+            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                <c:if test="${ p eq pi.currentPage }">
+                <li><a href="#">${ p }</a></li>               
+                </c:if>
+                <c:if test="${ p ne pi.currentPage }">
+                    <c:url var="rlistCheck" value="selectReservationList.ad">
+                         <c:param name="currentPage" value="${ p }"/>
+                    </c:url>
+                    <li><a href="${ rlistCheck }">${ p }</a></li>  
+                </c:if>
+            </c:forEach>
+            <c:if test="${ pi.currentPage >= pi.maxPage }">
+                <li><a>&raquo;</a></li>
+            </c:if>
+            <c:if test="${ pi.currentPage < pi.maxPage }">
+                <c:url var="rlistEnd" value="selectReservationList.bo">
+                    <c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+                </c:url>
+                <li><a href="${ rlistEnd }">&raquo;</a></li>
+            </c:if>
+            </ul>
+    </div>
 
-
-	</div> 
-	<jsp:include page="../common/footer.jsp"/>
+<!-- 예약 디테일 -->
+	<div class="modal fade" id="reservationDetailModal" role="dialog">
+		<div class="modal-dialog" align="center">
+	    
+		  	<div class="modal-content" style="width:530px;">
+		  		<div class="modal-header">
+		  			<button type="button" class="close" data-dismiss="modal">&times;</button>
+		  			<h4 class="modal-title">상세 예약 내역</h4>
+		  		</div>
+		  		<div class="modal-body">
+		  			<table id="reservationDetailTable">
+		  				<tr>
+		  					<th>예약번호</th>
+		  					<td colspan="3"><p id="oId"></p></td>
+		  				</tr>
+		  				<tr>
+		  					<th>예약처</th>
+		  					<td colspan="3">
+		  						<p id="cName"></p>
+		  					</td>
+		  				</tr>
+		  				<tr>
+		  					<th>예약자</th>
+		  					<td colspan="3">
+		  						<p id="paName"></p>
+		  					</td>
+		  				</tr>
+		  				<tr>
+		  					<th>숙박기간</th>
+		  					<td colspan="3">
+		  						<p id="date"></p>
+		  					</td>
+		  				</tr>
+		  				<tr>
+		  					<th>예약일</th>
+		  					<td colspan="3">
+		  						<p id="pdDate"></p>
+		  					</td>
+		  				</tr>
+		  				<tr>
+		  					<th style="border-right:3px solid orangered;">객실 타입</th>
+		  					<td><p id="r_type"></p></td>
+		  					<th style="border-right:3px solid orangered;">객실 수</th>
+		  					<td><p id="o_rcount"></p></td>
+		  				</tr>
+		  				<tr>
+		  					<th>인원 수</th>
+		  					<td colspan="3"><p id="r_people"></p></td>
+		  				</tr>
+		  				<tr>
+		  					<th>금액</th>
+		  					<td><p id="r_price"></p></td>
+		  					<th>상태</th>
+		  					<td><p id="pdType"></p></td>
+		  				</tr>
+		  			</table>
+		  			
+		  		</div>
+		  		<div class="modal-footer" align="center">
+		  		</div>
+		  	</div>
+	      
+	  	</div>
+	</div>
 	
 	<script>
-	
+		$(function(){
+			<% for(int i = 0; i < 11; i++){%>
+			$("#reservationTable tr").eq(<%=i%>).children().eq(5).hide();
+			$("#reservationTable tr").eq(<%=i%>).children().eq(6).hide();
+			$("#reservationTable tr").eq(<%=i%>).children().eq(7).hide();
+			$("#reservationTable tr").eq(<%=i%>).children().eq(8).hide();
+			<% } %>
+			$("#reservationTable tr").click(function(){
+				$("#oId").text($(this).children().eq(0).text());
+				$("#cName").text($(this).children().eq(1).text());
+				$("#paName").text($(this).children().eq(2).text());
+				$("#date").text($(this).children().eq(3).text());
+				$("#pdDate").text($(this).children().eq(4).text());
+				$("#r_type").text($(this).children().eq(5).text());
+				$("#o_rcount").text($(this).children().eq(6).text() + "개");
+				$("#r_people").text($(this).children().eq(7).text() + "명");
+				$("#r_price").text($(this).children().eq(8).text() + "원");
+				$("#pdType").text($(this).children().eq(9).text());
+				$(this).attr({"data-toggle":"modal", "data-target":"#reservationDetailModal"});
+			});
+		});
 	</script>
+	<jsp:include page="../common/footer.jsp"/>
+
 </body>
 </html>

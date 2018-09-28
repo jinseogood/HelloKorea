@@ -81,7 +81,7 @@
 			<div class="submenuTitle">
 				<nav class="tm-nav">
 					<ul>
-						<li><a href="reservationView.ad" style="padding: 10px 34px 10px 34px;">예약내역
+						<li><a href="selectReservationList.ad" style="padding: 10px 34px 10px 34px;">예약내역
 								관리</a></li>
 						<li><a href="reportView.ad" style="padding: 10px 34px 10px 34px;">일반회원
 								관리</a></li>
@@ -97,7 +97,7 @@
 				<dl>
 					<dd>
 						<ul>
-							<li><a href="reservationView.ad">예약내역 조회</a></li>
+							<li><a href="selectReservationList.ad">예약내역 조회</a></li>
 						</ul>
 					</dd>
 				</dl>

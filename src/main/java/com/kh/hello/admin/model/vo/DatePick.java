@@ -3,38 +3,37 @@ package com.kh.hello.admin.model.vo;
 import java.sql.Date;
 
 public class DatePick implements java.io.Serializable{
-	private Date startDate;
-	private Date endDate;
+	private String fromDate;
+	private String toDate;
 	
 	public DatePick(){}
 
-	public DatePick(Date startDate, Date endDate) {
+	public DatePick(String fromDate, String toDate) {
 		super();
-		this.startDate = startDate;
-		this.endDate = endDate;
+		this.fromDate = fromDate;
+		this.toDate = toDate;
 	}
 
-	public Date getStartDate() {
-		return startDate;
+	public String getFromDate() {
+		return fromDate;
 	}
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+	public void setFromDate(String fromDate) {
+		this.fromDate = fromDate;
 	}
 
-	public Date getEndDate() {
-		return endDate;
+	public String getToDate() {
+		return toDate;
 	}
 
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+	public void setToDate(String toDate) {
+		this.toDate = toDate;
 	}
 
 	@Override
 	public String toString() {
-		return "DatePick [startDate=" + startDate + ", endDate=" + endDate + "]";
+		return "DatePick [fromDate=" + fromDate + ", toDate=" + toDate + "]";
 	}
-	
-	
 
+	
 }
