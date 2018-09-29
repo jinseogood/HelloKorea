@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,6 +17,9 @@
 	#searchAreaBox{position:absolute; left:835px; top:480px; z-index:3;}
 	.mainSearchArea{width:150px; height:60px;}
 	.areaSearchBtn{height:60px;}
+	.themeAreaSelect{cursor:pointer; color:blue;}
+	.themeAreaSelect:hover{color:#00aef0;}
+	.tm-home-box-2-description .box-3{width:244px;}
 </style>
 </head>
 <body>
@@ -48,14 +52,12 @@
 					<input type="button" class="tm-banner-link areaSearchBtn" value="검색">
 		</div>
 		
-		
 		<div class="flexslider flexslider-banner">
 		  <ul class="slides">
 		    <li>
 			    <div class="tm-banner-inner">
 					<h1 class="tm-banner-title">Find <span class="tm-yellow-text">The Best</span> Place</h1>
 					<p class="tm-banner-subtitle">For Your Holidays</p>
-					<!-- <input type="text" name="searchArea" class="tm-banner-link"> -->
 				</div>
 				<img src="${ contextPath }/resources/img/banner-1.jpg" alt="Image" />	
 		    </li>
@@ -63,7 +65,6 @@
 			    <div class="tm-banner-inner">
 					<h1 class="tm-banner-title">Lorem <span class="tm-yellow-text">Ipsum</span> Dolor</h1>
 					<p class="tm-banner-subtitle">Wonderful Destinations</p>
-					<!-- <input type="text" name="searchArea" class="tm-banner-link"> -->
 					
 				</div>
 		      <img src="${ contextPath }/resources/img/banner-2.jpg" alt="Image" />
@@ -72,8 +73,6 @@
 			    <div class="tm-banner-inner">
 					<h1 class="tm-banner-title">Proin <span class="tm-yellow-text">Gravida</span> Nibhvell</h1>
 					<p class="tm-banner-subtitle">Velit Auctor</p>
-					<!-- <input type="text" name="searchArea" class="tm-banner-link"> -->
-						
 				</div>
 		      <img src="${ contextPath }/resources/img/banner-3.jpg" alt="Image" />
 		    </li>
@@ -216,7 +215,11 @@
 					<div class="col-lg-3 col-md-3 col-sm-3"><hr></div>	
 				</div>
 				<div align="right">
-					<a href="">쇼핑</a> | <a href="">뷰티</a> | <a href="">전통</a> | <a href="">레져</a> | <a href="">한류</a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<a class="themeAreaSelect" onclick="shoppingTheme();">쇼핑</a> | 
+					<a class="themeAreaSelect" onclick="beautyTheme();">뷰티</a> | 
+					<a class="themeAreaSelect" onclick="classicTheme();">전통</a> | 
+					<a class="themeAreaSelect" onclick="leisureTheme();">레져</a> | 
+					<a class="themeAreaSelect" onclick="koreaWaveTheme();">한류</a>&nbsp;&nbsp;&nbsp;&nbsp;
 				</div><br>
 			</div>
 			<div class="col-lg-6">
@@ -228,7 +231,7 @@
 							<p class="tm-home-box-3-description" id="themeText">Proin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum</p>
 					        <div class="tm-home-box-2-container">
 							<a href="#" class="tm-home-box-2-link"><i class="fa fa-heart tm-home-box-2-icon border-right"></i></a>
-							<a href="#" class="tm-home-box-2-link"><span class="tm-home-box-2-description box-3">Travel</span></a>
+							<a href="#" class="tm-home-box-2-link"><span class="tm-home-box-2-description box-3" id="themeSpan">Travel</span></a>
 							<a href="#" class="tm-home-box-2-link"><i class="fa fa-edit tm-home-box-2-icon border-left"></i></a>
 						</div>
 						</div>						
@@ -308,7 +311,7 @@
 						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3'>"+themeData.title+"</span>";
+						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -338,7 +341,7 @@
 						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3'>"+themeData.title+"</span>";
+						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -367,7 +370,7 @@
 						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3'>"+themeData.title+"</span>";
+						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -396,7 +399,7 @@
 						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3'>"+themeData.title+"</span>";
+						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -405,8 +408,369 @@
 					}
 				});
 				
-				
 			});
+			
+			function shoppingTheme(){
+				$.ajax({
+					url:"mainThemeShopping.tm",
+					type:"GET",
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var themeData = data.response.body.items.item;
+						var containerArea = $("#subContainer1");
+						containerArea.html("");
+						var output = "";
+						output += "<div class='tm-home-box-3-img-container'>";
+						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
+						output += "</div>";
+						output += "<div class='tm-home-box-3-info'>";
+						if(themeData.overview.length > 50){
+							var overviewText = "";
+							overviewText = themeData.overview.substring(0, 110) + "...";
+							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
+						}
+						output += "<div class='tm-home-box-2-container'>";
+						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
+						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "</div></div>";
+						containerArea.html(output);
+					},
+					error:function(data){
+						console.log("fail..");
+						console.log(data);
+					}
+				});
+				$.ajax({
+					url:"mainThemeShopping2.tm",
+					type:"GET",
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var themeData = data.response.body.items.item;
+						var containerArea = $("#subContainer2");
+						containerArea.html("");
+						var output = "";
+						output += "<div class='tm-home-box-3-img-container'>";
+						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
+						output += "</div>";
+						output += "<div class='tm-home-box-3-info'>";
+						if(themeData.overview.length > 1){
+							var overviewText = "";
+							overviewText = themeData.overview.substring(0, 110) + "...";
+							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
+						}
+						output += "<div class='tm-home-box-2-container'>";
+						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
+						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "</div></div>";
+						containerArea.html(output);
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+				$.ajax({
+					url:"mainThemeShopping3.tm",
+					type:"GET",
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var themeData = data.response.body.items.item;
+						var containerArea = $("#subContainer3");
+						containerArea.html("");
+						var output = "";
+						output += "<div class='tm-home-box-3-img-container'>";
+						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
+						output += "</div>";
+						output += "<div class='tm-home-box-3-info'>";
+						if(themeData.overview.length > 50){
+							var overviewText = "";
+							overviewText = themeData.overview.substring(0, 110) + "...";
+							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
+						}
+						output += "<div class='tm-home-box-2-container'>";
+						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
+						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "</div></div>";
+						containerArea.html(output);
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+				$.ajax({
+					url:"mainThemeShopping4.tm",
+					type:"GET",
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var themeData = data.response.body.items.item;
+						var containerArea = $("#subContainer4");
+						containerArea.html("");
+						var output = "";
+						output += "<div class='tm-home-box-3-img-container'>";
+						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
+						output += "</div>";
+						output += "<div class='tm-home-box-3-info'>";
+						if(themeData.overview.length > 50){
+							var overviewText = "";
+							overviewText = themeData.overview.substring(0, 110) + "...";
+							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
+						}
+						output += "<div class='tm-home-box-2-container'>";
+						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
+						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "</div></div>";
+						containerArea.html(output);
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+			}
+			
+			function beautyTheme(){
+				$.ajax({
+					url:"mainThemeBeauty.tm",
+					type:"GET",
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var themeData = data.response.body.items.item;
+						var containerArea = $("#subContainer1");
+						containerArea.html("");
+						var output = "";
+						output += "<div class='tm-home-box-3-img-container'>";
+						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
+						output += "</div>";
+						output += "<div class='tm-home-box-3-info'>";
+						if(themeData.overview.length > 50){
+							var overviewText = "";
+							overviewText = themeData.overview.substring(0, 110) + "...";
+							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
+						}
+						output += "<div class='tm-home-box-2-container'>";
+						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
+						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "</div></div>";
+						containerArea.html(output);
+					},
+					error:function(data){
+						console.log("fail..");
+						console.log(data);
+					}
+				});
+				$.ajax({
+					url:"mainThemeBeauty2.tm",
+					type:"GET",
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var themeData = data.response.body.items.item;
+						var containerArea = $("#subContainer2");
+						containerArea.html("");
+						var output = "";
+						output += "<div class='tm-home-box-3-img-container'>";
+						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
+						output += "</div>";
+						output += "<div class='tm-home-box-3-info'>";
+						if(themeData.overview.length > 1){
+							var overviewText = "";
+							overviewText = themeData.overview.substring(0, 110) + "...";
+							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
+						}
+						output += "<div class='tm-home-box-2-container'>";
+						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
+						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "</div></div>";
+						containerArea.html(output);
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+				$.ajax({
+					url:"mainThemeBeauty3.tm",
+					type:"GET",
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var themeData = data.response.body.items.item;
+						var containerArea = $("#subContainer3");
+						containerArea.html("");
+						var output = "";
+						output += "<div class='tm-home-box-3-img-container'>";
+						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
+						output += "</div>";
+						output += "<div class='tm-home-box-3-info'>";
+						if(themeData.overview.length > 50){
+							var overviewText = "";
+							overviewText = themeData.overview.substring(0, 110) + "...";
+							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
+						}
+						output += "<div class='tm-home-box-2-container'>";
+						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
+						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "</div></div>";
+						containerArea.html(output);
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+				$.ajax({
+					url:"mainThemeBeauty4.tm",
+					type:"GET",
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var themeData = data.response.body.items.item;
+						var containerArea = $("#subContainer4");
+						containerArea.html("");
+						var output = "";
+						output += "<div class='tm-home-box-3-img-container'>";
+						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
+						output += "</div>";
+						output += "<div class='tm-home-box-3-info'>";
+						if(themeData.overview.length > 50){
+							var overviewText = "";
+							overviewText = themeData.overview.substring(0, 110) + "...";
+							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
+						}
+						output += "<div class='tm-home-box-2-container'>";
+						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
+						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "</div></div>";
+						containerArea.html(output);
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+			}
+			
+			function classicTheme(){
+				$.ajax({
+					url:"mainThemeClassic.tm",
+					type:"GET",
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var themeData = data.response.body.items.item;
+						var containerArea = $("#subContainer1");
+						containerArea.html("");
+						var output = "";
+						output += "<div class='tm-home-box-3-img-container'>";
+						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
+						output += "</div>";
+						output += "<div class='tm-home-box-3-info'>";
+						if(themeData.overview.length > 50){
+							var overviewText = "";
+							overviewText = themeData.overview.substring(0, 110) + "...";
+							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
+						}
+						output += "<div class='tm-home-box-2-container'>";
+						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
+						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "</div></div>";
+						containerArea.html(output);
+					},
+					error:function(data){
+						console.log("fail..");
+						console.log(data);
+					}
+				});
+				$.ajax({
+					url:"mainThemeClassic2.tm",
+					type:"GET",
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var themeData = data.response.body.items.item;
+						var containerArea = $("#subContainer2");
+						containerArea.html("");
+						var output = "";
+						output += "<div class='tm-home-box-3-img-container'>";
+						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
+						output += "</div>";
+						output += "<div class='tm-home-box-3-info'>";
+						if(themeData.overview.length > 1){
+							var overviewText = "";
+							overviewText = themeData.overview.substring(0, 110) + "...";
+							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
+						}
+						output += "<div class='tm-home-box-2-container'>";
+						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
+						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "</div></div>";
+						containerArea.html(output);
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+				$.ajax({
+					url:"mainThemeClassic3.tm",
+					type:"GET",
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var themeData = data.response.body.items.item;
+						var containerArea = $("#subContainer3");
+						containerArea.html("");
+						var output = "";
+						output += "<div class='tm-home-box-3-img-container'>";
+						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
+						output += "</div>";
+						output += "<div class='tm-home-box-3-info'>";
+						if(themeData.overview.length > 50){
+							var overviewText = "";
+							overviewText = themeData.overview.substring(0, 110) + "...";
+							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
+						}
+						output += "<div class='tm-home-box-2-container'>";
+						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
+						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "</div></div>";
+						containerArea.html(output);
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+				$.ajax({
+					url:"mainThemeClassic4.tm",
+					type:"GET",
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var themeData = data.response.body.items.item;
+						var containerArea = $("#subContainer4");
+						containerArea.html("");
+						var output = "";
+						output += "<div class='tm-home-box-3-img-container'>";
+						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
+						output += "</div>";
+						output += "<div class='tm-home-box-3-info'>";
+						if(themeData.overview.length > 50){
+							var overviewText = "";
+							overviewText = themeData.overview.substring(0, 110) + "...";
+							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
+						}
+						output += "<div class='tm-home-box-2-container'>";
+						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
+						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "</div></div>";
+						containerArea.html(output);
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+			}
+			
+			
 		</script>
 	</section>		
 	
@@ -488,7 +852,7 @@
 			$('#hotelCarTabs a').click(function (e) {
 			  e.preventDefault()
 			  $(this).tab('show')
-			})
+			});
 
         	$('.date').datetimepicker({
             	format: 'MM/DD/YYYY'

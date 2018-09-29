@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>Hello Korea</title>
 <style>
 	#more{margin-top:5%;}
@@ -23,7 +24,7 @@
 			    <li>
 			      <img src="${ contextPath }/resources/img/about-1.jpg" alt="image" />
 			      <div class="flex-caption">
-			      	<h2 class="slider-title">서울</h2>
+			      	<h2 class="slider-title"> </h2>
 			      	<h3 class="slider-subtitle"></h3>
 			      	<p class="slider-description">서울 소개입니다. 얄리얄리 얄라셩 얄라리 얄라</p>
 			      </div>			      
@@ -44,6 +45,42 @@
 		<script>
 			var areaCode = ${param.areaCode};
 			console.log("지역메인 areaCode : " + areaCode);
+			
+			if(areaCode == 1){
+				$(".flex-caption .slider-title").text("서울");
+			}else if(areaCode == 2){
+				$(".flex-caption .slider-title").text("인천");
+			}else if(areaCode == 3){
+				$(".flex-caption .slider-title").text("대전");
+			}else if(areaCode == 4){
+				$(".flex-caption .slider-title").text("대구");
+			}else if(areaCode == 5){
+				$(".flex-caption .slider-title").text("광주");
+			}else if(areaCode == 6){
+				$(".flex-caption .slider-title").text("부산");
+			}else if(areaCode == 7){
+				$(".flex-caption .slider-title").text("울산");
+			}else if(areaCode == 8){
+				$(".flex-caption .slider-title").text("세종특별자치시");
+			}else if(areaCode == 31){
+				$(".flex-caption .slider-title").text("경기도");
+			}else if(areaCode == 32){
+				$(".flex-caption .slider-title").text("강원도");
+			}else if(areaCode == 33){
+				$(".flex-caption .slider-title").text("충청북도");
+			}else if(areaCode == 34){
+				$(".flex-caption .slider-title").text("충청남도");
+			}else if(areaCode == 35){
+				$(".flex-caption .slider-title").text("경상북도");
+			}else if(areaCode == 36){
+				$(".flex-caption .slider-title").text("경상남도");
+			}else if(areaCode == 37){
+				$(".flex-caption .slider-title").text("전라북도");
+			}else if(areaCode == 38){
+				$(".flex-caption .slider-title").text("전라남도");
+			}else if(areaCode == 39){
+				$(".flex-caption .slider-title").text("제주도");
+			}
 		
 		/* Google map
       	------------------------------------------------*/
