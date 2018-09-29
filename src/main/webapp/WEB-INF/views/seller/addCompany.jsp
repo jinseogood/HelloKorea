@@ -80,6 +80,9 @@
 	#resultTable td{
 		text-align:left;
 	}
+	#resultTalbe tr > td > a:hover{
+		cursor:pointer;
+	}
 </style>
 </head>
 <body>
@@ -100,7 +103,7 @@
                 </div>
 			</div>
 		
-			<form action="" method="post">
+			<form action="insert.com" method="post" encType="multipart/form-data">
 				<input type="hidden" id="contentId" name="contentId" readonly>
 				<table id="addTable" align="center">
 					<tr>
@@ -113,19 +116,19 @@
 					</tr>
 					<tr class="comType">
 						<th>법인사업자등록번호</th>
-						<td colspan="4"><input type="text" name="companyNum" size="25"></td>
+						<td colspan="4"><input type="text" id="companyNum" name="companyNum" size="25"></td>
 					</tr>
 					<tr class="comType">
 						<th>법인사업자등록증</th>
-						<td colspan="4"><input type="file" name="companyFile"></td>
+						<td colspan="4"><input type="file" id="companyFile" name="companyFile"></td>
 					</tr>
 					<tr>
 						<th>사업자등록번호</th>
-						<td colspan="4"><input type="text" name="personalNum" size="25"></td>
+						<td colspan="4"><input type="text" id="personalNum" name="personalNum" size="25"></td>
 					</tr>
 					<tr>
 						<th>사업자등록증</th>
-						<td colspan="4"><input type="file" name="personalFile"></td>
+						<td colspan="4"><input type="file" id="personalFile" name="personalFile"></td>
 					</tr>
 					<tr>
 						<th>상호명</th>
@@ -142,42 +145,54 @@
 					</tr>
 					<tr>
 						<th>객실타입</th>
-						<td colspan="2"><input type="text" name="roomType1" size="25"></td>
+						<td colspan="2"><input type="text" id="roomType1" name="roomType1" size="25"></td>
 						<th style="width:60px;">객실 수</th>
-						<td><input type="number" name="roomCount1" value="1"></td>
+						<td><input type="number" id="roomCount1" name="roomCount1" value="1" min="1"></td>
 					</tr>
 					<tr>
 						<th>객실 가격</th>
-						<td colspan="4"><input type="text" name="roomPrice1" size="25"></td>
+						<td colspan="2"><input type="text" id="roomPrice1" name="roomPrice1" size="25"></td>
+						<th style="width:60px;">정원</th>
+						<td><input type="number" id="roomPeople1" name="roomPeople1" value="1" min="1"></td>
 					</tr>
-					<tr>
+					<tr class="plus1">
+						<td colspan="5" style="text-align:center;"><img src="${ contextPath }/resources/img/plusIcon.png" id="roomPlus1" style="width:30px; height:30px;"></td>
+					</tr>
+					<tr class="rType2">
 						<th>객실타입</th>
-						<td colspan="2"><input type="text" name="roomType2" size="25"></td>
+						<td colspan="2"><input type="text" id="roomType2" name="roomType2" size="25"></td>
 						<th style="width:60px;">객실 수</th>
-						<td><input type="number" name="roomCount2" value="1"></td>
+						<td><input type="number" id="roomCount2" name="roomCount2" value="1" min="1"></td>
 					</tr>
-					<tr>
+					<tr class="rType2">
 						<th>객실 가격</th>
-						<td colspan="4"><input type="text" name="roomPrice2" size="25"></td>
+						<td colspan="2"><input type="text" id="roomPrice2" name="roomPrice2" size="25"></td>
+						<th style="width:60px;">정원</th>
+						<td><input type="number" id="roomPeople2" name="roomPeople2" value="1" min="1"></td>
 					</tr>
-					<tr>
+					<tr class="plus2">
+						<td colspan="5" style="text-align:center;"><img src="${ contextPath }/resources/img/plusIcon.png" id="roomPlus2" style="width:30px; height:30px;"></td>
+					</tr>
+					<tr class="rType3">
 						<th>객실타입</th>
-						<td colspan="2"><input type="text" name="roomType3" size="25"></td>
+						<td colspan="2"><input type="text" id="roomType3" name="roomType3" size="25"></td>
 						<th style="width:60px;">객실 수</th>
-						<td><input type="number" name="roomCount3" value="1"></td>
+						<td><input type="number" id="roomCount3" name="roomCount3" value="1" min="1"></td>
 					</tr>
-					<tr>
+					<tr class="rType3">
 						<th>객실 가격</th>
-						<td colspan="4"><input type="text" name="roomPrice3" size="25"></td>
+						<td colspan="2"><input type="text" id="roomPrice3" name="roomPrice3" size="25"></td>
+						<th style="width:60px;">정원</th>
+						<td><input type="number" id="roomPeople3" name="roomPeople3" value="1" min="1"></td>
 					</tr>
 					<tr>
 						<th>등록 기간</th>
 						<td colspan="4">
-							<input type="radio" name="term" id="1month" checked><label for="1month">1개월</label>&nbsp;
-							<input type="radio" name="term" id="3month"><label for="3month">3개월</label>&nbsp;
-							<input type="radio" name="term" id="6month"><label for="6month">6개월</label>&nbsp;
-							<input type="radio" name="term" id="9month"><label for="9month">9개월</label>&nbsp;
-							<input type="radio" name="term" id="12month"><label for="12month">12개월</label>
+							<input type="radio" name="term" id="1month" value="1" checked><label for="1month">1개월</label>&nbsp;
+							<input type="radio" name="term" id="3month" value="3"><label for="3month">3개월</label>&nbsp;
+							<input type="radio" name="term" id="6month" value="6"><label for="6month">6개월</label>&nbsp;
+							<input type="radio" name="term" id="9month" value="9"><label for="9month">9개월</label>&nbsp;
+							<input type="radio" name="term" id="12month" value="12"><label for="12month">12개월</label>
 						</td>
 					</tr>
 					<tr>
@@ -559,6 +574,20 @@
 			
 			$("#company").click(function(){
 				$(".comType").show();
+			});
+			
+			$(".rType2").hide();
+			$(".rType3").hide();
+			$(".plus2").hide();
+			
+			$("#roomPlus1").click(function(){
+				$(".plus1").hide();
+				$(".rType2").show();
+				$(".plus2").show();
+			});
+			$("#roomPlus2").click(function(){
+				$(".plus2").hide();
+				$(".rType3").show();
 			});
 			
 			$("#sigungu1").hide();
@@ -997,20 +1026,27 @@
 					
 					var company=data.response.body.items.item;
 					
-					console.log(company.length);
+					console.log(company);
 					
-					if(company.length != "undefined"){
-						for(var i=0;i<company.length;i++){
+					if(company != null){
+						if(company.length > 0){
+							for(var i=0;i<company.length;i++){
+								var output="";
+								output += "<tr><td><a onclick=\"valueSetting("+ company[i].contentid + ", '" + company[i].title + "', '" + company[i].tel + "', '" + company[i].addr1 + "');\" data-dismiss='modal'><b><font style='font-size:13px;'>" + company[i].title + "</font></b></a><br>";
+								output += "<font style='font-size:11px;'>" + company[i].addr1 + "</font></td></tr>";
+								$tableBody.append(output);
+							}
+						}
+						else{
 							var output="";
-							output += "<tr><td><a onclick=\"valueSetting("+ company[i].contentid + ", '" + company[i].title + "', '" + company[i].tel + "', '" + company[i].addr1 + "');\"><b><font style='font-size:13px;'>" + company[i].title + "</font></b></a><br>";
-							output += "<font style='font-size:11px;'>" + company[i].addr1 + "</font></td></tr>";
+							output += "<tr><td><a onclick=\"valueSetting("+ company.contentid + ", '" + company.title + "', '" + company.tel + "', '" + company.addr1 + "');\" data-dismiss='modal'><b><font style='font-size:13px;'>" + company.title + "</font></b></a><br>";
+							output += "<font style='font-size:11px;'>" + company.addr1 + "</font></td></tr>";
 							$tableBody.append(output);
 						}
 					}
 					else{
 						var output="";
-						output += "<tr><td><a onclick=\"valueSetting("+ company.contentid + ", '" + company.title + "', '" + company.tel + "', '" + company.addr1 + "');\"><b><font style='font-size:13px;'>" + company[i].title + "</font></b></a><br>";
-						output += "<font style='font-size:11px;'>" + company.addr1 + "</font></td></tr>";
+						output = "<tr style='height:415px;'><td style='text-align:center;'>검색 결과가 없습니다.</td></tr>";
 						$tableBody.append(output);
 					}
 					
@@ -1021,12 +1057,6 @@
 		}
 		
 		function valueSetting(contentId, title, tel, addr){
-			
-			console.log(contentId);
-			console.log(title);
-			console.log(tel);
-			console.log(addr);
-			
 			$("#contentId").attr("value", contentId);
 			$("#companyName").attr("value", title);
 			$("#companyPhone").attr("value", tel);
