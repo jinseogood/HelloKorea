@@ -2,8 +2,7 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Admin">
-
+<mapper namespace="Reservation">
 	<!-- 예약 내역 관리 -->
 	<!-- 예약 내역 조회 테이블 값 -->
 	<resultMap type="Reservation" id="reservationResultSet">
@@ -118,10 +117,4 @@
         ORDER BY R.O_ID DESC
 	</select>
 	
-	<!--  -->
-	<!-- 신고 내역 관리 -->
-	<select id="">
-	    SELECT COUNT(*)
-	    FROM REPORT_HISTORY
-	</select>
 </mapper>

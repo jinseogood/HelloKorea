@@ -6,6 +6,7 @@ public class Report implements java.io.Serializable{
     private int rRecordId;
 	private int rLevel;
 	private String rLevelText;
+	private int mId;
 	private int rTarget;
 	private Date rDate;
 	private String reason;
@@ -16,12 +17,13 @@ public class Report implements java.io.Serializable{
 	
 	public Report(){}
 
-	public Report(int rRecordId, int rLevel, String rLevelText, int rTarget, Date rDate, String reason, String result,
-			String resultText, int refId, String rContent) {
+	public Report(int rRecordId, int rLevel, String rLevelText, int mId, int rTarget, Date rDate, String reason,
+			String result, String resultText, int refId, String rContent) {
 		super();
 		this.rRecordId = rRecordId;
 		this.rLevel = rLevel;
 		this.rLevelText = rLevelText;
+		this.mId = mId;
 		this.rTarget = rTarget;
 		this.rDate = rDate;
 		this.reason = reason;
@@ -53,6 +55,14 @@ public class Report implements java.io.Serializable{
 
 	public void setrLevelText(String rLevelText) {
 		this.rLevelText = rLevelText;
+	}
+
+	public int getmId() {
+		return mId;
+	}
+
+	public void setmId(int mId) {
+		this.mId = mId;
 	}
 
 	public int getrTarget() {
@@ -113,9 +123,9 @@ public class Report implements java.io.Serializable{
 
 	@Override
 	public String toString() {
-		return "Report [rRecordId=" + rRecordId + ", rLevel=" + rLevel + ", rLevelText=" + rLevelText + ", rTarget="
-				+ rTarget + ", rDate=" + rDate + ", reason=" + reason + ", result=" + result + ", resultText="
-				+ resultText + ", refId=" + refId + ", rContent=" + rContent + "]";
+		return "Report [rRecordId=" + rRecordId + ", rLevel=" + rLevel + ", rLevelText=" + rLevelText + ", mId=" + mId
+				+ ", rTarget=" + rTarget + ", rDate=" + rDate + ", reason=" + reason + ", result=" + result
+				+ ", resultText=" + resultText + ", refId=" + refId + ", rContent=" + rContent + "]";
 	}
 
 	

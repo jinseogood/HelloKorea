@@ -6,6 +6,7 @@
   <configuration>
   
       <typeAliases>
+          <typeAlias type="com.kh.hello.admin.model.vo.Report" alias="Report"/>
           <typeAlias type="com.kh.hello.message.model.vo.Message" alias="Message"/>
           <typeAlias type="com.kh.hello.admin.model.vo.DatePick" alias="DatePick"/>
           <typeAlias type="com.kh.hello.admin.model.vo.Reservation" alias="Reservation"/>
@@ -14,7 +15,8 @@
   
       <mappers>
           <mapper resource="mappers/message-mapper.xml"/>
-          <mapper resource="mappers/admin-mapper.xml"/>
+          <mapper resource="mappers/report-mapper.xml"/>
+          <mapper resource="mappers/reservation-mapper.xml"/>
           <mapper resource="mappers/member-mapper.xml"/>
       </mappers>
   
