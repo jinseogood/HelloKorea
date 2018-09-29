@@ -181,6 +181,7 @@ public class MainInformationController {
 		json.put("data", data);
 	}
 	
+	
 	@RequestMapping(value="mainThemeShopping2.tm")
 	public void mainThemeShopping2(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		request.setCharacterEncoding("UTF-8");
@@ -220,6 +221,7 @@ public class MainInformationController {
 		JSONObject json = new JSONObject();
 		json.put("data", data);
 	}
+	
 	
 	@RequestMapping(value="mainThemeShopping3.tm")
 	public void mainThemeShopping3(HttpServletRequest request, HttpServletResponse response) throws IOException{
@@ -261,6 +263,7 @@ public class MainInformationController {
 		json.put("data", data);
 	}
 	
+	
 	@RequestMapping(value="mainThemeShopping4.tm")
 	public void mainThemeShopping4(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		request.setCharacterEncoding("UTF-8");
@@ -273,6 +276,334 @@ public class MainInformationController {
 		PrintWriter out = response.getWriter();
 		parameter = parameter + "&" + "contentTypeId=38";
 		parameter = parameter + "&" + "contentId=2359162";
+		parameter = parameter + "&" + "MobileOS=ETC";
+		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
+		parameter = parameter + "&" + "defaultYN=Y";
+		parameter = parameter + "&" + "firstImageYN=Y";
+		parameter = parameter + "&" + "areacodeYN=Y";
+		parameter = parameter + "&" + "catcodeYN=Y";
+		parameter = parameter + "&" + "addrinfoYN=Y";
+		parameter = parameter + "&" + "mapinfoYN=Y";
+		parameter = parameter + "&" + "overviewYN=Y";
+		parameter = parameter + "&" + "transGuideYN=Y";
+		parameter = parameter + "&" + "_type=json";
+		
+		addr = addr + serviceKey + parameter;
+		URL url = new URL(addr);
+		
+		InputStream in = url.openStream();
+		CachedOutputStream bos = new CachedOutputStream();
+		IOUtils.copy(in, bos);
+		in.close();
+		bos.close();
+		
+		String data = bos.getOut().toString();
+		out.println(data);
+		
+		JSONObject json = new JSONObject();
+		json.put("data", data);
+	}
+	
+	
+	@RequestMapping(value="mainThemeBeauty.tm")
+	public void mainThemeBeauty(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
+		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String parameter="";
+		
+		PrintWriter out = response.getWriter();
+		parameter = parameter + "&" + "contentTypeId=38";
+		parameter = parameter + "&" + "contentId=970046";
+		parameter = parameter + "&" + "MobileOS=ETC";
+		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
+		parameter = parameter + "&" + "defaultYN=Y";
+		parameter = parameter + "&" + "firstImageYN=Y";
+		parameter = parameter + "&" + "areacodeYN=Y";
+		parameter = parameter + "&" + "catcodeYN=Y";
+		parameter = parameter + "&" + "addrinfoYN=Y";
+		parameter = parameter + "&" + "mapinfoYN=Y";
+		parameter = parameter + "&" + "overviewYN=Y";
+		parameter = parameter + "&" + "transGuideYN=Y";
+		parameter = parameter + "&" + "_type=json";
+		
+		addr = addr + serviceKey + parameter;
+		URL url = new URL(addr);
+		
+		InputStream in = url.openStream();
+		CachedOutputStream bos = new CachedOutputStream();
+		IOUtils.copy(in, bos);
+		in.close();
+		bos.close();
+		
+		String data = bos.getOut().toString();
+		out.println(data);
+		
+		JSONObject json = new JSONObject();
+		json.put("data", data);
+	}
+	
+	
+	@RequestMapping(value="mainThemeBeauty2.tm")
+	public void mainThemeBeaury2(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
+		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String parameter="";
+		
+		PrintWriter out = response.getWriter();
+		parameter = parameter + "&" + "contentTypeId=38";
+		parameter = parameter + "&" + "contentId=2497595";
+		parameter = parameter + "&" + "MobileOS=ETC";
+		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
+		parameter = parameter + "&" + "defaultYN=Y";
+		parameter = parameter + "&" + "firstImageYN=Y";
+		parameter = parameter + "&" + "areacodeYN=Y";
+		parameter = parameter + "&" + "catcodeYN=Y";
+		parameter = parameter + "&" + "addrinfoYN=Y";
+		parameter = parameter + "&" + "mapinfoYN=Y";
+		parameter = parameter + "&" + "overviewYN=Y";
+		parameter = parameter + "&" + "transGuideYN=Y";
+		parameter = parameter + "&" + "_type=json";
+		
+		addr = addr + serviceKey + parameter;
+		URL url = new URL(addr);
+		
+		InputStream in = url.openStream();
+		CachedOutputStream bos = new CachedOutputStream();
+		IOUtils.copy(in, bos);
+		in.close();
+		bos.close();
+		
+		String data = bos.getOut().toString();
+		out.println(data);
+		
+		JSONObject json = new JSONObject();
+		json.put("data", data);
+	}
+	
+	
+	@RequestMapping(value="mainThemeBeauty3.tm")
+	public void mainThemeBeauty3(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
+		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String parameter="";
+		
+		PrintWriter out = response.getWriter();
+		parameter = parameter + "&" + "contentTypeId=38";
+		parameter = parameter + "&" + "contentId=1304854";
+		parameter = parameter + "&" + "MobileOS=ETC";
+		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
+		parameter = parameter + "&" + "defaultYN=Y";
+		parameter = parameter + "&" + "firstImageYN=Y";
+		parameter = parameter + "&" + "areacodeYN=Y";
+		parameter = parameter + "&" + "catcodeYN=Y";
+		parameter = parameter + "&" + "addrinfoYN=Y";
+		parameter = parameter + "&" + "mapinfoYN=Y";
+		parameter = parameter + "&" + "overviewYN=Y";
+		parameter = parameter + "&" + "transGuideYN=Y";
+		parameter = parameter + "&" + "_type=json";
+		
+		addr = addr + serviceKey + parameter;
+		URL url = new URL(addr);
+		
+		InputStream in = url.openStream();
+		CachedOutputStream bos = new CachedOutputStream();
+		IOUtils.copy(in, bos);
+		in.close();
+		bos.close();
+		
+		String data = bos.getOut().toString();
+		out.println(data);
+		
+		JSONObject json = new JSONObject();
+		json.put("data", data);
+	}
+	
+	
+	@RequestMapping(value="mainThemeBeauty4.tm")
+	public void mainThemeBeauty4(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
+		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String parameter="";
+		
+		PrintWriter out = response.getWriter();
+		parameter = parameter + "&" + "contentTypeId=38";
+		parameter = parameter + "&" + "contentId=985355";
+		parameter = parameter + "&" + "MobileOS=ETC";
+		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
+		parameter = parameter + "&" + "defaultYN=Y";
+		parameter = parameter + "&" + "firstImageYN=Y";
+		parameter = parameter + "&" + "areacodeYN=Y";
+		parameter = parameter + "&" + "catcodeYN=Y";
+		parameter = parameter + "&" + "addrinfoYN=Y";
+		parameter = parameter + "&" + "mapinfoYN=Y";
+		parameter = parameter + "&" + "overviewYN=Y";
+		parameter = parameter + "&" + "transGuideYN=Y";
+		parameter = parameter + "&" + "_type=json";
+		
+		addr = addr + serviceKey + parameter;
+		URL url = new URL(addr);
+		
+		InputStream in = url.openStream();
+		CachedOutputStream bos = new CachedOutputStream();
+		IOUtils.copy(in, bos);
+		in.close();
+		bos.close();
+		
+		String data = bos.getOut().toString();
+		out.println(data);
+		
+		JSONObject json = new JSONObject();
+		json.put("data", data);
+	}
+	
+	
+	@RequestMapping(value="mainThemeClassic.tm")
+	public void mainThemeClassic(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
+		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String parameter="";
+		
+		PrintWriter out = response.getWriter();
+		parameter = parameter + "&" + "contentTypeId=12";
+		parameter = parameter + "&" + "contentId=126508";
+		parameter = parameter + "&" + "MobileOS=ETC";
+		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
+		parameter = parameter + "&" + "defaultYN=Y";
+		parameter = parameter + "&" + "firstImageYN=Y";
+		parameter = parameter + "&" + "areacodeYN=Y";
+		parameter = parameter + "&" + "catcodeYN=Y";
+		parameter = parameter + "&" + "addrinfoYN=Y";
+		parameter = parameter + "&" + "mapinfoYN=Y";
+		parameter = parameter + "&" + "overviewYN=Y";
+		parameter = parameter + "&" + "transGuideYN=Y";
+		parameter = parameter + "&" + "_type=json";
+		
+		addr = addr + serviceKey + parameter;
+		URL url = new URL(addr);
+		
+		InputStream in = url.openStream();
+		CachedOutputStream bos = new CachedOutputStream();
+		IOUtils.copy(in, bos);
+		in.close();
+		bos.close();
+		
+		String data = bos.getOut().toString();
+		out.println(data);
+		
+		JSONObject json = new JSONObject();
+		json.put("data", data);
+	}
+	
+	
+	@RequestMapping(value="mainThemeClassic2.tm")
+	public void mainThemeClassic2(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
+		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String parameter="";
+		
+		PrintWriter out = response.getWriter();
+		parameter = parameter + "&" + "contentTypeId=12";
+		parameter = parameter + "&" + "contentId=126509";
+		parameter = parameter + "&" + "MobileOS=ETC";
+		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
+		parameter = parameter + "&" + "defaultYN=Y";
+		parameter = parameter + "&" + "firstImageYN=Y";
+		parameter = parameter + "&" + "areacodeYN=Y";
+		parameter = parameter + "&" + "catcodeYN=Y";
+		parameter = parameter + "&" + "addrinfoYN=Y";
+		parameter = parameter + "&" + "mapinfoYN=Y";
+		parameter = parameter + "&" + "overviewYN=Y";
+		parameter = parameter + "&" + "transGuideYN=Y";
+		parameter = parameter + "&" + "_type=json";
+		
+		addr = addr + serviceKey + parameter;
+		URL url = new URL(addr);
+		
+		InputStream in = url.openStream();
+		CachedOutputStream bos = new CachedOutputStream();
+		IOUtils.copy(in, bos);
+		in.close();
+		bos.close();
+		
+		String data = bos.getOut().toString();
+		out.println(data);
+		
+		JSONObject json = new JSONObject();
+		json.put("data", data);
+	}
+	
+	
+	@RequestMapping(value="mainThemeClassic3.tm")
+	public void mainThemeClassic3(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
+		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String parameter="";
+		
+		PrintWriter out = response.getWriter();
+		parameter = parameter + "&" + "contentTypeId=12";
+		parameter = parameter + "&" + "contentId=128162";
+		parameter = parameter + "&" + "MobileOS=ETC";
+		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
+		parameter = parameter + "&" + "defaultYN=Y";
+		parameter = parameter + "&" + "firstImageYN=Y";
+		parameter = parameter + "&" + "areacodeYN=Y";
+		parameter = parameter + "&" + "catcodeYN=Y";
+		parameter = parameter + "&" + "addrinfoYN=Y";
+		parameter = parameter + "&" + "mapinfoYN=Y";
+		parameter = parameter + "&" + "overviewYN=Y";
+		parameter = parameter + "&" + "transGuideYN=Y";
+		parameter = parameter + "&" + "_type=json";
+		
+		addr = addr + serviceKey + parameter;
+		URL url = new URL(addr);
+		
+		InputStream in = url.openStream();
+		CachedOutputStream bos = new CachedOutputStream();
+		IOUtils.copy(in, bos);
+		in.close();
+		bos.close();
+		
+		String data = bos.getOut().toString();
+		out.println(data);
+		
+		JSONObject json = new JSONObject();
+		json.put("data", data);
+	}
+	
+	
+	@RequestMapping(value="mainThemeClassic4.tm")
+	public void mainThemeClassic4(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
+		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String parameter="";
+		
+		PrintWriter out = response.getWriter();
+		parameter = parameter + "&" + "contentTypeId=12";
+		parameter = parameter + "&" + "contentId=127642";
 		parameter = parameter + "&" + "MobileOS=ETC";
 		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
 		parameter = parameter + "&" + "defaultYN=Y";
