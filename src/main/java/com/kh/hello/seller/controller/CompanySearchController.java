@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import net.sf.json.JSONObject;
 
 @Controller
-public class SearchController {
+public class CompanySearchController {
 	@RequestMapping(value="searchCompany.sell")
 	public void searchCompany(@RequestParam String area, @RequestParam String sigungu, HttpServletResponse response){
         response.setContentType("text/html; charset=utf-8");

@@ -62,6 +62,38 @@
     	<servlet-name>board</servlet-name>
     	<url-pattern>*.bo</url-pattern>
     </servlet-mapping>
+    
+    <!-- Seller -->
+	
+	<!-- <servlet>
+		<servlet-name>seller</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/seller-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+    <servlet-mapping>
+    	<servlet-name>seller</servlet-name>
+    	<url-pattern>*.sell</url-pattern>
+    </servlet-mapping> -->
+    
+    <!-- Company -->
+	
+	<!-- <servlet>
+		<servlet-name>company</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/company-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+    <servlet-mapping>
+    	<servlet-name>company</servlet-name>
+    	<url-pattern>*.com</url-pattern>
+    </servlet-mapping> -->
 
 	<!-- 한글 인코딩 처리를 위한 filter Mapping -->
     <filter>

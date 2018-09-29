@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class SellerController {
+public class SellerPageController {
 	@RequestMapping("myPageView.sell")
 	public String myPageView(){
 		return "seller/sellerMain";
