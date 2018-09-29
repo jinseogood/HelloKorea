@@ -32,26 +32,7 @@
                 console.log(a);
             });
 
-           /*  $(".rate2").on("updateError", function(ev, jxhr, msg, err){
-                console.log("This is a custom error event");
-            });
-
-            $(".rate2").rate("setAdditionalData", {id: 41});
-            $(".rate2").on("updateSuccess", function(ev, data){
-                console.log(data);
-            }); */
-
-          
-
-            /* setTimeout(function(){
-      
-
-                $("#rate6").rate({
-                    selected_symbol_type: 'fontawesome_star',
-                    max_value: 5,
-                    step_size: 0.25,
-                });
-            }, 2000); */
+           
 
             
 

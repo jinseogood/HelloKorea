@@ -105,7 +105,7 @@ body{ margin:50px 0px; }
 
       <div class="tm-section-header section-margin-top" >
 					<div class="col-lg-4 col-md-3 col-sm-3"><hr></div>
-					<div class="col-lg-4 col-md-6 col-sm-6"><h2 class="tm-section-title">R E V I E W</h2></div>
+					<div class="col-lg-4 col-md-6 col-sm-6"><h2 class="tm-section-title">Q & A</h2></div>
 					<div class="col-lg-4 col-md-3 col-sm-3"><hr></div>	
 	  </div>	
       <div id="google-map" style = "text-align:center; width:100%; height:1000px">

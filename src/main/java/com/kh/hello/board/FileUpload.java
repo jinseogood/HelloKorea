@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileUpload {
 	private static final String[] ALLOWED_FILE_TYPES = {"image/jpeg", "image/jpg", "image/gif"};
     private static final Long MAX_FILE_SIZE = 1048576L; //1MB
-    private static final String UPLOAD_FILE_PATH = "/opt/images/";
+    private static final String UPLOAD_FILE_PATH = "hello/webapp/resource/css/images/";
     
     public String process(MultipartFile file) {
         if (!file.isEmpty()) {
