@@ -106,7 +106,7 @@ table.type09 td {
 	
 	</div>
 	<div class="searchArea" align="center">
- <form action="selectReservationList.ad">
+ <form action="selectReportList.ad">
 			<div class="col-xs-8 col-xs-offset-2">
 		    <div class="input-group">
                 <div class="input-group-btn search-panel">
@@ -114,9 +114,9 @@ table.type09 td {
                     	<span id="search_concept">검색 카테고리</span> <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="#oId">신고 번호</a></li>
-                      <li><a href="#cName">신고 대상</a></li>
-                      <li><a href="#paName">미 처리건</a></li>
+                      <li><a href="#rRecordId">신고 번호</a></li>
+                      <li><a href="#rTarget">신고 대상</a></li>
+                      <li><a href="#noResult">미 처리건</a></li>
                       <li class="divider"></li>
                       <li><a href="#datePick" onclick="showDatePicker()">신고일</a></li>
                     </ul>
@@ -175,6 +175,7 @@ table.type09 td {
         <th>신고일</th>
         <th>신고사유</th>
         <th>처리상황</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -186,6 +187,7 @@ table.type09 td {
         <td>${r.rDate}</td>
         <td>${r.reason}</td>
         <td>${r.resultText}</td>
+        <td>${r.refId}</td>
     </tr>
     </c:forEach>
     
@@ -249,13 +251,13 @@ table.type09 td {
                                                       <div class="form-group">
                                                           <label for="reportedId" class="col-lg-2 col-sm-2 control-label">신고대상</label>
                                                           <div class="col-lg-10">
-                                                              <input type="text" class="form-control" id="reportedId" readonly>
+                                                              <input type="text" class="form-control" id="rTarget" readonly>
                                                           </div>
                                                       </div>
                                                       <div class="form-group">
                                                           <label for="reportId" class="col-lg-2 col-sm-2 control-label">신고자</label>
                                                           <div class="col-lg-10">
-                                                              <input type="text" class="form-control" id="reportId" readonly>
+                                                              <input type="text" class="form-control" id="mId" readonly>
                                                           </div>
                                                       </div>
                                                       <div class="form-group">
@@ -273,7 +275,7 @@ table.type09 td {
                                                       <div class="form-group">
                                                           <label for="text" class="col-lg-2 col-sm-2 control-label">신고내용</label>
                                                           <div class="col-lg-10">
-                                                              <textArea class="form-control" id="text" style="height:300px;" readonly>
+                                                              <textArea class="form-control" id="rContent" style="height:300px;" readonly>
                                                               </textArea>
                                                           </div>
                                                       </div>
@@ -316,8 +318,54 @@ table.type09 td {
 
 	<script>
 	$(function(){
+		<% for(int i = 0; i < 11; i++){%>
+		$("#reportTable tr").eq(<%=i%>).children().eq(6).hide();
+		<% } %>
+		
+	});
+	
+	$(function(){
 		$("#reportTable tr").click(function(){
 			
+		    var rLevelText = $(this).children().eq(1).text();
+		    var rLevel = -99;
+		    var refId = $(this).children().eq(6).text();
+		    if(rLevelText == '게시글'){
+		    	rLevel = 0;
+		    }else if(rLevelText == '댓글'){
+		    	rLevel = 1;
+		    }else{
+		    	rLevel = 2;
+		    }
+			
+		    console.log(rLevel);
+		    console.log(refId);
+		    
+			  $.ajax({
+				url:"selectReportOne.ad",
+				type:"POST",
+				data:{rLevel:rLevel,
+					  refId:refId},
+				success:function(data){
+					console.log(data);
+					$("#rRecordId").val(data.rRecordId0+', '+data.rRecordId1+', '
+							            +data.rRecordId2+', '+data.rRecordId3+', '
+							            +data.rRecordId4);
+					$("#rTarget").val(data.rTarget);
+					$("#mId").val(data.mId0+', '+data.mId1+', '+data.mId2+', '
+							      +data.mId3+', '+data.mId4);
+					$("#rDate").val(data.rDate0+', '+data.rDate1+', '+data.rDate2+', '+
+							       data.rDate3+', '+data.rDate4);
+					$("#reason").val(data.reason0+', '+data.reason1+', '+data.reason2+', '
+							         +data.reason3+', '+data.reason4);
+					$("#rContent").val(data.rContent);
+				},
+				error:function(data){
+					console.log("에러");
+					console.log(data);
+				}
+			});
+		
 			$(this).attr({"data-toggle":"modal", "data-target":"#myModal-1"});
 		});
 	});
