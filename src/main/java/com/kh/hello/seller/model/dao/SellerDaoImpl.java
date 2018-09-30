@@ -16,23 +16,18 @@ public class SellerDaoImpl implements SellerDao{
 	}
 
 	@Override
-	public int insertRoom(Room rm, SqlSessionTemplate sqlSession) {
-		
-		if(rm.getRoomType2() != null){
-			
-			if(rm.getRoomType3() != null){
-				sqlSession.insert("Room.insertRoom1", rm);
-				sqlSession.insert("Room.insertRoom2", rm);
-				return sqlSession.insert("Room.insertRoom3", rm);
-			}
-			else{
-				sqlSession.insert("Room.insertRoom1", rm);
-				return sqlSession.insert("Room.insertRoom2", rm);
-			}
-		}
-		else{
-			return sqlSession.insert("Room.insertRoom1", rm);
-		}
+	public int insertRoom1(Room rm, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("Room.insertRoom", rm);
+	}
+	
+	@Override
+	public int insertRoom2(Room rm, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("Room.insertRoom", rm);
+	}
+	
+	@Override
+	public int insertRoom3(Room rm, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("Room.insertRoom", rm);
 	}
 
 	@Override

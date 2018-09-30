@@ -27,10 +27,24 @@ public class SellerServiceImpl implements SellerService{
 	}
 
 	@Override
-	public int insertRoom(Room rm) {
+	public int insertRoom1(Room rm) {
 		System.out.println("service room : " + rm);
 		
-		return sd.insertRoom(rm, sqlSession);
+		return sd.insertRoom1(rm, sqlSession);
+	}
+	
+	@Override
+	public int insertRoom2(Room rm) {
+		System.out.println("service room : " + rm);
+		
+		return sd.insertRoom2(rm, sqlSession);
+	}
+	
+	@Override
+	public int insertRoom3(Room rm) {
+		System.out.println("service room : " + rm);
+		
+		return sd.insertRoom3(rm, sqlSession);
 	}
 
 	@Override
@@ -39,5 +53,6 @@ public class SellerServiceImpl implements SellerService{
 		
 		return sd.insertRH(rh, sqlSession);
 	}
+
 
 }

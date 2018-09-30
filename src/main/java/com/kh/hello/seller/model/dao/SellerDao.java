@@ -10,7 +10,11 @@ public interface SellerDao {
 
 	int insertCompany(Company c, SqlSessionTemplate sqlSession);
 
-	int insertRoom(Room rm, SqlSessionTemplate sqlSession);
+	int insertRoom1(Room rm, SqlSessionTemplate sqlSession);
+
+	int insertRoom2(Room rm, SqlSessionTemplate sqlSession);
+	
+	int insertRoom3(Room rm, SqlSessionTemplate sqlSession);
 
 	int insertRH(RegistrationHistory rh, SqlSessionTemplate sqlSession);
 
