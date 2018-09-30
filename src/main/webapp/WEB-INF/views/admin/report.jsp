@@ -200,14 +200,14 @@ table.type09 td {
 <li><a>&laquo;</a></li>
             </c:if>
             <c:if test="${ pi.currentPage > 1 }">
-                <c:url var="rlistBack" value="/selectReportList.ad">
+                <c:url var="rlistBack" value="selectReportList.ad">
                     <c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
                 </c:url>
                 <li><a href="${ rlistBack }">&laquo;</a></li>
             </c:if>
             <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
                 <c:if test="${ p eq pi.currentPage }">
-                <li><a href="#">${ p }</a></li>               
+                <li><a href="#" style="background-color:#ddd;">${ p }</a></li>               
                 </c:if>
                 <c:if test="${ p ne pi.currentPage }">
                     <c:url var="rlistCheck" value="selectReportList.ad">
@@ -241,11 +241,13 @@ table.type09 td {
                                               </div>
                                               <div class="modal-body">
                                                   <br>
-                                                  <form class="form-horizontal" role="form">
+                                                  <form class="form-horizontal">
                                                       <div class="form-group">
                                                           <label for="rRecordId" class="col-lg-2 col-sm-2 control-label">신고번호</label>
                                                           <div class="col-lg-10">
                                                               <input type="text" class="form-control" id="rRecordId" readonly>
+                                                              <input type="hidden" id="rLevel" name="rLevel">
+                                                              <input type="hidden" id="refId" name="refId">
                                                           </div>
                                                       </div>
                                                       <div class="form-group">
@@ -279,33 +281,39 @@ table.type09 td {
                                                               </textArea>
                                                           </div>
                                                       </div>
+                                                      
+                                                      
+                                                      <div id="blacklist">
+                                                      
                                                       <label class="col-lg-2 col-sm-2 control-label">기간</label>
                                                       <div class="radio" align="center">
                                                       
                                                   <label>
-                                                      <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+                                                      <input type="radio" name="radioBtn" value="7" checked="">
                                                       7일&nbsp;&nbsp;
                                                   </label>
                                               
                                                   <label>
-                                                      <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                                      <input type="radio" name="radioBtn" value="15">
                                                       15일&nbsp;&nbsp;
                                                   </label>
                                                   <label>
-                                                      <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
+                                                      <input type="radio" name="radioBtn" value="30">
                                                       30일&nbsp;&nbsp;
                                                   </label>
                                                   <label>
-                                                      <input type="radio" name="optionsRadios" id="optionsRadios4" value="option4">
+                                                      <input type="radio" name="radioBtn" value="0">
                                                       영구정지
                                                   </label>
                                               </div>
                                                       <br>
                                                       <div class="form-group" align="center">
-                                                              <button type="submit" class="btn btn-info">블랙리스트 등록</button>
-                                                              <button type="submit" class="btn btn-success">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;반려하기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                                              <button type="button" class="btn btn-info" onclick="insertBlacklist()">블랙리스트 등록</button>
+                                                              <button type="button" class="btn btn-success" onclick="refuseReport()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;반려하기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
                                                           
                                                       </div>
+                                                      
+                                               </div>
                                                   </form>
 
                                               </div>
@@ -338,9 +346,6 @@ table.type09 td {
 		    	rLevel = 2;
 		    }
 			
-		    console.log(rLevel);
-		    console.log(refId);
-		    
 			  $.ajax({
 				url:"selectReportOne.ad",
 				type:"POST",
@@ -348,17 +353,34 @@ table.type09 td {
 					  refId:refId},
 				success:function(data){
 					console.log(data);
-					$("#rRecordId").val(data.rRecordId0+', '+data.rRecordId1+', '
-							            +data.rRecordId2+', '+data.rRecordId3+', '
-							            +data.rRecordId4);
-					$("#rTarget").val(data.rTarget);
-					$("#mId").val(data.mId0+', '+data.mId1+', '+data.mId2+', '
+					if(data.rLevel == 0 || data.rLevel == 1){
+						$("#rRecordId").val(data.rRecordId0+', '+data.rRecordId1+', '
+					            +data.rRecordId2+', '+data.rRecordId3+', '
+					            +data.rRecordId4);
+						$("#mId").val(data.mId0+', '+data.mId1+', '+data.mId2+', '
 							      +data.mId3+', '+data.mId4);
-					$("#rDate").val(data.rDate0+', '+data.rDate1+', '+data.rDate2+', '+
-							       data.rDate3+', '+data.rDate4);
-					$("#reason").val(data.reason0+', '+data.reason1+', '+data.reason2+', '
-							         +data.reason3+', '+data.reason4);
+					    $("#rDate").val(data.rDate0+', '+data.rDate1+', '+data.rDate2+', '+
+							            data.rDate3+', '+data.rDate4);
+					    $("#reason").val(data.reason0+', '+data.reason1+', '+data.reason2+', '
+							             +data.reason3+', '+data.reason4);
+					}else{
+						$("#rRecordId").val(data.rRecordId0);
+						$("#mId").val(data.mId0);
+						$("#rDate").val(data.rDate0);
+						$("#reason").val(data.reason0);
+					}
+					
+					$("#rTarget").val(data.rTarget);
 					$("#rContent").val(data.rContent);
+					$("#rLevel").val(data.rLevel);
+					$("#refId").val(data.refId);
+					
+					if(data.result == 'Y' || data.result == 'N'){
+						$("#blacklist").hide();
+					}else{
+						$("#blacklist").show();
+					}
+						
 				},
 				error:function(data){
 					console.log("에러");
@@ -367,8 +389,32 @@ table.type09 td {
 			});
 		
 			$(this).attr({"data-toggle":"modal", "data-target":"#myModal-1"});
+			
 		});
+		
 	});
+	
+
+
+	
+	function insertBlacklist(){
+		
+		var rLevel = $("#rLevel").val();
+		var refId = $("#refId").val();
+		var period = $('input[name="radioBtn"]:checked').val();
+	    var rTarget = $("#rTarget").val();
+	    var reason = $("#reason").val();
+	    	
+		location.href="insertBlacklist.ad?rLevel="+rLevel+"&refId="+refId
+				      +"&period="+period+"&rTarget="+rTarget+"&reason="+reason;
+	}
+	
+	function refuseReport(){
+		var rLevel = $("#rLevel").val();
+		var refId = $("#refId").val();
+		location.href="refuseReport.ad?rLevel="+rLevel+"&refId="+refId;
+		
+	}
 </script>
 </body>
 </html>
