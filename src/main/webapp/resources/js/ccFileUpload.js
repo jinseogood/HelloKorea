@@ -143,7 +143,7 @@
             /**
              * Create the initial message.
              */
-            $('#'+__options.previews).html($('<div/>').addClass('text-center text-muted').append($('<span/>').addClass('glyphicon glyphicon-download').css({'font-size':'200px'}).prop('aria-hidden','true')));
+            $('#'+__options.previews).html($('<div/>').addClass('text-center text-muted').append($('<span/>').addClass('glyphicon glyphicon-download').css({'font-size':'180px'}).prop('aria-hidden','true')));
 
             return _this;
         },
@@ -186,7 +186,7 @@
             if($.inArray(file.name.split('.').pop().toLowerCase(), __options.allowedPreviews) != -1){
                 var reader = new FileReader();
                 reader.onload = function(e){
-                    $('<div/>').append($('<span/>').append(file.name)).append($('<img/>').attr('src', e.target.result).addClass('thumbnail img-responsive center-block').css({'max-height':'200px','max-width':'200px'})).prependTo(prvwCntnr);
+                    $('<div/>').append($('<span/>').append(file.name)).css({'font-size':'10px'}).append($('<img/>').attr('src', e.target.result).addClass('thumbnail img-responsive center-block').css({'max-height':'150px','max-width':'150px'})).prependTo(prvwCntnr);
                 };
                 reader.readAsDataURL(file);
             }
@@ -366,6 +366,19 @@
                                         $(this).parent().parent().fadeOut(200, function(){
                                             $(this).remove(); __counter--; $().updateCounter();
                                         });
+                                        $.ajax({
+                            				url:"deleteUpload.bo",
+                            				data:{response1:response},
+                            				type:"get",
+                            				success:function(data){
+                            					console.log("삭제성공");
+                            					
+                            					
+                            				},
+                            				error:function(data){
+                            					console.log("실패!");
+                            				}
+                            			});
                                      }).hide();
             
             div.children().last().find('.progress-bar').css({'width':'100%'});

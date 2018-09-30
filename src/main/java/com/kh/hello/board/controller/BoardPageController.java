@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.hello.board.FileDeleteUpload;
 import com.kh.hello.board.FileUpload;
 import com.kh.hello.board.Response;
 
@@ -45,7 +46,21 @@ public class BoardPageController {
         for (int i = 0; i < file.length; i++) {
             result.add(fileUpload.process(file[i]));
         }
+ 
+        return new Response(result);
+    }
+	
+	@RequestMapping(value="/deleteUpload.bo")
+    @ResponseBody
+    public Response handleFileDeleteUpload(HttpServletRequest request) {
+		String changeFileName = request.getParameter("response1");
+        List<String> result = new ArrayList<String>();
+        FileDeleteUpload fileDeleteUpload = new FileDeleteUpload();
+        result.add(fileDeleteUpload.process(changeFileName));
 
+        System.out.println("오냐");
+        System.out.println(changeFileName);
+        
         return new Response(result);
     }
 
