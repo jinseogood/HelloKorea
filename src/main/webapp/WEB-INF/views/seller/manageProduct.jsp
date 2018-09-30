@@ -160,7 +160,7 @@
 	<script>
 		$(function(){
 			$("#productTable td").click(function(){
-				location.href="editCompany.sell";
+				location.href="editCompanyView.sell";
 			});
 		});
 	</script>

@@ -10,32 +10,32 @@ public class SellerPageController {
 		return "seller/sellerMain";
 	}
 	
-	@RequestMapping("addCompany.sell")
+	@RequestMapping("addCompanyView.sell")
 	public String addCompanyView(){
 		return "seller/addCompany";
 	}
 	
-	@RequestMapping("manageProduct.sell")
+	@RequestMapping("manageProductView.sell")
 	public String manageProductView(){
 		return "seller/manageProduct";
 	}
 	
-	@RequestMapping("reservation.sell")
+	@RequestMapping("reservationView.sell")
 	public String reservationView(){
 		return "seller/reservation";
 	}
 	
-	@RequestMapping("manageRevenue.sell")
+	@RequestMapping("manageRevenueView.sell")
 	public String manageRevenueView(){
 		return "seller/manageRevenue";
 	}
 	
-	@RequestMapping("editCompany.sell")
+	@RequestMapping("editCompanyView.sell")
 	public String editCompanyView(){
 		return "seller/editCompany";
 	}
 	
-	@RequestMapping("paymentDetail.sell")
+	@RequestMapping("paymentDetailView.sell")
 	public String paymentDetailView(){
 		return "payment/detailPayment";
 	}

@@ -57,7 +57,7 @@
 				<div class="sm-st clearfix">
 					<span class="sm-st-icon st-green"><i class="fa fa-paperclip"></i></span>
 					<div class="sm-st-info">
-						<span><a href="addCompany.sell">업체 등록</a></span>
+						<span><a href="addCompanyView.sell">업체 등록</a></span>
 					</div>
 				</div>
 			</div>
@@ -65,7 +65,7 @@
     			<div class="sm-st clearfix">
     				<span class="sm-st-icon st-red"><i class="fa fa-check-square-o"></i></span>
     				<div class="sm-st-info">
-    					<span><a href="reservation.sell">35건</a></span>
+    					<span><a href="reservationView.sell">35건</a></span>
        					예약 내역
     				</div>
     			</div>
@@ -74,7 +74,7 @@
 				<div class="sm-st clearfix">
 					<span class="sm-st-icon st-blue"><i class="fa fa-dollar"></i></span>
 					<div class="sm-st-info">
-						<span><a href="manageRevenue.sell">100,320원</a></span>
+						<span><a href="manageRevenueView.sell">100,320원</a></span>
 						이번달 수익
 					</div>
 				</div>
@@ -83,7 +83,7 @@
 				<div class="sm-st clearfix">
 					<span class="sm-st-icon st-violet"><i class="fa fa-envelope-o"></i></span>
 					<div class="sm-st-info">
-						<span><a href="paymentDetail.sell">결제페이지</a></span>
+						<span><a href="paymentDetailView.sell">결제페이지</a></span>
 					</div>
 				</div>
 			</div>

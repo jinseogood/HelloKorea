@@ -103,15 +103,15 @@
                 </div>
 			</div>
 		
-			<form action="insert.com" method="post" encType="multipart/form-data">
+			<form action="addCompany.sell" method="get" encType="multipart/form-data">
 				<input type="hidden" id="contentId" name="contentId" readonly>
 				<table id="addTable" align="center">
 					<tr>
 						<th>구분</th>
 						<td colspan="4" align="center">
-							<input type="radio" name="sellerType" id="personal" checked><label for="personal">개인</label>
+							<input type="radio" name="sellerType" id="personal" value="1" checked><label for="personal">개인</label>
 							&nbsp;&nbsp;
-							<input type="radio" name="sellerType" id="company"><label for="company">법인</label>
+							<input type="radio" name="sellerType" id="company" value="2" ><label for="company">법인</label>
 						</td>
 					</tr>
 					<tr class="comType">

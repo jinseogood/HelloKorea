@@ -25,7 +25,7 @@ public class MemberController {
 
 	@RequestMapping(value ="insertUser.me")
 	public String insertMember(Model model,Member m ){
-
+		
 		String encPassword = passwordEncoder.encode(m.getPassword());
 
 		/*		System.out.println("암호화 : "+encPassword);*/
