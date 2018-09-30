@@ -7,9 +7,9 @@ import java.util.Arrays;
 import org.springframework.web.multipart.MultipartFile;
 
 public class FileUpload {
-	private static final String[] ALLOWED_FILE_TYPES = {"image/jpeg", "image/jpg", "image/gif"};
+	private static final String[] ALLOWED_FILE_TYPES = {"image/jpeg", "image/jpg", "image/gif", "image/png"};
     private static final Long MAX_FILE_SIZE = 1048576L; //1MB
-    private static final String UPLOAD_FILE_PATH = "hello/webapp/resource/css/images/";
+    private static final String UPLOAD_FILE_PATH = "D:/git/HelloKorea/src/main/webapp/resources/img/";
     
     public String process(MultipartFile file) {
         if (!file.isEmpty()) {
@@ -19,7 +19,8 @@ public class FileUpload {
                     String newFile = UPLOAD_FILE_PATH + file.getOriginalFilename();
                     try {
                         file.transferTo(new File(newFile));
-                        return "You have successfully uploaded " + file.getOriginalFilename() + "!";
+                        /*return "You have successfully uploaded " + file.getOriginalFilename() + "!";*/
+                        return file.getOriginalFilename();
                     } catch (IllegalStateException e) {
                         return "There was an error uploading " + file.getOriginalFilename() + " => " + e.getMessage();
                     } catch (IOException e) {

@@ -201,6 +201,7 @@
 				  			<a class="fas fa-angry" id="loginOpen" data-toggle="modal" data-target="#loginDiv">Login</a>
 							<a href="myPageView.sell">Seller MyPage</a>
 							<a href="myPageView.ad">ADMIN MyPage</a>
+							<a href="reviewWrite.bo">reviewW</a>
 							<div id="google_translate_element"></div>
 				  		</div>
 					</nav>		

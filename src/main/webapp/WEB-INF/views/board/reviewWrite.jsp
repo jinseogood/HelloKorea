@@ -189,7 +189,7 @@ body{ margin:50px 0px; }
             		<br>
             		<br>
             		<br>
-            		<div>
+            		
             		<span>여행시기는 언제였나요?</span><br><br>
             				<i class="fa fa-calendar" id = "btn_monthpicker" style = "font-size:40px; "></i><br><br>
             				<input id="monthpicker" type="text" style = "height:35px; box-sizing:border-box; text-align:center"/>
@@ -219,7 +219,7 @@ body{ margin:50px 0px; }
 								})(jQuery);
 							</script>
 
-						</div>
+						
 						
         		</div>
         	</div>
@@ -229,25 +229,25 @@ body{ margin:50px 0px; }
         	<div class="col-lg-12 col-md-12 col-sm-12" style="padding-top:40px"><hr>
         		<span>공유하실 추억은 무엇인가요? (선택사항)</span><br><br>
             	<%-- <button type="button" class="btn btn-secondary" onclick="location.href='${contextPath}/starTest.bo'">사진첨부</button> --%>
-            	<div class="container">
-        <div class="col-xs-12 text-center text-primary">
+            	
+        <div class="text-center text-primary">
         </div>
-        <div class="col-xs-12"> </div>
+
  
-        <div class="col-xs-12">
+        <div class="col-lg-12 col-md-12 col-sm-12">
             <div id="consistentCoder" class="text-center"></div>
         </div>
-        <div class="col-xs-12">
+        <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="label label-info pull-right"><span class="countMe">0</span> files uploaded.</div>
         </div>
-        <div class="col-xs-12"> </div>
-        <div class="col-xs-12 stageParent">
+        <div class="col-lg-12 col-md-12 col-sm-12"> </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 stageParent">
             <div id="stage" class="stage"></div>
         </div>
 
-        <div class="col-xs-12"> </div>
+        <div class="col-lg-12 col-md-12 col-sm-12"> </div>
         <div id="response" class="text-center"></div>
-    </div>
+    
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="${ contextPath }/resources/js/ccFileUpload.js"></script>
@@ -263,7 +263,7 @@ body{ margin:50px 0px; }
                     'counter':'countMe',
                     'columnClass':'col-md-3 text-center',
                     'allowedFiles':['gif','png','jpg','jpeg','xlsx','.psd'],
-                    'allowedPreviews':['jpg','jpeg'],
+                    'allowedPreviews':['gif','png','jpg','jpeg'],
                     'animSpeed':'fast'
                   };
             $("#consistentCoder").ccFileUpload(options);
