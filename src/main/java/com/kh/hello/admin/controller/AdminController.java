@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.hello.admin.model.service.AdminService;
+import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.DatePick;
 import com.kh.hello.admin.model.vo.PageInfo;
 import com.kh.hello.admin.model.vo.Report;
@@ -72,7 +73,7 @@ public class AdminController {
 				r.setPaName(searchWord);
 			}
 			
-			int listCount = as.getSearchReservationListCount(r);
+			int listCount = as.getSearchWordReservationListCount(r);
 			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
 			list = as.selectSearchWordReservationList(r, pi);
 		}
@@ -122,7 +123,7 @@ public class AdminController {
 			}else{
 				System.out.println("미처리 건 검색");
 			}
-			int listCount = as.getSearchReportListCount(r);
+			int listCount = as.getSearchWordReportListCount(r);
 			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
 			list = as.selectSearchWordReportList(r, pi);
 		}
@@ -140,7 +141,7 @@ public class AdminController {
 			if(list.get(i).getResult() == null){
 				list.get(i).setResultText("미처리");
 			}else{
-				if(list.get(i).getResult().equals('Y')){
+				if(list.get(i).getResult().equals("Y")){
 					list.get(i).setResultText("블랙리스트");
 				}else{
 					list.get(i).setResultText("반려");
@@ -177,10 +178,102 @@ public class AdminController {
 			hmap.put("reason" + i, list.get(i).getReason());
 			
 		}
+		hmap.put("result", list.get(0).getResult());
+		hmap.put("rLevel", rLevel);
+		hmap.put("refId", refId);
 		hmap.put("rTarget", list.get(0).getrTarget());
 		hmap.put("rContent", list.get(0).getrContent());
 		return hmap;
 		
+	}
+	
+	//신고 후 블랙리스트 입력
+	@RequestMapping("insertBlacklist.ad")
+	public String insertBlackList(String rLevel, String refId, String rTarget, String period, String reason, Model model){
+		
+		Report r = new Report();
+		r.setResult("Y");
+		r.setrLevel(Integer.parseInt(rLevel));
+		r.setRefId(Integer.parseInt(refId));
+		
+		Blacklist b = new Blacklist();
+		b.setmId(Integer.parseInt(rTarget));
+		b.setPeriod(Integer.parseInt(period));
+		b.setReason(reason);
+		int result = as.updateBlacklist(r,b);
+		
+		if(result > 0){
+			int listCount = as.getReportListCount();
+			PageInfo pi = Pagination.getPageInfo(1, listCount);		
+			ArrayList<Report> list = as.selectReportList(pi);
+			model.addAttribute("list", list);
+			model.addAttribute("pi", pi);
+			for(int i = 0; i < list.size(); i++){
+				//구분
+				if(list.get(i).getrLevel() == 0){
+					list.get(i).setrLevelText("게시글");
+				}else if(list.get(i).getrLevel() == 1){
+					list.get(i).setrLevelText("댓글");
+				}else{
+					list.get(i).setrLevelText("메세지");
+				}
+				//처리상황
+				if(list.get(i).getResult() == null){
+					list.get(i).setResultText("미처리");
+				}else{
+					if(list.get(i).getResult().equals("Y")){
+						list.get(i).setResultText("블랙리스트");
+					}else{
+						list.get(i).setResultText("반려");
+					}
+				}
+			}
+			return "admin/report";
+		}else{
+			model.addAttribute("msg","블랙리스트 등록 실패");
+			return "common/errorPage";
+		}
+		
+		
+	}
+	
+	//신고 반려
+	@RequestMapping("refuseReport.ad")
+	public String refuseReport(String rLevel, String refId, Model model){
+		Report r = new Report();
+		r.setResult("N");
+		r.setrLevel(Integer.parseInt(rLevel));
+		r.setRefId(Integer.parseInt(refId));
+		
+		int result = as.updateReportResult(r);
+		
+		int listCount = as.getReportListCount();
+		PageInfo pi = Pagination.getPageInfo(1, listCount);		
+		ArrayList<Report> list = as.selectReportList(pi);
+		for(int i = 0; i < list.size(); i++){
+			//구분
+			if(list.get(i).getrLevel() == 0){
+				list.get(i).setrLevelText("게시글");
+			}else if(list.get(i).getrLevel() == 1){
+				list.get(i).setrLevelText("댓글");
+			}else{
+				list.get(i).setrLevelText("메세지");
+			}
+			//처리상황
+			if(list.get(i).getResult() == null){
+				list.get(i).setResultText("미처리");
+			}else{
+				if(list.get(i).getResult().equals('Y')){
+					list.get(i).setResultText("블랙리스트");
+				}else{
+					list.get(i).setResultText("반려");
+				}
+			}
+		}
+
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		return "admin/report";
 	}
 	
 	@RequestMapping("questionView.ad")
@@ -188,8 +281,71 @@ public class AdminController {
 		return "admin/question";
 	}
 
-	@RequestMapping("blacklistView.ad")
-	public String blacklistView(){
+	//블랙리스트 내역 조회
+	@RequestMapping("selectBlacklist.ad")
+	public String selectBlacklist(String searchParam, String searchWord, String fromDate, String toDate, PageInfo p, Model model){
+		if(p.getCurrentPage() == 0){
+			p.setCurrentPage(1);
+		}
+
+		ArrayList<Blacklist> list = null;
+		PageInfo pi = null;
+		int listCount = 0;
+		
+		//전체 리스트
+		if(searchParam == null && searchWord == null){
+
+			listCount = as.getBlacklistCount();
+			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);		
+			list = as.selectBlacklist(pi);
+
+		//숙박일 검색
+		}else if(searchParam.equals("datePick") || searchParam.equals("datePick2")){
+
+			DatePick d = new DatePick();
+			d.setFromDate(fromDate);
+			d.setToDate(toDate);
+			//등록일 검색
+			if(searchParam.equals("datePick")){
+				listCount = as.getSearchRDateBlacklistCount(d);
+				pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
+				list = as.selectSearchRDateBlacklist(d, pi);
+			}else{ //해지일 검색
+				listCount = as.getSearchTDateBlacklistCount(d);
+				pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
+				list = as.selectSearchTDateBlacklist(d, pi);
+			}
+			
+		}else if(searchParam.equals("noT")){
+			listCount = as.getnoTBlacklistCount();
+			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
+			list = as.selectnoTBlacklist(pi);
+		}else{
+			
+			Blacklist b = new Blacklist();
+			b.setbRecordId(-99);
+			//블랙리스트번호 검색
+			if(searchParam.equals("bRecordId")){
+				b.setbRecordId(Integer.parseInt(searchWord));
+			//블랙리스트 대상 검색
+			}else if(searchParam.equals("mId")){
+				b.setmId(Integer.parseInt(searchWord));
+			}
+			
+			listCount = as.getSearchWordBlacklistCount(b);
+			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
+			list = as.selectSearchWordBlacklist(b, pi);
+		}
+		for(int i = 0; i < list.size(); i++){
+			//구분
+			if(list.get(i).getbType().equals("R")){
+				list.get(i).setbTypeText("등록");
+			}else{
+				list.get(i).setbTypeText("해지");
+			}
+		}
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
 		return "admin/blacklist";
 	}
 

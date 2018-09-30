@@ -44,7 +44,7 @@
 	</select>
 
 	<!-- 예약 내역 검색 수 조회용 쿼리문 -->
-	<select id="selectSearchReservationListCount" resultType="_int">
+	<select id="selectSearchWordReservationListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM (SELECT R.O_ID, C.C_NAME, PA.PA_NAME, R.R_SDATE, R.R_EDATE,
 		PD.PD_DATE, RO.R_TYPE, R.O_RCOUNT, R.PEOPLE, PD.PRICE, PD.PD_TYPE

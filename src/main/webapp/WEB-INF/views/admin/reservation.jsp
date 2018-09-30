@@ -209,14 +209,14 @@ table.type09 td {
 <li><a>&laquo;</a></li>
             </c:if>
             <c:if test="${ pi.currentPage > 1 }">
-                <c:url var="rlistBack" value="/selectReservationList.ad">
+                <c:url var="rlistBack" value="selectReservationList.ad">
                     <c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
                 </c:url>
                 <li><a href="${ rlistBack }">&laquo;</a></li>
             </c:if>
             <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
                 <c:if test="${ p eq pi.currentPage }">
-                <li><a href="#">${ p }</a></li>               
+                <li><a href="#" style="background-color:#ddd;">${ p }</a></li>               
                 </c:if>
                 <c:if test="${ p ne pi.currentPage }">
                     <c:url var="rlistCheck" value="selectReservationList.ad">

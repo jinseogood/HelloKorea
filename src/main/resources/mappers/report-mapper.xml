@@ -150,7 +150,7 @@
 	</select>
 
 	<!-- 신고 검색 리스트 카운트 -->
-	<select id="selectSearchReportListCount" resultType="_int">
+	<select id="selectSearchWordReportListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM (SELECT R_RECORD_ID, R_LEVEL, R_TARGET, R_DATE, REASON, RESULT, REF_ID, R_CONTENT
 		FROM (SELECT RH.R_RECORD_ID, RH.R_LEVEL, RH.R_TARGET, RH.R_DATE,
@@ -240,28 +240,36 @@
 	</select>
 	
 	<!-- 신고 내용 상세보기 -->
+	<!-- 게시판인 경우 -->
 	<select id="selectBoardReportOne" parameterType="_int" resultMap="reportResultSet">
-	    SELECT RH.R_RECORD_ID, RH.R_TARGET, RH.M_ID, RH.R_DATE, RH.REASON, B.TEXT AS R_CONTENT
+	    SELECT RH.R_RECORD_ID, RH.R_TARGET, RH.M_ID, RH.R_DATE, RH.REASON, RH.RESULT, B.TEXT AS R_CONTENT
         FROM REPORT_HISTORY RH
         JOIN BOARD B ON(RH.REF_ID=B.BID)
         WHERE R_LEVEL = 0
         AND REF_ID = #{refId}
 	</select>
-	
+	<!-- 댓글인 경우 -->
 	<select id="selectReplyReportOne" parameterType="_int" resultMap="reportResultSet">
-	    SELECT RH.R_RECORD_ID, RH.R_TARGET, RH.M_ID, RH.R_DATE, RH.REASON, R.CONTENT AS R_CONTENT
+	    SELECT RH.R_RECORD_ID, RH.R_TARGET, RH.M_ID, RH.R_DATE, RH.REASON, RH.RESULT, R.CONTENT AS R_CONTENT
         FROM REPORT_HISTORY RH
         JOIN REPLY R ON(RH.REF_ID=R.REPLY_ID)
         WHERE R_LEVEL = 1
         AND REF_ID = #{refId}
 	</select>
-	
+	<!-- 메세지인 경우 -->
 	<select id="selectMessageReportOne" parameterType="_int" resultMap="reportResultSet">
-	     SELECT RH.R_RECORD_ID, RH.R_TARGET, RH.M_ID, RH.R_DATE, RH.REASON, M.CONTENT AS R_CONTENT
+	     SELECT RH.R_RECORD_ID, RH.R_TARGET, RH.M_ID, RH.R_DATE, RH.REASON, RH.RESULT, M.CONTENT AS R_CONTENT
          FROM REPORT_HISTORY RH
          JOIN MESSAGE M ON(RH.REF_ID=M.MSG_ID)
          WHERE R_LEVEL = 2
          AND REF_ID = #{refId}
 	</select>
 	
+	<!-- 신고글 결과 업데이트 -->
+	<update id="updateReportResult">
+	    UPDATE REPORT_HISTORY
+	    SET RESULT = #{result}
+	    WHERE R_LEVEL = #{rLevel}
+        AND REF_ID = #{refId}
+	</update>
 </mapper>
