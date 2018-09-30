@@ -11,14 +11,14 @@
       <result property="companyNum" column="CP_RNUM"/>
       <result property="personalNum" column="C_RNUM"/>
       <result property="companyName" column="C_NAME"/>
-      <result property="companyPhone" column="C_MASTER"/>
+      <result property="companyPhone" column="C_PHONE"/>
       <result property="companyAddress" column="C_ADDRESS"/>
       <result property="mId" column="M_ID"/>
    </resultMap>
    
    <!-- 업체 등록 -->
 	<insert id="insertCompany" parameterType="Company">
-		INSERT INTO COMPANY (C_ID, C_ORIGINID, C_TYPE, CP_RNUM, C_RNUM, C_NAME, C_MASTER, C_ADDRESS, M_ID) 
+		INSERT INTO COMPANY (C_ID, C_ORIGINID, C_TYPE, CP_RNUM, C_RNUM, C_NAME, C_PHONE, C_ADDRESS, M_ID) 
 		VALUES (SEQ_C_ID.NEXTVAL, #{contentId}, #{sellerType}, #{companyNum}, #{personalNum}, #{companyName}, #{companyPhone}, #{companyAddress}, #{mId})
 	</insert>
 	

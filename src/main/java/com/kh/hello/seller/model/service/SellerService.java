@@ -8,7 +8,11 @@ public interface SellerService {
 
 	int insertCompany(Company c);
 
-	int insertRoom(Room rm);
+	int insertRoom1(Room rm);
+	
+	int insertRoom2(Room rm);
+	
+	int insertRoom3(Room rm);
 
 	int insertRH(RegistrationHistory rh);
 
