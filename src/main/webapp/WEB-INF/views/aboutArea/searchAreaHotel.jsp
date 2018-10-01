@@ -10,11 +10,11 @@
 	#more{margin-top:5%;}
 	#detailClick:hover{cursor:pointer}
 	.hotelSearchText{font-size:20px;}
-	#detailHover{max-width:750px;}
+	#detailHover{max-width:750px; height:225px;}
 	#detailInfo-1{max-width:500px;}
 	#tm-home-box-2-link-1{width:50px;}
 	#tm-home-box-2-link-2{width:445px; display:inline-block;}
-	#dibsBtn{padding:15px; width:50px; height:50px;}
+	#dibsBtn{padding:20px; width:55px; height:60px;}
 	#infoTextArea{height:175px; padding:10px 20px 44px; overflow:auto; text-align:left; }
 	.img-responsive1{width:250px; height:225px;}
 </style>
@@ -30,7 +30,7 @@
 			<div class="row">
 				<div class="tm-section-header section-margin-top">
 					<div class="col-lg-3 col-md-3 col-sm-3"><hr></div>
-					<div class="col-lg-6 col-md-6 col-sm-6"><h2 class="tm-section-title">서울 호텔</h2></div>
+					<div class="col-lg-6 col-md-6 col-sm-6"><h2 class="tm-section-title tm-section-title1">서울 호텔</h2></div>
 					<div class="col-lg-3 col-md-3 col-sm-3"><hr></div>	
 				</div>
 					<div class="col-lg-3 col-md-3 col-sm-3">
@@ -163,6 +163,42 @@
 			var sigunguCode = ${param.sigunguCode};
 			console.log("지역호텔검색areaCode : " + areaCode);
 			console.log("지역호텔검색sigunguCode : " + sigunguCode);
+			
+			if(areaCode == 1){
+				$(".tm-section-title1").text("서울 호텔");
+			}else if(areaCode == 2){
+				$(".tm-section-title1").text("인천 호텔");
+			}else if(areaCode == 3){
+				$(".tm-section-title1").text("대전 호텔");
+			}else if(areaCode == 4){
+				$(".tm-section-title1").text("대구 호텔");
+			}else if(areaCode == 5){
+				$(".tm-section-title1").text("광주 호텔");
+			}else if(areaCode == 6){
+				$(".tm-section-title1").text("부산 호텔");
+			}else if(areaCode == 7){
+				$(".tm-section-title1").text("울산 호텔");
+			}else if(areaCode == 8){
+				$(".tm-section-title1").text("세종특별자치시 호텔");
+			}else if(areaCode == 31){
+				$(".tm-section-title1").text("경기도 호텔");
+			}else if(areaCode == 32){
+				$(".tm-section-title1").text("강원도 호텔");
+			}else if(areaCode == 33){
+				$(".tm-section-title1").text("충청북도 호텔");
+			}else if(areaCode == 34){
+				$(".tm-section-title1").text("충청남도 호텔");
+			}else if(areaCode == 35){
+				$(".tm-section-title1").text("경상북도 호텔");
+			}else if(areaCode == 36){
+				$(".tm-section-title1").text("경상남도 호텔");
+			}else if(areaCode == 37){
+				$(".tm-section-title1").text("전라북도 호텔");
+			}else if(areaCode == 38){
+				$(".tm-section-title1").text("전라남도 호텔");
+			}else if(areaCode == 39){
+				$(".tm-section-title1").text("제주도 호텔");
+			}
 		
 			$(function(){
 				$.ajax({
@@ -187,21 +223,27 @@
 				var viewArea = $("#viewArea");
 				viewArea.html("");
 				var output = "";
-				for(var i = 0; i < myData.length; i++){
-					output += "<div class='tm-home-box-3' id='detailHover'>";
-					output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='location.href=${contextPath}/detailHotel'>";
-					if(myData[i].firstimage == null){
-						output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
-					}else{
-						output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
+				if(myData == null){
+					output += "<div>정보가 없습니다.</div>";
+					document.getElementById("viewArea").innerHTML += output;
+				}else{
+					for(var i = 0; i < myData.length; i++){
+						output = "";
+						output += "<div class='tm-home-box-3' id='detailHover'>";
+						output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='location.href=${contextPath}/detailHotel'>";
+						if(myData[i].firstimage == null){
+							output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
+						}else{
+							output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
+						}
+						output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+						output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData[i].addr1+"</p>";
+						output += "<div class='tm-home-box-2-container'>";
+						output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+						output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
+						output += "</div></div></div>";
+						document.getElementById("viewArea").innerHTML += output;
 					}
-					output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
-					output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData[i].addr1+"</p>";
-					output += "<div class='tm-home-box-2-container'>";
-					output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-					output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
-					output += "</div></div></div>";
-					viewArea.html(output);
 				}
 			}
 		</script>
