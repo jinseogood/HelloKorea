@@ -15,7 +15,7 @@
 	<!-- 업체 등록 이력 추가 -->
 	<insert id="insertRH" parameterType="RH">
 		INSERT INTO COM_REGIST (CR_ID, C_ID, CR_DATE, CR_TERM, CR_STATUS) 
-		VALUES (SEQ_CR_ID.NEXTVAL, SEQ_C_ID.CURRVAL, SYSDATE, #{term}, 'Y')
+		VALUES (SEQ_CR_ID.NEXTVAL, SEQ_C_ID.CURRVAL, SYSDATE, #{term}, 'N')
 	</insert>
 	
 </mapper>

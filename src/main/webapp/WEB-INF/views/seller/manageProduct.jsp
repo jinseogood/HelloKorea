@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,7 +86,7 @@
                         	<button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조회 선택하기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
                             	<ul class="dropdown-menu pull-right">
                                 	<li><a href="#">상호명으로 조회</a></li>
-                                    <li><a href="#">대표자로 조회</a></li>
+                                    <li><a href="#">주소로 조회</a></li>
                                     <li><a href="#">상태로 조회</a></li>
                                     <li class="divider"></li>
                                     <li><a href="#">기간으로 조회</a></li>
@@ -99,54 +100,46 @@
 					<tr>
 						<th width="50px">No</th>
 						<th width="150px">상호명</th>
-						<th width="100px">대표자</th>
 						<th width="200px">주소</th>
+						<th width="100px">전화번호</th>
 						<th width="100px">기간</th>
 						<th width="100px">상태</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<th></th>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<th></th>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<th></th>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
+					<c:forEach var="p" items="${ list }">
+						<tr>
+							<td>${ p.cId }</td>
+							<td>${ p.companyName }</td>
+							<td>${ p.companyAddress }</td>
+							<td>${ p.companyPhone }</td>
+							<td>${ p.term }</td>
+							<td>${ p.status }</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 			
 			<div class="paging" align="center">
             	<ul class="pagination pagination-sm">
-                	<li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">6</a></li>
-                    <li><a href="#">7</a></li>
-                    <li><a href="#">8</a></li>
-                    <li><a href="#">9</a></li>
-                    <li><a href="#">10</a></li>
-                    <li><a href="#">&raquo;</a></li>
+                    <c:if test="${ pi.currentPage <= 1 }">
+                    	<c:url var="listFirst" value="managerProduct.sell">
+                    		<c:param name="currentPage" value="${ pi.startPage }"/>
+                    	</c:url>
+	                	<li><a href="${ listFirst }">&laquo;</a></li>
+					</c:if>
+					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+						<c:url var="listCheck" value="managerProduct.sell">
+							<c:param name="currentPage" value="${ p }"/>
+						</c:url>
+						<li><a href="${ listCheck }">${ p }</a></li>
+					</c:forEach>
+					<c:if test="${ pi.currentPage < pi.maxPage }">
+						<c:url var="listEnd" value="managerProduct.sell">
+							<c:param name="currentPage" value="${ pi.endPage }"/>
+						</c:url>
+	                    <li><a href="${ listEnd }">&raquo;</a></li>
+					</c:if>
                 </ul>
             </div>
 
