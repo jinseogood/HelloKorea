@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.DatePick;
 import com.kh.hello.admin.model.vo.PageInfo;
+import com.kh.hello.admin.model.vo.Question;
 import com.kh.hello.admin.model.vo.Report;
 import com.kh.hello.admin.model.vo.Reservation;
 @Repository
@@ -246,6 +247,51 @@ public class AdminDaoImpl implements AdminDao{
 		return list;
 	}
 
+	//문의 리스트 카운트
+	@Override
+	public int getQuestionListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("getQuestionListCount");
+	}
 
+	//문의 리스트
+	@Override
+	public ArrayList<Question> selectQuestionList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		ArrayList<Question> list = null;
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		list = (ArrayList)sqlSession.selectList("selectQuestionList", null, rowBounds);
+		return list;
+	}
 
+	//문의일 검색 카운트
+	@Override
+	public int getSearchDateQuestionListCount(SqlSessionTemplate sqlSession, DatePick d) {
+		return sqlSession.selectOne("getSearchDateQuestionListCount", d);
+	}
+
+	//문의일 검색 리스트
+	@Override
+	public ArrayList<Question> selectSearchDateQuestionList(SqlSessionTemplate sqlSession, DatePick d, PageInfo pi) {
+		ArrayList<Question> list = null;
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		list = (ArrayList)sqlSession.selectList("selectSearchDateQuestionList", d, rowBounds);
+		return list;
+	}
+
+	//문의 검색 카운트
+	@Override
+	public int getSearchWordQuestionListCount(SqlSessionTemplate sqlSession, Question q) {
+		return sqlSession.selectOne("getSearchWordQuestionListCount", q);
+	}
+
+	//문의 검색 리스트
+	@Override
+	public ArrayList<Question> selectSearchWordQuestionList(SqlSessionTemplate sqlSession, Question q, PageInfo pi) {
+		ArrayList<Question> list = null;
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		list = (ArrayList)sqlSession.selectList("selectSearchWordQuestionList", q, rowBounds);
+		return list;
+	}
 }
