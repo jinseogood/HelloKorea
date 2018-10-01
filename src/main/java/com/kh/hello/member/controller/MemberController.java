@@ -56,7 +56,7 @@ public class MemberController {
 	public String insertSeller(Model model, Member m){
 
 		String encPassword = passwordEncoder.encode(m.getPassword());
-
+		
 		m.setPassword(encPassword);
 		System.out.println(m);
 
@@ -104,18 +104,8 @@ public class MemberController {
 			return"common/errorPage";
 
 		}
-
-
-
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	@RequestMapping(value="addSeller.me")
 	public String updateAddSeller(Model model, Member m){
 		
@@ -145,6 +135,20 @@ public class MemberController {
 	}
 	
 	
-	
+	@RequestMapping(value="editProfile.me")
+	public String editProfile(Model model, Member m){
+		
+		System.out.println("editProfile : " + m);
+		
+		int result = ms.editProfile(m);
+		if(result >0){
+			
+			return "userMypage/editProfile";
+			
+		}else{
+			return "common/errorPage";
+		}
+		
+	}
 
 }

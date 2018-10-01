@@ -20,6 +20,7 @@
 <link href="${ contextPath }/resources/css/templatemo-style.css" rel="stylesheet">
 <title>Insert title here</title>
 <style>
+
 	#menuIconArea{
 		width:135px;
 		height:80px;

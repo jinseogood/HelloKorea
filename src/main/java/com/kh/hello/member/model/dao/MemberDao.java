@@ -26,5 +26,7 @@ public interface MemberDao {
 
 	int updateAddSeller(Member m, SqlSessionTemplate sqlSession);
 
+	int editProfile(Member m, SqlSessionTemplate sqlSession);
+
 	
 }
