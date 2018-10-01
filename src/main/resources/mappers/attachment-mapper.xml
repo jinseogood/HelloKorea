@@ -16,11 +16,16 @@
           <result property="bid" column="BID"/>
      </resultMap>
      
-     <!-- 리뷰사진 인서트 -->
-     <insert id="insertAttachment" parameterType="Attachment">
-          INSERT INTO ATTACHMENT VALUES(SEQ_FID.NEXTVAL, SYSDATE,
-                                       #{mId}, #{reason}, #{period}, 'R')
+     <!-- 리뷰사진 추가 -->
+     <insert id="insertReviewAttachment" parameterType="Attachment">
+          INSERT INTO ATTACHMENT VALUES(SEQ_FID.NEXTVAL, #{origin_name},
+                                       #{file_path}, SYSDATE, #{change_name}, #{status}, #{a_level}, SEQ_BID.CURRVAL)
      </insert>
+     
+     <!-- 리뷰사진 삭제 -->
+     <delete id="deleteReviewAttachment" parameterType="_int">
+          DELETE FROM ATTACHMENT WHERE BID = (SELECT MAX(BID) FROM BOARD WHERE M_ID = #{m})	
+     </delete>
      
      <!-- 리뷰사진 상태 업데이트 -->
      <!-- <update id="updateAttachment" parameterType="_int">

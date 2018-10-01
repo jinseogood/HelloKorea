@@ -57,6 +57,7 @@ public class MemberController {
 		String encPassword = passwordEncoder.encode(m.getPassword());
 
 		/*System.out.println(m);*/
+		m.setPassword(encPassword);
 
 		int result = ms.insertSeller(m);
 		
