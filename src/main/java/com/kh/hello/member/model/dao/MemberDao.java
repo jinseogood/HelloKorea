@@ -21,5 +21,9 @@ public interface MemberDao {
 	//회원시퀀스
 	int selectMemberSequence(SqlSessionTemplate sqlSession);
 
+	int selectSellerSequence(SqlSessionTemplate sqlSession);
+
+	int updateAddSeller(Member m, SqlSessionTemplate sqlSession);
+
 	
 }

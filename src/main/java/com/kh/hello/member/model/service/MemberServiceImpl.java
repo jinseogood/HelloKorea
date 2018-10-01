@@ -70,6 +70,22 @@ public class MemberServiceImpl implements MemberService {
 
 
 
+	@Override
+	public int selectSellerSequence() {
+		// TODO Auto-generated method stub
+		return md.selectSellerSequence(sqlSession);
+	}
+
+
+
+	@Override
+	public int updateAddSeller(Member m) {
+		// TODO Auto-generated method stub
+		return md.updateAddSeller(m,sqlSession);
+	}
+
+
+
 
 
 

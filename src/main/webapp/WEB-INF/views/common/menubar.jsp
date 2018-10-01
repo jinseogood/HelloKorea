@@ -125,7 +125,7 @@
 		top: 0px;
 		position: absolute;
 		width: 450px;
-		height: 500px;
+		height: 420px;
 		display: none;
 		background: white;
 		border: none;
@@ -153,6 +153,7 @@
 		width: 100px;
 		margin-left: 15px;
 		height: 30px;
+		border:none;
 	}
 	
 	#joinDiv {
@@ -201,7 +202,6 @@
 				  			<a class="fas fa-angry" id="loginOpen" data-toggle="modal" data-target="#loginDiv">Login</a>
 							<a href="myPageView.sell">Seller MyPage</a>
 							<a href="myPageView.ad">ADMIN MyPage</a>
-							<a href="reviewWrite.bo">reviewW</a>
 							<div id="google_translate_element"></div>
 				  		</div>
 					</nav>		
@@ -267,7 +267,7 @@
 				is free!</label>
 		</div>
 		<div id="joinInsert">
-			<form action="insertUser.me" method="get" id="insertForm">
+			<form action="insertUser.me" method="post" id="insertForm">
 				<table align="center">
 					<tr>
 						<th>Email</th>
@@ -298,7 +298,7 @@
 			<button id="closeBtn3">X</button>
 			<label style="width: 50px; font-size: 30px;">SELLERJOIN</label>
 		</div>
-		<form action="insertSeller.me" method="get">
+		<form action="insertSeller.me" method="post">
 			<table align="center">
 				<tr>
 					<th>Email</th>
@@ -311,24 +311,6 @@
 				</tr>
 				<tr>
 					<td><input type="password" name="password" class="inputStyle"></td>
-				</tr>
-				<tr>
-					<th>Phone</th>
-				</tr>
-				<tr>
-					<td><input type="text" name="phone" class="inputStyle"></td>
-				</tr>
-				<tr>
-					<th>Account</th>
-				</tr>
-				<tr>
-					<td><input type="text" name="bankNum" class="inputStyle"></td>
-				</tr>
-				<tr>
-					<th>Nickname</th>
-				</tr>
-				<tr>
-					<td><input type="text" name="nickname" class="inputStyle"></td>
 				</tr>
 			</table>
 			<div align="center">

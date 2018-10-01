@@ -21,6 +21,11 @@ public interface MemberService {
 	//회원시퀀스 
 	int selectMemberSequence();
 
+	int selectSellerSequence();
+	
+	
+	int updateAddSeller(Member m);
+
 	
 
 }

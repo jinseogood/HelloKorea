@@ -66,5 +66,15 @@
 	<select id="selectMemberSequence" resultType="_int">
       SELECT SEQ_M_ID.currval FROM DUAL
 	</select>
-
+	<select id="selectSellerSequence" resultType="_int">
+      SELECT SEQ_M_ID.currval FROM DUAL
+	</select>
+	<update id="updateAddSeller">
+		UPDATE MEMBER
+		SET NICKNAME=#{nickname},
+			BANK_NUM=#{bankNum},
+			PHONE=#{phone}
+		WHERE M_ID =#{mId}
+	</update>
+	
 </mapper>
