@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Attachment">
+
+     <!-- 리뷰사진 -->
+     <resultMap type="Attachment" id="AttachmentResultSet">
+          <id property="fid" column="FID"/>
+          <result property="origin_name" column="ORIGIN_NAME" />
+          <result property="file_path" column="FILE_PATH"/>
+          <result property="upload_date" column="UPLOAD_DATE"/>
+          <result property="change_name" column="CHANGE_NAME"/>
+          <result property="status" column="STATUS"/>
+          <result property="a_level" column="A_LEVEL"/>
+          <result property="bid" column="BID"/>
+     </resultMap>
+     
+     <!-- 리뷰사진 인서트 -->
+     <insert id="insertAttachment" parameterType="Attachment">
+          INSERT INTO ATTACHMENT VALUES(SEQ_FID.NEXTVAL, SYSDATE,
+                                       #{mId}, #{reason}, #{period}, 'R')
+     </insert>
+     
+     <!-- 리뷰사진 상태 업데이트 -->
+     <!-- <update id="updateAttachment" parameterType="_int">
+         UPDATE MEMBER
+         SET STATUS = 'B'
+         WHERE M_ID = #{mId} 
+     </update> -->
+     
+     <!-- 리뷰사진 검색 검색 -->
+     <!-- <select id="selectAttachment" resultMap="AttachmentResultSet">
+         SELECT *
+         FROM ATTACHMENT
+         WHERE B_TYPE = 'R'
+         AND IN_DATE BETWEEN TO_DATE(#{fromDate}) AND TO_DATE(#{toDate})
+         ORDER BY B_RECORD_ID DESC
+     </select> -->
+     
+</mapper>

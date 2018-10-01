@@ -4,7 +4,7 @@ import java.io.File;
 
 public class FileDeleteUpload {
 	
-    private static final String UPLOAD_FILE_PATH = "D:/git/HelloKorea/src/main/webapp/resources/img/";
+    private static final String UPLOAD_FILE_PATH = "D:/git/HelloKorea/src/main/webapp/resources/uploadFiles/";
     
     public String process(String changeFileName) {
         

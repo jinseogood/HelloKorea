@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.hello.board.FileDeleteUpload;
 import com.kh.hello.board.FileUpload;
 import com.kh.hello.board.Response;
+import com.kh.hello.board.model.vo.Attachment;
 
 @Controller
 public class BoardPageController {
@@ -46,7 +47,15 @@ public class BoardPageController {
         for (int i = 0; i < file.length; i++) {
             result.add(fileUpload.process(file[i]));
         }
- 
+
+        Attachment a = new Attachment();
+        a.setOrigin_name(fileUpload.originalName());
+        a.setFile_path("D:/git/HelloKorea/src/main/webapp/resources/uploadFiles/"+fileUpload.changeName());
+        a.setChange_name(fileUpload.changeName());
+        a.setStatus("일단 리뷰");
+        a.setBid(1);
+        System.out.println(fileUpload.originalName());
+        
         return new Response(result);
     }
 	
@@ -59,7 +68,6 @@ public class BoardPageController {
         result.add(fileDeleteUpload.process(changeFileName));
 
         System.out.println("오냐");
-        System.out.println(changeFileName);
         
         return new Response(result);
     }
