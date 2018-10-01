@@ -25,6 +25,12 @@ public interface MemberService {
 	
 	int updateAddSeller(Member m);
 
+	int editProfile(Member m);
+
+	
+
+	
+
 	
 
 }

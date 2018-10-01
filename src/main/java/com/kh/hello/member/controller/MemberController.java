@@ -145,6 +145,20 @@ public class MemberController {
 	}
 	
 	
-	
+	@RequestMapping(value="editProfile.me")
+	public String editProfile(Model model, Member m){
+		
+		System.out.println("editProfile : " + m);
+		
+		int result = ms.editProfile(m);
+		if(result >0){
+			
+			return "userMypage/editProfile";
+			
+		}else{
+			return "common/errorPage";
+		}
+		
+	}
 
 }

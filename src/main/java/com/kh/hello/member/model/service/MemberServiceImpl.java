@@ -84,6 +84,19 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
+	@Override
+	public int editProfile(Member m) {
+		// TODO Auto-generated method stub
+		return md.editProfile(m,sqlSession);
+	}
+
+
+
+
+
+
+	
+
 
 
 

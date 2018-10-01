@@ -57,6 +57,16 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.update("Member.updateAddSeller",m);
 	}
 
+	@Override
+	public int editProfile(Member m, SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("Member.editProfile", m);
+	}
+
+
+
+	
+
 	
 
 	
