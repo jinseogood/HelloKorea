@@ -286,6 +286,7 @@
 					<button class="loginBtn1">회원가입하기</button>
 				</div>
 			</form>
+			
 			<div align="center">
 				<label>판매자등록은 여기로
 					<button class="loginBtn" id="joinBtn1" data-toggle="modal" data-target="#sellerDiv">판매자등록</button>

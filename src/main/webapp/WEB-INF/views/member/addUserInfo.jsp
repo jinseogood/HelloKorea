@@ -167,6 +167,7 @@ option {
 							<option value="콜롬비아">Columbia</option>
 							<option value="콩고">Congo</option>
 							<option value="쿠바">Cuba</option>
+				
 							<option value="쿠웨이트">Kuwait</option>
 							<option value="크로아티아">Croatia</option>
 							<option value="타지키스탄">Tajikistan</option>
@@ -192,6 +193,7 @@ option {
 							<option value="압하지야">usa</option>
 							<option value="타이완">japan</option>
 					</select></td>
+					
 				</tr>
 				<tr>
 					<th>Interest</th>

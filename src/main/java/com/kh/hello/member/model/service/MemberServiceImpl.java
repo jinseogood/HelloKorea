@@ -25,7 +25,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
-
 	//
 	@Override
 	public int insertSeller(Member m) {

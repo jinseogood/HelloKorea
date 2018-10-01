@@ -20,6 +20,7 @@ public class MemberDaoImpl implements MemberDao {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("Member.insertSeller",m);
 	}
+	
 
 	@Override
 	public String selectEncPassword(SqlSessionTemplate sqlSession, Member m) {

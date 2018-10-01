@@ -18,6 +18,7 @@ public interface MemberDao {
 
 	int updateAddUser(Member m, SqlSessionTemplate sqlSession);
 	
+	
 	//회원시퀀스
 	int selectMemberSequence(SqlSessionTemplate sqlSession);
 

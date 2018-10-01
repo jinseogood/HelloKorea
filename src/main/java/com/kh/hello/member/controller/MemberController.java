@@ -22,7 +22,6 @@ public class MemberController {
 	@Autowired BCryptPasswordEncoder passwordEncoder;
 
 
-
 	@RequestMapping(value ="insertUser.me")
 	public String insertMember(Model model,Member m ){
 

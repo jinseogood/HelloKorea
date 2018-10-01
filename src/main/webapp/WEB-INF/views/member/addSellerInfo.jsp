@@ -11,6 +11,7 @@
 .container {
 	margin-left:auto;
 	margin-right:auto;
+	
 }
 #sellerTable{
 	margin-left:auto;
