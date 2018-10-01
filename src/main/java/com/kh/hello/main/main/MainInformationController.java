@@ -25,7 +25,7 @@ public class MainInformationController {
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
 		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-		String parameter="";
+		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
 		parameter = parameter + "&" + "contentTypeId=32";
@@ -66,7 +66,7 @@ public class MainInformationController {
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
 		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-		String parameter="";
+		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
 		parameter = parameter + "&" + "contentTypeId=32";
@@ -107,7 +107,7 @@ public class MainInformationController {
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
 		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-		String parameter="";
+		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
 		parameter = parameter + "&" + "contentTypeId=32";
@@ -148,7 +148,7 @@ public class MainInformationController {
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
 		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-		String parameter="";
+		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
 		parameter = parameter + "&" + "contentTypeId=38";
@@ -189,7 +189,7 @@ public class MainInformationController {
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
 		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-		String parameter="";
+		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
 		parameter = parameter + "&" + "contentTypeId=38";
@@ -230,7 +230,7 @@ public class MainInformationController {
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
 		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-		String parameter="";
+		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
 		parameter = parameter + "&" + "contentTypeId=38";
@@ -271,7 +271,7 @@ public class MainInformationController {
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
 		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-		String parameter="";
+		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
 		parameter = parameter + "&" + "contentTypeId=38";
@@ -312,7 +312,7 @@ public class MainInformationController {
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
 		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-		String parameter="";
+		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
 		parameter = parameter + "&" + "contentTypeId=38";
@@ -353,7 +353,7 @@ public class MainInformationController {
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
 		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-		String parameter="";
+		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
 		parameter = parameter + "&" + "contentTypeId=38";
@@ -394,7 +394,7 @@ public class MainInformationController {
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
 		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-		String parameter="";
+		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
 		parameter = parameter + "&" + "contentTypeId=38";
@@ -435,7 +435,7 @@ public class MainInformationController {
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
 		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-		String parameter="";
+		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
 		parameter = parameter + "&" + "contentTypeId=38";
@@ -476,7 +476,7 @@ public class MainInformationController {
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
 		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-		String parameter="";
+		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
 		parameter = parameter + "&" + "contentTypeId=12";
@@ -517,7 +517,7 @@ public class MainInformationController {
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
 		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-		String parameter="";
+		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
 		parameter = parameter + "&" + "contentTypeId=12";
@@ -558,7 +558,7 @@ public class MainInformationController {
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
 		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-		String parameter="";
+		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
 		parameter = parameter + "&" + "contentTypeId=12";
@@ -599,7 +599,7 @@ public class MainInformationController {
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
 		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-		String parameter="";
+		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
 		parameter = parameter + "&" + "contentTypeId=12";
@@ -640,7 +640,7 @@ public class MainInformationController {
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
 		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-		String parameter="";
+		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
 		parameter = parameter + "&" + "contentTypeId=28";
@@ -681,7 +681,7 @@ public class MainInformationController {
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
 		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-		String parameter="";
+		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
 		parameter = parameter + "&" + "contentTypeId=28";
@@ -722,7 +722,7 @@ public class MainInformationController {
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
 		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-		String parameter="";
+		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
 		parameter = parameter + "&" + "contentTypeId=28";
@@ -763,7 +763,7 @@ public class MainInformationController {
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
 		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-		String parameter="";
+		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
 		parameter = parameter + "&" + "contentTypeId=28";
