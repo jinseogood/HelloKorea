@@ -20,7 +20,7 @@ import net.sf.json.JSONObject;
 public class SubInformationController {
 	
 	@RequestMapping(value="searchAreaHotel.sub")
-	public void searchAreaHotel(HttpServletRequest request, HttpServletResponse response, @RequestParam int areaCode, @RequestParam int sigunguCode) throws IOException{
+	public void searchAreaHotel(HttpServletRequest request, HttpServletResponse response, @RequestParam int areaCode, @RequestParam int sigunguCode, @RequestParam int page) throws IOException{
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
@@ -39,7 +39,7 @@ public class SubInformationController {
 		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
 		parameter = parameter + "&" + "arrange=A";
 		parameter = parameter + "&" + "numOfRows=12";
-		parameter = parameter + "&" + "pageNo=1";
+		parameter = parameter + "&" + "pageNo="+page;
 		parameter = parameter + "&" + "_type=json";
 		
 		addr = addr + serviceKey + parameter;
