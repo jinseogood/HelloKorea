@@ -22,10 +22,9 @@ public class MemberController {
 	@Autowired BCryptPasswordEncoder passwordEncoder;
 
 
-
 	@RequestMapping(value ="insertUser.me")
 	public String insertMember(Model model,Member m ){
-		
+
 		String encPassword = passwordEncoder.encode(m.getPassword());
 
 		/*		System.out.println("암호화 : "+encPassword);*/
@@ -60,9 +59,12 @@ public class MemberController {
 		/*System.out.println(m);*/
 
 		int result = ms.insertSeller(m);
-		//int mid  = ms.
+		
+		int mid  = ms.selectSellerSequence();
 
 		if(result > 0){
+			System.out.println("mid seller :" + mid);
+			model.addAttribute("mid", mid);
 			return "member/addSellerInfo";
 		}
 		return null;
@@ -102,6 +104,28 @@ public class MemberController {
 
 
 	}
-	//@RequestMapping(value="addSeller")
+	
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping(value="addSeller.me")
+	public String updateAddSeller(Model model, Member m){
+		
+		System.out.println("m seller:"+m);
+		int result = ms.updateAddSeller(m);
+		
+		if(result >0){
+			return "main/main";
+		}else{
+			return "common/errorPage";
+		}
+		
+		
+		
+	}
 
 }

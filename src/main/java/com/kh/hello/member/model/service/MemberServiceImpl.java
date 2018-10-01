@@ -25,7 +25,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
-
 	//
 	@Override
 	public int insertSeller(Member m) {
@@ -66,6 +65,22 @@ public class MemberServiceImpl implements MemberService {
 	public int selectMemberSequence() {
 		// TODO Auto-generated method stub
 		return md.selectMemberSequence(sqlSession);
+	}
+
+
+
+	@Override
+	public int selectSellerSequence() {
+		// TODO Auto-generated method stub
+		return md.selectSellerSequence(sqlSession);
+	}
+
+
+
+	@Override
+	public int updateAddSeller(Member m) {
+		// TODO Auto-generated method stub
+		return md.updateAddSeller(m,sqlSession);
 	}
 
 

@@ -11,6 +11,7 @@
 .container {
 	margin-left:auto;
 	margin-right:auto;
+	
 }
 #sellerTable{
 	margin-left:auto;
@@ -41,8 +42,9 @@ input[type='text']{
 	<input type="hidden" class="input-sm" id="client_secret" name="client_secret" value="8096f01f6b2048d789198a7c3108950b">
 	<input type="hidden" class="input-sm" id="token" name="token">
 	<input type="hidden" class="input-sm" id="account_holder_info_type" name="account_holder_info_type">
-		<form id="sellerForm">
+		<form action="addSeller.me" method="post">
 			<table id="sellerTable">
+			<input type="hidden" name="mId" value="${mid}"/>
 				<tr>
 					<th>Name</th>
 					<td><input type="text" name="nickname" class="inputStyle"></td>
@@ -58,7 +60,7 @@ input[type='text']{
 				</tr>
 				<tr>
 					<th>Account</th>
-					<td><input type="text" name="bank_num" placeholder="'-'없이 입력하세요"></td>
+					<td><input type="text" name="bankNum" placeholder="'-'없이 입력하세요"></td>
 				</tr>
 					<input type="hidden" class="input-sm" id="tran_dtime" name="tran_dtime">
 					<input type="hidden" class="input-sm" id="bank_code_std" name="bank_code_std">
