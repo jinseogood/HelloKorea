@@ -32,6 +32,7 @@ public class CompanyManageController {
 		
 		String filePath=root + "\\uploadFiles\\seller";
 		
+		System.out.println("filePath : " + filePath);
 		System.out.println("file : " + personalFile);
 		
 		//사업자등록증 파일

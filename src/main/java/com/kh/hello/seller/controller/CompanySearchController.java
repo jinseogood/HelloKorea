@@ -20,7 +20,7 @@ import net.sf.json.JSONObject;
 @Controller
 public class CompanySearchController {
 	@RequestMapping(value="searchCompany.sell")
-	public void searchCompany(@RequestParam String area, @RequestParam String sigungu, HttpServletResponse response){
+	public void searchCompany(@RequestParam String area, @RequestParam String sigungu, @RequestParam String page, HttpServletResponse response){
         response.setContentType("text/html; charset=utf-8");
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchStay?ServiceKey=";
@@ -30,7 +30,7 @@ public class CompanySearchController {
         parameter = parameter + "&" + "arrange=A";
         parameter = parameter + "&" + "areaCode=" + area;
         parameter = parameter + "&" + "sigunguCode=" + sigungu;
-        parameter = parameter + "&" + "pageNo=1&numOfRows=8";
+        parameter = parameter + "&" + "pageNo=" + page + "&numOfRows=8";
         parameter = parameter + "&" + "MobileOS=ETC";
         parameter = parameter + "&" + "MobileApp=HelloKorea";
         parameter = parameter + "&" + "_type=json";
@@ -55,13 +55,6 @@ public class CompanySearchController {
 	        JSONObject json = new JSONObject();
 	        json.put("data", data);
 	        
-	        /*System.out.println("controller : " + data);
-	        System.out.println("data length : " + data.length());*/
-	        
-	        System.out.println("area : " + area);
-	        System.out.println("sigungu : " + sigungu);
-	        
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
