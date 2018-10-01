@@ -44,7 +44,9 @@
 	</section>
 		<script>
 			var areaCode = ${param.areaCode};
+			var sigunguCode = ${param.sigunguCode};
 			console.log("지역메인 areaCode : " + areaCode);
+			console.log("지역메인 sigunguCode : " + sigunguCode);
 			
 			if(areaCode == 1){
 				$(".flex-caption .slider-title").text("서울");

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,13 +24,11 @@
     margin-bottom:5%;
 }
 .searchArea{
-    width:30%;
-    margin-bottom:5%;
+    width:60%; 
+    margin-bottom:6%;
     margin-left:auto;
     margin-right:auto;
 }
-
-
 table.type09 {
     width:80%;
     border-collapse: collapse;
@@ -60,17 +59,13 @@ table.type09 td {
     vertical-align: top;
     border-bottom: 1px solid #ccc;
 }
-
 .modal-body{
     width:90%;
     margin-left:auto;
     margin-right:auto;
     
 }
-
 </style>
-
-
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp"/>
@@ -83,8 +78,8 @@ table.type09 td {
                             <!--breadcrumbs start -->
                             <ul class="breadcrumb">
                                 <li><a href="myPageView.ad"><i class="fa fa-home"></i> Home</a></li>
-                                <li><a href="reportView.ad">일반회원 관리</a></li>
-                                <li class="active">문의현황</li>
+                                <li><a href="selectReportList.ad">일반회원 관리</a></li>
+                                <li><a href="selectQuestionList.ad">문의현황</a></li>
                             </ul>
                             <!--breadcrumbs end -->
                         </div>
@@ -92,88 +87,131 @@ table.type09 td {
 	
 	
 	</div>
-			<div class="searchArea" align="center">
-
- <div class="input-group m-b-10">
-                                                  <input type="text" class="form-control">
-                                                  <div class="input-group-btn">
-                                                      <button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조회 선택하기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
-                                                      <ul class="dropdown-menu pull-right">
-                                                          <li><a href="#">문의번호로 조회</a></li>
-                                                          <li><a href="#">문의자로 조회</a></li>
-                                                          <li><a href="#">처리건만 조회</a></li>
-                                                          <li><a href="#">미처리건만 조회</a></li>
-                                                          <li class="divider"></li>
-                                                          <li><a onclick="showDatePicker()">문의일로 조회</a></li>
-                                                      </ul>
-                                                  </div>
-                                              </div>
-            <br>
-            
-            <div id="datePicker">
-            <jsp:include page="../common/datePicker.jsp"/>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="btn btn-white">&nbsp;조회&nbsp;</button>
+	<div class="searchArea" align="center">
+	
+ <form action="selectQuestionList.ad">
+			<div class="col-xs-8 col-xs-offset-2">
+		    <div class="input-group">
+                <div class="input-group-btn search-panel">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    	<span id="search_concept">검색 카테고리</span> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#qRecordId">문의번호</a></li>
+                      <li><a href="#sendId">문의자</a></li>
+                      <li><a href="#noP">미처리건</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#datePick" onclick="showDatePicker()">문의일</a></li>
+                    </ul>
+                </div>
+                <input type="hidden" name="searchParam" value="all" id="searchParam">                       
+                <input type="text" class="form-control" name="searchWord" placeholder="검색어를 입력하세요">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+                </form>
             </div>
             
-            <script>
-             $(function(){
-            	 $("#datePicker").hide();
-            	 
-             });
-             function showDatePicker(){
-            	 $("#datePicker").show();
-            	 
-             }
-            </script>
-</div>	
-
-	<div class="tableArea" align="center">
+            
+            <div id="datePicker">
+            <br>
+            <jsp:include page="../common/datePicker.jsp"/>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-white" type="submit">&nbsp;조회&nbsp;</button>
+            <br>
+            </div>
+            
+                </div>
+                </div>
+        </div>
+	
+	<script>
+	 $(function(){
+    	 $("#datePicker").hide();
+     });
+	 
+     function showDatePicker(){
+    	 $("#datePicker").show();
+    	 
+     }
+     
+	$(document).ready(function(e){
+	    $('.search-panel .dropdown-menu').find('a').click(function(e) {
+			e.preventDefault();
+			var param = $(this).attr("href").replace("#","");
+			var concept = $(this).text();
+			$('.search-panel span#search_concept').text(concept);
+			$('.input-group #searchParam').val(param);
+		});
+	});
+	
+	</script>
+			
+	<div class="tableArea" align="center" id="questionTable">
 <table class="type09">
     <thead>
     <tr>
         <th>문의번호</th>
         <th>문의자</th>
-        <th>문의내용</th>
+        <th>문의 제목</th>
         <th>문의일</th>
         <th>처리상황</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
-    <% for(int i = 0; i < 10; i++){ %>
+    <c:forEach var="q" items="${ list }">
     <tr>
-        <th scope="row">
-        <a href="#myModal-1" data-toggle="modal">번호</a>
-        </th>
-        <td>내용</td>
-        <td>내용</td>
-        <td>내용</td>
-        <td>내용</td>
+        <th scope="row">${q.qRecordId}</th>
+        <td>${q.sendId}</td>
+        <td>${q.title}</td>
+        <td>${q.sendDate}</td>
+        <td>${q.status}</td>
+        <td>${q.content}</td>
     </tr>
-    <% } %>
+    </c:forEach>
     
     </tbody>
 </table>
 </div>
 <div class="paging" align="center">
-                                        <ul class="pagination pagination-sm">
-                                        <li><a href="#">&laquo;</a></li>
-                                        <li><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#">6</a></li>
-                                        <li><a href="#">7</a></li>
-                                        <li><a href="#">8</a></li>
-                                        <li><a href="#">9</a></li>
-                                        <li><a href="#">10</a></li>
-                                        <li><a href="#">&raquo;</a></li>
-                                    </ul>
-                                    </div>
+<ul class="pagination pagination-sm">
+<c:if test="${ pi.currentPage <= 1 }">
+<li><a>&laquo;</a></li>
+            </c:if>
+            <c:if test="${ pi.currentPage > 1 }">
+                <c:url var="qlistBack" value="selectQuestionList.ad">
+                    <c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
+                </c:url>
+                <li><a href="${ qlistBack }">&laquo;</a></li>
+            </c:if>
+            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                <c:if test="${ p eq pi.currentPage }">
+                <li><a href="#" style="background-color:#ddd;">${ p }</a></li>               
+                </c:if>
+                <c:if test="${ p ne pi.currentPage }">
+                    <c:url var="qlistCheck" value="selectQuestionList.ad">
+                         <c:param name="currentPage" value="${ p }"/>
+                    </c:url>
+                    <li><a href="${ qlistCheck }">${ p }</a></li>  
+                </c:if>
+            </c:forEach>
+            <c:if test="${ pi.currentPage >= pi.maxPage }">
+                <li><a>&raquo;</a></li>
+            </c:if>
+            <c:if test="${ pi.currentPage < pi.maxPage }">
+                <c:url var="qlistEnd" value="selectQuestionList.ad">
+                    <c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+                </c:url>
+                <li><a href="${ qlistEnd }">&raquo;</a></li>
+            </c:if>
+            </ul>
+    </div>
 
 
 	</div> 
+
+	
 	<jsp:include page="../common/footer.jsp"/>
 	
 	<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal-1" class="modal fade">
@@ -187,9 +225,9 @@ table.type09 td {
                                                   <br>
                                                   <form class="form-horizontal" role="form">
                                                       <div class="form-group">
-                                                          <label for="msgId" class="col-lg-2 col-sm-2 control-label">문의번호</label>
+                                                          <label for="qRecordId" class="col-lg-2 col-sm-2 control-label">문의번호</label>
                                                           <div class="col-lg-10">
-                                                              <input type="text" class="form-control" id="msgId" readonly>
+                                                              <input type="text" class="form-control" id="qRecordId" readonly>
                                                           </div>
                                                       </div>
                                                       <div class="form-group">
@@ -202,6 +240,12 @@ table.type09 td {
                                                           <label for="sendDate" class="col-lg-2 col-sm-2 control-label">문의일</label>
                                                           <div class="col-lg-10">
                                                               <input type="text" class="form-control" id="sendDate" readonly>
+                                                          </div>
+                                                      </div>
+                                                      <div class="form-group">
+                                                          <label for="title" class="col-lg-2 col-sm-2 control-label">문의 제목</label>
+                                                          <div class="col-lg-10">
+                                                              <input type="text" class="form-control" id="title" readonly>
                                                           </div>
                                                       </div>
                                                       <div class="form-group">
@@ -245,6 +289,24 @@ table.type09 td {
                                           </div>
                                       </div>
                                   </div>
+                                  
+                                  	
+	<script>
+		$(function(){
+			<% for(int i = 0; i < 11; i++){%>
+			$("#questionTable tr").eq(<%=i%>).children().eq(5).hide();
+			<% } %>
+			
+			$("#questionTable tr").click(function(){
+				$("#qRecordId").val($(this).children().eq(0).text());
+				$("#sendId").val($(this).children().eq(1).text());
+				$("#sendDate").val($(this).children().eq(3).text());
+				$("#title").val($(this).children().eq(2).text());
+				$("#content").text($(this).children().eq(5).text());
+				$(this).attr({"data-toggle":"modal", "data-target":"#myModal-1"});
+			});
+		});
+	</script>
 
 </body>
 </html>

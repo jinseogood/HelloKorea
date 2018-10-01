@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!DOCTYPE html>
 <html>
@@ -30,8 +30,6 @@
     margin-left:auto;
     margin-right:auto;
 }
-
-
 table.type09 {
     width:80%;
     border-collapse: collapse;
@@ -62,8 +60,6 @@ table.type09 td {
     vertical-align: top;
     border-bottom: 1px solid #ccc;
 }
-
-
 </style>
 </head>
 <body>
@@ -78,7 +74,7 @@ table.type09 td {
                             <ul class="breadcrumb">
                                 <li><a href="myPageView.ad"><i class="fa fa-home"></i> Home</a></li>
                                 <li><a href="selectReportList.ad">일반회원 관리</a></li>
-                                <li class="active">블랙리스트 관리</li>
+                                <li><a href="selectBlacklist.ad">블랙리스트 관리</a></li>
                             </ul>
                             <!--breadcrumbs end -->
                         </div>
@@ -103,7 +99,7 @@ table.type09 td {
                       <li><a href="#datePick2" onclick="showDatePicker2()">해지일자</a></li>
                     </ul>
                 </div>
-                <input type="hidden" name="searchParam" value="all" id="searchParam">         
+                <input type="hidden" name="searchParam" value="all" id="searchParam">                       
                 <input type="text" class="form-control" name="searchWord" placeholder="검색어를 입력하세요">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
@@ -183,7 +179,7 @@ table.type09 td {
 <li><a>&laquo;</a></li>
             </c:if>
             <c:if test="${ pi.currentPage > 1 }">
-                <c:url var="blistBack" value="/selectBlacklist.ad">
+                <c:url var="blistBack" value="selectBlacklist.ad">
                     <c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
                 </c:url>
                 <li><a href="${ blistBack }">&laquo;</a></li>

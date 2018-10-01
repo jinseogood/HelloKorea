@@ -185,7 +185,7 @@
 			<when test="rRecordId != -99">
 				AND R_RECORD_ID = #{rRecordId}
 			</when>
-			<when test="rTarget != null">
+			<when test="rTarget != -99">
 				AND R_TARGET = #{rTarget}
 			</when>
 			<otherwise>
@@ -229,7 +229,7 @@
 			<when test="rRecordId != -99">
 				AND R_RECORD_ID = #{rRecordId}
 			</when>
-			<when test="rTarget != null">
+			<when test="rTarget != -99">
 				AND R_TARGET = #{rTarget}
 			</when>
 			<otherwise>

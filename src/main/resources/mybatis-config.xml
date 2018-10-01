@@ -6,6 +6,7 @@
   <configuration>
   
       <typeAliases>
+          <typeAlias type="com.kh.hello.admin.model.vo.Question" alias="Question"/>
           <typeAlias type="com.kh.hello.admin.model.vo.Blacklist" alias="Blacklist"/>
           <typeAlias type="com.kh.hello.admin.model.vo.Report" alias="Report"/>
           <typeAlias type="com.kh.hello.message.model.vo.Message" alias="Message"/>
@@ -15,9 +16,11 @@
           <typeAlias type="com.kh.hello.seller.model.vo.Company" alias="Company"/>
           <typeAlias type="com.kh.hello.seller.model.vo.Room" alias="Room"/>
           <typeAlias type="com.kh.hello.seller.model.vo.RegistrationHistory" alias="RH"/>
+          <typeAlias type="com.kh.hello.board.model.vo.Attachment" alias="Attachment"/>
       </typeAliases>
   
       <mappers>
+          <mapper resource="mappers/question-mapper.xml"/>
           <mapper resource="mappers/blacklist-mapper.xml"/>
           <mapper resource="mappers/message-mapper.xml"/>
           <mapper resource="mappers/report-mapper.xml"/>
@@ -26,6 +29,7 @@
           <mapper resource="mappers/company-mapper.xml"/>
           <mapper resource="mappers/room-mapper.xml"/>
           <mapper resource="mappers/rh-mapper.xml"/>
+          <mapper resource="mappers/attachment-mapper.xml"/>
       </mappers>
   
   </configuration>

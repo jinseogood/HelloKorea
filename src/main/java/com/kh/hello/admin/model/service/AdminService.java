@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.DatePick;
 import com.kh.hello.admin.model.vo.PageInfo;
+import com.kh.hello.admin.model.vo.Question;
 import com.kh.hello.admin.model.vo.Report;
 import com.kh.hello.admin.model.vo.Reservation;
 
@@ -40,5 +41,12 @@ public interface AdminService {
 	ArrayList<Blacklist> selectnoTBlacklist(PageInfo pi);
 	int getSearchWordBlacklistCount(Blacklist b);
 	ArrayList<Blacklist> selectSearchWordBlacklist(Blacklist b, PageInfo pi);
+	
+	int getQuestionListCount();
+	ArrayList<Question> selectQuestionList(PageInfo pi);
+	int getSearchDateQuestionListCount(DatePick d);
+	ArrayList<Question> selectSearchDateQuestionList(DatePick d, PageInfo pi);
+	int getSearchWordQuestionListCount(Question q);
+	ArrayList<Question> selectSearchWordQuestionList(Question q, PageInfo pi);
 	
 }

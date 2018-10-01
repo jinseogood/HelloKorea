@@ -97,7 +97,7 @@ table.type09 td {
                             <ul class="breadcrumb">
                                 <li><a href="myPageView.ad"><i class="fa fa-home"></i> Home</a></li>
                                 <li><a href="selectReportList.ad">일반회원 관리</a></li>
-                                <li class="active">신고현황</li>
+                                <li><a href="selectReportList.ad">신고현황</a></li>
                             </ul>
                             <!--breadcrumbs end -->
                         </div>

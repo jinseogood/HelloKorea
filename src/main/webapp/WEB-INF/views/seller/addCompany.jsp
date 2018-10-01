@@ -75,13 +75,10 @@
 	}
 	#resultTable tr{
 		border-bottom:1px solid lightgray;
-		height:39px;
+		height:52px;
 	}
 	#resultTable td{
 		text-align:left;
-	}
-	#resultTalbe tr > td > a:hover{
-		cursor:pointer;
 	}
 </style>
 </head>
@@ -527,7 +524,7 @@
 			  							<option value="4">제주시</option>
 			  						</select>
 			  					</td>
-			  					<td width="20%"><button type="button" class="btn btn-warning btn-sm" onclick="return searchCompany();">검색</button></td>
+			  					<td width="20%"><button type="button" class="btn btn-warning btn-sm" onclick="return searchCompany(1);">검색</button></td>
 			  				</tr>
 		  				</thead>
 			  			<tbody>
@@ -542,13 +539,7 @@
 		  			</table>
 		  			<div class="paging" align="center">
             			<ul class="pagination pagination-sm">
-                			<li><a href="#">&laquo;</a></li>
-                    		<li><a href="#">1</a></li>
-                    		<li><a href="#">2</a></li>
-                    		<li><a href="#">3</a></li>
-                    		<li><a href="#">4</a></li>
-                    		<li><a href="#">5</a></li>
-                    		<li><a href="#">&raquo;</a></li>
+                			
                 		</ul>
             		</div>
 		  		</div>
@@ -1009,24 +1000,28 @@
 			
 		});
 		
-		function searchCompany(){
+		function searchCompany(page){
 			console.log("area : " + area);
 			console.log("sigungu : " + sigungu);
+			console.log("page : " + page);
 			
 			$.ajax({
 				url:"searchCompany.sell",
 				type:"get",
-				data:{area:area, sigungu:sigungu},
+				data:{area:area, sigungu:sigungu, page:page},
 				dataType:"json",
 				success:function(data){
 					console.log(data.response.body.items.item);
+					console.log(data.response.body.totalCount);
 					
 					$tableBody = $("#resultTable");
 					$tableBody.html('');
 					
-					var company=data.response.body.items.item;
+					$pageBody = $(".paging ul");
+					$pageBody.html('');
 					
-					console.log(company);
+					var company=data.response.body.items.item;
+					var totalCount=data.response.body.totalCount;
 					
 					if(company != null){
 						if(company.length > 0){
@@ -1036,12 +1031,30 @@
 								output += "<font style='font-size:11px;'>" + company[i].addr1 + "</font></td></tr>";
 								$tableBody.append(output);
 							}
+							
+							var num=(totalCount/8) + 0.9;
+							
+							var pOutput="";
+							pOutput += "<li><a onclick='goFirst();'>&laquo;</a></li>";
+							
+							for(var k=1;k<=num;k++){
+								pOutput += "<li><a onclick='goPage(" + k + ")'>" + k + "</a></li>";
+							}
+							
+							pOutput += "<li><a onclick='goLast(" + num + ")'>&raquo;</a></li>";
+							$pageBody.append(pOutput);
 						}
 						else{
 							var output="";
 							output += "<tr><td><a onclick=\"valueSetting("+ company.contentid + ", '" + company.title + "', '" + company.tel + "', '" + company.addr1 + "');\" data-dismiss='modal'><b><font style='font-size:13px;'>" + company.title + "</font></b></a><br>";
 							output += "<font style='font-size:11px;'>" + company.addr1 + "</font></td></tr>";
 							$tableBody.append(output);
+							
+							var pOutput="";
+							pOutput += "<li><a disabled>&laquo;</a></li>";
+							pOutput += "<li><a disabled>1</a></li>";
+							pOutput += "<li><a disabled>&raquo;</a></li>";
+							$pageBody.append(pOutput);
 						}
 					}
 					else{
@@ -1054,6 +1067,21 @@
 					console.log(data);
 				}
 			});
+		}
+		
+		function goFirst(){
+			page=1;
+			searchCompany(page);
+		}
+		
+		function goPage(page){
+			page=page;
+			searchCompany(page);
+		}
+		
+		function goLast(page){
+			page=Math.floor(page);
+			searchCompany(page);
 		}
 		
 		function valueSetting(contentId, title, tel, addr){

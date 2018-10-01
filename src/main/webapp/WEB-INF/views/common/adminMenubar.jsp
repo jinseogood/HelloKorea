@@ -105,7 +105,7 @@
 					<dd>
 						<ul>
 							<li><a href="selectReportList.ad">신고현황</a></li>
-							<li><a href="questionView.ad">문의현황</a></li>
+							<li><a href="selectQuestionList.ad">문의현황</a></li>
 							<li><a href="selectBlacklist.ad">블랙리스트 관리</a></li>
 						</ul>
 					</dd>

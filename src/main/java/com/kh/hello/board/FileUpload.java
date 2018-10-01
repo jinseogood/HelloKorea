@@ -6,21 +6,27 @@ import java.util.Arrays;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.hello.common.CommonUtils;
+
 public class FileUpload {
 	private static final String[] ALLOWED_FILE_TYPES = {"image/jpeg", "image/jpg", "image/gif", "image/png"};
     private static final Long MAX_FILE_SIZE = 1048576L; //1MB
-    private static final String UPLOAD_FILE_PATH = "D:/git/HelloKorea/src/main/webapp/resources/img/";
+    private static final String UPLOAD_FILE_PATH = "D:/git/HelloKorea/src/main/webapp/resources/uploadFiles/";
+    private String originalName;
+    private String changeName;
     
     public String process(MultipartFile file) {
         if (!file.isEmpty()) {
             String contentType = file.getContentType().toString().toLowerCase();
             if (isValidContentType(contentType)) {
                 if (belowMaxFileSize(file.getSize())) {
-                    String newFile = UPLOAD_FILE_PATH + file.getOriginalFilename();
+                	String ext = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+                	originalName = file.getOriginalFilename();
+                	changeName = CommonUtils.getRandomString();
+                    String newFile = UPLOAD_FILE_PATH + changeName + ext;
                     try {
                         file.transferTo(new File(newFile));
-                        /*return "You have successfully uploaded " + file.getOriginalFilename() + "!";*/
-                        return file.getOriginalFilename();
+                        return changeName + ext;
                     } catch (IllegalStateException e) {
                         return "There was an error uploading " + file.getOriginalFilename() + " => " + e.getMessage();
                     } catch (IOException e) {
@@ -35,6 +41,14 @@ public class FileUpload {
         } else {
             return "Error. No file choosen.";
         }
+    }
+    
+    public String changeName(){
+    	return changeName;
+    }
+    
+    public String originalName(){
+    	return originalName;
     }
     
     private Boolean isValidContentType(String contentType) {
