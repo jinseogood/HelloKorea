@@ -15,10 +15,10 @@ public class SellerPageController {
 		return "seller/addCompany";
 	}
 	
-	@RequestMapping("manageProductView.sell")
+	/*@RequestMapping("manageProductView.sell")
 	public String manageProductView(){
 		return "seller/manageProduct";
-	}
+	}*/
 	
 	@RequestMapping("reservationView.sell")
 	public String reservationView(){

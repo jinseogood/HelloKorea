@@ -3,6 +3,7 @@ package com.kh.hello.seller.controller;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,23 +11,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.hello.common.CommonUtils;
+import com.kh.hello.common.Pagination;
+import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.seller.model.service.SellerService;
+import com.kh.hello.seller.model.vo.Attachment;
 import com.kh.hello.seller.model.vo.Company;
+import com.kh.hello.seller.model.vo.PageInfo;
 import com.kh.hello.seller.model.vo.Registration;
 import com.kh.hello.seller.model.vo.RegistrationHistory;
 import com.kh.hello.seller.model.vo.Room;
+import com.kh.hello.seller.model.vo.SearchProduct;
 
 @Controller
 public class CompanyManageController {
 	@Autowired
 	private SellerService ss;
 	
-	@RequestMapping(value="addCompany.sell")
-	public String addCompany(Registration r, Model model, HttpServletRequest request, @RequestParam(name="companyFile", required=false)MultipartFile companyFile, @RequestParam(name="personalFile", required=false)MultipartFile personalFile){
+	@RequestMapping(value="addCompany.sell", method=RequestMethod.POST)
+	public String addCompany(Registration r, Model model, HttpServletRequest request, @RequestParam(name="companyFile", required=false)MultipartFile companyFile, @RequestParam(name="personalFile")MultipartFile personalFile){
 		
 		String root=request.getSession().getServletContext().getRealPath("resources");
 		
@@ -52,10 +59,6 @@ public class CompanyManageController {
 		}
 		
 		try {
-			personalFile.transferTo(new File(filePath + "\\" + changePerName + perExt));
-			if(!originComFileName.equals("")){
-				companyFile.transferTo(new File(filePath + "\\" + changeComName + comExt));
-			}
 		
 			System.out.println("Registration : " + r);
 			
@@ -147,6 +150,28 @@ public class CompanyManageController {
 			rh.setTerm(r.getTerm());
 			
 			ss.insertRH(rh);
+			
+			personalFile.transferTo(new File(filePath + "\\" + changePerName + perExt));
+			
+			Attachment perFileDB=new Attachment();
+			perFileDB.setFilePath(filePath);
+			perFileDB.setOriginName(originPerFileName);
+			perFileDB.setChangeName(changePerName);
+			
+			ss.insertPerFile(perFileDB);
+			
+			if(!originComFileName.equals("")){
+				companyFile.transferTo(new File(filePath + "\\" + changeComName + comExt));
+				
+				Attachment comFileDB=new Attachment();
+				comFileDB.setFilePath(filePath);
+				comFileDB.setOriginName(originComFileName);
+				comFileDB.setChangeName(changeComName);
+				
+				ss.insertComFile(comFileDB);
+			}
+			
+			return "seller/sellerMain";
 		}
 		catch (Exception e) {
 			new File(filePath + "\\" + changePerName + perExt).delete();
@@ -154,9 +179,39 @@ public class CompanyManageController {
 				new File(filePath + "\\" + changeComName + comExt).delete();
 			}
 			
-			e.printStackTrace();
+			model.addAttribute("msg", "업체등록 오류");
+			
+			return "common/errorPage";
 		}
 		
-		return "seller/sellerMain";
+	}
+	
+	@RequestMapping(value="manageProduct.sell")
+	public String manageProduct(Model model, HttpServletRequest request, PageInfo p){
+		Member m=(Member)request.getSession().getAttribute("loginUser");
+		
+		System.out.println("member : " + m);
+		
+		if(p.getCurrentPage() == 0){
+			p.setCurrentPage(1);
+		}
+		
+		int listCount=0;
+		
+		listCount=ss.getProductListCount(m.getmId());
+		
+		System.out.println("listCount : " + listCount);
+		
+		PageInfo pi=null;
+		/*pi=Pagination.getPageInfo(p.getCurrentPage(), listCount);*/
+		
+		ArrayList<SearchProduct> list=ss.selectProductList(m.getmId(), pi);
+		
+		System.out.println("list : " + list);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		
+		return "seller/manageProduct";
 	}
 }
