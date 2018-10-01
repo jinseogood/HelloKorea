@@ -186,7 +186,7 @@
             if($.inArray(file.name.split('.').pop().toLowerCase(), __options.allowedPreviews) != -1){
                 var reader = new FileReader();
                 reader.onload = function(e){
-                    $('<div/>').append($('<span/>').append(file.name)).css({'font-size':'10px'}).append($('<img/>').attr('src', e.target.result).addClass('thumbnail img-responsive center-block').css({'max-height':'150px','max-width':'150px'})).prependTo(prvwCntnr);
+                    $('<div/>').append($('<span/>').append(file.name)).css({'font-size':'10px'}).append($('<img/>').attr('src', e.target.result).addClass('thumbnail img-responsive center-block').css({'height':'150px','width':'150px'})).prependTo(prvwCntnr);
                 };
                 reader.readAsDataURL(file);
             }

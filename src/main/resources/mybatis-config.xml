@@ -15,6 +15,7 @@
           <typeAlias type="com.kh.hello.seller.model.vo.Company" alias="Company"/>
           <typeAlias type="com.kh.hello.seller.model.vo.Room" alias="Room"/>
           <typeAlias type="com.kh.hello.seller.model.vo.RegistrationHistory" alias="RH"/>
+          <typeAlias type="com.kh.hello.board.model.vo.Attachment" alias="Attachment"/>
       </typeAliases>
   
       <mappers>
@@ -26,6 +27,7 @@
           <mapper resource="mappers/company-mapper.xml"/>
           <mapper resource="mappers/room-mapper.xml"/>
           <mapper resource="mappers/rh-mapper.xml"/>
+          <mapper resource="mappers/attachment-mapper.xml"/>
       </mappers>
   
   </configuration>
