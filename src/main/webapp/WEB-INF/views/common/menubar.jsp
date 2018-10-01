@@ -216,6 +216,10 @@
 							<c:if test="${ sessionScope.loginUser == null }">
 					  			<a class="fas fa-angry" id="loginOpen" data-toggle="modal" data-target="#loginDiv">Login</a>
 							</c:if>
+							<c:if test="${! empty sessionScope.loginUser }">
+								<a class="logout" href="logout.me">Logout</a>
+								<a class="myPage" href="userMypage.me">mypage</a>
+							</c:if>
 								<a href="reviewWrite.bo">reviewW</a>
 								<div id="google_translate_element"></div>
 				  		</div>

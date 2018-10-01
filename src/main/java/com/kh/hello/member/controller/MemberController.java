@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.kh.hello.member.model.exception.LoginException;
 import com.kh.hello.member.model.service.MemberService;
@@ -46,7 +47,7 @@ public class MemberController {
 
 		}else{
 			System.out.println("실패");
-			return "main/main";
+			return "common/errorPage";
 		}
 
 	}
@@ -55,19 +56,22 @@ public class MemberController {
 	public String insertSeller(Model model, Member m){
 
 		String encPassword = passwordEncoder.encode(m.getPassword());
-
-		/*System.out.println(m);*/
+		
+		m.setPassword(encPassword);
+		System.out.println(m);
 
 		int result = ms.insertSeller(m);
 		
 		int mid  = ms.selectSellerSequence();
 
 		if(result > 0){
-			System.out.println("mid seller :" + mid);
+			
 			model.addAttribute("mid", mid);
 			return "member/addSellerInfo";
+		}else{
+			
+			return "common/errorPage";
 		}
-		return null;
 	}
 
 	@RequestMapping(value="login.me")
@@ -124,8 +128,23 @@ public class MemberController {
 			return "common/errorPage";
 		}
 		
+	}
+	
+	@RequestMapping(value="logout.me")
+	public String logout(SessionStatus status){
 		
+		status.setComplete();
+		
+		return "main/main";
 		
 	}
+	@RequestMapping(value="userMypage.me")
+	public String userMypage(Model model){
+		
+		return "userMypage/editProfile";
+	}
+	
+	
+	
 
 }
