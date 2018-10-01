@@ -8,10 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.DatePick;
-import com.kh.hello.admin.model.vo.PageInfo;
+import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
 import com.kh.hello.admin.model.vo.Report;
 import com.kh.hello.admin.model.vo.Reservation;
+import com.kh.hello.message.model.vo.Message;
 @Repository
 public class AdminDaoImpl implements AdminDao{
 
@@ -293,5 +294,17 @@ public class AdminDaoImpl implements AdminDao{
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
 		list = (ArrayList)sqlSession.selectList("selectSearchWordQuestionList", q, rowBounds);
 		return list;
+	}
+
+	//문의 답변 발송
+	@Override
+	public int insertAnswerMsg(SqlSessionTemplate sqlSession, Message m) {
+		return sqlSession.insert("insertAnswerMsg", m);
+	}
+
+	//답변 된 문의 pDate 업데이트
+	@Override
+	public int updatepDate(SqlSessionTemplate sqlSession, Message m) {
+		return sqlSession.update("updatepDate", m);
 	}
 }

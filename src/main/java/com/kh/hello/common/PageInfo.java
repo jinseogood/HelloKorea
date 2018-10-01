@@ -1,4 +1,4 @@
-package com.kh.hello.admin.model.vo;
+package com.kh.hello.common;
 
 public class PageInfo implements java.io.Serializable{
     private int currentPage;

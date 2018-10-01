@@ -12,6 +12,7 @@
     width:80%;
     margin-left:auto;
     margin-right:auto;
+    min-height:480px;
 }
 .titleArea{
     padding:3%;

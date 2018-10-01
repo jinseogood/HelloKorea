@@ -1,6 +1,6 @@
 package com.kh.hello.common;
 
-import com.kh.hello.admin.model.vo.PageInfo;
+import com.kh.hello.common.PageInfo;
 
 public class Pagination {
 
