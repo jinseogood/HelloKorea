@@ -41,6 +41,10 @@
 		width:200px;
 		text-align:center;
 	}
+	#addTable img{
+		width:20px;
+		height:20px;
+	}
 	#searchTable{
 		width:330px;
 		height:450px;
@@ -100,8 +104,9 @@
                 </div>
 			</div>
 		
-			<form action="addCompany.sell" method="get" encType="multipart/form-data">
-				<input type="hidden" id="contentId" name="contentId" readonly>
+			<form action="addCompany.sell" method="post" encType="multipart/form-data">
+				<input type="hidden" name="mId" value="${ sessionScope.loginUser.mId }">
+				<input type="hidden" id="contentId" name="contentId">
 				<table id="addTable" align="center">
 					<tr>
 						<th>구분</th>
@@ -113,19 +118,27 @@
 					</tr>
 					<tr class="comType">
 						<th>법인사업자등록번호</th>
-						<td colspan="4"><input type="text" id="companyNum" name="companyNum" size="25"></td>
+						<td colspan="3"><input type="text" id="companyNum" name="companyNum" size="25"></td>
+						<td>
+							<div id="comNumCollect"><img src="${ contextPath }/resources/img/checkOKIcon.png"></div>
+							<div id="comNumWrong"><img src="${ contextPath }/resources/img/checkFailIcon.png"></div>
+						</td>
 					</tr>
 					<tr class="comType">
 						<th>법인사업자등록증</th>
-						<td colspan="4"><input type="file" id="companyFile" name="companyFile"></td>
+						<td colspan="4"><input type="file" name="companyFile"></td>
 					</tr>
 					<tr>
 						<th>사업자등록번호</th>
-						<td colspan="4"><input type="text" id="personalNum" name="personalNum" size="25"></td>
+						<td colspan="3"><input type="text" id="personalNum" name="personalNum" size="25"></td>
+						<td>
+							<div id="perNumCollect"><img src="${ contextPath }/resources/img/checkOKIcon.png"></div>
+							<div id="perNumWrong"><img src="${ contextPath }/resources/img/checkFailIcon.png"></div>
+						</td>
 					</tr>
 					<tr>
 						<th>사업자등록증</th>
-						<td colspan="4"><input type="file" id="personalFile" name="personalFile"></td>
+						<td colspan="4"><input type="file" name="personalFile"></td>
 					</tr>
 					<tr>
 						<th>상호명</th>
@@ -565,6 +578,69 @@
 			
 			$("#company").click(function(){
 				$(".comType").show();
+			});
+			
+			$("#comNumCollect").hide();
+			$("#comNumWrong").hide();
+			$("#perNumCollect").hide();
+			$("#perNumWrong").hide();
+			
+			//법인등록번호 유효성 검사
+			$("#companyNum").blur(function isRegNo(){
+				var sRegNo=$("#companyNum").val();
+				console.log("sRegNo : " + sRegNo);
+				var re = /-/g;
+				sRegNo = sRegNo.replace('-','');
+
+				if (sRegNo.length != 13){
+					$("#comNumWrong").show();
+				}
+
+				var arr_regno  = sRegNo.split("");
+				var arr_wt   = new Array(1,2,1,2,1,2,1,2,1,2,1,2);
+				var iSum_regno  = 0;
+				var iCheck_digit = 0;
+
+				for (i = 0; i < 12; i++){
+					iSum_regno +=  eval(arr_regno[i]) * eval(arr_wt[i]);
+				}
+
+				iCheck_digit = 10 - (iSum_regno % 10);
+
+				iCheck_digit = iCheck_digit % 10;
+
+				if (iCheck_digit != arr_regno[12]){
+					$("#comNumCollect").hide();
+					$("#comNumWrong").show();
+				}
+				else{
+					$("#comNumWrong").hide();
+					$("#comNumCollect").show();
+				}
+			});
+
+			//사업자등록번호 유효성 검사			
+			$("#personalNum").blur(function checkBizID(){
+				var bizID=$("#personalNum").val();
+				console.log("bizID : " + bizID);
+			    var checkID = new Array(1, 3, 7, 1, 3, 7, 1, 3, 5, 1); 
+			    var tmpBizID, i, chkSum=0, c2, remander; 
+			    bizID = bizID.replace(/-/gi,'');
+
+			    for (i=0; i<=7; i++) chkSum += checkID[i] * bizID.charAt(i); 
+			    c2 = "0" + (checkID[8] * bizID.charAt(8));
+			    c2 = c2.substring(c2.length - 2, c2.length);
+			    chkSum += Math.floor(c2.charAt(0)) + Math.floor(c2.charAt(1)); 
+			    remander = (10 - (chkSum % 10)) % 10;
+			    
+			    if (Math.floor(bizID.charAt(9)) == remander){
+			    	$("#perNumWrong").hide();
+			    	$("#perNumCollect").show();
+			    }
+			    else{
+			    	$("#perNumCollect").hide();
+			    	$("#perNumWrong").show();
+			    }
 			});
 			
 			$(".rType2").hide();

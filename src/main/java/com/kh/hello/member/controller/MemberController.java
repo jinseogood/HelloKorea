@@ -104,18 +104,8 @@ public class MemberController {
 			return"common/errorPage";
 
 		}
-
-
-
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	@RequestMapping(value="addSeller.me")
 	public String updateAddSeller(Model model, Member m){
 		

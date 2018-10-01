@@ -13,9 +13,11 @@ public class Registration implements java.io.Serializable{
 	private String companyName;
 	private String companyPhone;
 	private String companyAddress;
+	private int mId;
+	
+	//Registration History
 	private String term;
 	private String status;
-	private int mId;
 	
 	//Room
 	private int rId;
