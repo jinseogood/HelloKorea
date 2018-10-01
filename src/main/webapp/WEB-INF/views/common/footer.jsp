@@ -9,8 +9,9 @@
 <body>
 	<footer class="tm-black-bg">
 		<div class="container">
+			<a href="helpView" style="float:right; color:#FCDD44;">도움말 센터</a>
 			<div class="row">
-				<p class="tm-copyright-text">Copyright &copy; 2084 Your Company Name</p>
+				<p class="tm-copyright-text">Copyright &copy; 2018 Hello Korea</p>
 			</div>
 		</div>		
 	</footer>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +25,10 @@
 		height:80px;
 		float:right;
 	}
+	#menuIconArea img{
+		width:20px;
+		height:20px;
+	}
 </style>
 </head>
 <body>
@@ -41,11 +46,22 @@
 		            </div>
 		            <nav class="tm-nav">
 				  		<div id="menuIconArea">
-				  			<a onclick="openMsg()">Msg</a>
-				  			<a href="helpView">Help</a>
-							<a href="myPageView.sell">MyPage</a>
-							<a href="myPageView.ad">ADMIN MyPage</a>
-							<div id="google_translate_element"></div>
+				  			<c:if test="${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('admin') }">
+								<a href="myPageView.ad"><img src="${ contextPath }/resources/img/myPageIcon.png"></a>
+								<a onclick="openMsg()"><img src="${ contextPath }/resources/img/msgIcon.png"></a>
+							</c:if>
+							<c:if test="${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1') }">
+					  			<a onclick="openMsg()"><img src="${ contextPath }/resources/img/msgIcon.png"></a>
+							</c:if>
+							<c:if test="${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('2') }">
+								<a onclick="openMsg()"><img src="${ contextPath }/resources/img/msgIcon.png"></a>
+								<a href="myPageView.sell"><img src="${ contextPath }/resources/img/myPageIcon.png"></a>
+							</c:if>
+							<c:if test="${ sessionScope.loginUser == null }">
+					  			<a class="fas fa-angry" id="loginOpen" data-toggle="modal" data-target="#loginDiv">Login</a>
+							</c:if>
+								<a href="reviewWrite.bo">reviewW</a>
+								<div id="google_translate_element"></div>
 				  		</div>
 			  		</nav>
 	  			</div>				
