@@ -15,7 +15,7 @@
 	#themeText{height:164px; overflow:hidden; padding:30px 30px 54px;}
 	.mainSearchArea{font-size:15px; width:150px; height:60px; background-color:#00aef0; color:white;}
 	.subSearchArea{font-size:15px; width:150px; height:60px; background-color:#00aef0; color:white;}
-	#searchAreaBox{position:absolute; left:835px; top:480px; z-index:3;}
+	#searchAreaBox{position:absolute; text-align:center; top:18%; z-index:3;}
 	.areaSearchBtn{height:60px;}
 	.themeAreaSelect{cursor:pointer; color:blue;}
 	.themeAreaSelect:hover{color:#00aef0;}
@@ -29,7 +29,7 @@
 	<!-- Banner -->
 	<section class="tm-banner">
 		<!-- Flexslider -->
-		<div id="searchAreaBox">
+		<div id="searchAreaBox" class="col-lg-12 col-md-12 col-sm-12">
 			<select class="mainSearchArea" name="searchCondition">
 						<option value="0">지역선택</option>
 						<option value="1">서울</option>
@@ -373,15 +373,129 @@
 		$(function(){
 			
 			$(".areaSearchBtn").click(function(){
-				var areaCode = $(".mainSearchArea").val();
-				var sigunguCode = $(".subSearchArea").val();
+				areaCode = $(".mainSearchArea").val();
+				sigunguCode = $(".subSearchArea").val();
+				console.log("mainSearchAreaValue : " + areaCode);
+				
 				if(areaCode == 0){
 					alert("지역을 선택해 주세요.");
-				}else{
+				}else if(areaCode == 1){
+					sigunguCode = $("#sigungu1").val();
 					if(sigunguCode == 0){
 						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
 					}else{
-						console.log("지역코드 : " + areaCode);
+						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode;
+					}
+				}else if(areaCode == 2){
+					sigunguCode = $("#sigungu2").val();
+					if(sigunguCode == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode;
+					}
+				}else if(areaCode == 3){
+					sigunguCode = $("#sigungu3").val();
+					if(sigunguCode == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode;
+					}
+				}else if(areaCode == 4){
+					sigunguCode = $("#sigungu4").val();
+					if(sigunguCode == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode;
+					}
+				}else if(areaCode == 5){
+					sigunguCode = $("#sigungu5").val();
+					if(sigunguCode == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode;
+					}
+				}else if(areaCode == 6){
+					sigunguCode = $("#sigungu6").val();
+					if(sigunguCode == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode;
+					}
+				}else if(areaCode == 7){
+					sigunguCode = $("#sigungu7").val();
+					if(sigunguCode == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode;
+					}
+				}else if(areaCode == 8){
+					sigunguCode = $("#sigungu8").val();
+					if(sigunguCode == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode;
+					}
+				}else if(areaCode == 31){
+					sigunguCode = $("#sigungu9").val();
+					if(sigunguCode == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode;
+					}
+				}else if(areaCode == 32){
+					sigunguCode = $("#sigungu10").val();
+					if(sigunguCode == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode;
+					}
+				}else if(areaCode == 33){
+					sigunguCode = $("#sigungu11").val();
+					if(sigunguCode == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode;
+					}
+				}else if(areaCode == 34){
+					sigunguCode = $("#sigungu12").val();
+					if(sigunguCode == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode;
+					}
+				}else if(areaCode == 35){
+					sigunguCode = $("#sigungu13").val();
+					if(sigunguCode == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode;
+					}
+				}else if(areaCode == 36){
+					sigunguCode = $("#sigungu14").val();
+					if(sigunguCode == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode;
+					}
+				}else if(areaCode == 37){
+					sigunguCode = $("#sigungu15").val();
+					if(sigunguCode == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode;
+					}
+				}else if(areaCode == 38){
+					sigunguCode = $("#sigungu16").val();
+					if(sigunguCode == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode;
+					}
+				}else if(areaCode == 39){
+					sigunguCode = $("#sigungu17").val();
+					if(sigunguCode == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
 						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode;
 					}
 				}
