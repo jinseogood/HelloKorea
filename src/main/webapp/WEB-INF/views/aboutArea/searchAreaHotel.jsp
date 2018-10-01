@@ -74,14 +74,14 @@
 					<br><br>
 					
 					<div class="col-lg-12 col-md-12 col-sm-12" align="left">
-						<span class="tm-section-title" style="font-size:25px; border-bottom:1px solid #ccc;"><b>특정지역</b></span>
+						<span class="tm-section-title" style="font-size:25px; border-bottom:1px solid #ccc;"><b>유형</b></span>
 						<br>
-						<input type="checkbox" class="hotelSearch" id="hongdae" name="hongdae" style="width:17px; height:17px;"/>
-						<label for="hongdae" class="hotelSearchText">&nbsp;&nbsp;홍대</label><br>
-						<input type="checkbox" class="hotelSearch" id="jongro" name="jongro" style="width:17px; height:17px;"/>
-						<label for="jongro" class="hotelSearchText">&nbsp;&nbsp;광화문/종로</label><br>
-						<input type="checkbox" class="hotelSearch" id="myungdong" name="myungdong" style="width:17px; height:17px;"/>
-						<label for="myungdong" class="hotelSearchText">&nbsp;&nbsp;명동/남대문</label><br><br>
+						<input type="checkbox" class="hotelSearch" id="goodStay" name="goodStay" style="width:17px; height:17px;"/>
+						<label for="goodStay" class="hotelSearchText">&nbsp;&nbsp;굿스테이</label><br>
+						<input type="checkbox" class="hotelSearch" id="hanOk" name="hanOk" style="width:17px; height:17px;"/>
+						<label for="hanOk" class="hotelSearchText">&nbsp;&nbsp;한옥</label><br>
+						<input type="checkbox" class="hotelSearch" id="benicia" name="benicia" style="width:17px; height:17px;"/>
+						<label for="benicia" class="hotelSearchText">&nbsp;&nbsp;베니키아</label><br><br>
 					</div>
 					
 					<br>
@@ -159,8 +159,10 @@
 			</div>
 		</div>
 		<script>
+			let isEnd = false;
 			var areaCode = ${param.areaCode};
 			var sigunguCode = ${param.sigunguCode};
+			var pageNo = 1;
 			console.log("지역호텔검색areaCode : " + areaCode);
 			console.log("지역호텔검색sigunguCode : " + sigunguCode);
 			
@@ -199,15 +201,26 @@
 			}else if(areaCode == 39){
 				$(".tm-section-title1").text("제주도 호텔");
 			}
-		
-			$(function(){
+			
+			
+			
+			let searchHotelPage = function(page){
+				
+				if(isEnd == true){
+					return;
+				}
+				
 				$.ajax({
 					url:"searchAreaHotel.sub",
 					type:"GET",
-					data:{areaCode:areaCode, sigunguCode:sigunguCode},
+					data:{areaCode:areaCode, sigunguCode:sigunguCode, page:page},
 					dataType:"json",
 					success:function(data){
-						console.log("오예");
+						let length = data.response.body.items.item;
+						if(length < 12){
+							isEnd = true;
+						}
+						
 						console.log(data);
 						subAreaHotelView(data);
 					},
@@ -215,11 +228,26 @@
 						console.log(data);
 					}
 				});
+			}
+		
+			$(function(){
+				
+				$(window).scroll(function(){
+					let $window = $(this);
+					let scrollTop = $window.scrollTop();
+					let windowHeight = $window.height();
+					let documentHeight = $(document).height();
+					
+					if(scrollTop + windowHeight + 30 > documentHeight){
+						searchHotelPage();
+					}
+				searchHotelPage();
+				});
+				
 			});
 			
 			function subAreaHotelView(data){
 				var myData = data.response.body.items.item;
-				console.log("subAreaHotelView : " + myData);
 				var viewArea = $("#viewArea");
 				viewArea.html("");
 				var output = "";
@@ -236,6 +264,7 @@
 						}else{
 							output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
 						}
+						output += "</div>";
 						output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
 						output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData[i].addr1+"</p>";
 						output += "<div class='tm-home-box-2-container'>";
