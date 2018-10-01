@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.hello.admin.model.service.AdminService;
 import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.DatePick;
-import com.kh.hello.admin.model.vo.PageInfo;
+import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
 import com.kh.hello.admin.model.vo.Report;
 import com.kh.hello.admin.model.vo.Reservation;
 import com.kh.hello.common.Pagination;
+import com.kh.hello.message.model.vo.Message;
 @Controller
 public class AdminController {
 
@@ -121,10 +122,8 @@ public class AdminController {
 			//신고 대상 검색	
 			}else if(searchParam.equals("rTarget")){
 				r.setrTarget(Integer.parseInt(searchWord));
-			//미처리건 검색은 mapper에서
-			}else{
-				System.out.println("미처리 건 검색");
 			}
+			//미처리건 검색은 mapper에서
 			int listCount = as.getSearchWordReportListCount(r);
 			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
 			list = as.selectSearchWordReportList(r, pi);
@@ -313,10 +312,8 @@ public class AdminController {
 			//문의자 검색	
 			}else if(searchParam.equals("sendId")){
 				q.setSendId(Integer.parseInt(searchWord));
-			//미처리건 검색은 mapper에서
-			}else{
-				System.out.println("미처리 건 검색");
 			}
+			//미처리건 검색은 mapper에서
 			listCount = as.getSearchWordQuestionListCount(q);
 			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
 			list = as.selectSearchWordQuestionList(q, pi);
@@ -336,6 +333,40 @@ public class AdminController {
 		return "admin/question";
 	}
 
+	//문의 답변하기
+	@RequestMapping("answerQuestion.ad")
+	public String insertAnswerMsg(String recieveId, String content, String msgId, Model model){
+		Message m = new Message();
+		m.setRecieveId(Integer.parseInt(recieveId));
+		m.setContent(content);
+	    m.setMsgId(Integer.parseInt(msgId));
+	    
+	    System.out.println(m.getMsgId());
+	    
+		int result = as.insertAnswerMsg(m);
+		
+		if(result > 0){
+			int listCount = as.getQuestionListCount();
+			PageInfo pi = Pagination.getPageInfo(1, listCount);		
+			ArrayList<Question> list = as.selectQuestionList(pi);
+			for(int i = 0; i < list.size(); i++){
+				//처리상황
+				if(list.get(i).getpDate() == null){
+					list.get(i).setStatus("미처리");
+				}else{
+					list.get(i).setStatus("처리완료");
+				}
+
+			}
+			model.addAttribute("list", list);
+			model.addAttribute("pi", pi);
+			return "admin/question";
+		}else{
+			model.addAttribute("msg","문의 답변 발송 실패");
+			return "common/errorPage";
+		}
+	}
+	
 	//블랙리스트 내역 조회
 	@RequestMapping("selectBlacklist.ad")
 	public String selectBlacklist(String searchParam, String searchWord, String fromDate, String toDate, PageInfo p, Model model){

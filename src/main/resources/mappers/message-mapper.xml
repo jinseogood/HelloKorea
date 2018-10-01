@@ -5,7 +5,7 @@
 <mapper namespace="Message">
 
 	<!-- MESSAGE 테이블 값 + 닉네임 -->
-	<!-- <resultMap type="Message" id="messageResultSet">
+	<resultMap type="Message" id="messageResultSet">
 		<id property="msgId" column="MSG_ID" />
 		<result property="recieveId" column="RECIEVE_ID" />
 		<result property="sendId" column="SEND_ID" />
@@ -17,7 +17,21 @@
 		<result property="status" column="STATUS" />
 		<result property="mLevel" column="M_LEVEL" />
 		<result property="pDate" column="P_DATE" />
-	</resultMap> -->
+	</resultMap>
+	
+	<!-- 문의 답변 발송 -->
+	<insert id="insertAnswerMsg" parameterType="Message">
+        INSERT INTO MESSAGE
+        VALUES (SEQ_MSG_ID.NEXTVAL, #{recieveId}, 0, '문의 답변 드립니다',
+                #{content}, SYSDATE, NULL, 'Y', 'G', NULL)
+    </insert>
+    
+    <!-- 문의 처리일 입력 쿼리문  -->
+	<update id="updatepDate" parameterType="Message">
+		UPDATE MESSAGE
+		SET P_DATE = SYSDATE
+		WHERE MSG_ID = #{msgId} 
+	</update>
 
     <!-- 받은 메세지 수 조회용 쿼리문 -->
     <!-- <select id="selectReMsgListCount" resultType="_int">
@@ -86,10 +100,5 @@
 		ORDER BY MSG_ID
 	</select> -->
 	
-	<!-- 메세지 발송(문의 발송, 문의 답변)용 쿼리문 -->
-	<!-- <insert id="insertMsg" parameterType="Message">
-        INSERT INTO MESSAGE
-        VALUES (SEQ_MSG_ID.NEXTVAL, #{recieveId}, #{sendId}, #{title},
-                #{content}, SYSDATE, NULL, 'N', #{mLevel}, NULL)
-    </insert> -->
+	
 </mapper>

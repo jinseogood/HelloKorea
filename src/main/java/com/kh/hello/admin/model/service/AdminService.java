@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.DatePick;
-import com.kh.hello.admin.model.vo.PageInfo;
+import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
 import com.kh.hello.admin.model.vo.Report;
 import com.kh.hello.admin.model.vo.Reservation;
+import com.kh.hello.message.model.vo.Message;
 
 public interface AdminService {
 
@@ -48,5 +49,7 @@ public interface AdminService {
 	ArrayList<Question> selectSearchDateQuestionList(DatePick d, PageInfo pi);
 	int getSearchWordQuestionListCount(Question q);
 	ArrayList<Question> selectSearchWordQuestionList(Question q, PageInfo pi);
+	
+	int insertAnswerMsg(Message m);
 	
 }

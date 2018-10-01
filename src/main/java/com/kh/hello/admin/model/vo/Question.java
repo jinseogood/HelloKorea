@@ -10,10 +10,12 @@ public class Question {
     private String content;
     private Date pDate;
     private String status;
+    private int msgId;
     
     public Question(){}
 
-	public Question(int qRecordId, int sendId, String title, Date sendDate, String content, Date pDate, String status) {
+	public Question(int qRecordId, int sendId, String title, Date sendDate, String content, Date pDate, String status,
+			int msgId) {
 		super();
 		this.qRecordId = qRecordId;
 		this.sendId = sendId;
@@ -22,6 +24,7 @@ public class Question {
 		this.content = content;
 		this.pDate = pDate;
 		this.status = status;
+		this.msgId = msgId;
 	}
 
 	public int getqRecordId() {
@@ -80,10 +83,18 @@ public class Question {
 		this.status = status;
 	}
 
+	public int getMsgId() {
+		return msgId;
+	}
+
+	public void setMsgId(int msgId) {
+		this.msgId = msgId;
+	}
+
 	@Override
 	public String toString() {
 		return "Question [qRecordId=" + qRecordId + ", sendId=" + sendId + ", title=" + title + ", sendDate=" + sendDate
-				+ ", content=" + content + ", pDate=" + pDate + ", status=" + status + "]";
+				+ ", content=" + content + ", pDate=" + pDate + ", status=" + status + ", msgId=" + msgId + "]";
 	}
-	
+
 }

@@ -12,6 +12,7 @@
     width:80%;
     margin-left:auto;
     margin-right:auto;
+    min-height:480px;
 }
 .titleArea{
     padding:3%;
@@ -157,6 +158,7 @@ table.type09 td {
         <th>문의일</th>
         <th>처리상황</th>
         <th></th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -168,6 +170,7 @@ table.type09 td {
         <td>${q.sendDate}</td>
         <td>${q.status}</td>
         <td>${q.content}</td>
+        <td>${q.msgId}</td>
     </tr>
     </c:forEach>
     
@@ -228,6 +231,7 @@ table.type09 td {
                                                           <label for="qRecordId" class="col-lg-2 col-sm-2 control-label">문의번호</label>
                                                           <div class="col-lg-10">
                                                               <input type="text" class="form-control" id="qRecordId" readonly>
+                                                              <input type="hidden" class="form-control" id="msgId">
                                                           </div>
                                                       </div>
                                                       <div class="form-group">
@@ -279,7 +283,7 @@ table.type09 td {
                                                       
                                               <br>
                                                       <div class="form-group" align="center">
-                                                              <button type="submit" class="btn btn-info">문의답변 발송하기</button>
+                                                              <button type="button" class="btn btn-info" onclick="answerQuestion()">문의답변 발송하기</button>
                                                           
                                                       </div>
                                                   </form>
@@ -295,17 +299,27 @@ table.type09 td {
 		$(function(){
 			<% for(int i = 0; i < 11; i++){%>
 			$("#questionTable tr").eq(<%=i%>).children().eq(5).hide();
+			$("#questionTable tr").eq(<%=i%>).children().eq(6).hide();
 			<% } %>
 			
 			$("#questionTable tr").click(function(){
 				$("#qRecordId").val($(this).children().eq(0).text());
+				$("#msgId").val($(this).children().eq(6).text());
 				$("#sendId").val($(this).children().eq(1).text());
 				$("#sendDate").val($(this).children().eq(3).text());
 				$("#title").val($(this).children().eq(2).text());
 				$("#content").text($(this).children().eq(5).text());
+				
 				$(this).attr({"data-toggle":"modal", "data-target":"#myModal-1"});
 			});
 		});
+		
+		function answerQuestion(){
+			var msgId = $("#msgId").val();
+			var recieveId = $("#sendId").val();
+			var content = $("#content2").val();
+			location.href="answerQuestion.ad?recieveId="+recieveId+"&msgId="+msgId+"&content="+content;
+		}
 	</script>
 
 </body>
