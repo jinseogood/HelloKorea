@@ -56,7 +56,7 @@ public class MemberController {
 	public String insertSeller(Model model, Member m){
 
 		String encPassword = passwordEncoder.encode(m.getPassword());
-		
+
 		m.setPassword(encPassword);
 		System.out.println(m);
 

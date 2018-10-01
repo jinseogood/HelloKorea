@@ -17,6 +17,8 @@
           <typeAlias type="com.kh.hello.seller.model.vo.Room" alias="Room"/>
           <typeAlias type="com.kh.hello.seller.model.vo.RegistrationHistory" alias="RH"/>
           <typeAlias type="com.kh.hello.board.model.vo.Attachment" alias="Attachment"/>
+          <typeAlias type="com.kh.hello.seller.model.vo.Attachment" alias="SellerAT"/>
+          <typeAlias type="com.kh.hello.seller.model.vo.SearchProduct" alias="Product"/>
       </typeAliases>
   
       <mappers>
@@ -30,6 +32,8 @@
           <mapper resource="mappers/room-mapper.xml"/>
           <mapper resource="mappers/rh-mapper.xml"/>
           <mapper resource="mappers/attachment-mapper.xml"/>
+          <mapper resource="mappers/sellerAT-mapper.xml"/>
+          <mapper resource="mappers/product-mapper.xml"/>
       </mappers>
   
   </configuration>
