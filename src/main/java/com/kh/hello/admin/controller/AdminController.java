@@ -16,6 +16,7 @@ import com.kh.hello.admin.model.service.AdminService;
 import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.DatePick;
 import com.kh.hello.admin.model.vo.PageInfo;
+import com.kh.hello.admin.model.vo.Question;
 import com.kh.hello.admin.model.vo.Report;
 import com.kh.hello.admin.model.vo.Reservation;
 import com.kh.hello.common.Pagination;
@@ -113,6 +114,7 @@ public class AdminController {
 		}else{
 			Report r = new Report();
 			r.setrRecordId(-99);
+			r.setrTarget(-99);
 			//신고번호 검색
 			if(searchParam.equals("rRecordId")){
 				r.setrRecordId(Integer.parseInt(searchWord));
@@ -276,8 +278,61 @@ public class AdminController {
 		return "admin/report";
 	}
 	
-	@RequestMapping("questionView.ad")
-	public String questionView(){
+	//문의 내역 조회
+	@RequestMapping("selectQuestionList.ad")
+	public String selectQuestionList(String searchParam, String searchWord, String fromDate, String toDate, PageInfo p, Model model){
+		if(p.getCurrentPage() == 0){
+			p.setCurrentPage(1);
+		}
+		ArrayList<Question> list = null;
+		PageInfo pi = null;
+        int listCount;
+		//전체 리스트
+		if(searchParam == null && searchWord == null){
+
+			listCount = as.getQuestionListCount();
+			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);		
+			list = as.selectQuestionList(pi);
+			
+		//문의일 검색
+		 }else if(searchParam.equals("datePick")){
+			DatePick d = new DatePick();
+			d.setFromDate(fromDate);
+			d.setToDate(toDate);
+			listCount = as.getSearchDateQuestionListCount(d);
+			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
+			list = as.selectSearchDateQuestionList(d, pi);
+			
+		}else{
+			Question q = new Question();
+			q.setqRecordId(-99);
+			q.setSendId(-99);
+			//문의번호 검색
+			if(searchParam.equals("qRecordId")){
+				q.setqRecordId(Integer.parseInt(searchWord));
+			//문의자 검색	
+			}else if(searchParam.equals("sendId")){
+				q.setSendId(Integer.parseInt(searchWord));
+			//미처리건 검색은 mapper에서
+			}else{
+				System.out.println("미처리 건 검색");
+			}
+			listCount = as.getSearchWordQuestionListCount(q);
+			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
+			list = as.selectSearchWordQuestionList(q, pi);
+		}
+		
+		for(int i = 0; i < list.size(); i++){
+			//처리상황
+			if(list.get(i).getpDate() == null){
+				list.get(i).setStatus("미처리");
+			}else{
+				list.get(i).setStatus("처리완료");
+			}
+			
+		}
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
 		return "admin/question";
 	}
 

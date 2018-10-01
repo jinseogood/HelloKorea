@@ -100,7 +100,7 @@ table.type09 td {
                             <ul class="breadcrumb">
                                 <li><a href="myPageView.ad"><i class="fa fa-home"></i> Home</a></li>
                                 <li><a href="selectReservationList.ad">예약내역 관리</a></li>
-                                <li class="active">예약내역 조회</li>
+                                <li><a href="selectReservationList.ad">예약내역 조회</a></li>
                             </ul>
                             <!--breadcrumbs end -->
                         </div>

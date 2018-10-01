@@ -14,6 +14,7 @@ import com.kh.hello.admin.dao.AdminDao;
 import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.DatePick;
 import com.kh.hello.admin.model.vo.PageInfo;
+import com.kh.hello.admin.model.vo.Question;
 import com.kh.hello.admin.model.vo.Report;
 import com.kh.hello.admin.model.vo.Reservation;
 @Service
@@ -196,5 +197,36 @@ public class AdminServiceImpl implements AdminService{
 		return ad.selectSearchWordBlacklist(sqlSession, b, pi);
 	}
 
+	@Override
+	public int getQuestionListCount() {
+		return ad.getQuestionListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Question> selectQuestionList(PageInfo pi) {
+		// TODO Auto-generated method stub
+		return ad.selectQuestionList(sqlSession, pi);
+	}
+
+	@Override
+	public int getSearchDateQuestionListCount(DatePick d) {
+		return ad.getSearchDateQuestionListCount(sqlSession, d);
+	}
+
+	@Override
+	public ArrayList<Question> selectSearchDateQuestionList(DatePick d, PageInfo pi) {
+		return ad.selectSearchDateQuestionList(sqlSession, d, pi);
+
+	}
+
+	@Override
+	public int getSearchWordQuestionListCount(Question q) {
+		return ad.getSearchWordQuestionListCount(sqlSession, q);
+	}
+
+	@Override
+	public ArrayList<Question> selectSearchWordQuestionList(Question q, PageInfo pi) {
+		return ad.selectSearchWordQuestionList(sqlSession, q, pi);
+	}
 
 }
