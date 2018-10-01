@@ -36,11 +36,15 @@
 button {
 	width: 300px;
 	height: 50px;
-	margin-top: 10px;
+	margin-top: 30px;
 	border: none;
 }
 
-option {
+#national {
+	width: 300px;
+	height: 50px;
+}
+#interest{
 	width: 300px;
 	height: 50px;
 }
@@ -66,7 +70,7 @@ option {
 					<th>National</th>
 				</tr>
 				<tr>
-					<td><select name="national">
+					<td><select name="national" id="national">
 							<option>----</option>
 							<option value="가나">Ghana</option>
 							<option value="가봉">Gabon</option>
@@ -167,7 +171,6 @@ option {
 							<option value="콜롬비아">Columbia</option>
 							<option value="콩고">Congo</option>
 							<option value="쿠바">Cuba</option>
-				
 							<option value="쿠웨이트">Kuwait</option>
 							<option value="크로아티아">Croatia</option>
 							<option value="타지키스탄">Tajikistan</option>
@@ -178,20 +181,19 @@ option {
 							<option value="파나마">Panama</option>
 							<option value="파라과이">Paraguay</option>
 							<option value="파기스탄">Pakistan</option>
-							<option value="파푸아뉴기니">usa</option>
-							<option value="팔라우">japan</option>
-							<option value="페루">usa</option>
-							<option value="포르투갈">japan</option>
-							<option value="폴란드">usa</option>
-							<option value="프랑스">japan</option>
-							<option value="피지">usa</option>
-							<option value="필란드">japan</option>
-							<option value="필리핀">usa</option>
-							<option value="헝가리">japan</option>
-							<option value="아르차흐">usa</option>
-							<option value="소말리아">japan</option>
-							<option value="압하지야">usa</option>
-							<option value="타이완">japan</option>
+							<option value="파푸아뉴기니">Papua New Guinea</option>
+							<option value="팔라우">Palau</option>
+							<option value="페루">Peru</option>
+							<option value="포르투갈">Portugal</option>
+							<option value="폴란드">Poland</option>
+							<option value="프랑스">France</option>
+							<option value="피지">sebum</option>
+							<option value="필란드">Finland</option>
+							<option value="필리핀">Philippines</option>
+							<option value="헝가리">Hungary</option>
+							<option value="아르차흐">Archach</option>
+							<option value="소말리아">Somalia</option>
+							<option value="타이완">Taiwan</option>
 					</select></td>
 					
 				</tr>
@@ -199,7 +201,7 @@ option {
 					<th>Interest</th>
 				</tr>
 				<tr>
-					<td><select name="interest">
+					<td><select name="interest" id="interest">
 							<option>----</option>
 							<option value="뷰티">beauty</option>
 							<option value="관광">tourism</option>
