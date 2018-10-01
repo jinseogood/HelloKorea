@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Board">
+
+     <!-- 리뷰 -->
+     <resultMap type="Board" id="BoardResultSet">
+          <id property="bid" column="BID"/>
+          <result property="title" column="TITLE" />
+          <result property="text" column="TEXT"/>
+          <result property="board_type" column="BOARD_TYPE"/>
+          <result property="regist_date" column="REGIST_DATE"/>
+          <result property="status" column="STATUS"/>
+          <result property="modify_date" column="MODIFY_DATE"/>
+          <result property="grade" column="GRADE"/>
+          <result property="likey" column="LIKEY"/>
+          <result property="m_id" column="M_ID"/>
+     </resultMap>
+     
+     <!-- 리뷰 인서트************2 -->
+     <insert id="insertReviewBoard" parameterType="Board">
+          INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, '1',
+                                       '1', 1, SYSDATE, 'Y', SYSDATE, null, null, 2)
+     </insert>
+     
+     <!-- 리뷰사진 상태 업데이트 -->
+     <!-- <update id="updateAttachment" parameterType="_int">
+         UPDATE MEMBER
+         SET STATUS = 'B'
+         WHERE M_ID = #{mId} 
+     </update> -->
+     
+     <!-- 리뷰사진 검색 검색 -->
+     <!-- <select id="selectAttachment" resultMap="AttachmentResultSet">
+         SELECT *
+         FROM ATTACHMENT
+         WHERE B_TYPE = 'R'
+         AND IN_DATE BETWEEN TO_DATE(#{fromDate}) AND TO_DATE(#{toDate})
+         ORDER BY B_RECORD_ID DESC
+     </select> -->
+     
+</mapper>

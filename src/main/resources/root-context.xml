@@ -40,5 +40,5 @@
 			<tx:method name="delete*" rollback-for="Exception" propagation="REQUIRED" isolation="SERIALIZABLE"/>
 		</tx:attributes>
 	</tx:advice>
-	
+	<tx:annotation-driven/>
 </beans>
