@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>Hello Korea</title>
 <style>
 	#more{margin-top:5%;}
@@ -15,6 +16,7 @@
 	#tm-home-box-2-link-2{width:445px; display:inline-block;}
 	#dibsBtn{padding:15px; width:50px; height:50px;}
 	#infoTextArea{height:175px; padding:10px 20px 44px; overflow:auto; text-align:left; }
+	.img-responsive1{width:250px; height:225px;}
 </style>
 </head>
 <body>
@@ -99,7 +101,7 @@
 					
 					
 				</div>
-				<div class="col-lg-9" align="right">
+				<div class="col-lg-9" align="right" id="viewArea">
 					
 				    <div class="tm-home-box-3" id="detailHover">
 						<div class="tm-home-box-3-img-container" id="detailClick" onclick="location.href='${contextPath}/detailHotel'">
@@ -126,7 +128,8 @@
 							<!-- <a href="#" class="tm-home-box-2-link" id="tm-home-box-2-link-1"><i class="fa fa-edit tm-home-box-2-icon border-left"></i></a> -->
 						</div>
 						</div>						
-					</div><div class="tm-home-box-3" id="detailHover">
+					</div>
+					<div class="tm-home-box-3" id="detailHover">
 						<div class="tm-home-box-3-img-container" id="detailClick" onclick="location.href='${contextPath}/detailHotel'">
 							<img src="${ contextPath }/resources/img/index-09.jpg" alt="image" class="img-responsive1">	
 						</div>						
@@ -138,7 +141,8 @@
 							<!-- <a href="#" class="tm-home-box-2-link" id="tm-home-box-2-link-1"><i class="fa fa-edit tm-home-box-2-icon border-left"></i></a> -->
 						</div>
 						</div>						
-					</div><div class="tm-home-box-3" id="detailHover">
+					</div>
+					<div class="tm-home-box-3" id="detailHover">
 						<div class="tm-home-box-3-img-container" id="detailClick" onclick="location.href='${contextPath}/detailHotel'">
 							<img src="${ contextPath }/resources/img/index-09.jpg" alt="image" class="img-responsive1">	
 						</div>						
@@ -152,10 +156,55 @@
 						</div>						
 					</div>
 			    </div>
+			</div>
 		</div>
+		<script>
+			var areaCode = ${param.areaCode};
+			var sigunguCode = ${param.sigunguCode};
+			console.log("지역호텔검색areaCode : " + areaCode);
+			console.log("지역호텔검색sigunguCode : " + sigunguCode);
+		
+			$(function(){
+				$.ajax({
+					url:"searchAreaHotel.sub",
+					type:"GET",
+					data:{areaCode:areaCode, sigunguCode:sigunguCode},
+					dataType:"json",
+					success:function(data){
+						console.log("오예");
+						console.log(data);
+						subAreaHotelView(data);
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+			});
 			
-					
-		</div>
+			function subAreaHotelView(data){
+				var myData = data.response.body.items.item;
+				console.log("subAreaHotelView : " + myData);
+				var viewArea = $("#viewArea");
+				viewArea.html("");
+				var output = "";
+				for(var i = 0; i < myData.length; i++){
+					output += "<div class='tm-home-box-3' id='detailHover'>";
+					output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='location.href=${contextPath}/detailHotel'>";
+					if(myData[i].firstimage == null){
+						output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
+					}else{
+						output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
+					}
+					output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+					output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData[i].addr1+"</p>";
+					output += "<div class='tm-home-box-2-container'>";
+					output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+					output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
+					output += "</div></div></div>";
+					viewArea.html(output);
+				}
+			}
+		</script>
 		
 	</section>		
 	
