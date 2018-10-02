@@ -6,8 +6,8 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
-import com.kh.hello.seller.model.vo.Attachment;
 import com.kh.hello.seller.model.vo.Company;
 import com.kh.hello.seller.model.vo.RegistrationHistory;
 import com.kh.hello.seller.model.vo.Room;
@@ -43,12 +43,12 @@ public class SellerDaoImpl implements SellerDao{
 
 	@Override
 	public int insertPerFile(Attachment perFileDB, SqlSessionTemplate sqlSession) {
-		return sqlSession.insert("SellerAT.insertPerFile", perFileDB);
+		return sqlSession.insert("Attachment.insertPerFile", perFileDB);
 	}
 
 	@Override
 	public int insertComFile(Attachment comFileDB, SqlSessionTemplate sqlSession) {
-		return sqlSession.insert("SellerAT.insertComFile", comFileDB);
+		return sqlSession.insert("Attachment.insertComFile", comFileDB);
 	}
 
 	@Override

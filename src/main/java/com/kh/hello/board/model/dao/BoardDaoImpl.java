@@ -3,8 +3,8 @@ package com.kh.hello.board.model.dao;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.hello.board.model.vo.Attachment;
 import com.kh.hello.board.model.vo.Board;
+import com.kh.hello.common.Attachment;
 
 @Repository
 public class BoardDaoImpl implements BoardDao{

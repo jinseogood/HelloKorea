@@ -6,8 +6,8 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
 
 import com.kh.hello.board.model.dao.BoardDao;
-import com.kh.hello.board.model.vo.Attachment;
 import com.kh.hello.board.model.vo.Board;
+import com.kh.hello.common.Attachment;
 
 @Service
 public class BoardServiceImpl implements BoardService{
