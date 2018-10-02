@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.hello.member.model.exception.LoginException;
 import com.kh.hello.member.model.dao.MemberDao;
+import com.kh.hello.member.model.vo.Attachment;
 import com.kh.hello.member.model.vo.Member;
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -88,6 +89,13 @@ public class MemberServiceImpl implements MemberService {
 	public int editProfile(Member m) {
 		// TODO Auto-generated method stub
 		return md.editProfile(m,sqlSession);
+	}
+
+
+	@Override
+	public int uploadprofile(Attachment a) {
+		// TODO Auto-generated method stub
+		return md.uploadprofile(a,sqlSession);
 	}
 
 

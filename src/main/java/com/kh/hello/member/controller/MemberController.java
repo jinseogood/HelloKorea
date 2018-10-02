@@ -1,5 +1,10 @@
 package com.kh.hello.member.controller;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.hello.common.CommonUtils;
 import com.kh.hello.member.model.exception.LoginException;
 import com.kh.hello.member.model.service.MemberService;
+import com.kh.hello.member.model.vo.Attachment;
 import com.kh.hello.member.model.vo.Member;
 
 @Controller
@@ -21,7 +29,6 @@ public class MemberController {
 	@Autowired
 	private MemberService ms;
 	@Autowired BCryptPasswordEncoder passwordEncoder;
-
 
 	@RequestMapping(value ="insertUser.me")
 	public String insertMember(Model model,Member m ){
@@ -136,11 +143,40 @@ public class MemberController {
 	
 	
 	@RequestMapping(value="editProfile.me")
-	public String editProfile(Model model, Member m){
+	public String editProfile(Model model, Member m ,
+								HttpServletRequest request,@RequestParam(name="photo",required=false)MultipartFile photo){
 		
 		System.out.println("editProfile : " + m);
 		
 		int result = ms.editProfile(m);
+		
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		
+		String filePath = root+"\\uploadFiles";
+		
+		String originName = photo.getOriginalFilename();
+		String ext = originName.substring(originName.lastIndexOf("."));
+		String changeName = CommonUtils.getRandomString();
+		
+		Attachment a = new Attachment();
+		a.setOriginName(originName);
+		a.setChangeName(changeName);
+		a.setRefId(m.getmId());
+		a.setFilePath(filePath);
+		
+		int result2 = ms.uploadprofile(a);
+		
+		try {
+			photo.transferTo(new File(filePath +"\\"+changeName +ext));
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		if(result >0){
 			
 			return "userMypage/editProfile";

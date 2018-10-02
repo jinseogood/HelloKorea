@@ -42,5 +42,6 @@
          AND IN_DATE BETWEEN TO_DATE(#{fromDate}) AND TO_DATE(#{toDate})
          ORDER BY B_RECORD_ID DESC
      </select> -->
+  
      
 </mapper>

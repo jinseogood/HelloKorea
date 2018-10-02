@@ -1,6 +1,7 @@
 package com.kh.hello.member.model.service;
 
 import com.kh.hello.member.model.exception.LoginException;
+import com.kh.hello.member.model.vo.Attachment;
 import com.kh.hello.member.model.vo.Member;
 
 public interface MemberService {
@@ -26,6 +27,10 @@ public interface MemberService {
 	int updateAddSeller(Member m);
 
 	int editProfile(Member m);
+
+	int uploadprofile(Attachment a);
+
+	
 
 	
 

@@ -50,7 +50,7 @@
 			<div id="photoDiv">
 				<img src="${contextPath}/resources/img/user.png" id="myPhoto">
 			</div>
-			<form action="editProfile.me" method="post">
+			<form action="editProfile.me" method="post" encType="multipart/form-data">
 				<table id="profileTable">
 					<input type="hidden" value="${sessionScope.loginUser.mId}"name="mId">
 					

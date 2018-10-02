@@ -3,6 +3,7 @@ package com.kh.hello.member.model.dao;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.hello.member.model.vo.Attachment;
 import com.kh.hello.member.model.vo.Member;
 @Repository
 public class MemberDaoImpl implements MemberDao {
@@ -61,6 +62,12 @@ public class MemberDaoImpl implements MemberDao {
 	public int editProfile(Member m, SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("Member.editProfile", m);
+	}
+
+	@Override
+	public int uploadprofile(Attachment a, SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("Attachment.uploadprofile",a);
 	}
 
 
