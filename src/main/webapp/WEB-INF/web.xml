@@ -80,7 +80,7 @@
     </servlet-mapping>
   
     <!-- Good -->
-    <!-- <servlet>
+    <servlet>
     	<servlet-name>good</servlet-name>
     	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     	<init-param>
@@ -92,7 +92,7 @@
     <servlet-mapping>
     	<servlet-name>good</servlet-name>
     	<url-pattern>*.good</url-pattern>
-    </servlet-mapping> -->
+    </servlet-mapping>
 
 	<!-- 한글 인코딩 처리를 위한 filter Mapping -->
     <filter>

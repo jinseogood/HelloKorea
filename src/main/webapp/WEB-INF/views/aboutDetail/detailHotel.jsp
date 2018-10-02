@@ -89,6 +89,17 @@
 		</div>
 	</section>
 		<script>
+		
+			var contentid = ${param.contentid};
+			
+			function detailHotelInfo(contentid){
+				//이어서 합시다.. areaCode, sigunguCode, pageNo 까지 다 받아와야 해요. 처음부터 다시넘겨요..
+			}
+			
+			$(function(){
+				detailHotelInfo(contentid);
+			});
+		
 		/* Google map
       	------------------------------------------------*/
       	var map = '';

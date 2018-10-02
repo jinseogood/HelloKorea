@@ -20,13 +20,12 @@ import net.sf.json.JSONObject;
 public class SubInformationController {
 	
 	@RequestMapping(value="searchAreaHotel.sub")
-	public void searchAreaHotel(HttpServletRequest request, HttpServletResponse response, @RequestParam int areaCode, @RequestParam int sigunguCode, @RequestParam int pageNo) throws IOException{
+	public void searchAreaHotel(HttpServletRequest request, HttpServletResponse response, @RequestParam int areaCode, @RequestParam int sigunguCode) throws IOException{
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
 		System.out.println("subInfo_areaCode : " + areaCode);
 		System.out.println("subInfo_sigunguCode : " + sigunguCode);
-		System.out.println("subInfo_pageNo : " + pageNo);
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchStay?ServiceKey=";
 		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
@@ -40,7 +39,7 @@ public class SubInformationController {
 		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
 		parameter = parameter + "&" + "arrange=A";
 		parameter = parameter + "&" + "numOfRows=12";
-		parameter = parameter + "&" + "pageNo="+pageNo;
+		parameter = parameter + "&" + "pageNo=1";
 		parameter = parameter + "&" + "_type=json";
 		
 		addr = addr + serviceKey + parameter;
