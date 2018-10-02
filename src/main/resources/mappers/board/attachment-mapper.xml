@@ -6,20 +6,20 @@
 
      <!-- 리뷰사진 -->
      <resultMap type="Attachment" id="AttachmentResultSet">
-          <id property="fid" column="FID"/>
-          <result property="origin_name" column="ORIGIN_NAME" />
-          <result property="file_path" column="FILE_PATH"/>
-          <result property="upload_date" column="UPLOAD_DATE"/>
-          <result property="change_name" column="CHANGE_NAME"/>
+          <id property="fId" column="FID"/>
+          <result property="originName" column="ORIGIN_NAME" />
+          <result property="filePath" column="FILE_PATH"/>
+          <result property="uploadDate" column="UPLOAD_DATE"/>
+          <result property="changeName" column="CHANGE_NAME"/>
           <result property="status" column="STATUS"/>
-          <result property="a_level" column="A_LEVEL"/>
-          <result property="bid" column="REF_ID"/>
+          <result property="aLevel" column="A_LEVEL"/>
+          <result property="refId" column="REF_ID"/>
      </resultMap>
      
      <!-- 리뷰사진 추가 -->
      <insert id="insertReviewAttachment" parameterType="Attachment">
-          INSERT INTO ATTACHMENT VALUES(SEQ_FID.NEXTVAL, #{origin_name},
-                                       #{file_path}, SYSDATE, #{change_name}, #{status}, #{a_level}, SEQ_BID.CURRVAL)
+          INSERT INTO ATTACHMENT VALUES(SEQ_FID.NEXTVAL, #{originName},
+                                       #{filePath}, SYSDATE, #{changeName}, #{status}, #{aLevel}, SEQ_BID.CURRVAL)
      </insert>
      
      <!-- 리뷰사진 선택삭제 -->
@@ -29,7 +29,7 @@
      
      <!-- 리뷰사진 일괄삭제 -->
      <delete id="deleteAllReviewAttachment" parameterType="_int">
-          DELETE FROM ATTACHMENT WHERE REF_ID = (SELECT MAX(BID) FROM BOARD WHERE M_ID = #{m})	
+          DELETE FROM ATTACHMENT WHERE REF_ID = (SELECT MAX(BID) FROM BOARD WHERE M_ID = #{mId})	
      </delete>
      
      <!-- 리뷰사진 상태 업데이트 -->
@@ -40,13 +40,11 @@
      </update> -->
      
      <!-- 리뷰사진 검색 검색 -->
-     <!-- <select id="selectAttachment" resultMap="AttachmentResultSet">
+     <select id="selectAttachment" resultMap="AttachmentResultSet">
          SELECT *
          FROM ATTACHMENT
-         WHERE B_TYPE = 'R'
-         AND IN_DATE BETWEEN TO_DATE(#{fromDate}) AND TO_DATE(#{toDate})
-         ORDER BY B_RECORD_ID DESC
-     </select> -->
+         WHERE REF_ID = (SELECT MAX(BID) FROM BOARD WHERE M_ID = #{mId})
+     </select>
   
      
 </mapper>

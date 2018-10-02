@@ -93,5 +93,33 @@ public class BoardPageController {
         
         return new Response(result);
     }
+	
+	@RequestMapping(value="deleteAllUpload.bo")
+	public String deleteAllUpload(HttpServletRequest request){
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		FileDeleteUpload fileDeleteUpload = new FileDeleteUpload();
+		int result = 0;
+		
+		ArrayList<Attachment> at = null;
+		at = bs.selectUpload(m.getmId());
+		
+		if(at != null){
+			for(int i = 0 ; i < at.size() ; i++){
+				fileDeleteUpload.process(at.get(i).getChangeName());
+			}
+			
+			result = bs.deleteAllUpload(m.getmId());
+		}
+		
+		return "main/main";
+	}
+	
+	@RequestMapping(value="insertReview.bo")
+	public String insertReview(Model model, Board b, HttpServletRequest request){
+		int result = 0;
+		result = bs.updateBoard(b);
+		
+		return "main/main";
+	}
 
 }
