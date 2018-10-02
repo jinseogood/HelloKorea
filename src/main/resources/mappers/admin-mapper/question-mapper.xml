@@ -40,7 +40,7 @@
                  FROM ( SELECT ROWNUM AS Q_RECORD_ID, SEND_ID, TITLE, SEND_DATE, CONTENT, P_DATE, MSG_ID
                         FROM MESSAGE
                         WHERE M_LEVEL = 'Q' )
-                 WHERE SEND_DATE BETWEEN TO_DATE(#{fromDate}) AND TO_DATE(#{toDate}))
+                 WHERE TO_CHAR(SEND_DATE,'YYYYMMDD') BETWEEN #{fromDate} AND #{toDate})
 	</select>
 	
 	<!-- 문의일로 조회 -->
@@ -49,7 +49,7 @@
           FROM ( SELECT ROWNUM AS Q_RECORD_ID, SEND_ID, TITLE, SEND_DATE, CONTENT, P_DATE, MSG_ID
                  FROM MESSAGE
                  WHERE M_LEVEL = 'Q' )
-          WHERE SEND_DATE BETWEEN TO_DATE(#{fromDate}) AND TO_DATE(#{toDate})
+          WHERE TO_CHAR(SEND_DATE,'YYYYMMDD') BETWEEN #{fromDate} AND #{toDate}
           ORDER BY Q_RECORD_ID DESC
     </select>
 	

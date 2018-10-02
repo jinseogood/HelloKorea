@@ -287,18 +287,30 @@ public class AdminServiceImpl implements AdminService{
 		return ad.selectSearchcrDateBlacklist(sqlSession, d, pi);
 	}
 
-	//회사 승인일 검색 리스트
+	//회사 등록승인일 검색 리스트
 	@Override
 	public int getSearchapDateBlacklistCount(DatePick d) {
 		return ad.getSearchapDateBlacklistCount(sqlSession, d);
 
 	}
 
-	//회사 승인일 검색
+	//회사 등록승인일 검색
 	@Override
 	public ArrayList<Approval> selectSearchapDateBlacklist(DatePick d, PageInfo pi) {
 		return ad.selectSearchapDateBlacklist(sqlSession, d, pi);
 
+	}
+
+	//회사 등록 이력 검색 카운트
+	@Override
+	public int getSearchWordCompanyListCount(Approval a) {
+		return ad.getSearchWordCompanyListCount(sqlSession, a);
+	}
+
+	//회사 등록 이력 검색 리스트
+	@Override
+	public ArrayList<Approval> selectSearchWordCompanyList(Approval a, PageInfo pi) {
+		return ad.selectSearchWordCompanyList(sqlSession, a, pi);
 	}
 
 }

@@ -63,6 +63,10 @@ table.type09 td {
     border-bottom: 1px solid #ccc;
 }
 
+#detailBtn{
+    font-size:12px;
+    line-height:0.8;
+}
 
 </style>
 </head>
@@ -153,11 +157,12 @@ table.type09 td {
 <table class="type09">
     <thead>
     <tr>
-        <th>등록번호</th>
+        <th style="min-width:60px;">등록번호</th>
         <th>업체명</th>
         <th>담당자</th>
         <th>신청일</th>
         <th>승인일</th>
+        <th>상세 보기</th>
     </tr>
     </thead>
     <tbody>
@@ -168,6 +173,7 @@ table.type09 td {
         <td>${c.cMaster}</td>
         <td>${c.crDate}</td>
         <td>${c.apDate}</td>
+        <td><button class="btn btn-success" id="detailBtn">상세 보기</button></td>
     </tr>
     </c:forEach>
     

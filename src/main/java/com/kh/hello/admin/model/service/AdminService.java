@@ -59,5 +59,7 @@ public interface AdminService {
 	ArrayList<Approval> selectSearchcrDateBlacklist(DatePick d, PageInfo pi);
 	int getSearchapDateBlacklistCount(DatePick d);
 	ArrayList<Approval> selectSearchapDateBlacklist(DatePick d, PageInfo pi);
+	int getSearchWordCompanyListCount(Approval a);
+	ArrayList<Approval> selectSearchWordCompanyList(Approval a, PageInfo pi);
 	
 }

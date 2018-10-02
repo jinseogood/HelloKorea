@@ -37,14 +37,14 @@
          FROM ( SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_MASTER, CR.CR_TERM, CR.AP_DATE 
                 FROM COM_REGIST CR
                 JOIN COMPANY C ON(CR.C_ID=C.C_ID)
-                WHERE CR_DATE BETWEEN TO_DATE(#{fromDate}) AND TO_DATE(#{toDate}))
+                WHERE TO_CHAR(CR_DATE,'YYYYMMDD') BETWEEN #{fromDate} AND #{toDate})
      </select>
      <!-- 등록일 검색 -->
      <select id="selectSearchcrDateBlacklist" resultMap="approvalResultSet">
          SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_MASTER, CR.CR_TERM, CR.AP_DATE 
          FROM COM_REGIST CR
          JOIN COMPANY C ON(CR.C_ID=C.C_ID)
-         WHERE CR_DATE BETWEEN TO_DATE(#{fromDate}) AND TO_DATE(#{toDate})
+         WHERE TO_CHAR(CR_DATE,'YYYYMMDD') BETWEEN #{fromDate} AND #{toDate}
          ORDER BY CR_ID DESC
      </select>
      <!-- 승인일 검색 카운트 -->
@@ -53,14 +53,59 @@
          FROM ( SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_MASTER, CR.CR_TERM, CR.AP_DATE 
                 FROM COM_REGIST CR
                 JOIN COMPANY C ON(CR.C_ID=C.C_ID)
-                WHERE AP_DATE BETWEEN TO_DATE(#{fromDate}) AND TO_DATE(#{toDate}))
+                WHERE TO_CHAR(AP_DATE,'YYYYMMDD') BETWEEN #{fromDate} AND #{toDate})
      </select>
      <!-- 승인일 검색 -->
      <select id="selectSearchapDateBlacklist" resultMap="approvalResultSet">
          SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_MASTER, CR.CR_TERM, CR.AP_DATE 
          FROM COM_REGIST CR
          JOIN COMPANY C ON(CR.C_ID=C.C_ID)
-         WHERE AP_DATE BETWEEN TO_DATE(#{fromDate}) AND TO_DATE(#{toDate})
+         WHERE TO_CHAR(AP_DATE,'YYYYMMDD') BETWEEN #{fromDate} AND #{toDate}
+         ORDER BY CR_ID DESC
+     </select>
+     
+     <!-- 승인 검색 리스트 카운트 -->
+     <select id="selectSearchWordCompanyListCount" resultType="_int">
+         SELECT COUNT(*)
+         FROM ( SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_MASTER, CR.CR_TERM, CR.AP_DATE 
+                FROM COM_REGIST CR
+                JOIN COMPANY C ON(CR.C_ID=C.C_ID)
+                WHERE 1=1
+                <choose>
+                  <when test="crId != -99">
+                      AND CR_ID = #{crId}
+                  </when>
+                  <when test="cName != null">
+                      AND C_NAME LIKE '%' || #{cName} || '%'
+                  </when>
+                  <when test="cMaster != null">
+                      AND C_MASTER LIKE '%' || #{cMaster} || '%'
+                  </when>
+                  <otherwise>
+                      AND AP_DATE IS NULL
+                  </otherwise>
+                </choose>)
+     </select>
+     <!-- 승인 검색 리스트 -->
+     <select id="selectSearchWordCompanyList" resultMap="approvalResultSet">
+         SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_MASTER, CR.CR_TERM, CR.AP_DATE 
+         FROM COM_REGIST CR
+         JOIN COMPANY C ON(CR.C_ID=C.C_ID)
+         WHERE 1=1
+         <choose>
+             <when test="crId != -99">
+                 AND CR_ID = #{crId}
+             </when>
+             <when test="cName != null">
+                 AND C_NAME LIKE '%' || #{cName} || '%'
+             </when>
+             <when test="cMaster != null">
+                 AND C_MASTER LIKE '%' || #{cMaster} || '%'
+             </when>
+             <otherwise>
+                 AND AP_DATE IS NULL
+             </otherwise>
+         </choose>
          ORDER BY CR_ID DESC
      </select>
 </mapper>

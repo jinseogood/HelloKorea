@@ -68,7 +68,7 @@
          FROM ( SELECT *
                 FROM BLACKLIST
                 WHERE B_TYPE = 'R'
-                AND IN_DATE BETWEEN TO_DATE(#{fromDate}) AND TO_DATE(#{toDate}))
+                AND TO_CHAR(IN_DATE,'YYYYMMDD') BETWEEN #{fromDate} AND #{toDate})
      </select>
      
      <!-- 블랙리스트 등록일 검색 -->
@@ -76,7 +76,7 @@
          SELECT *
          FROM BLACKLIST
          WHERE B_TYPE = 'R'
-         AND IN_DATE BETWEEN TO_DATE(#{fromDate}) AND TO_DATE(#{toDate})
+         AND TO_CHAR(IN_DATE,'YYYYMMDD') BETWEEN #{fromDate} AND #{toDate}
          ORDER BY B_RECORD_ID DESC
      </select>
      

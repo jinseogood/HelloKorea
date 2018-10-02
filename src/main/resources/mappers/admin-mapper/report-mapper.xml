@@ -112,7 +112,7 @@
 		      FROM REPORT_HISTORY RH
 		      JOIN MESSAGE M ON(RH.REF_ID=M.MSG_ID)
 		      WHERE R_LEVEL = 2)
-		WHERE R_DATE BETWEEN TO_DATE(#{fromDate}) AND TO_DATE(#{toDate}))
+		WHERE TO_CHAR(R_DATE,'YYYYMMDD') BETWEEN #{fromDate} AND #{toDate})
 	</select>
 
 	<!-- 신고일 검색 -->
@@ -145,7 +145,7 @@
 		      FROM REPORT_HISTORY RH
 		      JOIN MESSAGE M ON(RH.REF_ID=M.MSG_ID)
 		      WHERE R_LEVEL = 2)
-		WHERE R_DATE BETWEEN TO_DATE(#{fromDate}) AND TO_DATE(#{toDate})
+		WHERE TO_CHAR(R_DATE,'YYYYMMDD') BETWEEN #{fromDate} AND #{toDate}
 		ORDER BY R_RECORD_ID DESC
 	</select>
 

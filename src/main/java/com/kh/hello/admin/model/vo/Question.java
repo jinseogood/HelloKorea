@@ -2,7 +2,10 @@ package com.kh.hello.admin.model.vo;
 
 import java.sql.Date;
 
-public class Question {
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class Question implements java.io.Serializable{
     private int qRecordId;
     private int sendId;
     private String title;

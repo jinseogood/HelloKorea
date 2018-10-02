@@ -357,4 +357,20 @@ public class AdminDaoImpl implements AdminDao{
 		list = (ArrayList)sqlSession.selectList("selectSearchapDateBlacklist", d, rowBounds);
 		return list;
 	}
+
+	//업체 검색 리스트 카운트
+	@Override
+	public int getSearchWordCompanyListCount(SqlSessionTemplate sqlSession, Approval a) {
+		return sqlSession.selectOne("selectSearchWordCompanyListCount", a);
+	}
+
+	//업체 검색 리스트
+	@Override
+	public ArrayList<Approval> selectSearchWordCompanyList(SqlSessionTemplate sqlSession, Approval a, PageInfo pi) {
+		ArrayList<Approval> list = null;
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		list = (ArrayList)sqlSession.selectList("selectSearchWordCompanyList", a, rowBounds);
+		return list;
+	}
 }

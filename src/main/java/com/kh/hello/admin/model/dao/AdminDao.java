@@ -66,6 +66,8 @@ public interface AdminDao {
 	ArrayList<Approval> selectSearchcrDateBlacklist(SqlSessionTemplate sqlSession, DatePick d, PageInfo pi);
 	int getSearchapDateBlacklistCount(SqlSessionTemplate sqlSession, DatePick d);
 	ArrayList<Approval> selectSearchapDateBlacklist(SqlSessionTemplate sqlSession, DatePick d, PageInfo pi);
+	int getSearchWordCompanyListCount(SqlSessionTemplate sqlSession, Approval a);
+	ArrayList<Approval> selectSearchWordCompanyList(SqlSessionTemplate sqlSession, Approval a, PageInfo pi);
 	
 	
 }
