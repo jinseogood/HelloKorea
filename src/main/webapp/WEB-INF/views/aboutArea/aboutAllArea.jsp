@@ -8,6 +8,7 @@
 <title>Hello Korea</title>
 <style>
 	#more{margin-top:5%;}
+	.img-responsive2{width:254px; height:185px;}
 </style>
 </head>
 <body>
@@ -44,12 +45,11 @@
 	</section>
 		<script>
 			var areaCode = ${param.areaCode};
-			var sigunguCode = ${param.sigunguCode};
 			console.log("지역메인 areaCode : " + areaCode);
-			console.log("지역메인 sigunguCode : " + sigunguCode);
 			
 			if(areaCode == 1){
 				$(".flex-caption .slider-title").text("서울");
+				
 			}else if(areaCode == 2){
 				$(".flex-caption .slider-title").text("인천");
 			}else if(areaCode == 3){
@@ -83,6 +83,109 @@
 			}else if(areaCode == 39){
 				$(".flex-caption .slider-title").text("제주도");
 			}
+			
+			$.ajax({
+				url:"aboutMainSeoulHotel.sub",
+				type:"GET",
+				data:{areaCode:areaCode, sigunguCode:1},
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					var myData = data.response.body.items.item;
+					var rowHotelArea = $("#rowHotelArea");
+					rowHotelArea.html("");
+					var output = "";
+					var count = 0;
+					for(var i = 0; i < myData.length; i++){
+						count++;
+						output = "";
+						output += "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12'>";
+						output += "<div class='tm-home-box-2'>";
+						if(myData[i].firstimage == null){
+							output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive2'>";
+						}else{
+							output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive2'>";
+						}
+						output += "<h3>"+myData[i].title+"</h3>";
+						output += "</div></div>";
+						document.getElementById("rowHotelArea").innerHTML += output;
+						if(count == 4){
+							return;
+						}
+					}
+				},
+				error:function(data){
+					console.log(data);
+				}
+			});
+			$.ajax({
+				url:"aboutMainSeoulFood.sub",
+				type:"GET",
+				data:{areaCode:areaCode},
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					var myData = data.response.body.items.item;
+					var rowFoodArea = $("#rowFoodArea");
+					rowFoodArea.html("");
+					var output = "";
+					var count = 0;
+					for(var i = 0; i < myData.length; i++){
+						count++;
+						output = "";
+						output += "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12'>";
+						output += "<div class='tm-home-box-2'>";
+						if(myData[i].firstimage == null){
+							output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive2'>";
+						}else{
+							output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive2'>";
+						}
+						output += "<h3>"+myData[i].title+"</h3>";
+						output += "</div></div>";
+						document.getElementById("rowFoodArea").innerHTML += output;
+						if(count == 4){
+							return;
+						}
+					}
+				},
+				error:function(data){
+					console.log(data);
+				}
+			});
+			$.ajax({
+				url:"aboutMainSeoulGame.sub",
+				type:"GET",
+				data:{areaCode:areaCode},
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					var myData = data.response.body.items.item;
+					var rowGameArea = $("#rowGameArea");
+					rowGameArea.html("");
+					var output = "";
+					var count = 0;
+					for (var i = 0; i < myData.length; i++){
+						count++;
+						output = "";
+						output += "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12'>";
+						output += "<div class='tm-home-box-2'>";
+						if(myData[i].firstimage == null){
+							output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive2'>";
+						}else{
+							output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive2'>";
+						}
+						output += "<h3>"+myData[i].title+"</h3>";
+						output += "</div></div>";
+						document.getElementById("rowGameArea").innerHTML += output;
+						if(count == 4){
+							return;
+						}
+					}
+				},
+				error:function(data){
+					console.log(data);
+				}
+			});
 		
 		/* Google map
       	------------------------------------------------*/
@@ -154,7 +257,7 @@
 					<div class="col-lg-4 col-md-6 col-sm-6"><h2 class="tm-section-title">추천 호텔</h2></div>
 					<div class="col-lg-4 col-md-3 col-sm-3"><hr></div>	
 				</div>
-				<div class="row">
+				<div class="row" id="rowHotelArea">
 				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12">
 					<div class="tm-home-box-2">						
 						<img src="${ contextPath }/resources/img/index-03.jpg" alt="image" class="img-responsive2">
@@ -192,7 +295,7 @@
 					<div class="col-lg-4 col-md-6 col-sm-6"><h2 class="tm-section-title">추천 음식점</h2></div>
 					<div class="col-lg-4 col-md-3 col-sm-3"><hr></div>	
 				</div>
-				<div class="row">
+				<div class="row" id="rowFoodArea">
 				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12">
 					<div class="tm-home-box-2">						
 						<img src="${ contextPath }/resources/img/index-03.jpg" alt="image" class="img-responsive2">
@@ -231,7 +334,7 @@
 					<div class="col-lg-4 col-md-6 col-sm-6"><h2 class="tm-section-title">추천 오락거리</h2></div>
 					<div class="col-lg-4 col-md-3 col-sm-3"><hr></div>	
 				</div>
-				<div class="row">
+				<div class="row" id="rowGameArea">
 				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12">
 					<div class="tm-home-box-2">						
 						<img src="${ contextPath }/resources/img/index-03.jpg" alt="image" class="img-responsive2">

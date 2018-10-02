@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MainPageController {
 	
 	@RequestMapping(value="areaHotelView.main")
-	public String areaView(@RequestParam int areaCode, @RequestParam int sigunguCode){
+	public String areaView(@RequestParam int areaCode, @RequestParam int sigunguCode, @RequestParam int pageNo){
 		return "aboutArea/searchAreaHotel";
 	}
 	
 	@RequestMapping(value="areaAllView.main")
 	public String areaAllView(@RequestParam int areaCode){
+		System.out.println(areaCode);
 		return "aboutArea/aboutAllArea";
 	}
 	

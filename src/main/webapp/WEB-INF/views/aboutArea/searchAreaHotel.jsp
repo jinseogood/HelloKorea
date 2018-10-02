@@ -159,12 +159,13 @@
 			</div>
 		</div>
 		<script>
-			let isEnd = false;
+			
 			var areaCode = ${param.areaCode};
 			var sigunguCode = ${param.sigunguCode};
-			var pageNo = 1;
+			var pageNo = ${param.pageNo};
 			console.log("지역호텔검색areaCode : " + areaCode);
 			console.log("지역호텔검색sigunguCode : " + sigunguCode);
+			console.log("지역호텔검색pageNo : " + pageNo);
 			
 			if(areaCode == 1){
 				$(".tm-section-title1").text("서울 호텔");
@@ -204,23 +205,15 @@
 			
 			
 			
-			let searchHotelPage = function(page){
+			function searchHotelPage(pageNo){
 				
-				if(isEnd == true){
-					return;
-				}
 				
 				$.ajax({
 					url:"searchAreaHotel.sub",
 					type:"GET",
-					data:{areaCode:areaCode, sigunguCode:sigunguCode, page:page},
+					data:{areaCode:areaCode, sigunguCode:sigunguCode, pageNo:pageNo},
 					dataType:"json",
 					success:function(data){
-						let length = data.response.body.items.item;
-						if(length < 12){
-							isEnd = true;
-						}
-						
 						console.log(data);
 						subAreaHotelView(data);
 					},
@@ -231,18 +224,8 @@
 			}
 		
 			$(function(){
-				
-				$(window).scroll(function(){
-					let $window = $(this);
-					let scrollTop = $window.scrollTop();
-					let windowHeight = $window.height();
-					let documentHeight = $(document).height();
-					
-					if(scrollTop + windowHeight + 30 > documentHeight){
-						searchHotelPage();
-					}
-				searchHotelPage();
-				});
+				searchHotelPage(pageNo);
+
 				
 			});
 			
