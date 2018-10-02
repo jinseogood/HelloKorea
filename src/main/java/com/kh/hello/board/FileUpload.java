@@ -22,11 +22,11 @@ public class FileUpload {
                 if (belowMaxFileSize(file.getSize())) {
                 	String ext = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
                 	originalName = file.getOriginalFilename();
-                	changeName = CommonUtils.getRandomString();
-                    String newFile = UPLOAD_FILE_PATH + changeName + ext;
+                	changeName = CommonUtils.getRandomString() + ext;
+                    String newFile = UPLOAD_FILE_PATH + changeName;
                     try {
                         file.transferTo(new File(newFile));
-                        return changeName + ext;
+                        return changeName;
                     } catch (IllegalStateException e) {
                         return "There was an error uploading " + file.getOriginalFilename() + " => " + e.getMessage();
                     } catch (IOException e) {

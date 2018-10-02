@@ -24,9 +24,11 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 	@Override
-	public int deleteAttachment(SqlSessionTemplate sqlSession, int m) {
-		int result = sqlSession.delete("Attachment.deleteReviewAttachment", m);
-		System.out.println(m);
+	public int deleteAttachment(SqlSessionTemplate sqlSession, String changeFileName) {
+		int result = sqlSession.delete("Attachment.deleteSelectReviewAttachment", changeFileName);
+		
+		System.out.println(changeFileName);
+		
 		return result;
 	}
 

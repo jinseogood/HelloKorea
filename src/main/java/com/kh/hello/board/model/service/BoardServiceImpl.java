@@ -37,8 +37,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int deleteAttachment(int m) {
-		int result = bd.deleteAttachment(sqlSession, m);
+	public int deleteAttachment(String changeFileName) {
+		int result = bd.deleteAttachment(sqlSession, changeFileName);
 		
 		return result;
 	}

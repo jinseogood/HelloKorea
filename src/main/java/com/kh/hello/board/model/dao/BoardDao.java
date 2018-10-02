@@ -11,6 +11,6 @@ public interface BoardDao {
 
 	int insertBoard(Board b, SqlSessionTemplate sqlSession);
 
-	int deleteAttachment(SqlSessionTemplate sqlSession, int m);
+	int deleteAttachment(SqlSessionTemplate sqlSession, String changeFileName);
 
 }

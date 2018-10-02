@@ -13,7 +13,7 @@
           <result property="change_name" column="CHANGE_NAME"/>
           <result property="status" column="STATUS"/>
           <result property="a_level" column="A_LEVEL"/>
-          <result property="bid" column="BID"/>
+          <result property="bid" column="REF_ID"/>
      </resultMap>
      
      <!-- 리뷰사진 추가 -->
@@ -22,9 +22,14 @@
                                        #{file_path}, SYSDATE, #{change_name}, #{status}, #{a_level}, SEQ_BID.CURRVAL)
      </insert>
      
-     <!-- 리뷰사진 삭제 -->
-     <delete id="deleteReviewAttachment" parameterType="_int">
-          DELETE FROM ATTACHMENT WHERE BID = (SELECT MAX(BID) FROM BOARD WHERE M_ID = #{m})	
+     <!-- 리뷰사진 선택삭제 -->
+     <delete id="deleteSelectReviewAttachment" parameterType="java.lang.String">
+          DELETE FROM ATTACHMENT WHERE CHANGE_NAME = #{changeFileName}	
+     </delete>
+     
+     <!-- 리뷰사진 일괄삭제 -->
+     <delete id="deleteAllReviewAttachment" parameterType="_int">
+          DELETE FROM ATTACHMENT WHERE REF_ID = (SELECT MAX(BID) FROM BOARD WHERE M_ID = #{m})	
      </delete>
      
      <!-- 리뷰사진 상태 업데이트 -->

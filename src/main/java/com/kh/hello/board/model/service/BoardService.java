@@ -9,6 +9,6 @@ public interface BoardService{
 
 	int insertBoard(Board b);
 
-	int deleteAttachment(int i);
+	int deleteAttachment(String changeFileName);
 
 }

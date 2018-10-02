@@ -9,13 +9,13 @@ public class Attachment {
 	private Date upload_date;
 	private String change_name;
 	private String status;
-	private String a_level;
+	private int a_level;
 	private int bid;
 	
 	public Attachment(){}
 
 	public Attachment(int fid, String origin_name, String file_path, Date upload_date, String change_name,
-			String status, String a_level, int bid) {
+			String status, int a_level, int bid) {
 		super();
 		this.fid = fid;
 		this.origin_name = origin_name;
@@ -75,11 +75,11 @@ public class Attachment {
 		this.status = status;
 	}
 
-	public String getA_level() {
+	public int getA_level() {
 		return a_level;
 	}
 
-	public void setA_level(String a_level) {
+	public void setA_level(int a_level) {
 		this.a_level = a_level;
 	}
 

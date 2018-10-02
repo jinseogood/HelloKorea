@@ -32,6 +32,8 @@ public class BoardPageController {
 	public String reviewWrite(Model model, HttpServletRequest request/*, @RequestParam("file") MultipartFile[] file*/){
 		
 		Board b = new Board();
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		b.setM_id(m.getmId());
 		
 		int result = bs.insertBoard(b);
 		
@@ -50,7 +52,7 @@ public class BoardPageController {
 	
 	@RequestMapping(value="/upload.bo", method=RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public Response handleFileUpload(@RequestParam("file") MultipartFile[] file) {
+    public Response handleFileUpload(@RequestParam("file") MultipartFile[] file, HttpServletRequest request) {
 
         List<String> result = new ArrayList<String>();
         FileUpload fileUpload = new FileUpload();
@@ -63,7 +65,8 @@ public class BoardPageController {
         a.setFile_path("D:/git/HelloKorea/src/main/webapp/resources/uploadFiles/"+fileUpload.changeName());
         a.setChange_name(fileUpload.changeName());
         a.setStatus("Y");
-        a.setA_level("리뷰");
+        a.setA_level(0);
+        Member m = (Member)request.getSession().getAttribute("loginUser");
         
         int result1 = bs.insertAttachment(a);
         
@@ -82,7 +85,11 @@ public class BoardPageController {
         FileDeleteUpload fileDeleteUpload = new FileDeleteUpload();
         result.add(fileDeleteUpload.process(changeFileName));
 
-        int result1 = bs.deleteAttachment(m.getmId());
+        //선택삭제
+        int result1 = bs.deleteAttachment(changeFileName);
+        
+        //일괄삭제
+        //int result1 = bs.deleteAttachment(m.getmId());
         
         return new Response(result);
     }
