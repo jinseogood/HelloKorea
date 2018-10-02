@@ -21,7 +21,7 @@
      <!-- 리뷰 인서트************2 -->
      <insert id="insertReviewBoard" parameterType="Board">
           INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, '1',
-                                       '1', 1, SYSDATE, 'Y', SYSDATE, null, null, 2)
+                                       '1', 1, SYSDATE, 'Y', SYSDATE, null, null, #{m_id})
      </insert>
      
      <!-- 리뷰사진 상태 업데이트 -->

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -457,7 +458,11 @@
 	
 	<script>
 		function review(){
- 			location.href="reviewWrite.bo";
+			if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('2')})
+ 				location.href="reviewWrite.bo";
+			else{
+				alert("로그인이 필요한 서비스 입니다.");
+			}
  		}
  	  
     	function reportWrite(){
