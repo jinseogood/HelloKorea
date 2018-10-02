@@ -1,4 +1,4 @@
-package com.kh.hello.admin.dao;
+package com.kh.hello.admin.model.dao;
 
 import java.util.ArrayList;
 
@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.DatePick;
 import com.kh.hello.common.PageInfo;
@@ -306,5 +307,54 @@ public class AdminDaoImpl implements AdminDao{
 	@Override
 	public int updatepDate(SqlSessionTemplate sqlSession, Message m) {
 		return sqlSession.update("updatepDate", m);
+	}
+
+	//업체 승인 신청 리스트 카운트
+	@Override
+	public int getCompanyListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("selectCompanyListCount");
+	}
+
+	//업체 승인 신청 리스트
+	@Override
+	public ArrayList<Approval> selectCompanyList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		ArrayList<Approval> list = null;
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		list = (ArrayList)sqlSession.selectList("selectCompanyList", null, rowBounds);
+		return list;
+	}
+
+	//업체 등록일 검색 리스트 카운트
+	@Override
+	public int getSearchcrDateBlacklistCount(SqlSessionTemplate sqlSession, DatePick d) {
+		return sqlSession.selectOne("selectSearchcrDateBlacklistCount", d);
+	}
+
+	//업체 등록일 검색 리스트
+	@Override
+	public ArrayList<Approval> selectSearchcrDateBlacklist(SqlSessionTemplate sqlSession, DatePick d, PageInfo pi) {
+		ArrayList<Approval> list = null;
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		list = (ArrayList)sqlSession.selectList("selectSearchcrDateBlacklist", d, rowBounds);
+		return list;
+	}
+	
+	//업체 승인일 검색 리스트 카운트
+	@Override
+	public int getSearchapDateBlacklistCount(SqlSessionTemplate sqlSession, DatePick d) {
+		return sqlSession.selectOne("selectSearchapDateBlacklistCount", d);
+
+	}
+	
+	//업체 승인일 검색 리스트
+	@Override
+	public ArrayList<Approval> selectSearchapDateBlacklist(SqlSessionTemplate sqlSession, DatePick d, PageInfo pi) {
+		ArrayList<Approval> list = null;
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		list = (ArrayList)sqlSession.selectList("selectSearchapDateBlacklist", d, rowBounds);
+		return list;
 	}
 }

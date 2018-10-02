@@ -97,7 +97,7 @@ table.type09 td {
                       <li><a href="#noT">미해지건</a></li>
                       <li class="divider"></li>
                       <li><a href="#datePick" onclick="showDatePicker()">등록일자</a></li>
-                      <li><a href="#datePick2" onclick="showDatePicker2()">해지일자</a></li>
+                      <li><a href="#datePick2" onclick="showDatePicker()">해지일자</a></li>
                     </ul>
                 </div>
                 <input type="hidden" name="searchParam" value="all" id="searchParam">                       
@@ -133,9 +133,6 @@ table.type09 td {
     	 
      }
      
-     function showDatePicker2(){
-    	 $("#datePicker").show(); 
-     }
 	$(document).ready(function(e){
 	    $('.search-panel .dropdown-menu').find('a').click(function(e) {
 			e.preventDefault();

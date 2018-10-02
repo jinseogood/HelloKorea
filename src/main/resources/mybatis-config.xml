@@ -6,6 +6,7 @@
   <configuration>
   
       <typeAliases>
+          <typeAlias type="com.kh.hello.admin.model.vo.Approval" alias="Approval"/>
           <typeAlias type="com.kh.hello.admin.model.vo.Question" alias="Question"/>
           <typeAlias type="com.kh.hello.admin.model.vo.Blacklist" alias="Blacklist"/>
           <typeAlias type="com.kh.hello.admin.model.vo.Report" alias="Report"/>
@@ -25,11 +26,12 @@
       </typeAliases>
   
       <mappers>
-          <mapper resource="mappers/question-mapper.xml"/>
-          <mapper resource="mappers/blacklist-mapper.xml"/>
+          <mapper resource="mappers/admin-mapper/company-mapper.xml"/>
+          <mapper resource="mappers/admin-mapper/question-mapper.xml"/>
+          <mapper resource="mappers/admin-mapper/blacklist-mapper.xml"/>
           <mapper resource="mappers/message-mapper.xml"/>
-          <mapper resource="mappers/report-mapper.xml"/>
-          <mapper resource="mappers/reservation-mapper.xml"/>
+          <mapper resource="mappers/admin-mapper/report-mapper.xml"/>
+          <mapper resource="mappers/admin-mapper/reservation-mapper.xml"/>
           <mapper resource="mappers/member-mapper.xml"/>
           <mapper resource="mappers/company-mapper.xml"/>
           <mapper resource="mappers/room-mapper.xml"/>

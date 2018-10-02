@@ -1,9 +1,10 @@
-package com.kh.hello.admin.dao;
+package com.kh.hello.admin.model.dao;
 
 import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.DatePick;
 import com.kh.hello.common.PageInfo;
@@ -58,6 +59,13 @@ public interface AdminDao {
 	
 	int insertAnswerMsg(SqlSessionTemplate sqlSession, Message m);
 	int updatepDate(SqlSessionTemplate sqlSession, Message m);
+	
+	int getCompanyListCount(SqlSessionTemplate sqlSession);
+	ArrayList<Approval> selectCompanyList(SqlSessionTemplate sqlSession, PageInfo pi);
+	int getSearchcrDateBlacklistCount(SqlSessionTemplate sqlSession, DatePick d);
+	ArrayList<Approval> selectSearchcrDateBlacklist(SqlSessionTemplate sqlSession, DatePick d, PageInfo pi);
+	int getSearchapDateBlacklistCount(SqlSessionTemplate sqlSession, DatePick d);
+	ArrayList<Approval> selectSearchapDateBlacklist(SqlSessionTemplate sqlSession, DatePick d, PageInfo pi);
 	
 	
 }

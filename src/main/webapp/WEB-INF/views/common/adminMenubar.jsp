@@ -85,7 +85,7 @@
 								관리</a></li>
 						<li><a href="selectReportList.ad" style="padding: 10px 34px 10px 34px;">일반회원
 								관리</a></li>
-						<li><a href="approvalView.ad" style="padding: 10px 34px 10px 34px;">제휴업체
+						<li><a href="selectCompanyList.ad" style="padding: 10px 34px 10px 34px;">제휴업체
 								관리</a></li>
 						<li><a href="salesStatisticsView.ad" style="padding: 10px 34px 10px 34px;">통계</a></li>
 					</ul>
@@ -113,8 +113,8 @@
 				<dl>
 					<dd>
 						<ul>
-							<li><a href="approvalView.ad" style="padding: 10px 27px 10px 22px;">업체
-									조회·승인</a></li>
+							<li><a href="selectCompanyList.ad" style="padding: 10px 27px 10px 22px;">업체
+									승인·관리</a></li>
 							<li><a href="depositView.ad" style="padding: 10px 27px 10px 22px;">업체
 									입금관리</a></li>
 						</ul>

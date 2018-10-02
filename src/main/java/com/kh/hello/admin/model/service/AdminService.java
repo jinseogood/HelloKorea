@@ -2,6 +2,7 @@ package com.kh.hello.admin.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.DatePick;
 import com.kh.hello.common.PageInfo;
@@ -51,5 +52,12 @@ public interface AdminService {
 	ArrayList<Question> selectSearchWordQuestionList(Question q, PageInfo pi);
 	
 	int insertAnswerMsg(Message m);
+	
+	int getCompanyListCount();
+	ArrayList<Approval> selectCompanyList(PageInfo pi);
+	int getSearchcrDateBlacklistCount(DatePick d);
+	ArrayList<Approval> selectSearchcrDateBlacklist(DatePick d, PageInfo pi);
+	int getSearchapDateBlacklistCount(DatePick d);
+	ArrayList<Approval> selectSearchapDateBlacklist(DatePick d, PageInfo pi);
 	
 }

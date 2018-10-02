@@ -260,6 +260,7 @@ table.type09 td {
                                                           </div>
                                                       </div>
                                                       
+                                              <div id="sendAnswer">
                                                       <div class="input-group m-b-10">
                                                   <div class="input-group-btn" align="right">
                                                       <button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">자주 묻는 질문에 답하기<span class="caret"></span></button>
@@ -286,6 +287,7 @@ table.type09 td {
                                                               <button type="button" class="btn btn-info" onclick="answerQuestion()">문의답변 발송하기</button>
                                                           
                                                       </div>
+                                                  </div>    
                                                   </form>
 
                                               </div>
@@ -309,6 +311,14 @@ table.type09 td {
 				$("#sendDate").val($(this).children().eq(3).text());
 				$("#title").val($(this).children().eq(2).text());
 				$("#content").text($(this).children().eq(5).text());
+				
+				var status = $(this).children().eq(4).text();
+				
+				if(status == '처리완료'){
+					$("#sendAnswer").hide();
+				}else{
+					$("#sendAnswer").show();
+				}
 				
 				$(this).attr({"data-toggle":"modal", "data-target":"#myModal-1"});
 			});
