@@ -151,8 +151,9 @@ public class MemberController {
 		int result = ms.editProfile(m);
 		
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		
-		String filePath = root+"\\uploadFiles";
+		System.out.println("root" + root);
+		String filePath = root+"\\uploadFiles\\member";
+		System.out.println("filePath :"+filePath);
 		
 		String originName = photo.getOriginalFilename();
 		String ext = originName.substring(originName.lastIndexOf("."));

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Attachment">
+     <resultMap type="Attachment" id="profileATResultSet">
+          <id property="fId" column="FID"/>
+          <result property="filePath" column="FILE_PATH"/>
+          <result property="originName" column="ORIGIN_NAME" />
+          <result property="changeName" column="CHANGE_NAME"/>
+          <result property="uploadDate" column="UPLOAD_DATE"/>
+          <result property="aLevel" column="A_LEVEL"/>
+          <result property="refId" column="REF_ID"/>
+          <result property="status" column="STATUS"/>
+     </resultMap>
+    
+    <insert id="uploadprofile" parameterType="Attachment">
+    	INSERT INTO ATTACHMENT (FID,FILE_PATH,ORIGIN_NAME,CHANGE_NAME,STATUS,A_LEVEL,REF_ID,UPLOAD_DATE)
+    	VALUES(SEQ_FID.NEXTVAL,#{filePath},#{originName},#{changeName},'Y',2,#{refId},SYSDATE)
+    
+    
+    </insert>
+    
+</mapper>

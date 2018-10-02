@@ -31,7 +31,7 @@
           <mapper resource="mappers/admin-mapper/report-mapper.xml"/>
           <mapper resource="mappers/admin-mapper/message-mapper.xml"/>
           <mapper resource="mappers/member/member-mapper.xml"/>
-          <!-- <mapper resource="mappers/member/attachment-mapper.xml"/> -->
+          <mapper resource="mappers/member/profileAT-mapper.xml"/>
           <mapper resource="mappers/seller/company-mapper.xml"/>
           <mapper resource="mappers/seller/room-mapper.xml"/>
           <mapper resource="mappers/seller/rh-mapper.xml"/>

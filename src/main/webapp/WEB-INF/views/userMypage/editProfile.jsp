@@ -47,6 +47,7 @@
 		<jsp:include page="../common/userMenubar.jsp"/>
 		
 		<div id="profileDiv">
+		
 			<div id="photoDiv">
 				<img src="${contextPath}/resources/img/user.png" id="myPhoto">
 			</div>
