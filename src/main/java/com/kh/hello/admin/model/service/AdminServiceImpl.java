@@ -10,7 +10,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kh.hello.admin.dao.AdminDao;
+import com.kh.hello.admin.model.dao.AdminDao;
+import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.DatePick;
 import com.kh.hello.common.PageInfo;
@@ -260,6 +261,44 @@ public class AdminServiceImpl implements AdminService{
 			result = 0;
 		}
 		return result;
+	}
+
+	//회사 등록 이력 리스트 카운트
+	@Override
+	public int getCompanyListCount() {
+		return ad.getCompanyListCount(sqlSession);
+	}
+
+	//회사 등록 이력 리스트
+ 	@Override
+	public ArrayList<Approval> selectCompanyList(PageInfo pi) {
+		return ad.selectCompanyList(sqlSession, pi);
+	}
+
+ 	//회사 등록일 검색 카운트
+	@Override
+	public int getSearchcrDateBlacklistCount(DatePick d) {
+		return ad.getSearchcrDateBlacklistCount(sqlSession, d);
+	}
+
+	//회사 등록일 검색
+	@Override
+	public ArrayList<Approval> selectSearchcrDateBlacklist(DatePick d, PageInfo pi) {
+		return ad.selectSearchcrDateBlacklist(sqlSession, d, pi);
+	}
+
+	//회사 승인일 검색 리스트
+	@Override
+	public int getSearchapDateBlacklistCount(DatePick d) {
+		return ad.getSearchapDateBlacklistCount(sqlSession, d);
+
+	}
+
+	//회사 승인일 검색
+	@Override
+	public ArrayList<Approval> selectSearchapDateBlacklist(DatePick d, PageInfo pi) {
+		return ad.selectSearchapDateBlacklist(sqlSession, d, pi);
+
 	}
 
 }

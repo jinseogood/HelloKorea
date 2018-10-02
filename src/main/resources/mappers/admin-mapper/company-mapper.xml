@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Blacklist">
+
+     <!-- 승인 신청 리스트 결과 셋 -->
+     <resultMap type="Approval" id="approvalResultSet">
+          <id property="crId" column="CR_ID"/>
+          <result property="crDate" column="CR_DATE" />
+          <result property="crStatus" column="CR_STATUS"/>
+          <result property="cId" column="C_ID"/>
+          <result property="cName" column="C_NAME"/>
+          <result property="cMaster" column="C_MASTER"/>
+          <result property="crTerm" column="CR_TERM"/>
+          <result property="apDate" column="AP_DATE"/>
+     </resultMap>
+     
+     <!-- 승인 신청 리스트 카운트 -->
+     <select id="selectCompanyListCount" resultType="_int">
+         SELECT COUNT(*)
+         FROM ( SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_MASTER, CR.CR_TERM, CR.AP_DATE 
+                FROM COM_REGIST CR
+                JOIN COMPANY C ON(CR.C_ID=C.C_ID))
+     </select>
+     <!-- 승인 신청 리스트 -->
+     <select id="selectCompanyList" resultMap="approvalResultSet">
+         SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_MASTER, CR.CR_TERM, CR.AP_DATE 
+         FROM COM_REGIST CR
+         JOIN COMPANY C ON(CR.C_ID=C.C_ID)
+         ORDER BY CR_ID DESC
+     </select>
+     
+     <!-- 등록일 검색 카운트 -->
+     <select id="selectSearchcrDateBlacklistCount" resultType="_int">
+         SELECT COUNT(*)
+         FROM ( SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_MASTER, CR.CR_TERM, CR.AP_DATE 
+                FROM COM_REGIST CR
+                JOIN COMPANY C ON(CR.C_ID=C.C_ID)
+                WHERE CR_DATE BETWEEN TO_DATE(#{fromDate}) AND TO_DATE(#{toDate}))
+     </select>
+     <!-- 등록일 검색 -->
+     <select id="selectSearchcrDateBlacklist" resultMap="approvalResultSet">
+         SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_MASTER, CR.CR_TERM, CR.AP_DATE 
+         FROM COM_REGIST CR
+         JOIN COMPANY C ON(CR.C_ID=C.C_ID)
+         WHERE CR_DATE BETWEEN TO_DATE(#{fromDate}) AND TO_DATE(#{toDate})
+         ORDER BY CR_ID DESC
+     </select>
+     <!-- 승인일 검색 카운트 -->
+     <select id="selectSearchapDateBlacklistCount" resultType="_int">
+         SELECT COUNT(*)
+         FROM ( SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_MASTER, CR.CR_TERM, CR.AP_DATE 
+                FROM COM_REGIST CR
+                JOIN COMPANY C ON(CR.C_ID=C.C_ID)
+                WHERE AP_DATE BETWEEN TO_DATE(#{fromDate}) AND TO_DATE(#{toDate}))
+     </select>
+     <!-- 승인일 검색 -->
+     <select id="selectSearchapDateBlacklist" resultMap="approvalResultSet">
+         SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_MASTER, CR.CR_TERM, CR.AP_DATE 
+         FROM COM_REGIST CR
+         JOIN COMPANY C ON(CR.C_ID=C.C_ID)
+         WHERE AP_DATE BETWEEN TO_DATE(#{fromDate}) AND TO_DATE(#{toDate})
+         ORDER BY CR_ID DESC
+     </select>
+</mapper>

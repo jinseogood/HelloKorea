@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.hello.admin.model.service.AdminService;
+import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.DatePick;
 import com.kh.hello.common.PageInfo;
@@ -435,8 +436,64 @@ public class AdminController {
 		return "admin/blacklist";
 	}
 
-	@RequestMapping("approvalView.ad")
-	public String approvalView(){
+	//업체신청 이력조회
+	@RequestMapping("selectCompanyList.ad")
+	public String selectCompanyList(String searchParam, String searchWord, String fromDate, String toDate, PageInfo p, Model model){
+		if(p.getCurrentPage() == 0){
+			p.setCurrentPage(1);
+		}
+
+		ArrayList<Approval> list = null;
+		PageInfo pi = null;
+		int listCount = 0;
+		
+		//전체 리스트
+		if(searchParam == null && searchWord == null){
+
+			listCount = as.getCompanyListCount();
+			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);		
+			list = as.selectCompanyList(pi);
+
+		//신청일,승인일 검색
+		}else if(searchParam.equals("datePick") || searchParam.equals("datePick2")){
+
+			DatePick d = new DatePick();
+			d.setFromDate(fromDate);
+			d.setToDate(toDate);
+			//등록일 검색
+			if(searchParam.equals("datePick")){
+				listCount = as.getSearchcrDateBlacklistCount(d);
+				pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
+				list = as.selectSearchcrDateBlacklist(d, pi);
+			}else{ //해지일 검색
+				listCount = as.getSearchapDateBlacklistCount(d);
+				pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
+				list = as.selectSearchapDateBlacklist(d, pi);
+			}
+			
+		}/*else if(searchParam.equals("noA")){
+			listCount = as.getnoACompanyListCount();
+			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
+			list = as.selectnoACompanyList(pi);
+		}else{
+			Approval a = new Approval();
+			a.setCrId(-99);
+			//등록이력번호 검색
+			if(searchParam.equals("crId")){
+				a.setCrId(Integer.parseInt(searchWord));
+			//업체명 검색
+			}else if(searchParam.equals("cName")){
+				a.setcName(searchWord);
+			}else{ //대표자명
+				a.setcMaster(searchWord);
+			}
+			
+			listCount = as.getSearchWordCompanyListCount(a);
+			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
+			list = as.selectSearchWordCompanyList(a, pi);
+		}*/
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
 		return "admin/approval";
 	}
 
