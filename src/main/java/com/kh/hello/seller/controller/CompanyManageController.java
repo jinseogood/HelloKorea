@@ -17,11 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.hello.common.CommonUtils;
 import com.kh.hello.common.Pagination;
+import com.kh.hello.common.PageInfo;
 import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.seller.model.service.SellerService;
 import com.kh.hello.seller.model.vo.Attachment;
 import com.kh.hello.seller.model.vo.Company;
-import com.kh.hello.seller.model.vo.PageInfo;
 import com.kh.hello.seller.model.vo.Registration;
 import com.kh.hello.seller.model.vo.RegistrationHistory;
 import com.kh.hello.seller.model.vo.Room;
@@ -187,27 +187,52 @@ public class CompanyManageController {
 	}
 	
 	@RequestMapping(value="manageProduct.sell")
-	public String manageProduct(Model model, HttpServletRequest request, PageInfo p){
+	public String manageProduct(Model model, HttpServletRequest request, PageInfo p, String searchParam, String searchWord, String fromDate, String toDate){
 		Member m=(Member)request.getSession().getAttribute("loginUser");
 		
 		System.out.println("member : " + m);
+		
+		System.out.println("searchParam : " + searchParam);
+		System.out.println("searchWord : " + searchWord);
+		System.out.println("fromDate : " + fromDate);
+		System.out.println("toDate : " + toDate);
 		
 		if(p.getCurrentPage() == 0){
 			p.setCurrentPage(1);
 		}
 		
-		int listCount=0;
-		
-		listCount=ss.getProductListCount(m.getmId());
-		
-		System.out.println("listCount : " + listCount);
-		
+		ArrayList<SearchProduct> list=null;
 		PageInfo pi=null;
-		/*pi=Pagination.getPageInfo(p.getCurrentPage(), listCount);*/
+		int listCount=0;
+
+		if(searchParam == null && searchWord == null){
+			listCount=ss.getProductListCount(m.getmId());
+			pi=Pagination.getPageInfo(p.getCurrentPage(), listCount);
+			list=ss.selectProductList(m.getmId(), pi);
+		}
+		else if(searchParam.equals("datePick")){
+			listCount=ss.getSearchDateProductListCount(m.getmId(), toDate, fromDate);
+			pi=Pagination.getPageInfo(p.getCurrentPage(), listCount);
+			list=ss.selectSearchDateProductList(m.getmId(), toDate, fromDate, pi);
+		}
+		else{
+			SearchProduct spd=new SearchProduct();
+			
+			if(searchParam.equals("comName")){
+				spd.setCompanyName(searchWord);
+			}
+			else if(searchParam.equals("comAddr")){
+				spd.setCompanyAddress(searchWord);
+			}
+			else{
+				spd.setStatus(searchWord);
+			}
+			
+			listCount=ss.getSearchWordProductListCount(m.getmId(), spd);
+			pi=Pagination.getPageInfo(p.getCurrentPage(), listCount);
+			list=ss.selectSearchWordProductListCount(m.getmId(), spd, pi);
+		}
 		
-		ArrayList<SearchProduct> list=ss.selectProductList(m.getmId(), pi);
-		
-		System.out.println("list : " + list);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
