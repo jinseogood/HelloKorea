@@ -2,8 +2,8 @@ package com.kh.hello.seller.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
-import com.kh.hello.seller.model.vo.Attachment;
 import com.kh.hello.seller.model.vo.Company;
 import com.kh.hello.seller.model.vo.RegistrationHistory;
 import com.kh.hello.seller.model.vo.Room;

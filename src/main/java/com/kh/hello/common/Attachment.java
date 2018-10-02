@@ -1,4 +1,4 @@
-package com.kh.hello.member.model.vo;
+package com.kh.hello.common;
 
 import java.sql.Date;
 
@@ -11,13 +11,13 @@ public class Attachment implements java.io.Serializable{
 	private String originName;
 	private String changeName;
 	private Date uploadDate;
-	private String aLevel;
+	private int aLevel;
 	private int refId;
 	private String status;
 	
 	public Attachment(){}
 
-	public Attachment(int fId, String filePath, String originName, String changeName, Date uploadDate, String aLevel,
+	public Attachment(int fId, String filePath, String originName, String changeName, Date uploadDate, int aLevel,
 			int refId, String status) {
 		super();
 		this.fId = fId;
@@ -70,11 +70,11 @@ public class Attachment implements java.io.Serializable{
 		this.uploadDate = uploadDate;
 	}
 
-	public String getaLevel() {
+	public int getaLevel() {
 		return aLevel;
 	}
 
-	public void setaLevel(String aLevel) {
+	public void setaLevel(int aLevel) {
 		this.aLevel = aLevel;
 	}
 
@@ -100,7 +100,5 @@ public class Attachment implements java.io.Serializable{
 				+ changeName + ", uploadDate=" + uploadDate + ", aLevel=" + aLevel + ", refId=" + refId + ", status="
 				+ status + "]";
 	}
-	
-	
 	
 }

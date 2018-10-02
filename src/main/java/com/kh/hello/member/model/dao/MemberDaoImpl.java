@@ -3,7 +3,7 @@ package com.kh.hello.member.model.dao;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.hello.member.model.vo.Attachment;
+import com.kh.hello.common.Attachment;
 import com.kh.hello.member.model.vo.Member;
 @Repository
 public class MemberDaoImpl implements MemberDao {

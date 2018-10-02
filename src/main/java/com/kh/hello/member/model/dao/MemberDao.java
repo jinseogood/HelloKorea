@@ -2,7 +2,7 @@ package com.kh.hello.member.model.dao;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
-import com.kh.hello.member.model.vo.Attachment;
+import com.kh.hello.common.Attachment;
 import com.kh.hello.member.model.vo.Member;
 
 public interface MemberDao {

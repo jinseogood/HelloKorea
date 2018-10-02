@@ -18,8 +18,8 @@ import com.kh.hello.board.FileDeleteUpload;
 import com.kh.hello.board.FileUpload;
 import com.kh.hello.board.Response;
 import com.kh.hello.board.model.service.BoardService;
-import com.kh.hello.board.model.vo.Attachment;
 import com.kh.hello.board.model.vo.Board;
+import com.kh.hello.common.Attachment;
 import com.kh.hello.member.model.vo.Member;
 
 @Controller
@@ -61,11 +61,11 @@ public class BoardPageController {
         }
 
         Attachment a = new Attachment();
-        a.setOrigin_name(fileUpload.originalName());
-        a.setFile_path("D:/git/HelloKorea/src/main/webapp/resources/uploadFiles/"+fileUpload.changeName());
-        a.setChange_name(fileUpload.changeName());
+        a.setOriginName(fileUpload.originalName());
+        a.setFilePath("D:/git/HelloKorea/src/main/webapp/resources/uploadFiles/"+fileUpload.changeName());
+        a.setChangeName(fileUpload.changeName());
         a.setStatus("Y");
-        a.setA_level(0);
+        a.setaLevel(0);
         Member m = (Member)request.getSession().getAttribute("loginUser");
         
         int result1 = bs.insertAttachment(a);

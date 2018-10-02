@@ -7,8 +7,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kh.hello.member.model.exception.LoginException;
+import com.kh.hello.common.Attachment;
 import com.kh.hello.member.model.dao.MemberDao;
-import com.kh.hello.member.model.vo.Attachment;
 import com.kh.hello.member.model.vo.Member;
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -97,16 +97,6 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return md.uploadprofile(a,sqlSession);
 	}
-
-
-
-
-
-
-	
-
-
-
 
 
 	

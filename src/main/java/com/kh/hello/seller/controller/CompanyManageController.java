@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.hello.common.Attachment;
 import com.kh.hello.common.CommonUtils;
 import com.kh.hello.common.Pagination;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.seller.model.service.SellerService;
-import com.kh.hello.seller.model.vo.Attachment;
 import com.kh.hello.seller.model.vo.Company;
 import com.kh.hello.seller.model.vo.Registration;
 import com.kh.hello.seller.model.vo.RegistrationHistory;
