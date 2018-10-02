@@ -33,13 +33,13 @@
           <mapper resource="mappers/admin-mapper/report-mapper.xml"/>
           <mapper resource="mappers/admin-mapper/reservation-mapper.xml"/>
           <mapper resource="mappers/member-mapper.xml"/>
-          <mapper resource="mappers/company-mapper.xml"/>
-          <mapper resource="mappers/room-mapper.xml"/>
-          <mapper resource="mappers/rh-mapper.xml"/>
+          <mapper resource="mappers/seller/company-mapper.xml"/>
+          <mapper resource="mappers/seller/room-mapper.xml"/>
+          <mapper resource="mappers/seller/rh-mapper.xml"/>
           <mapper resource="mappers/attachment-mapper.xml"/>
           <mapper resource="mappers/board-mapper.xml"/>
-          <mapper resource="mappers/sellerAT-mapper.xml"/>
-          <mapper resource="mappers/product-mapper.xml"/>
+          <mapper resource="mappers/seller/sellerAT-mapper.xml"/>
+          <mapper resource="mappers/seller/product-mapper.xml"/>
       </mappers>
   
   </configuration>

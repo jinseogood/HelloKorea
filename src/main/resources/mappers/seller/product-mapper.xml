@@ -1,0 +1,99 @@
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Product">
+	<resultMap type="Product" id="productResultSet">
+		<id property="cId" column="C_ID"/>
+		<result property="companyName" column="C_NAME"/>
+		<result property="companyPhone" column="C_PHONE"/>
+		<result property="companyAddress" column="C_ADDRESS"/>
+		<result property="mId" column="M_ID"/>
+		<result property="term" column="CR_TERM"/>
+		<result property="status" column="CR_STATUS"/>
+		<result property="apDate" column="AP_DATE"/>
+	</resultMap>
+   
+	<!-- 상품 리스트 카운트 -->
+	<select id="getProductListCount" resultType="_int" parameterType="_int">
+		SELECT COUNT(*)
+		FROM COMPANY
+		JOIN COM_REGIST USING(C_ID)
+		WHERE CR_STATUS = 'Y'
+		AND M_ID = #{mId}
+	</select>
+	
+	<!-- 상품 전체 조회 -->
+	<select id="selectProductList" resultMap="productResultSet" parameterType="_int">
+		SELECT C_ID, C_NAME, C_ADDRESS, C_PHONE, CR_TERM, CR_STATUS
+		FROM COMPANY
+		JOIN COM_REGIST USING(C_ID)
+		WHERE CR_STATUS = 'Y'
+		AND M_ID = #{mId}
+		ORDER BY AP_DATE
+	</select>
+	
+	<!-- 등록기간 검색 리스트 카운트 -->
+	<select id="getSearchDateProductListCount" resultType="_int" parameterType="arraylist">
+		SELECT COUNT(*)
+		FROM COMPANY
+		JOIN COM_REGIST USING(C_ID)
+		WHERE CR_STATUS = 'Y'
+		AND M_ID = #{list.mId}
+		AND AP_DATE = #{list.toDate}
+		AND ADD_MONTHS(AP_DATE, CR_TERM) = #{list.fromDate}
+		ORDER BY AP_DATE
+	</select>
+	
+	<!-- 등록기간 검색 상품 조회 -->
+	<select id="selectSearchDateProductList" resultMap="productResultSet" parameterType="arraylist">
+		SELECT C_ID, C_NAME, C_ADDRESS, C_PHONE, CR_TERM, CR_STATUS
+		FROM COMPANY
+		JOIN COM_REGIST USING(C_ID)
+		WHERE CR_STATUS = 'Y'
+		AND M_ID = #{list.mId}
+		AND AP_DATE = #{list.toDate}
+		AND ADD_MONTHS(AP_DATE, CR_TERM) = #{list.fromDate}
+		ORDER BY AP_DATE
+	</select>
+	
+	<!-- 검색 상품 리스트 카운트 -->
+	<select id="getSearchWordProductListCount" resultType="_int" parameterType="arraylist">
+		SELECT COUNT(*)
+		FROM COMPANY
+		JOIN COM_REGIST USING(C_ID)
+		WHERE M_ID = #{list.mId}
+		<choose>
+			<when test="list.spd.getCompanyName() != null">
+				AND C_NAME LIKE '%'||#{list.spd.getCompanyName()}||'%'
+			</when>
+			<when test="list.spd.getCompanyAddress() != null">
+				AND C_ADDRESS LIKE '%'||#{list.spd.getCompanyAddress()}||'%'
+			</when>
+			<otherwise>
+				AND CR_STATUS = #{list.spd.getStatus()}
+			</otherwise>
+		</choose>
+	</select>
+	
+	<!-- 검색 상품 조회 -->
+	<select id="selectSearchWordProductList" resultMap="productResultSet" parameterType="arraylist">
+		SELECT COUNT(*)
+		FROM COMPANY
+		JOIN COM_REGIST USING(C_ID)
+		WHERE M_ID = #{list.mId}
+		<choose>
+			<when test="list.spd.getCompanyName() != null">
+				AND C_NAME LIKE '%'||#{list.spd.getCompanyName()}||'%'
+			</when>
+			<when test="list.spd.getCompanyAddress() != null">
+				AND C_ADDRESS LIKE '%'||#{list.spd.getCompanyAddress()}||'%'
+			</when>
+			<otherwise>
+				AND CR_STATUS = #{list.spd.getStatus()}
+			</otherwise>
+		</choose>
+	</select>
+	
+</mapper>

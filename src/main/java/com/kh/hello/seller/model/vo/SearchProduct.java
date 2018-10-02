@@ -1,5 +1,7 @@
 package com.kh.hello.seller.model.vo;
 
+import java.sql.Date;
+
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -14,11 +16,12 @@ public class SearchProduct implements java.io.Serializable{
 	//Registration History
 	private String term;
 	private String status;
+	private Date apDate;
 	
 	public SearchProduct(){}
 
 	public SearchProduct(int cId, String companyName, String companyPhone, String companyAddress, int mId, String term,
-			String status) {
+			String status, Date apDate) {
 		super();
 		this.cId = cId;
 		this.companyName = companyName;
@@ -27,6 +30,7 @@ public class SearchProduct implements java.io.Serializable{
 		this.mId = mId;
 		this.term = term;
 		this.status = status;
+		this.apDate = apDate;
 	}
 
 	public int getcId() {
@@ -85,10 +89,19 @@ public class SearchProduct implements java.io.Serializable{
 		this.status = status;
 	}
 
+	public Date getApDate() {
+		return apDate;
+	}
+
+	public void setApDate(Date apDate) {
+		this.apDate = apDate;
+	}
+
 	@Override
 	public String toString() {
 		return "SearchProduct [cId=" + cId + ", companyName=" + companyName + ", companyPhone=" + companyPhone
-				+ ", companyAddress=" + companyAddress + ", mId=" + mId + ", term=" + term + ", status=" + status + "]";
+				+ ", companyAddress=" + companyAddress + ", mId=" + mId + ", term=" + term + ", status=" + status
+				+ ", apDate=" + apDate + "]";
 	}
-	
+
 }
