@@ -2,6 +2,7 @@ package com.kh.hello.member.model.dao;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.kh.hello.member.model.vo.Attachment;
 import com.kh.hello.member.model.vo.Member;
 
 public interface MemberDao {
@@ -27,6 +28,8 @@ public interface MemberDao {
 	int updateAddSeller(Member m, SqlSessionTemplate sqlSession);
 
 	int editProfile(Member m, SqlSessionTemplate sqlSession);
+
+	int uploadprofile(Attachment a, SqlSessionTemplate sqlSession);
 
 	
 }

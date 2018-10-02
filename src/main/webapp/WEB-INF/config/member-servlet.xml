@@ -33,6 +33,12 @@
 	<!-- 상단에 aop 추가 -->
 	<aop:aspectj-autoproxy proxy-target-class = "true"/>
 	
+	<context:component-scan base-package="com.kh.hello" />
+	<beans:bean class = "org.springframework.web.multipart.commons.CommonsMultipartResolver"
+						id = "multipartResolver">
+			<beans:property name="maxUploadSize" value = "10000000"/>			
+	
+	</beans:bean>
 	
 	
 	

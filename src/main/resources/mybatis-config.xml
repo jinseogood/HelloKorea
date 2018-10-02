@@ -13,6 +13,7 @@
           <typeAlias type="com.kh.hello.admin.model.vo.DatePick" alias="DatePick"/>
           <typeAlias type="com.kh.hello.admin.model.vo.Reservation" alias="Reservation"/>
           <typeAlias type="com.kh.hello.member.model.vo.Member" alias="Member"/>
+          <typeAlias type="com.kh.hello.member.model.vo.Attachment" alias="Member"/>
           <typeAlias type="com.kh.hello.seller.model.vo.Company" alias="Company"/>
           <typeAlias type="com.kh.hello.seller.model.vo.Room" alias="Room"/>
           <typeAlias type="com.kh.hello.seller.model.vo.RegistrationHistory" alias="RH"/>
