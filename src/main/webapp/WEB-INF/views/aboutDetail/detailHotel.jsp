@@ -16,6 +16,7 @@
 	/* .firstImgArea{display:inline-block;} */
 	.imgArea{display:block;}
 	.secondImgArea{display:inline-block;}
+	.firstImg{width:528px; height:435px;}
 	.secondImg{width:262.5px; height:217px; display:inline-block;}
 	.contentArea{display:block;}
 	.detailHead{text-align:center; width:280px; height:40px; background-color:lightgray;}
@@ -35,7 +36,7 @@
 		<div class="row">
 		</div>
 		<div class="tm-section-header section-margin-top">
-			<div class="col-lg-4 col-md-4 col-sm-4"><h2 class="tm-section-title">아무개호텔</h2></div>
+			<div class="col-lg-4 col-md-4 col-sm-4"><h2 class="tm-section-title" id="hotelTitleText">아무개호텔</h2></div>
 			<div class="col-lg-8 col-md-8 col-sm-8"><hr></div>	
 		</div>
 		
@@ -43,7 +44,7 @@
 			<div class="col-lg-7">
 				<div class="imgArea">
 				<div class="firstImgArea">
-					<img src="${ contextPath }/resources/img/about-1.jpg" alt="image" />
+					<img src="${ contextPath }/resources/img/about-1.jpg" alt="image" class="firstImg"/>
 				</div>
 				<div class="secondImgArea">
 					<img src="${ contextPath }/resources/img/about-1.jpg" class="secondImg" alt="image" />
@@ -91,9 +92,36 @@
 		<script>
 		
 			var contentid = ${param.contentid};
+			var contenttypeid = ${param.contenttypeid};
 			
 			function detailHotelInfo(contentid){
-				//이어서 합시다.. areaCode, sigunguCode, pageNo 까지 다 받아와야 해요. 처음부터 다시넘겨요..
+				console.log("deatilHotel : " + contenttypeid);
+				console.log("detailHotel : " + contentid);
+				$.ajax({
+					url:"detailHotelInformation.sub",
+					type:"GET",
+					data:{contenttypeid:contenttypeid, contentid:contentid},
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var myData = data.response.body.items.item;
+						var output = "";
+						var overviewText = myData.overview.split(". ");
+						console.log(overviewText);
+						$("#hotelTitleText").text(myData.title);
+						for(var i = 0; i < overviewText.length; i++){
+							output += overviewText[i] + ".<br>";
+						}
+						$(".contentArea").html(output);
+						output = "<img src="+myData.firstimage+" alt='image' class='firstImg' />";
+						$(".firstImgArea").html(output);
+						
+						
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
 			}
 			
 			$(function(){

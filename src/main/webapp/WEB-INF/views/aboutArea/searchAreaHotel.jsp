@@ -233,7 +233,7 @@
 								contentid = myData[i].contentid;
 								output = "";
 								output += "<div class='tm-home-box-3' id='detailHover'>";
-								output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+");'>";
+								output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
 								if(myData[i].firstimage == null){
 									output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
 								}else{
@@ -312,8 +312,8 @@
 				});
 			}
 			
-			function detailView(contentid){
-				location.href="${contextPath}/detailHotel?contentid="+contentid;
+			function detailView(contentid,contenttypeid){
+				location.href="${contextPath}/detailHotel?contentid="+contentid+"&contenttypeid="+contenttypeid;
 			}
 			
 		
