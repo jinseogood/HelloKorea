@@ -18,7 +18,7 @@
 	
 	<!-- 선택 상품 조회 -->
 	<select id="selectOneProduct" resultMap="oneProductResultSet" parameterType="_int">
-		SELECT C_ID, C_NAME, C_PHONE, C_ADDRESS, R_TYPE, R_COUNT, R_LIMIT, CR_TERM
+		SELECT C_ID, C_NAME, C_PHONE, C_ADDRESS, R_TYPE, R_COUNT, R_PRICE, R_LIMIT, CR_TERM
 		FROM COMPANY
 		JOIN ROOM USING(C_ID)
 		JOIN COM_REGIST USING(C_ID)

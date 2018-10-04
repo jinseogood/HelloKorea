@@ -124,9 +124,14 @@ public class SellerDaoImpl implements SellerDao{
 	//선택 상품 조회
 	@Override
 	public ArrayList<OneProduct> selectOneProduct(int cId, SqlSessionTemplate sqlSession) {
-		System.out.println("dao cId : " + cId);
 		ArrayList<OneProduct> opList=(ArrayList)sqlSession.selectList("OneProduct.selectOneProduct", cId);
 		return opList;
+	}
+
+	//업체 수정
+	@Override
+	public int updateProduct(ArrayList<Room> list, SqlSessionTemplate sqlSession) {
+		return sqlSession.update("Room.updateProduct", list);
 	}
 
 }

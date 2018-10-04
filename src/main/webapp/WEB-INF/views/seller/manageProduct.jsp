@@ -73,7 +73,7 @@
                 	<div class="col-md-12">
                     	<ul class="breadcrumb">
                         	<li><a href="myPageView.sell"><i class="fa fa-home"></i> Home</a></li>
-                            <li class="active">상품 관리</li>
+                            <li class="active">업체 관리</li>
                         </ul>
                     </div>
                 </div>

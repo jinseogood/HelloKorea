@@ -19,4 +19,12 @@
 		VALUES (SEQ_R_ID.NEXTVAL, #{roomType}, #{roomCount}, #{roomPrice}, #{roomPeople}, SEQ_C_ID.CURRVAL)
 	</insert>
 	
+	<!-- 객실 수정 -->
+	<update id="updateProduct" parameterType="arraylist">
+		UPDATE ROOM
+		<foreach collection="">
+			SET R_TYPE = '${list.get(0).roomType}', 
+		</foreach>
+	</update>
+	
 </mapper>
