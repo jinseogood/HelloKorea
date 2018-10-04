@@ -59,4 +59,43 @@ public class CompanySearchController {
 			e.printStackTrace();
 		}
 	}
+	
+	@RequestMapping(value="searchRoom.sell")
+	public void searchRoom(@RequestParam String contentId, HttpServletResponse response){
+		response.setContentType("text/html; charset=utf-8");
+		
+		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailInfo?ServiceKey=";
+        String serviceKey = "VOojT%2FUVcidkM%2BUIsxUGc2mInFoFPlSOBUvkCvCqGLi1x7x3MYlKptGiWXnsFP6xPfgI9chYJ6MNNFvtIdZBXg%3D%3D";
+        String parameter = "";
+        //serviceKey = URLEncoder.encode(serviceKey,"utf-8");
+        parameter = parameter + "&" + "contentTypeId=32";
+        parameter = parameter + "&" + "contentId=" + contentId;
+        parameter = parameter + "&" + "MobileOS=ETC";
+        parameter = parameter + "&" + "MobileApp=HelloKorea";
+        parameter = parameter + "&" + "_type=json";
+         
+        addr = addr + serviceKey + parameter;
+		
+		try {
+			
+			URL url = new URL(addr);
+	         
+	        InputStream in = url.openStream(); 
+	        CachedOutputStream bos = new CachedOutputStream();
+	        IOUtils.copy(in, bos);
+	        in.close();
+	        bos.close();
+	        
+	        String data = bos.getOut().toString();
+	         
+	        PrintWriter out = response.getWriter();
+	        out.println(data);
+	        
+	        JSONObject json = new JSONObject();
+	        json.put("data", data);
+	        
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

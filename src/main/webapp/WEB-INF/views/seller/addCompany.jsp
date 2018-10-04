@@ -15,7 +15,7 @@
 	}
 	.content{
 		width:800px;
-		height:800px;
+		height:1100px;
 		margin-left:auto;
 		margin-right:auto;
 	}
@@ -108,109 +108,74 @@
 				<input type="hidden" name="mId" value="${ sessionScope.loginUser.mId }">
 				<input type="hidden" id="contentId" name="contentId">
 				<table id="addTable" align="center">
-					<tr>
-						<th>구분</th>
-						<td colspan="4" align="center">
-							<input type="radio" name="sellerType" id="personal" value="1" checked><label for="personal">개인</label>
-							&nbsp;&nbsp;
-							<input type="radio" name="sellerType" id="company" value="2" ><label for="company">법인</label>
-						</td>
-					</tr>
-					<tr class="comType">
-						<th>법인사업자등록번호</th>
-						<td colspan="3"><input type="text" id="companyNum" name="companyNum" size="25"></td>
-						<td>
-							<div id="comNumCollect"><img src="${ contextPath }/resources/img/checkOKIcon.png"></div>
-							<div id="comNumWrong"><img src="${ contextPath }/resources/img/checkFailIcon.png"></div>
-						</td>
-					</tr>
-					<tr class="comType">
-						<th>법인사업자등록증</th>
-						<td colspan="4"><input type="file" name="companyFile"></td>
-					</tr>
-					<tr>
-						<th>사업자등록번호</th>
-						<td colspan="3"><input type="text" id="personalNum" name="personalNum" size="25" required></td>
-						<td>
-							<div id="perNumCollect"><img src="${ contextPath }/resources/img/checkOKIcon.png"></div>
-							<div id="perNumWrong"><img src="${ contextPath }/resources/img/checkFailIcon.png"></div>
-						</td>
-					</tr>
-					<tr>
-						<th>사업자등록증</th>
-						<td colspan="4"><input type="file" name="personalFile" required></td>
-					</tr>
-					<tr>
-						<th>상호명</th>
-						<td colspan="3"><input type="text" id="companyName" name="companyName" size="33" readonly required></td>
-						<td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#searchModal">검색</button></td>
-					</tr>
-					<tr>
-						<th>전화번호</th>
-						<td colspan="4"><input type="text" id="companyPhone" name="companyPhone" size="15" readonly required></td>
-					</tr>
-					<tr>
-						<th>주소</th>
-						<td colspan="4"><input type="text" id="companyAddress" name="companyAddress" size="59" readonly required></td>
-					</tr>
-					<tr>
-						<th>객실타입</th>
-						<td colspan="2"><input type="text" id="roomType1" name="roomType1" size="25" required></td>
-						<th style="width:60px;">객실 수</th>
-						<td><input type="number" id="roomCount1" name="roomCount1" value="1" min="1"></td>
-					</tr>
-					<tr>
-						<th>객실 가격</th>
-						<td colspan="2"><input type="text" id="roomPrice1" name="roomPrice1" size="25" required></td>
-						<th style="width:60px;">정원</th>
-						<td><input type="number" id="roomPeople1" name="roomPeople1" value="1" min="1"></td>
-					</tr>
-					<tr class="plus1">
-						<td colspan="5" style="text-align:center;"><img src="${ contextPath }/resources/img/plusIcon.png" id="roomPlus1" style="width:30px; height:30px;"></td>
-					</tr>
-					<tr class="rType2">
-						<th>객실타입</th>
-						<td colspan="2"><input type="text" id="roomType2" name="roomType2" size="25"></td>
-						<th style="width:60px;">객실 수</th>
-						<td><input type="number" id="roomCount2" name="roomCount2" value="1" min="1"></td>
-					</tr>
-					<tr class="rType2">
-						<th>객실 가격</th>
-						<td colspan="2"><input type="text" id="roomPrice2" name="roomPrice2" size="25"></td>
-						<th style="width:60px;">정원</th>
-						<td><input type="number" id="roomPeople2" name="roomPeople2" value="1" min="1"></td>
-					</tr>
-					<tr class="plus2">
-						<td colspan="5" style="text-align:center;"><img src="${ contextPath }/resources/img/plusIcon.png" id="roomPlus2" style="width:30px; height:30px;"></td>
-					</tr>
-					<tr class="rType3">
-						<th>객실타입</th>
-						<td colspan="2"><input type="text" id="roomType3" name="roomType3" size="25"></td>
-						<th style="width:60px;">객실 수</th>
-						<td><input type="number" id="roomCount3" name="roomCount3" value="1" min="1"></td>
-					</tr>
-					<tr class="rType3">
-						<th>객실 가격</th>
-						<td colspan="2"><input type="text" id="roomPrice3" name="roomPrice3" size="25"></td>
-						<th style="width:60px;">정원</th>
-						<td><input type="number" id="roomPeople3" name="roomPeople3" value="1" min="1"></td>
-					</tr>
-					<tr>
-						<th>등록 기간</th>
-						<td colspan="4">
-							<input type="radio" name="term" id="1month" value="1" checked><label for="1month">1개월</label>&nbsp;
-							<input type="radio" name="term" id="3month" value="3"><label for="3month">3개월</label>&nbsp;
-							<input type="radio" name="term" id="6month" value="6"><label for="6month">6개월</label>&nbsp;
-							<input type="radio" name="term" id="9month" value="9"><label for="9month">9개월</label>&nbsp;
-							<input type="radio" name="term" id="12month" value="12"><label for="12month">12개월</label>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="5" align="center">
-							<button type="reset" class="btn btn-default">취소</button>&nbsp;&nbsp;
-							<button type="submit" class="btn btn-success">등록</button>
-						</td>
-					</tr>
+					<thead>
+						<tr>
+							<th>구분</th>
+							<td colspan="4" align="center">
+								<input type="radio" name="sellerType" id="personal" value="1" checked><label for="personal">개인</label>
+								&nbsp;&nbsp;
+								<input type="radio" name="sellerType" id="company" value="2" ><label for="company">법인</label>
+							</td>
+						</tr>
+						<tr class="comType">
+							<th>법인사업자등록번호</th>
+							<td colspan="3"><input type="text" id="companyNum" name="companyNum" size="25"></td>
+							<td>
+								<div id="comNumCollect"><img src="${ contextPath }/resources/img/checkOKIcon.png"></div>
+								<div id="comNumWrong"><img src="${ contextPath }/resources/img/checkFailIcon.png"></div>
+							</td>
+						</tr>
+						<tr class="comType">
+							<th>법인사업자등록증</th>
+							<td colspan="4"><input type="file" name="companyFile"></td>
+						</tr>
+						<tr>
+							<th>사업자등록번호</th>
+							<td colspan="3"><input type="text" id="personalNum" name="personalNum" size="25" required></td>
+							<td>
+								<div id="perNumCollect"><img src="${ contextPath }/resources/img/checkOKIcon.png"></div>
+								<div id="perNumWrong"><img src="${ contextPath }/resources/img/checkFailIcon.png"></div>
+							</td>
+						</tr>
+						<tr>
+							<th>사업자등록증</th>
+							<td colspan="4"><input type="file" name="personalFile" required></td>
+						</tr>
+						<tr>
+							<th>상호명</th>
+							<td colspan="3"><input type="text" id="companyName" name="companyName" size="33" readonly required></td>
+							<td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#searchModal">검색</button></td>
+						</tr>
+						<tr>
+							<th>전화번호</th>
+							<td colspan="4"><input type="text" id="companyPhone" name="companyPhone" size="15" readonly required></td>
+						</tr>
+						<tr>
+							<th>주소</th>
+							<td colspan="4"><input type="text" id="companyAddress" name="companyAddress" size="59" readonly required></td>
+						</tr>
+					</thead>
+					<tbody>
+					
+					</tbody>
+					<tfoot>
+						<tr>
+							<th>등록 기간</th>
+							<td colspan="4">
+								<input type="radio" name="term" id="1month" value="1" checked><label for="1month">1개월</label>&nbsp;
+								<input type="radio" name="term" id="3month" value="3"><label for="3month">3개월</label>&nbsp;
+								<input type="radio" name="term" id="6month" value="6"><label for="6month">6개월</label>&nbsp;
+								<input type="radio" name="term" id="9month" value="9"><label for="9month">9개월</label>&nbsp;
+								<input type="radio" name="term" id="12month" value="12"><label for="12month">12개월</label>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="5" align="center">
+								<button type="reset" class="btn btn-default">취소</button>&nbsp;&nbsp;
+								<button type="submit" class="btn btn-success">등록</button>
+							</td>
+						</tr>
+					</tfoot>
 				</table>
 			</form>
 		</div>
@@ -1099,8 +1064,6 @@
 				data:{area:area, sigungu:sigungu, page:page},
 				dataType:"json",
 				success:function(data){
-					console.log(data.response.body.items.item);
-					console.log(data.response.body.totalCount);
 					
 					$tableBody = $("#resultTable");
 					$tableBody.html('');
@@ -1177,6 +1140,44 @@
 			$("#companyName").attr("value", title);
 			$("#companyPhone").attr("value", tel);
 			$("#companyAddress").attr("value", addr);
+			searchRoom(contentId);
+		}
+		
+		function searchRoom(contentId){
+			$.ajax({
+				url:"searchRoom.sell",
+				type:"get",
+				data:{contentId:contentId},
+				dataType:"json",
+				success:function(data){
+					
+					var rTotalCount=data.response.body.totalCount;
+					var room=data.response.body.items.item;
+					
+					console.log(rTotalCount);
+					console.log(room);
+					console.log(room.length);
+					
+					$roomBody=$("#addTable tbody");
+					console.log($roomBody);
+					$roomBody.html('');
+					
+					for(var i=0;i<room.length;i++){
+						console.log(i);
+						var output="";
+						output += "<tr><th>객실 타입</th><td colspan='2'><input type='text' name='roomType" + (i+1) + "' value='" + room[i].roomtitle + "' size='25' readonly></td>";
+						output += "<th style='width:60px;'>객실 수</th>";
+						output += "<td><input type='number' name='roomCount" + (i+1) + "' value='1' min='1'></td></tr>";
+						output += "<tr><th>객실 가격</th><td colspan='2'><input type='text' name='roomPrice" + (i+1) + "' size='25' required></td>";
+						output += "<th style='width:60px;'>정원</th>";
+						output += "<td><input type='number' name='roomPeople" + (i+1) + "' value='" + room[i].roommaxcount + "'></td></tr>";
+						$roomBody.append(output);
+					}
+					
+				}, error:function(data){
+					console.log(data);
+				}
+			});
 		}
 	</script>
 </body>

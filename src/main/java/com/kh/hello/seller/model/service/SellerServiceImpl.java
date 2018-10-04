@@ -49,6 +49,42 @@ public class SellerServiceImpl implements SellerService{
 	public int insertRoom3(Room rm) {
 		return sd.insertRoom3(rm, sqlSession);
 	}
+	
+	//객실4 등록
+	@Override
+	public int insertRoom4(Room rm) {
+		return sd.insertRoom4(rm, sqlSession);
+	}
+		
+	//객실5 등록
+	@Override
+	public int insertRoom5(Room rm) {
+		return sd.insertRoom5(rm, sqlSession);
+	}
+		
+	//객실6 등록
+	@Override
+	public int insertRoom6(Room rm) {
+		return sd.insertRoom6(rm, sqlSession);
+	}
+		
+	//객실7 등록
+	@Override
+	public int insertRoom7(Room rm) {
+		return sd.insertRoom7(rm, sqlSession);
+	}
+		
+	//객실8 등록
+	@Override
+	public int insertRoom8(Room rm) {
+		return sd.insertRoom8(rm, sqlSession);
+	}
+		
+	//객실9 등록
+	@Override
+	public int insertRoom9(Room rm) {
+		return sd.insertRoom9(rm, sqlSession);
+	}
 
 	//등록 이력 추가
 	@Override
@@ -120,7 +156,15 @@ public class SellerServiceImpl implements SellerService{
 	//업체 수정
 	@Override
 	public int updateProduct(ArrayList<Room> list) {
+		System.out.println("list size : " + list.size());
+		System.out.println("list : " + list);
 		return sd.updateProduct(list, sqlSession);
+	}
+
+	//등록 기간 연장
+	@Override
+	public int extendsPeriod(String cId, String term) {
+		return sd.extendsPeriod(cId, term, sqlSession);
 	}
 
 

@@ -21,9 +21,14 @@
 	
 	<!-- 객실 수정 -->
 	<update id="updateProduct" parameterType="arraylist">
-		UPDATE ROOM
-		<foreach collection="">
-			SET R_TYPE = '${list.get(0).roomType}', 
+		<foreach collection="list" item="r" index="i">
+			UPDATE ROOM
+			SET R_COUNT = #{r.roomCount}, R_PRICE = #{r.roomPrice}
+			WHERE R_ID = (SELECT R_ID 
+						  FROM (SELECT ROWNUM RNUM, R_ID
+						  		FROM ROOM
+						  		WHERE C_ID = #{r.cId}) 
+						  WHERE RNUM = #{i})
 		</foreach>
 	</update>
 	

@@ -27,6 +27,24 @@ public interface SellerDao {
 	//객실3 등록
 	int insertRoom3(Room rm, SqlSessionTemplate sqlSession);
 
+	//객실4 등록
+	int insertRoom4(Room rm, SqlSessionTemplate sqlSession);
+
+	//객실5 등록
+	int insertRoom5(Room rm, SqlSessionTemplate sqlSession);
+		
+	//객실6 등록
+	int insertRoom6(Room rm, SqlSessionTemplate sqlSession);
+		
+	//객실7 등록
+	int insertRoom7(Room rm, SqlSessionTemplate sqlSession);
+
+	//객실8 등록
+	int insertRoom8(Room rm, SqlSessionTemplate sqlSession);
+		
+	//객실9 등록
+	int insertRoom9(Room rm, SqlSessionTemplate sqlSession);
+	
 	//등록이력 추가
 	int insertRH(RegistrationHistory rh, SqlSessionTemplate sqlSession);
 
@@ -61,5 +79,8 @@ public interface SellerDao {
 
 	//업체 수정
 	int updateProduct(ArrayList<Room> list, SqlSessionTemplate sqlSession);
+
+	//등록 기간 연장
+	int extendsPeriod(String cId, String term, SqlSessionTemplate sqlSession);
 
 }

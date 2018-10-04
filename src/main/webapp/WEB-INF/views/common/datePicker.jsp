@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
 <style>
 /*datepicker에서 사용한 이미지 버튼 style적용*/
 img.ui-datepicker-trigger {
@@ -34,10 +34,10 @@ input{
 
 </style>
 
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <!-- datepicker 한국어로 -->
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
 <script>
 $(function() {
        //오늘 날짜를 출력

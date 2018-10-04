@@ -12,7 +12,7 @@
 <script type="text/javascript" src="${ contextPath }/resources/js/bootstrap.min.js"></script>					<!-- bootstrap js -->
 <script type="text/javascript" src="${ contextPath }/resources/js/jquery.flexslider-min.js"></script>			<!-- flexslider js -->
 <script type="text/javascript" src="${ contextPath }/resources/js/templatemo-script.js"></script>      		<!-- Templatemo Script -->
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet' type='text/css'>
 <link href="${ contextPath }/resources/css/font-awesome.min.css" rel="stylesheet">
 <link href="${ contextPath }/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${ contextPath }/resources/css/bootstrap-datetimepicker.min.css" rel="stylesheet">  
@@ -427,20 +427,25 @@
 		});
   		
   	</script>
-  	<!-- <script>
+  	<script>
   		$(function(){
+  			$("#loginOpen").click(function(){
+  				
   			$.ajax({
   				url:'facebook.me',
   				data:{},
   				type:'post',
   				success:function(data){
-  					
+  					$('#facebook').attr('href', data)
+  					console.log(data);
+  				},
+  				error:function(data){
+  					console.log(data);
   				}
-  			})
+  			});
+  			});
   		});
-  	
   	</script>
-  	 -->
   	
 </body>
 </html>

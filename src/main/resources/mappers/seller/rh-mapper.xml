@@ -15,7 +15,13 @@
 	<!-- 업체 등록 이력 추가 -->
 	<insert id="insertRH" parameterType="RH">
 		INSERT INTO COM_REGIST (CR_ID, C_ID, CR_DATE, CR_TERM, CR_STATUS) 
-		VALUES (SEQ_CR_ID.NEXTVAL, SEQ_C_ID.CURRVAL, SYSDATE, #{term}, 'Y')
+		VALUES (SEQ_CR_ID.NEXTVAL, SEQ_C_ID.CURRVAL, SYSDATE, #{term}, 'N')
+	</insert>
+	
+	<!-- 업체 등록 기간 연장 -->
+	<insert id="extendsPeriod" parameterType="arraylist">
+		INSERT INTO COM_REGIST (CR_ID, C_ID, CR_DATE, CR_TERM, CR_STATUS)
+		VALUES (SEQ_CR_ID.NEXTVAL, ${list.get(0)}, SYSDATE, ${list.get(1)}, 'N')
 	</insert>
 	
 </mapper>
