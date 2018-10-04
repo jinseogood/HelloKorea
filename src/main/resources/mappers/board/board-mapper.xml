@@ -19,19 +19,19 @@
      </resultMap>
      
      <!-- 리뷰 인서트************2 -->
-     <insert id="insertReviewBoard" parameterType="Board">
-          INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, '1',
-                                       '1', 1, SYSDATE, 'Y', SYSDATE, null, null, #{m_id})
+     <insert id="insertReviewBoard" parameterType="_int">
+          INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, '타이틀',
+                                       '텍스트', 1, SYSDATE, 'Y', SYSDATE, null, 0, #{m_id})
      </insert>
      
-     <!-- 리뷰사진 상태 업데이트 -->
-     <!-- <update id="updateAttachment" parameterType="_int">
-         UPDATE MEMBER
-         SET STATUS = 'B'
-         WHERE M_ID = #{mId} 
-     </update> -->
+     <!-- 리뷰 업데이트(실질적 글작성) -->
+     <update id="updateReviewBoard" parameterType="Board">
+         UPDATE BOARD
+         SET TITLE = #{title}, TEXT = #{text}, REGIST_DATE = SYSDATE, GRADE = #{grade}, MODIFY_DATE = SYSDATE
+         WHERE bid = (SELECT MAX(BID) FROM BOARD WHERE M_ID = #{m_id})
+     </update>
      
-     <!-- 리뷰사진 검색 검색 -->
+     <!-- 리뷰 삭제(취소시 미리 인서트해놓은 것) -->
      <!-- <select id="selectAttachment" resultMap="AttachmentResultSet">
          SELECT *
          FROM ATTACHMENT
