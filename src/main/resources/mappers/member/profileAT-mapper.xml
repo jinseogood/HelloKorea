@@ -20,5 +20,10 @@
     
     
     </insert>
-    
+    <select id="photoCheck" resultType="_int" parameterType="_int">
+	    	SELECT *
+	    	FROM MEMBER
+	    	LEFT JOIN ATTACHMNET ON(M_ID = REF_ID)
+	    	WHERE M_ID=#{mId}
+    </select>
 </mapper>

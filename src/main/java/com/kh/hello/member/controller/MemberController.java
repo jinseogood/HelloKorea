@@ -4,10 +4,15 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.social.facebook.connect.FacebookConnectionFactory;
+import org.springframework.social.oauth2.GrantType;
+import org.springframework.social.oauth2.OAuth2Operations;
+import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +34,13 @@ public class MemberController {
 	@Autowired
 	private MemberService ms;
 	@Autowired BCryptPasswordEncoder passwordEncoder;
-
+	/*@Autowired
+    private FacebookConnectionFactory connectionFactory;
+    @Autowired
+    private OAuth2Parameters oAuth2Parameters;
+	*/
+	
+	
 	@RequestMapping(value ="insertUser.me")
 	public String insertMember(Model model,Member m ){
 
@@ -136,8 +147,18 @@ public class MemberController {
 		
 	}
 	@RequestMapping(value="userMypage.me")
-	public String userMypage(Model model){
+	public String userMypage(Model model, HttpServletRequest request){
 		
+		 Member m=(Member)request.getSession().getAttribute("loginUser");
+		
+		int mId= m.getmId();
+		 
+		System.out.println("mid :" + mId);
+		//int result = ms.photoCheck(mId);
+		
+		 
+		
+		//model.addAttribute("result", result);
 		return "userMypage/editProfile";
 	}
 	
@@ -187,5 +208,17 @@ public class MemberController {
 		}
 		
 	}
+	/*  @RequestMapping(value = "facebook.me", method = { RequestMethod.GET, RequestMethod.POST })
+	    public void join(HttpServletResponse response, Model model) {
+	        
+	        OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
+	        String facebook_url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, oAuth2Parameters);
+	    
+	        model.addAttribute("facebook_url", facebook_url);
+	        System.out.println("/facebook" + facebook_url);
+	 
+	        
+	    }*/
+
 
 }

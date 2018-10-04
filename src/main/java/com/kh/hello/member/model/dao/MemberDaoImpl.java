@@ -70,6 +70,12 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.insert("Attachment.uploadprofile",a);
 	}
 
+	@Override
+	public int photoCheck(int mId, SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("Attachment.photoCheck",mId);
+	}
+
 
 
 	

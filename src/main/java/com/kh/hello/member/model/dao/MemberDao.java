@@ -31,5 +31,7 @@ public interface MemberDao {
 
 	int uploadprofile(Attachment a, SqlSessionTemplate sqlSession);
 
+	int photoCheck(int mId, SqlSessionTemplate sqlSession);
+
 	
 }
