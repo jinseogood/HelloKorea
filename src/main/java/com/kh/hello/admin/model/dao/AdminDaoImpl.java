@@ -16,7 +16,7 @@ import com.kh.hello.admin.model.vo.Reservation;
 import com.kh.hello.message.model.vo.Message;
 @Repository
 public class AdminDaoImpl implements AdminDao{
-
+   
 	//예약 리스트 카운트용
 	@Override
 	public int getReservationListCount(SqlSessionTemplate sqlSession) {

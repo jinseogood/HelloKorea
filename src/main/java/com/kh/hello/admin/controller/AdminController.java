@@ -1,5 +1,5 @@
 package com.kh.hello.admin.controller;
-
+   
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import com.kh.hello.common.Pagination;
 import com.kh.hello.message.model.vo.Message;
 @Controller
 public class AdminController {
-
+   
 	@Autowired
 	private AdminService as;
 

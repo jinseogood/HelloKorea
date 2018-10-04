@@ -10,7 +10,7 @@ import com.kh.hello.admin.model.vo.Question;
 import com.kh.hello.admin.model.vo.Report;
 import com.kh.hello.admin.model.vo.Reservation;
 import com.kh.hello.message.model.vo.Message;
-
+   
 public interface AdminService {
 
 	int getReservationListCount();

@@ -3,7 +3,7 @@ package com.kh.hello.admin.model.vo;
 import java.sql.Date;
 
 import org.springframework.stereotype.Repository;
-
+   
 @Repository
 public class Approval implements java.io.Serializable{
 	private int crId;

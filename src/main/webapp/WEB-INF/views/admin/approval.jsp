@@ -99,10 +99,10 @@ table.type09 td {
                     	<span id="search_concept">검색 카테고리</span> <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="#crId">등록번호</a></li>
-                      <li><a href="#cName">업체명</a></li>
-                      <li><a href="#cMaster">담당자</a></li>
-                      <li><a href="#noA">미승인건</a></li>
+                      <li><a href="#crId" class="search">등록번호</a></li>
+                      <li><a href="#cName" class="search">업체명</a></li>
+                      <li><a href="#cMaster" class="search">담당자</a></li>
+                      <li><a href="#noA" class="search">미승인건</a></li>
                       <li class="divider"></li>
                       <li><a href="#datePick" onclick="showDatePicker()">신청일</a></li>
                       <li><a href="#datePick2" onclick="showDatePicker()">승인일</a></li>
@@ -136,6 +136,13 @@ table.type09 td {
     	 $("#datePicker").hide();
     	 
      });
+	 
+	 $(document).ready(function(e){
+		 $(".search").click(function(e){
+			 $("#datePicker").hide();
+		 });
+	 });
+	 
      function showDatePicker(){
     	 $("#datePicker").show();
     	 

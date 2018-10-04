@@ -115,9 +115,9 @@ table.type09 td {
                     	<span id="search_concept">검색 카테고리</span> <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="#rRecordId">신고 번호</a></li>
-                      <li><a href="#rTarget">신고 대상</a></li>
-                      <li><a href="#noResult">미 처리건</a></li>
+                      <li><a href="#rRecordId" class="search">신고 번호</a></li>
+                      <li><a href="#rTarget" class="search">신고 대상</a></li>
+                      <li><a href="#noResult" class="search">미 처리건</a></li>
                       <li class="divider"></li>
                       <li><a href="#datePick" onclick="showDatePicker()">신고일</a></li>
                     </ul>
@@ -150,6 +150,13 @@ table.type09 td {
     	 $("#datePicker").hide();
     	 
      });
+	 
+	 $(document).ready(function(e){
+		 $(".search").click(function(e){
+			 $("#datePicker").hide();
+		 });
+	 });
+	 
      function showDatePicker(){
     	 $("#datePicker").show();
     	 
