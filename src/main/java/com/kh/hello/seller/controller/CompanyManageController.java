@@ -22,6 +22,7 @@ import com.kh.hello.common.PageInfo;
 import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.seller.model.service.SellerService;
 import com.kh.hello.seller.model.vo.Company;
+import com.kh.hello.seller.model.vo.OneProduct;
 import com.kh.hello.seller.model.vo.Registration;
 import com.kh.hello.seller.model.vo.RegistrationHistory;
 import com.kh.hello.seller.model.vo.Room;
@@ -225,6 +226,12 @@ public class CompanyManageController {
 				spd.setCompanyAddress(searchWord);
 			}
 			else{
+				if(searchWord.equals("승인완료")){
+					searchWord="Y";
+				}
+				else if(searchWord.equals("미승인")){
+					searchWord="N";
+				}
 				spd.setStatus(searchWord);
 			}
 			
@@ -233,10 +240,28 @@ public class CompanyManageController {
 			list=ss.selectSearchWordProductListCount(m.getmId(), spd, pi);
 		}
 		
+		for(int i=0;i<list.size();i++){
+			if(list.get(i).getStatus().equals("Y")){
+				list.get(i).setStatus("승인완료");
+			}
+			else if(list.get(i).getStatus().equals("N")){
+				list.get(i).setStatus("미승인");
+			}
+		}
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		
 		return "seller/manageProduct";
+	}
+	
+	@RequestMapping(value="detailCompany.sell")
+	public String detailCompany(int cId, Model model){
+		System.out.println("detail : " + cId);
+		ArrayList<OneProduct> opList=ss.selectOneProduct(cId);
+		
+		model.addAttribute("opList", opList);
+		
+		return "seller/detailCompany";
 	}
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,29 +58,32 @@
 				<table id="detailTable" align="center">
 					<tr>
 						<th>상호명</th>
-						<td colspan="4"><input type="text" id="companyName" name="companyName" size="25" readonly></td>
+						<td colspan="4"><input type="text" id="companyName" name="companyName" value="${ opList.get(0).companyName }" size="25" readonly></td>
 					</tr>
 					<tr>
 						<th>전화번호</th>
-						<td colspan="4"><input type="text" id="companyPhone" name="companyPhone" size="25" readonly></td>
+						<td colspan="4"><input type="text" id="companyPhone" name="companyPhone" value="${ opList.get(0).companyPhone }" size="25" readonly></td>
 					</tr>
 					<tr>
 						<th>주소</th>
-						<td colspan="4"><input type="text" id="companyAddress" name="companyAddress" size="25" readonly></td>
+						<td colspan="4"><input type="text" id="companyAddress" name="companyAddress" value="${ opList.get(0).companyAddress }" size="25" readonly></td>
 					</tr>
-					<tr>
-						<th>객실타입</th>
-						<td colspan="2"><input type="text" id="roomType1" name="roomType1" size="25" readonly></td>
-						<th style="width:60px;">객실 수</th>
-						<td><input type="number" id="roomCount1" name="roomCount1" value="1" min="1" readonly></td>
-					</tr>
-					<tr>
-						<th>객실 가격</th>
-						<td colspan="2"><input type="text" id="roomPrice1" name="roomPrice1" size="25" readonly></td>
-						<th style="width:60px;">정원</th>
-						<td><input type="number" id="roomPeople1" name="roomPeople1" value="1" min="1" readonly></td>
-					</tr>
-					<tr>
+					<c:set var="r" value="1"/>
+					<c:forEach var="op" items="${ opList }">
+						<tr>
+							<th>객실타입</th>
+							<td colspan="2"><input type="text" id="roomType" name="roomType" value="${ op.roomType }" size="25" readonly></td>
+							<th style="width:60px;">객실 수</th>
+							<td><input type="number" id="roomCount" name="roomCount" value="${ op.roomCount }" readonly></td>
+						</tr>
+						<tr>
+							<th>객실 가격</th>
+							<td colspan="2"><input type="text" id="roomPrice" name="roomPrice" value="${ op.roomPrice }" size="25" readonly></td>
+							<th style="width:60px;">정원</th>
+							<td><input type="number" id="roomPeople" name="roomPeople" value="${ op.roomPeople }" readonly></td>
+						</tr>
+					</c:forEach>
+					<!-- <tr>
 						<th>객실타입</th>
 						<td colspan="2"><input type="text" id="roomType2" name="roomType2" size="25" readonly></td>
 						<th style="width:60px;">객실 수</th>
@@ -102,15 +106,11 @@
 						<td colspan="2"><input type="text" id="roomPrice3" name="roomPrice3" size="25" readonly></td>
 						<th style="width:60px;">정원</th>
 						<td><input type="number" id="roomPeople3" name="roomPeople3" value="1" min="1" readonly></td>
-					</tr>
+					</tr> -->
 					<tr>
 						<th>등록 기간</th>
 						<td colspan="4">
-							<input type="radio" name="term" id="1month" value="1" checked readonly><label for="1month">1개월</label>
-							<input type="radio" name="term" id="3month" value="3" readonly><label for="3month">3개월</label>
-							<input type="radio" name="term" id="6month" value="6" readonly><label for="6month">6개월</label>
-							<input type="radio" name="term" id="9month" value="9" readonly><label for="9month">9개월</label>
-							<input type="radio" name="term" id="12month" value="12" readonly><label for="12month">12개월</label>
+							${ opList.get(0).term }
 						</td>
 					</tr>
 					<tr>

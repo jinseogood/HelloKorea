@@ -104,7 +104,7 @@
                 </div>
 			</div>
 		
-			<form action="addCompany.sell" method="post" encType="multipart/form-data">
+			<form id="addForm" action="#" method="post" encType="multipart/form-data">
 				<input type="hidden" name="mId" value="${ sessionScope.loginUser.mId }">
 				<input type="hidden" id="contentId" name="contentId">
 				<table id="addTable" align="center">
@@ -130,7 +130,7 @@
 					</tr>
 					<tr>
 						<th>사업자등록번호</th>
-						<td colspan="3"><input type="text" id="personalNum" name="personalNum" size="25"></td>
+						<td colspan="3"><input type="text" id="personalNum" name="personalNum" size="25" required></td>
 						<td>
 							<div id="perNumCollect"><img src="${ contextPath }/resources/img/checkOKIcon.png"></div>
 							<div id="perNumWrong"><img src="${ contextPath }/resources/img/checkFailIcon.png"></div>
@@ -138,30 +138,30 @@
 					</tr>
 					<tr>
 						<th>사업자등록증</th>
-						<td colspan="4"><input type="file" name="personalFile"></td>
+						<td colspan="4"><input type="file" name="personalFile" required></td>
 					</tr>
 					<tr>
 						<th>상호명</th>
-						<td colspan="3"><input type="text" id="companyName" name="companyName" size="33" readonly></td>
+						<td colspan="3"><input type="text" id="companyName" name="companyName" size="33" readonly required></td>
 						<td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#searchModal">검색</button></td>
 					</tr>
 					<tr>
 						<th>전화번호</th>
-						<td colspan="4"><input type="text" id="companyPhone" name="companyPhone" size="15" readonly></td>
+						<td colspan="4"><input type="text" id="companyPhone" name="companyPhone" size="15" readonly required></td>
 					</tr>
 					<tr>
 						<th>주소</th>
-						<td colspan="4"><input type="text" id="companyAddress" name="companyAddress" size="59" readonly></td>
+						<td colspan="4"><input type="text" id="companyAddress" name="companyAddress" size="59" readonly required></td>
 					</tr>
 					<tr>
 						<th>객실타입</th>
-						<td colspan="2"><input type="text" id="roomType1" name="roomType1" size="25"></td>
+						<td colspan="2"><input type="text" id="roomType1" name="roomType1" size="25" required></td>
 						<th style="width:60px;">객실 수</th>
 						<td><input type="number" id="roomCount1" name="roomCount1" value="1" min="1"></td>
 					</tr>
 					<tr>
 						<th>객실 가격</th>
-						<td colspan="2"><input type="text" id="roomPrice1" name="roomPrice1" size="25"></td>
+						<td colspan="2"><input type="text" id="roomPrice1" name="roomPrice1" size="25" required></td>
 						<th style="width:60px;">정원</th>
 						<td><input type="number" id="roomPeople1" name="roomPeople1" value="1" min="1"></td>
 					</tr>
@@ -316,7 +316,7 @@
 			  							<option value="0">시군구 선택</option>
 			  							<option value="1">광산구</option>
 			  							<option value="2">남구</option>
-			  							<option value="3">동군</option>
+			  							<option value="3">동구</option>
 			  							<option value="4">북구</option>
 			  							<option value="5">서구</option>
 			  						</select>
@@ -588,7 +588,6 @@
 			//법인등록번호 유효성 검사
 			$("#companyNum").blur(function isRegNo(){
 				var sRegNo=$("#companyNum").val();
-				console.log("sRegNo : " + sRegNo);
 				var re = /-/g;
 				sRegNo = sRegNo.replace('-','');
 
@@ -622,7 +621,6 @@
 			//사업자등록번호 유효성 검사			
 			$("#personalNum").blur(function checkBizID(){
 				var bizID=$("#personalNum").val();
-				console.log("bizID : " + bizID);
 			    var checkID = new Array(1, 3, 7, 1, 3, 7, 1, 3, 5, 1); 
 			    var tmpBizID, i, chkSum=0, c2, remander; 
 			    bizID = bizID.replace(/-/gi,'');
@@ -636,6 +634,7 @@
 			    if (Math.floor(bizID.charAt(9)) == remander){
 			    	$("#perNumWrong").hide();
 			    	$("#perNumCollect").show();
+			    	$("#addForm").attr("action", "addCompany.sell");
 			    }
 			    else{
 			    	$("#perNumCollect").hide();
@@ -651,12 +650,27 @@
 				$(".plus1").hide();
 				$(".rType2").show();
 				$(".plus2").show();
+				$("#roomType2").attr("required", "true");
+				$("#roomPrice2").attr("required", "true");
 			});
 			$("#roomPlus2").click(function(){
 				$(".plus2").hide();
 				$(".rType3").show();
+				$("#roomType3").attr("required", "true");
+				$("#roomPrice3").attr("required", "true");
 			});
 			
+			$("#sellerType").click(function(){
+				var com=$("#sellerType").val();
+				
+				if(com == 2){
+					$("#companyNum").attr("required", "true");
+					$("#companyFile").attr("required", "true");
+				}
+			});
+
+			
+			//상호 검색 모달
 			$("#sigungu1").hide();
 			$("#sigungu2").hide();
 			$("#sigungu3").hide();
@@ -677,8 +691,6 @@
 			
 			$("#area").on("click", function(){
 				area=$("#area").val();
-				
-				console.log("before area : " + area);
 				
 				if(area == 1){
 					$("#sigungu1").show();
