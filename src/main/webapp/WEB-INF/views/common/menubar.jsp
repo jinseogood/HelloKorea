@@ -237,7 +237,7 @@
 			<label style="width: 180px; font-size: 30px;">Hello Korea</label>
 		</div>
 		<div id="snsBtn">
-			<button class="loginBtn1">Facebook</button>
+			<button class="loginBtn1" >Facebook</button>
 			<button class="loginBtn1">Google</button>
 		</div>
 		<hr style="	width: 400px;
@@ -427,5 +427,20 @@
 		});
   		
   	</script>
+  	<!-- <script>
+  		$(function(){
+  			$.ajax({
+  				url:'facebook.me',
+  				data:{},
+  				type:'post',
+  				success:function(data){
+  					
+  				}
+  			})
+  		});
+  	
+  	</script>
+  	 -->
+  	
 </body>
 </html>

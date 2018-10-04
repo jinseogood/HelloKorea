@@ -29,4 +29,6 @@ public interface MemberService {
 	int editProfile(Member m);
 
 	int uploadprofile(Attachment a);
+
+	int photoCheck(int mId);
 }

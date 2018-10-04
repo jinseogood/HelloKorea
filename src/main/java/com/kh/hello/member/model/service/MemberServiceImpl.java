@@ -99,5 +99,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
+	@Override
+	public int photoCheck(int mId) {
+		// TODO Auto-generated method stub
+		return md.photoCheck(mId,sqlSession);
+	}
+
+
 	
 }

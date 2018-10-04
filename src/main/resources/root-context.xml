@@ -27,6 +27,19 @@
    	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
     	<property name="dataSource" ref="dataSource"/>
 	</bean>
+	<!-- Facebook 소셜 로그인 연결 설정 -->
+ 
+    <bean id="connectionFactory"
+        class="org.springframework.social.facebook.connect.FacebookConnectionFactory">
+        <constructor-arg value="Client ID" />
+        <constructor-arg value="Secret Code" />
+    </bean>
+ 
+    <bean id="oAuth2Parameters"
+        class="org.springframework.social.oauth2.OAuth2Parameters">
+        <property name="scope" value="email" />
+        <property name="redirectUri" value="https://localhost:8443/Path..." />
+    </bean>
    
 	<!-- 어노테이션으로 트랜젝션 매니저를 설정하기 위해 추가해야 하는 설정 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
