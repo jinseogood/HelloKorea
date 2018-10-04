@@ -20,6 +20,7 @@
           <typeAlias type="com.kh.hello.seller.model.vo.RegistrationHistory" alias="RH"/>
           <typeAlias type="com.kh.hello.seller.model.vo.SearchProduct" alias="Product"/>
           <typeAlias type="com.kh.hello.board.model.vo.Board" alias="Board"/>
+          <typeAlias type="com.kh.hello.good.model.vo.Good" alias="Good"/>
 
       </typeAliases>
   
@@ -39,6 +40,7 @@
           <mapper resource="mappers/seller/product-mapper.xml"/>
           <mapper resource="mappers/board/board-mapper.xml"/>
           <mapper resource="mappers/board/attachment-mapper.xml"/>
+          <mapper resource="mappers/good/good-mapper.xml" />
       </mappers>
   
   </configuration>

@@ -49,7 +49,6 @@
 			
 			if(areaCode == 1){
 				$(".flex-caption .slider-title").text("서울");
-				
 			}else if(areaCode == 2){
 				$(".flex-caption .slider-title").text("인천");
 			}else if(areaCode == 3){
@@ -84,108 +83,130 @@
 				$(".flex-caption .slider-title").text("제주도");
 			}
 			
-			$.ajax({
-				url:"aboutMainSeoulHotel.sub",
-				type:"GET",
-				data:{areaCode:areaCode, sigunguCode:1},
-				dataType:"json",
-				success:function(data){
-					console.log(data);
-					var myData = data.response.body.items.item;
-					var rowHotelArea = $("#rowHotelArea");
-					rowHotelArea.html("");
-					var output = "";
-					var count = 0;
-					for(var i = 0; i < myData.length; i++){
-						count++;
-						output = "";
-						output += "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12'>";
-						output += "<div class='tm-home-box-2'>";
-						if(myData[i].firstimage == null){
-							output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive2'>";
-						}else{
-							output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive2'>";
-						}
-						output += "<h3>"+myData[i].title+"</h3>";
-						output += "</div></div>";
-						document.getElementById("rowHotelArea").innerHTML += output;
-						if(count == 4){
-							return;
-						}
-					}
-				},
-				error:function(data){
-					console.log(data);
-				}
+			$(function(){
+				var sigunguCode = 1;
+				aboutMainHotel(sigunguCode);
+				aboutMainFood(sigunguCode);
+				aboutMainGame(sigunguCode);
 			});
-			$.ajax({
-				url:"aboutMainSeoulFood.sub",
-				type:"GET",
-				data:{areaCode:areaCode},
-				dataType:"json",
-				success:function(data){
-					console.log(data);
-					var myData = data.response.body.items.item;
-					var rowFoodArea = $("#rowFoodArea");
-					rowFoodArea.html("");
-					var output = "";
-					var count = 0;
-					for(var i = 0; i < myData.length; i++){
-						count++;
-						output = "";
-						output += "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12'>";
-						output += "<div class='tm-home-box-2'>";
-						if(myData[i].firstimage == null){
-							output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive2'>";
+			
+			function aboutMainHotel(sigunguCode){
+				$.ajax({
+					url:"aboutMainSeoulHotel.sub",
+					type:"GET",
+					data:{areaCode:areaCode, sigunguCode:sigunguCode},
+					dataType:"json",
+					success:function(data){
+						if(data.response.body.totalCount == 0){
+							sigunguCode++;
+							aboutMainHotel(sigunguCode);
 						}else{
-							output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive2'>";
+							console.log(data);
+							var myData = data.response.body.items.item;
+							var rowHotelArea = $("#rowHotelArea");
+							rowHotelArea.html("");
+							var output = "";
+							var count = 0;
+							for(var i = 0; i < myData.length; i++){
+								count++;
+								output = "";
+								output += "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12'>";
+								output += "<div class='tm-home-box-2'>";
+								if(myData[i].firstimage == null){
+									output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive2'>";
+								}else{
+									output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive2'>";
+								}
+								output += "<h3>"+myData[i].title+"</h3>";
+								output += "</div></div>";
+								document.getElementById("rowHotelArea").innerHTML += output;
+								if(count == 4){
+									return;
+								}
+							}
 						}
-						output += "<h3>"+myData[i].title+"</h3>";
-						output += "</div></div>";
-						document.getElementById("rowFoodArea").innerHTML += output;
-						if(count == 4){
-							return;
-						}
+						
+					},
+					error:function(data){
+						console.log(data);
 					}
-				},
-				error:function(data){
-					console.log(data);
-				}
-			});
-			$.ajax({
-				url:"aboutMainSeoulGame.sub",
-				type:"GET",
-				data:{areaCode:areaCode},
-				dataType:"json",
-				success:function(data){
-					console.log(data);
-					var myData = data.response.body.items.item;
-					var rowGameArea = $("#rowGameArea");
-					rowGameArea.html("");
-					var output = "";
-					var count = 0;
-					for (var i = 0; i < myData.length; i++){
-						count++;
-						output = "";
-						output += "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12'>";
-						output += "<div class='tm-home-box-2'>";
-						if(myData[i].firstimage == null){
-							output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive2'>";
-						}else{
-							output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive2'>";
+				});
+			}
+			
+			function aboutMainFood(){
+				$.ajax({
+					url:"aboutMainSeoulFood.sub",
+					type:"GET",
+					data:{areaCode:areaCode},
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var myData = data.response.body.items.item;
+						var rowFoodArea = $("#rowFoodArea");
+						rowFoodArea.html("");
+						var output = "";
+						var count = 0;
+						for(var i = 0; i < myData.length; i++){
+							count++;
+							output = "";
+							output += "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12'>";
+							output += "<div class='tm-home-box-2'>";
+							if(myData[i].firstimage == null){
+								output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive2'>";
+							}else{
+								output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive2'>";
+							}
+							output += "<h3>"+myData[i].title+"</h3>";
+							output += "</div></div>";
+							document.getElementById("rowFoodArea").innerHTML += output;
+							if(count == 4){
+								return;
+							}
 						}
-						output += "<h3>"+myData[i].title+"</h3>";
-						output += "</div></div>";
-						document.getElementById("rowGameArea").innerHTML += output;
-						if(count == 4){
-							return;
-						}
+					},
+					error:function(data){
+						console.log(data);
 					}
-				},
-				error:function(data){
-					console.log(data);
-				}
-			});
+				});
+			}
+			
+			function aboutMainGame(){
+				$.ajax({
+					url:"aboutMainSeoulGame.sub",
+					type:"GET",
+					data:{areaCode:areaCode},
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var myData = data.response.body.items.item;
+						var rowGameArea = $("#rowGameArea");
+						rowGameArea.html("");
+						var output = "";
+						var count = 0;
+						for (var i = 0; i < myData.length; i++){
+							count++;
+							output = "";
+							output += "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12'>";
+							output += "<div class='tm-home-box-2'>";
+							if(myData[i].firstimage == null){
+								output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive2'>";
+							}else{
+								output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive2'>";
+							}
+							output += "<h3>"+myData[i].title+"</h3>";
+							output += "</div></div>";
+							document.getElementById("rowGameArea").innerHTML += output;
+							if(count == 4){
+								return;
+							}
+						}
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+			}
+			
 		
 		/* Google map
       	------------------------------------------------*/

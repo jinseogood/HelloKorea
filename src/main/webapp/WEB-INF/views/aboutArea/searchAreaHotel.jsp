@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -160,13 +161,6 @@
 		</div>
 		<script>
 			
-			var areaCode = ${param.areaCode};
-			var sigunguCode = ${param.sigunguCode};
-			var pageNo = ${param.pageNo};
-			console.log("지역호텔검색areaCode : " + areaCode);
-			console.log("지역호텔검색sigunguCode : " + sigunguCode);
-			console.log("지역호텔검색pageNo : " + pageNo);
-			
 			if(areaCode == 1){
 				$(".tm-section-title1").text("서울 호텔");
 			}else if(areaCode == 2){
@@ -203,61 +197,144 @@
 				$(".tm-section-title1").text("제주도 호텔");
 			}
 			
+			var areaCode = ${param.areaCode};
+			var sigunguCode = ${param.sigunguCode};
+			var pageNo = ${param.pageNo};
+			var contenttypeid = 0;
+			var contentid = 0;
+			let isEnd = false;
 			
-			
-			function searchHotelPage(pageNo){
-				
+			function searchHotelPage(){
+				if(isEnd == true){
+					return;
+				}
 				
 				$.ajax({
 					url:"searchAreaHotel.sub",
 					type:"GET",
-					data:{areaCode:areaCode, sigunguCode:sigunguCode, pageNo:pageNo},
+					data:{areaCode:areaCode, sigunguCode:sigunguCode},
 					dataType:"json",
 					success:function(data){
 						console.log(data);
-						subAreaHotelView(data);
+						let length = data.response.body.items.item.length;
+						if(length < 12){
+							isEnd = true;
+						}
+						var myData = data.response.body.items.item;
+						var viewArea = $("#viewArea");
+						viewArea.html("");
+						var output = "";
+						if(myData == null){
+							output += "<div align='center'><h1>정보가 없습니다.</h1></div>";
+							document.getElementById("viewArea").innerHTML += output;
+						}else{
+							for(var i = 0; i < myData.length; i++){
+								contenttypeid = myData[i].contenttypeid;
+								contentid = myData[i].contentid;
+								output = "";
+								output += "<div class='tm-home-box-3' id='detailHover'>";
+								output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+								if(myData[i].firstimage == null){
+									output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
+								}else{
+									output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
+								}
+								output += "</div>";
+								output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+								output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData[i].addr1+"</p>";
+								output += "<div class='tm-home-box-2-container'>";
+								output += "<input type='hidden' value="+contenttypeid+">";
+								output += "<input type='hidden' value="+contentid+">";
+								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+								output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
+								output += "</div></div></div>";
+								document.getElementById("viewArea").innerHTML += output;
+							}
+						}
 					},
 					error:function(data){
 						console.log(data);
 					}
 				});
 			}
+			
+			function btnGood(contenttypeid, contentid){
+				console.log(contenttypeid);
+				console.log(contentid);
+				if(contenttypeid == 32){
+					$.ajax({
+						url:"dibsHotel.good",
+						type:"GET",
+						data:{contenttypeid:contenttypeid, contentid:contentid},
+						success:function(data){
+							// 1일시, 이미 찜한 목록 => delete요청.
+							// 0일시, 새로 찜에 추가 => insert요청.
+							if(data > 0){
+								deleteDibsHotel(contentid);
+							}else{
+								insertDibsHotel(contentid);
+							}
+						},
+						error:function(data){
+							console.log(data);
+						}
+					});
+				}
+			}
+			
+			function insertDibsHotel(contentid){
+				$.ajax({
+					url:"insertDibsHotel.good",
+					type:"GET",
+					data:{contenttypeid:contenttypeid, contentid:contentid},
+					success:function(data){
+						if(data > 0){
+							alert("찜 목록에 추가되었습니다.");
+						}
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+			}
+			
+			function deleteDibsHotel(contentid){
+				$.ajax({
+					url:"deleteDibsHotel.good",
+					type:"GET",
+					data:{contenttypeid:contenttypeid, contentid:contentid},
+					success:function(data){
+						alert("찜 목록에서 삭제되었습니다.");
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+			}
+			
+			function detailView(contentid,contenttypeid){
+				location.href="${contextPath}/detailHotel?contentid="+contentid+"&contenttypeid="+contenttypeid;
+			}
+			
 		
 			$(function(){
-				searchHotelPage(pageNo);
+				
+				searchHotelPage();
+				
+				$(window).scroll(function(){
+					let $window = $(this);
+					let scrollTop = $window.scrollTop();
+					let windowHeight = $window.height();
+					let documentHeight = $(document).height();
+					
+					if(scrollTop + windowHeight + 100 > documentHeight){
+						
+					}
+				});
 
 				
 			});
 			
-			function subAreaHotelView(data){
-				var myData = data.response.body.items.item;
-				var viewArea = $("#viewArea");
-				viewArea.html("");
-				var output = "";
-				if(myData == null){
-					output += "<div>정보가 없습니다.</div>";
-					document.getElementById("viewArea").innerHTML += output;
-				}else{
-					for(var i = 0; i < myData.length; i++){
-						output = "";
-						output += "<div class='tm-home-box-3' id='detailHover'>";
-						output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='location.href=${contextPath}/detailHotel'>";
-						if(myData[i].firstimage == null){
-							output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
-						}else{
-							output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
-						}
-						output += "</div>";
-						output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
-						output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData[i].addr1+"</p>";
-						output += "<div class='tm-home-box-2-container'>";
-						output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
-						output += "</div></div></div>";
-						document.getElementById("viewArea").innerHTML += output;
-					}
-				}
-			}
 		</script>
 		
 	</section>		
