@@ -2,6 +2,9 @@ package com.kh.hello.board.model.vo;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class Board {
 	private int bid;
 	private String title;

@@ -141,7 +141,7 @@ body{ margin:50px 0px; }
             		</span> -->
             		
             		<div class="rate2"></div>
-   					<input id="input2" type="text" >
+   					<input id="input2" type="text" name = "grade">
    					
             		<script src="http://code.jquery.com/jquery-1.11.3.min.js" charset="utf-8"></script>
    					<script src="${ contextPath }/resources/js/rater.js" charset="utf-8"></script>
@@ -177,14 +177,14 @@ body{ margin:50px 0px; }
             		<br>
             		<div>
             		<span>리뷰제목</span><br>
-            			<input type="text" id = "review_title" placeholder="방문 목적이나 인상 깊었던 점에 대해 언급하세요." width = "80%">
+            			<input type="text" id = "review_title" name = "title" placeholder="방문 목적이나 인상 깊었던 점에 대해 언급하세요." width = "80%">
             		</div>
             		<br>
             		<br>
             		<br>
             		<div>
             		<span>리뷰내용</span><br>
-            			<textarea style="resize: none;" placeholder="객실 위치, 편의시설등에 대한 고객님의 경험을 공유하세요." rows="10" cols="50"></textarea>
+            			<textarea style="resize: none;" name = "text" placeholder="객실 위치, 편의시설등에 대한 고객님의 경험을 공유하세요." rows="10" cols="50"></textarea>
             		</div>
             		<br>
             		<br>
@@ -273,7 +273,7 @@ body{ margin:50px 0px; }
         	</div>
         	<div class="col-lg-12 col-md-12 col-sm-12"><hr>
         		<input type="submit" class="btn btn-secondary" value = "확인">
-        		<button type="button" class="btn btn-secondary">취소</button>
+        		<button type="button" class="btn btn-secondary" onclick="cancel()">취소</button>
         	</div>
         	</form>
    </section>
@@ -288,6 +288,10 @@ body{ margin:50px 0px; }
 	/* function test(){
 		location.href="starTest.bo";
 	} */
+	
+	function cancel(){
+		location.href="deleteAllUpload.bo";
+	}	
 </script>
 </body>
 </html>

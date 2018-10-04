@@ -1,5 +1,7 @@
 package com.kh.hello.board.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.hello.board.model.vo.Board;
@@ -12,5 +14,11 @@ public interface BoardDao {
 	int insertBoard(Board b, SqlSessionTemplate sqlSession);
 
 	int deleteAttachment(SqlSessionTemplate sqlSession, String changeFileName);
+
+	int deleteAllUpload(SqlSessionTemplate sqlSession, int mId);
+
+	ArrayList<Attachment> selectUpload(SqlSessionTemplate sqlSession, int mId);
+
+	int updateBoard(SqlSessionTemplate sqlSession, Board b);
 
 }

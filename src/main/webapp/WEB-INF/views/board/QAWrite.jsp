@@ -225,52 +225,7 @@ body{ margin:50px 0px; }
         	</div>
         	
         	
-      </div>
-        	<div class="col-lg-12 col-md-12 col-sm-12" style="padding-top:40px"><hr>
-        		<span>공유하실 추억은 무엇인가요? (선택사항)</span><br><br>
-            	<%-- <button type="button" class="btn btn-secondary" onclick="location.href='${contextPath}/starTest.bo'">사진첨부</button> --%>
-            	<div class="container">
-        <div class="col-xs-12 text-center text-primary">
-        </div>
-        <div class="col-xs-12"> </div>
- 
-        <div class="col-xs-12">
-            <div id="consistentCoder" class="text-center"></div>
-        </div>
-        <div class="col-xs-12">
-            <div class="label label-info pull-right"><span class="countMe">0</span> files uploaded.</div>
-        </div>
-        <div class="col-xs-12"> </div>
-        <div class="col-xs-12 stageParent">
-            <div id="stage" class="stage"></div>
-        </div>
-
-        <div class="col-xs-12"> </div>
-        <div id="response" class="text-center"></div>
-    </div>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="${ contextPath }/resources/js/ccFileUpload.js"></script>
-    <script>
-    	(function($){
-        $(document).ready(function(){
-            var options = {
-                    'name':'file',
-                    'uploadUrl':'upload.bo',
-                    'sync':false,
-                    'previews':'stage',
-                    'response':'response',
-                    'counter':'countMe',
-                    'columnClass':'col-md-3 text-center',
-                    'allowedFiles':['gif','png','jpg','jpeg','xlsx','.psd'],
-                    'allowedPreviews':['jpg','jpeg'],
-                    'animSpeed':'fast'
-                  };
-            $("#consistentCoder").ccFileUpload(options);
-        });
-    	})(jQuery);
-    </script>
-        	</div>
+      </div>          	
         	<div class="col-lg-12 col-md-12 col-sm-12"><hr>
         		<input type="submit" class="btn btn-secondary" value = "확인">
         		<button type="button" class="btn btn-secondary">취소</button>
