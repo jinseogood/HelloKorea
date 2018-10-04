@@ -30,10 +30,10 @@ public class SellerPageController {
 		return "seller/manageRevenue";
 	}
 	
-	@RequestMapping("editCompanyView.sell")
+	/*@RequestMapping("editCompanyView.sell")
 	public String editCompanyView(){
 		return "seller/editCompany";
-	}
+	}*/
 	
 	@RequestMapping("paymentDetailView.sell")
 	public String paymentDetailView(){

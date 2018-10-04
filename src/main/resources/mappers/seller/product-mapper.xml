@@ -20,8 +20,7 @@
 		SELECT COUNT(*)
 		FROM COMPANY
 		JOIN COM_REGIST USING(C_ID)
-		WHERE CR_STATUS = 'Y'
-		AND M_ID = #{mId}
+		WHERE M_ID = #{mId}
 	</select>
 	
 	<!-- 상품 전체 조회 -->
@@ -29,8 +28,7 @@
 		SELECT C_ID, C_NAME, C_ADDRESS, C_PHONE, CR_TERM, CR_STATUS
 		FROM COMPANY
 		JOIN COM_REGIST USING(C_ID)
-		WHERE CR_STATUS = 'Y'
-		AND M_ID = #{mId}
+		WHERE M_ID = #{mId}
 		ORDER BY AP_DATE
 	</select>
 	
@@ -40,9 +38,9 @@
 		FROM COMPANY
 		JOIN COM_REGIST USING(C_ID)
 		WHERE CR_STATUS = 'Y'
-		AND M_ID = #{list.mId}
-		AND AP_DATE = #{list.toDate}
-		AND ADD_MONTHS(AP_DATE, CR_TERM) = #{list.fromDate}
+		AND M_ID = ${list.get(0)}
+		AND AP_DATE = ${list.get(1)}
+		AND ADD_MONTHS(AP_DATE, CR_TERM) = ${list.get(2)}
 		ORDER BY AP_DATE
 	</select>
 	
@@ -52,9 +50,9 @@
 		FROM COMPANY
 		JOIN COM_REGIST USING(C_ID)
 		WHERE CR_STATUS = 'Y'
-		AND M_ID = #{list.mId}
-		AND AP_DATE = #{list.toDate}
-		AND ADD_MONTHS(AP_DATE, CR_TERM) = #{list.fromDate}
+		AND M_ID = ${list.get(0)}
+		AND AP_DATE = ${list.get(1)}
+		AND ADD_MONTHS(AP_DATE, CR_TERM) = ${list.get(2)}
 		ORDER BY AP_DATE
 	</select>
 	
@@ -63,35 +61,35 @@
 		SELECT COUNT(*)
 		FROM COMPANY
 		JOIN COM_REGIST USING(C_ID)
-		WHERE M_ID = #{list.mId}
+		WHERE M_ID = ${list.get(0)}
 		<choose>
-			<when test="list.spd.getCompanyName() != null">
-				AND C_NAME LIKE '%'||#{list.spd.getCompanyName()}||'%'
+			<when test="list.get(1).companyName != null">
+				AND C_NAME LIKE '%' || '${list.get(1).companyName}' || '%'
 			</when>
-			<when test="list.spd.getCompanyAddress() != null">
-				AND C_ADDRESS LIKE '%'||#{list.spd.getCompanyAddress()}||'%'
+			<when test="list.get(1).companyAddress != null">
+				AND C_ADDRESS LIKE '%' || '${list.get(1).companyAddress}' || '%'
 			</when>
 			<otherwise>
-				AND CR_STATUS = #{list.spd.getStatus()}
+				AND CR_STATUS = ${list.get(1).status}
 			</otherwise>
 		</choose>
 	</select>
 	
 	<!-- 검색 상품 조회 -->
 	<select id="selectSearchWordProductList" resultMap="productResultSet" parameterType="arraylist">
-		SELECT COUNT(*)
+		SELECT C_ID, C_NAME, C_ADDRESS, C_PHONE, CR_TERM, CR_STATUS
 		FROM COMPANY
 		JOIN COM_REGIST USING(C_ID)
-		WHERE M_ID = #{list.mId}
+		WHERE M_ID = ${list.get(0)}
 		<choose>
-			<when test="list.spd.getCompanyName() != null">
-				AND C_NAME LIKE '%'||#{list.spd.getCompanyName()}||'%'
+			<when test="list.get(1).companyName != null">
+				AND C_NAME LIKE '%' || '${list.get(1).companyName}' || '%'
 			</when>
-			<when test="list.spd.getCompanyAddress() != null">
-				AND C_ADDRESS LIKE '%'||#{list.spd.getCompanyAddress()}||'%'
+			<when test="list.get(1).companyAddress != null">
+				AND C_ADDRESS LIKE '%' || '${list.get(1).companyAddress}' || '%'
 			</when>
 			<otherwise>
-				AND CR_STATUS = #{list.spd.getStatus()}
+				AND CR_STATUS = ${list.get(1).status}
 			</otherwise>
 		</choose>
 	</select>

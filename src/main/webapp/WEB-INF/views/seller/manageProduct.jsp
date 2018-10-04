@@ -126,18 +126,20 @@
 				</thead>
 				<tbody>
 					<c:set var="no" value="1"/>
-					<c:forEach var="p" items="${ list }">
-						<tr>
-							<input type="hidden" name="cId" value="${ p.cId }">
-							<th>${ no }</th>
-							<td>${ p.companyName }</td>
-							<td>${ p.companyAddress }</td>
-							<td>${ p.companyPhone }</td>
-							<td>${ p.term }</td>
-							<td>${ p.status }</td>
-							<c:set var="no" value="${ no + 1 }"/>
-						</tr>
-					</c:forEach>
+					<c:if test="${ list != null }">
+						<c:forEach var="p" items="${ list }">
+							<tr>
+								<input type="hidden" id="CID" value="${ p.cId }">
+								<th>${ no }</th>
+								<td>${ p.companyName }</td>
+								<td>${ p.companyAddress }</td>
+								<td>${ p.companyPhone }</td>
+								<td>${ p.term }</td>
+								<td>${ p.status }</td>
+								<c:set var="no" value="${ no + 1 }"/>
+							</tr>
+						</c:forEach>
+					</c:if>
 				</tbody>
 			</table>
 			
@@ -184,12 +186,13 @@
 	
 	<script>
 		$(function(){
-			$("#productTable td").click(function(){
-				location.href="editCompanyView.sell";
-			});
-		});
-		$(function(){
 	    	$("#datePicker").hide();
+	    	
+	    	$("#productTable tbody tr").click(function(){
+	    		var cId=$(this).children().eq(0).val();
+	    		console.log("CID : " + cId);
+	    		location.href="detailCompany.sell?cId=" + cId;
+	    	});
 	    });
 	    function showDatePicker(){
 	    	$("#datePicker").show();
