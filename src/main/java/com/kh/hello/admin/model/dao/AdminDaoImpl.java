@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
+import com.kh.hello.admin.model.vo.CompanyDetails;
 import com.kh.hello.admin.model.vo.DatePick;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
@@ -372,5 +373,11 @@ public class AdminDaoImpl implements AdminDao{
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
 		list = (ArrayList)sqlSession.selectList("selectSearchWordCompanyList", a, rowBounds);
 		return list;
+	}
+
+	//업체 디테일
+	@Override
+	public ArrayList<CompanyDetails> selectOneCompany(SqlSessionTemplate sqlSession, int cId) {
+		return (ArrayList)sqlSession.selectList("selectOneCompany", cId);
 	}
 }

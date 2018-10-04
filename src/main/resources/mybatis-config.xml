@@ -7,6 +7,7 @@
      
       <typeAliases>
           <typeAlias type="com.kh.hello.common.Attachment" alias="Attachment"/>
+          <typeAlias type="com.kh.hello.admin.model.vo.CompanyDetails" alias="CompanyDetails"/>
           <typeAlias type="com.kh.hello.admin.model.vo.Approval" alias="Approval"/>
           <typeAlias type="com.kh.hello.admin.model.vo.Question" alias="Question"/>
           <typeAlias type="com.kh.hello.admin.model.vo.Blacklist" alias="Blacklist"/>
@@ -26,12 +27,12 @@
       </typeAliases>
   
       <mappers>
-          <mapper resource="mappers/admin-mapper/company-mapper.xml"/>
-          <mapper resource="mappers/admin-mapper/question-mapper.xml"/>
-          <mapper resource="mappers/admin-mapper/blacklist-mapper.xml"/>
-          <mapper resource="mappers/admin-mapper/reservation-mapper.xml"/>
-          <mapper resource="mappers/admin-mapper/report-mapper.xml"/>
-          <mapper resource="mappers/admin-mapper/message-mapper.xml"/>
+          <mapper resource="mappers/admin/company-mapper.xml"/>
+          <mapper resource="mappers/admin/question-mapper.xml"/>
+          <mapper resource="mappers/admin/blacklist-mapper.xml"/>
+          <mapper resource="mappers/admin/reservation-mapper.xml"/>
+          <mapper resource="mappers/admin/report-mapper.xml"/>
+          <mapper resource="mappers/admin/message-mapper.xml"/>
           <mapper resource="mappers/member/member-mapper.xml"/>
           <!-- <mapper resource="mappers/member/attachment-mapper.xml"/> -->
           <mapper resource="mappers/seller/company-mapper.xml"/>

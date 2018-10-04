@@ -101,7 +101,7 @@ table.type09 td {
                     <ul class="dropdown-menu" role="menu">
                       <li><a href="#crId" class="search">등록번호</a></li>
                       <li><a href="#cName" class="search">업체명</a></li>
-                      <li><a href="#cMaster" class="search">담당자</a></li>
+                      <li><a href="#cPhone" class="search">연락처</a></li>
                       <li><a href="#noA" class="search">미승인건</a></li>
                       <li class="divider"></li>
                       <li><a href="#datePick" onclick="showDatePicker()">신청일</a></li>
@@ -161,15 +161,15 @@ table.type09 td {
 	</script>
 
 	<div class="tableArea" align="center">
-<table class="type09">
+<table class="type09" id="companyTable">
     <thead>
     <tr>
         <th style="min-width:60px;">등록번호</th>
         <th>업체명</th>
-        <th>담당자</th>
+        <th>연락처</th>
         <th>신청일</th>
         <th>승인일</th>
-        <th>상세 보기</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -177,10 +177,10 @@ table.type09 td {
     <tr>
         <th scope="row">${c.crId}</th>
         <td>${c.cName}</td>
-        <td>${c.cMaster}</td>
+        <td>${c.cPhone}</td>
         <td>${c.crDate}</td>
         <td>${c.apDate}</td>
-        <td><button class="btn btn-success" id="detailBtn">상세 보기</button></td>
+        <td>${c.cId}</td>
     </tr>
     </c:forEach>
     
@@ -223,7 +223,19 @@ table.type09 td {
 	<jsp:include page="../common/footer.jsp"/>
 	
 	<script>
+	$(function(){
+		<% for(int i = 0; i < 11; i++){%>
+		$("#companyTable tr").eq(<%=i%>).children().eq(5).hide();
+		<% } %>
+		
+	});
 	
+	$(function(){
+		$("#companyTable tr").click(function(){
+		    var cId = $(this).children().eq(5).text();
+			location.href="selectOneCompany.ad?cId="+cId;
+		});
+	});
 	</script>
 </body>
 </html>

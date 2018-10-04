@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.hello.admin.model.service.AdminService;
 import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
+import com.kh.hello.admin.model.vo.CompanyDetails;
 import com.kh.hello.admin.model.vo.DatePick;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
@@ -483,8 +484,8 @@ public class AdminController {
 			}else if(searchParam.equals("cName")){
 				a.setcName(searchWord);
 		    //대표자명
-			}else if(searchParam.equals("cMaster")){
-				a.setcMaster(searchWord);
+			}else if(searchParam.equals("cPhone")){
+				a.setcPhone(searchWord);
 			}
 			
 			listCount = as.getSearchWordCompanyListCount(a);
@@ -496,6 +497,15 @@ public class AdminController {
 		return "admin/approval";
 	}
 
+	//업체 디테일 조회
+	@RequestMapping("selectOneCompany.ad")
+	public String selectOneCompany(String cId, Model model){
+		ArrayList<CompanyDetails> list = as.selectOneCompany(Integer.parseInt(cId));
+		model.addAttribute("list", list);
+		return "admin/companyDetails";
+	}
+	
+	
 	@RequestMapping("depositView.ad")
 	public String depositView(){
 		return "admin/deposit";
