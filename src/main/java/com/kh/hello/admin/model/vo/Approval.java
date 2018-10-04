@@ -11,13 +11,13 @@ public class Approval implements java.io.Serializable{
 	private String crStatus;
 	private int cId;
 	private String cName;
-	private String cMaster;
+	private String cPhone;
 	private int crTerm;
 	private Date apDate;
 	
 	public Approval(){}
 
-	public Approval(int crId, Date crDate, String crStatus, int cId, String cName, String cMaster, int crTerm,
+	public Approval(int crId, Date crDate, String crStatus, int cId, String cName, String cPhone, int crTerm,
 			Date apDate) {
 		super();
 		this.crId = crId;
@@ -25,7 +25,7 @@ public class Approval implements java.io.Serializable{
 		this.crStatus = crStatus;
 		this.cId = cId;
 		this.cName = cName;
-		this.cMaster = cMaster;
+		this.cPhone = cPhone;
 		this.crTerm = crTerm;
 		this.apDate = apDate;
 	}
@@ -70,12 +70,12 @@ public class Approval implements java.io.Serializable{
 		this.cName = cName;
 	}
 
-	public String getcMaster() {
-		return cMaster;
+	public String getcPhone() {
+		return cPhone;
 	}
 
-	public void setcMaster(String cMaster) {
-		this.cMaster = cMaster;
+	public void setcPhone(String cPhone) {
+		this.cPhone = cPhone;
 	}
 
 	public int getCrTerm() {
@@ -97,8 +97,9 @@ public class Approval implements java.io.Serializable{
 	@Override
 	public String toString() {
 		return "Approval [crId=" + crId + ", crDate=" + crDate + ", crStatus=" + crStatus + ", cId=" + cId + ", cName="
-				+ cName + ", cMaster=" + cMaster + ", crTerm=" + crTerm + ", apDate=" + apDate + "]";
+				+ cName + ", cPhone=" + cPhone + ", crTerm=" + crTerm + ", apDate=" + apDate + "]";
 	}
+
 	
 	
 

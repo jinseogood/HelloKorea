@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.hello.admin.model.dao.AdminDao;
 import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
+import com.kh.hello.admin.model.vo.CompanyDetails;
 import com.kh.hello.admin.model.vo.DatePick;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
@@ -311,6 +312,12 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public ArrayList<Approval> selectSearchWordCompanyList(Approval a, PageInfo pi) {
 		return ad.selectSearchWordCompanyList(sqlSession, a, pi);
+	}
+
+	//업체 디테일 화면
+	@Override
+	public ArrayList<CompanyDetails> selectOneCompany(int cId) {
+		return ad.selectOneCompany(sqlSession, cId);
 	}
 
 }

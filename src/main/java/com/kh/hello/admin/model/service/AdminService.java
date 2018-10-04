@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
+import com.kh.hello.admin.model.vo.CompanyDetails;
 import com.kh.hello.admin.model.vo.DatePick;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
@@ -61,5 +62,6 @@ public interface AdminService {
 	ArrayList<Approval> selectSearchapDateBlacklist(DatePick d, PageInfo pi);
 	int getSearchWordCompanyListCount(Approval a);
 	ArrayList<Approval> selectSearchWordCompanyList(Approval a, PageInfo pi);
+	ArrayList<CompanyDetails> selectOneCompany(int cId);
 	
 }

@@ -11,21 +11,36 @@
           <result property="crStatus" column="CR_STATUS"/>
           <result property="cId" column="C_ID"/>
           <result property="cName" column="C_NAME"/>
-          <result property="cMaster" column="C_MASTER"/>
+          <result property="cPhone" column="C_PHONE"/>
           <result property="crTerm" column="CR_TERM"/>
           <result property="apDate" column="AP_DATE"/>
      </resultMap>
      
+     <!-- 회사 디테일 -->
+     <resultMap type="CompanyDetails" id="companyDetailsResultSet">
+          <id property="cId" column="C_ID"/>
+          <result property="crId" column="CR_ID"/>
+          <result property="cName" column="C_NAME"/>
+          <result property="cPhone" column="C_PHONE"/>
+          <result property="cAddress" column="C_ADDRESS"/>
+          <result property="crDate" column="CR_DATE"/>
+          <result property="apDate" column="AP_DATE"/>
+          <result property="crOpenTerm" column="CR_OPENTERM"/> 
+          <result property="rType" column="R_TYPE"/>
+          <result property="rCount" column="R_COUNT"/>
+          <result property="rPrice" column="R_PRICE"/>
+          <result property="rLimit" column="R_LIMIT"/>
+     </resultMap>
      <!-- 승인 신청 리스트 카운트 -->
      <select id="selectCompanyListCount" resultType="_int">
          SELECT COUNT(*)
-         FROM ( SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_MASTER, CR.CR_TERM, CR.AP_DATE 
+         FROM ( SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_PHONE, CR.CR_TERM, CR.AP_DATE 
                 FROM COM_REGIST CR
                 JOIN COMPANY C ON(CR.C_ID=C.C_ID))
      </select>
      <!-- 승인 신청 리스트 -->
      <select id="selectCompanyList" resultMap="approvalResultSet">
-         SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_MASTER, CR.CR_TERM, CR.AP_DATE 
+         SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_PHONE, CR.CR_TERM, CR.AP_DATE 
          FROM COM_REGIST CR
          JOIN COMPANY C ON(CR.C_ID=C.C_ID)
          ORDER BY CR_ID DESC
@@ -34,14 +49,14 @@
      <!-- 등록일 검색 카운트 -->
      <select id="selectSearchcrDateBlacklistCount" resultType="_int">
          SELECT COUNT(*)
-         FROM ( SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_MASTER, CR.CR_TERM, CR.AP_DATE 
+         FROM ( SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_PHONE, CR.CR_TERM, CR.AP_DATE 
                 FROM COM_REGIST CR
                 JOIN COMPANY C ON(CR.C_ID=C.C_ID)
                 WHERE TO_CHAR(CR_DATE,'YYYYMMDD') BETWEEN #{fromDate} AND #{toDate})
      </select>
      <!-- 등록일 검색 -->
      <select id="selectSearchcrDateBlacklist" resultMap="approvalResultSet">
-         SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_MASTER, CR.CR_TERM, CR.AP_DATE 
+         SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_PHONE, CR.CR_TERM, CR.AP_DATE 
          FROM COM_REGIST CR
          JOIN COMPANY C ON(CR.C_ID=C.C_ID)
          WHERE TO_CHAR(CR_DATE,'YYYYMMDD') BETWEEN #{fromDate} AND #{toDate}
@@ -50,14 +65,14 @@
      <!-- 승인일 검색 카운트 -->
      <select id="selectSearchapDateBlacklistCount" resultType="_int">
          SELECT COUNT(*)
-         FROM ( SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_MASTER, CR.CR_TERM, CR.AP_DATE 
+         FROM ( SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_PHONE, CR.CR_TERM, CR.AP_DATE 
                 FROM COM_REGIST CR
                 JOIN COMPANY C ON(CR.C_ID=C.C_ID)
                 WHERE TO_CHAR(AP_DATE,'YYYYMMDD') BETWEEN #{fromDate} AND #{toDate})
      </select>
      <!-- 승인일 검색 -->
      <select id="selectSearchapDateBlacklist" resultMap="approvalResultSet">
-         SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_MASTER, CR.CR_TERM, CR.AP_DATE 
+         SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_PHONE, CR.CR_TERM, CR.AP_DATE 
          FROM COM_REGIST CR
          JOIN COMPANY C ON(CR.C_ID=C.C_ID)
          WHERE TO_CHAR(AP_DATE,'YYYYMMDD') BETWEEN #{fromDate} AND #{toDate}
@@ -67,7 +82,7 @@
      <!-- 승인 검색 리스트 카운트 -->
      <select id="selectSearchWordCompanyListCount" resultType="_int">
          SELECT COUNT(*)
-         FROM ( SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_MASTER, CR.CR_TERM, CR.AP_DATE 
+         FROM ( SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_PHONE, CR.CR_TERM, CR.AP_DATE 
                 FROM COM_REGIST CR
                 JOIN COMPANY C ON(CR.C_ID=C.C_ID)
                 WHERE 1=1
@@ -78,8 +93,8 @@
                   <when test="cName != null">
                       AND C_NAME LIKE '%' || #{cName} || '%'
                   </when>
-                  <when test="cMaster != null">
-                      AND C_MASTER LIKE '%' || #{cMaster} || '%'
+                  <when test="cPhone != null">
+                      AND C_PHONE LIKE '%' || #{cPhone} || '%'
                   </when>
                   <otherwise>
                       AND AP_DATE IS NULL
@@ -88,7 +103,7 @@
      </select>
      <!-- 승인 검색 리스트 -->
      <select id="selectSearchWordCompanyList" resultMap="approvalResultSet">
-         SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_MASTER, CR.CR_TERM, CR.AP_DATE 
+         SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_PHONE, CR.CR_TERM, CR.AP_DATE 
          FROM COM_REGIST CR
          JOIN COMPANY C ON(CR.C_ID=C.C_ID)
          WHERE 1=1
@@ -99,13 +114,23 @@
              <when test="cName != null">
                  AND C_NAME LIKE '%' || #{cName} || '%'
              </when>
-             <when test="cMaster != null">
-                 AND C_MASTER LIKE '%' || #{cMaster} || '%'
+             <when test="cPhone != null">
+                 AND C_PHONE LIKE '%' || #{cPhone} || '%'
              </when>
              <otherwise>
                  AND AP_DATE IS NULL
              </otherwise>
          </choose>
          ORDER BY CR_ID DESC
+     </select>
+     
+     <!-- 회사 상세 페이지 조회 -->
+     <select id="selectOneCompany" resultMap="companyDetailsResultSet" parameterType="_int">
+         SELECT C.C_ID, CR.CR_ID, C.C_NAME, C.C_PHONE, C.C_ADDRESS, CR.CR_DATE, CR.AP_DATE, CR.AP_DATE||'~'||ADD_MONTHS(CR.AP_DATE,CR.CR_TERM) AS CR_OPENTERM,
+                R.R_TYPE, R.R_COUNT, R.R_PRICE, R.R_LIMIT
+         FROM ROOM R
+         LEFT JOIN COM_REGIST CR ON (R.C_ID=CR.C_ID)
+         LEFT JOIN COMPANY C ON (CR.C_ID=C.C_ID)
+         WHERE C.C_ID= #{cId}
      </select>
 </mapper>
