@@ -121,5 +121,13 @@ public class BoardPageController {
 		
 		return "main/main";
 	}
+	
+	@RequestMapping(value="insertQA.bo")
+	public String insertReview(Model model, HttpServletRequest request){
+		int result = 0;
+		//result = bs.insertQA();
+		
+		return "main/main";
+	}
 
 }
