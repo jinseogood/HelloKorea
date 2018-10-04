@@ -40,7 +40,7 @@
      </update> -->
      
      <!-- 리뷰사진 검색 검색 -->
-     <select id="selectAttachment" resultMap="AttachmentResultSet">
+     <select id="selectAttachment" parameterType="_int" resultMap="AttachmentResultSet">
          SELECT *
          FROM ATTACHMENT
          WHERE REF_ID = (SELECT MAX(BID) FROM BOARD WHERE M_ID = #{mId})

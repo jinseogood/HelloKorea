@@ -11,7 +11,7 @@ import com.kh.hello.common.CommonUtils;
 public class FileUpload {
 	private static final String[] ALLOWED_FILE_TYPES = {"image/jpeg", "image/jpg", "image/gif", "image/png"};
     private static final Long MAX_FILE_SIZE = 1048576L; //1MB
-    private static final String UPLOAD_FILE_PATH = "D:/git/HelloKorea/src/main/webapp/resources/uploadFiles/";
+    private static final String UPLOAD_FILE_PATH = "D:/git/HelloKorea/src/main/webapp/resources/uploadFiles/board/";
     private String originalName;
     private String changeName;
     

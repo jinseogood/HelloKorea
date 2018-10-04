@@ -56,6 +56,7 @@ public class BoardServiceImpl implements BoardService{
 	public ArrayList<Attachment> selectUpload(int mId) {
 		ArrayList<Attachment> at = null;
 		at = bd.selectUpload(sqlSession, mId);
+		
 		return at;
 	}
 

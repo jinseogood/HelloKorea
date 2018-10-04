@@ -88,9 +88,6 @@ public class BoardPageController {
         //선택삭제
         int result1 = bs.deleteAttachment(changeFileName);
         
-        //일괄삭제
-        //int result1 = bs.deleteAttachment(m.getmId());
-        
         return new Response(result);
     }
 	
@@ -107,7 +104,7 @@ public class BoardPageController {
 			for(int i = 0 ; i < at.size() ; i++){
 				fileDeleteUpload.process(at.get(i).getChangeName());
 			}
-			
+			//취소시 일괄삭제
 			result = bs.deleteAllUpload(m.getmId());
 		}
 		
@@ -117,17 +114,20 @@ public class BoardPageController {
 	@RequestMapping(value="insertReview.bo")
 	public String insertReview(Model model, Board b, HttpServletRequest request){
 		int result = 0;
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		b.setM_id(m.getmId());
 		result = bs.updateBoard(b);
 		
 		return "main/main";
 	}
+
 	
-	@RequestMapping(value="insertQA.bo")
+	/*@RequestMapping(value="insertQA.bo")
 	public String insertReview(Model model, HttpServletRequest request){
 		int result = 0;
 		//result = bs.insertQA();
 		
 		return "main/main";
-	}
+	}*/
 
 }
