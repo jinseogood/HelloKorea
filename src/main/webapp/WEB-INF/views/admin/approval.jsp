@@ -63,6 +63,10 @@ table.type09 td {
     border-bottom: 1px solid #ccc;
 }
 
+#detailBtn{
+    font-size:12px;
+    line-height:0.8;
+}
 
 </style>
 </head>
@@ -95,10 +99,10 @@ table.type09 td {
                     	<span id="search_concept">검색 카테고리</span> <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="#crId">등록번호</a></li>
-                      <li><a href="#cName">업체명</a></li>
-                      <li><a href="#cMaster">담당자</a></li>
-                      <li><a href="#noA">미승인건</a></li>
+                      <li><a href="#crId" class="search">등록번호</a></li>
+                      <li><a href="#cName" class="search">업체명</a></li>
+                      <li><a href="#cMaster" class="search">담당자</a></li>
+                      <li><a href="#noA" class="search">미승인건</a></li>
                       <li class="divider"></li>
                       <li><a href="#datePick" onclick="showDatePicker()">신청일</a></li>
                       <li><a href="#datePick2" onclick="showDatePicker()">승인일</a></li>
@@ -132,6 +136,13 @@ table.type09 td {
     	 $("#datePicker").hide();
     	 
      });
+	 
+	 $(document).ready(function(e){
+		 $(".search").click(function(e){
+			 $("#datePicker").hide();
+		 });
+	 });
+	 
      function showDatePicker(){
     	 $("#datePicker").show();
     	 
@@ -153,11 +164,12 @@ table.type09 td {
 <table class="type09">
     <thead>
     <tr>
-        <th>등록번호</th>
+        <th style="min-width:60px;">등록번호</th>
         <th>업체명</th>
         <th>담당자</th>
         <th>신청일</th>
         <th>승인일</th>
+        <th>상세 보기</th>
     </tr>
     </thead>
     <tbody>
@@ -168,6 +180,7 @@ table.type09 td {
         <td>${c.cMaster}</td>
         <td>${c.crDate}</td>
         <td>${c.apDate}</td>
+        <td><button class="btn btn-success" id="detailBtn">상세 보기</button></td>
     </tr>
     </c:forEach>
     

@@ -117,9 +117,9 @@ table.type09 td {
                     	<span id="search_concept">검색 카테고리</span> <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="#oId">예약 번호</a></li>
-                      <li><a href="#cName">예약처</a></li>
-                      <li><a href="#paName">예약자</a></li>
+                      <li><a href="#oId" class="search">예약 번호</a></li>
+                      <li><a href="#cName" class="search">예약처</a></li>
+                      <li><a href="#paName" class="search">예약자</a></li>
                       <li class="divider"></li>
                       <li><a href="#datePick" onclick="showDatePicker()">숙박일</a></li>
                     </ul>
@@ -152,6 +152,13 @@ table.type09 td {
     	 $("#datePicker").hide();
     	 
      });
+	 
+	 $(document).ready(function(e){
+		 $(".search").click(function(e){
+			 $("#datePicker").hide();
+		 });
+	 });
+	 
      function showDatePicker(){
     	 $("#datePicker").show();
     	 

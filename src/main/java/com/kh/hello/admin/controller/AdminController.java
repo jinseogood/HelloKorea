@@ -1,5 +1,5 @@
 package com.kh.hello.admin.controller;
-
+   
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import com.kh.hello.common.Pagination;
 import com.kh.hello.message.model.vo.Message;
 @Controller
 public class AdminController {
-
+   
 	@Autowired
 	private AdminService as;
 
@@ -56,8 +56,10 @@ public class AdminController {
 		}else if(searchParam.equals("datePick")){
 
 			DatePick d = new DatePick();
-			d.setFromDate(fromDate);
-			d.setToDate(toDate);
+			d.setFromDate(fromDate.replaceAll("-", ""));
+			d.setToDate(toDate.replaceAll("-", ""));
+			
+			
 			int listCount = as.getSearchDateReservationListCount(d);
 			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
 			list = as.selectSearchDateReservationList(d, pi);
@@ -107,8 +109,8 @@ public class AdminController {
 		 }else if(searchParam.equals("datePick")){
 
 			DatePick d = new DatePick();
-			d.setFromDate(fromDate);
-			d.setToDate(toDate);
+			d.setFromDate(fromDate.replaceAll("-", ""));
+			d.setToDate(toDate.replaceAll("-", ""));
 			int listCount = as.getSearchDateReportListCount(d);
 			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
 			list = as.selectSearchDateReportList(d, pi);
@@ -172,7 +174,7 @@ public class AdminController {
 		HashMap<String, Object> hmap = new HashMap<String, Object>();
 		for(int i = 0; i < list.size(); i++){
 
-			Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Format formatter = new SimpleDateFormat("yyyy-MM-dd");
 			
 			hmap.put("rRecordId" + i, list.get(i).getrRecordId());
 			hmap.put("mId" + i, list.get(i).getmId());
@@ -297,8 +299,8 @@ public class AdminController {
 		//문의일 검색
 		 }else if(searchParam.equals("datePick")){
 			DatePick d = new DatePick();
-			d.setFromDate(fromDate);
-			d.setToDate(toDate);
+			d.setFromDate(fromDate.replaceAll("-", ""));
+			d.setToDate(toDate.replaceAll("-", ""));
 			listCount = as.getSearchDateQuestionListCount(d);
 			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
 			list = as.selectSearchDateQuestionList(d, pi);
@@ -390,8 +392,8 @@ public class AdminController {
 		}else if(searchParam.equals("datePick") || searchParam.equals("datePick2")){
 
 			DatePick d = new DatePick();
-			d.setFromDate(fromDate);
-			d.setToDate(toDate);
+			d.setFromDate(fromDate.replaceAll("-", ""));
+			d.setToDate(toDate.replaceAll("-", ""));
 			//등록일 검색
 			if(searchParam.equals("datePick")){
 				listCount = as.getSearchRDateBlacklistCount(d);
@@ -458,8 +460,8 @@ public class AdminController {
 		}else if(searchParam.equals("datePick") || searchParam.equals("datePick2")){
 
 			DatePick d = new DatePick();
-			d.setFromDate(fromDate);
-			d.setToDate(toDate);
+			d.setFromDate(fromDate.replaceAll("-", ""));
+			d.setToDate(toDate.replaceAll("-", ""));
 			//등록일 검색
 			if(searchParam.equals("datePick")){
 				listCount = as.getSearchcrDateBlacklistCount(d);
@@ -471,10 +473,6 @@ public class AdminController {
 				list = as.selectSearchapDateBlacklist(d, pi);
 			}
 			
-		}/*else if(searchParam.equals("noA")){
-			listCount = as.getnoACompanyListCount();
-			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
-			list = as.selectnoACompanyList(pi);
 		}else{
 			Approval a = new Approval();
 			a.setCrId(-99);
@@ -484,14 +482,15 @@ public class AdminController {
 			//업체명 검색
 			}else if(searchParam.equals("cName")){
 				a.setcName(searchWord);
-			}else{ //대표자명
+		    //대표자명
+			}else if(searchParam.equals("cMaster")){
 				a.setcMaster(searchWord);
 			}
 			
 			listCount = as.getSearchWordCompanyListCount(a);
 			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
 			list = as.selectSearchWordCompanyList(a, pi);
-		}*/
+		}
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		return "admin/approval";

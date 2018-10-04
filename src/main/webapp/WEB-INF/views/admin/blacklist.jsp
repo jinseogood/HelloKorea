@@ -92,9 +92,9 @@ table.type09 td {
                     	<span id="search_concept">검색 카테고리</span> <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="#bRecordId">블랙리스트 번호</a></li>
-                      <li><a href="#mId">대상</a></li>
-                      <li><a href="#noT">미해지건</a></li>
+                      <li><a href="#bRecordId" class="search">블랙리스트 번호</a></li>
+                      <li><a href="#mId" class="search">대상</a></li>
+                      <li><a href="#noT" class="search">미해지건</a></li>
                       <li class="divider"></li>
                       <li><a href="#datePick" onclick="showDatePicker()">등록일자</a></li>
                       <li><a href="#datePick2" onclick="showDatePicker()">해지일자</a></li>
@@ -127,6 +127,12 @@ table.type09 td {
 	 $(function(){
     	 $("#datePicker").hide();
      });
+	 
+	 $(document).ready(function(e){
+		 $(".search").click(function(e){
+			 $("#datePicker").hide();
+		 });
+	 });
 	 
      function showDatePicker(){
     	 $("#datePicker").show();

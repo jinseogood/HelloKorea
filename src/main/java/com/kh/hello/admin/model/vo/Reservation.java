@@ -2,6 +2,9 @@ package com.kh.hello.admin.model.vo;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Repository;
+   
+@Repository
 public class Reservation implements java.io.Serializable{
 	private int oId; //예약번호
 	private String cName; //예약처
