@@ -48,74 +48,49 @@
                 	<div class="col-md-12">
                     	<ul class="breadcrumb">
                         	<li><a href="myPageView.sell"><i class="fa fa-home"></i> Home</a></li>
-                            <li class="active">업체 수정</li>
+                        	<li><a href="manageProduct.sell">업체 관리</a></li>
+                            <li class="active">업체 상세</li>
                         </ul>
                     </div>
                 </div>
 			</div>
 		
-			<form action="" method="post">
+			<form action="editCompanyView.sell" method="post">
 				<table id="detailTable" align="center">
+					<input type="hidden" name="cId" value="${ opList.get(0).cId }">
 					<tr>
 						<th>상호명</th>
-						<td colspan="4"><input type="text" id="companyName" name="companyName" value="${ opList.get(0).companyName }" size="25" readonly></td>
+						<td colspan="4"><input type="hidden" name="companyName" value="${ opList.get(0).companyName }">${ opList.get(0).companyName }</td>
 					</tr>
 					<tr>
 						<th>전화번호</th>
-						<td colspan="4"><input type="text" id="companyPhone" name="companyPhone" value="${ opList.get(0).companyPhone }" size="25" readonly></td>
+						<td colspan="4"><input type="hidden" name="companyPhone" value="${ opList.get(0).companyPhone }">${ opList.get(0).companyPhone }</td>
 					</tr>
 					<tr>
 						<th>주소</th>
-						<td colspan="4"><input type="text" id="companyAddress" name="companyAddress" value="${ opList.get(0).companyAddress }" size="25" readonly></td>
+						<td colspan="4"><input type="hidden" name="companyAddress" value="${ opList.get(0).companyAddress }">${ opList.get(0).companyAddress }</td>
 					</tr>
-					<c:set var="r" value="1"/>
 					<c:forEach var="op" items="${ opList }">
 						<tr>
 							<th>객실타입</th>
-							<td colspan="2"><input type="text" id="roomType" name="roomType" value="${ op.roomType }" size="25" readonly></td>
+							<td colspan="2"><input type="hidden" name="roomType" value="${ op.roomType }">${ op.roomType }</td>
 							<th style="width:60px;">객실 수</th>
-							<td><input type="number" id="roomCount" name="roomCount" value="${ op.roomCount }" readonly></td>
+							<td><input type="hidden" name="roomCount" value="${ op.roomCount }">${ op.roomCount }</td>
 						</tr>
 						<tr>
 							<th>객실 가격</th>
-							<td colspan="2"><input type="text" id="roomPrice" name="roomPrice" value="${ op.roomPrice }" size="25" readonly></td>
+							<td colspan="2"><input type="hidden" name="roomPrice" value="${ op.roomPrice }">${ op.roomPrice }</td>
 							<th style="width:60px;">정원</th>
-							<td><input type="number" id="roomPeople" name="roomPeople" value="${ op.roomPeople }" readonly></td>
+							<td><input type="hidden" name="roomPeople" value="${ op.roomPeople }">${ op.roomPeople }</td>
 						</tr>
 					</c:forEach>
-					<!-- <tr>
-						<th>객실타입</th>
-						<td colspan="2"><input type="text" id="roomType2" name="roomType2" size="25" readonly></td>
-						<th style="width:60px;">객실 수</th>
-						<td><input type="number" id="roomCount2" name="roomCount2" value="1" min="1" readonly></td>
-					</tr>
-					<tr>
-						<th>객실 가격</th>
-						<td colspan="2"><input type="text" id="roomPrice2" name="roomPrice2" size="25" readonly></td>
-						<th style="width:60px;">정원</th>
-						<td><input type="number" id="roomPeople2" name="roomPeople2" value="1" min="1" readonly></td>
-					</tr>
-					<tr>
-						<th>객실타입</th>
-						<td colspan="2"><input type="text" id="roomType3" name="roomType3" size="25" readonly></td>
-						<th style="width:60px;">객실 수</th>
-						<td><input type="number" id="roomCount3" name="roomCount3" value="1" min="1" readonly></td>
-					</tr>
-					<tr>
-						<th>객실 가격</th>
-						<td colspan="2"><input type="text" id="roomPrice3" name="roomPrice3" size="25" readonly></td>
-						<th style="width:60px;">정원</th>
-						<td><input type="number" id="roomPeople3" name="roomPeople3" value="1" min="1" readonly></td>
-					</tr> -->
 					<tr>
 						<th>등록 기간</th>
-						<td colspan="4">
-							${ opList.get(0).term }
-						</td>
+						<td colspan="4"><input type="hidden" name="term" value="${ opList.get(0).term }">${ opList.get(0).term }</td>
 					</tr>
 					<tr>
 						<td colspan="5" align="center">
-							<button type="reset" class="btn btn-default">취소</button>&nbsp;&nbsp;
+							<button type="button" onclick="return recvPage();" class="btn btn-default">이전</button>&nbsp;&nbsp;
 							<button type="submit" class="btn btn-success">수정</button>
 						</td>
 					</tr>
@@ -125,6 +100,12 @@
 	</div>
 	
 	<jsp:include page="../common/footer.jsp"/>
+	
+	<script>
+		function recvPage(){
+			location.href="manageProduct.sell";
+		}
+	</script>
 	
 </body>
 </html>

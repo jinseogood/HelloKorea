@@ -55,4 +55,7 @@ public interface SellerService {
 	//선택 상품 조회
 	ArrayList<OneProduct> selectOneProduct(int cId);
 
+	//업체 수정
+	int updateProduct(ArrayList<Room> list);
+
 }

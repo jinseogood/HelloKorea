@@ -33,15 +33,13 @@ public class CompanyManageController {
 	@Autowired
 	private SellerService ss;
 	
+	//업체 등록
 	@RequestMapping(value="addCompany.sell", method=RequestMethod.POST)
 	public String addCompany(Registration r, Model model, HttpServletRequest request, @RequestParam(name="companyFile", required=false)MultipartFile companyFile, @RequestParam(name="personalFile")MultipartFile personalFile){
 		
 		String root=request.getSession().getServletContext().getRealPath("resources");
 		
 		String filePath=root + "\\uploadFiles\\seller";
-		
-		System.out.println("filePath : " + filePath);
-		System.out.println("file : " + personalFile);
 		
 		//사업자등록증 파일
 		String originPerFileName=personalFile.getOriginalFilename();
@@ -61,8 +59,6 @@ public class CompanyManageController {
 		
 		try {
 		
-			System.out.println("Registration : " + r);
-			
 			//Company
 			Company c=new Company();
 			c.setcId(r.getcId());
@@ -187,16 +183,10 @@ public class CompanyManageController {
 		
 	}
 	
+	//상품 관리
 	@RequestMapping(value="manageProduct.sell")
 	public String manageProduct(Model model, HttpServletRequest request, PageInfo p, String searchParam, String searchWord, String fromDate, String toDate){
 		Member m=(Member)request.getSession().getAttribute("loginUser");
-		
-		System.out.println("member : " + m);
-		
-		System.out.println("searchParam : " + searchParam);
-		System.out.println("searchWord : " + searchWord);
-		System.out.println("fromDate : " + fromDate);
-		System.out.println("toDate : " + toDate);
 		
 		if(p.getCurrentPage() == 0){
 			p.setCurrentPage(1);
@@ -255,13 +245,125 @@ public class CompanyManageController {
 		return "seller/manageProduct";
 	}
 	
+	//선택 상품 조회
 	@RequestMapping(value="detailCompany.sell")
 	public String detailCompany(int cId, Model model){
-		System.out.println("detail : " + cId);
 		ArrayList<OneProduct> opList=ss.selectOneProduct(cId);
 		
 		model.addAttribute("opList", opList);
 		
 		return "seller/detailCompany";
 	}
+	
+	//상품 수정 화면 이동
+	@RequestMapping(value="editCompanyView.sell")
+	public String editCompanyView(OneProduct op, Model model){
+		ArrayList<OneProduct> eOP=ss.selectOneProduct(op.getcId());
+		
+		model.addAttribute("eOP", eOP);
+		
+		return "seller/editCompany";
+	}
+	
+	//상품 수정
+	@RequestMapping(value="editCompany.sell")
+	public String editCompany(@RequestParam int cId
+			, @RequestParam String roomType1, @RequestParam int roomCount1, @RequestParam String roomPrice1, @RequestParam int roomPeople1
+			, @RequestParam(required=false) String roomType2, @RequestParam(required=false) int roomCount2, @RequestParam(required=false) String roomPrice2, @RequestParam(required=false) int roomPeople2
+			, @RequestParam(required=false) String roomType3, @RequestParam(required=false) int roomCount3, @RequestParam(required=false) String roomPrice3, @RequestParam(required=false) int roomPeople3
+			, Model model){
+		
+		System.out.println("cId : " + cId);
+		System.out.println("roomType : " + roomType1);
+		System.out.println("roomType : " + roomType2);
+		System.out.println("roomType : " + roomType3);
+		System.out.println("roomCount : " + roomCount1);
+		System.out.println("roomCount : " + roomCount2);
+		System.out.println("roomCount : " + roomCount3);
+		System.out.println("roomPrice : " + roomPrice1);
+		System.out.println("roomPrice : " + roomPrice2);
+		System.out.println("roomPrice : " + roomPrice3);
+		System.out.println("roomPeople : " + roomPeople1);
+		System.out.println("roomPeople : " + roomPeople2);
+		System.out.println("roomPeople : " + roomPeople3);
+		
+		Room r1=null;
+		Room r2=null;
+		Room r3=null;
+		ArrayList<Room> list=new ArrayList<Room>();
+		
+		if(roomType2 != null){
+			if(roomType3 != null){
+				r1=new Room();
+				r1.setcId(cId);
+				r1.setRoomType(roomType1);
+				r1.setRoomCount(roomCount1);
+				r1.setRoomPrice(Integer.parseInt(roomPrice1));
+				r1.setRoomPeople(roomPeople1);
+				
+				r2=new Room();
+				r2.setcId(cId);
+				r2.setRoomType(roomType2);
+				r2.setRoomCount(roomCount2);
+				r2.setRoomPrice(Integer.parseInt(roomPrice2));
+				r2.setRoomPeople(roomPeople2);
+				
+				r3=new Room();
+				r3.setcId(cId);
+				r3.setRoomType(roomType3);
+				r3.setRoomCount(roomCount3);
+				r3.setRoomPrice(Integer.parseInt(roomPrice3));
+				r3.setRoomPeople(roomPeople3);
+				
+				list.add(r1);
+				list.add(r2);
+				list.add(r3);
+			}
+			else{
+				r1=new Room();
+				r1.setcId(cId);
+				r1.setRoomType(roomType1);
+				r1.setRoomCount(roomCount1);
+				r1.setRoomPrice(Integer.parseInt(roomPrice1));
+				r1.setRoomPeople(roomPeople1);
+				
+				r2=new Room();
+				r2.setcId(cId);
+				r2.setRoomType(roomType2);
+				r2.setRoomCount(roomCount2);
+				r2.setRoomPrice(Integer.parseInt(roomPrice2));
+				r2.setRoomPeople(roomPeople2);
+				
+				list.add(r1);
+				list.add(r2);
+			}
+		}
+		else{
+			r1=new Room();
+			r1.setcId(cId);
+			r1.setRoomType(roomType1);
+			r1.setRoomCount(roomCount1);
+			r1.setRoomPrice(Integer.parseInt(roomPrice1));
+			r1.setRoomPeople(roomPeople1);
+			
+			list.add(r1);
+		}
+
+		int result=ss.updateProduct(list);
+		
+		if(result > 0){
+			ArrayList<OneProduct> opList=ss.selectOneProduct(cId);
+			
+			model.addAttribute("opList", opList);
+			
+			return "seller/detailCompany";
+		}
+		else{
+			model.addAttribute("msg", "업체 수정 실패");
+			
+			return "common/errorPage";
+		}
+		
+	}
+	
 }
