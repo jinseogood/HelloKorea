@@ -1,6 +1,7 @@
 package com.kh.hello.admin.model.service;
    
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,9 @@ import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.CompanyDetails;
 import com.kh.hello.admin.model.vo.DatePick;
+import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
+import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.admin.model.vo.Question;
 import com.kh.hello.admin.model.vo.Report;
 import com.kh.hello.admin.model.vo.Reservation;
@@ -278,27 +281,27 @@ public class AdminServiceImpl implements AdminService{
 
  	//회사 등록일 검색 카운트
 	@Override
-	public int getSearchcrDateBlacklistCount(DatePick d) {
-		return ad.getSearchcrDateBlacklistCount(sqlSession, d);
+	public int getSearchcrDateCompanyListCount(DatePick d) {
+		return ad.getSearchcrDateCompanyListCount(sqlSession, d);
 	}
 
 	//회사 등록일 검색
 	@Override
-	public ArrayList<Approval> selectSearchcrDateBlacklist(DatePick d, PageInfo pi) {
-		return ad.selectSearchcrDateBlacklist(sqlSession, d, pi);
+	public ArrayList<Approval> selectSearchcrDateCompanyList(DatePick d, PageInfo pi) {
+		return ad.selectSearchcrDateCompanyList(sqlSession, d, pi);
 	}
 
 	//회사 등록승인일 검색 리스트
 	@Override
-	public int getSearchapDateBlacklistCount(DatePick d) {
-		return ad.getSearchapDateBlacklistCount(sqlSession, d);
+	public int getSearchapDateCompanyListCount(DatePick d) {
+		return ad.getSearchapDateCompanyListCount(sqlSession, d);
 
 	}
 
 	//회사 등록승인일 검색
 	@Override
-	public ArrayList<Approval> selectSearchapDateBlacklist(DatePick d, PageInfo pi) {
-		return ad.selectSearchapDateBlacklist(sqlSession, d, pi);
+	public ArrayList<Approval> selectSearchapDateCompanyList(DatePick d, PageInfo pi) {
+		return ad.selectSearchapDateCompanyList(sqlSession, d, pi);
 
 	}
 
@@ -316,8 +319,42 @@ public class AdminServiceImpl implements AdminService{
 
 	//업체 디테일 화면
 	@Override
-	public ArrayList<CompanyDetails> selectOneCompany(int cId) {
-		return ad.selectOneCompany(sqlSession, cId);
+	public ArrayList<CompanyDetails> selectOneCompany(int crId) {
+		return ad.selectOneCompany(sqlSession, crId);
+	}
+
+	//업체 첨부파일
+	@Override
+	public ArrayList<Attachment> selectCompanyFiles(int refId) {
+		return ad.selectCompanyFiles(sqlSession, refId);
+	}
+
+	@Override
+	public Map<String, Object> selectFileInfo(int fId) throws Exception {
+		 return ad.selectFileInfo(sqlSession, fId);
+	}
+
+	//업체 승인
+	@Override
+	public int updateCompanyRegist(CompanyDetails cd) {
+		return ad.updateCompanyRegist(sqlSession, cd);
+	}
+
+	//업체 해지
+	@Override
+	@Transactional(propagation=Propagation.REQUIRED, isolation=Isolation.SERIALIZABLE, rollbackFor={Exception.class})
+	public int terminateCompany(String crId, String content) {
+		int result= -99;
+		int result1 = ad.updateCompanyStatus(sqlSession, crId);
+		Message m = ad.selectRecieveId(sqlSession, crId);
+		m.setContent(content);
+		int result2 = ad.inserTerminateMsg(sqlSession, m);
+		if(result1 > 0 && result2 > 0){
+			result = 1;
+		}else{
+			result = 0;
+		}
+		return result;
 	}
 
 }

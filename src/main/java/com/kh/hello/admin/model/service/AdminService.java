@@ -1,11 +1,13 @@
 package com.kh.hello.admin.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.CompanyDetails;
 import com.kh.hello.admin.model.vo.DatePick;
+import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
 import com.kh.hello.admin.model.vo.Report;
@@ -56,12 +58,18 @@ public interface AdminService {
 	
 	int getCompanyListCount();
 	ArrayList<Approval> selectCompanyList(PageInfo pi);
-	int getSearchcrDateBlacklistCount(DatePick d);
-	ArrayList<Approval> selectSearchcrDateBlacklist(DatePick d, PageInfo pi);
-	int getSearchapDateBlacklistCount(DatePick d);
-	ArrayList<Approval> selectSearchapDateBlacklist(DatePick d, PageInfo pi);
+	int getSearchcrDateCompanyListCount(DatePick d);
+	ArrayList<Approval> selectSearchcrDateCompanyList(DatePick d, PageInfo pi);
+	int getSearchapDateCompanyListCount(DatePick d);
+	ArrayList<Approval> selectSearchapDateCompanyList(DatePick d, PageInfo pi);
 	int getSearchWordCompanyListCount(Approval a);
 	ArrayList<Approval> selectSearchWordCompanyList(Approval a, PageInfo pi);
-	ArrayList<CompanyDetails> selectOneCompany(int cId);
+	ArrayList<CompanyDetails> selectOneCompany(int crId);
+	
+	ArrayList<Attachment> selectCompanyFiles(int refId);
+	Map<String, Object> selectFileInfo(int fId) throws Exception;
+	int updateCompanyRegist(CompanyDetails cd);
+	int terminateCompany(String crId, String content);
+
 	
 }
