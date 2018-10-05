@@ -15,6 +15,7 @@
 		margin-left:auto;
 		margin-right:auto;
 	}
+	.searchSubMenu{cursor:pointer;}
 </style>
 </head>
 <body>
@@ -22,13 +23,20 @@
 		<div class="submenuTitle">
 			<nav class="tm-nav">
 				<ul>
-					<li><a href="aboutView" style="padding:10px 34px 10px 34px;">지역의 모든 것</a></li>
-					<li><a href="aboutAreaHotel" style="padding:10px 34px 10px 34px;">숙박</a></li>
-					<li><a href="aboutAreaFood" style="padding:10px 34px 10px 34px;">음식점</a></li>
-					<li><a href="aboutAreaGame" style="padding:10px 34px 10px 34px;">오락거리</a></li>
+					<li><a class="searchSubMenu" onclick="areaAll();" style="padding:10px 34px 10px 34px;">지역의 모든 것</a></li>
+					<li><a class="searchSubMenu" href="aboutAreaHotel" style="padding:10px 34px 10px 34px;">숙박</a></li>
+					<li><a class="searchSubMenu" href="aboutAreaFood" style="padding:10px 34px 10px 34px;">음식점</a></li>
+					<li><a class="searchSubMenu" href="aboutAreaGame" style="padding:10px 34px 10px 34px;">오락거리</a></li>
 				</ul>
 			</nav>	
 		</div>
+		<script>
+			var areaCode = ${param.areaCode};
+			function areaAll(areaCode){
+				//console.log(areaCode);
+				//location.href="${contextPath}/areaAllView.main?areaCode"+areaCode;
+			}
+		</script>
 	</div>
 </body>
 </html>

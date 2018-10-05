@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>Hello Korea</title>
 <style>
 	#more{margin-top:5%;}
@@ -15,6 +17,7 @@
 	#tm-home-box-2-link-2{width:445px; display:inline-block;}
 	#dibsBtn{padding:15px; width:50px; height:50px;}
 	#infoTextArea{height:175px; padding:10px 20px 44px; overflow:auto; text-align:left; }
+	.img-responsive1{width:250px; height:225px;}
 </style>
 </head>
 <body>
@@ -28,7 +31,7 @@
 			<div class="row">
 				<div class="tm-section-header section-margin-top">
 					<div class="col-lg-3 col-md-3 col-sm-3"><hr></div>
-					<div class="col-lg-6 col-md-6 col-sm-6"><h2 class="tm-section-title">서울 음식점</h2></div>
+					<div class="col-lg-6 col-md-6 col-sm-6"><h2 class="tm-section-title tm-section-title1">서울 음식점</h2></div>
 					<div class="col-lg-3 col-md-3 col-sm-3"><hr></div>	
 				</div>
 					<div class="col-lg-3 col-md-3 col-sm-3">
@@ -131,6 +134,56 @@
 			    </div>
 			</div>
 		</div>
+		<script>
+			var areaCode = ${param.areaCode};
+			//var cat3 = ${param.cat3};
+			
+			if(areaCode == 1){
+				$(".tm-section-title1").text("서울 음식점");
+			}else if(areaCode == 2){
+				$(".tm-section-title1").text("인천 음식점");
+			}else if(areaCode == 3){
+				$(".tm-section-title1").text("대전 음식점");
+			}else if(areaCode == 4){
+				$(".tm-section-title1").text("대구 음식점");
+			}else if(areaCode == 5){
+				$(".tm-section-title1").text("광주 음식점");
+			}else if(areaCode == 6){
+				$(".tm-section-title1").text("부산 음식점");
+			}else if(areaCode == 7){
+				$(".tm-section-title1").text("울산 음식점");
+			}else if(areaCode == 8){
+				$(".tm-section-title1").text("세종시 음식점");
+			}else if(areaCode == 31){
+				$(".tm-section-title1").text("경기도 음식점");
+			}else if(areaCode == 32){
+				$(".tm-section-title1").text("강원도 음식점");
+			}else if(areaCode == 33){
+				$(".tm-section-title1").text("충청북도 음식점");
+			}else if(areaCode == 34){
+				$(".tm-section-title1").text("충청남도 음식점");
+			}else if(areaCode == 35){
+				$(".tm-section-title1").text("경상북도 음식점");
+			}else if(areaCode == 36){
+				$(".tm-section-title1").text("경상남도 음식점");
+			}else if(areaCode == 37){
+				$(".tm-section-title1").text("전라북도 음식점");
+			}else if(areaCode == 38){
+				$(".tm-section-title1").text("전라남도 음식점");
+			}else if(areaCode == 39){
+				$(".tm-section-title1").text("제주도 음식점");
+			}
+			
+			$(function(){
+				searchFoodStore();
+			});
+			
+			function searchFoodStore(){
+				//여기서 파라미터값 파싱해서 바다와야함...구글링해라.
+				console.log("searchFoodStore : " + areaCode);
+				//console.log("searchFoodStore : " + cat3);
+			}
+		</script>
 		
 	</section>		
 	
