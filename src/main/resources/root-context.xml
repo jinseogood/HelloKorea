@@ -31,14 +31,14 @@
  
     <bean id="connectionFactory"
         class="org.springframework.social.facebook.connect.FacebookConnectionFactory">
-        <constructor-arg value="Client ID" />
-        <constructor-arg value="Secret Code" />
+        <constructor-arg value="2078468609042330" />
+        <constructor-arg value="cf259b8538e94e36277db57c349052f1" />
     </bean>
  
     <bean id="oAuth2Parameters"
         class="org.springframework.social.oauth2.OAuth2Parameters">
         <property name="scope" value="email" />
-        <property name="redirectUri" value="https://localhost:8443/Path..." />
+        <property name="redirectUri" value="https://localhost:8443/hello/" />
     </bean>
    
 	<!-- 어노테이션으로 트랜젝션 매니저를 설정하기 위해 추가해야 하는 설정 -->
