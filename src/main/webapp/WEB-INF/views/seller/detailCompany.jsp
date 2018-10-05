@@ -71,6 +71,7 @@
 			<form action="editCompanyView.sell" method="post">
 				<table id="detailTable" align="center">
 					<input type="hidden" name="cId" value="${ opList.get(0).cId }">
+					<input type="hidden" name="crId" value="${ opList.get(0).crId }">
 					<tr>
 						<th>상호명</th>
 						<td colspan="4"><input type="hidden" name="companyName" value="${ opList.get(0).companyName }">${ opList.get(0).companyName }</td>
@@ -84,6 +85,7 @@
 						<td colspan="4"><input type="hidden" name="companyAddress" value="${ opList.get(0).companyAddress }">${ opList.get(0).companyAddress }</td>
 					</tr>
 					<c:forEach var="op" items="${ opList }">
+						<input type="hidden" name="roomId" value="${ op.rId }">
 						<tr>
 							<th>객실타입</th>
 							<td colspan="2"><input type="hidden" name="roomType" value="${ op.roomType }">${ op.roomType }</td>
@@ -156,7 +158,8 @@
 		function extendsPeriod(){
 			var term=$("#term").val();
 			var cId=$("#detailTable").children().eq(0).val();
-			location.href="extendsPeriod.sell?cId=" + cId + "&term=" + term;
+			var crId=$("#detailTable").children().eq(1).val();
+			location.href="extendsPeriod.sell?cId=" + cId + "&term=" + term + "&crId=" + crId;
 		}
 	</script>
 	

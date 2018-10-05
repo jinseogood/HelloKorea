@@ -75,7 +75,7 @@ public interface SellerDao {
 			SqlSessionTemplate sqlSession);
 
 	//선택 상품 조회
-	ArrayList<OneProduct> selectOneProduct(int cId, SqlSessionTemplate sqlSession);
+	ArrayList<OneProduct> selectOneProduct(int cId, int crId, SqlSessionTemplate sqlSession);
 
 	//업체 수정
 	int updateProduct(ArrayList<Room> list, SqlSessionTemplate sqlSession);

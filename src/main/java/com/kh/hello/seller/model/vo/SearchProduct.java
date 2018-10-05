@@ -14,20 +14,22 @@ public class SearchProduct implements java.io.Serializable{
 	private int mId;
 		
 	//Registration History
+	private int crId;
 	private String term;
 	private String status;
 	private Date apDate;
 	
 	public SearchProduct(){}
 
-	public SearchProduct(int cId, String companyName, String companyPhone, String companyAddress, int mId, String term,
-			String status, Date apDate) {
+	public SearchProduct(int cId, String companyName, String companyPhone, String companyAddress, int mId, int crId,
+			String term, String status, Date apDate) {
 		super();
 		this.cId = cId;
 		this.companyName = companyName;
 		this.companyPhone = companyPhone;
 		this.companyAddress = companyAddress;
 		this.mId = mId;
+		this.crId = crId;
 		this.term = term;
 		this.status = status;
 		this.apDate = apDate;
@@ -73,6 +75,14 @@ public class SearchProduct implements java.io.Serializable{
 		this.mId = mId;
 	}
 
+	public int getCrId() {
+		return crId;
+	}
+
+	public void setCrId(int crId) {
+		this.crId = crId;
+	}
+
 	public String getTerm() {
 		return term;
 	}
@@ -100,8 +110,9 @@ public class SearchProduct implements java.io.Serializable{
 	@Override
 	public String toString() {
 		return "SearchProduct [cId=" + cId + ", companyName=" + companyName + ", companyPhone=" + companyPhone
-				+ ", companyAddress=" + companyAddress + ", mId=" + mId + ", term=" + term + ", status=" + status
-				+ ", apDate=" + apDate + "]";
+				+ ", companyAddress=" + companyAddress + ", mId=" + mId + ", crId=" + crId + ", term=" + term
+				+ ", status=" + status + ", apDate=" + apDate + "]";
 	}
+
 
 }

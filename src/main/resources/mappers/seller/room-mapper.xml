@@ -20,16 +20,11 @@
 	</insert>
 	
 	<!-- 객실 수정 -->
-	<update id="updateProduct" parameterType="arraylist">
-		<foreach collection="list" item="r" index="i">
-			UPDATE ROOM
-			SET R_COUNT = #{r.roomCount}, R_PRICE = #{r.roomPrice}
-			WHERE R_ID = (SELECT R_ID 
-						  FROM (SELECT ROWNUM RNUM, R_ID
-						  		FROM ROOM
-						  		WHERE C_ID = #{r.cId}) 
-						  WHERE RNUM = #{i})
-		</foreach>
+	<update id="updateProduct" parameterType="Room">
+		UPDATE ROOM
+		SET R_COUNT = #{roomCount}, R_PRICE = #{roomPrice}
+		WHERE R_ID = #{rId}
+		AND C_ID = #{cId}
 	</update>
 	
 </mapper>

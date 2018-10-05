@@ -657,8 +657,8 @@ public class CompanyManageController {
 	
 	//선택 상품 조회
 	@RequestMapping(value="detailCompany.sell")
-	public String detailCompany(int cId, Model model){
-		ArrayList<OneProduct> opList=ss.selectOneProduct(cId);
+	public String detailCompany(int cId, int crId, Model model){
+		ArrayList<OneProduct> opList=ss.selectOneProduct(cId, crId);
 		
 		model.addAttribute("opList", opList);
 		
@@ -668,9 +668,7 @@ public class CompanyManageController {
 	//상품 수정 화면 이동
 	@RequestMapping(value="editCompanyView.sell")
 	public String editCompanyView(OneProduct op, Model model){
-		ArrayList<OneProduct> eOP=ss.selectOneProduct(op.getcId());
-		
-		System.out.println("eOP list size : " + eOP.size());
+		ArrayList<OneProduct> eOP=ss.selectOneProduct(op.getcId(), op.getCrId());
 		
 		model.addAttribute("eOP", eOP);
 		
@@ -679,20 +677,17 @@ public class CompanyManageController {
 	
 	//상품 수정
 	@RequestMapping(value="editCompany.sell")
-	public String editCompany(@RequestParam int cId
-			, @RequestParam String roomType1, @RequestParam int roomCount1, @RequestParam String roomPrice1
-			, @RequestParam(name="roomType2", required=false) String roomType2, @RequestParam(name="roomCount2", required=false) int roomCount2, @RequestParam(name="roomPrice2", required=false) String roomPrice2
-			, @RequestParam(name="roomType3", required=false) String roomType3, @RequestParam(name="roomCount3", required=false) int roomCount3, @RequestParam(name="roomPrice3", required=false) String roomPrice3
-			, @RequestParam(name="roomType4", required=false) String roomType4, @RequestParam(name="roomCount4", required=false) int roomCount4, @RequestParam(name="roomPrice4", required=false) String roomPrice4
-			, @RequestParam(name="roomType5", required=false) String roomType5, @RequestParam(name="roomCount5", required=false) int roomCount5, @RequestParam(name="roomPrice5", required=false) String roomPrice5
-			, @RequestParam(name="roomType6", required=false) String roomType6, @RequestParam(name="roomCount6", required=false) int roomCount6, @RequestParam(name="roomPrice6", required=false) String roomPrice6
-			, @RequestParam(name="roomType7", required=false) String roomType7, @RequestParam(name="roomCount7", required=false) int roomCount7, @RequestParam(name="roomPrice7", required=false) String roomPrice7
-			, @RequestParam(name="roomType8", required=false) String roomType8, @RequestParam(name="roomCount8", required=false) int roomCount8, @RequestParam(name="roomPrice8", required=false) String roomPrice8
-			, @RequestParam(name="roomType9", required=false) String roomType9, @RequestParam(name="roomCount9", required=false) int roomCount9, @RequestParam(name="roomPrice9", required=false) String roomPrice9
+	public String editCompany(@RequestParam int cId, @RequestParam int crId
+			, @RequestParam String roomType1, @RequestParam int roomCount1, @RequestParam String roomPrice1, @RequestParam int roomId1
+			, @RequestParam(name="roomType2", required=false) String roomType2, @RequestParam(name="roomCount2", required=false, defaultValue="0") int roomCount2, @RequestParam(name="roomPrice2", required=false) String roomPrice2, @RequestParam(name="roomId2", required=false, defaultValue="0") int roomId2
+			, @RequestParam(name="roomType3", required=false) String roomType3, @RequestParam(name="roomCount3", required=false, defaultValue="0") int roomCount3, @RequestParam(name="roomPrice3", required=false) String roomPrice3, @RequestParam(name="roomId3", required=false, defaultValue="0") int roomId3
+			, @RequestParam(name="roomType4", required=false) String roomType4, @RequestParam(name="roomCount4", required=false, defaultValue="0") int roomCount4, @RequestParam(name="roomPrice4", required=false) String roomPrice4, @RequestParam(name="roomId4", required=false, defaultValue="0") int roomId4
+			, @RequestParam(name="roomType5", required=false) String roomType5, @RequestParam(name="roomCount5", required=false, defaultValue="0") int roomCount5, @RequestParam(name="roomPrice5", required=false) String roomPrice5, @RequestParam(name="roomId5", required=false, defaultValue="0") int roomId5
+			, @RequestParam(name="roomType6", required=false) String roomType6, @RequestParam(name="roomCount6", required=false, defaultValue="0") int roomCount6, @RequestParam(name="roomPrice6", required=false) String roomPrice6, @RequestParam(name="roomId6", required=false, defaultValue="0") int roomId6
+			, @RequestParam(name="roomType7", required=false) String roomType7, @RequestParam(name="roomCount7", required=false, defaultValue="0") int roomCount7, @RequestParam(name="roomPrice7", required=false) String roomPrice7, @RequestParam(name="roomId7", required=false, defaultValue="0") int roomId7
+			, @RequestParam(name="roomType8", required=false) String roomType8, @RequestParam(name="roomCount8", required=false, defaultValue="0") int roomCount8, @RequestParam(name="roomPrice8", required=false) String roomPrice8, @RequestParam(name="roomId8", required=false, defaultValue="0") int roomId8
+			, @RequestParam(name="roomType9", required=false) String roomType9, @RequestParam(name="roomCount9", required=false, defaultValue="0") int roomCount9, @RequestParam(name="roomPrice9", required=false) String roomPrice9, @RequestParam(name="roomId9", required=false, defaultValue="0") int roomId9
 			, Model model){
-		
-		System.out.println("rCount1 : " + roomCount1);
-		System.out.println("rCount2 : " + roomCount2);
 		
 		Room r1=null;
 		Room r2=null;
@@ -715,54 +710,63 @@ public class CompanyManageController {
 									if(roomType9 != null){
 										r1=new Room();
 										r1.setcId(cId);
+										r1.setrId(roomId1);
 										r1.setRoomType(roomType1);
 										r1.setRoomCount(roomCount1);
 										r1.setRoomPrice(Integer.parseInt(roomPrice1));
 										
 										r2=new Room();
 										r2.setcId(cId);
+										r2.setrId(roomId2);
 										r2.setRoomType(roomType2);
 										r2.setRoomCount(roomCount2);
 										r2.setRoomPrice(Integer.parseInt(roomPrice2));
 										
 										r3=new Room();
 										r3.setcId(cId);
+										r3.setrId(roomId3);
 										r3.setRoomType(roomType3);
 										r3.setRoomCount(roomCount3);
 										r3.setRoomPrice(Integer.parseInt(roomPrice3));
 										
 										r4=new Room();
 										r4.setcId(cId);
+										r4.setrId(roomId4);
 										r4.setRoomType(roomType4);
 										r4.setRoomCount(roomCount4);
 										r4.setRoomPrice(Integer.parseInt(roomPrice4));
 										
 										r5=new Room();
 										r5.setcId(cId);
+										r5.setrId(roomId5);
 										r5.setRoomType(roomType5);
 										r5.setRoomCount(roomCount5);
 										r5.setRoomPrice(Integer.parseInt(roomPrice5));
 										
 										r6=new Room();
 										r6.setcId(cId);
+										r6.setrId(roomId6);
 										r6.setRoomType(roomType6);
 										r6.setRoomCount(roomCount6);
 										r6.setRoomPrice(Integer.parseInt(roomPrice6));
 										
 										r7=new Room();
 										r7.setcId(cId);
+										r7.setrId(roomId7);
 										r7.setRoomType(roomType7);
 										r7.setRoomCount(roomCount7);
 										r7.setRoomPrice(Integer.parseInt(roomPrice7));
 										
 										r8=new Room();
 										r8.setcId(cId);
+										r8.setrId(roomId8);
 										r8.setRoomType(roomType8);
 										r8.setRoomCount(roomCount8);
 										r8.setRoomPrice(Integer.parseInt(roomPrice8));
 										
 										r9=new Room();
 										r9.setcId(cId);
+										r9.setrId(roomId9);
 										r9.setRoomType(roomType9);
 										r9.setRoomCount(roomCount9);
 										r9.setRoomPrice(Integer.parseInt(roomPrice9));
@@ -780,48 +784,56 @@ public class CompanyManageController {
 									else{
 										r1=new Room();
 										r1.setcId(cId);
+										r1.setrId(roomId1);
 										r1.setRoomType(roomType1);
 										r1.setRoomCount(roomCount1);
 										r1.setRoomPrice(Integer.parseInt(roomPrice1));
 										
 										r2=new Room();
 										r2.setcId(cId);
+										r2.setrId(roomId2);
 										r2.setRoomType(roomType2);
 										r2.setRoomCount(roomCount2);
 										r2.setRoomPrice(Integer.parseInt(roomPrice2));
 										
 										r3=new Room();
 										r3.setcId(cId);
+										r3.setrId(roomId3);
 										r3.setRoomType(roomType3);
 										r3.setRoomCount(roomCount3);
 										r3.setRoomPrice(Integer.parseInt(roomPrice3));
 										
 										r4=new Room();
 										r4.setcId(cId);
+										r4.setrId(roomId4);
 										r4.setRoomType(roomType4);
 										r4.setRoomCount(roomCount4);
 										r4.setRoomPrice(Integer.parseInt(roomPrice4));
 										
 										r5=new Room();
 										r5.setcId(cId);
+										r5.setrId(roomId5);
 										r5.setRoomType(roomType5);
 										r5.setRoomCount(roomCount5);
 										r5.setRoomPrice(Integer.parseInt(roomPrice5));
 										
 										r6=new Room();
 										r6.setcId(cId);
+										r6.setrId(roomId6);
 										r6.setRoomType(roomType6);
 										r6.setRoomCount(roomCount6);
 										r6.setRoomPrice(Integer.parseInt(roomPrice6));
 										
 										r7=new Room();
 										r7.setcId(cId);
+										r7.setrId(roomId7);
 										r7.setRoomType(roomType7);
 										r7.setRoomCount(roomCount7);
 										r7.setRoomPrice(Integer.parseInt(roomPrice7));
 										
 										r8=new Room();
 										r8.setcId(cId);
+										r8.setrId(roomId8);
 										r8.setRoomType(roomType8);
 										r8.setRoomCount(roomCount8);
 										r8.setRoomPrice(Integer.parseInt(roomPrice8));
@@ -839,42 +851,49 @@ public class CompanyManageController {
 								else{
 									r1=new Room();
 									r1.setcId(cId);
+									r1.setrId(roomId1);
 									r1.setRoomType(roomType1);
 									r1.setRoomCount(roomCount1);
 									r1.setRoomPrice(Integer.parseInt(roomPrice1));
 									
 									r2=new Room();
 									r2.setcId(cId);
+									r2.setrId(roomId2);
 									r2.setRoomType(roomType2);
 									r2.setRoomCount(roomCount2);
 									r2.setRoomPrice(Integer.parseInt(roomPrice2));
 									
 									r3=new Room();
 									r3.setcId(cId);
+									r3.setrId(roomId3);
 									r3.setRoomType(roomType3);
 									r3.setRoomCount(roomCount3);
 									r3.setRoomPrice(Integer.parseInt(roomPrice3));
 									
 									r4=new Room();
 									r4.setcId(cId);
+									r4.setrId(roomId4);
 									r4.setRoomType(roomType4);
 									r4.setRoomCount(roomCount4);
 									r4.setRoomPrice(Integer.parseInt(roomPrice4));
 									
 									r5=new Room();
 									r5.setcId(cId);
+									r5.setrId(roomId5);
 									r5.setRoomType(roomType5);
 									r5.setRoomCount(roomCount5);
 									r5.setRoomPrice(Integer.parseInt(roomPrice5));
 									
 									r6=new Room();
 									r6.setcId(cId);
+									r6.setrId(roomId6);
 									r6.setRoomType(roomType6);
 									r6.setRoomCount(roomCount6);
 									r6.setRoomPrice(Integer.parseInt(roomPrice6));
 									
 									r7=new Room();
 									r7.setcId(cId);
+									r7.setrId(roomId7);
 									r7.setRoomType(roomType7);
 									r7.setRoomCount(roomCount7);
 									r7.setRoomPrice(Integer.parseInt(roomPrice7));
@@ -891,36 +910,42 @@ public class CompanyManageController {
 							else{
 								r1=new Room();
 								r1.setcId(cId);
+								r1.setrId(roomId1);
 								r1.setRoomType(roomType1);
 								r1.setRoomCount(roomCount1);
 								r1.setRoomPrice(Integer.parseInt(roomPrice1));
 								
 								r2=new Room();
 								r2.setcId(cId);
+								r2.setrId(roomId2);
 								r2.setRoomType(roomType2);
 								r2.setRoomCount(roomCount2);
 								r2.setRoomPrice(Integer.parseInt(roomPrice2));
 								
 								r3=new Room();
 								r3.setcId(cId);
+								r3.setrId(roomId3);
 								r3.setRoomType(roomType3);
 								r3.setRoomCount(roomCount3);
 								r3.setRoomPrice(Integer.parseInt(roomPrice3));
 								
 								r4=new Room();
 								r4.setcId(cId);
+								r4.setrId(roomId4);
 								r4.setRoomType(roomType4);
 								r4.setRoomCount(roomCount4);
 								r4.setRoomPrice(Integer.parseInt(roomPrice4));
 								
 								r5=new Room();
 								r5.setcId(cId);
+								r5.setrId(roomId5);
 								r5.setRoomType(roomType5);
 								r5.setRoomCount(roomCount5);
 								r5.setRoomPrice(Integer.parseInt(roomPrice5));
 								
 								r6=new Room();
 								r6.setcId(cId);
+								r6.setrId(roomId6);
 								r6.setRoomType(roomType6);
 								r6.setRoomCount(roomCount6);
 								r6.setRoomPrice(Integer.parseInt(roomPrice6));
@@ -936,30 +961,35 @@ public class CompanyManageController {
 						else{
 							r1=new Room();
 							r1.setcId(cId);
+							r1.setrId(roomId1);
 							r1.setRoomType(roomType1);
 							r1.setRoomCount(roomCount1);
 							r1.setRoomPrice(Integer.parseInt(roomPrice1));
 							
 							r2=new Room();
 							r2.setcId(cId);
+							r2.setrId(roomId2);
 							r2.setRoomType(roomType2);
 							r2.setRoomCount(roomCount2);
 							r2.setRoomPrice(Integer.parseInt(roomPrice2));
 							
 							r3=new Room();
 							r3.setcId(cId);
+							r3.setrId(roomId3);
 							r3.setRoomType(roomType3);
 							r3.setRoomCount(roomCount3);
 							r3.setRoomPrice(Integer.parseInt(roomPrice3));
 							
 							r4=new Room();
 							r4.setcId(cId);
+							r4.setrId(roomId4);
 							r4.setRoomType(roomType4);
 							r4.setRoomCount(roomCount4);
 							r4.setRoomPrice(Integer.parseInt(roomPrice4));
 							
 							r5=new Room();
 							r5.setcId(cId);
+							r5.setrId(roomId5);
 							r5.setRoomType(roomType5);
 							r5.setRoomCount(roomCount5);
 							r5.setRoomPrice(Integer.parseInt(roomPrice5));
@@ -974,24 +1004,28 @@ public class CompanyManageController {
 					else{
 						r1=new Room();
 						r1.setcId(cId);
+						r1.setrId(roomId1);
 						r1.setRoomType(roomType1);
 						r1.setRoomCount(roomCount1);
 						r1.setRoomPrice(Integer.parseInt(roomPrice1));
 						
 						r2=new Room();
 						r2.setcId(cId);
+						r2.setrId(roomId2);
 						r2.setRoomType(roomType2);
 						r2.setRoomCount(roomCount2);
 						r2.setRoomPrice(Integer.parseInt(roomPrice2));
 						
 						r3=new Room();
 						r3.setcId(cId);
+						r3.setrId(roomId3);
 						r3.setRoomType(roomType3);
 						r3.setRoomCount(roomCount3);
 						r3.setRoomPrice(Integer.parseInt(roomPrice3));
 						
 						r4=new Room();
 						r4.setcId(cId);
+						r4.setrId(roomId4);
 						r4.setRoomType(roomType4);
 						r4.setRoomCount(roomCount4);
 						r4.setRoomPrice(Integer.parseInt(roomPrice4));
@@ -1005,18 +1039,21 @@ public class CompanyManageController {
 				else{
 					r1=new Room();
 					r1.setcId(cId);
+					r1.setrId(roomId1);
 					r1.setRoomType(roomType1);
 					r1.setRoomCount(roomCount1);
 					r1.setRoomPrice(Integer.parseInt(roomPrice1));
 					
 					r2=new Room();
 					r2.setcId(cId);
+					r2.setrId(roomId2);
 					r2.setRoomType(roomType2);
 					r2.setRoomCount(roomCount2);
 					r2.setRoomPrice(Integer.parseInt(roomPrice2));
 					
 					r3=new Room();
 					r3.setcId(cId);
+					r3.setrId(roomId3);
 					r3.setRoomType(roomType3);
 					r3.setRoomCount(roomCount3);
 					r3.setRoomPrice(Integer.parseInt(roomPrice3));
@@ -1029,12 +1066,14 @@ public class CompanyManageController {
 			else{
 				r1=new Room();
 				r1.setcId(cId);
+				r1.setrId(roomId1);
 				r1.setRoomType(roomType1);
 				r1.setRoomCount(roomCount1);
 				r1.setRoomPrice(Integer.parseInt(roomPrice1));
 				
 				r2=new Room();
 				r2.setcId(cId);
+				r2.setrId(roomId2);
 				r2.setRoomType(roomType2);
 				r2.setRoomCount(roomCount2);
 				r2.setRoomPrice(Integer.parseInt(roomPrice2));
@@ -1046,6 +1085,7 @@ public class CompanyManageController {
 		else{
 			r1=new Room();
 			r1.setcId(cId);
+			r1.setrId(roomId1);
 			r1.setRoomType(roomType1);
 			r1.setRoomCount(roomCount1);
 			r1.setRoomPrice(Integer.parseInt(roomPrice1));
@@ -1058,7 +1098,7 @@ public class CompanyManageController {
 		int result=ss.updateProduct(list);
 		
 		if(result > 0){
-			ArrayList<OneProduct> opList=ss.selectOneProduct(cId);
+			ArrayList<OneProduct> opList=ss.selectOneProduct(cId, crId);
 			
 			model.addAttribute("opList", opList);
 			

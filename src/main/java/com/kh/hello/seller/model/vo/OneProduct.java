@@ -8,25 +8,29 @@ public class OneProduct implements java.io.Serializable{
 	private String companyName;
 	private String companyPhone;
 	private String companyAddress;
+	private int rId;
 	private String roomType;
 	private int roomCount;
 	private String roomPrice;
 	private int roomPeople;
+	private int crId;
 	private String term;
 	
 	public OneProduct(){}
 
-	public OneProduct(int cId, String companyName, String companyPhone, String companyAddress, String roomType,
-			int roomCount, String roomPrice, int roomPeople, String term) {
+	public OneProduct(int cId, String companyName, String companyPhone, String companyAddress, int rId, String roomType,
+			int roomCount, String roomPrice, int roomPeople, int crId, String term) {
 		super();
 		this.cId = cId;
 		this.companyName = companyName;
 		this.companyPhone = companyPhone;
 		this.companyAddress = companyAddress;
+		this.rId = rId;
 		this.roomType = roomType;
 		this.roomCount = roomCount;
 		this.roomPrice = roomPrice;
 		this.roomPeople = roomPeople;
+		this.crId = crId;
 		this.term = term;
 	}
 
@@ -62,6 +66,14 @@ public class OneProduct implements java.io.Serializable{
 		this.companyAddress = companyAddress;
 	}
 
+	public int getrId() {
+		return rId;
+	}
+
+	public void setrId(int rId) {
+		this.rId = rId;
+	}
+
 	public String getRoomType() {
 		return roomType;
 	}
@@ -94,6 +106,14 @@ public class OneProduct implements java.io.Serializable{
 		this.roomPeople = roomPeople;
 	}
 
+	public int getCrId() {
+		return crId;
+	}
+
+	public void setCrId(int crId) {
+		this.crId = crId;
+	}
+
 	public String getTerm() {
 		return term;
 	}
@@ -105,9 +125,11 @@ public class OneProduct implements java.io.Serializable{
 	@Override
 	public String toString() {
 		return "OneProduct [cId=" + cId + ", companyName=" + companyName + ", companyPhone=" + companyPhone
-				+ ", companyAddress=" + companyAddress + ", roomType=" + roomType + ", roomCount=" + roomCount
-				+ ", roomPrice=" + roomPrice + ", roomPeople=" + roomPeople + ", term=" + term + "]";
+				+ ", companyAddress=" + companyAddress + ", rId=" + rId + ", roomType=" + roomType + ", roomCount="
+				+ roomCount + ", roomPrice=" + roomPrice + ", roomPeople=" + roomPeople + ", crId=" + crId + ", term="
+				+ term + "]";
 	}
 
+	
 	
 }

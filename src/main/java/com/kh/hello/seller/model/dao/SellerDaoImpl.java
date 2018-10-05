@@ -159,18 +159,22 @@ public class SellerDaoImpl implements SellerDao{
 
 	//선택 상품 조회
 	@Override
-	public ArrayList<OneProduct> selectOneProduct(int cId, SqlSessionTemplate sqlSession) {
-		ArrayList<OneProduct> opList=(ArrayList)sqlSession.selectList("OneProduct.selectOneProduct", cId);
+	public ArrayList<OneProduct> selectOneProduct(int cId, int crId, SqlSessionTemplate sqlSession) {
+		ArrayList<Object> list=new ArrayList<Object>();
+		list.add(cId);
+		list.add(crId);
+		ArrayList<OneProduct> opList=(ArrayList)sqlSession.selectList("OneProduct.selectOneProduct", list);
 		return opList;
 	}
 
 	//업체 수정
 	@Override
 	public int updateProduct(ArrayList<Room> list, SqlSessionTemplate sqlSession) {
-		System.out.println("list size : " + list.size());
-		System.out.println("list : " + list);
-		/*return sqlSession.update("Room.updateProduct", list);*/
-		return 0;
+		int result=0;
+		for(int i=0;i<list.size();i++){
+			result=sqlSession.update("Room.updateProduct", list.get(i));
+		}
+		return result;
 	}
 
 	//등록 기간 연장
