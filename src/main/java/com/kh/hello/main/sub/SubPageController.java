@@ -1,10 +1,7 @@
-package com.kh.hello.subPage;
-
-import javax.servlet.http.HttpServletResponse;
+package com.kh.hello.main.sub;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class SubPageController {

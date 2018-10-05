@@ -211,8 +211,8 @@ public class MemberController {
 		}
 		
 	}
-	
-	@RequestMapping(value = "facebook.me", method = { RequestMethod.GET, RequestMethod.POST })
+
+	/*@RequestMapping(value = "facebook.me", method = { RequestMethod.GET, RequestMethod.POST })
     public String join(HttpServletResponse response, Model model) {
         
         OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
@@ -237,7 +237,12 @@ public class MemberController {
  
         return facebook_url ;
     }
-
+    
+        model.addAttribute("facebook_url", facebook_url);
+        System.out.println("/facebook" + facebook_url);
+ 
+        return "main/main";
+    }*/
 
 
 }

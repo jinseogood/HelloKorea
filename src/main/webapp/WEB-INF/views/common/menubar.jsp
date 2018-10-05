@@ -197,9 +197,9 @@
 		            </div>
 	  				<nav class="tm-nav">
 						<ul>
-							<li><a href="mainView">Home</a></li>
-							<li><a href="aboutView">About</a></li>
-							<li><a href="toursView">Our Tours</a></li>
+							<li><a href="hotelView">숙박</a></li>
+							<li><a href="foodView">음식점</a></li>
+							<li><a href="toursView">오락거리</a></li>
 							<li><a href="contactView">Contact</a></li>
 						</ul>
 				  		<div id="menuIconArea">
@@ -237,7 +237,7 @@
 			<label style="width: 180px; font-size: 30px;">Hello Korea</label>
 		</div>
 		<div id="snsBtn">
-			<button class="loginBtn1" >Facebook</button>
+			<button class="loginBtn1" id="facebook"><a href="${facebook_url}">Facebook</a></button>
 			<button class="loginBtn1">Google</button>
 		</div>
 		<hr style="	width: 400px;
@@ -446,6 +446,7 @@
   			});
   		});
   	</script>
+
   	
 </body>
 </html>

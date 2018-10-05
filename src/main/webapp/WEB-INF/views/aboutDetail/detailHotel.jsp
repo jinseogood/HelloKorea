@@ -23,6 +23,7 @@
 	.detailContent{height:350px; text-align:center;}
 	.detailBottom{height:50px;}
 	.tm-about-box-1{padding:10px 10px;}
+	.roomImgTd{width:260px; height:300px;}
 </style>
 </head>
 <body>
@@ -57,26 +58,11 @@
 					호텔정보 영역입니다.<br>
 					호텔정보 영역입니다.<br>
 					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
-					호텔정보 영역입니다.<br>
 					<input type="button" class="btn" id="payment" value="결제하기"/>
+				</div>
+				<hr>
+				<div class="hInfoArea">
+					호텔정보 영역입니다.<br>
 				</div>
 			</div>
 		</div>
@@ -94,7 +80,7 @@
 			var contentid = ${param.contentid};
 			var contenttypeid = ${param.contenttypeid};
 			
-			function detailHotelInfo(contentid){
+			function detailHotelInfo(){
 				console.log("deatilHotel : " + contenttypeid);
 				console.log("detailHotel : " + contentid);
 				$.ajax({
@@ -107,16 +93,17 @@
 						var myData = data.response.body.items.item;
 						var output = "";
 						var overviewText = myData.overview.split(". ");
-						console.log(overviewText);
 						$("#hotelTitleText").text(myData.title);
 						for(var i = 0; i < overviewText.length; i++){
 							output += overviewText[i] + ".<br>";
 						}
 						$(".contentArea").html(output);
-						output = "<img src="+myData.firstimage+" alt='image' class='firstImg' />";
+						if(myData.firstimage == null){
+							output = "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='firstImg' />";
+						}else{
+							output = "<img src="+myData.firstimage+" alt='image' class='firstImg' />";
+						}
 						$(".firstImgArea").html(output);
-						
-						
 					},
 					error:function(data){
 						console.log(data);
@@ -124,8 +111,123 @@
 				});
 			}
 			
+			function detailHotelImage(){
+				console.log("detailHotelImage : " + contentid);
+				$.ajax({
+					url:"detailHotelImage.sub",
+					type:"GET",
+					data:{contenttypeid:contenttypeid, contentid:contentid},
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var myData = data.response.body.items.item;
+						var count = 0;
+						var output = "";
+						if(data.response.body.items == ""){
+							output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='secondImg' />";
+							output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='secondImg' />";
+						}else{
+							for(var i = 0; i < myData.length; i++){
+								count++;
+								output += "<img src="+myData[i].originimgurl+" alt='image' class='secondImg' />";
+								if(count == 2){break;}
+							}
+						}
+						$(".secondImgArea").html(output);
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+			}
+			
+			function detailHotelIntro(){
+				console.log("detailHotelIntro : " + contenttypeid);
+				console.log("detailHotelIntro : " + contentid);
+				$.ajax({
+					url:"detailHotelIntro.sub",
+					type:"GET",
+					data:{contenttypeid:contenttypeid, contentid:contentid},
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var myData = data.response.body.items.item;
+						var output = "";
+						var hInfo = $(".hInfoArea");
+						hInfo.html("");
+						output += "<h3>숙박정보</h3><br>";
+						//output += "<b>문의 및 안내</b> : <br>";
+						output += "<b>문의 및 안내</b> : "+myData.infocenterlodging+"<br>";
+						//output += "<b>규 모</b> : <br>";
+						output += "<b>규 모</b> : "+myData.scaleloading+"<br>";
+						output += "<b>객실 수</b> : "+myData.roomcount+"<br>";
+						output += "<b>객실 유형</b> : "+myData.roomtype+"<br>";
+						output += "<b>주차 가능</b> : "+myData.parkinglodging+"<br>";
+						output += "<b>조리 가능</b> : "+myData.chkcooking+"<br>";
+						output += "<b>체크인</b> : "+myData.checkintime+"<br>";
+						output += "<b>체크아웃</b> : "+myData.checkouttime+"<br>";
+						output += "<b>예약 안내</b> : "+myData.reservationloading+"<br>";
+						output += "<b>예약안내 홈페이지</b> : "+myData.reservationurl+"<br>";
+						hInfo.html(output);
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+			}
+			
+			function detailRoomInfo(){
+				console.log("detailRoomInfo : " + contenttypeid);
+				console.log("detailRoomInfo : " + contentid);
+				$.ajax({
+					url:"detailRoomInfo.sub",
+					type:"GET",
+					data:{contenttypeid:contenttypeid, contentid:contentid},
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var myData = data.response.body.items.item;
+						var output = "";
+						var roomInfo = $("#roomInfoArea");
+						roomInfo.html("");
+						for(var i in myData){
+							output = "";
+							output += "<tr>";
+							output += "<td class='detailContent'><img src="+myData[i].roomimg1+" class='roomImgTd' /></td>";
+							output += "<td>";
+							output += "<h4><b>객실명 : "+myData[i].roomtitle+"</b></h4>";
+							output += "ㆍ 객실크기 : "+myData[i].roomsize1+" 평<br>";
+							output += "ㆍ 객실수 : "+myData[i].roomcount+"<br>";
+							output += "ㆍ 기준인원 : "+myData[i].roombasecount+" (최대인원 : "+myData[i].roommaxcount+")<br>";
+							output += "ㆍ 목욕시설 : "+myData[i].roombathfacility+"<br>";
+							output += "ㆍ 욕조 : "+myData[i].roombath+"<br>";
+							output += "ㆍ 에어컨 : "+myData[i].roomaircondition+"<br>";
+							output += "ㆍ TV : "+myData[i].roomtv+"<br>";
+							output += "ㆍ 케이블설치 : "+myData[i].roomcable+"<br>";
+							output += "ㆍ 인터넷 : "+myData[i].roominternet+"<br>";
+							output += "ㆍ 냉장고 : "+myData[i].roomrefrigerator+"<br>";
+							output += "ㆍ 세면도구 : "+myData[i].roomtoiletries+"<br>";
+							output += "ㆍ 드라이기 : "+myData[i].roomhairdryer+"<br>";
+							output += "</td>"
+							output += "<td>";
+							output += "ㆍ 비수기 주중최소 : "+myData[i].roomoffseasonminfee1+" (성수기 : "+myData[i].roompeakseasonminfee1+")<br>";
+							output += "ㆍ 비수기 주말최소 : "+myData[i].roomoffseasonminfee2+" (성수기 : "+myData[i].roompeakseasonminfee2+")<br>";
+							output += "</td>";
+							output += "</tr>"
+							document.getElementById("roomInfoArea").innerHTML += output;
+						}
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});//output += "ㆍ ";
+			}
+			
 			$(function(){
-				detailHotelInfo(contentid);
+				detailHotelInfo();
+				detailHotelImage();
+				detailHotelIntro();
+				detailRoomInfo();
 			});
 		
 		/* Google map
@@ -196,12 +298,12 @@
 				<thead>
 					<tr>
 						<th class="detailHead">객실유형</th>
-						<th class="detailHead">정원</th>
+						<th class="detailHead">정보</th>
 						<th class="detailHead">가격</th>
 						<th class="detailHead">객실선택</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="roomInfoArea">
 					<tr>
 						<td class="detailContent">정보오오오오오오오오</td>
 						<td class="detailContent">정보오오오오오오오오</td>
