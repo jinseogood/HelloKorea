@@ -237,7 +237,7 @@
 			<label style="width: 180px; font-size: 30px;">Hello Korea</label>
 		</div>
 		<div id="snsBtn">
-			<button class="loginBtn1" >Facebook</button>
+			<button class="loginBtn1" id="facebook"><a href="${facebook_url}">Facebook</a></button>
 			<button class="loginBtn1">Google</button>
 		</div>
 		<hr style="	width: 400px;
@@ -427,20 +427,19 @@
 		});
   		
   	</script>
-  	<!-- <script>
+  	<script>
   		$(function(){
   			$.ajax({
   				url:'facebook.me',
   				data:{},
   				type:'post',
   				success:function(data){
-  					
+  					$('#facebook').attr('href', data)
   				}
-  			})
+  			});
   		});
-  	
   	</script>
-  	 -->
+  
   	
 </body>
 </html>
