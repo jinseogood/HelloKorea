@@ -71,7 +71,7 @@ public interface SellerService {
 	ArrayList<SearchProduct> selectSearchWordProductListCount(int mId, SearchProduct spd, PageInfo pi);
 
 	//선택 상품 조회
-	ArrayList<OneProduct> selectOneProduct(int cId);
+	ArrayList<OneProduct> selectOneProduct(int cId, int crId);
 
 	//업체 수정
 	int updateProduct(ArrayList<Room> list);

@@ -130,6 +130,7 @@
 						<c:forEach var="p" items="${ list }">
 							<tr>
 								<input type="hidden" id="CID" value="${ p.cId }">
+								<input type="hidden" id="CRID" value="${ p.crId }">
 								<th>${ no }</th>
 								<td>${ p.companyName }</td>
 								<td>${ p.companyAddress }</td>
@@ -190,7 +191,8 @@
 	    	
 	    	$("#productTable tbody tr").click(function(){
 	    		var cId=$(this).children().eq(0).val();
-	    		location.href="detailCompany.sell?cId=" + cId;
+	    		var crId=$(this).children().eq(1).val();
+	    		location.href="detailCompany.sell?cId=" + cId + "&crId=" + crId;
 	    	});
 	    });
 	    function showDatePicker(){

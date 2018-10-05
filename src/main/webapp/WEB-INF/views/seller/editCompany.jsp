@@ -59,6 +59,7 @@
 			<form action="editCompany.sell" method="post">
 				<table id="editTable" align="center">
 					<input type="hidden" id="cId" name="cId" value="${ eOP.get(0).cId }">
+					<input type="hidden" id="crId" name="crId" value="${ eOP.get(0).crId }">
 					<tr>
 						<th>상호명</th>
 						<td colspan="4"><input type="hidden" name="companyName" value="${ eOP.get(0).companyName }">${ eOP.get(0).companyName }</td>
@@ -73,17 +74,18 @@
 					</tr>
 					<c:set var="i" value="1"/>
 					<c:forEach var="eOP" items="${ eOP }">
+						<input type="hidden" name="roomId${ i }" value="${ eOP.rId }">
 						<tr>
 							<th>객실타입</th>
-							<td colspan="2"><input type="text" name="roomType${ i }" value="${ eOP.roomType }" readonly></td>
+							<td colspan="2"><input type="hidden" name="roomType${ i }" value="${ eOP.roomType }">${ eOP.roomType }</td>
 							<th style="width:60px;">객실 수</th>
-							<td><input type="number" name="roomCount${ i }" value="${ eOP.roomCount }" required></td>
+							<td><input type="number" name="roomCount${ i }" value="${ eOP.roomCount }"></td>
 						</tr>
 						<tr>
 							<th>객실 가격</th>
-							<td colspan="2"><input type="text" name="roomPrice${ i }" value="${ eOP.roomPrice }" required></td>
+							<td colspan="2"><input type="text" name="roomPrice${ i }" value="${ eOP.roomPrice }"></td>
 							<th style="width:60px;">정원</th>
-							<td><input type="text" name="roomPeople${ i }" value="${ eOP.roomPeople }" readonly></td>
+							<td>${ eOP.roomPeople }</td>
 						</tr>
 						<c:set var="i" value="${ i+1 }"/>
 					</c:forEach>
@@ -106,7 +108,7 @@
 	
 	<script>
 		function productDetail(){
-			location.href="detailCompany.sell?cId=" + $("#cId").val();
+			location.href="detailCompany.sell?cId=" + $("#cId").val() + "&crId=" + $("#crId").val();
 		}
 	</script>
 	

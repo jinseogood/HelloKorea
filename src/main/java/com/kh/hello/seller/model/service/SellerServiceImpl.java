@@ -148,16 +148,14 @@ public class SellerServiceImpl implements SellerService{
 
 	//선택 상품 조회
 	@Override
-	public ArrayList<OneProduct> selectOneProduct(int cId) {
-		ArrayList<OneProduct> opList=sd.selectOneProduct(cId, sqlSession);
+	public ArrayList<OneProduct> selectOneProduct(int cId, int crId) {
+		ArrayList<OneProduct> opList=sd.selectOneProduct(cId, crId, sqlSession);
 		return opList;
 	}
 
 	//업체 수정
 	@Override
 	public int updateProduct(ArrayList<Room> list) {
-		System.out.println("list size : " + list.size());
-		System.out.println("list : " + list);
 		return sd.updateProduct(list, sqlSession);
 	}
 
