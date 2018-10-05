@@ -10,9 +10,15 @@ import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.social.MissingAuthorizationException;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.api.User;
+import org.springframework.social.facebook.api.UserOperations;
+import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
+import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.oauth2.GrantType;
 import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
@@ -212,37 +218,85 @@ public class MemberController {
 		
 	}
 
-	/*@RequestMapping(value = "facebook.me", method = { RequestMethod.GET, RequestMethod.POST })
-    public String join(HttpServletResponse response, Model model) {
-        
-        OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
-        String facebook_url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, oAuth2Parameters);
-        
-        ObjectMapper mapper = new ObjectMapper();
-        
-        try {
-			response.getWriter().print(mapper.writeValueAsString(facebook_url));
-		} catch (JsonGenerationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
-        System.out.println("/facebook" + facebook_url);
- 
-        return facebook_url ;
-    }
-    
-        model.addAttribute("facebook_url", facebook_url);
-        System.out.println("/facebook" + facebook_url);
- 
-        return "main/main";
-    }*/
+	@RequestMapping(value="facebook.me")
+	public void facebookLogin(Model model,HttpServletResponse response){
+		
+		 	OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
+	        String facebook_url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, oAuth2Parameters);
+	        
+	        ObjectMapper mapper = new ObjectMapper();
+	        
+	        try {
+				response.getWriter().println(mapper.writeValueAsString(facebook_url));
+			} catch (JsonGenerationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        
+	       /* model.addAttribute("facebook_url", facebook_url);*/
+	        System.out.println("/facebook" + facebook_url);
+	 
+		
+		
+		/*return "main/main";*/
+		
+	}
+	 @RequestMapping(value = "facebookCallback.me", method = { RequestMethod.GET, RequestMethod.POST })
+	    public String facebookSignInCallback(@RequestParam String code) throws Exception {
+	 
+	        try {
+	             String redirectUri = oAuth2Parameters.getRedirectUri();
+	            System.out.println("Redirect URI : " + redirectUri);
+	            System.out.println("Code : " + code);
+	 
+	            OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
+	            AccessGrant accessGrant = oauthOperations.exchangeForAccess(code, redirectUri, null);
+	            String accessToken = accessGrant.getAccessToken();
+	            System.out.println("AccessToken: " + accessToken);
+	            Long expireTime = accessGrant.getExpireTime();
+	        
+	            
+	            if (expireTime != null && expireTime < System.currentTimeMillis()) {
+	                accessToken = accessGrant.getRefreshToken();
+	               // logger.info("accessToken is expired. refresh token = {}", accessToken);
+	            };
+	            
+	        
+	            Connection<Facebook> connection = connectionFactory.createConnection(accessGrant);
+	            Facebook facebook = connection == null ? new FacebookTemplate(accessToken) : connection.getApi();
+	            UserOperations userOperations = facebook.userOperations();
+	            
+	            try
+	 
+	            {            
+	                String [] fields = { "id", "email",  "name"};
+	                User userProfile = facebook.fetchObject("me", User.class, fields);
+	                System.out.println("유저이메일 : " + userProfile.getEmail());
+	                System.out.println("유저 id : " + userProfile.getId());
+	                System.out.println("유저 name : " + userProfile.getName());
+	                
+	            } catch (MissingAuthorizationException e) {
+	                e.printStackTrace();
+	            }
+	 
+	        
+	        } catch (Exception e) {
+	 
+	            e.printStackTrace();
+	 
+	        }
+	        return "member/addUserInfo";
+	 
+	    }
+	
 
+
+	
 
 }

@@ -237,7 +237,8 @@
 			<label style="width: 180px; font-size: 30px;">Hello Korea</label>
 		</div>
 		<div id="snsBtn">
-			<button class="loginBtn1" id="facebook"><a href="${facebook_url}">Facebook</a></button>
+			<%-- <a href="${facebook_url }">Facebook</a> --%>
+			<button id="facebookBtn" onclick='location.href="${facebook_url }"'>Facebook</button>
 			<button class="loginBtn1">Google</button>
 		</div>
 		<hr style="	width: 400px;
@@ -427,26 +428,31 @@
 		});
   		
   	</script>
-  	<script>
-  		$(function(){
-  			$("#loginOpen").click(function(){
-  				
-  			$.ajax({
-  				url:'facebook.me',
-  				data:{},
-  				type:'post',
-  				success:function(data){
-  					$('#facebook').attr('href', data)
-  					console.log(data);
-  				},
-  				error:function(data){
-  					console.log(data);
-  				}
-  			});
-  			});
-  		});
-  	</script>
-
+	<script>
+		$("#loginOpen").click(function(){
+			$.ajax({
+				url:"facebook.me",
+				type:"post",
+				data:{},
+				success:function(data){
+					alert(data);
+					/* var f_url=$("#facebookBtn").val(data);
+					alert(f_url); */
+					
+					console.log(data);
+					
+					
+				},
+				errror:function(){
+					console.log("에러");	
+				}
+			})
+		});
+		
+	
+	</script>
+  	
+ 
   	
 </body>
 </html>
