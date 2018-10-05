@@ -112,7 +112,7 @@ public class BoardPageController {
 		if(at != null){
 			for(int i = 0 ; i < at.size() ; i++){
 				fileDeleteUpload.process(at.get(i).getChangeName());
-			}
+			} 
 			//취소시 일괄삭제
 			result = bs.deleteAllUpload(m.getmId());
 		}

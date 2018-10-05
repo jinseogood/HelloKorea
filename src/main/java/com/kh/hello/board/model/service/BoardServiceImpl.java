@@ -82,5 +82,5 @@ public class BoardServiceImpl implements BoardService{
 		
 		return bd.selectReviewCount(sqlSession);
 	}
-
+ 
 }

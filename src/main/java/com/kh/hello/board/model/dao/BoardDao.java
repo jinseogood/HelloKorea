@@ -8,7 +8,7 @@ import com.kh.hello.board.model.vo.Board;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 
-public interface BoardDao {
+public interface BoardDao { 
 
 	int insertAttachment(Attachment a, SqlSessionTemplate sqlSession);
 

@@ -38,7 +38,7 @@
      <!-- 리뷰 내역 수 조회용 -->
      <select id= "selectReviewCount" resultType = "_int">
      	SELECT COUNT(*)
-     	FROM BOARD
+     	FROM BOARD 
      	WHERE BOARD_TYPE = 1
      </select>
      

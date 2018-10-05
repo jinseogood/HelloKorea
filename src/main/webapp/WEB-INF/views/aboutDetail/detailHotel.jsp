@@ -530,7 +530,7 @@
 		function reviewPaging(page){
 			console.log("page : " + page);
 			
-			$.ajax({
+			$.ajax({ 
 				url:"reviewPaging.bo",
 				type:"get",
 				data:{page:page},

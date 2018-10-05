@@ -22,7 +22,7 @@ public class Pagination2 {
 		//마지막 페이지
 		endPage = startPage + buttonCount - 1;
 		
-		if(maxPage < endPage){
+		if(maxPage < endPage){ 
 			endPage = maxPage;
 		}
 		

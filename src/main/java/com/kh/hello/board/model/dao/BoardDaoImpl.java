@@ -77,6 +77,6 @@ public class BoardDaoImpl implements BoardDao{
 	public int selectReviewCount(SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.selectOne("Board.selectReviewCount");
-	}
+	} 
 
 }
