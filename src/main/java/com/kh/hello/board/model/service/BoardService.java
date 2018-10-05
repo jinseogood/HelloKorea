@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.hello.board.model.vo.Board;
 import com.kh.hello.common.Attachment;
+import com.kh.hello.common.PageInfo;
 
 public interface BoardService{
 
@@ -19,4 +20,8 @@ public interface BoardService{
 
 	int updateBoard(Board b);
 
-}
+	ArrayList<Board> selectReview(PageInfo pi);
+
+	int selectReviewCount();
+
+} 

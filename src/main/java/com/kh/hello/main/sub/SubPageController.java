@@ -1,11 +1,26 @@
 package com.kh.hello.main.sub;
 
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.kh.hello.board.model.service.BoardService;
+import com.kh.hello.board.model.vo.Board;
+import com.kh.hello.common.PageInfo;
+import com.kh.hello.common.Pagination2;
+
+
 
 @Controller
 public class SubPageController {
 	
+	@Autowired
+	private BoardService bs;
+
 	@RequestMapping("aboutAreaHotel")
 	public String aboutAreaHotel(){
 		return "aboutArea/searchAreaHotel";
@@ -22,7 +37,27 @@ public class SubPageController {
 	}
 	
 	@RequestMapping("detailHotel")
-	public String detailHotelView(){
+	public String detailHotelView(Model model, PageInfo p){
+
+		ArrayList<Board> list = null;
+		
+		if(p.getCurrentPage() == 0){
+			p.setCurrentPage(1);
+		}
+		
+		PageInfo pi = null;
+
+		int listCount = bs.selectReviewCount();
+		pi = Pagination2.getPageInfo(p.getCurrentPage(), listCount);
+		list= bs.selectReview(pi);
+		
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		
+		System.out.println(list);
+		System.out.println(pi);
+		
 		return "aboutDetail/detailHotel";
 	}
 	

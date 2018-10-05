@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.hello.board.model.dao.BoardDao;
 import com.kh.hello.board.model.vo.Board;
 import com.kh.hello.common.Attachment;
+import com.kh.hello.common.PageInfo;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -68,4 +69,18 @@ public class BoardServiceImpl implements BoardService{
 		return result;
 	}
 
+	@Override
+	public ArrayList<Board> selectReview(PageInfo pi) {
+		ArrayList<Board> list = null;
+		list = bd.selectReview(sqlSession, pi);
+		
+		return list;
+	}
+
+	@Override
+	public int selectReviewCount() {
+		
+		return bd.selectReviewCount(sqlSession);
+	}
+ 
 }

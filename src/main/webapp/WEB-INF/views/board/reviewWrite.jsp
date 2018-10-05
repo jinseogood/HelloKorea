@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+ 
 <meta charset="UTF-8">
 <link href="${ contextPath }/resources/css/jquery-ui.css" rel="stylesheet" type="text/css">
 
@@ -15,7 +15,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
-  <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
   <link rel="stylesheet" href="${ contextPath }/resources/css/ccFileUpload.css">
 

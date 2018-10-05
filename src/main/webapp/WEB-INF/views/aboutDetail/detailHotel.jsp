@@ -320,11 +320,10 @@
 			</table>
 		</div>
 	</section>
-	
 	<section class="container tm-home-section-1" id="more">
    
       <div class="section-margin-top about-section">
-         <div class="row">   
+         <div class="row"> 
          </div>         
          <div class="tm-section-header section-margin-top">
        		   <div class="col-lg-4 col-md-4 col-sm-4"><h2 class="tm-section-title">R E V I E W (1,123)</h2></div>
@@ -337,6 +336,7 @@
 
       	 </div>
       </div>
+		 <c:forEach var = "list" items = "${ list }"> 
      
          <div class="row line_b" >
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style = "height:220px">
@@ -368,18 +368,15 @@
             	</span>
             	</div>
             	<div class="ReviewTitle" style = "font-size:20px; cursor:pointer; padding-top:10px">
-            		<a href="#"><span>여기 너무 멋져요우~</span></a>
+            		<a href="#"><span>${ list.title }</span></a>
             	</div>
             	<div class="summary" style = "padding-top:10px">
-            		방과 수영장이 매우 좋았습니다. 다만 영어 못하는 택시기사가 바가지 씌울때 호텔에...
-            		방과 수영장이 매우 좋았습니다. 다만 영어 못하는 택시기사가 바가지 씌울때 호텔에...
-            		방과 수영장이 매우 좋았습니다. 다만 영어 못하는 택시기사가 바가지 씌울때 호텔에...
-            		방과 수영장이 매우 좋았습니다. 다만 영어 못하는 택시기사가 바가지 씌울때 호텔에...
+            		${ list.text }
             		<span><a href="#">더 보기</a></span>
             	</div>
             	<div style = "padding-top:20px;" >
             		<div class="fa" style = "width:100%">
-            			<i class="fa fa-thumbs-o-up" style = "font-size:20px; padding-top:10px"> 0 </i>
+            			<i class="fa fa-thumbs-o-up" style = "font-size:20px; padding-top:10px"> ${ list.likey } </i>
             			<i class="fa fa-comment" style = "font-size:20px; padding-top:10px"> 0 </i>
             			<i class="fa fa-flag" style = "font-size:20px; padding-top:10px; float:right;"> 신고하기 </i>
             		
@@ -388,7 +385,41 @@
             </div>
             
          </div> 
-         <br>
+         </c:forEach>
+         <div class="paging" align="center">
+<ul class="pagination pagination-sm">
+<c:if test="${ pi.currentPage <= 1 }">
+<li><a>&laquo;</a></li>
+            </c:if>
+            <c:if test="${ pi.currentPage > 1 }">
+                <c:url var="rlistBack" value="reviewPaging.bo">
+                    <c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
+                </c:url>
+                <li><a href="${ rlistBack }">&laquo;</a></li>
+            </c:if>
+            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                <c:if test="${ p eq pi.currentPage }">
+                <li><a href="#" style="background-color:#ddd;">${ p }</a></li>               
+                </c:if>
+                <c:if test="${ p ne pi.currentPage }">
+                    <c:url var="rlistCheck" value="reviewPaging.bo">
+                         <c:param name="currentPage" value="${ p }"/>
+                    </c:url>
+                    <li><a href="${ rlistCheck }">${ p }</a></li>  
+                </c:if>
+            </c:forEach>
+            <c:if test="${ pi.currentPage >= pi.maxPage }">
+                <li><a>&raquo;</a></li>
+            </c:if>
+            <c:if test="${ pi.currentPage < pi.maxPage }">
+                <c:url var="rlistEnd" value="reviewPaging.no">
+                    <c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+                </c:url>
+                <li><a href="${ rlistEnd }">&raquo;</a></li>
+            </c:if>
+            </ul>
+    </div>
+         <%-- <br>
          <div class="row line_b" >
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style = "height:220px">
                <div class="tm-about-box-1" style = "height:220px; padding:10px 10px">
@@ -483,9 +514,9 @@
             		
             		</div>
             	</div>
-            </div>
+            </div> --%>
             
-         </div>        
+         <!-- </div>  -->       
  
    </section> 
    
@@ -589,7 +620,7 @@
          <br>
          
                 
-      </div>
+      <!-- </div> -->
    </section>
 	
 	<!-- white bg -->
@@ -598,6 +629,38 @@
 	<jsp:include page="../common/footer.jsp"/>
 	
 	<script>
+		function reviewPaging(page){
+			console.log("page : " + page);
+			
+			$.ajax({ 
+				url:"reviewPaging.bo",
+				type:"get",
+				data:{page:page},
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					
+					$divBody = $("#line_b");
+					$divBody.html('');
+					
+					$pageBody = $(".paging ul");
+					$pageBody.html('');
+					
+					//var review = data.json1.
+					//var totalCount
+					
+					/* if(review != null){
+						if(review.length > 0){
+							for(var i=0;i<review.length;i++){
+								var dput = "";
+								//dput += 
+							}
+						}
+					} */
+				}
+			});
+		}
+	
 		function review(){
 			if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('2')})
  				location.href="reviewWrite.bo";
