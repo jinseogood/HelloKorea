@@ -56,7 +56,6 @@ public class CompanyManageController {
 			comExt=originComFileName.substring(originComFileName.lastIndexOf("."));
 			changeComName=CommonUtils.getRandomString();
 		}
-		
 		try {
 		
 			//Company
@@ -76,36 +75,447 @@ public class CompanyManageController {
 			//Room
 			if(!r.getRoomType2().equals("")){
 				if(!r.getRoomType3().equals("")){
-					Room rm=new Room();
-					rm.setrId(r.getcId());
-					rm.setRoomType(r.getRoomType1());
-					rm.setRoomCount(r.getRoomCount1());
-					rm.setRoomPrice(Integer.parseInt(r.getRoomPrice1()));
-					rm.setRoomPeople(r.getRoomPeople1());
-					rm.setrId(r.getrId());
-					
-					ss.insertRoom1(rm);
-					
-					Room rm2=new Room();
-					rm2.setrId(r.getcId());
-					rm2.setRoomType(r.getRoomType2());
-					rm2.setRoomCount(r.getRoomCount2());
-					rm2.setRoomPrice(Integer.parseInt(r.getRoomPrice2()));
-					rm2.setRoomPeople(r.getRoomPeople2());
-					rm2.setrId(r.getrId());
-					
-					ss.insertRoom2(rm2);
-					
-					Room rm3=new Room();
-					rm3.setrId(r.getcId());
-					rm3.setRoomType(r.getRoomType3());
-					rm3.setRoomCount(r.getRoomCount3());
-					rm3.setRoomPrice(Integer.parseInt(r.getRoomPrice3()));
-					rm3.setRoomPeople(r.getRoomPeople3());
-					rm3.setrId(r.getrId());
-					
-					ss.insertRoom3(rm3);
-					
+					if(!r.getRoomType4().equals("")){
+						if(!r.getRoomType5().equals("")){
+							if(!r.getRoomType6().equals("")){
+								if(!r.getRoomType7().equals("")){
+									if(!r.getRoomType8().equals("")){
+										if(!r.getRoomType9().equals("")){
+											Room rm=new Room();
+											rm.setrId(r.getcId());
+											rm.setRoomType(r.getRoomType1());
+											rm.setRoomCount(r.getRoomCount1());
+											rm.setRoomPrice(Integer.parseInt(r.getRoomPrice1()));
+											rm.setRoomPeople(r.getRoomPeople1());
+											rm.setrId(r.getrId());
+											
+											ss.insertRoom1(rm);
+											
+											Room rm2=new Room();
+											rm2.setrId(r.getcId());
+											rm2.setRoomType(r.getRoomType2());
+											rm2.setRoomCount(r.getRoomCount2());
+											rm2.setRoomPrice(Integer.parseInt(r.getRoomPrice2()));
+											rm2.setRoomPeople(r.getRoomPeople2());
+											rm2.setrId(r.getrId());
+											
+											ss.insertRoom2(rm2);
+											
+											Room rm3=new Room();
+											rm3.setrId(r.getcId());
+											rm3.setRoomType(r.getRoomType3());
+											rm3.setRoomCount(r.getRoomCount3());
+											rm3.setRoomPrice(Integer.parseInt(r.getRoomPrice3()));
+											rm3.setRoomPeople(r.getRoomPeople3());
+											rm3.setrId(r.getrId());
+											
+											ss.insertRoom3(rm3);
+											
+											Room rm4=new Room();
+											rm4.setrId(r.getcId());
+											rm4.setRoomType(r.getRoomType4());
+											rm4.setRoomCount(r.getRoomCount4());
+											rm4.setRoomPrice(Integer.parseInt(r.getRoomPrice4()));
+											rm4.setRoomPeople(r.getRoomPeople4());
+											rm4.setrId(r.getrId());
+											
+											ss.insertRoom4(rm4);
+											
+											Room rm5=new Room();
+											rm5.setrId(r.getcId());
+											rm5.setRoomType(r.getRoomType5());
+											rm5.setRoomCount(r.getRoomCount5());
+											rm5.setRoomPrice(Integer.parseInt(r.getRoomPrice5()));
+											rm5.setRoomPeople(r.getRoomPeople5());
+											rm5.setrId(r.getrId());
+											
+											ss.insertRoom5(rm5);
+											
+											Room rm6=new Room();
+											rm6.setrId(r.getcId());
+											rm6.setRoomType(r.getRoomType6());
+											rm6.setRoomCount(r.getRoomCount6());
+											rm6.setRoomPrice(Integer.parseInt(r.getRoomPrice6()));
+											rm6.setRoomPeople(r.getRoomPeople6());
+											rm6.setrId(r.getrId());
+											
+											ss.insertRoom6(rm6);
+											
+											Room rm7=new Room();
+											rm7.setrId(r.getcId());
+											rm7.setRoomType(r.getRoomType7());
+											rm7.setRoomCount(r.getRoomCount7());
+											rm7.setRoomPrice(Integer.parseInt(r.getRoomPrice7()));
+											rm7.setRoomPeople(r.getRoomPeople7());
+											rm7.setrId(r.getrId());
+											
+											ss.insertRoom7(rm7);
+											
+											Room rm8=new Room();
+											rm8.setrId(r.getcId());
+											rm8.setRoomType(r.getRoomType8());
+											rm8.setRoomCount(r.getRoomCount8());
+											rm8.setRoomPrice(Integer.parseInt(r.getRoomPrice8()));
+											rm8.setRoomPeople(r.getRoomPeople8());
+											rm8.setrId(r.getrId());
+											
+											ss.insertRoom8(rm8);
+											
+											Room rm9=new Room();
+											rm9.setrId(r.getcId());
+											rm9.setRoomType(r.getRoomType9());
+											rm9.setRoomCount(r.getRoomCount9());
+											rm9.setRoomPrice(Integer.parseInt(r.getRoomPrice9()));
+											rm9.setRoomPeople(r.getRoomPeople9());
+											rm9.setrId(r.getrId());
+											
+											ss.insertRoom3(rm3);
+										}
+										else{
+											Room rm=new Room();
+											rm.setrId(r.getcId());
+											rm.setRoomType(r.getRoomType1());
+											rm.setRoomCount(r.getRoomCount1());
+											rm.setRoomPrice(Integer.parseInt(r.getRoomPrice1()));
+											rm.setRoomPeople(r.getRoomPeople1());
+											rm.setrId(r.getrId());
+											
+											ss.insertRoom1(rm);
+											
+											Room rm2=new Room();
+											rm2.setrId(r.getcId());
+											rm2.setRoomType(r.getRoomType2());
+											rm2.setRoomCount(r.getRoomCount2());
+											rm2.setRoomPrice(Integer.parseInt(r.getRoomPrice2()));
+											rm2.setRoomPeople(r.getRoomPeople2());
+											rm2.setrId(r.getrId());
+											
+											ss.insertRoom2(rm2);
+											
+											Room rm3=new Room();
+											rm3.setrId(r.getcId());
+											rm3.setRoomType(r.getRoomType3());
+											rm3.setRoomCount(r.getRoomCount3());
+											rm3.setRoomPrice(Integer.parseInt(r.getRoomPrice3()));
+											rm3.setRoomPeople(r.getRoomPeople3());
+											rm3.setrId(r.getrId());
+											
+											ss.insertRoom3(rm3);
+											
+											Room rm4=new Room();
+											rm4.setrId(r.getcId());
+											rm4.setRoomType(r.getRoomType4());
+											rm4.setRoomCount(r.getRoomCount4());
+											rm4.setRoomPrice(Integer.parseInt(r.getRoomPrice4()));
+											rm4.setRoomPeople(r.getRoomPeople4());
+											rm4.setrId(r.getrId());
+											
+											ss.insertRoom4(rm4);
+											
+											Room rm5=new Room();
+											rm5.setrId(r.getcId());
+											rm5.setRoomType(r.getRoomType5());
+											rm5.setRoomCount(r.getRoomCount5());
+											rm5.setRoomPrice(Integer.parseInt(r.getRoomPrice5()));
+											rm5.setRoomPeople(r.getRoomPeople5());
+											rm5.setrId(r.getrId());
+											
+											ss.insertRoom5(rm5);
+											
+											Room rm6=new Room();
+											rm6.setrId(r.getcId());
+											rm6.setRoomType(r.getRoomType6());
+											rm6.setRoomCount(r.getRoomCount6());
+											rm6.setRoomPrice(Integer.parseInt(r.getRoomPrice6()));
+											rm6.setRoomPeople(r.getRoomPeople6());
+											rm6.setrId(r.getrId());
+											
+											ss.insertRoom6(rm6);
+											
+											Room rm7=new Room();
+											rm7.setrId(r.getcId());
+											rm7.setRoomType(r.getRoomType7());
+											rm7.setRoomCount(r.getRoomCount7());
+											rm7.setRoomPrice(Integer.parseInt(r.getRoomPrice7()));
+											rm7.setRoomPeople(r.getRoomPeople7());
+											rm7.setrId(r.getrId());
+											
+											ss.insertRoom7(rm7);
+											
+											Room rm8=new Room();
+											rm8.setrId(r.getcId());
+											rm8.setRoomType(r.getRoomType8());
+											rm8.setRoomCount(r.getRoomCount8());
+											rm8.setRoomPrice(Integer.parseInt(r.getRoomPrice8()));
+											rm8.setRoomPeople(r.getRoomPeople8());
+											rm8.setrId(r.getrId());
+											
+											ss.insertRoom8(rm8);
+											
+										}
+									}
+									else{
+										Room rm=new Room();
+										rm.setrId(r.getcId());
+										rm.setRoomType(r.getRoomType1());
+										rm.setRoomCount(r.getRoomCount1());
+										rm.setRoomPrice(Integer.parseInt(r.getRoomPrice1()));
+										rm.setRoomPeople(r.getRoomPeople1());
+										rm.setrId(r.getrId());
+										
+										ss.insertRoom1(rm);
+										
+										Room rm2=new Room();
+										rm2.setrId(r.getcId());
+										rm2.setRoomType(r.getRoomType2());
+										rm2.setRoomCount(r.getRoomCount2());
+										rm2.setRoomPrice(Integer.parseInt(r.getRoomPrice2()));
+										rm2.setRoomPeople(r.getRoomPeople2());
+										rm2.setrId(r.getrId());
+										
+										ss.insertRoom2(rm2);
+										
+										Room rm3=new Room();
+										rm3.setrId(r.getcId());
+										rm3.setRoomType(r.getRoomType3());
+										rm3.setRoomCount(r.getRoomCount3());
+										rm3.setRoomPrice(Integer.parseInt(r.getRoomPrice3()));
+										rm3.setRoomPeople(r.getRoomPeople3());
+										rm3.setrId(r.getrId());
+										
+										ss.insertRoom3(rm3);
+										
+										Room rm4=new Room();
+										rm4.setrId(r.getcId());
+										rm4.setRoomType(r.getRoomType4());
+										rm4.setRoomCount(r.getRoomCount4());
+										rm4.setRoomPrice(Integer.parseInt(r.getRoomPrice4()));
+										rm4.setRoomPeople(r.getRoomPeople4());
+										rm4.setrId(r.getrId());
+										
+										ss.insertRoom4(rm4);
+										
+										Room rm5=new Room();
+										rm5.setrId(r.getcId());
+										rm5.setRoomType(r.getRoomType5());
+										rm5.setRoomCount(r.getRoomCount5());
+										rm5.setRoomPrice(Integer.parseInt(r.getRoomPrice5()));
+										rm5.setRoomPeople(r.getRoomPeople5());
+										rm5.setrId(r.getrId());
+										
+										ss.insertRoom5(rm5);
+										
+										Room rm6=new Room();
+										rm6.setrId(r.getcId());
+										rm6.setRoomType(r.getRoomType6());
+										rm6.setRoomCount(r.getRoomCount6());
+										rm6.setRoomPrice(Integer.parseInt(r.getRoomPrice6()));
+										rm6.setRoomPeople(r.getRoomPeople6());
+										rm6.setrId(r.getrId());
+										
+										ss.insertRoom6(rm6);
+										
+										Room rm7=new Room();
+										rm7.setrId(r.getcId());
+										rm7.setRoomType(r.getRoomType7());
+										rm7.setRoomCount(r.getRoomCount7());
+										rm7.setRoomPrice(Integer.parseInt(r.getRoomPrice7()));
+										rm7.setRoomPeople(r.getRoomPeople7());
+										rm7.setrId(r.getrId());
+										
+										ss.insertRoom7(rm7);
+										
+									}
+								}
+								else{
+									Room rm=new Room();
+									rm.setrId(r.getcId());
+									rm.setRoomType(r.getRoomType1());
+									rm.setRoomCount(r.getRoomCount1());
+									rm.setRoomPrice(Integer.parseInt(r.getRoomPrice1()));
+									rm.setRoomPeople(r.getRoomPeople1());
+									rm.setrId(r.getrId());
+									
+									ss.insertRoom1(rm);
+									
+									Room rm2=new Room();
+									rm2.setrId(r.getcId());
+									rm2.setRoomType(r.getRoomType2());
+									rm2.setRoomCount(r.getRoomCount2());
+									rm2.setRoomPrice(Integer.parseInt(r.getRoomPrice2()));
+									rm2.setRoomPeople(r.getRoomPeople2());
+									rm2.setrId(r.getrId());
+									
+									ss.insertRoom2(rm2);
+									
+									Room rm3=new Room();
+									rm3.setrId(r.getcId());
+									rm3.setRoomType(r.getRoomType3());
+									rm3.setRoomCount(r.getRoomCount3());
+									rm3.setRoomPrice(Integer.parseInt(r.getRoomPrice3()));
+									rm3.setRoomPeople(r.getRoomPeople3());
+									rm3.setrId(r.getrId());
+									
+									ss.insertRoom3(rm3);
+									
+									Room rm4=new Room();
+									rm4.setrId(r.getcId());
+									rm4.setRoomType(r.getRoomType4());
+									rm4.setRoomCount(r.getRoomCount4());
+									rm4.setRoomPrice(Integer.parseInt(r.getRoomPrice4()));
+									rm4.setRoomPeople(r.getRoomPeople4());
+									rm4.setrId(r.getrId());
+									
+									ss.insertRoom4(rm4);
+									
+									Room rm5=new Room();
+									rm5.setrId(r.getcId());
+									rm5.setRoomType(r.getRoomType5());
+									rm5.setRoomCount(r.getRoomCount5());
+									rm5.setRoomPrice(Integer.parseInt(r.getRoomPrice5()));
+									rm5.setRoomPeople(r.getRoomPeople5());
+									rm5.setrId(r.getrId());
+									
+									ss.insertRoom5(rm5);
+									
+									Room rm6=new Room();
+									rm6.setrId(r.getcId());
+									rm6.setRoomType(r.getRoomType6());
+									rm6.setRoomCount(r.getRoomCount6());
+									rm6.setRoomPrice(Integer.parseInt(r.getRoomPrice6()));
+									rm6.setRoomPeople(r.getRoomPeople6());
+									rm6.setrId(r.getrId());
+									
+									ss.insertRoom6(rm6);
+								}
+							}
+							else{
+								Room rm=new Room();
+								rm.setrId(r.getcId());
+								rm.setRoomType(r.getRoomType1());
+								rm.setRoomCount(r.getRoomCount1());
+								rm.setRoomPrice(Integer.parseInt(r.getRoomPrice1()));
+								rm.setRoomPeople(r.getRoomPeople1());
+								rm.setrId(r.getrId());
+								
+								ss.insertRoom1(rm);
+								
+								Room rm2=new Room();
+								rm2.setrId(r.getcId());
+								rm2.setRoomType(r.getRoomType2());
+								rm2.setRoomCount(r.getRoomCount2());
+								rm2.setRoomPrice(Integer.parseInt(r.getRoomPrice2()));
+								rm2.setRoomPeople(r.getRoomPeople2());
+								rm2.setrId(r.getrId());
+								
+								ss.insertRoom2(rm2);
+								
+								Room rm3=new Room();
+								rm3.setrId(r.getcId());
+								rm3.setRoomType(r.getRoomType3());
+								rm3.setRoomCount(r.getRoomCount3());
+								rm3.setRoomPrice(Integer.parseInt(r.getRoomPrice3()));
+								rm3.setRoomPeople(r.getRoomPeople3());
+								rm3.setrId(r.getrId());
+								
+								ss.insertRoom3(rm3);
+								
+								Room rm4=new Room();
+								rm4.setrId(r.getcId());
+								rm4.setRoomType(r.getRoomType4());
+								rm4.setRoomCount(r.getRoomCount4());
+								rm4.setRoomPrice(Integer.parseInt(r.getRoomPrice4()));
+								rm4.setRoomPeople(r.getRoomPeople4());
+								rm4.setrId(r.getrId());
+								
+								ss.insertRoom4(rm4);
+								
+								Room rm5=new Room();
+								rm5.setrId(r.getcId());
+								rm5.setRoomType(r.getRoomType5());
+								rm5.setRoomCount(r.getRoomCount5());
+								rm5.setRoomPrice(Integer.parseInt(r.getRoomPrice5()));
+								rm5.setRoomPeople(r.getRoomPeople5());
+								rm5.setrId(r.getrId());
+								
+								ss.insertRoom5(rm5);
+								
+							}
+						}
+						else{
+							Room rm=new Room();
+							rm.setrId(r.getcId());
+							rm.setRoomType(r.getRoomType1());
+							rm.setRoomCount(r.getRoomCount1());
+							rm.setRoomPrice(Integer.parseInt(r.getRoomPrice1()));
+							rm.setRoomPeople(r.getRoomPeople1());
+							rm.setrId(r.getrId());
+							
+							ss.insertRoom1(rm);
+							
+							Room rm2=new Room();
+							rm2.setrId(r.getcId());
+							rm2.setRoomType(r.getRoomType2());
+							rm2.setRoomCount(r.getRoomCount2());
+							rm2.setRoomPrice(Integer.parseInt(r.getRoomPrice2()));
+							rm2.setRoomPeople(r.getRoomPeople2());
+							rm2.setrId(r.getrId());
+							
+							ss.insertRoom2(rm2);
+							
+							Room rm3=new Room();
+							rm3.setrId(r.getcId());
+							rm3.setRoomType(r.getRoomType3());
+							rm3.setRoomCount(r.getRoomCount3());
+							rm3.setRoomPrice(Integer.parseInt(r.getRoomPrice3()));
+							rm3.setRoomPeople(r.getRoomPeople3());
+							rm3.setrId(r.getrId());
+							
+							ss.insertRoom3(rm3);
+							
+							Room rm4=new Room();
+							rm4.setrId(r.getcId());
+							rm4.setRoomType(r.getRoomType4());
+							rm4.setRoomCount(r.getRoomCount4());
+							rm4.setRoomPrice(Integer.parseInt(r.getRoomPrice4()));
+							rm4.setRoomPeople(r.getRoomPeople4());
+							rm4.setrId(r.getrId());
+							
+							ss.insertRoom4(rm4);
+							
+						}
+					}
+					else{
+						Room rm=new Room();
+						rm.setrId(r.getcId());
+						rm.setRoomType(r.getRoomType1());
+						rm.setRoomCount(r.getRoomCount1());
+						rm.setRoomPrice(Integer.parseInt(r.getRoomPrice1()));
+						rm.setRoomPeople(r.getRoomPeople1());
+						rm.setrId(r.getrId());
+						
+						ss.insertRoom1(rm);
+						
+						Room rm2=new Room();
+						rm2.setrId(r.getcId());
+						rm2.setRoomType(r.getRoomType2());
+						rm2.setRoomCount(r.getRoomCount2());
+						rm2.setRoomPrice(Integer.parseInt(r.getRoomPrice2()));
+						rm2.setRoomPeople(r.getRoomPeople2());
+						rm2.setrId(r.getrId());
+						
+						ss.insertRoom2(rm2);
+						
+						Room rm3=new Room();
+						rm3.setrId(r.getcId());
+						rm3.setRoomType(r.getRoomType3());
+						rm3.setRoomCount(r.getRoomCount3());
+						rm3.setRoomPrice(Integer.parseInt(r.getRoomPrice3()));
+						rm3.setRoomPeople(r.getRoomPeople3());
+						rm3.setrId(r.getrId());
+						
+						ss.insertRoom3(rm3);
+					}
 				}
 				else{
 					Room rm=new Room();
@@ -153,7 +563,7 @@ public class CompanyManageController {
 			Attachment perFileDB=new Attachment();
 			perFileDB.setFilePath(filePath);
 			perFileDB.setOriginName(originPerFileName);
-			perFileDB.setChangeName(changePerName);
+			perFileDB.setChangeName(changePerName + perExt);
 			
 			ss.insertPerFile(perFileDB);
 			
@@ -163,7 +573,7 @@ public class CompanyManageController {
 				Attachment comFileDB=new Attachment();
 				comFileDB.setFilePath(filePath);
 				comFileDB.setOriginName(originComFileName);
-				comFileDB.setChangeName(changeComName);
+				comFileDB.setChangeName(changeComName + comExt);
 				
 				ss.insertComFile(comFileDB);
 			}
@@ -260,6 +670,8 @@ public class CompanyManageController {
 	public String editCompanyView(OneProduct op, Model model){
 		ArrayList<OneProduct> eOP=ss.selectOneProduct(op.getcId());
 		
+		System.out.println("eOP list size : " + eOP.size());
+		
 		model.addAttribute("eOP", eOP);
 		
 		return "seller/editCompany";
@@ -268,56 +680,351 @@ public class CompanyManageController {
 	//상품 수정
 	@RequestMapping(value="editCompany.sell")
 	public String editCompany(@RequestParam int cId
-			, @RequestParam String roomType1, @RequestParam int roomCount1, @RequestParam String roomPrice1, @RequestParam int roomPeople1
-			, @RequestParam(required=false) String roomType2, @RequestParam(required=false) int roomCount2, @RequestParam(required=false) String roomPrice2, @RequestParam(required=false) int roomPeople2
-			, @RequestParam(required=false) String roomType3, @RequestParam(required=false) int roomCount3, @RequestParam(required=false) String roomPrice3, @RequestParam(required=false) int roomPeople3
+			, @RequestParam String roomType1, @RequestParam int roomCount1, @RequestParam String roomPrice1
+			, @RequestParam(name="roomType2", required=false) String roomType2, @RequestParam(name="roomCount2", required=false) int roomCount2, @RequestParam(name="roomPrice2", required=false) String roomPrice2
+			, @RequestParam(name="roomType3", required=false) String roomType3, @RequestParam(name="roomCount3", required=false) int roomCount3, @RequestParam(name="roomPrice3", required=false) String roomPrice3
+			, @RequestParam(name="roomType4", required=false) String roomType4, @RequestParam(name="roomCount4", required=false) int roomCount4, @RequestParam(name="roomPrice4", required=false) String roomPrice4
+			, @RequestParam(name="roomType5", required=false) String roomType5, @RequestParam(name="roomCount5", required=false) int roomCount5, @RequestParam(name="roomPrice5", required=false) String roomPrice5
+			, @RequestParam(name="roomType6", required=false) String roomType6, @RequestParam(name="roomCount6", required=false) int roomCount6, @RequestParam(name="roomPrice6", required=false) String roomPrice6
+			, @RequestParam(name="roomType7", required=false) String roomType7, @RequestParam(name="roomCount7", required=false) int roomCount7, @RequestParam(name="roomPrice7", required=false) String roomPrice7
+			, @RequestParam(name="roomType8", required=false) String roomType8, @RequestParam(name="roomCount8", required=false) int roomCount8, @RequestParam(name="roomPrice8", required=false) String roomPrice8
+			, @RequestParam(name="roomType9", required=false) String roomType9, @RequestParam(name="roomCount9", required=false) int roomCount9, @RequestParam(name="roomPrice9", required=false) String roomPrice9
 			, Model model){
 		
-		System.out.println("cId : " + cId);
-		System.out.println("roomType : " + roomType1);
-		System.out.println("roomType : " + roomType2);
-		System.out.println("roomType : " + roomType3);
-		System.out.println("roomCount : " + roomCount1);
-		System.out.println("roomCount : " + roomCount2);
-		System.out.println("roomCount : " + roomCount3);
-		System.out.println("roomPrice : " + roomPrice1);
-		System.out.println("roomPrice : " + roomPrice2);
-		System.out.println("roomPrice : " + roomPrice3);
-		System.out.println("roomPeople : " + roomPeople1);
-		System.out.println("roomPeople : " + roomPeople2);
-		System.out.println("roomPeople : " + roomPeople3);
+		System.out.println("rCount1 : " + roomCount1);
+		System.out.println("rCount2 : " + roomCount2);
 		
 		Room r1=null;
 		Room r2=null;
 		Room r3=null;
+		Room r4=null;
+		Room r5=null;
+		Room r6=null;
+		Room r7=null;
+		Room r8=null;
+		Room r9=null;
 		ArrayList<Room> list=new ArrayList<Room>();
 		
 		if(roomType2 != null){
 			if(roomType3 != null){
-				r1=new Room();
-				r1.setcId(cId);
-				r1.setRoomType(roomType1);
-				r1.setRoomCount(roomCount1);
-				r1.setRoomPrice(Integer.parseInt(roomPrice1));
-				r1.setRoomPeople(roomPeople1);
-				
-				r2=new Room();
-				r2.setcId(cId);
-				r2.setRoomType(roomType2);
-				r2.setRoomCount(roomCount2);
-				r2.setRoomPrice(Integer.parseInt(roomPrice2));
-				r2.setRoomPeople(roomPeople2);
-				
-				r3=new Room();
-				r3.setcId(cId);
-				r3.setRoomType(roomType3);
-				r3.setRoomCount(roomCount3);
-				r3.setRoomPrice(Integer.parseInt(roomPrice3));
-				r3.setRoomPeople(roomPeople3);
-				
-				list.add(r1);
-				list.add(r2);
-				list.add(r3);
+				if(roomType4 != null){
+					if(roomType5 != null){
+						if(roomType6 != null){
+							if(roomType7 != null){
+								if(roomType8 != null){
+									if(roomType9 != null){
+										r1=new Room();
+										r1.setcId(cId);
+										r1.setRoomType(roomType1);
+										r1.setRoomCount(roomCount1);
+										r1.setRoomPrice(Integer.parseInt(roomPrice1));
+										
+										r2=new Room();
+										r2.setcId(cId);
+										r2.setRoomType(roomType2);
+										r2.setRoomCount(roomCount2);
+										r2.setRoomPrice(Integer.parseInt(roomPrice2));
+										
+										r3=new Room();
+										r3.setcId(cId);
+										r3.setRoomType(roomType3);
+										r3.setRoomCount(roomCount3);
+										r3.setRoomPrice(Integer.parseInt(roomPrice3));
+										
+										r4=new Room();
+										r4.setcId(cId);
+										r4.setRoomType(roomType4);
+										r4.setRoomCount(roomCount4);
+										r4.setRoomPrice(Integer.parseInt(roomPrice4));
+										
+										r5=new Room();
+										r5.setcId(cId);
+										r5.setRoomType(roomType5);
+										r5.setRoomCount(roomCount5);
+										r5.setRoomPrice(Integer.parseInt(roomPrice5));
+										
+										r6=new Room();
+										r6.setcId(cId);
+										r6.setRoomType(roomType6);
+										r6.setRoomCount(roomCount6);
+										r6.setRoomPrice(Integer.parseInt(roomPrice6));
+										
+										r7=new Room();
+										r7.setcId(cId);
+										r7.setRoomType(roomType7);
+										r7.setRoomCount(roomCount7);
+										r7.setRoomPrice(Integer.parseInt(roomPrice7));
+										
+										r8=new Room();
+										r8.setcId(cId);
+										r8.setRoomType(roomType8);
+										r8.setRoomCount(roomCount8);
+										r8.setRoomPrice(Integer.parseInt(roomPrice8));
+										
+										r9=new Room();
+										r9.setcId(cId);
+										r9.setRoomType(roomType9);
+										r9.setRoomCount(roomCount9);
+										r9.setRoomPrice(Integer.parseInt(roomPrice9));
+										
+										list.add(r1);
+										list.add(r2);
+										list.add(r3);
+										list.add(r4);
+										list.add(r5);
+										list.add(r6);
+										list.add(r7);
+										list.add(r8);
+										list.add(r9);
+									}
+									else{
+										r1=new Room();
+										r1.setcId(cId);
+										r1.setRoomType(roomType1);
+										r1.setRoomCount(roomCount1);
+										r1.setRoomPrice(Integer.parseInt(roomPrice1));
+										
+										r2=new Room();
+										r2.setcId(cId);
+										r2.setRoomType(roomType2);
+										r2.setRoomCount(roomCount2);
+										r2.setRoomPrice(Integer.parseInt(roomPrice2));
+										
+										r3=new Room();
+										r3.setcId(cId);
+										r3.setRoomType(roomType3);
+										r3.setRoomCount(roomCount3);
+										r3.setRoomPrice(Integer.parseInt(roomPrice3));
+										
+										r4=new Room();
+										r4.setcId(cId);
+										r4.setRoomType(roomType4);
+										r4.setRoomCount(roomCount4);
+										r4.setRoomPrice(Integer.parseInt(roomPrice4));
+										
+										r5=new Room();
+										r5.setcId(cId);
+										r5.setRoomType(roomType5);
+										r5.setRoomCount(roomCount5);
+										r5.setRoomPrice(Integer.parseInt(roomPrice5));
+										
+										r6=new Room();
+										r6.setcId(cId);
+										r6.setRoomType(roomType6);
+										r6.setRoomCount(roomCount6);
+										r6.setRoomPrice(Integer.parseInt(roomPrice6));
+										
+										r7=new Room();
+										r7.setcId(cId);
+										r7.setRoomType(roomType7);
+										r7.setRoomCount(roomCount7);
+										r7.setRoomPrice(Integer.parseInt(roomPrice7));
+										
+										r8=new Room();
+										r8.setcId(cId);
+										r8.setRoomType(roomType8);
+										r8.setRoomCount(roomCount8);
+										r8.setRoomPrice(Integer.parseInt(roomPrice8));
+										
+										list.add(r1);
+										list.add(r2);
+										list.add(r3);
+										list.add(r4);
+										list.add(r5);
+										list.add(r6);
+										list.add(r7);
+										list.add(r8);
+									}
+								}
+								else{
+									r1=new Room();
+									r1.setcId(cId);
+									r1.setRoomType(roomType1);
+									r1.setRoomCount(roomCount1);
+									r1.setRoomPrice(Integer.parseInt(roomPrice1));
+									
+									r2=new Room();
+									r2.setcId(cId);
+									r2.setRoomType(roomType2);
+									r2.setRoomCount(roomCount2);
+									r2.setRoomPrice(Integer.parseInt(roomPrice2));
+									
+									r3=new Room();
+									r3.setcId(cId);
+									r3.setRoomType(roomType3);
+									r3.setRoomCount(roomCount3);
+									r3.setRoomPrice(Integer.parseInt(roomPrice3));
+									
+									r4=new Room();
+									r4.setcId(cId);
+									r4.setRoomType(roomType4);
+									r4.setRoomCount(roomCount4);
+									r4.setRoomPrice(Integer.parseInt(roomPrice4));
+									
+									r5=new Room();
+									r5.setcId(cId);
+									r5.setRoomType(roomType5);
+									r5.setRoomCount(roomCount5);
+									r5.setRoomPrice(Integer.parseInt(roomPrice5));
+									
+									r6=new Room();
+									r6.setcId(cId);
+									r6.setRoomType(roomType6);
+									r6.setRoomCount(roomCount6);
+									r6.setRoomPrice(Integer.parseInt(roomPrice6));
+									
+									r7=new Room();
+									r7.setcId(cId);
+									r7.setRoomType(roomType7);
+									r7.setRoomCount(roomCount7);
+									r7.setRoomPrice(Integer.parseInt(roomPrice7));
+									
+									list.add(r1);
+									list.add(r2);
+									list.add(r3);
+									list.add(r4);
+									list.add(r5);
+									list.add(r6);
+									list.add(r7);
+								}
+							}
+							else{
+								r1=new Room();
+								r1.setcId(cId);
+								r1.setRoomType(roomType1);
+								r1.setRoomCount(roomCount1);
+								r1.setRoomPrice(Integer.parseInt(roomPrice1));
+								
+								r2=new Room();
+								r2.setcId(cId);
+								r2.setRoomType(roomType2);
+								r2.setRoomCount(roomCount2);
+								r2.setRoomPrice(Integer.parseInt(roomPrice2));
+								
+								r3=new Room();
+								r3.setcId(cId);
+								r3.setRoomType(roomType3);
+								r3.setRoomCount(roomCount3);
+								r3.setRoomPrice(Integer.parseInt(roomPrice3));
+								
+								r4=new Room();
+								r4.setcId(cId);
+								r4.setRoomType(roomType4);
+								r4.setRoomCount(roomCount4);
+								r4.setRoomPrice(Integer.parseInt(roomPrice4));
+								
+								r5=new Room();
+								r5.setcId(cId);
+								r5.setRoomType(roomType5);
+								r5.setRoomCount(roomCount5);
+								r5.setRoomPrice(Integer.parseInt(roomPrice5));
+								
+								r6=new Room();
+								r6.setcId(cId);
+								r6.setRoomType(roomType6);
+								r6.setRoomCount(roomCount6);
+								r6.setRoomPrice(Integer.parseInt(roomPrice6));
+								
+								list.add(r1);
+								list.add(r2);
+								list.add(r3);
+								list.add(r4);
+								list.add(r5);
+								list.add(r6);
+							}
+						}
+						else{
+							r1=new Room();
+							r1.setcId(cId);
+							r1.setRoomType(roomType1);
+							r1.setRoomCount(roomCount1);
+							r1.setRoomPrice(Integer.parseInt(roomPrice1));
+							
+							r2=new Room();
+							r2.setcId(cId);
+							r2.setRoomType(roomType2);
+							r2.setRoomCount(roomCount2);
+							r2.setRoomPrice(Integer.parseInt(roomPrice2));
+							
+							r3=new Room();
+							r3.setcId(cId);
+							r3.setRoomType(roomType3);
+							r3.setRoomCount(roomCount3);
+							r3.setRoomPrice(Integer.parseInt(roomPrice3));
+							
+							r4=new Room();
+							r4.setcId(cId);
+							r4.setRoomType(roomType4);
+							r4.setRoomCount(roomCount4);
+							r4.setRoomPrice(Integer.parseInt(roomPrice4));
+							
+							r5=new Room();
+							r5.setcId(cId);
+							r5.setRoomType(roomType5);
+							r5.setRoomCount(roomCount5);
+							r5.setRoomPrice(Integer.parseInt(roomPrice5));
+							
+							list.add(r1);
+							list.add(r2);
+							list.add(r3);
+							list.add(r4);
+							list.add(r5);
+						}
+					}
+					else{
+						r1=new Room();
+						r1.setcId(cId);
+						r1.setRoomType(roomType1);
+						r1.setRoomCount(roomCount1);
+						r1.setRoomPrice(Integer.parseInt(roomPrice1));
+						
+						r2=new Room();
+						r2.setcId(cId);
+						r2.setRoomType(roomType2);
+						r2.setRoomCount(roomCount2);
+						r2.setRoomPrice(Integer.parseInt(roomPrice2));
+						
+						r3=new Room();
+						r3.setcId(cId);
+						r3.setRoomType(roomType3);
+						r3.setRoomCount(roomCount3);
+						r3.setRoomPrice(Integer.parseInt(roomPrice3));
+						
+						r4=new Room();
+						r4.setcId(cId);
+						r4.setRoomType(roomType4);
+						r4.setRoomCount(roomCount4);
+						r4.setRoomPrice(Integer.parseInt(roomPrice4));
+						
+						list.add(r1);
+						list.add(r2);
+						list.add(r3);
+						list.add(r4);
+					}
+				}
+				else{
+					r1=new Room();
+					r1.setcId(cId);
+					r1.setRoomType(roomType1);
+					r1.setRoomCount(roomCount1);
+					r1.setRoomPrice(Integer.parseInt(roomPrice1));
+					
+					r2=new Room();
+					r2.setcId(cId);
+					r2.setRoomType(roomType2);
+					r2.setRoomCount(roomCount2);
+					r2.setRoomPrice(Integer.parseInt(roomPrice2));
+					
+					r3=new Room();
+					r3.setcId(cId);
+					r3.setRoomType(roomType3);
+					r3.setRoomCount(roomCount3);
+					r3.setRoomPrice(Integer.parseInt(roomPrice3));
+					
+					list.add(r1);
+					list.add(r2);
+					list.add(r3);
+				}
 			}
 			else{
 				r1=new Room();
@@ -325,14 +1032,12 @@ public class CompanyManageController {
 				r1.setRoomType(roomType1);
 				r1.setRoomCount(roomCount1);
 				r1.setRoomPrice(Integer.parseInt(roomPrice1));
-				r1.setRoomPeople(roomPeople1);
 				
 				r2=new Room();
 				r2.setcId(cId);
 				r2.setRoomType(roomType2);
 				r2.setRoomCount(roomCount2);
 				r2.setRoomPrice(Integer.parseInt(roomPrice2));
-				r2.setRoomPeople(roomPeople2);
 				
 				list.add(r1);
 				list.add(r2);
@@ -344,11 +1049,12 @@ public class CompanyManageController {
 			r1.setRoomType(roomType1);
 			r1.setRoomCount(roomCount1);
 			r1.setRoomPrice(Integer.parseInt(roomPrice1));
-			r1.setRoomPeople(roomPeople1);
 			
 			list.add(r1);
 		}
 
+		System.out.println("controller list : " + list);
+		
 		int result=ss.updateProduct(list);
 		
 		if(result > 0){
@@ -364,6 +1070,35 @@ public class CompanyManageController {
 			return "common/errorPage";
 		}
 		
+	}
+	
+	//등록 기간 연장
+	@RequestMapping(value="extendsPeriod.sell")
+	public String extendsPeriod(@RequestParam String cId, @RequestParam String term, Model model, HttpServletRequest request){
+		
+		int result=ss.extendsPeriod(cId, term);
+		
+		if(result > 0){
+			Member m=(Member)request.getSession().getAttribute("loginUser");
+			
+			ArrayList<SearchProduct> list=null;
+			PageInfo pi=null;
+			int listCount=0;
+			
+			listCount=ss.getProductListCount(m.getmId());
+			pi=Pagination.getPageInfo(1, listCount);
+			list=ss.selectProductList(m.getmId(), pi);
+			
+			model.addAttribute("list", list);
+			model.addAttribute("pi", pi);
+			
+			return "seller/manageProduct";
+		}
+		else{
+			model.addAttribute("msg", "기간 연장 실패");
+			
+			return "common/errorPage";
+		}
 	}
 	
 }

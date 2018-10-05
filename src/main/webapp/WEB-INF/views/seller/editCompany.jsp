@@ -12,7 +12,7 @@
 	}
 	.content{
 		width:800px;
-		height:1000px;
+		height:1100px;
 		margin-left:auto;
 		margin-right:auto;
 	}
@@ -49,7 +49,7 @@
                     	<ul class="breadcrumb">
                         	<li><a href="myPageView.sell"><i class="fa fa-home"></i> Home</a></li>
                         	<li><a href="manageProduct.sell">업체 관리</a></li>
-                        	<li><a onclick="productDetail();">업체 상세</a>
+                        	<li><a onclick="productDetail();">${ eOP.get(0).companyName }</a>
                             <li class="active">업체 수정</li>
                         </ul>
                     </div>
@@ -75,7 +75,7 @@
 					<c:forEach var="eOP" items="${ eOP }">
 						<tr>
 							<th>객실타입</th>
-							<td colspan="2"><input type="text" name="roomType${ i }" value="${ eOP.roomType }" required></td>
+							<td colspan="2"><input type="text" name="roomType${ i }" value="${ eOP.roomType }" readonly></td>
 							<th style="width:60px;">객실 수</th>
 							<td><input type="number" name="roomCount${ i }" value="${ eOP.roomCount }" required></td>
 						</tr>
@@ -83,7 +83,7 @@
 							<th>객실 가격</th>
 							<td colspan="2"><input type="text" name="roomPrice${ i }" value="${ eOP.roomPrice }" required></td>
 							<th style="width:60px;">정원</th>
-							<td><input type="number" name="roomPeople${ i }" value="${ eOP.roomPeople }" required></td>
+							<td><input type="text" name="roomPeople${ i }" value="${ eOP.roomPeople }" readonly></td>
 						</tr>
 						<c:set var="i" value="${ i+1 }"/>
 					</c:forEach>

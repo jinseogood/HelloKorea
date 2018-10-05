@@ -41,6 +41,42 @@ public class SellerDaoImpl implements SellerDao{
 	public int insertRoom3(Room rm, SqlSessionTemplate sqlSession) {
 		return sqlSession.insert("Room.insertRoom", rm);
 	}
+	
+	//객실4 등록
+	@Override
+	public int insertRoom4(Room rm, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("Room.insertRoom", rm);
+	}
+		
+	//객실5 등록
+	@Override
+	public int insertRoom5(Room rm, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("Room.insertRoom", rm);
+	}
+		
+	//객실6 등록
+	@Override
+	public int insertRoom6(Room rm, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("Room.insertRoom", rm);
+	}
+		
+	//객실7 등록
+	@Override
+	public int insertRoom7(Room rm, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("Room.insertRoom", rm);
+	}
+		
+	//객실8 등록
+	@Override
+	public int insertRoom8(Room rm, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("Room.insertRoom", rm);
+	}
+		
+	//객실9 등록
+	@Override
+	public int insertRoom9(Room rm, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("Room.insertRoom", rm);
+	}
 
 	//등록이력 추가
 	@Override
@@ -131,7 +167,23 @@ public class SellerDaoImpl implements SellerDao{
 	//업체 수정
 	@Override
 	public int updateProduct(ArrayList<Room> list, SqlSessionTemplate sqlSession) {
-		return sqlSession.update("Room.updateProduct", list);
+		System.out.println("list size : " + list.size());
+		System.out.println("list : " + list);
+		/*return sqlSession.update("Room.updateProduct", list);*/
+		return 0;
+	}
+
+	//등록 기간 연장
+	@Override
+	public int extendsPeriod(String cId, String term, SqlSessionTemplate sqlSession) {
+		int cID=Integer.parseInt(cId);
+		int period=Integer.parseInt(term);
+		
+		ArrayList<Object> epList=new ArrayList<Object>();
+		epList.add(cID);
+		epList.add(period);
+		
+		return sqlSession.insert("RH.extendsPeriod", epList);
 	}
 
 }

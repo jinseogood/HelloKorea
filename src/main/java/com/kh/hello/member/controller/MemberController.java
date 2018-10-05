@@ -6,6 +6,9 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -34,11 +37,11 @@ public class MemberController {
 	@Autowired
 	private MemberService ms;
 	@Autowired BCryptPasswordEncoder passwordEncoder;
-	/*@Autowired
+	@Autowired
     private FacebookConnectionFactory connectionFactory;
     @Autowired
     private OAuth2Parameters oAuth2Parameters;
-	*/
+	
 	
 	
 	@RequestMapping(value ="insertUser.me")
@@ -208,17 +211,38 @@ public class MemberController {
 		}
 		
 	}
-	/*  @RequestMapping(value = "facebook.me", method = { RequestMethod.GET, RequestMethod.POST })
-	    public void join(HttpServletResponse response, Model model) {
-	        
-	        OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
-	        String facebook_url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, oAuth2Parameters);
-	    
-	        model.addAttribute("facebook_url", facebook_url);
-	        System.out.println("/facebook" + facebook_url);
-	 
-	        
-	    }*/
+
+	/*@RequestMapping(value = "facebook.me", method = { RequestMethod.GET, RequestMethod.POST })
+    public String join(HttpServletResponse response, Model model) {
+        
+        OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
+        String facebook_url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, oAuth2Parameters);
+        
+        ObjectMapper mapper = new ObjectMapper();
+        
+        try {
+			response.getWriter().print(mapper.writeValueAsString(facebook_url));
+		} catch (JsonGenerationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        System.out.println("/facebook" + facebook_url);
+ 
+        return facebook_url ;
+    }
+    
+        model.addAttribute("facebook_url", facebook_url);
+        System.out.println("/facebook" + facebook_url);
+ 
+        return "main/main";
+    }*/
 
 
 }

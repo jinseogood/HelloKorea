@@ -1,5 +1,6 @@
 package com.kh.hello.main.sub;
 
+
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class SubPageController {
 	
 	@Autowired
 	private BoardService bs;
-	
+
 	@RequestMapping("aboutAreaHotel")
 	public String aboutAreaHotel(){
 		return "aboutArea/searchAreaHotel";
