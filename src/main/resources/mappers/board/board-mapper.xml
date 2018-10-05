@@ -31,6 +31,17 @@
          WHERE bid = (SELECT MAX(BID) FROM BOARD WHERE M_ID = #{m_id})
      </update>
      
+     <select id = "selectReview" resultMap = "BoardResultSet">
+     	SELECT * FROM BOARD WHERE BOARD_TYPE = 1
+     </select>
+     
+     <!-- 리뷰 내역 수 조회용 -->
+     <select id= "selectReviewCount" resultType = "_int">
+     	SELECT COUNT(*)
+     	FROM BOARD
+     	WHERE BOARD_TYPE = 1
+     </select>
+     
      <!-- 리뷰 삭제(취소시 미리 인서트해놓은 것) -->
      <!-- <select id="selectAttachment" resultMap="AttachmentResultSet">
          SELECT *

@@ -1,9 +1,13 @@
 package com.kh.hello.board.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +24,12 @@ import com.kh.hello.board.Response;
 import com.kh.hello.board.model.service.BoardService;
 import com.kh.hello.board.model.vo.Board;
 import com.kh.hello.common.Attachment;
+import com.kh.hello.common.PageInfo;
+import com.kh.hello.common.Pagination2;
 import com.kh.hello.member.model.vo.Member;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Controller
 public class BoardPageController {
@@ -119,6 +128,62 @@ public class BoardPageController {
 		result = bs.updateBoard(b);
 		
 		return "main/main";
+	}
+	
+	@RequestMapping(value="reviewPaging.bo")
+	public void reviewPaging(Model model, PageInfo p, HttpServletResponse response){
+		
+		ArrayList<Board> list = null;
+		System.out.println("여기가 Ajax " + p  );
+		PageInfo pi = null;
+		
+		int listCount = bs.selectReviewCount();
+		pi = Pagination2.getPageInfo(p.getCurrentPage(), listCount);
+		list = bs.selectReview(pi);
+		System.out.println(list);
+		PrintWriter out;
+		try {
+			out = response.getWriter();
+			
+			out.println(list);
+			out.println(pi);
+			
+			JSONArray ja = new JSONArray();
+			JSONObject json1 = new JSONObject();
+			JSONObject json2 = new JSONObject();
+			for(Board review : list){
+				json1=new JSONObject();
+				
+				json1.put("bid", review.getBid());
+				json1.put("title", URLEncoder.encode(review.getTitle(), "UTF-8"));
+				json1.put("text", URLEncoder.encode(review.getText(), "UTF-8"));
+				json1.put("board_type", review.getBoard_type());
+				json1.put("regist_date", review.getRegist_date());
+				json1.put("status", URLEncoder.encode(review.getStatus(), "UTF-8"));
+				json1.put("modify_date", review.getModify_date());
+				json1.put("grade", review.getGrade());
+				json1.put("likey", review.getLikey());
+				json1.put("m_id", review.getM_id());
+				
+				
+				ja.add(json1);
+			}
+			
+			json2.put("currentPage", pi.getCurrentPage());
+			json2.put("listCount", pi.getListCount());
+			json2.put("limit", pi.getLimit());
+			json2.put("maxPage", pi.getMaxPage());
+			json2.put("startPage", pi.getStartPage());
+			json2.put("endPage", pi.getEndPage());
+			
+			ja.add(json2);
+
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	

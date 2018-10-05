@@ -2,11 +2,13 @@ package com.kh.hello.board.model.dao;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hello.board.model.vo.Board;
 import com.kh.hello.common.Attachment;
+import com.kh.hello.common.PageInfo;
 
 @Repository
 public class BoardDaoImpl implements BoardDao{
@@ -58,6 +60,23 @@ public class BoardDaoImpl implements BoardDao{
 		result = sqlSession.update("Board.updateReviewBoard", b);
 		
 		return result;
+	}
+
+	@Override
+	public ArrayList<Board> selectReview(SqlSessionTemplate sqlSession, PageInfo pi) {
+		ArrayList<Board> list = null;
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		
+		list = (ArrayList)sqlSession.selectList("Board.selectReview", null, rowBounds);
+		
+		return list;
+	}
+
+	@Override
+	public int selectReviewCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("Board.selectReviewCount");
 	}
 
 }
