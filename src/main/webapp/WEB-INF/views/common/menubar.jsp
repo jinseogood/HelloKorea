@@ -12,7 +12,7 @@
 <script type="text/javascript" src="${ contextPath }/resources/js/bootstrap.min.js"></script>					<!-- bootstrap js -->
 <script type="text/javascript" src="${ contextPath }/resources/js/jquery.flexslider-min.js"></script>			<!-- flexslider js -->
 <script type="text/javascript" src="${ contextPath }/resources/js/templatemo-script.js"></script>      		<!-- Templatemo Script -->
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet' type='text/css'>
 <link href="${ contextPath }/resources/css/font-awesome.min.css" rel="stylesheet">
 <link href="${ contextPath }/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${ contextPath }/resources/css/bootstrap-datetimepicker.min.css" rel="stylesheet">  
@@ -197,9 +197,9 @@
 		            </div>
 	  				<nav class="tm-nav">
 						<ul>
-							<li><a href="mainView">Home</a></li>
-							<li><a href="aboutView">About</a></li>
-							<li><a href="toursView">Our Tours</a></li>
+							<li><a href="hotelView">숙박</a></li>
+							<li><a href="foodView">음식점</a></li>
+							<li><a href="toursView">오락거리</a></li>
 							<li><a href="contactView">Contact</a></li>
 						</ul>
 				  		<div id="menuIconArea">

@@ -1100,7 +1100,7 @@
 			<input type="button" class="btn themeBtn" value="테마여행 더보기" onclick="location.href='${contextPath}/themeMain'">
 		</div>
 		
-		<!-- <script>
+		<script>
 		
 			function btnGood(){
 				var contentId = $(this).parent().children("input").val();
@@ -1710,7 +1710,7 @@
 			}
 			
 			
-		</script> -->
+		</script>
 	</section>		
 	
 	
