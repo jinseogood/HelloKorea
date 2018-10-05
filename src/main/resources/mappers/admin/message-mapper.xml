@@ -32,6 +32,13 @@
 		SET P_DATE = SYSDATE
 		WHERE MSG_ID = #{msgId} 
 	</update>
+	
+	<!-- 제휴 해지 알림을 위해 아이디 찾아오기 -->
+	<!-- <select id="selectRecieveId">
+	    SELECT RECIEVE_ID AS M_ID
+	    FROM 
+	    
+	</select> -->
 
     <!-- 받은 메세지 수 조회용 쿼리문 -->
     <!-- <select id="selectReMsgListCount" resultType="_int">

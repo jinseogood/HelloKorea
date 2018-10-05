@@ -90,7 +90,7 @@ p {
 	<input type="hidden" class="input-sm" id="token" name="token">
 	<input type="hidden" class="input-sm" id="account_holder_info_type" name="account_holder_info_type">
 	
-	<form id="real_nameFrm" action="<%=request.getContextPath() %>/updateInvestorMember" method="post">
+	<form id="real_nameFrm" action="/updateInvestorMember" method="post">
 	<input type="hidden" id="userId" name="userId">
 	<input type="hidden" class="input-sm" id="tran_dtime" name="tran_dtime">
 	<input type="hidden" class="input-sm" id="bank_code_std" name="bank_code_std">

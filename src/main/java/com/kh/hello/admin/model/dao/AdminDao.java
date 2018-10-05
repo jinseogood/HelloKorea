@@ -1,6 +1,7 @@
 package com.kh.hello.admin.model.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -8,6 +9,7 @@ import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.CompanyDetails;
 import com.kh.hello.admin.model.vo.DatePick;
+import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
 import com.kh.hello.admin.model.vo.Report;
@@ -63,13 +65,20 @@ public interface AdminDao {
 	
 	int getCompanyListCount(SqlSessionTemplate sqlSession);
 	ArrayList<Approval> selectCompanyList(SqlSessionTemplate sqlSession, PageInfo pi);
-	int getSearchcrDateBlacklistCount(SqlSessionTemplate sqlSession, DatePick d);
-	ArrayList<Approval> selectSearchcrDateBlacklist(SqlSessionTemplate sqlSession, DatePick d, PageInfo pi);
-	int getSearchapDateBlacklistCount(SqlSessionTemplate sqlSession, DatePick d);
-	ArrayList<Approval> selectSearchapDateBlacklist(SqlSessionTemplate sqlSession, DatePick d, PageInfo pi);
+	int getSearchcrDateCompanyListCount(SqlSessionTemplate sqlSession, DatePick d);
+	ArrayList<Approval> selectSearchcrDateCompanyList(SqlSessionTemplate sqlSession, DatePick d, PageInfo pi);
+	int getSearchapDateCompanyListCount(SqlSessionTemplate sqlSession, DatePick d);
+	ArrayList<Approval> selectSearchapDateCompanyList(SqlSessionTemplate sqlSession, DatePick d, PageInfo pi);
 	int getSearchWordCompanyListCount(SqlSessionTemplate sqlSession, Approval a);
 	ArrayList<Approval> selectSearchWordCompanyList(SqlSessionTemplate sqlSession, Approval a, PageInfo pi);
-	ArrayList<CompanyDetails> selectOneCompany(SqlSessionTemplate sqlSession, int cId);
+	ArrayList<CompanyDetails> selectOneCompany(SqlSessionTemplate sqlSession, int crId);
+	
+	ArrayList<Attachment> selectCompanyFiles(SqlSessionTemplate sqlSession, int refId);
+	Map<String, Object> selectFileInfo(SqlSessionTemplate sqlSession, int fId);
+	int updateCompanyRegist(SqlSessionTemplate sqlSession, CompanyDetails cd);
+	int updateCompanyStatus(SqlSessionTemplate sqlSession, String crId);
+	Message selectRecieveId(SqlSessionTemplate sqlSession, String crId);
+	int inserTerminateMsg(SqlSessionTemplate sqlSession, Message m);
 	
 	
 }

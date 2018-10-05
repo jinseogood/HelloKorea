@@ -50,7 +50,7 @@ public class CompanyManageController {
 		String originComFileName="";
 		String comExt="";
 		String changeComName="";
-		
+		System.out.println(r);
 		if(!r.getCompanyNum().equals("")){
 			originComFileName=companyFile.getOriginalFilename();
 			comExt=originComFileName.substring(originComFileName.lastIndexOf("."));

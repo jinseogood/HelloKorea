@@ -169,7 +169,6 @@ table.type09 td {
         <th>연락처</th>
         <th>신청일</th>
         <th>승인일</th>
-        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -180,7 +179,6 @@ table.type09 td {
         <td>${c.cPhone}</td>
         <td>${c.crDate}</td>
         <td>${c.apDate}</td>
-        <td>${c.cId}</td>
     </tr>
     </c:forEach>
     
@@ -223,17 +221,11 @@ table.type09 td {
 	<jsp:include page="../common/footer.jsp"/>
 	
 	<script>
-	$(function(){
-		<% for(int i = 0; i < 11; i++){%>
-		$("#companyTable tr").eq(<%=i%>).children().eq(5).hide();
-		<% } %>
-		
-	});
 	
 	$(function(){
 		$("#companyTable tr").click(function(){
-		    var cId = $(this).children().eq(5).text();
-			location.href="selectOneCompany.ad?cId="+cId;
+		    var crId = $(this).children().eq(0).text();
+			location.href="selectOneCompany.ad?crId="+crId;
 		});
 	});
 	</script>

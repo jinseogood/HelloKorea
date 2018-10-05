@@ -1,6 +1,7 @@
 package com.kh.hello.admin.model.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -10,6 +11,7 @@ import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.CompanyDetails;
 import com.kh.hello.admin.model.vo.DatePick;
+import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
 import com.kh.hello.admin.model.vo.Report;
@@ -328,13 +330,13 @@ public class AdminDaoImpl implements AdminDao{
 
 	//업체 등록일 검색 리스트 카운트
 	@Override
-	public int getSearchcrDateBlacklistCount(SqlSessionTemplate sqlSession, DatePick d) {
+	public int getSearchcrDateCompanyListCount(SqlSessionTemplate sqlSession, DatePick d) {
 		return sqlSession.selectOne("selectSearchcrDateBlacklistCount", d);
 	}
 
 	//업체 등록일 검색 리스트
 	@Override
-	public ArrayList<Approval> selectSearchcrDateBlacklist(SqlSessionTemplate sqlSession, DatePick d, PageInfo pi) {
+	public ArrayList<Approval> selectSearchcrDateCompanyList(SqlSessionTemplate sqlSession, DatePick d, PageInfo pi) {
 		ArrayList<Approval> list = null;
 		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
@@ -344,14 +346,14 @@ public class AdminDaoImpl implements AdminDao{
 	
 	//업체 승인일 검색 리스트 카운트
 	@Override
-	public int getSearchapDateBlacklistCount(SqlSessionTemplate sqlSession, DatePick d) {
+	public int getSearchapDateCompanyListCount(SqlSessionTemplate sqlSession, DatePick d) {
 		return sqlSession.selectOne("selectSearchapDateBlacklistCount", d);
 
 	}
 	
 	//업체 승인일 검색 리스트
 	@Override
-	public ArrayList<Approval> selectSearchapDateBlacklist(SqlSessionTemplate sqlSession, DatePick d, PageInfo pi) {
+	public ArrayList<Approval> selectSearchapDateCompanyList(SqlSessionTemplate sqlSession, DatePick d, PageInfo pi) {
 		ArrayList<Approval> list = null;
 		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
@@ -377,7 +379,45 @@ public class AdminDaoImpl implements AdminDao{
 
 	//업체 디테일
 	@Override
-	public ArrayList<CompanyDetails> selectOneCompany(SqlSessionTemplate sqlSession, int cId) {
-		return (ArrayList)sqlSession.selectList("selectOneCompany", cId);
+	public ArrayList<CompanyDetails> selectOneCompany(SqlSessionTemplate sqlSession, int crId) {
+		return (ArrayList)sqlSession.selectList("selectOneCompany", crId);
+	}
+
+	//업체 첨부파일
+	@Override
+	public ArrayList<Attachment> selectCompanyFiles(SqlSessionTemplate sqlSession, int refId) {
+		return (ArrayList)sqlSession.selectList("selectCompanyFiles", refId);
+	}
+
+	//첨부파일 정보 읽어가기
+	@Override
+	public Map<String, Object> selectFileInfo(SqlSessionTemplate sqlSession, int fId) {
+		return (Map<String, Object>)sqlSession.selectOne("selectFileInfo", fId);
+
+	}
+
+	//회사 승인
+	@Override
+	public int updateCompanyRegist(SqlSessionTemplate sqlSession, CompanyDetails cd) {
+		return sqlSession.update("updateCompanyRegist", cd);
+	}
+
+	//회사 해지
+	@Override
+	public int updateCompanyStatus(SqlSessionTemplate sqlSession, String crId) {
+		return sqlSession.update("updateCompanyStatus", Integer.parseInt(crId));
+	}
+
+	//해지 메세지 발송을 위해 찾아오기
+	@Override
+	public Message selectRecieveId(SqlSessionTemplate sqlSession, String crId) {
+		return sqlSession.selectOne("selectRecieveId", Integer.parseInt(crId));
+	}
+
+	//해지 메세지 발송
+	@Override
+	public int inserTerminateMsg(SqlSessionTemplate sqlSession, Message m) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

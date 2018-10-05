@@ -13,7 +13,8 @@ public class CompanyDetails implements java.io.Serializable{
 	private String cAddress;
 	private Date crDate;
 	private Date apDate;
-	private String crOpenTerm;
+	private int crTerm;
+	private Date crEDate;
 	private String rType;
 	private int rCount;
 	private String rPrice;
@@ -22,7 +23,7 @@ public class CompanyDetails implements java.io.Serializable{
 	public CompanyDetails(){}
 
 	public CompanyDetails(int cId, int crId, String cName, String cPhone, String cAddress, Date crDate, Date apDate,
-			String crOpenTerm, String rType, int rCount, String rPrice, int rLimit) {
+			int crTerm, Date crEDate, String rType, int rCount, String rPrice, int rLimit) {
 		super();
 		this.cId = cId;
 		this.crId = crId;
@@ -31,7 +32,8 @@ public class CompanyDetails implements java.io.Serializable{
 		this.cAddress = cAddress;
 		this.crDate = crDate;
 		this.apDate = apDate;
-		this.crOpenTerm = crOpenTerm;
+		this.crTerm = crTerm;
+		this.crEDate = crEDate;
 		this.rType = rType;
 		this.rCount = rCount;
 		this.rPrice = rPrice;
@@ -94,12 +96,20 @@ public class CompanyDetails implements java.io.Serializable{
 		this.apDate = apDate;
 	}
 
-	public String getCrOpenTerm() {
-		return crOpenTerm;
+	public int getCrTerm() {
+		return crTerm;
 	}
 
-	public void setCrOpenTerm(String crOpenTerm) {
-		this.crOpenTerm = crOpenTerm;
+	public void setCrTerm(int crTerm) {
+		this.crTerm = crTerm;
+	}
+
+	public Date getCrEDate() {
+		return crEDate;
+	}
+
+	public void setCrEDate(Date crEDate) {
+		this.crEDate = crEDate;
 	}
 
 	public String getrType() {
@@ -137,10 +147,10 @@ public class CompanyDetails implements java.io.Serializable{
 	@Override
 	public String toString() {
 		return "CompanyDetails [cId=" + cId + ", crId=" + crId + ", cName=" + cName + ", cPhone=" + cPhone
-				+ ", cAddress=" + cAddress + ", crDate=" + crDate + ", apDate=" + apDate + ", crOpenTerm=" + crOpenTerm
-				+ ", rType=" + rType + ", rCount=" + rCount + ", rPrice=" + rPrice + ", rLimit=" + rLimit + "]";
+				+ ", cAddress=" + cAddress + ", crDate=" + crDate + ", apDate=" + apDate + ", crTerm=" + crTerm
+				+ ", crEDate=" + crEDate + ", rType=" + rType + ", rCount=" + rCount + ", rPrice=" + rPrice
+				+ ", rLimit=" + rLimit + "]";
 	}
 
-	
 	
 }

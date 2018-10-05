@@ -1,13 +1,25 @@
 package com.kh.hello.admin.controller;
    
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.net.URLEncoder;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
+import javax.activation.CommandMap;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +29,7 @@ import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.CompanyDetails;
 import com.kh.hello.admin.model.vo.DatePick;
+import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
 import com.kh.hello.admin.model.vo.Report;
@@ -465,13 +478,13 @@ public class AdminController {
 			d.setToDate(toDate.replaceAll("-", ""));
 			//등록일 검색
 			if(searchParam.equals("datePick")){
-				listCount = as.getSearchcrDateBlacklistCount(d);
+				listCount = as.getSearchcrDateCompanyListCount(d);
 				pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
-				list = as.selectSearchcrDateBlacklist(d, pi);
+				list = as.selectSearchcrDateCompanyList(d, pi);
 			}else{ //해지일 검색
-				listCount = as.getSearchapDateBlacklistCount(d);
+				listCount = as.getSearchapDateCompanyListCount(d);
 				pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
-				list = as.selectSearchapDateBlacklist(d, pi);
+				list = as.selectSearchapDateCompanyList(d, pi);
 			}
 			
 		}else{
@@ -499,12 +512,78 @@ public class AdminController {
 
 	//업체 디테일 조회
 	@RequestMapping("selectOneCompany.ad")
-	public String selectOneCompany(String cId, Model model){
-		ArrayList<CompanyDetails> list = as.selectOneCompany(Integer.parseInt(cId));
+	public String selectOneCompany(String crId, Model model){
+		ArrayList<CompanyDetails> list = as.selectOneCompany(Integer.parseInt(crId));
 		model.addAttribute("list", list);
 		return "admin/companyDetails";
 	}
 	
+	//업체 첨부 파일 이름 가져가기
+	@RequestMapping("selectCompanyFiles.ad")
+	public @ResponseBody HashMap<String, Object> selectCompanyFiles(@RequestParam String refId){
+		ArrayList<Attachment> list = as.selectCompanyFiles(Integer.parseInt(refId));
+		
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
+		for(int i = 0; i < list.size(); i++){
+		hmap.put("fileList" + i, list.get(i));
+		}
+		return hmap;
+	}
+	
+	//업체 첨부 파일 다운로드
+	@RequestMapping(value="downloadFile.ad")
+	public void downloadFile(String fId, HttpServletResponse response) throws Exception{
+		
+		Map<String,Object> map = as.selectFileInfo(Integer.parseInt(fId));
+	    String changeName = (String)map.get("CHANGE_NAME");
+	    String originName = (String)map.get("ORIGIN_NAME");
+	    
+	    byte fileByte[] = FileUtils.readFileToByteArray(new File("D:\\git\\HelloKorea\\src\\main\\webapp\\resources\\uploadFiles\\seller\\"+changeName));
+	     
+	    response.setContentType("application/octet-stream");
+	    response.setContentLength(fileByte.length);
+	    response.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(originName,"UTF-8")+"\";");
+	    response.setHeader("Content-Transfer-Encoding", "binary");
+	    response.getOutputStream().write(fileByte);
+	     
+	    response.getOutputStream().flush();
+	    response.getOutputStream().close();
+	}
+
+	//업체 승인
+	@RequestMapping("updateCompanyRegist.ad")
+	public String updateCompanyRegist(String crId, String crTerm, String cId, Model model){
+		CompanyDetails cd = new CompanyDetails();
+		cd.setCrId(Integer.parseInt(crId));
+		cd.setCrTerm(Integer.parseInt(crTerm));
+		int result = as.updateCompanyRegist(cd);
+		
+		if(result > 0){
+			ArrayList<CompanyDetails> list = as.selectOneCompany(Integer.parseInt(crId));
+			model.addAttribute("list", list);
+			return "admin/companyDetails";
+		}else{
+			model.addAttribute("msg","제휴 승인 실패");
+			return "common/errorPage";
+		}
+		
+		
+	}
+	
+	@RequestMapping("terminateCompany.ad")
+	public String terminateCompany(String crId, String content, Model model){
+		
+		int result = as.terminateCompany(crId, content);
+		
+		if(result > 0){
+			ArrayList<CompanyDetails> list = as.selectOneCompany(Integer.parseInt(crId));
+			model.addAttribute("list", list);
+			return "admin/companyDetails";
+		}else{
+			model.addAttribute("msg","제휴 해지 실패");
+			return "common/errorPage";
+		}
+	}
 	
 	@RequestMapping("depositView.ad")
 	public String depositView(){
