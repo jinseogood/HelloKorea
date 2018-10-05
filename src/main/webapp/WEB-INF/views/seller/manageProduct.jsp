@@ -149,7 +149,7 @@
 						<li><a href="#">&laquo;</a></li>
 					</c:if>
                     <c:if test="${ pi.currentPage > 1 }">
-                    	<c:url var="listFirst" value="managerProduct.sell">
+                    	<c:url var="listFirst" value="manageProduct.sell">
                     		<c:param name="currentPage" value="${ pi.startPage }"/>
                     	</c:url>
 	                	<li><a href="${ listFirst }">&laquo;</a></li>
@@ -159,7 +159,7 @@
 							<li><a href="#">${ p }</a></li>	
 						</c:if>
 						<c:if test="${ p ne pi.currentPage }">
-							<c:url var="listCheck" value="managerProduct.sell">
+							<c:url var="listCheck" value="manageProduct.sell">
 								<c:param name="currentPage" value="${ p }"/>
 							</c:url>
 							<li><a href="${ listCheck }">${ p }</a></li>
@@ -169,7 +169,7 @@
 						<li><a href="#">&raquo;</a></li>
 					</c:if>
 					<c:if test="${ pi.currentPage < pi.maxPage }">
-						<c:url var="listEnd" value="managerProduct.sell">
+						<c:url var="listEnd" value="manageProduct.sell">
 							<c:param name="currentPage" value="${ pi.endPage }"/>
 						</c:url>
 	                    <li><a href="${ listEnd }">&raquo;</a></li>
@@ -190,7 +190,6 @@
 	    	
 	    	$("#productTable tbody tr").click(function(){
 	    		var cId=$(this).children().eq(0).val();
-	    		console.log("CID : " + cId);
 	    		location.href="detailCompany.sell?cId=" + cId;
 	    	});
 	    });

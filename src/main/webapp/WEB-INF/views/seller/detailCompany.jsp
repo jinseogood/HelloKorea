@@ -12,7 +12,7 @@
 	}
 	.content{
 		width:800px;
-		height:1000px;
+		height:1100px;
 		margin-left:auto;
 		margin-right:auto;
 	}
@@ -34,6 +34,19 @@
 		width:200px;
 		text-align:center;
 	}
+	#extendsTable th {
+	    padding: 10px;
+	    font-weight: bold;
+	    text-align: center;
+	    border-top: 1px solid #ccc;
+	    border-bottom: 1px solid #ccc;
+	    background: #f3f6f7;
+	}
+	#extendsTable td {
+	    padding: 10px;
+	    border-top: 1px solid #ccc;
+	    border-bottom: 1px solid #ccc;
+	}
 </style>
 </head>
 <body>
@@ -49,7 +62,7 @@
                     	<ul class="breadcrumb">
                         	<li><a href="myPageView.sell"><i class="fa fa-home"></i> Home</a></li>
                         	<li><a href="manageProduct.sell">업체 관리</a></li>
-                            <li class="active">업체 상세</li>
+                            <li class="active">${ opList.get(0).companyName }</li>
                         </ul>
                     </div>
                 </div>
@@ -86,7 +99,8 @@
 					</c:forEach>
 					<tr>
 						<th>등록 기간</th>
-						<td colspan="4"><input type="hidden" name="term" value="${ opList.get(0).term }">${ opList.get(0).term }</td>
+						<td colspan="3"><input type="hidden" name="term" value="${ opList.get(0).term }">${ opList.get(0).term }</td>
+						<td><button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#extendsModal">연장하기</button></td>
 					</tr>
 					<tr>
 						<td colspan="5" align="center">
@@ -99,11 +113,50 @@
 		</div>
 	</div>
 	
+	<!-- 기간 연장 모달 -->
+	<div class="modal fade" id="extendsModal" role="dialog">
+		<div class="modal-dialog" align="center">
+	    
+		  	<div class="modal-content" style="width:280px;">
+		  		<div class="modal-header">
+		  			<button type="button" class="close" data-dismiss="modal">&times;</button>
+		  			<h4 class="modal-title">기간 연장</h4>
+		  		</div>
+		  		<div class="modal-body">
+		  			<table id="extendsTable" align="center">
+		  				<tr>
+		  					<th>등록 기간</th>
+		  					<td>
+								<select id="term">
+									<option value="1">1개월</option>
+									<option value="3">3개월</option>
+									<option value="6">6개월</option>
+									<option value="9">9개월</option>
+									<option value="12">12개월</option>
+								</select>
+		  					</td>
+		  					<td><button type="button" onclick="extendsPeriod();" class="btn btn-info btn-sm">연장</button></td>
+		  				</tr>
+		  			</table>
+		  		</div>
+		  		<div class="modal-footer" align="center">
+		  		</div>
+		  	</div>
+	      
+	  	</div>
+	</div>
+	
 	<jsp:include page="../common/footer.jsp"/>
 	
 	<script>
 		function recvPage(){
 			location.href="manageProduct.sell";
+		}
+		
+		function extendsPeriod(){
+			var term=$("#term").val();
+			var cId=$("#detailTable").children().eq(0).val();
+			location.href="extendsPeriod.sell?cId=" + cId + "&term=" + term;
 		}
 	</script>
 	

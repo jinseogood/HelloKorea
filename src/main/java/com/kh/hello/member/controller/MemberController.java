@@ -211,36 +211,32 @@ public class MemberController {
 		}
 		
 	}
-	@RequestMapping(value = "facebook.me", method = { RequestMethod.GET, RequestMethod.POST })
-	    public void join(HttpServletResponse response, Model model) {
-	        
-	        OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
-	        String facebook_url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, oAuth2Parameters);
-	        
-	        ObjectMapper mapper = new ObjectMapper();
-	        
-	        try {
-				response.getWriter().print(mapper.writeValueAsString(facebook_url));
-			} catch (JsonGenerationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (JsonMappingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	        
-	        System.out.println("/facebook" + facebook_url);
-	 
-	        
-	    }
+
 	/*@RequestMapping(value = "facebook.me", method = { RequestMethod.GET, RequestMethod.POST })
     public String join(HttpServletResponse response, Model model) {
         
         OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
         String facebook_url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, oAuth2Parameters);
+        
+        ObjectMapper mapper = new ObjectMapper();
+        
+        try {
+			response.getWriter().print(mapper.writeValueAsString(facebook_url));
+		} catch (JsonGenerationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        System.out.println("/facebook" + facebook_url);
+ 
+        return facebook_url ;
+    }
     
         model.addAttribute("facebook_url", facebook_url);
         System.out.println("/facebook" + facebook_url);

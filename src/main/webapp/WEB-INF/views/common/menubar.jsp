@@ -429,17 +429,24 @@
   	</script>
   	<script>
   		$(function(){
+  			$("#loginOpen").click(function(){
+  				
   			$.ajax({
   				url:'facebook.me',
   				data:{},
   				type:'post',
   				success:function(data){
   					$('#facebook').attr('href', data)
+  					console.log(data);
+  				},
+  				error:function(data){
+  					console.log(data);
   				}
+  			});
   			});
   		});
   	</script>
-  
+
   	
 </body>
 </html>
