@@ -32,9 +32,10 @@
      </update>
      
      <select id = "selectReview" resultMap = "BoardResultSet">
-     	SELECT * FROM BOARD WHERE BOARD_TYPE = 1
+     	SELECT BID, TITLE, TEXT, BOARD_TYPE ,TO_CHAR(REGIST_DATE, 'YYYY/MM/DD'), STATUS, TO_CHAR(MODIFY_DATE, 'YYYY/MM/DD'), GRADE, LIKEY, M_ID
+     	FROM BOARD WHERE BOARD_TYPE = 1
      </select>
-     
+
      <!-- 리뷰 내역 수 조회용 -->
      <select id= "selectReviewCount" resultType = "_int">
      	SELECT COUNT(*)

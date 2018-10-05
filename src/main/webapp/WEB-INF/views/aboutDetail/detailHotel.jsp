@@ -77,8 +77,8 @@
 	</section>
 		<script>
 		
-			var contentid = ${param.contentid};
-			var contenttypeid = ${param.contenttypeid};
+			//var contentid = ${param.contentid};
+			//var contenttypeid = ${param.contenttypeid};
 			
 			function detailHotelInfo(){
 				console.log("deatilHotel : " + contenttypeid);
@@ -392,30 +392,21 @@
 <li><a>&laquo;</a></li>
             </c:if>
             <c:if test="${ pi.currentPage > 1 }">
-                <c:url var="rlistBack" value="reviewPaging.bo">
-                    <c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
-                </c:url>
-                <li><a href="${ rlistBack }">&laquo;</a></li>
+                <li><a onclick="goFirst();">&laquo;</a></li>
             </c:if>
             <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
                 <c:if test="${ p eq pi.currentPage }">
-                <li><a href="#" style="background-color:#ddd;">${ p }</a></li>               
+                <li><a style="background-color:#ddd;">${ p }</a></li>               
                 </c:if>
                 <c:if test="${ p ne pi.currentPage }">
-                    <c:url var="rlistCheck" value="reviewPaging.bo">
-                         <c:param name="currentPage" value="${ p }"/>
-                    </c:url>
-                    <li><a href="${ rlistCheck }">${ p }</a></li>  
+                    <li><a onclick="goPage(${ p })">${ p }</a></li>  
                 </c:if>
             </c:forEach>
             <c:if test="${ pi.currentPage >= pi.maxPage }">
                 <li><a>&raquo;</a></li>
             </c:if>
             <c:if test="${ pi.currentPage < pi.maxPage }">
-                <c:url var="rlistEnd" value="reviewPaging.no">
-                    <c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
-                </c:url>
-                <li><a href="${ rlistEnd }">&raquo;</a></li>
+                <li><a onclick="goPage(${ pi.currentPage + 1 })">&raquo;</a></li>
             </c:if>
             </ul>
     </div>
@@ -634,10 +625,12 @@
 			
 			$.ajax({ 
 				url:"reviewPaging.bo",
-				type:"get",
+				type:"post",
 				data:{page:page},
+				//async : false,
 				dataType:"json",
 				success:function(data){
+					console.log("오나");
 					console.log(data);
 					
 					$divBody = $("#line_b");
@@ -646,7 +639,10 @@
 					$pageBody = $(".paging ul");
 					$pageBody.html('');
 					
-					//var review = data.json1.
+					var review = list.size();
+					console.log(review);
+					
+					console.log(pi);
 					//var totalCount
 					
 					/* if(review != null){
@@ -657,8 +653,25 @@
 							}
 						}
 					} */
+				}, error:function(data){
+					console.log(data);
 				}
 			});
+		}
+		
+		function goFirst(){
+			page=1;
+			reviewPaging(page);
+		}
+		
+		function goPage(page){
+			page=page;
+			reviewPaging(page);
+		}
+		
+		function goLast(page){
+			page=Math.floor(page);
+			reviewPaging(page);
 		}
 	
 		function review(){
