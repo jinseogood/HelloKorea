@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hello.board.FileDeleteUpload;
 import com.kh.hello.board.FileUpload;
@@ -131,16 +132,19 @@ public class BoardPageController {
 	}
 	
 	@RequestMapping(value="reviewPaging.bo")
-	public void reviewPaging(Model model, PageInfo p, HttpServletResponse response){
-		
+	public ModelAndView reviewPaging(/*Model model, */HttpServletResponse response, @RequestParam int page, ModelAndView mv){
+		//ModelAndView mv = new ModelAndView();
 		ArrayList<Board> list = null;
-		System.out.println("여기가 Ajax " + p  );
 		PageInfo pi = null;
 		
 		int listCount = bs.selectReviewCount();
-		pi = Pagination2.getPageInfo(p.getCurrentPage(), listCount);
+		pi = Pagination2.getPageInfo(page, listCount);
 		list = bs.selectReview(pi);
-		System.out.println(list);
+		mv.addObject("list", list);
+		mv.addObject("pi", pi);
+		mv.setViewName("jsonView");
+
+		/*System.out.println(list);
 		PrintWriter out;
 		try {
 			out = response.getWriter();
@@ -177,13 +181,13 @@ public class BoardPageController {
 			json2.put("endPage", pi.getEndPage());
 			
 			ja.add(json2);
-
 			
+			out.print(ja);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}*/
+		return mv;
 	}
 
 	
