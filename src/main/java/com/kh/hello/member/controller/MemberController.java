@@ -102,7 +102,7 @@ public class MemberController {
 			model.addAttribute("loginUser", ms.loginMember(m));
 			System.out.println("로그인 성공");
 
-			return "main/main";
+			return "main/mainHotel";
 		} catch (LoginException e) {
 			model.addAttribute("msg",e.getMessage());
 
@@ -146,7 +146,7 @@ public class MemberController {
 		
 		status.setComplete();
 		
-		return "main/main";
+		return "main/mainHotel";
 		
 	}
 	@RequestMapping(value="userMypage.me")

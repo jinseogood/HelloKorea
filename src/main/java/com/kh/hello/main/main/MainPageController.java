@@ -14,10 +14,14 @@ public class MainPageController {
 	
 	@RequestMapping(value="areaAllView.main")
 	public String areaAllView(@RequestParam int areaCode){
-		System.out.println(areaCode);
 		return "aboutArea/aboutAllArea";
 	}
 	
+	
+	@RequestMapping(value="areaFoodView.main")
+	public String areaFoodView(@RequestParam int areaCode, @RequestParam String cat3){
+		return "aboutArea/searchAreaFood";
+	}
 	
 	
 	

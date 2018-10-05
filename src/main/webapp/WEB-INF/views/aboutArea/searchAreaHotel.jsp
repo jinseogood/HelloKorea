@@ -77,12 +77,12 @@
 					<div class="col-lg-12 col-md-12 col-sm-12" align="left">
 						<span class="tm-section-title" style="font-size:25px; border-bottom:1px solid #ccc;"><b>유형</b></span>
 						<br>
-						<input type="checkbox" class="hotelSearch" id="goodStay" name="goodStay" style="width:17px; height:17px;"/>
+						<input type="radio" onclick="searchHotelGoodStay();" class="hotelSearchGoodStay" value="goodStay" id="goodStay" name="hotelSearchCondition" style="width:17px; height:17px;"/>
 						<label for="goodStay" class="hotelSearchText">&nbsp;&nbsp;굿스테이</label><br>
-						<input type="checkbox" class="hotelSearch" id="hanOk" name="hanOk" style="width:17px; height:17px;"/>
+						<input type="radio" onclick="searchHotelHanOk();" class="hotelSearchHanOk" value="hanOk" id="hanOk" name="hotelSearchCondition" style="width:17px; height:17px;"/>
 						<label for="hanOk" class="hotelSearchText">&nbsp;&nbsp;한옥</label><br>
-						<input type="checkbox" class="hotelSearch" id="benicia" name="benicia" style="width:17px; height:17px;"/>
-						<label for="benicia" class="hotelSearchText">&nbsp;&nbsp;베니키아</label><br><br>
+						<input type="radio" onclick="searchHotelBenikia();" class="hotelSearchBenikia" value="benikia" id="benikia" name="hotelSearchCondition" style="width:17px; height:17px;"/>
+						<label for="benikia" class="hotelSearchText">&nbsp;&nbsp;베니키아</label><br><br>
 					</div>
 					
 					<br>
@@ -202,12 +202,152 @@
 			var pageNo = ${param.pageNo};
 			var contenttypeid = 0;
 			var contentid = 0;
-			let isEnd = false;
+			
+			function searchHotelGoodStay(){
+				var searchValue = $(".hotelSearchGoodStay").val();
+				console.log(searchValue);
+				$.ajax({
+					url:"searchGoodStay.sub",
+					type:"GET",
+					data:{areaCode:areaCode, sigunguCode:sigunguCode},
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var myData = data.response.body.items.item;
+						var viewArea = $("#viewArea");
+						viewArea.html("");
+						var output = "";
+						if(myData == null){
+							output += "<div align='center'><h1>정보가 없습니다.</h1></div>"
+							document.getElementById("viewArea").innerHTML += output;
+						}else{
+							for(var i = 0; i < myData.length; i++){
+								contenttypeid = myData[i].contenttypeid;
+								contentid = myData[i].contentid;
+								output = "";
+								output += "<div class='tm-home-box-3' id='detailHover'>";
+								output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+								if(myData[i].firstimage == null){
+									output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
+								}else{
+									output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
+								}
+								output += "</div>";
+								output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+								output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData[i].addr1+"</p>";
+								output += "<div class='tm-home-box-2-container'>";
+								output += "<input type='hidden' value="+contenttypeid+">";
+								output += "<input type='hidden' value="+contentid+">";
+								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+								output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
+								output += "</div></div></div>";
+								document.getElementById("viewArea").innerHTML += output;
+							}
+						}
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+			}
+			
+			function searchHotelHanOk(){
+				var searchValue = $(".hotelSearchHanOk").val();
+				console.log(searchValue);
+				$.ajax({
+					url:"searchHanOk.sub",
+					type:"GET",
+					data:{areaCode:areaCode, sigunguCode:sigunguCode},
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var myData = data.response.body.items.item;
+						var viewArea = $("#viewArea");
+						viewArea.html("");
+						var output = "";
+						if(myData == null){
+							output += "<div align='center'><h1>정보가 없습니다.</h1></div>"
+							document.getElementById("viewArea").innerHTML += output;
+						}else{
+							for(var i = 0; i < myData.length; i++){
+								contenttypeid = myData[i].contenttypeid;
+								contentid = myData[i].contentid;
+								output = "";
+								output += "<div class='tm-home-box-3' id='detailHover'>";
+								output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+								if(myData[i].firstimage == null){
+									output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
+								}else{
+									output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
+								}
+								output += "</div>";
+								output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+								output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData[i].addr1+"</p>";
+								output += "<div class='tm-home-box-2-container'>";
+								output += "<input type='hidden' value="+contenttypeid+">";
+								output += "<input type='hidden' value="+contentid+">";
+								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+								output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
+								output += "</div></div></div>";
+								document.getElementById("viewArea").innerHTML += output;
+							}
+						}
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+			}
+			
+			function searchHotelBenikia(){
+				var searchValue = $(".hotelSearchBenikia").val();
+				console.log(searchValue);
+				$.ajax({
+					url:"searchBenikia.sub",
+					type:"GET",
+					data:{areaCode:areaCode, sigunguCode:sigunguCode},
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						var myData = data.response.body.items.item;
+						var viewArea = $("#viewArea");
+						viewArea.html("");
+						var output = "";
+						if(myData == null){
+							output += "<div align='center'><h1>정보가 없습니다.</h1></div>"
+							document.getElementById("viewArea").innerHTML += output;
+						}else{
+							for(var i = 0; i < myData.length; i++){
+								contenttypeid = myData[i].contenttypeid;
+								contentid = myData[i].contentid;
+								output = "";
+								output += "<div class='tm-home-box-3' id='detailHover'>";
+								output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+								if(myData[i].firstimage == null){
+									output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
+								}else{
+									output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
+								}
+								output += "</div>";
+								output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+								output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData[i].addr1+"</p>";
+								output += "<div class='tm-home-box-2-container'>";
+								output += "<input type='hidden' value="+contenttypeid+">";
+								output += "<input type='hidden' value="+contentid+">";
+								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+								output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
+								output += "</div></div></div>";
+								document.getElementById("viewArea").innerHTML += output;
+							}
+						}
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+			}
 			
 			function searchHotelPage(){
-				if(isEnd == true){
-					return;
-				}
 				
 				$.ajax({
 					url:"searchAreaHotel.sub",
@@ -216,10 +356,6 @@
 					dataType:"json",
 					success:function(data){
 						console.log(data);
-						let length = data.response.body.items.item.length;
-						if(length < 12){
-							isEnd = true;
-						}
 						var myData = data.response.body.items.item;
 						var viewArea = $("#viewArea");
 						viewArea.html("");
@@ -320,18 +456,6 @@
 			$(function(){
 				
 				searchHotelPage();
-				
-				$(window).scroll(function(){
-					let $window = $(this);
-					let scrollTop = $window.scrollTop();
-					let windowHeight = $window.height();
-					let documentHeight = $(document).height();
-					
-					if(scrollTop + windowHeight + 100 > documentHeight){
-						
-					}
-				});
-
 				
 			});
 			
