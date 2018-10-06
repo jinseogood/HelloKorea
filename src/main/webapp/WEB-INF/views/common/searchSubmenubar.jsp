@@ -31,7 +31,7 @@
 			</nav>	
 		</div>
 		<script>
-			var areaCode = ${param.areaCode};
+			//var areaCode = ${param.areaCode};
 			function areaAll(areaCode){
 				//console.log(areaCode);
 				//location.href="${contextPath}/areaAllView.main?areaCode"+areaCode;

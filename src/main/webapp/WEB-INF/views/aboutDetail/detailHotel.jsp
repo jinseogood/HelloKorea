@@ -77,8 +77,8 @@
 	</section>
 		<script>
 		
-			//var contentid = ${param.contentid};
-			//var contenttypeid = ${param.contenttypeid};
+			var contentid = ${param.contentid};
+			var contenttypeid = ${param.contenttypeid};
 			
 			function detailHotelInfo(){
 				console.log("deatilHotel : " + contenttypeid);
@@ -220,14 +220,14 @@
 					error:function(data){
 						console.log(data);
 					}
-				});//output += "ㆍ ";
+				});
 			}
 			
 			$(function(){
-				detailHotelInfo();
-				detailHotelImage();
-				detailHotelIntro();
-				detailRoomInfo();
+				detailHotelInfo();//공통정보
+				detailHotelImage();//메인,서브이미지
+				detailHotelIntro();//호텔소개
+				detailRoomInfo();//객실정보
 			});
 		
 		/* Google map

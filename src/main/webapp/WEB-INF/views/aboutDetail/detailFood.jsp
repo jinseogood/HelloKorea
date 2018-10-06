@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,16 +56,8 @@
 					음식점 소개영역입니다.<br>
 					음식점 소개영역입니다.<br>
 					음식점 소개영역입니다.<br>
-					음식점 소개영역입니다.<br>
-					음식점 소개영역입니다.<br>
-					음식점 소개영역입니다.<br>
-					음식점 소개영역입니다.<br>
-					음식점 소개영역입니다.<br>
-					음식점 소개영역입니다.<br>
-					음식점 소개영역입니다.<br>
-					음식점 소개영역입니다.<br>
-					음식점 소개영역입니다.<br>
-					음식점 소개영역입니다.<br>
+				</div>
+				<div class="fInfoArea">
 					음식점 소개영역입니다.<br>
 				</div>
 			</div>
@@ -79,6 +72,39 @@
 		</div>
 	</section>
 		<script>
+		var contenttypeid = ${param.contenttypeid};
+		var contentid = ${param.contentid};
+		
+		function detailFoodInfo(){
+			console.log("detailFoodInfo : " + contenttypeid);
+			console.log("detailFoodInfo : " + contentid);
+			$.ajax({
+				url:"detailFoodInformation.sub",
+				type:"GET",
+				data:{contenttypeid:contenttypeid, contentid:contentid},
+				dataType:"json",
+				success:function(data){
+					console.log(data);//데이터 넘어오나 내일 다시 확인
+				},
+				error:function(data){
+					console.log(data);
+				}
+			});
+		}
+		
+		function detailFoodImage(){}
+		
+		function detailFoodIntro(){}
+		
+		function detailMenuInfo(){}
+		
+		$(function(){
+			detailFoodInfo();//공통정보
+			//detailFoodImage();//메인,서브이미지
+			//detailFoodIntro();//음식점소개
+			//detailMenuInfo();//메뉴이미지
+			
+		});
 		/* Google map
       	------------------------------------------------*/
       	var map = '';

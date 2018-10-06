@@ -19,7 +19,7 @@ public class MainPageController {
 	
 	
 	@RequestMapping(value="areaFoodView.main")
-	public String areaFoodView(@RequestParam int areaCode, @RequestParam String cat3){
+	public String areaFoodView(@RequestParam int areaCode, @RequestParam int sigunguCode, @RequestParam String cat3){
 		return "aboutArea/searchAreaFood";
 	}
 	

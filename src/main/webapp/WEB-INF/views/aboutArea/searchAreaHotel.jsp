@@ -220,6 +220,24 @@
 						if(myData == null){
 							output += "<div align='center'><h1>정보가 없습니다.</h1></div>"
 							document.getElementById("viewArea").innerHTML += output;
+						}else if(data.response.body.totalCount == 1){
+							contenttypeid = myData.contenttypeid;
+							contentid = myData.contentid;
+							output += "<div class='tm-home-box-3' id='detailHover'>";
+							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+							if(myData.firstimage == null){
+								output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
+							}else{
+								output += "<img src="+myData.firstimage+" alt='image' class='img-responsive1'>";
+							}
+							output += "</div>";
+							output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+							output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData.addr1+"</p>";
+							output += "<div class='tm-home-box-2-container'>";
+							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
+							output += "</div></div></div>";
+							document.getElementById("viewArea").innerHTML += output;
 						}else{
 							for(var i = 0; i < myData.length; i++){
 								contenttypeid = myData[i].contenttypeid;
@@ -236,8 +254,6 @@
 								output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
 								output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData[i].addr1+"</p>";
 								output += "<div class='tm-home-box-2-container'>";
-								output += "<input type='hidden' value="+contenttypeid+">";
-								output += "<input type='hidden' value="+contentid+">";
 								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 								output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
 								output += "</div></div></div>";
@@ -268,6 +284,24 @@
 						if(myData == null){
 							output += "<div align='center'><h1>정보가 없습니다.</h1></div>"
 							document.getElementById("viewArea").innerHTML += output;
+						}else if(data.response.body.totalCount == 1){
+							contenttypeid = myData.contenttypeid;
+							contentid = myData.contentid;
+							output += "<div class='tm-home-box-3' id='detailHover'>";
+							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+							if(myData.firstimage == null){
+								output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
+							}else{
+								output += "<img src="+myData.firstimage+" alt='image' class='img-responsive1'>";
+							}
+							output += "</div>";
+							output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+							output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData.addr1+"</p>";
+							output += "<div class='tm-home-box-2-container'>";
+							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
+							output += "</div></div></div>";
+							document.getElementById("viewArea").innerHTML += output;
 						}else{
 							for(var i = 0; i < myData.length; i++){
 								contenttypeid = myData[i].contenttypeid;
@@ -284,8 +318,6 @@
 								output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
 								output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData[i].addr1+"</p>";
 								output += "<div class='tm-home-box-2-container'>";
-								output += "<input type='hidden' value="+contenttypeid+">";
-								output += "<input type='hidden' value="+contentid+">";
 								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 								output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
 								output += "</div></div></div>";
@@ -315,6 +347,24 @@
 						var output = "";
 						if(myData == null){
 							output += "<div align='center'><h1>정보가 없습니다.</h1></div>"
+							document.getElementById("viewArea").innerHTML += output;
+						}else if(data.response.body.totalCount == 1){
+							contenttypeid = myData.contenttypeid;
+							contentid = myData.contentid;
+							output += "<div class='tm-home-box-3' id='detailHover'>";
+							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+							if(myData.firstimage == null){
+								output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
+							}else{
+								output += "<img src="+myData.firstimage+" alt='image' class='img-responsive1'>";
+							}
+							output += "</div>";
+							output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+							output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData.addr1+"</p>";
+							output += "<div class='tm-home-box-2-container'>";
+							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
+							output += "</div></div></div>";
 							document.getElementById("viewArea").innerHTML += output;
 						}else{
 							for(var i = 0; i < myData.length; i++){
@@ -362,6 +412,24 @@
 						var output = "";
 						if(myData == null){
 							output += "<div align='center'><h1>정보가 없습니다.</h1></div>";
+							document.getElementById("viewArea").innerHTML += output;
+						}else if(data.response.body.totalCount == 1){
+							contenttypeid = myData.contenttypeid;
+							contentid = myData.contentid;
+							output += "<div class='tm-home-box-3' id='detailHover'>";
+							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+							if(myData.firstimage == null){
+								output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
+							}else{
+								output += "<img src="+myData.firstimage+" alt='image' class='img-responsive1'>";
+							}
+							output += "</div>";
+							output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+							output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData.addr1+"</p>";
+							output += "<div class='tm-home-box-2-container'>";
+							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
+							output += "</div></div></div>";
 							document.getElementById("viewArea").innerHTML += output;
 						}else{
 							for(var i = 0; i < myData.length; i++){

@@ -47,25 +47,30 @@
 					<div class="col-lg-12 col-md-12 col-sm-12" align="left">
 						<span class="tm-section-title" style="font-size:25px; border-bottom:1px solid #ccc;"><b>음식점 유형</b></span>
 						<br>
-						<input type="checkbox" class="foodSearch" id="foodStore" name="foodStore" style="width:15px; height:15px;"/>　<label for="foodStore">음식점</label><br>
-						<input type="checkbox" class="foodSearch" id="dessert" name="dessert" style="width:15px; height:15px;"/>　<label for="dessert">디저트</label><br>
-						<input type="checkbox" class="foodSearch" id="coffee" name="coffee" style="width:15px; height:15px;"/>　<label for="coffee">커피/차</label><br>
-						<input type="checkbox" class="foodSearch" id="bakery" name="bakery" style="width:15px; height:15px;"/>　<label for="bakery">베이커리</label><br><br>
+						
+						<input type="radio" class="foodSearch" id="koreaFood" value="A05020100" name="foodSearchCondition" style="width:15px; height:15px;"/>　
+						<label for="koreaFood">한식</label><br>
+						<input type="radio" class="foodSearch" id="americanFood" value="A05020200" name="foodSearchCondition" style="width:15px; height:15px;"/>　
+						<label for="americanFood">서양식</label><br>
+						<input type="radio" class="foodSearch" id="japanFood" value="A05020300" name="foodSearchCondition" style="width:15px; height:15px;"/>　
+						<label for="japanFood">일식</label><br>
+						<input type="radio" class="foodSearch" id="chinaFood" value="A05020400" name="foodSearchCondition" style="width:15px; height:15px;"/>　
+						<label for="chinaFood">중식</label><br>
+						<input type="radio" class="foodSearch" id="asiaFood" value="A05020500" name="foodSearchCondition" style="width:15px; height:15px;"/>　
+						<label for="asiaFood">아시아식</label><br>
+						<input type="radio" class="foodSearch" id="familyRestaurant" value="A05020600" name="foodSearchCondition" style="width:15px; height:15px;"/>　
+						<label for="familyRestaurant">패밀리레스토랑</label><br>
+						<input type="radio" class="foodSearch" id="unUsualFood" value="A05020700" name="foodSearchCondition" style="width:15px; height:15px;"/>　
+						<label for="unUsualFood">이색음식점</label><br>
+						<input type="radio" class="foodSearch" id="vegetableFood" value="A05020800" name="foodSearchCondition" style="width:15px; height:15px;"/>　
+						<label for="vegetableFood">채식전문점</label><br>
+						<input type="radio" class="foodSearch" id="cafe" value="A05020900" name="foodSearchCondition" style="width:15px; height:15px;"/>　
+						<label for="cafe">바/카페</label><br>
+						<input type="radio" class="foodSearch" id="club" value="A05021000" name="foodSearchCondition" style="width:15px; height:15px;"/>　
+						<label for="club">클럽</label><br>
 					</div>
-					
-					<br><br>
-					
-					<div class="col-lg-12 col-md-12 col-sm-12" align="left">
-						<span class="tm-section-title" style="font-size:25px; border-bottom:1px solid #ccc;"><b>요리유형</b></span>
-						<br>
-						<input type="checkbox" class="foodSearch" id="koreaFood" name="koreaFood" style="width:15px; height:15px;"/>　<label for="koreaFood">한식</label><br>
-						<input type="checkbox" class="foodSearch" id="japanFood" name="japanFood" style="width:15px; height:15px;"/>　<label for="japanFood">일식</label><br>
-						<input type="checkbox" class="foodSearch" id="chinaFood" name="chinaFood" style="width:15px; height:15px;"/>　<label for="chinaFood">중식</label><br>
-						<input type="checkbox" class="foodSearch" id="americanFood" name="americanFood" style="width:15px; height:15px;"/>　<label for="americanFood">양식</label><br><br>
-					</div>
-					
 					<br>
-					<div class="col-lg-12 col-md-12 col-sm-12" align="left">
+					<div class="col-lg-12 col-md-12 col-sm-12" align="left"><br>
 						<span class="tm-section-title" style="font-size:25px; border-bottom:1px solid #ccc;"><b>평점</b></span>
 						<br>
 						<input type="radio" class="foodSearch" id="fiveStar" name="foodAvg" style="width:15px; height:15px;"/>
@@ -77,10 +82,12 @@
 						<input type="radio" class="foodSearch" id="twoStar" name="foodAvg" style="width:15px; height:15px;"/>
 						<label for="twoStar" class="foodSearchText">&nbsp;&nbsp;★★☆☆☆ 이상</label><br>
 					</div>
+						
+						
 					
 					
 				</div>
-				<div class="col-lg-9" align="right">
+				<div class="col-lg-9" align="right" id="viewArea">
 					
 				    <div class="tm-home-box-3" id="detailHover">
 						<div class="tm-home-box-3-img-container" id="detailClick" onclick="location.href='${contextPath}/detailFood'">
@@ -136,7 +143,19 @@
 		</div>
 		<script>
 			var areaCode = ${param.areaCode};
-			//var cat3 = ${param.cat3};
+			var sigunguCode = ${param.sigunguCode};
+			var getParam = function(key){
+				var _params = {};
+				document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function(){
+					function decode(s){
+						return decodeURIComponent(s.split("+").join(" "));
+					}
+					_params[decode(arguments[1])] = decode(arguments[2]);
+				});
+				return _params[key];
+			}
+			var cat3 = getParam("cat3");
+			var checkValue = "";
 			
 			if(areaCode == 1){
 				$(".tm-section-title1").text("서울 음식점");
@@ -176,12 +195,202 @@
 			
 			$(function(){
 				searchFoodStore();
+				$(".foodSearch").click(function(){
+					checkValue = $("input[type=radio][name=foodSearchCondition]:checked").val();
+					console.log(checkValue);
+					searchFoodCondition(areaCode, sigunguCode, checkValue);
+				})
 			});
 			
+			function searchFoodCondition(areaCode, sigunguCode, cat3){
+				$.ajax({
+					url:"searchAreaFood.sub",
+					type:"GET",
+					data:{areaCode:areaCode, sigunguCode:sigunguCode, cat3:cat3},
+					dataType:"json",
+					success:function(data){
+						console.log("searchFood");
+						console.log(data);
+						var myData = data.response.body.items.item;
+						var viewArea = $("#viewArea");
+						viewArea.html("");
+						var output = "";
+						if(myData == null){
+							output += "<div align='center'><h1>정보가 없습니다.</h1></div>";
+							document.getElementById("viewArea").innerHTML += output;
+						}else if(data.response.body.totalCount == 1){
+							contenttypeid = myData.contenttypeid;
+							contentid = myData.contentid;
+							output += "<div class='tm-home-box-3' id='detailHover'>";
+							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+							if(myData.firstimage == null){
+								output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image'class='img-responsive1'>";
+							}else{
+								output += "<img src="+myData.firstimage+" alt='image' class='img-responsive1'>";
+							}
+							output += "</div>";
+							output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+							output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData.addr1+"</p>";
+							output += "<div class='tm-home-box-2-container'>";
+							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
+							output += "</div></div></div>";
+							document.getElementById("viewArea").innerHTML += output;
+						}else{
+							for(var i in myData){
+								contenttypeid = myData[i].contenttypeid;
+								contentid = myData[i].contentid;
+								output = "";
+								output += "<div class='tm-home-box-3' id='detailHover'>";
+								output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+								if(myData[i].firstimage == null){
+									output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image'class='img-responsive1'>";
+								}else{
+									output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
+								}
+								output += "</div>";
+								output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+								output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData[i].addr1+"</p>";
+								output += "<div class='tm-home-box-2-container'>";
+								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+								output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
+								output += "</div></div></div>";
+								document.getElementById("viewArea").innerHTML += output;
+							}
+						}
+						
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+			}
+			
+			
 			function searchFoodStore(){
-				//여기서 파라미터값 파싱해서 바다와야함...구글링해라.
 				console.log("searchFoodStore : " + areaCode);
-				//console.log("searchFoodStore : " + cat3);
+				console.log("searchFoodStore : " + sigunguCode);
+				console.log("searchFoodStore : " + cat3);
+				$.ajax({
+					url:"searchAreaFood.sub",
+					type:"GET",
+					data:{areaCode:areaCode, sigunguCode:sigunguCode, cat3:cat3},
+					dataType:"json",
+					success:function(data){
+						console.log("searchFood");
+						console.log(data);
+						var myData = data.response.body.items.item;
+						var viewArea = $("#viewArea");
+						viewArea.html("");
+						var output = "";
+						if(myData == null){
+							output += "<div align='center'><h1>정보가 없습니다.</h1></div>";
+							document.getElementById("viewArea").innerHTML += output;
+						}else if(data.response.body.totalCount == 1){
+							contenttypeid = myData.contenttypeid;
+							contentid = myData.contentid;
+							output += "<div class='tm-home-box-3' id='detailHover'>";
+							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+							if(myData.firstimage == null){
+								output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image'class='img-responsive1'>";
+							}else{
+								output += "<img src="+myData.firstimage+" alt='image' class='img-responsive1'>";
+							}
+							output += "</div>";
+							output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+							output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData.addr1+"</p>";
+							output += "<div class='tm-home-box-2-container'>";
+							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
+							output += "</div></div></div>";
+							document.getElementById("viewArea").innerHTML += output;
+						}else{
+							for(var i in myData){
+								contenttypeid = myData[i].contenttypeid;
+								contentid = myData[i].contentid;
+								output = "";
+								output += "<div class='tm-home-box-3' id='detailHover'>";
+								output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+								if(myData[i].firstimage == null){
+									output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image'class='img-responsive1'>";
+								}else{
+									output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
+								}
+								output += "</div>";
+								output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+								output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData[i].addr1+"</p>";
+								output += "<div class='tm-home-box-2-container'>";
+								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+								output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
+								output += "</div></div></div>";
+								document.getElementById("viewArea").innerHTML += output;
+							}
+						}
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+			}
+			
+			function btnGood(contenttypeid, contentid){
+				console.log(contenttypeid);
+				console.log(contentid);
+				if(contenttypeid == 39){
+					$.ajax({
+						url:"dibsFood.good",
+						type:"GET",
+						data:{contenttypeid:contenttypeid, contentid:contentid},
+						success:function(data){
+							// 1일시, 이미 찜한 목록 => delete요청.
+							// 0일시, 새로 찜에 추가 => insert요청.
+							if(data > 0){
+								deleteDibsFood(contentid);
+							}else{
+								insertDibsFood(contentid);
+							}
+						},
+						error:function(data){
+							console.log(data);
+						}
+					});
+				}
+			}
+			
+			function insertDibsFood(contentid){
+				$.ajax({
+					url:"insertDibsFood.good",
+					type:"GET",
+					data:{contenttypeid:contenttypeid, contentid:contentid},
+					success:function(data){
+						if(data > 0){
+							alert("찜 목록에 추가되었습니다.");
+						}
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+			}
+			
+			function deleteDibsFood(contentid){
+				$.ajax({
+					url:"deleteDibsFood.good",
+					type:"GET",
+					data:{contenttypeid:contenttypeid, contentid:contentid},
+					success:function(data){
+						if(data > 0){
+							alert("찜 목록에서 삭제되었습니다.");
+						}
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+			}
+			
+			function detailView(contenttypeid, contentid){
+				location.href="${contextPath}/detailFood?contenttypeid="+contenttypeid+"&contentid="+contentid;
 			}
 		</script>
 		
