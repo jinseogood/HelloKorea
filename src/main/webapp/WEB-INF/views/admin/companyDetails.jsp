@@ -70,6 +70,14 @@ table.type09 td {
 		
 			<div class="tableArea" align="center">
 				<table class="type09" id="detailTable" align="center">
+				    <c:if test="${list.get(0).crStatus == 'T'}">
+				            <th>안내</th>
+				            <td colspan="3">*** 중도 해지 된 상품입니다 ***</td>
+                    </c:if>
+                    <c:if test="${list.get(0).crStatus == 'E'}">
+				            <th>안내</th>
+				            <td colspan="3">*** 기간이 만료 된 상품입니다 ***</td>
+                    </c:if>
 					<tr>
 						<th>상호명</th>
 						<td>${list.get(0).cName}</td>
@@ -83,7 +91,7 @@ table.type09 td {
 					<tr>
 						<th>신청일</th>
 						<td>${list.get(0).crDate}</td>
-						<th>승인일</th>
+						<th>승인일/해지일</th>
 						<td>${list.get(0).apDate}</td>
 					</tr>
 					<c:forEach var="r" items="${list}">
@@ -124,9 +132,10 @@ table.type09 td {
 							<c:if test="${list.get(0).apDate == null}">
 							<button type="button" class="btn btn-success" onclick="approvalCompany(${list.get(0).crId})">제휴승인</button>
 							</c:if>
-							<c:if test="${list.get(0).apDate != null}">
+							<c:if test="${list.get(0).crStatus == 'Y'}">
 							<button type="button" class="btn btn-toggle" data-toggle="modal" data-target="#myModal-1">제휴 해지</button>
 						    </c:if>
+                            
 						</td>
 					</tr>
 				</table>

@@ -1,8 +1,6 @@
 package com.kh.hello.admin.controller;
    
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.net.URLEncoder;
 import java.text.Format;
 import java.text.SimpleDateFormat;
@@ -10,16 +8,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.activation.CommandMap;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,6 +23,7 @@ import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.CompanyDetails;
 import com.kh.hello.admin.model.vo.DatePick;
+import com.kh.hello.admin.model.vo.Deposit;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
@@ -265,33 +260,39 @@ public class AdminController {
 		
 		int result = as.updateReportResult(r);
 		
-		int listCount = as.getReportListCount();
-		PageInfo pi = Pagination.getPageInfo(1, listCount);		
-		ArrayList<Report> list = as.selectReportList(pi);
-		for(int i = 0; i < list.size(); i++){
-			//구분
-			if(list.get(i).getrLevel() == 0){
-				list.get(i).setrLevelText("게시글");
-			}else if(list.get(i).getrLevel() == 1){
-				list.get(i).setrLevelText("댓글");
-			}else{
-				list.get(i).setrLevelText("메세지");
-			}
-			//처리상황
-			if(list.get(i).getResult() == null){
-				list.get(i).setResultText("미처리");
-			}else{
-				if(list.get(i).getResult().equals('Y')){
-					list.get(i).setResultText("블랙리스트");
+		if(result > 0){
+			int listCount = as.getReportListCount();
+			PageInfo pi = Pagination.getPageInfo(1, listCount);		
+			ArrayList<Report> list = as.selectReportList(pi);
+			for(int i = 0; i < list.size(); i++){
+				//구분
+				if(list.get(i).getrLevel() == 0){
+					list.get(i).setrLevelText("게시글");
+				}else if(list.get(i).getrLevel() == 1){
+					list.get(i).setrLevelText("댓글");
 				}else{
-					list.get(i).setResultText("반려");
+					list.get(i).setrLevelText("메세지");
+				}
+				//처리상황
+				if(list.get(i).getResult() == null){
+					list.get(i).setResultText("미처리");
+				}else{
+					if(list.get(i).getResult().equals('Y')){
+						list.get(i).setResultText("블랙리스트");
+					}else{
+						list.get(i).setResultText("반려");
+					}
 				}
 			}
-		}
 
-		model.addAttribute("list", list);
-		model.addAttribute("pi", pi);
-		return "admin/report";
+			model.addAttribute("list", list);
+			model.addAttribute("pi", pi);
+			return "admin/report";
+		}else{
+			model.addAttribute("msg","신고 반려 실패");
+			return "common/errorPage";
+		}
+		
 	}
 	
 	//문의 내역 조회
@@ -570,6 +571,7 @@ public class AdminController {
 		
 	}
 	
+	//업체 제휴 해지
 	@RequestMapping("terminateCompany.ad")
 	public String terminateCompany(String crId, String content, Model model){
 		
@@ -585,11 +587,102 @@ public class AdminController {
 		}
 	}
 	
-	@RequestMapping("depositView.ad")
-	public String depositView(){
+	//입금처리 조회
+	@RequestMapping("selectDepositList.ad")
+	public String selectDepositList(String searchParam, String searchWord, PageInfo p, Model model){
+		if(p.getCurrentPage() == 0){
+			p.setCurrentPage(1);
+		}
+
+		ArrayList<Deposit> list = null;
+		PageInfo pi = null;
+		int listCount = 0;
+		
+		//전체 리스트
+		if(searchParam == null && searchWord == null){
+
+			listCount = as.getDepositListCount();
+			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);		
+			list = as.selectDepositList(pi);
+		}else{
+			Deposit d = new Deposit();
+			d.setcId(-99);
+			//등록이력번호 검색
+			if(searchParam.equals("cId")){
+				d.setcId(Integer.parseInt(searchWord));
+			//업체명 검색
+			}else if(searchParam.equals("cName")){
+				d.setcName(searchWord);
+		    //입금액순은 mapper에서
+			}
+			listCount = as.getSearchWordgetDepositListCount(d);
+			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
+			list = as.selectSearchWordgetDepositList(d, pi);
+		}
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
 		return "admin/deposit";
 	}
 
+	//업체에 입금하기
+	@RequestMapping("makeDeposit.ad")
+	public String makeDeposit(String cId, String dAmount, Model model){
+		Deposit d = new Deposit();
+		d.setcId(Integer.parseInt(cId));
+		d.setdAmount(Integer.parseInt(dAmount));
+		int result = as.insertDepositHistory(d);
+		
+		if(result > 0){
+			int listCount = as.getDepositListCount();
+			PageInfo pi = Pagination.getPageInfo(1, listCount);		
+			ArrayList<Deposit> list = as.selectDepositList(pi);
+			model.addAttribute("list", list);
+			model.addAttribute("pi", pi);
+			return "admin/deposit";
+		}else{
+			model.addAttribute("msg","업체 입금 실패");
+			return "common/errorPage";
+		}
+		
+	}
+	//업체 입금 내역 보기
+	@RequestMapping("selectDepositHistoryList.ad")
+	public String selectDepositHistroyList(String searchParam, String searchWord, PageInfo p, Model model){
+		if(p.getCurrentPage() == 0){
+			p.setCurrentPage(1);
+		}
+
+		ArrayList<Deposit> list = null;
+		PageInfo pi = null;
+		int listCount = 0;
+		
+		//전체 리스트
+		//if(searchParam == null && searchWord == null){
+
+			listCount = as.getDepositHistoryListCount();
+			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);		
+			list = as.selectDepositHistoryList(pi);
+		
+		/*}else{
+			Deposit d = new Deposit();
+			d.setcId(-99);
+			//등록이력번호 검색
+			if(searchParam.equals("cId")){
+				d.setcId(Integer.parseInt(searchWord));
+			//업체명 검색
+			}else if(searchParam.equals("cName")){
+				d.setcName(searchWord);
+		    //입금액순은 mapper에서
+			}
+			listCount = as.getSearchWordgetDepositListCount(d);
+			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
+			list = as.selectSearchWordgetDepositList(d, pi);
+		}*/
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		return "admin/depositHistory";
+	}
+	
 	@RequestMapping("salesStatisticsView.ad")
 	public String salesStatistics(){
 		return "admin/salesStatistics";

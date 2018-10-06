@@ -11,6 +11,7 @@ import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.CompanyDetails;
 import com.kh.hello.admin.model.vo.DatePick;
+import com.kh.hello.admin.model.vo.Deposit;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
@@ -416,8 +417,59 @@ public class AdminDaoImpl implements AdminDao{
 
 	//해지 메세지 발송
 	@Override
-	public int inserTerminateMsg(SqlSessionTemplate sqlSession, Message m) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertTerminateMsg(SqlSessionTemplate sqlSession, Message m) {
+		return sqlSession.insert("insertTerminateMsg", m);
 	}
+
+	//입금 처리를 위한 리스트 카운트
+	@Override
+	public int getDepositListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("selectDepositListCount");
+	}
+	//입금 처리를 위한 리스트
+	@Override
+	public ArrayList<Deposit> selectDepositList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		ArrayList<Deposit> list = null;
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		list = (ArrayList)sqlSession.selectList("selectDepositList", null, rowBounds);
+		return list;
+	}
+
+	//입금처리를 위한 리스트 검색 카운트
+	@Override
+	public int getSearchWordgetDepositListCount(SqlSessionTemplate sqlSession, Deposit d) {
+		return sqlSession.selectOne("selectSearchWordgetDepositListCount",d);
+	}
+
+	//입금처리를 위한 리스트 검색
+	@Override
+	public ArrayList<Deposit> selectSearchWordgetDepositList(SqlSessionTemplate sqlSession, Deposit d, PageInfo pi) {
+		ArrayList<Deposit> list = null;
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		list = (ArrayList)sqlSession.selectList("selectSearchWordgetDepositList", d, rowBounds);
+		return list;
+	}
+
+	//업체 입금해주기
+	@Override
+	public int insertDepositHistory(SqlSessionTemplate sqlSession, Deposit d) {
+		return sqlSession.insert("insertDepositHistory",d);
+	}
+
+	@Override
+	public int getDepositHistoryListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("selectDepositHistoryListCount");
+	}
+
+	@Override
+	public ArrayList<Deposit> selectDepositHistoryList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		ArrayList<Deposit> list = null;
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		list = (ArrayList)sqlSession.selectList("selectDepositHistoryList", null, rowBounds);
+		return list;
+	}
+
 }

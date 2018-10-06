@@ -115,8 +115,10 @@
 						<ul>
 							<li><a href="selectCompanyList.ad" style="padding: 10px 27px 10px 22px;">업체
 									승인·관리</a></li>
-							<li><a href="depositView.ad" style="padding: 10px 27px 10px 22px;">업체
-									입금관리</a></li>
+							<li><a href="selectDepositList.ad" style="padding: 10px 27px 10px 22px;">업체
+									입금처리</a></li>
+							<li><a href="selectDepositHistoryList.ad" style="padding: 10px 27px 10px 22px;">업체
+									입금내역</a></li>		
 						</ul>
 					</dd>
 				</dl>

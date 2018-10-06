@@ -16,6 +16,7 @@ import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.CompanyDetails;
 import com.kh.hello.admin.model.vo.DatePick;
+import com.kh.hello.admin.model.vo.Deposit;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.member.model.vo.Member;
@@ -348,7 +349,7 @@ public class AdminServiceImpl implements AdminService{
 		int result1 = ad.updateCompanyStatus(sqlSession, crId);
 		Message m = ad.selectRecieveId(sqlSession, crId);
 		m.setContent(content);
-		int result2 = ad.inserTerminateMsg(sqlSession, m);
+		int result2 = ad.insertTerminateMsg(sqlSession, m);
 		if(result1 > 0 && result2 > 0){
 			result = 1;
 		}else{
@@ -356,5 +357,48 @@ public class AdminServiceImpl implements AdminService{
 		}
 		return result;
 	}
+
+	//입금처리리스트 카운트
+	@Override
+	public int getDepositListCount() {
+		return ad.getDepositListCount(sqlSession);
+	}
+
+	//입금처리 리스트
+	@Override
+	public ArrayList<Deposit> selectDepositList(PageInfo pi) {
+		return ad.selectDepositList(sqlSession, pi);
+	}
+
+	//입금처리 리스트 검색 카운트
+	@Override
+	public int getSearchWordgetDepositListCount(Deposit d) {
+		return ad.getSearchWordgetDepositListCount(sqlSession, d);
+	}
+
+	//입급처리 리스트 검색
+	@Override
+	public ArrayList<Deposit> selectSearchWordgetDepositList(Deposit d, PageInfo pi) {
+		return ad.selectSearchWordgetDepositList(sqlSession, d, pi);
+	}
+
+	//업체 입금해주기
+	@Override
+	public int insertDepositHistory(Deposit d) {
+		return ad.insertDepositHistory(sqlSession, d);
+	}
+
+	//입금내역 리스트 카운트
+	@Override
+	public int getDepositHistoryListCount() {
+		return ad.getDepositHistoryListCount(sqlSession);
+	}
+
+	//입금내역 리스트
+	@Override
+	public ArrayList<Deposit> selectDepositHistoryList(PageInfo pi) {
+		return ad.selectDepositHistoryList(sqlSession, pi);
+	}
+
 
 }

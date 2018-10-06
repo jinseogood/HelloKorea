@@ -7,6 +7,7 @@
      
       <typeAliases>
           <typeAlias type="com.kh.hello.common.Attachment" alias="Attachment"/>
+          <typeAlias type="com.kh.hello.admin.model.vo.Deposit" alias="Deposit"/>
           <typeAlias type="com.kh.hello.admin.model.vo.CompanyDetails" alias="CompanyDetails"/>
           <typeAlias type="com.kh.hello.admin.model.vo.Approval" alias="Approval"/>
           <typeAlias type="com.kh.hello.admin.model.vo.Question" alias="Question"/>
@@ -27,6 +28,7 @@
       </typeAliases>
   
       <mappers>
+          <mapper resource="mappers/admin/deposit-mapper.xml"/>
           <mapper resource="mappers/admin/company-mapper.xml"/>
           <mapper resource="mappers/admin/question-mapper.xml"/>
           <mapper resource="mappers/admin/blacklist-mapper.xml"/>

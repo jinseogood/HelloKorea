@@ -7,6 +7,7 @@ import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.CompanyDetails;
 import com.kh.hello.admin.model.vo.DatePick;
+import com.kh.hello.admin.model.vo.Deposit;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
@@ -70,6 +71,15 @@ public interface AdminService {
 	Map<String, Object> selectFileInfo(int fId) throws Exception;
 	int updateCompanyRegist(CompanyDetails cd);
 	int terminateCompany(String crId, String content);
+	
+	int getDepositListCount();
+	ArrayList<Deposit> selectDepositList(PageInfo pi);
+	int getSearchWordgetDepositListCount(Deposit d);
+	ArrayList<Deposit> selectSearchWordgetDepositList(Deposit d, PageInfo pi);
+	int insertDepositHistory(Deposit d);
+	
+	int getDepositHistoryListCount();
+	ArrayList<Deposit> selectDepositHistoryList(PageInfo pi);
 
 	
 }
