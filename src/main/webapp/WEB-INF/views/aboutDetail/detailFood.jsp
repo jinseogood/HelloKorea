@@ -15,6 +15,7 @@
 	#more{margin-top:5%;}
 	/* .firstImgArea{display:inline-block;} */
 	.imgArea{display:block;}
+	.firstImg{width:528px; height:435px;}
 	.secondImgArea{display:inline-block;}
 	.secondImg{width:262.5px; height:217px; display:inline-block;}
 	.contentArea{display:block;}
@@ -22,6 +23,7 @@
 	.detailContent{height:350px; text-align:center;}
 	.detailBottom{height:50px;}
 	.tm-about-box-1{padding:10px 10px;}
+	.roomImgTd{width:260px; height:300px;}
 </style>
 </head>
 <body>
@@ -35,7 +37,7 @@
 		<div class="row">
 		</div>
 		<div class="tm-section-header section-margin-top">
-			<div class="col-lg-4 col-md-4 col-sm-4"><h2 class="tm-section-title">아무개 식당</h2></div>
+			<div class="col-lg-4 col-md-4 col-sm-4"><h2 class="tm-section-title" id="foodTitleText">아무개 식당</h2></div>
 			<div class="col-lg-8 col-md-8 col-sm-8"><hr></div>	
 		</div>
 		
@@ -43,7 +45,7 @@
 			<div class="col-lg-7">
 				<div class="imgArea">
 				<div class="firstImgArea">
-					<img src="${ contextPath }/resources/img/about-1.jpg" alt="image" />
+					<img src="${ contextPath }/resources/img/about-1.jpg" alt="image" class="firstImg"/>
 				</div>
 				<div class="secondImgArea">
 					<img src="${ contextPath }/resources/img/about-1.jpg" class="secondImg" alt="image" />
@@ -57,6 +59,7 @@
 					음식점 소개영역입니다.<br>
 					음식점 소개영역입니다.<br>
 				</div>
+				<hr>
 				<div class="fInfoArea">
 					음식점 소개영역입니다.<br>
 				</div>
@@ -84,7 +87,21 @@
 				data:{contenttypeid:contenttypeid, contentid:contentid},
 				dataType:"json",
 				success:function(data){
-					console.log(data);//데이터 넘어오나 내일 다시 확인
+					console.log(data);
+					var myData = data.response.body.items.item;
+					var output = "";
+					var overviewText = myData.overview.split(". ");
+					$("#foodTitleText").text(myData.title);
+					for(var i in overviewText){
+						output += overviewText[i] + ".<br>";
+					}
+					$(".contentArea").html(output);
+					if(myData.firstimage == null){
+						output = "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='firstImg' />";
+					}else{
+						output = "<img src="+myData.firstimage+" alt='image' class='firstImg' />";
+					}
+					$(".firstImgArea").html(output);
 				},
 				error:function(data){
 					console.log(data);
@@ -92,17 +109,102 @@
 			});
 		}
 		
-		function detailFoodImage(){}
+		function detailFoodImage(){
+			console.log("detailFoodImage : " + contentid);
+			$.ajax({
+				url:"detailFoodImage.sub",
+				type:"get",
+				data:{contenttypeid:contenttypeid, contentid:contentid},
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					var myData = data.response.body.items.item;
+					var count = 0;
+					var output = "";
+					if(data.response.body.items == ""){
+						output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='secondImg' />";
+						output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='secondImg' />";
+					}else{
+						for(var i in myData){
+							count++;
+							output += "<img src="+myData[i].originimgurl+" alt='image' class='secondImg' />";
+							if(count == 2){break;}
+						}
+					}
+					$(".secondImgArea").html(output);
+				},
+				error:function(data){
+					console.log(data);
+				}
+			});
+		}
 		
-		function detailFoodIntro(){}
+		function detailFoodIntro(){
+			console.log("detailFoodIntro : " + contenttypeid);
+			console.log("detailFoodIntro : " + contentid);
+			$.ajax({
+				url:"detailFoodIntro.sub",
+				type:"get",
+				data:{contenttypeid:contenttypeid, contentid:contentid},
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					var myData = data.response.body.items.item;
+					var output = "";
+					var fInfo = $(".fInfoArea");
+					fInfo.html("");
+					output += "<h3>음식점</h3><br>";
+					output += "ㆍ <b>주차 시설</b> : "+myData.parkingfood+"<br>";
+					output += "ㆍ <b>개업일</b> : "+myData.opendatefood+"<br>";
+					output += "ㆍ <b>영업 시간</b> : "+myData.opentimefood+"<br>";
+					output += "ㆍ <b>쉬는 날</b> : "+myData.restdatefood+"<br>";
+					output += "ㆍ <b>대표 메뉴</b> : "+myData.firstmenu+"<br>";
+					output += "ㆍ <b>취급 메뉴</b> : "+myData.treatmenu+"<br>";
+					output += "ㆍ <b>금연/흡연</b> : "+myData.smoking+"<br>";
+					output += "ㆍ <b>신용 카드 정보</b> : "+myData.chkcreditcardfood+"<br>";
+					output += "ㆍ <b>포장 가능</b> : "+myData.packing+"<br>";
+					output += "ㆍ <b>예약 안내</b> : "+myData.reservationfood+"<br>";
+					fInfo.html(output);
+				},
+				error:function(data){
+					console.log(data);
+				}
+			});
+		}
 		
-		function detailMenuInfo(){}
+		function detailMenuInfo(){
+			console.log("detailMenuInfo : " + contenttypeid);
+			console.log("detailMenuInfo : " + contentid);
+			$.ajax({
+				url:"detailMenuInfo.sub",
+				type:"GET",
+				data:{contenttypeid:contenttypeid, contentid:contentid},
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					var myData = data.response.body.items.item;
+					var output = "";
+					var foodInfo = $("#foodInfoArea");
+					foodInfo.html("");
+					for(var i in myData){
+						output = "";
+						output += "<tr>";
+						output += "";
+						output += "</tr>";
+						document.getElementById("foodInfoArea").innerHTML += output;
+					}
+				},
+				error:function(data){
+					console.log(data);
+				}
+			});
+		}
 		
 		$(function(){
 			detailFoodInfo();//공통정보
-			//detailFoodImage();//메인,서브이미지
-			//detailFoodIntro();//음식점소개
-			//detailMenuInfo();//메뉴이미지
+			detailFoodImage();//메인,서브이미지
+			detailFoodIntro();//음식점소개
+			detailMenuInfo();//메뉴이미지
 			
 		});
 		/* Google map
@@ -168,7 +270,7 @@
 	</script>
 	
 	<section class="container tm-home-section-1" id="more">
-		<!-- <div class="col-lg-12" >
+		<div class="col-lg-12" >
 			<table border="1">
 				<thead>
 					<tr>
@@ -178,7 +280,7 @@
 						<th class="detailHead">객실선택</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="foodInfoArea">
 					<tr>
 						<td class="detailContent">정보오오오오오오오오</td>
 						<td class="detailContent">정보오오오오오오오오</td>
@@ -193,7 +295,7 @@
 					</tr>
 				</tbody>
 			</table>
-		</div> -->
+		</div>
 	</section>
 	
 	<section class="container tm-home-section-1" id="more">
