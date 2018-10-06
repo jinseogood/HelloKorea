@@ -16,11 +16,14 @@
 		<result property="roomPeople" column="R_LIMIT"/>
 		<result property="crId" column="CR_ID"/>
 		<result property="term" column="CR_TERM"/>
+		<result property="crDate" column="CR_DATE"/>
+		<result property="apDate" column="AP_DATE"/>
+		<result property="crEDate" column="CR_EDATE"/>
 	</resultMap>
 	
 	<!-- 선택 상품 조회 -->
 	<select id="selectOneProduct" resultMap="oneProductResultSet" parameterType="arraylist">
-		SELECT C_ID, C_NAME, C_PHONE, C_ADDRESS, R_ID, R_TYPE, R_COUNT, R_PRICE, R_LIMIT, CR_ID, CR_TERM
+		SELECT C_ID, C_NAME, C_PHONE, C_ADDRESS, R_ID, R_TYPE, R_COUNT, R_PRICE, R_LIMIT, CR_ID, CR_TERM, CR_DATE, AP_DATE, CR_EDATE
 		FROM COMPANY
 		JOIN ROOM USING(C_ID)
 		JOIN COM_REGIST USING(C_ID)

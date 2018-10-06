@@ -15,7 +15,7 @@
 	}
 	.content{
 		width:800px;
-		height:1100px;
+		height:1300px;
 		margin-left:auto;
 		margin-right:auto;
 	}
@@ -1170,7 +1170,7 @@
 						output += "<td><input type='number' name='roomCount" + (i+1) + "' value='1' min='1'></td></tr>";
 						output += "<tr><th>객실 가격</th><td colspan='2'><input type='text' name='roomPrice" + (i+1) + "' size='25' required></td>";
 						output += "<th style='width:60px;'>정원</th>";
-						output += "<td><input type='number' name='roomPeople" + (i+1) + "' value='" + room[i].roommaxcount + "'></td></tr>";
+						output += "<td><input type='number' name='roomPeople" + (i+1) + "' value='" + room[i].roommaxcount + "' readonly></td></tr>";
 						$roomBody.append(output);
 					}
 					

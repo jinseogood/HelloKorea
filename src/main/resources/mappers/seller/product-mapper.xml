@@ -13,7 +13,9 @@
 		<result property="crId" column="CR_ID"/>
 		<result property="term" column="CR_TERM"/>
 		<result property="status" column="CR_STATUS"/>
+		<result property="crDate" column="CR_DATE"/>
 		<result property="apDate" column="AP_DATE"/>
+		<result property="crEDate" column="CR_EDATE"/>
 	</resultMap>
    
 	<!-- 상품 리스트 카운트 -->
@@ -26,7 +28,7 @@
 	
 	<!-- 상품 전체 조회 -->
 	<select id="selectProductList" resultMap="productResultSet" parameterType="_int">
-		SELECT C_ID, C_NAME, C_ADDRESS, C_PHONE, CR_ID, CR_TERM, CR_STATUS
+		SELECT C_ID, C_NAME, C_ADDRESS, C_PHONE, CR_ID, CR_TERM, CR_STATUS, CR_DATE, AP_DATE, CR_EDATE
 		FROM COMPANY
 		JOIN COM_REGIST USING(C_ID)
 		WHERE M_ID = #{mId}
@@ -40,20 +42,20 @@
 		JOIN COM_REGIST USING(C_ID)
 		WHERE CR_STATUS = 'Y'
 		AND M_ID = ${list.get(0)}
-		AND AP_DATE = ${list.get(1)}
-		AND ADD_MONTHS(AP_DATE, CR_TERM) = ${list.get(2)}
+		AND AP_DATE <![CDATA[<]]>= ${list.get(1)}
+		AND CR_EDATE <![CDATA[>]]>= ${list.get(2)}
 		ORDER BY AP_DATE
 	</select>
 	
 	<!-- 등록기간 검색 상품 조회 -->
 	<select id="selectSearchDateProductList" resultMap="productResultSet" parameterType="arraylist">
-		SELECT C_ID, C_NAME, C_ADDRESS, C_PHONE, CR_ID, CR_TERM, CR_STATUS
+		SELECT C_ID, C_NAME, C_ADDRESS, C_PHONE, CR_ID, CR_TERM, CR_STATUS, CR_DATE, AP_DATE, CR_EDATE
 		FROM COMPANY
 		JOIN COM_REGIST USING(C_ID)
 		WHERE CR_STATUS = 'Y'
 		AND M_ID = ${list.get(0)}
-		AND AP_DATE = ${list.get(1)}
-		AND ADD_MONTHS(AP_DATE, CR_TERM) = ${list.get(2)}
+		AND AP_DATE <![CDATA[<]]>= ${list.get(1)}
+		AND CR_EDATE <![CDATA[>]]>= ${list.get(2)}
 		ORDER BY AP_DATE
 	</select>
 	
@@ -78,7 +80,7 @@
 	
 	<!-- 검색 상품 조회 -->
 	<select id="selectSearchWordProductList" resultMap="productResultSet" parameterType="arraylist">
-		SELECT C_ID, C_NAME, C_ADDRESS, C_PHONE, CR_ID, CR_TERM, CR_STATUS
+		SELECT C_ID, C_NAME, C_ADDRESS, C_PHONE, CR_ID, CR_TERM, CR_STATUS, CR_DATE, AP_DATE, CR_EDATE
 		FROM COMPANY
 		JOIN COM_REGIST USING(C_ID)
 		WHERE M_ID = ${list.get(0)}

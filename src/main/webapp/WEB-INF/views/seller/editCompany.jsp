@@ -23,16 +23,22 @@
     	margin-right:auto;
 	}
 	#editTable{
-		width:650px;
-	}
-	#editTable tr{
-		height:40px;
-		border-top:1px solid lightgray;
-		border-bottom:1px solid lightgray;
+		width:750px;
 	}
 	#editTable th{
-		width:200px;
-		text-align:center;
+		width: 250px;
+    	padding: 10px;
+    	font-weight: bold;
+    	text-align: center;
+    	vertical-align: top;
+    	border-bottom: 1px solid #ccc;
+    	background: #f3f6f7;
+	}
+	#editTable td{
+		width: 500px;
+    	padding: 10px;
+    	vertical-align: top;
+    	border-bottom: 1px solid #ccc;
 	}
 </style>
 </head>
@@ -62,37 +68,31 @@
 					<input type="hidden" id="crId" name="crId" value="${ eOP.get(0).crId }">
 					<tr>
 						<th>상호명</th>
-						<td colspan="4"><input type="hidden" name="companyName" value="${ eOP.get(0).companyName }">${ eOP.get(0).companyName }</td>
-					</tr>
-					<tr>
+						<td><input type="hidden" name="companyName" value="${ eOP.get(0).companyName }">${ eOP.get(0).companyName }</td>
 						<th>전화번호</th>
-						<td colspan="4"><input type="hidden" name="companyPhone" value="${ eOP.get(0).companyPhone }">${ eOP.get(0).companyPhone }</td>
+						<td><input type="hidden" name="companyPhone" value="${ eOP.get(0).companyPhone }">${ eOP.get(0).companyPhone }</td>
 					</tr>
 					<tr>
 						<th>주소</th>
-						<td colspan="4"><input type="hidden" name="companyAddress" value="${ eOP.get(0).companyAddress }">${ eOP.get(0).companyAddress }</td>
+						<td colspan="3"><input type="hidden" name="companyAddress" value="${ eOP.get(0).companyAddress }">${ eOP.get(0).companyAddress }</td>
 					</tr>
 					<c:set var="i" value="1"/>
 					<c:forEach var="eOP" items="${ eOP }">
 						<input type="hidden" name="roomId${ i }" value="${ eOP.rId }">
 						<tr>
 							<th>객실타입</th>
-							<td colspan="2"><input type="hidden" name="roomType${ i }" value="${ eOP.roomType }">${ eOP.roomType }</td>
-							<th style="width:60px;">객실 수</th>
+							<td><input type="hidden" name="roomType${ i }" value="${ eOP.roomType }">${ eOP.roomType }</td>
+							<th>객실 수</th>
 							<td><input type="number" name="roomCount${ i }" value="${ eOP.roomCount }"></td>
 						</tr>
 						<tr>
 							<th>객실 가격</th>
-							<td colspan="2"><input type="text" name="roomPrice${ i }" value="${ eOP.roomPrice }"></td>
-							<th style="width:60px;">정원</th>
-							<td>${ eOP.roomPeople }</td>
+							<td><input type="text" name="roomPrice${ i }" value="${ eOP.roomPrice }"></td>
+							<th>정원</th>
+							<td>${ eOP.roomPeople }명</td>
 						</tr>
 						<c:set var="i" value="${ i+1 }"/>
 					</c:forEach>
-					<tr>
-						<th>등록 기간</th>
-						<td colspan="4"><input type="hidden" name="term" value="${ eOP.get(0).term }">${ eOP.get(0).term }</td>
-					</tr>
 					<tr>
 						<td colspan="5" align="center">
 							<button type="reset" class="btn btn-default">취소</button>&nbsp;&nbsp;
