@@ -56,7 +56,6 @@ public class BoardDaoImpl implements BoardDao{
 	@Override
 	public int updateBoard(SqlSessionTemplate sqlSession, Board b) {
 		int result = 0;
-		System.out.println(b);
 		result = sqlSession.update("Board.updateReviewBoard", b);
 		
 		return result;

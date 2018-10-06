@@ -143,7 +143,7 @@ body{ margin:50px 0px; }
             		<div class="rate2"></div>
    					<input id="input2" type="text" name = "grade">
    					
-            		<script src="http://code.jquery.com/jquery-1.11.3.min.js" charset="utf-8"></script>
+            		<script src="https://code.jquery.com/jquery-1.11.3.min.js" charset="utf-8"></script>
    					<script src="${ contextPath }/resources/js/rater.js" charset="utf-8"></script>
     				<script> 
     					var a;	

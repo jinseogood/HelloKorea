@@ -1,8 +1,7 @@
 package com.kh.hello.board.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.URLEncoder;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,9 +27,6 @@ import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.common.Pagination2;
 import com.kh.hello.member.model.vo.Member;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 @Controller
 public class BoardPageController {
@@ -131,15 +127,24 @@ public class BoardPageController {
 		return "main/main";
 	}
 	
-	@RequestMapping(value="reviewPaging.bo")
+	@RequestMapping(value="reviewPaging.bo", produces = "application/json; charset=utf8")
 	public ModelAndView reviewPaging(/*Model model, */HttpServletResponse response, @RequestParam int page, ModelAndView mv){
 		//ModelAndView mv = new ModelAndView();
+		response.setContentType("text/html; charset=UTF-8");
 		ArrayList<Board> list = null;
 		PageInfo pi = null;
+		//DateFormat df = new SimpleDateFormat("yyyy년 MM월 dd일");
 		
 		int listCount = bs.selectReviewCount();
 		pi = Pagination2.getPageInfo(page, listCount);
 		list = bs.selectReview(pi);
+		
+		/*for(int i = 0 ; i < list.size() ; i++){
+			String tempDate = df.format(list.get(i).getRegist_date());
+			list.get(i).setRegist_date(tempDate);
+			System.out.println(list.get(i).getRegist_date());
+		}*/
+		
 		mv.addObject("list", list);
 		mv.addObject("pi", pi);
 		mv.setViewName("jsonView");

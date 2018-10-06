@@ -10,16 +10,16 @@ public class Board {
 	private String title;
 	private String text;
 	private int board_type;
-	private Date regist_date;
+	private String regist_date;
 	private String status;
-	private Date modify_date;
+	private String modify_date;
 	private float grade;
 	private int likey;
 	private int m_id;
 	
 	public Board(){}
 
-	public Board(int bid, String title, String text, int board_type, Date regist_date, String status, Date modify_date,
+	public Board(int bid, String title, String text, int board_type, String regist_date, String status, String modify_date,
 			float grade, int likey, int m_id) {
 		super();
 		this.bid = bid;
@@ -66,11 +66,11 @@ public class Board {
 		this.board_type = board_type;
 	}
 
-	public Date getRegist_date() {
+	public String getRegist_date() {
 		return regist_date;
 	}
 
-	public void setRegist_date(Date regist_date) {
+	public void setRegist_date(String regist_date) {
 		this.regist_date = regist_date;
 	}
 
@@ -82,11 +82,11 @@ public class Board {
 		this.status = status;
 	}
 
-	public Date getModify_date() {
+	public String getModify_date() {
 		return modify_date;
 	}
 
-	public void setModify_date(Date modify_date) {
+	public void setModify_date(String modify_date) {
 		this.modify_date = modify_date;
 	}
 

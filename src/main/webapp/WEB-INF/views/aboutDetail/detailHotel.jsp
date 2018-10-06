@@ -336,8 +336,9 @@
 
       	 </div>
       </div>
+      <div class = "new_line">
 		 <c:forEach var = "list" items = "${ list }"> 
-     
+      
          <div class="row line_b" >
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style = "height:220px">
                <div class="tm-about-box-1" style = "height:220px; padding:10px 10px">
@@ -386,6 +387,7 @@
             
          </div> 
          </c:forEach>
+         </div>
          <div class="paging" align="center">
 <ul class="pagination pagination-sm">
 <c:if test="${ pi.currentPage <= 1 }">
@@ -399,14 +401,14 @@
                 <li><a style="background-color:#ddd;">${ p }</a></li>               
                 </c:if>
                 <c:if test="${ p ne pi.currentPage }">
-                    <li><a onclick="goPage(${ p })">${ p }</a></li>  
+                    <li><a onclick="goPage(${ p });">${ p }</a></li>  
                 </c:if>
             </c:forEach>
             <c:if test="${ pi.currentPage >= pi.maxPage }">
                 <li><a>&raquo;</a></li>
             </c:if>
             <c:if test="${ pi.currentPage < pi.maxPage }">
-                <li><a onclick="goPage(${ pi.currentPage + 1 })">&raquo;</a></li>
+                <li><a onclick="goLast(${ pi.maxPage });">&raquo;</a></li>
             </c:if>
             </ul>
     </div>
@@ -633,26 +635,85 @@
 					console.log("오나");
 					console.log(data);
 					
-					$divBody = $("#line_b");
+					$divBody = $(".new_line");
 					$divBody.html('');
 					
 					$pageBody = $(".paging ul");
 					$pageBody.html('');
 					
-					var review = list.size();
-					console.log(review);
+					console.log(data.list);
+					console.log(data.list[0].bid);
+					console.log(data.pi);
 					
-					console.log(pi);
-					//var totalCount
+					var review = data.list;
+					console.log(review.length);
+					var p = data.pi;
 					
-					/* if(review != null){
-						if(review.length > 0){
-							for(var i=0;i<review.length;i++){
-								var dput = "";
-								//dput += 
-							}
+					if(review.length > 0){
+						for(var i = 0 ; i < review.length; i++){
+							var output="";
+							output += "<div class='row line_b'>";
+							output += "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-12' style = 'height:220px'>";
+							output += "<div class='tm-about-box-1' style = 'height:220px; padding:10px 10px;'>";
+							output += "<a href='#'><img src='${ contextPath }/resources/img/about-4.jpg' alt='img' class='tm-about-box-1-img' style = 'margin:0 auto 10px;'></a>";
+							output += "<h3 class='tm-about-box-1-title' style = 'margin-bottom:5px;'>Songs <span>( GOD )</span></h3>";
+							output += "<div class='gray-text'>";
+							output += "<a href='#' class='tm-social-icon'><i class='fa fa-twitter'></i></a>";
+							output += "<a href='#' class='tm-social-icon'><i class='fa fa-facebook'></i></a>";
+							output += "<a href='#' class='tm-social-icon'><i class='fa fa-pinterest'></i></a>";
+							output += "<a href='#' class='tm-social-icon'><i class='fa fa-google-plus'></i></a>";
+							output += "</div>";
+							output += "</div>";
+							output += "</div>";
+							output += "<div class='col-lg-9 col-md-9 col-sm-6 col-xs-12 line_l' style = 'height:220px; padding-bottom:10px;' ><br>";
+							output += "<div><span class='StarBar'>";
+							output += "<i class='fa fa-star'></i>";
+							output += "<i class='fa fa-star'></i>";
+							output += "<i class='fa fa-star'></i>";
+							output += "<i class='fa fa-star'></i>";
+							output += "<i class='fa fa-star'></i>";
+							output += "</span>&nbsp;&nbsp;";
+							output += "<span class='ReviewUpDate'>리뷰 게시 날짜 : "+review[i].regist_date+"</span></div>";
+							output += "<div class='ReviewTitle' style = 'font-size:20px; cursor:pointer; padding-top:10px;'><a href='#'><span>"+review[i].title+"</span></a></div>";
+							output += "<div class='summary' style = 'padding-top:10px;'>"+review[i].text+"<span><a href='#'>더 보기</a></span></div>";
+							output += "<div style = 'padding-top:20px;'><div class='fa' style = 'width:100%;'><i class='fa fa-thumbs-o-up' style = 'font-size:20px; padding-top:10px;'> "+review[i].likey+" </i><i class='fa fa-comment' style = 'font-size:20px; padding-top:10px;'> 0 </i><i class='fa fa-flag' style = 'font-size:20px; padding-top:10px; float:right;'> 신고하기 </i></div></div></div></div>";
+							
+							$divBody.append(output);
 						}
-					} */
+						var num = p.maxPage;
+						var pOutput = "";
+						/* if(p.currentPage <= 1){
+							pOutput += "<li><a>&laquo;</a></li>";
+						}
+						if(p.currentPage > 1){
+							pOutput += "<li><a onclick='goFirst();'>&laquo;</a></li>";
+						}
+						for(var a = p.startPage ; a < p.endPage ; a++){
+							
+						}
+						            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+						                <c:if test="${ p eq pi.currentPage }">
+						                <li><a style="background-color:#ddd;">${ p }</a></li>               
+						                </c:if>
+						                <c:if test="${ p ne pi.currentPage }">
+						                    <li><a onclick="goPage(${ p });">${ p }</a></li>  
+						                </c:if>
+						            </c:forEach>
+						            <c:if test="${ pi.currentPage >= pi.maxPage }">
+						                <li><a>&raquo;</a></li>
+						            </c:if>
+						            <c:if test="${ pi.currentPage < pi.maxPage }">
+						                <li><a onclick="goLast(${ pi.maxPage });">&raquo;</a></li>
+						            </c:if> */
+						pOutput += "<li><a onclick = 'goFirst();'>&laquo;</a></li>";
+						
+						for(var t = 1; t <= num ; t++){
+							pOutput += "<li><a onclick = 'goPage(" + t + ")')" + t + "</a></li>";
+						}
+						
+						pOutput += "<li><a onclick = 'goLast(" + num + ")'>&raquo;</a></li>";
+						$pageBody.append(pOutput);
+					}
 				}, error:function(data){
 					console.log(data);
 				}
