@@ -203,7 +203,12 @@ table.type09 td {
         <td>${ r.oRCount }</td>
         <td>${ r.people }</td>
         <td>${ r.price }</td>
-        <td>${ r.pdType }</td>
+        <c:if test="${r.pdType == 'P'}">
+        <td>구매</td>
+        </c:if>
+        <c:if test="${r.pdType == 'R'}">
+        <td>환불</td>
+        </c:if>
     </tr>
     </c:forEach>
     

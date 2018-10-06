@@ -9,6 +9,7 @@ import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.CompanyDetails;
 import com.kh.hello.admin.model.vo.DatePick;
+import com.kh.hello.admin.model.vo.Deposit;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
@@ -78,7 +79,16 @@ public interface AdminDao {
 	int updateCompanyRegist(SqlSessionTemplate sqlSession, CompanyDetails cd);
 	int updateCompanyStatus(SqlSessionTemplate sqlSession, String crId);
 	Message selectRecieveId(SqlSessionTemplate sqlSession, String crId);
-	int inserTerminateMsg(SqlSessionTemplate sqlSession, Message m);
+	int insertTerminateMsg(SqlSessionTemplate sqlSession, Message m);
+	
+	int getDepositListCount(SqlSessionTemplate sqlSession);
+	ArrayList<Deposit> selectDepositList(SqlSessionTemplate sqlSession, PageInfo pi);
+	int getSearchWordgetDepositListCount(SqlSessionTemplate sqlSession, Deposit d);
+	ArrayList<Deposit> selectSearchWordgetDepositList(SqlSessionTemplate sqlSession, Deposit d, PageInfo pi);
+	int insertDepositHistory(SqlSessionTemplate sqlSession, Deposit d);
+	
+	int getDepositHistoryListCount(SqlSessionTemplate sqlSession);
+	ArrayList<Deposit> selectDepositHistoryList(SqlSessionTemplate sqlSession, PageInfo pi);
 	
 	
 }

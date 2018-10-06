@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Blacklist">
+<mapper namespace="Company">
    
      <!-- 승인 신청 리스트 결과 셋 -->
      <resultMap type="Approval" id="approvalResultSet">
@@ -23,6 +23,7 @@
           <result property="cName" column="C_NAME"/>
           <result property="cPhone" column="C_PHONE"/>
           <result property="cAddress" column="C_ADDRESS"/>
+          <result property="crStatus" column="CR_STATUS"/>
           <result property="crDate" column="CR_DATE"/>
           <result property="apDate" column="AP_DATE"/>
           <result property="crEDate" column="CR_EDATE"/>
@@ -141,7 +142,7 @@
      
      <!-- 회사 상세 페이지 조회 -->
      <select id="selectOneCompany" resultMap="companyDetailsResultSet" parameterType="_int">
-         SELECT C.C_ID, CR.CR_ID, C.C_NAME, C.C_PHONE, C.C_ADDRESS, CR.CR_DATE, CR.AP_DATE,
+         SELECT C.C_ID, CR.CR_ID, C.C_NAME, C.C_PHONE, C.C_ADDRESS, CR.CR_STATUS, CR.CR_DATE, CR.AP_DATE,
                 CR.CR_TERM, CR.CR_EDATE, R.R_TYPE, R.R_COUNT, R.R_PRICE, R.R_LIMIT
          FROM ROOM R
          LEFT JOIN COM_REGIST CR ON (R.C_ID=CR.C_ID)

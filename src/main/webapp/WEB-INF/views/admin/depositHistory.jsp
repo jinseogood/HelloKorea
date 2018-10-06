@@ -78,7 +78,7 @@ table.type09 td {
                             <ul class="breadcrumb">
                                 <li><a href="myPageView.ad"><i class="fa fa-home"></i> Home</a></li>
                                 <li><a href="selectCompanyList.ad">제휴업체 관리</a></li>
-                                <li><a href="selectDepositList.ad">업체 입금처리</a></li>
+                                <li><a href="selectDepositHistoryList.ad">업체 입금내역</a></li>
                             </ul>
                             <!--breadcrumbs end -->
                         </div>
@@ -133,12 +133,11 @@ table.type09 td {
 <table class="type09">
     <thead>
     <tr>
-        <th>번호</th>
+        <th>업체번호</th>
         <th>업체명</th>
         <th>계좌번호</th>
         <th>입금액</th>
-        <th>입금예정일</th>
-        <th>입금처리</th>
+        <th>입금일</th>
     </tr>
     </thead>
     <tbody>
@@ -149,7 +148,6 @@ table.type09 td {
         <td>${d.bankNum}</td>
         <td>${d.dAmount}원</td>
         <td>${d.dDate}</td>
-        <td><button class="btn btn-success" onclick="makeDeposit(${d.cId},${d.dAmount})">입금하기</button></td>
     </tr>
     </c:forEach>
     </tbody>
@@ -191,9 +189,7 @@ table.type09 td {
 	<jsp:include page="../common/footer.jsp"/>
 	
 	<script>
-	function makeDeposit(cId, dAmount){
-		location.href="makeDeposit.ad?cId="+cId+"&dAmount="+dAmount;
-	}
+	
 	</script>
 </body>
 </html>
