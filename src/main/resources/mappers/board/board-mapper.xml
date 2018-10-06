@@ -32,7 +32,7 @@
      </update>
      
      <select id = "selectReview" resultMap = "BoardResultSet">
-     	SELECT BID, TITLE, TEXT, BOARD_TYPE ,TO_CHAR(REGIST_DATE, 'YYYY/MM/DD'), STATUS, TO_CHAR(MODIFY_DATE, 'YYYY/MM/DD'), GRADE, LIKEY, M_ID
+     	SELECT BID, TITLE, TEXT, BOARD_TYPE , REGIST_DATE, STATUS, MODIFY_DATE, GRADE, LIKEY, M_ID
      	FROM BOARD WHERE BOARD_TYPE = 1
      </select>
 
