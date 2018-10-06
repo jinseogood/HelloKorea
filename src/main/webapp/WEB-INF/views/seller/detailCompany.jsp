@@ -23,16 +23,22 @@
     	margin-right:auto;
 	}
 	#detailTable{
-		width:650px;
-	}
-	#detailTable tr{
-		height:40px;
-		border-top:1px solid lightgray;
-		border-bottom:1px solid lightgray;
+		width:750px;
 	}
 	#detailTable th{
-		width:200px;
-		text-align:center;
+		width: 150px;
+    	padding: 10px;
+    	font-weight: bold;
+    	text-align: center;
+    	vertical-align: top;
+    	border-bottom: 1px solid #ccc;
+    	background: #f3f6f7;
+	}
+	#detailTable td{
+		width: 600px;
+    	padding: 10px;
+    	vertical-align: top;
+    	border-bottom: 1px solid #ccc;
 	}
 	#extendsTable th {
 	    padding: 10px;
@@ -74,36 +80,40 @@
 					<input type="hidden" name="crId" value="${ opList.get(0).crId }">
 					<tr>
 						<th>상호명</th>
-						<td colspan="4"><input type="hidden" name="companyName" value="${ opList.get(0).companyName }">${ opList.get(0).companyName }</td>
-					</tr>
-					<tr>
+						<td><input type="hidden" name="companyName" value="${ opList.get(0).companyName }">${ opList.get(0).companyName }</td>
 						<th>전화번호</th>
-						<td colspan="4"><input type="hidden" name="companyPhone" value="${ opList.get(0).companyPhone }">${ opList.get(0).companyPhone }</td>
+						<td><input type="hidden" name="companyPhone" value="${ opList.get(0).companyPhone }">${ opList.get(0).companyPhone }</td>
 					</tr>
 					<tr>
 						<th>주소</th>
-						<td colspan="4"><input type="hidden" name="companyAddress" value="${ opList.get(0).companyAddress }">${ opList.get(0).companyAddress }</td>
+						<td colspan="3"><input type="hidden" name="companyAddress" value="${ opList.get(0).companyAddress }">${ opList.get(0).companyAddress }</td>
+					</tr>
+					<tr>
+						<th>신청일</th>
+						<td>${ opList.get(0).crDate }</td>
+						<th>승인일</th>
+						<td>${ opList.get(0).apDate }</td>
+					</tr>
+					<tr>
+						<th>등록 기간</th>
+						<td>${ opList.get(0).apDate } - ${ opList.get(0).crEDate }</td>
+						<td colspan="2"><button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#extendsModal" style="height:25px;">연장하기</button></td>
 					</tr>
 					<c:forEach var="op" items="${ opList }">
 						<input type="hidden" name="roomId" value="${ op.rId }">
 						<tr>
 							<th>객실타입</th>
-							<td colspan="2"><input type="hidden" name="roomType" value="${ op.roomType }">${ op.roomType }</td>
-							<th style="width:60px;">객실 수</th>
-							<td><input type="hidden" name="roomCount" value="${ op.roomCount }">${ op.roomCount }</td>
+							<td><input type="hidden" name="roomType" value="${ op.roomType }">${ op.roomType }</td>
+							<th>객실 수</th>
+							<td><input type="hidden" name="roomCount" value="${ op.roomCount }">${ op.roomCount }실</td>
 						</tr>
 						<tr>
 							<th>객실 가격</th>
-							<td colspan="2"><input type="hidden" name="roomPrice" value="${ op.roomPrice }">${ op.roomPrice }</td>
-							<th style="width:60px;">정원</th>
-							<td><input type="hidden" name="roomPeople" value="${ op.roomPeople }">${ op.roomPeople }</td>
+							<td><input type="hidden" name="roomPrice" value="${ op.roomPrice }">${ op.roomPrice }</td>
+							<th>정원</th>
+							<td><input type="hidden" name="roomPeople" value="${ op.roomPeople }">${ op.roomPeople }명</td>
 						</tr>
 					</c:forEach>
-					<tr>
-						<th>등록 기간</th>
-						<td colspan="3"><input type="hidden" name="term" value="${ opList.get(0).term }">${ opList.get(0).term }</td>
-						<td><button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#extendsModal">연장하기</button></td>
-					</tr>
 					<tr>
 						<td colspan="5" align="center">
 							<button type="button" onclick="return recvPage();" class="btn btn-default">이전</button>&nbsp;&nbsp;

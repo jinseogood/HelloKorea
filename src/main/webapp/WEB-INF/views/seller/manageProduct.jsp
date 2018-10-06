@@ -8,14 +8,14 @@
 <title>Insert title here</title>
 <style>
 	.content{
-		width:1000px;
+		width:1200px;
 		height:800px;
 		margin-left:auto;
 		margin-right:auto;
 	}
 	.titleArea{
     	padding:3%;
-    	width:950px;
+    	width:60%;
     	margin-left:auto;
     	margin-right:auto;
 	}
@@ -30,7 +30,7 @@
 	    margin-bottom:5%;
 	}
 	#productTable{
-		width:950px;
+		width:1200px;
 		border-collapse: collapse;
 	    text-align: center;
 	    line-height: 1.5;
@@ -116,12 +116,13 @@
 			<table id="productTable" align="center">
 				<thead>
 					<tr>
-						<th width="40px">No</th>
-						<th width="250px">상호명</th>
+						<th width="50px">No</th>
+						<th width="300px">상호명</th>
 						<th width="250px">주소</th>
 						<th width="150px">전화번호</th>
-						<th width="100px">등록 기간</th>
-						<th width="80px">상태</th>
+						<th width="100px">신청일</th>
+						<th width="200px">등록 기간</th>
+						<th width="100px">상태</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -135,7 +136,8 @@
 								<td>${ p.companyName }</td>
 								<td>${ p.companyAddress }</td>
 								<td>${ p.companyPhone }</td>
-								<td>${ p.term }</td>
+								<td>${ p.crDate }</td>
+								<td>${ p.apDate } - ${ p.crEDate }</td>
 								<td>${ p.status }</td>
 								<c:set var="no" value="${ no + 1 }"/>
 							</tr>

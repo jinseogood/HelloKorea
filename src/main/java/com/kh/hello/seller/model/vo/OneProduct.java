@@ -1,5 +1,7 @@
 package com.kh.hello.seller.model.vo;
 
+import java.sql.Date;
+
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -15,11 +17,15 @@ public class OneProduct implements java.io.Serializable{
 	private int roomPeople;
 	private int crId;
 	private String term;
+	private Date crDate;
+	private Date apDate;
+	private Date crEDate;
 	
 	public OneProduct(){}
 
 	public OneProduct(int cId, String companyName, String companyPhone, String companyAddress, int rId, String roomType,
-			int roomCount, String roomPrice, int roomPeople, int crId, String term) {
+			int roomCount, String roomPrice, int roomPeople, int crId, String term, Date crDate, Date apDate,
+			Date crEDate) {
 		super();
 		this.cId = cId;
 		this.companyName = companyName;
@@ -32,6 +38,9 @@ public class OneProduct implements java.io.Serializable{
 		this.roomPeople = roomPeople;
 		this.crId = crId;
 		this.term = term;
+		this.crDate = crDate;
+		this.apDate = apDate;
+		this.crEDate = crEDate;
 	}
 
 	public int getcId() {
@@ -122,14 +131,37 @@ public class OneProduct implements java.io.Serializable{
 		this.term = term;
 	}
 
+	public Date getCrDate() {
+		return crDate;
+	}
+
+	public void setCrDate(Date crDate) {
+		this.crDate = crDate;
+	}
+
+	public Date getApDate() {
+		return apDate;
+	}
+
+	public void setApDate(Date apDate) {
+		this.apDate = apDate;
+	}
+
+	public Date getCrEDate() {
+		return crEDate;
+	}
+
+	public void setCrEDate(Date crEDate) {
+		this.crEDate = crEDate;
+	}
+
 	@Override
 	public String toString() {
 		return "OneProduct [cId=" + cId + ", companyName=" + companyName + ", companyPhone=" + companyPhone
 				+ ", companyAddress=" + companyAddress + ", rId=" + rId + ", roomType=" + roomType + ", roomCount="
 				+ roomCount + ", roomPrice=" + roomPrice + ", roomPeople=" + roomPeople + ", crId=" + crId + ", term="
-				+ term + "]";
+				+ term + ", crDate=" + crDate + ", apDate=" + apDate + ", crEDate=" + crEDate + "]";
 	}
 
-	
 	
 }

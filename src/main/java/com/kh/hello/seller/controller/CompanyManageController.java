@@ -37,6 +37,8 @@ public class CompanyManageController {
 	@RequestMapping(value="addCompany.sell", method=RequestMethod.POST)
 	public String addCompany(Registration r, Model model, HttpServletRequest request, @RequestParam(name="companyFile", required=false)MultipartFile companyFile, @RequestParam(name="personalFile")MultipartFile personalFile){
 		
+		System.out.println("Controller Registration : " + r);
+		
 		String root=request.getSession().getServletContext().getRealPath("resources");
 		
 		String filePath=root + "\\uploadFiles\\seller";
@@ -50,532 +52,36 @@ public class CompanyManageController {
 		String originComFileName="";
 		String comExt="";
 		String changeComName="";
-		System.out.println(r);
+		
 		if(!r.getCompanyNum().equals("")){
 			originComFileName=companyFile.getOriginalFilename();
 			comExt=originComFileName.substring(originComFileName.lastIndexOf("."));
 			changeComName=CommonUtils.getRandomString();
 		}
 		try {
-		
-			//Company
-			Company c=new Company();
-			c.setcId(r.getcId());
-			c.setContentId(r.getContentId());
-			c.setSellerType(r.getSellerType());
-			c.setCompanyNum(r.getCompanyNum());
-			c.setPersonalNum(r.getPersonalNum());
-			c.setCompanyName(r.getCompanyName());
-			c.setCompanyPhone(r.getCompanyPhone());
-			c.setCompanyAddress(r.getCompanyAddress());
-			c.setmId(r.getmId());
-			
-			ss.insertCompany(c);
-			
-			//Room
-			if(!r.getRoomType2().equals("")){
-				if(!r.getRoomType3().equals("")){
-					if(!r.getRoomType4().equals("")){
-						if(!r.getRoomType5().equals("")){
-							if(!r.getRoomType6().equals("")){
-								if(!r.getRoomType7().equals("")){
-									if(!r.getRoomType8().equals("")){
-										if(!r.getRoomType9().equals("")){
-											Room rm=new Room();
-											rm.setrId(r.getcId());
-											rm.setRoomType(r.getRoomType1());
-											rm.setRoomCount(r.getRoomCount1());
-											rm.setRoomPrice(Integer.parseInt(r.getRoomPrice1()));
-											rm.setRoomPeople(r.getRoomPeople1());
-											rm.setrId(r.getrId());
-											
-											ss.insertRoom1(rm);
-											
-											Room rm2=new Room();
-											rm2.setrId(r.getcId());
-											rm2.setRoomType(r.getRoomType2());
-											rm2.setRoomCount(r.getRoomCount2());
-											rm2.setRoomPrice(Integer.parseInt(r.getRoomPrice2()));
-											rm2.setRoomPeople(r.getRoomPeople2());
-											rm2.setrId(r.getrId());
-											
-											ss.insertRoom2(rm2);
-											
-											Room rm3=new Room();
-											rm3.setrId(r.getcId());
-											rm3.setRoomType(r.getRoomType3());
-											rm3.setRoomCount(r.getRoomCount3());
-											rm3.setRoomPrice(Integer.parseInt(r.getRoomPrice3()));
-											rm3.setRoomPeople(r.getRoomPeople3());
-											rm3.setrId(r.getrId());
-											
-											ss.insertRoom3(rm3);
-											
-											Room rm4=new Room();
-											rm4.setrId(r.getcId());
-											rm4.setRoomType(r.getRoomType4());
-											rm4.setRoomCount(r.getRoomCount4());
-											rm4.setRoomPrice(Integer.parseInt(r.getRoomPrice4()));
-											rm4.setRoomPeople(r.getRoomPeople4());
-											rm4.setrId(r.getrId());
-											
-											ss.insertRoom4(rm4);
-											
-											Room rm5=new Room();
-											rm5.setrId(r.getcId());
-											rm5.setRoomType(r.getRoomType5());
-											rm5.setRoomCount(r.getRoomCount5());
-											rm5.setRoomPrice(Integer.parseInt(r.getRoomPrice5()));
-											rm5.setRoomPeople(r.getRoomPeople5());
-											rm5.setrId(r.getrId());
-											
-											ss.insertRoom5(rm5);
-											
-											Room rm6=new Room();
-											rm6.setrId(r.getcId());
-											rm6.setRoomType(r.getRoomType6());
-											rm6.setRoomCount(r.getRoomCount6());
-											rm6.setRoomPrice(Integer.parseInt(r.getRoomPrice6()));
-											rm6.setRoomPeople(r.getRoomPeople6());
-											rm6.setrId(r.getrId());
-											
-											ss.insertRoom6(rm6);
-											
-											Room rm7=new Room();
-											rm7.setrId(r.getcId());
-											rm7.setRoomType(r.getRoomType7());
-											rm7.setRoomCount(r.getRoomCount7());
-											rm7.setRoomPrice(Integer.parseInt(r.getRoomPrice7()));
-											rm7.setRoomPeople(r.getRoomPeople7());
-											rm7.setrId(r.getrId());
-											
-											ss.insertRoom7(rm7);
-											
-											Room rm8=new Room();
-											rm8.setrId(r.getcId());
-											rm8.setRoomType(r.getRoomType8());
-											rm8.setRoomCount(r.getRoomCount8());
-											rm8.setRoomPrice(Integer.parseInt(r.getRoomPrice8()));
-											rm8.setRoomPeople(r.getRoomPeople8());
-											rm8.setrId(r.getrId());
-											
-											ss.insertRoom8(rm8);
-											
-											Room rm9=new Room();
-											rm9.setrId(r.getcId());
-											rm9.setRoomType(r.getRoomType9());
-											rm9.setRoomCount(r.getRoomCount9());
-											rm9.setRoomPrice(Integer.parseInt(r.getRoomPrice9()));
-											rm9.setRoomPeople(r.getRoomPeople9());
-											rm9.setrId(r.getrId());
-											
-											ss.insertRoom3(rm3);
-										}
-										else{
-											Room rm=new Room();
-											rm.setrId(r.getcId());
-											rm.setRoomType(r.getRoomType1());
-											rm.setRoomCount(r.getRoomCount1());
-											rm.setRoomPrice(Integer.parseInt(r.getRoomPrice1()));
-											rm.setRoomPeople(r.getRoomPeople1());
-											rm.setrId(r.getrId());
-											
-											ss.insertRoom1(rm);
-											
-											Room rm2=new Room();
-											rm2.setrId(r.getcId());
-											rm2.setRoomType(r.getRoomType2());
-											rm2.setRoomCount(r.getRoomCount2());
-											rm2.setRoomPrice(Integer.parseInt(r.getRoomPrice2()));
-											rm2.setRoomPeople(r.getRoomPeople2());
-											rm2.setrId(r.getrId());
-											
-											ss.insertRoom2(rm2);
-											
-											Room rm3=new Room();
-											rm3.setrId(r.getcId());
-											rm3.setRoomType(r.getRoomType3());
-											rm3.setRoomCount(r.getRoomCount3());
-											rm3.setRoomPrice(Integer.parseInt(r.getRoomPrice3()));
-											rm3.setRoomPeople(r.getRoomPeople3());
-											rm3.setrId(r.getrId());
-											
-											ss.insertRoom3(rm3);
-											
-											Room rm4=new Room();
-											rm4.setrId(r.getcId());
-											rm4.setRoomType(r.getRoomType4());
-											rm4.setRoomCount(r.getRoomCount4());
-											rm4.setRoomPrice(Integer.parseInt(r.getRoomPrice4()));
-											rm4.setRoomPeople(r.getRoomPeople4());
-											rm4.setrId(r.getrId());
-											
-											ss.insertRoom4(rm4);
-											
-											Room rm5=new Room();
-											rm5.setrId(r.getcId());
-											rm5.setRoomType(r.getRoomType5());
-											rm5.setRoomCount(r.getRoomCount5());
-											rm5.setRoomPrice(Integer.parseInt(r.getRoomPrice5()));
-											rm5.setRoomPeople(r.getRoomPeople5());
-											rm5.setrId(r.getrId());
-											
-											ss.insertRoom5(rm5);
-											
-											Room rm6=new Room();
-											rm6.setrId(r.getcId());
-											rm6.setRoomType(r.getRoomType6());
-											rm6.setRoomCount(r.getRoomCount6());
-											rm6.setRoomPrice(Integer.parseInt(r.getRoomPrice6()));
-											rm6.setRoomPeople(r.getRoomPeople6());
-											rm6.setrId(r.getrId());
-											
-											ss.insertRoom6(rm6);
-											
-											Room rm7=new Room();
-											rm7.setrId(r.getcId());
-											rm7.setRoomType(r.getRoomType7());
-											rm7.setRoomCount(r.getRoomCount7());
-											rm7.setRoomPrice(Integer.parseInt(r.getRoomPrice7()));
-											rm7.setRoomPeople(r.getRoomPeople7());
-											rm7.setrId(r.getrId());
-											
-											ss.insertRoom7(rm7);
-											
-											Room rm8=new Room();
-											rm8.setrId(r.getcId());
-											rm8.setRoomType(r.getRoomType8());
-											rm8.setRoomCount(r.getRoomCount8());
-											rm8.setRoomPrice(Integer.parseInt(r.getRoomPrice8()));
-											rm8.setRoomPeople(r.getRoomPeople8());
-											rm8.setrId(r.getrId());
-											
-											ss.insertRoom8(rm8);
-											
-										}
-									}
-									else{
-										Room rm=new Room();
-										rm.setrId(r.getcId());
-										rm.setRoomType(r.getRoomType1());
-										rm.setRoomCount(r.getRoomCount1());
-										rm.setRoomPrice(Integer.parseInt(r.getRoomPrice1()));
-										rm.setRoomPeople(r.getRoomPeople1());
-										rm.setrId(r.getrId());
-										
-										ss.insertRoom1(rm);
-										
-										Room rm2=new Room();
-										rm2.setrId(r.getcId());
-										rm2.setRoomType(r.getRoomType2());
-										rm2.setRoomCount(r.getRoomCount2());
-										rm2.setRoomPrice(Integer.parseInt(r.getRoomPrice2()));
-										rm2.setRoomPeople(r.getRoomPeople2());
-										rm2.setrId(r.getrId());
-										
-										ss.insertRoom2(rm2);
-										
-										Room rm3=new Room();
-										rm3.setrId(r.getcId());
-										rm3.setRoomType(r.getRoomType3());
-										rm3.setRoomCount(r.getRoomCount3());
-										rm3.setRoomPrice(Integer.parseInt(r.getRoomPrice3()));
-										rm3.setRoomPeople(r.getRoomPeople3());
-										rm3.setrId(r.getrId());
-										
-										ss.insertRoom3(rm3);
-										
-										Room rm4=new Room();
-										rm4.setrId(r.getcId());
-										rm4.setRoomType(r.getRoomType4());
-										rm4.setRoomCount(r.getRoomCount4());
-										rm4.setRoomPrice(Integer.parseInt(r.getRoomPrice4()));
-										rm4.setRoomPeople(r.getRoomPeople4());
-										rm4.setrId(r.getrId());
-										
-										ss.insertRoom4(rm4);
-										
-										Room rm5=new Room();
-										rm5.setrId(r.getcId());
-										rm5.setRoomType(r.getRoomType5());
-										rm5.setRoomCount(r.getRoomCount5());
-										rm5.setRoomPrice(Integer.parseInt(r.getRoomPrice5()));
-										rm5.setRoomPeople(r.getRoomPeople5());
-										rm5.setrId(r.getrId());
-										
-										ss.insertRoom5(rm5);
-										
-										Room rm6=new Room();
-										rm6.setrId(r.getcId());
-										rm6.setRoomType(r.getRoomType6());
-										rm6.setRoomCount(r.getRoomCount6());
-										rm6.setRoomPrice(Integer.parseInt(r.getRoomPrice6()));
-										rm6.setRoomPeople(r.getRoomPeople6());
-										rm6.setrId(r.getrId());
-										
-										ss.insertRoom6(rm6);
-										
-										Room rm7=new Room();
-										rm7.setrId(r.getcId());
-										rm7.setRoomType(r.getRoomType7());
-										rm7.setRoomCount(r.getRoomCount7());
-										rm7.setRoomPrice(Integer.parseInt(r.getRoomPrice7()));
-										rm7.setRoomPeople(r.getRoomPeople7());
-										rm7.setrId(r.getrId());
-										
-										ss.insertRoom7(rm7);
-										
-									}
-								}
-								else{
-									Room rm=new Room();
-									rm.setrId(r.getcId());
-									rm.setRoomType(r.getRoomType1());
-									rm.setRoomCount(r.getRoomCount1());
-									rm.setRoomPrice(Integer.parseInt(r.getRoomPrice1()));
-									rm.setRoomPeople(r.getRoomPeople1());
-									rm.setrId(r.getrId());
-									
-									ss.insertRoom1(rm);
-									
-									Room rm2=new Room();
-									rm2.setrId(r.getcId());
-									rm2.setRoomType(r.getRoomType2());
-									rm2.setRoomCount(r.getRoomCount2());
-									rm2.setRoomPrice(Integer.parseInt(r.getRoomPrice2()));
-									rm2.setRoomPeople(r.getRoomPeople2());
-									rm2.setrId(r.getrId());
-									
-									ss.insertRoom2(rm2);
-									
-									Room rm3=new Room();
-									rm3.setrId(r.getcId());
-									rm3.setRoomType(r.getRoomType3());
-									rm3.setRoomCount(r.getRoomCount3());
-									rm3.setRoomPrice(Integer.parseInt(r.getRoomPrice3()));
-									rm3.setRoomPeople(r.getRoomPeople3());
-									rm3.setrId(r.getrId());
-									
-									ss.insertRoom3(rm3);
-									
-									Room rm4=new Room();
-									rm4.setrId(r.getcId());
-									rm4.setRoomType(r.getRoomType4());
-									rm4.setRoomCount(r.getRoomCount4());
-									rm4.setRoomPrice(Integer.parseInt(r.getRoomPrice4()));
-									rm4.setRoomPeople(r.getRoomPeople4());
-									rm4.setrId(r.getrId());
-									
-									ss.insertRoom4(rm4);
-									
-									Room rm5=new Room();
-									rm5.setrId(r.getcId());
-									rm5.setRoomType(r.getRoomType5());
-									rm5.setRoomCount(r.getRoomCount5());
-									rm5.setRoomPrice(Integer.parseInt(r.getRoomPrice5()));
-									rm5.setRoomPeople(r.getRoomPeople5());
-									rm5.setrId(r.getrId());
-									
-									ss.insertRoom5(rm5);
-									
-									Room rm6=new Room();
-									rm6.setrId(r.getcId());
-									rm6.setRoomType(r.getRoomType6());
-									rm6.setRoomCount(r.getRoomCount6());
-									rm6.setRoomPrice(Integer.parseInt(r.getRoomPrice6()));
-									rm6.setRoomPeople(r.getRoomPeople6());
-									rm6.setrId(r.getrId());
-									
-									ss.insertRoom6(rm6);
-								}
-							}
-							else{
-								Room rm=new Room();
-								rm.setrId(r.getcId());
-								rm.setRoomType(r.getRoomType1());
-								rm.setRoomCount(r.getRoomCount1());
-								rm.setRoomPrice(Integer.parseInt(r.getRoomPrice1()));
-								rm.setRoomPeople(r.getRoomPeople1());
-								rm.setrId(r.getrId());
-								
-								ss.insertRoom1(rm);
-								
-								Room rm2=new Room();
-								rm2.setrId(r.getcId());
-								rm2.setRoomType(r.getRoomType2());
-								rm2.setRoomCount(r.getRoomCount2());
-								rm2.setRoomPrice(Integer.parseInt(r.getRoomPrice2()));
-								rm2.setRoomPeople(r.getRoomPeople2());
-								rm2.setrId(r.getrId());
-								
-								ss.insertRoom2(rm2);
-								
-								Room rm3=new Room();
-								rm3.setrId(r.getcId());
-								rm3.setRoomType(r.getRoomType3());
-								rm3.setRoomCount(r.getRoomCount3());
-								rm3.setRoomPrice(Integer.parseInt(r.getRoomPrice3()));
-								rm3.setRoomPeople(r.getRoomPeople3());
-								rm3.setrId(r.getrId());
-								
-								ss.insertRoom3(rm3);
-								
-								Room rm4=new Room();
-								rm4.setrId(r.getcId());
-								rm4.setRoomType(r.getRoomType4());
-								rm4.setRoomCount(r.getRoomCount4());
-								rm4.setRoomPrice(Integer.parseInt(r.getRoomPrice4()));
-								rm4.setRoomPeople(r.getRoomPeople4());
-								rm4.setrId(r.getrId());
-								
-								ss.insertRoom4(rm4);
-								
-								Room rm5=new Room();
-								rm5.setrId(r.getcId());
-								rm5.setRoomType(r.getRoomType5());
-								rm5.setRoomCount(r.getRoomCount5());
-								rm5.setRoomPrice(Integer.parseInt(r.getRoomPrice5()));
-								rm5.setRoomPeople(r.getRoomPeople5());
-								rm5.setrId(r.getrId());
-								
-								ss.insertRoom5(rm5);
-								
-							}
-						}
-						else{
-							Room rm=new Room();
-							rm.setrId(r.getcId());
-							rm.setRoomType(r.getRoomType1());
-							rm.setRoomCount(r.getRoomCount1());
-							rm.setRoomPrice(Integer.parseInt(r.getRoomPrice1()));
-							rm.setRoomPeople(r.getRoomPeople1());
-							rm.setrId(r.getrId());
-							
-							ss.insertRoom1(rm);
-							
-							Room rm2=new Room();
-							rm2.setrId(r.getcId());
-							rm2.setRoomType(r.getRoomType2());
-							rm2.setRoomCount(r.getRoomCount2());
-							rm2.setRoomPrice(Integer.parseInt(r.getRoomPrice2()));
-							rm2.setRoomPeople(r.getRoomPeople2());
-							rm2.setrId(r.getrId());
-							
-							ss.insertRoom2(rm2);
-							
-							Room rm3=new Room();
-							rm3.setrId(r.getcId());
-							rm3.setRoomType(r.getRoomType3());
-							rm3.setRoomCount(r.getRoomCount3());
-							rm3.setRoomPrice(Integer.parseInt(r.getRoomPrice3()));
-							rm3.setRoomPeople(r.getRoomPeople3());
-							rm3.setrId(r.getrId());
-							
-							ss.insertRoom3(rm3);
-							
-							Room rm4=new Room();
-							rm4.setrId(r.getcId());
-							rm4.setRoomType(r.getRoomType4());
-							rm4.setRoomCount(r.getRoomCount4());
-							rm4.setRoomPrice(Integer.parseInt(r.getRoomPrice4()));
-							rm4.setRoomPeople(r.getRoomPeople4());
-							rm4.setrId(r.getrId());
-							
-							ss.insertRoom4(rm4);
-							
-						}
-					}
-					else{
-						Room rm=new Room();
-						rm.setrId(r.getcId());
-						rm.setRoomType(r.getRoomType1());
-						rm.setRoomCount(r.getRoomCount1());
-						rm.setRoomPrice(Integer.parseInt(r.getRoomPrice1()));
-						rm.setRoomPeople(r.getRoomPeople1());
-						rm.setrId(r.getrId());
-						
-						ss.insertRoom1(rm);
-						
-						Room rm2=new Room();
-						rm2.setrId(r.getcId());
-						rm2.setRoomType(r.getRoomType2());
-						rm2.setRoomCount(r.getRoomCount2());
-						rm2.setRoomPrice(Integer.parseInt(r.getRoomPrice2()));
-						rm2.setRoomPeople(r.getRoomPeople2());
-						rm2.setrId(r.getrId());
-						
-						ss.insertRoom2(rm2);
-						
-						Room rm3=new Room();
-						rm3.setrId(r.getcId());
-						rm3.setRoomType(r.getRoomType3());
-						rm3.setRoomCount(r.getRoomCount3());
-						rm3.setRoomPrice(Integer.parseInt(r.getRoomPrice3()));
-						rm3.setRoomPeople(r.getRoomPeople3());
-						rm3.setrId(r.getrId());
-						
-						ss.insertRoom3(rm3);
-					}
-				}
-				else{
-					Room rm=new Room();
-					rm.setrId(r.getcId());
-					rm.setRoomType(r.getRoomType1());
-					rm.setRoomCount(r.getRoomCount1());
-					rm.setRoomPrice(Integer.parseInt(r.getRoomPrice1()));
-					rm.setRoomPeople(r.getRoomPeople1());
-					rm.setrId(r.getrId());
-					
-					ss.insertRoom1(rm);
-					
-					Room rm2=new Room();
-					rm2.setrId(r.getcId());
-					rm2.setRoomType(r.getRoomType2());
-					rm2.setRoomCount(r.getRoomCount2());
-					rm2.setRoomPrice(Integer.parseInt(r.getRoomPrice2()));
-					rm2.setRoomPeople(r.getRoomPeople2());
-					rm2.setrId(r.getrId());
-					
-					ss.insertRoom2(rm2);
-				}
-			}
-			else{
-				Room rm=new Room();
-				rm.setrId(r.getcId());
-				rm.setRoomType(r.getRoomType1());
-				rm.setRoomCount(r.getRoomCount1());
-				rm.setRoomPrice(Integer.parseInt(r.getRoomPrice1()));
-				rm.setRoomPeople(r.getRoomPeople1());
-				rm.setrId(r.getrId());
-				
-				ss.insertRoom1(rm);
-			}
-			
-			//RH
-			RegistrationHistory rh=new RegistrationHistory();
-			rh.setcId(r.getcId());
-			rh.setTerm(r.getTerm());
-			
-			ss.insertRH(rh);
-			
-			personalFile.transferTo(new File(filePath + "\\" + changePerName + perExt));
 			
 			Attachment perFileDB=new Attachment();
 			perFileDB.setFilePath(filePath);
 			perFileDB.setOriginName(originPerFileName);
 			perFileDB.setChangeName(changePerName + perExt);
 			
-			ss.insertPerFile(perFileDB);
-			
+			Attachment comFileDB=null;
 			if(!originComFileName.equals("")){
-				companyFile.transferTo(new File(filePath + "\\" + changeComName + comExt));
 				
-				Attachment comFileDB=new Attachment();
+				comFileDB=new Attachment();
 				comFileDB.setFilePath(filePath);
 				comFileDB.setOriginName(originComFileName);
 				comFileDB.setChangeName(changeComName + comExt);
 				
-				ss.insertComFile(comFileDB);
+			}
+			
+			int result=ss.insertRegistration(r, perFileDB, comFileDB);
+			
+			if(result > 0){
+				personalFile.transferTo(new File(filePath + "\\" + changePerName + perExt));
+				if(!originComFileName.equals("")){
+					companyFile.transferTo(new File(filePath + "\\" + changeComName + comExt));
+				}
 			}
 			
 			return "seller/sellerMain";
@@ -632,6 +138,9 @@ public class CompanyManageController {
 				else if(searchWord.equals("미승인")){
 					searchWord="N";
 				}
+				else if(searchWord.equals("중도해지")){
+					searchWord="T";
+				}
 				spd.setStatus(searchWord);
 			}
 			
@@ -646,6 +155,9 @@ public class CompanyManageController {
 			}
 			else if(list.get(i).getStatus().equals("N")){
 				list.get(i).setStatus("미승인");
+			}
+			else if(list.get(i).getStatus().equals("T")){
+				list.get(i).setStatus("중도해지");
 			}
 		}
 		

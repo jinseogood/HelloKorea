@@ -14,44 +14,8 @@ import com.kh.hello.seller.model.vo.SearchProduct;
 public interface SellerService {
 
 	//업체 등록
-	int insertCompany(Company c);
-
-	//객실1 등록
-	int insertRoom1(Room rm);
+	int insertRegistration(Registration r, Attachment perFileDB, Attachment comFileDB);
 	
-	//객실2 등록
-	int insertRoom2(Room rm);
-	
-	//객실3 등록
-	int insertRoom3(Room rm);
-	
-	//객실4 등록
-	int insertRoom4(Room rm);
-		
-	//객실5 등록
-	int insertRoom5(Room rm);
-		
-	//객실6 등록
-	int insertRoom6(Room rm);
-		
-	//객실7 등록
-	int insertRoom7(Room rm);
-		
-	//객실8 등록
-	int insertRoom8(Room rm);
-		
-	//객실9 등록
-	int insertRoom9(Room rm);
-
-	//등록이력 추가
-	int insertRH(RegistrationHistory rh);
-
-	//사업자등록증 파일 추가
-	int insertPerFile(Attachment perFileDB);
-
-	//법인등록증 파일 추가
-	int insertComFile(Attachment comFileDB);
-
 	//전체 상품 조회 리스트 카운트
 	int getProductListCount(int mId);
 
@@ -78,5 +42,6 @@ public interface SellerService {
 
 	//등록 기간 연장
 	int extendsPeriod(String cId, String term);
+
 
 }
