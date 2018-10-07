@@ -87,7 +87,7 @@ table.type09 td {
 	
 	</div>
 				<div class="searchArea" align="center">
-    <form action="selectDepositList.ad">
+    <form action="selectDepositHistoryList.ad">
 			<div class="col-xs-8 col-xs-offset-2">
 		    <div class="input-group">
                 <div class="input-group-btn search-panel">
@@ -98,6 +98,8 @@ table.type09 td {
                       <li><a href="#cId" class="search">업체번호</a></li>
                       <li><a href="#cName" class="search">업체명</a></li>
                       <li><a href="#descD" class="search">입금액순</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#datePick" onclick="showDatePicker()">입금일</a></li>
                     </ul>
                 </div>
                 <input type="hidden" name="searchParam" value="all" id="searchParam">         
@@ -107,7 +109,13 @@ table.type09 td {
                 </span>
                 </form>
             </div>
-            
+            <div id="datePicker">
+            <br>
+            <jsp:include page="../common/datePicker.jsp"/>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-white" type="submit">&nbsp;조회&nbsp;</button>
+            <br>
+            </div>
                 </div>
                 </div>
         </div>
@@ -115,7 +123,21 @@ table.type09 td {
 
 	
 	<script>
-
+	$(function(){
+   	 $("#datePicker").hide();
+   	 
+    });
+	 
+	 $(document).ready(function(e){
+		 $(".search").click(function(e){
+			 $("#datePicker").hide();
+		 });
+	 });
+	 
+    function showDatePicker(){
+   	 $("#datePicker").show();
+   	 
+    }
      
 	$(document).ready(function(e){
 	    $('.search-panel .dropdown-menu').find('a').click(function(e) {

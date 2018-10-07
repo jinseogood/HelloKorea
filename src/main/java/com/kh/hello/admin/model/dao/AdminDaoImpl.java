@@ -12,6 +12,8 @@ import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.CompanyDetails;
 import com.kh.hello.admin.model.vo.DatePick;
 import com.kh.hello.admin.model.vo.Deposit;
+import com.kh.hello.admin.model.vo.InterestStatistics;
+import com.kh.hello.admin.model.vo.NationalStatistics;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
@@ -438,17 +440,17 @@ public class AdminDaoImpl implements AdminDao{
 
 	//입금처리를 위한 리스트 검색 카운트
 	@Override
-	public int getSearchWordgetDepositListCount(SqlSessionTemplate sqlSession, Deposit d) {
-		return sqlSession.selectOne("selectSearchWordgetDepositListCount",d);
+	public int getSearchWordDepositListCount(SqlSessionTemplate sqlSession, Deposit d) {
+		return sqlSession.selectOne("selectSearchWordDepositListCount",d);
 	}
 
 	//입금처리를 위한 리스트 검색
 	@Override
-	public ArrayList<Deposit> selectSearchWordgetDepositList(SqlSessionTemplate sqlSession, Deposit d, PageInfo pi) {
+	public ArrayList<Deposit> selectSearchWordDepositList(SqlSessionTemplate sqlSession, Deposit d, PageInfo pi) {
 		ArrayList<Deposit> list = null;
 		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
-		list = (ArrayList)sqlSession.selectList("selectSearchWordgetDepositList", d, rowBounds);
+		list = (ArrayList)sqlSession.selectList("selectSearchWordDepositList", d, rowBounds);
 		return list;
 	}
 
@@ -458,11 +460,13 @@ public class AdminDaoImpl implements AdminDao{
 		return sqlSession.insert("insertDepositHistory",d);
 	}
 
+	//입금내역 리스트 카운트
 	@Override
 	public int getDepositHistoryListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("selectDepositHistoryListCount");
 	}
 
+	//입금내역 리스트
 	@Override
 	public ArrayList<Deposit> selectDepositHistoryList(SqlSessionTemplate sqlSession, PageInfo pi) {
 		ArrayList<Deposit> list = null;
@@ -470,6 +474,52 @@ public class AdminDaoImpl implements AdminDao{
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
 		list = (ArrayList)sqlSession.selectList("selectDepositHistoryList", null, rowBounds);
 		return list;
+	}
+
+	//입금내역 입금일 검색 카운트
+	@Override
+	public int getSearchDateDepositHistoryListCount(SqlSessionTemplate sqlSession, DatePick d) {
+		return sqlSession.selectOne("selectSearchDateDepositHistoryListCount",d);
+	}
+
+	//입금내역 입금일 검색
+	@Override
+	public ArrayList<Deposit> selectSearchDateDepositHistoryList(SqlSessionTemplate sqlSession, DatePick d,
+			PageInfo pi) {
+		ArrayList<Deposit> list = null;
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		list = (ArrayList)sqlSession.selectList("selectSearchDateDepositHistoryList", d, rowBounds);
+		return list;
+	}
+
+	//입금내역 검색 카운트
+	@Override
+	public int getSearchWordDepositHistroyListCount(SqlSessionTemplate sqlSession, Deposit d) {
+		return sqlSession.selectOne("selectSearchWordDepositHistroyListCount",d);
+	}
+
+	//입금내역 검색
+	@Override
+	public ArrayList<Deposit> selectSearchWordDepositHistoryList(SqlSessionTemplate sqlSession, Deposit d,
+			PageInfo pi) {
+		ArrayList<Deposit> list = null;
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		list = (ArrayList)sqlSession.selectList("selectSearchWordDepositHistoryList", d, rowBounds);
+		return list;
+	}
+
+	//국가별 가입자수(월별)
+	@Override
+	public ArrayList<NationalStatistics> selectNationalStatistics(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("selectNationalStatistics");
+	}
+
+	//회원 관심분야 통계
+	@Override
+	public ArrayList<InterestStatistics> selectInterestStatistics(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("selectInterestStatistics");
 	}
 
 }

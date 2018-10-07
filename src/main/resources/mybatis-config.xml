@@ -7,6 +7,8 @@
      
       <typeAliases>
           <typeAlias type="com.kh.hello.common.Attachment" alias="Attachment"/>
+          <typeAlias type="com.kh.hello.admin.model.vo.InterestStatistics" alias="InterestStatistics"/>
+          <typeAlias type="com.kh.hello.admin.model.vo.NationalStatistics" alias="NationalStatistics"/>
           <typeAlias type="com.kh.hello.admin.model.vo.Deposit" alias="Deposit"/>
           <typeAlias type="com.kh.hello.admin.model.vo.CompanyDetails" alias="CompanyDetails"/>
           <typeAlias type="com.kh.hello.admin.model.vo.Approval" alias="Approval"/>
@@ -28,6 +30,7 @@
       </typeAliases>
   
       <mappers>
+          <mapper resource="mappers/admin/statistics-mapper.xml"/>
           <mapper resource="mappers/admin/deposit-mapper.xml"/>
           <mapper resource="mappers/admin/company-mapper.xml"/>
           <mapper resource="mappers/admin/question-mapper.xml"/>

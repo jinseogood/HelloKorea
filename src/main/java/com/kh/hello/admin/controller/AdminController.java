@@ -24,6 +24,8 @@ import com.kh.hello.admin.model.vo.Blacklist;
 import com.kh.hello.admin.model.vo.CompanyDetails;
 import com.kh.hello.admin.model.vo.DatePick;
 import com.kh.hello.admin.model.vo.Deposit;
+import com.kh.hello.admin.model.vo.InterestStatistics;
+import com.kh.hello.admin.model.vo.NationalStatistics;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
@@ -615,9 +617,9 @@ public class AdminController {
 				d.setcName(searchWord);
 		    //입금액순은 mapper에서
 			}
-			listCount = as.getSearchWordgetDepositListCount(d);
+			listCount = as.getSearchWordDepositListCount(d);
 			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
-			list = as.selectSearchWordgetDepositList(d, pi);
+			list = as.selectSearchWordDepositList(d, pi);
 		}
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
@@ -647,7 +649,7 @@ public class AdminController {
 	}
 	//업체 입금 내역 보기
 	@RequestMapping("selectDepositHistoryList.ad")
-	public String selectDepositHistroyList(String searchParam, String searchWord, PageInfo p, Model model){
+	public String selectDepositHistroyList(String searchParam, String searchWord, String fromDate, String toDate, PageInfo p, Model model){
 		if(p.getCurrentPage() == 0){
 			p.setCurrentPage(1);
 		}
@@ -657,16 +659,25 @@ public class AdminController {
 		int listCount = 0;
 		
 		//전체 리스트
-		//if(searchParam == null && searchWord == null){
+		if(searchParam == null && searchWord == null){
 
 			listCount = as.getDepositHistoryListCount();
 			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);		
 			list = as.selectDepositHistoryList(pi);
 		
-		/*}else{
+		}else if(searchParam.equals("datePick")){
+			
+			DatePick d = new DatePick();
+			d.setFromDate(fromDate.replaceAll("-", ""));
+			d.setToDate(toDate.replaceAll("-", ""));
+			listCount = as.getSearchDateDepositHistoryListCount(d);
+			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
+			list = as.selectSearchDateDepositHistoryList(d, pi);
+			
+		}else{
 			Deposit d = new Deposit();
 			d.setcId(-99);
-			//등록이력번호 검색
+			//업체번호 검색
 			if(searchParam.equals("cId")){
 				d.setcId(Integer.parseInt(searchWord));
 			//업체명 검색
@@ -674,13 +685,37 @@ public class AdminController {
 				d.setcName(searchWord);
 		    //입금액순은 mapper에서
 			}
-			listCount = as.getSearchWordgetDepositListCount(d);
+			listCount = as.getSearchWordDepositHistroyListCount(d);
 			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
-			list = as.selectSearchWordgetDepositList(d, pi);
-		}*/
+			list = as.selectSearchWordDepositHistoryList(d, pi);
+		}
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		return "admin/depositHistory";
+	}
+	
+	//국가별 가입자 수(월별)
+	@RequestMapping("selectNationalStatistics.ad")
+	public @ResponseBody HashMap<String, Object> selectNationalStatistics(){
+	    
+		ArrayList<NationalStatistics> list = as.selectNationalStatistics();
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
+		
+		hmap.put("nationalList", list);
+		
+	    return hmap;
+	}
+	
+	//관심 분야
+	@RequestMapping("selectInterestStatistics.ad")
+    public @ResponseBody HashMap<String, Object> selectInterestStatistics(){
+	    
+		ArrayList<InterestStatistics> list = as.selectInterestStatistics();
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
+		
+		hmap.put("interestList", list);
+		
+	    return hmap;
 	}
 	
 	@RequestMapping("salesStatisticsView.ad")
