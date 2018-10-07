@@ -15,11 +15,6 @@ public class SellerPageController {
 		return "seller/addCompany";
 	}
 	
-	/*@RequestMapping("manageProductView.sell")
-	public String manageProductView(){
-		return "seller/manageProduct";
-	}*/
-	
 	@RequestMapping("reservationView.sell")
 	public String reservationView(){
 		return "seller/reservation";
@@ -30,14 +25,4 @@ public class SellerPageController {
 		return "seller/manageRevenue";
 	}
 	
-	/*@RequestMapping("editCompanyView.sell")
-	public String editCompanyView(){
-		return "seller/editCompany";
-	}*/
-	
-	@RequestMapping("paymentDetailView.sell")
-	public String paymentDetailView(){
-		return "payment/detailPayment";
-	}
-
 }
