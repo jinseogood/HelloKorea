@@ -10,6 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAf5xrmNMwmRYe-jdx4N3ItbdKDOJryoj4&callback=initialize" async defer></script>
 <title>Hello Korea</title>
 <style>
 	#more{margin-top:5%;}
@@ -19,11 +20,12 @@
 	.secondImgArea{display:inline-block;}
 	.secondImg{width:262.5px; height:217px; display:inline-block;}
 	.contentArea{display:block;}
-	.detailHead{text-align:center; width:280px; height:40px; background-color:lightgray;}
-	.detailContent{height:350px; text-align:center;}
+	.detailHead{text-align:center; width:1120px; height:40px; background-color:lightgray;}
+	.detailContent{height:350px; text-align:center; display:inline-block;}
 	.detailBottom{height:50px;}
 	.tm-about-box-1{padding:10px 10px;}
-	.roomImgTd{width:260px; height:300px;}
+	.foodImgTd{width:260px; height:300px;}
+	#foodInfoArea{margin:0 auto;}
 </style>
 </head>
 <body>
@@ -102,6 +104,7 @@
 						output = "<img src="+myData.firstimage+" alt='image' class='firstImg' />";
 					}
 					$(".firstImgArea").html(output);
+					initialize(myData.mapy, myData.mapx, myData.title);
 				},
 				error:function(data){
 					console.log(data);
@@ -186,12 +189,16 @@
 					var output = "";
 					var foodInfo = $("#foodInfoArea");
 					foodInfo.html("");
-					for(var i in myData){
-						output = "";
-						output += "<tr>";
-						output += "";
-						output += "</tr>";
+					foodInfo.html("<h3 align='center'>메뉴 이미지</h3><hr>");
+					if(data.response.body.totalCount == 0){
+						output += "<h3 align='center'>정보가 없습니다.</h3>";
 						document.getElementById("foodInfoArea").innerHTML += output;
+					}else{
+						for(var i in myData){
+							output = "";
+							output += "<div class='col-lg-3 detailContent'><img src="+myData[i].originimgurl+" class='foodImgTd' /></div>";
+							document.getElementById("foodInfoArea").innerHTML += output;
+						}
 					}
 				},
 				error:function(data){
@@ -209,37 +216,45 @@
 		});
 		/* Google map
       	------------------------------------------------*/
-      	var map = '';
-      	var center;
-
-      	function initialize() {
-	        var mapOptions = {
-	          	zoom: 14,
-	          	center: new google.maps.LatLng(37.769725, -122.462154),
-	          	scrollwheel: false
-        	};
-        
-	        map = new google.maps.Map(document.getElementById('google-map'),  mapOptions);
-
-	        google.maps.event.addDomListener(map, 'idle', function() {
-	          calculateCenter();
-	        });
-        
-	        google.maps.event.addDomListener(window, 'resize', function() {
-	          map.setCenter(center);
-	        });
-      	}
-
-	    function calculateCenter() {
-	        center = map.getCenter();
-	    }
-
-	    function loadGoogleMap(){
-	        var script = document.createElement('script');
-	        script.type = 'text/javascript';
-	        script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' + 'callback=initialize';
-	        document.body.appendChild(script);
-	    }
+      	var map;
+      	 
+        function initialize(mapy, mapx, title) {
+   
+        	var mapLocation = {lat:mapy, lng:mapx};
+          var mapOptions = { //구글 맵 옵션 설정
+              zoom : 16, //기본 확대율
+              center : new google.maps.LatLng(mapy, mapx), // 지도 중앙 위치
+              scrollwheel : false, //마우스 휠로 확대 축소 사용 여부
+              mapTypeControl : false //맵 타입 컨트롤 사용 여부
+          };
+   
+          map = new google.maps.Map(document.getElementById('google-map'), mapOptions); //구글 맵을 사용할 타겟
+          var size_x = 60;
+          var size_y = 60;
+          var image = new google.maps.MarkerImage('http://www.weicherthallmark.com/wp-content/themes/realty/lib/images/map-marker/map-marker-gold-fat.png', //마커 이미지 설정
+        		  		new google.maps.Size(size_x, size_y),
+        		  		'',
+        		  		'',
+        		  		new google.maps.Size(size_x, size_y));
+          				
+          var marker = new google.maps.Marker({ //마커 설정
+              map : map,
+              position : mapLocation, //마커 위치
+              icon : image,//마커 이미지
+              title : title//가게이름..
+          });
+          /* var marker = new google.maps.Marker({
+        	  position:uluru,
+        	  map:map
+          }); */
+   
+          google.maps.event.addDomListener(window, "resize", function() { //리사이즈에 따른 마커 위치
+              var center = map.getCenter();
+              google.maps.event.trigger(map, "resize");
+              map.setCenter(center); 
+          });
+   
+        }
 	
       	// DOM is ready
 		$(function() {
@@ -265,36 +280,16 @@
 		  	});
 
 		  	// Google Map
-		  	loadGoogleMap();
+		  	//loadGoogleMap();
 		  });
 	</script>
 	
 	<section class="container tm-home-section-1" id="more">
-		<div class="col-lg-12" >
-			<table border="1">
-				<thead>
-					<tr>
-						<th class="detailHead">객실유형</th>
-						<th class="detailHead">정원</th>
-						<th class="detailHead">가격</th>
-						<th class="detailHead">객실선택</th>
-					</tr>
-				</thead>
-				<tbody id="foodInfoArea">
-					<tr>
-						<td class="detailContent">정보오오오오오오오오</td>
-						<td class="detailContent">정보오오오오오오오오</td>
-						<td class="detailContent">정보오오오오오오오오</td>
-						<td class="detailContent">정보오오오오오오오오</td>
-					</tr>
-					<tr>
-						<td class="detailBottom"></td>
-						<td class="detailBottom"></td>
-						<td class="detailBottom"></td>
-						<td class="detailBottom"></td>
-					</tr>
-				</tbody>
-			</table>
+		<div class="col-lg-12" id="foodInfoArea">
+				<div class="col-lg-3 detailContent"></div>
+				<div class="col-lg-3 detailContent"></div>
+				<div class="col-lg-3 detailContent"></div>
+				<div class="col-lg-3 detailContent"></div>
 		</div>
 	</section>
 	
