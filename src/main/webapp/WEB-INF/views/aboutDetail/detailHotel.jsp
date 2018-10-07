@@ -77,8 +77,8 @@
 	</section>
 		<script>
 		
-			var contentid = ${param.contentid};
-			var contenttypeid = ${param.contenttypeid};
+			//var contentid = ${param.contentid};
+			//var contenttypeid = ${param.contenttypeid};
 			
 			function detailHotelInfo(){
 				console.log("deatilHotel : " + contenttypeid);
@@ -220,14 +220,14 @@
 					error:function(data){
 						console.log(data);
 					}
-				});
+				});//output += "ㆍ ";
 			}
 			
 			$(function(){
-				detailHotelInfo();//공통정보
-				detailHotelImage();//메인,서브이미지
-				detailHotelIntro();//호텔소개
-				detailRoomInfo();//객실정보
+				detailHotelInfo();
+				detailHotelImage();
+				detailHotelIntro();
+				detailRoomInfo();
 			});
 		
 		/* Google map
@@ -394,7 +394,7 @@
 <li><a>&laquo;</a></li>
             </c:if>
             <c:if test="${ pi.currentPage > 1 }">
-                <li><a onclick="goFirst();">&laquo;</a></li>
+                <li><a onclick="goPrev();">&laquo;</a></li>
             </c:if>
             <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
                 <c:if test="${ p eq pi.currentPage }">
@@ -408,108 +408,10 @@
                 <li><a>&raquo;</a></li>
             </c:if>
             <c:if test="${ pi.currentPage < pi.maxPage }">
-                <li><a onclick="goLast(${ pi.maxPage });">&raquo;</a></li>
+                <li><a onclick="goNext(${ pi.currentPage });">&raquo;</a></li>
             </c:if>
             </ul>
-    </div>
-         <%-- <br>
-         <div class="row line_b" >
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style = "height:220px">
-               <div class="tm-about-box-1" style = "height:220px; padding:10px 10px">
-                  <a href="#"><img src="${ contextPath }/resources/img/about-4.jpg" alt="img" class="tm-about-box-1-img" style = "margin:0 auto 10px"></a>
-                  <h3 class="tm-about-box-1-title" style = "margin-bottom:5px">Songs <span>( GOD )</span></h3>
-                  <!-- <p class="margin-bottom-15 gray-text">Proin gravida nibhvell aliquet. Aenean sollicitudin bibum auctor nisi elit.</p> -->
-                  <div class="gray-text">
-                     <a href="#" class="tm-social-icon"><i class="fa fa-twitter"></i></a>
-                     <a href="#" class="tm-social-icon"><i class="fa fa-facebook"></i></a>
-                     <a href="#" class="tm-social-icon"><i class="fa fa-pinterest"></i></a>
-                     <a href="#" class="tm-social-icon"><i class="fa fa-google-plus"></i></a>
-                  </div>
-               </div>
-            </div>
-            <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12 line_l" style = "height:220px">
-          	    <br>
-            	<span class="StarBar">
-            		<i class="fa fa-star"></i>
-            		<i class="fa fa-star"></i>
-            		<i class="fa fa-star"></i>
-            		<i class="fa fa-star"></i>
-            		<i class="fa fa-star"></i>
-            	</span>
-            	&nbsp;&nbsp;
-            	<span class="ReviewUpDate">
-            		리뷰 게시 날짜 : 2018년 09월 19일
-            	</span>
-            	<div class="ReviewTitle" style = "font-size:20px; cursor:pointer; padding-top:10px">
-            		<a href="#"><span>여기 너무 멋져요우~</span></a>
-            	</div>
-            	<div class="summary" style = "padding-top:10px">
-            		방과 수영장이 매우 좋았습니다. 다만 영어 못하는 택시기사가 바가지 씌울때 호텔에...
-            		방과 수영장이 매우 좋았습니다. 다만 영어 못하는 택시기사가 바가지 씌울때 호텔에...
-            		방과 수영장이 매우 좋았습니다. 다만 영어 못하는 택시기사가 바가지 씌울때 호텔에...
-            		방과 수영장이 매우 좋았습니다. 다만 영어 못하는 택시기사가 바가지 씌울때 호텔에...
-            		<span><a href="#">더 보기</a></span>
-            	</div>
-            	<div style = "padding-top:20px" >
-            		<div class="fa" style = "width:100%">
-            			<i class="fa fa-thumbs-o-up" style = "font-size:20px; padding-top:10px"> 0 </i>
-            			<i class="fa fa-comment" style = "font-size:20px; padding-top:10px"> 0 </i>
-            			<i class="fa fa-flag" style = "font-size:20px; padding-top:10px; float:right;"> 신고하기 </i>
-            		
-            		</div>
-            	</div>
-            </div>
-            
-         </div>   
-         <br>
-         <div class="row line_b" >
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style = "height:220px">
-               <div class="tm-about-box-1" style = "height:220px; padding:10px 10px">
-                  <a href="#"><img src="${ contextPath }/resources/img/about-4.jpg" alt="img" class="tm-about-box-1-img" style = "margin:0 auto 10px"></a>
-                  <h3 class="tm-about-box-1-title" style = "margin-bottom:5px">Songs <span>( GOD )</span></h3>
-                  <!-- <p class="margin-bottom-15 gray-text">Proin gravida nibhvell aliquet. Aenean sollicitudin bibum auctor nisi elit.</p> -->
-                  <div class="gray-text">
-                     <a href="#" class="tm-social-icon"><i class="fa fa-twitter"></i></a>
-                     <a href="#" class="tm-social-icon"><i class="fa fa-facebook"></i></a>
-                     <a href="#" class="tm-social-icon"><i class="fa fa-pinterest"></i></a>
-                     <a href="#" class="tm-social-icon"><i class="fa fa-google-plus"></i></a>
-                  </div>
-               </div>
-            </div>
-            <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12 line_l" style = "height:220px">
-            	<br>
-            	<span class="StarBar">
-            		<i class="fa fa-star"></i>
-            		<i class="fa fa-star"></i>
-            		<i class="fa fa-star"></i>
-            		<i class="fa fa-star"></i>
-            		<i class="fa fa-star"></i>
-            	</span>
-            	&nbsp;&nbsp;
-            	<span class="ReviewUpDate">
-            		리뷰 게시 날짜 : 2018년 09월 19일
-            	</span>
-            	<div class="ReviewTitle" style = "font-size:20px; cursor:pointer; padding-top:10px">
-            		<a href="#"><span>여기 너무 멋져요우~</span></a>
-            	</div>
-            	<div class="summary" style = "padding-top:10px">
-            		방과 수영장이 매우 좋았습니다. 다만 영어 못하는 택시기사가 바가지 씌울때 호텔에...
-            		방과 수영장이 매우 좋았습니다. 다만 영어 못하는 택시기사가 바가지 씌울때 호텔에...
-            		방과 수영장이 매우 좋았습니다. 다만 영어 못하는 택시기사가 바가지 씌울때 호텔에...
-            		방과 수영장이 매우 좋았습니다. 다만 영어 못하는 택시기사가 바가지 씌울때 호텔에...
-            		<span><a href="#">더 보기</a></span>
-            	</div>
-            	<div style = "padding-top:20px" >
-            		<div class="fa" style = "width:100%">
-            			<i class="fa fa-thumbs-o-up" style = "font-size:20px; padding-top:10px"> 0 </i>
-            			<i class="fa fa-comment" style = "font-size:20px; padding-top:10px"> 0 </i>
-            			<i class="fa fa-flag" style = "font-size:20px; padding-top:10px; float:right;"> 신고하기 </i>
-            		
-            		</div>
-            	</div>
-            </div> --%>
-            
-         <!-- </div>  -->       
+    </div>    
  
    </section> 
    
@@ -522,11 +424,13 @@
        		   <div class="col-lg-4 col-md-4 col-sm-4"><h2 class="tm-section-title">Q & A (6,143)</h2></div>
       		   <div class="col-lg-8 col-md-8 col-sm-8"><hr></div>
 	      	   <div style = "height:200px; width:100%; position:relative">
-	      	   		<button type="button" class="btn btn-secondary" style = "position:absolute; right:10px; bottom:10px">Q&A 쓰기</button>
+	      	   		<button type="button" class="btn btn-secondary" style = "position:absolute; right:10px; bottom:10px" onclick="qa()">Q&A 쓰기</button>
 	      	   </div>	   
 
       	 </div>
       </div>
+      <div class = "new_line2">
+      	<c:forEach var = "list2" items = "${ list2 }">
          <div class="row line_b" >
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style = "height:220px">
                <div class="tm-about-box-1" style = "height:220px; padding:10px 10px">
@@ -544,7 +448,7 @@
             <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12 line_l" style = "height:220px">	
             	<br>
             	<div class="summary" style = "padding-top:10px; font-size:18px">
-            		I am staying 5 nights in October for my wife's 50th birthday. We are staying in The Oberoi hotel in Bali for 5nights previous. Can you advise approximately how long between hotels when travelling around midday? Seondly, is there anything you can do to wish my wife a Happy Birthday when she arrives?
+            		${ list2.text }
             		<span><a href="#">더 보기</a></span>
             	</div>
             	<br>
@@ -552,11 +456,11 @@
             	<div style = "padding-top:1px" >
             		<div class="fa" style = "width:100%">
             			<span class="ReviewUpDate" style = "padding-top:5px">
-            				질문 날짜 : 2018년 09월 19일
+            				${ list2.modify_date }
             			</span>
             			<span>|</span>
             			<span class="ReviewUpDate" style = "padding-top:5px">
-            				<i class="fa fa-thumbs-o-up" style = "font-size:14px; padding-top:5px"> 0 </i>
+            				<i class="fa fa-thumbs-o-up" style = "font-size:14px; padding-top:5px"> ${ list2.likey } </i>
             				<i class="fa fa-flag" style = "font-size:14px; padding-top:5px; float:right; cursor:pointer"><a onclick="reportWrite()"> 신고하기</a></i>
             			</span>	
             		</div>
@@ -568,52 +472,33 @@
             </div>
             
          </div> 
-         <br>
-         <div class="row line_b" >
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style = "height:220px">
-               <div class="tm-about-box-1" style = "height:220px; padding:10px 10px">
-                  <a href="#"><img src="${ contextPath }/resources/img/about-4.jpg" alt="img" class="tm-about-box-1-img" style = "margin:0 auto 10px"></a>
-                  <h3 class="tm-about-box-1-title" style = "margin-bottom:5px">Songs <span>( GOD )</span></h3>
-                  <!-- <p class="margin-bottom-15 gray-text">Proin gravida nibhvell aliquet. Aenean sollicitudin bibum auctor nisi elit.</p> -->
-                  <div class="gray-text">
-                     <a href="#" class="tm-social-icon"><i class="fa fa-twitter"></i></a>
-                     <a href="#" class="tm-social-icon"><i class="fa fa-facebook"></i></a>
-                     <a href="#" class="tm-social-icon"><i class="fa fa-pinterest"></i></a>
-                     <a href="#" class="tm-social-icon"><i class="fa fa-google-plus"></i></a>
-                  </div>
-               </div>
-            </div>
-            <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12 line_l" style = "height:220px">	
-            	<br>
-            	<div class="summary" style = "padding-top:10px; font-size:18px">
-            		I am staying 5 nights in October for my wife's 50th birthday. We are staying in The Oberoi hotel in Bali for 5nights previous. Can you advise approximately how long between hotels when travelling around midday? Seondly, is there anything you can do to wish my wife a Happy Birthday when she arrives?
-            		<span><a href="#">더 보기</a></span>
-            	</div>
-            	<br>
-            	
-            	<div style = "padding-top:1px" >
-            		<div class="fa" style = "width:100%">
-            			<span class="ReviewUpDate" style = "padding-top:5px">
-            				질문 날짜 : 2018년 09월 19일
-            			</span>
-            			<span>|</span>
-            			<span class="ReviewUpDate" style = "padding-top:5px">
-            				<i class="fa fa-thumbs-o-up" style = "font-size:14px; padding-top:5px"> 0 </i>
-            				<i class="fa fa-flag" style = "font-size:14px; padding-top:5px; float:right; cursor:pointer"><a onclick="reportWrite()"> 신고하기</a></i>
-            			</span>	
-            		</div>
-            	</div>
-            	<div style = "margin-top:5px">
-            		<button type="button" class="btn btn-secondary">답변</button>
-            		<button type="button" class="btn btn-secondary">모든 답변보기</button>
-            	</div>
-            </div>
-            
-         </div> 
-         <br>
-         
-                
-      <!-- </div> -->
+         </c:forEach>
+      </div>    
+         <br>              
+      <div class="paging2" align="center">
+<ul class="pagination pagination-sm">
+<c:if test="${ pi2.currentPage <= 1 }">
+<li><a>&laquo;</a></li>
+            </c:if>
+            <c:if test="${ pi2.currentPage > 1 }">
+                <li><a onclick="goPrev2();">&laquo;</a></li>
+            </c:if>
+            <c:forEach var="p" begin="${ pi2.startPage }" end="${ pi2.endPage }">
+                <c:if test="${ p eq pi2.currentPage }">
+                <li><a style="background-color:#ddd;">${ p }</a></li>               
+                </c:if>
+                <c:if test="${ p ne pi2.currentPage }">
+                    <li><a onclick="goPage2(${ p });">${ p }</a></li>  
+                </c:if>
+            </c:forEach>
+            <c:if test="${ pi2.currentPage >= pi2.maxPage }">
+                <li><a>&raquo;</a></li>
+            </c:if>
+            <c:if test="${ pi2.currentPage < pi2.maxPage }">
+                <li><a onclick="goNext2(${ pi2.currentPage });">&raquo;</a></li>
+            </c:if>
+            </ul>
+    </div>  
    </section>
 	
 	<!-- white bg -->
@@ -622,6 +507,93 @@
 	<jsp:include page="../common/footer.jsp"/>
 	
 	<script>
+		function QPaging(page){
+			console.log("page : " + page);
+			
+			$.ajax({ 
+				url:"QPaging.bo",
+				type:"post",
+				data:{page:page},
+				dataType:"json",
+				success:function(data){
+					console.log("오나");
+					console.log(data);
+					
+					$divBody = $(".new_line2");
+					$divBody.html('');
+					
+					$pageBody = $(".paging2 ul");
+					$pageBody.html('');
+					
+					console.log(data.list2);
+					console.log(data.list2[0].bid);
+					console.log(data.pi2);
+					
+					var Q = data.list2;
+					console.log(Q.length);
+					var p2 = data.pi2;
+					
+					if(Q.length > 0){
+						for(var i = 0 ; i < Q.length; i++){
+							var output="";
+							output += "<div class='row line_b'>";
+							output += "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-12' style = 'height:220px'>";
+							output += "<div class='tm-about-box-1' style = 'height:220px; padding:10px 10px;'>";
+							output += "<a href='#'><img src='${ contextPath }/resources/img/about-4.jpg' alt='img' class='tm-about-box-1-img' style = 'margin:0 auto 10px;'></a>";
+							output += "<h3 class='tm-about-box-1-title' style = 'margin-bottom:5px;'>Songs <span>( GOD )</span></h3>";
+							output += "<div class='gray-text'>";
+							output += "<a href='#' class='tm-social-icon'><i class='fa fa-twitter'></i></a>";
+							output += "<a href='#' class='tm-social-icon'><i class='fa fa-facebook'></i></a>";
+							output += "<a href='#' class='tm-social-icon'><i class='fa fa-pinterest'></i></a>";
+							output += "<a href='#' class='tm-social-icon'><i class='fa fa-google-plus'></i></a>";
+							output += "</div>";
+							output += "</div>";
+							output += "</div>";	
+							output += "<div class='col-lg-9 col-md-9 col-sm-6 col-xs-12 line_l' style = 'height:220px;' ><br>";
+							output += "<div class='summary' style = 'padding-top:10px; font-size:18px'>";
+							output += Q[i].text+"<span><a href="#">더 보기</a></span></div><br>";
+							output += "<div style = 'padding-top:1px' >";
+							output += "<div class='fa' style = 'width:100%'>";
+							output += "<span class='ReviewUpDate' style = 'padding-top:5px'>";
+							output += Q[i].modify_date"</span>";
+							output += "<span>|</span>";
+							output += "<span class='ReviewUpDate' style = 'padding-top:5px'><i class='fa fa-thumbs-o-up' style = 'font-size:14px; padding-top:5px'>"+Q[i].likey+"</i><i class='fa fa-flag' style = 'font-size:14px; padding-top:5px; float:right; cursor:pointer'><a onclick='reportWrite()'> 신고하기</a></i></span>";
+							output += "</div></div>";
+							output += "<div style = 'margin-top:5px'><button type='button' class='btn btn-secondary'>답변</button><button type='button' class='btn btn-secondary'>모든 답변보기</button></div></div>";
+							
+							$divBody.append(output);
+						}
+						var num = p2.maxPage;
+						var pOutput = "";
+						if(p2.currentPage <= 1){
+							pOutput += "<li><a>&laquo;</a></li>";
+						}
+						if(p2.currentPage > 1){
+							pOutput += "<li><a onclick='goPrev2("+p2.currentPage+");'>&laquo;</a></li>";
+						}
+						for(var a = p2.startPage ; a <= p2.endPage ; a++){
+							if(a == p2.currentPage){
+								pOutput += "<li><a style='background-color:#ddd;''>"+a+"</a></li>";
+							}
+							if(a != p.currentPage){
+								pOutput += "<li><a onclick='goPage2("+a+");'>"+a+"</a></li>";
+							}
+						}
+						if(p2.currentPage >= p2.maxPage){
+							pOutput += "<li><a>&raquo;</a></li>";
+						}
+						if(p2.currentPage < p2.maxPage){
+							pOutput += "<li><a onclick='goNext2("+p2.currentPage+");'>&raquo;</a></li>";
+						}
+
+						$pageBody.append(pOutput);
+					}
+				}, error:function(data){
+					console.log(data);
+				}
+			});
+		}
+		
 		function reviewPaging(page){
 			console.log("page : " + page);
 			
@@ -629,7 +601,6 @@
 				url:"reviewPaging.bo",
 				type:"post",
 				data:{page:page},
-				//async : false,
 				dataType:"json",
 				success:function(data){
 					console.log("오나");
@@ -682,36 +653,27 @@
 						}
 						var num = p.maxPage;
 						var pOutput = "";
-						/* if(p.currentPage <= 1){
+						if(p.currentPage <= 1){
 							pOutput += "<li><a>&laquo;</a></li>";
 						}
 						if(p.currentPage > 1){
-							pOutput += "<li><a onclick='goFirst();'>&laquo;</a></li>";
+							pOutput += "<li><a onclick='goPrev("+p.currentPage+");'>&laquo;</a></li>";
 						}
-						for(var a = p.startPage ; a < p.endPage ; a++){
-							
+						for(var a = p.startPage ; a <= p.endPage ; a++){
+							if(a == p.currentPage){
+								pOutput += "<li><a style='background-color:#ddd;''>"+a+"</a></li>";
+							}
+							if(a != p.currentPage){
+								pOutput += "<li><a onclick='goPage("+a+");'>"+a+"</a></li>";
+							}
 						}
-						            <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-						                <c:if test="${ p eq pi.currentPage }">
-						                <li><a style="background-color:#ddd;">${ p }</a></li>               
-						                </c:if>
-						                <c:if test="${ p ne pi.currentPage }">
-						                    <li><a onclick="goPage(${ p });">${ p }</a></li>  
-						                </c:if>
-						            </c:forEach>
-						            <c:if test="${ pi.currentPage >= pi.maxPage }">
-						                <li><a>&raquo;</a></li>
-						            </c:if>
-						            <c:if test="${ pi.currentPage < pi.maxPage }">
-						                <li><a onclick="goLast(${ pi.maxPage });">&raquo;</a></li>
-						            </c:if> */
-						pOutput += "<li><a onclick = 'goFirst();'>&laquo;</a></li>";
-						
-						for(var t = 1; t <= num ; t++){
-							pOutput += "<li><a onclick = 'goPage(" + t + ")')" + t + "</a></li>";
+						if(p.currentPage >= p.maxPage){
+							pOutput += "<li><a>&raquo;</a></li>";
 						}
-						
-						pOutput += "<li><a onclick = 'goLast(" + num + ")'>&raquo;</a></li>";
+						if(p.currentPage < p.maxPage){
+							pOutput += "<li><a onclick='goNext("+p.currentPage+");'>&raquo;</a></li>";
+						}
+
 						$pageBody.append(pOutput);
 					}
 				}, error:function(data){
@@ -720,8 +682,8 @@
 			});
 		}
 		
-		function goFirst(){
-			page=1;
+		function goPrev(page){
+			page=page-1;
 			reviewPaging(page);
 		}
 		
@@ -730,9 +692,24 @@
 			reviewPaging(page);
 		}
 		
-		function goLast(page){
-			page=Math.floor(page);
+		function goNext(page){
+			page=page+1;
 			reviewPaging(page);
+		}
+		
+		function goPrev2(page){
+			page=page-1;
+			QPaging(page);
+		}
+		
+		function goPage2(page){
+			page=page;
+			QPaging(page);
+		}
+		
+		function goNext2(page){
+			page=page+1;
+			QPaging(page);
 		}
 	
 		function review(){
@@ -742,6 +719,14 @@
 				alert("로그인이 필요한 서비스 입니다.");
 			}
  		}
+		
+		function qa(){
+			if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('2')})
+				location.href="QAWrite.bo";
+			else{
+				alert("로그인이 필요한 서비스 입니다.");
+			}
+		}
  	  
     	function reportWrite(){
     		window.open('reportWrite.bo', 'reportWrite', 'height=580, width=480, top=80, left=400 resizable=none, scrollbars=no')

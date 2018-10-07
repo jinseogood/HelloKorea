@@ -38,7 +38,8 @@ public class SubPageController {
 	
 	@RequestMapping("detailHotel")
 	public String detailHotelView(Model model, PageInfo p){
-
+		
+		//리뷰 페이징
 		ArrayList<Board> list = null;
 		
 		if(p.getCurrentPage() == 0){
@@ -49,15 +50,29 @@ public class SubPageController {
 
 		int listCount = bs.selectReviewCount();
 		pi = Pagination2.getPageInfo(p.getCurrentPage(), listCount);
-		list= bs.selectReview(pi);
-		
+		list= bs.selectReview(pi);	
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		
-		System.out.println(list);
-		System.out.println(pi);
+		//Q 페이징
+		ArrayList<Board> list2 = null;
 		
+		if(p.getCurrentPage() == 0){
+			p.setCurrentPage(1);
+		}
+		
+		PageInfo pi2 = null;
+		
+		int listCount2 = bs.selectQCount();
+		pi2 = Pagination2.getPageInfo(p.getCurrentPage(), listCount2);
+		list2 = bs.selectQ(pi2);
+		
+		model.addAttribute("list2", list2);
+		model.addAttribute("pi2", pi2);
+		
+		System.out.println(list2);
+		System.out.println(pi2);
 		return "aboutDetail/detailHotel";
 	}
 	

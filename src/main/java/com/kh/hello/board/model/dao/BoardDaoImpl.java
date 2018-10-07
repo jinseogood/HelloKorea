@@ -76,6 +76,29 @@ public class BoardDaoImpl implements BoardDao{
 	public int selectReviewCount(SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.selectOne("Board.selectReviewCount");
+	}
+
+	@Override
+	public int insertQ(SqlSessionTemplate sqlSession, Board b) {
+		
+		return sqlSession.insert("Board.insertQ", b);
+	}
+
+	@Override
+	public int selectQCount(SqlSessionTemplate sqlSession) {
+
+		return sqlSession.selectOne("Board.selectQCount");
+	}
+
+	@Override
+	public ArrayList<Board> selectQ(SqlSessionTemplate sqlSession, PageInfo pi) {
+		ArrayList<Board> list = null;
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		
+		list = (ArrayList)sqlSession.selectList("Board.selectQ", offset, rowBounds);
+		
+		return list;
 	} 
 
 }

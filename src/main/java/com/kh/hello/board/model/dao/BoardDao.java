@@ -26,4 +26,10 @@ public interface BoardDao {
 
 	int selectReviewCount(SqlSessionTemplate sqlSession);
 
+	int insertQ(SqlSessionTemplate sqlSession, Board b);
+
+	int selectQCount(SqlSessionTemplate sqlSession);
+
+	ArrayList<Board> selectQ(SqlSessionTemplate sqlSession, PageInfo pi);
+
 }

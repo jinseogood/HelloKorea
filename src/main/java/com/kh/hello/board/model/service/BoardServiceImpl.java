@@ -82,5 +82,23 @@ public class BoardServiceImpl implements BoardService{
 		
 		return bd.selectReviewCount(sqlSession);
 	}
+
+	@Override
+	public int insertQ(Board b) {
+		
+		return bd.insertQ(sqlSession, b);
+	}
+
+	@Override
+	public int selectQCount() {
+		
+		return bd.selectQCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Board> selectQ(PageInfo pi) {
+		
+		return bd.selectQ(sqlSession, pi);
+	}
  
 }

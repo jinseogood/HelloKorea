@@ -1,7 +1,5 @@
 package com.kh.hello.board.controller;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -127,6 +125,23 @@ public class BoardPageController {
 		return "main/main";
 	}
 	
+	@RequestMapping(value="QPaging.bo", produces = "application/json; charset=utf8")
+	public ModelAndView QPaging(HttpServletResponse response, @RequestParam int page, ModelAndView mv){
+		response.setContentType("text/html; charset=UTF-8");
+		ArrayList<Board> list2 = null;
+		PageInfo pi2 = null;
+		
+		int listCount = bs.selectQCount();
+		pi2 = Pagination2.getPageInfo(page, listCount);
+		list2 = bs.selectQ(pi2);
+		
+		mv.addObject("list2", list2);
+		mv.addObject("pi2", pi2);
+		mv.setViewName("jsonView");
+		
+		return mv;
+	}
+	
 	@RequestMapping(value="reviewPaging.bo", produces = "application/json; charset=utf8")
 	public ModelAndView reviewPaging(/*Model model, */HttpServletResponse response, @RequestParam int page, ModelAndView mv){
 		//ModelAndView mv = new ModelAndView();
@@ -196,12 +211,24 @@ public class BoardPageController {
 	}
 
 	
-	/*@RequestMapping(value="insertQA.bo")
-	public String insertReview(Model model, HttpServletRequest request){
-		int result = 0;
-		//result = bs.insertQA();
+	@RequestMapping(value="QAWrite.bo")
+	public String QAWrite(Model model, HttpServletRequest request){
+		/*Board b = new Board();
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		b.setM_id(m.getmId());*/
 		
-		return "main/main";
-	}*/
+		return "board/QAWrite";
+	}
+	
+	@RequestMapping(value="insertQ.bo")
+	public String insertQ(Model model, Board b , HttpServletRequest request){
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		b.setM_id(m.getmId());
+		
+		int result = 0;
+		result = bs.insertQ(b);
+		
+		return "main/about";
+	}
 
 }

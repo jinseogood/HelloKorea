@@ -24,4 +24,10 @@ public interface BoardService{
 
 	int selectReviewCount();
 
+	int insertQ(Board b);
+
+	int selectQCount();
+
+	ArrayList<Board> selectQ(PageInfo pi);
+
 } 
