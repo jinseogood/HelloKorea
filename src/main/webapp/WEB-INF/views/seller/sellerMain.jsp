@@ -83,7 +83,7 @@
 				<div class="sm-st clearfix">
 					<span class="sm-st-icon st-violet"><i class="fa fa-envelope-o"></i></span>
 					<div class="sm-st-info">
-						<span><a href="paymentDetailView.sell">결제페이지</a></span>
+						<span><a href="paymentDetailView.pay">결제페이지</a></span>
 					</div>
 				</div>
 			</div>

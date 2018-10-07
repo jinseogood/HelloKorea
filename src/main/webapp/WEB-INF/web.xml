@@ -33,6 +33,7 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
+	<!-- Member -->
 	<servlet>
 		<servlet-name>member</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -48,7 +49,6 @@
 	</servlet-mapping>
 	
 	<!-- Board -->
-	
 	<servlet>
 		<servlet-name>board</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -64,7 +64,6 @@
     </servlet-mapping>
     
     <!-- Seller -->
-	
 	<servlet>
 		<servlet-name>seller</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -94,7 +93,7 @@
     	<url-pattern>*.good</url-pattern>
     </servlet-mapping>
     
-    <!-- admin -->
+    <!-- Admin -->
     <servlet>
     	<servlet-name>admin</servlet-name>
     	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -107,6 +106,21 @@
     <servlet-mapping>
     	<servlet-name>admin</servlet-name>
     	<url-pattern>*.ad</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Payment -->
+	<servlet>
+		<servlet-name>payment</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/payment-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+    <servlet-mapping>
+    	<servlet-name>payment</servlet-name>
+    	<url-pattern>*.pay</url-pattern>
     </servlet-mapping>
 
 	<!-- 한글 인코딩 처리를 위한 filter Mapping -->
