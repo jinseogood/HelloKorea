@@ -45,11 +45,24 @@
      
      <!-- 리뷰 삭제(취소시 미리 인서트해놓은 것) -->
      <!-- <select id="selectAttachment" resultMap="AttachmentResultSet">
-         SELECT *
-         FROM ATTACHMENT
-         WHERE B_TYPE = 'R'
-         AND IN_DATE BETWEEN TO_DATE(#{fromDate}) AND TO_DATE(#{toDate})
-         ORDER BY B_RECORD_ID DESC
+         
      </select> -->
+     <select id = "selectQ" resultMap = "BoardResultSet">
+     	SELECT BID, TEXT, BOARD_TYPE, REGIST_DATE, STATUS, MODIFY_DATE, GRADE, LIKEY, M_ID
+     	FROM BOARD WHERE BOARD_TYPE = 2
+     </select>
+     
+     <!-- Q작성 인서트 -->
+     <insert id="insertQ" parameterType="Board">
+     	INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, '리뷰는없음',
+                                       #{text}, 2, SYSDATE, 'Y', SYSDATE, null, 0, #{m_id})
+     </insert>
+     
+     <!-- Q내역 수 조회용 -->
+     <select id= "selectQCount" resultType = "_int">
+     	SELECT COUNT(*)
+     	FROM BOARD 
+     	WHERE BOARD_TYPE = 2
+     </select>
      
 </mapper>
