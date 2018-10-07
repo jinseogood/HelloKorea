@@ -66,7 +66,7 @@
      </select>
      
      <!-- 입금 처리 검색 리스트 카운트 -->
-     <select id="selectSearchWordgetDepositListCount" resultType="_int">     
+     <select id="selectSearchWordDepositListCount" resultType="_int">     
          SELECT COUNT(*)
          FROM ( SELECT C_ID, C_NAME, BANK_NUM, ROUND(PRICE*0.85) AS D_AMOUNT, TO_CHAR(SYSDATE,'YYYY-MM') || '-05' AS D_DATE
                 FROM COMPANY C
@@ -99,7 +99,7 @@
                 </choose> )
      </select>
      <!-- 입금 처리 검색 리스트 -->
-     <select id="selectSearchWordgetDepositList" resultMap="depositResultSet">
+     <select id="selectSearchWordDepositList" resultMap="depositResultSet">
          SELECT C_ID, C_NAME, BANK_NUM, ROUND(PRICE*0.85) AS D_AMOUNT, TO_CHAR(SYSDATE,'YYYY-MM') || '-05' AS D_DATE
          FROM COMPANY C
          JOIN MEMBER M ON(C.M_ID=M.M_ID)
@@ -150,6 +150,7 @@
                  JOIN COMPANY C ON(DH.C_ID = C.C_ID)
                  JOIN MEMBER M ON(C.M_ID = M.M_ID))
       </select>
+      
       <!-- 입금내역 리스트 -->
       <select id="selectDepositHistoryList" resultMap="depositResultSet">
           SELECT DH.DH_ID, DH.C_ID, C.C_NAME, M.BANK_NUM, DH.D_AMOUNT, DH.D_DATE
@@ -157,5 +158,62 @@
           JOIN COMPANY C ON(DH.C_ID = C.C_ID)
           JOIN MEMBER M ON(C.M_ID = M.M_ID)
           ORDER BY DH_ID
+      </select>
+      
+      <!-- 입금 내역 입금일 검색 카운트 -->
+      <select id="selectSearchDateDepositHistoryListCount" resultType="_int">
+          SELECT COUNT(*)
+          FROM ( SELECT DH.DH_ID, DH.C_ID, C.C_NAME, M.BANK_NUM, DH.D_AMOUNT, DH.D_DATE
+                 FROM DEPOSIT_HISTORY DH
+                 JOIN COMPANY C ON(DH.C_ID = C.C_ID)
+                 JOIN MEMBER M ON(C.M_ID = M.M_ID)
+                 WHERE TO_CHAR(D_DATE,'YYYYMMDD') BETWEEN #{fromDate} AND #{toDate})
+      </select>
+      <!-- 입금 내역 입금일 검색 -->
+      <select id="selectSearchDateDepositHistoryList" resultMap="depositResultSet">
+          SELECT DH.DH_ID, DH.C_ID, C.C_NAME, M.BANK_NUM, DH.D_AMOUNT, DH.D_DATE
+          FROM DEPOSIT_HISTORY DH
+          JOIN COMPANY C ON(DH.C_ID = C.C_ID)
+          JOIN MEMBER M ON(C.M_ID = M.M_ID)
+          WHERE TO_CHAR(D_DATE,'YYYYMMDD') BETWEEN #{fromDate} AND #{toDate}
+          ORDER BY DH_ID
+      </select>
+      <!-- 입금 내역 검색 카운트 -->
+      <select id="selectSearchWordDepositHistroyListCount" resultType="_int">
+          SELECT COUNT(*)
+          FROM ( SELECT DH.DH_ID, DH.C_ID, C.C_NAME, M.BANK_NUM, DH.D_AMOUNT, DH.D_DATE
+                 FROM DEPOSIT_HISTORY DH
+                 JOIN COMPANY C ON(DH.C_ID = C.C_ID)
+                 JOIN MEMBER M ON(C.M_ID = M.M_ID)
+                 WHERE 1=1
+                 <choose>
+                   <when test="cId != -99">
+                       AND DH.C_ID = #{cId}
+                   </when>
+                   <when test="cName != null">
+                       AND C.C_NAME LIKE '%' || #{cName} || '%'
+                   </when>
+                 </choose>)
+      </select>
+      <!-- 입금 내역 검색-->
+      <select id="selectSearchWordDepositHistoryList" resultMap="depositResultSet">
+          SELECT DH.DH_ID, DH.C_ID, C.C_NAME, M.BANK_NUM, DH.D_AMOUNT, DH.D_DATE
+          FROM DEPOSIT_HISTORY DH
+          JOIN COMPANY C ON(DH.C_ID = C.C_ID)
+          JOIN MEMBER M ON(C.M_ID = M.M_ID)
+          WHERE 1=1
+          <choose>
+             <when test="cId != -99">
+                 AND DH.C_ID = #{cId}
+                 ORDER BY DH_ID
+             </when>
+             <when test="cName != null">
+                 AND C.C_NAME LIKE '%' || #{cName} || '%'
+                 ORDER BY DH_ID
+             </when>
+             <otherwise>
+                 ORDER BY D_AMOUNT DESC
+             </otherwise>
+         </choose>
       </select>
 </mapper>
