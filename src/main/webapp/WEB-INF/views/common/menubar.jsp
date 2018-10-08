@@ -240,7 +240,10 @@
 			<div id="fb-root"></div>
 
 			<div class="fb-login-button" scope="public_profile,email,publish_pages,manage_pages" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="true" data-use-continue-as="true" onlogin="fbLogin();"></div>
-			<button class="loginBtn1">Google</button>
+			<a href="${googleUrl}"><button id="btnJoinGoogle" class="btn btn-primary btn-round"
+                                style="width: 100%">
+                                <i class="fa fa-google" aria-hidden="true"></i>Google Login
+                            </button></a> 
 		</div>
 		<hr style="	width: 400px;
 		border: solid #D8D8D8 1px;">
@@ -501,7 +504,46 @@
 		
 		
 		</script>
- 
-  	
+ 		<script>
+ 		$("#loginOpen").click(function(){
+			$.ajax({
+				url:"google.me",
+				type:"post",
+				data:{},
+				success:function(data){
+					alert(data);
+					/* var f_url=$("#facebookBtn").val(data);
+					alert(f_url); */
+					
+					console.log(data);
+					
+					
+				},
+				error:function(){
+					console.log("에러");	
+				}
+			})
+		});
+ 		
+ 		</script>
+  		<script>
+  		$("#btnJoinGoogle").click(function(){
+ 			$.ajax({
+ 				url:"googleSignInCallback.me",
+ 				type:"post",
+ 				data:{},
+ 			succecc:function(data){
+ 				alert(data);
+ 				
+ 			},
+ 			error:function(){
+ 				alert("에러");
+ 				console.log(data);
+ 			}
+ 				
+ 			})
+ 		});
+  		
+  		</script>
 </body>
 </html>
