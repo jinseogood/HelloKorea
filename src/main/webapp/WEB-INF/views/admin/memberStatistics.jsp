@@ -170,7 +170,7 @@
                             <!--breadcrumbs start -->
                             <ul class="breadcrumb">
                                 <li><a href="myPageView.ad"><i class="fa fa-home"></i> Home</a></li>
-                                <li><a href="salesStatisticsView.ad">통계</a></li>
+                                <li><a href="selectSalesStatistics.ad">통계</a></li>
                                 <li><a href="memberStatisticsView.ad">회원 통계</a></li>
                             </ul>
                             <!--breadcrumbs end -->
