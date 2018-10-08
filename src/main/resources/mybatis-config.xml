@@ -7,6 +7,11 @@
      
       <typeAliases>
           <typeAlias type="com.kh.hello.common.Attachment" alias="Attachment"/>
+          <typeAlias type="com.kh.hello.admin.model.vo.SalesStatistics" alias="SalesStatistics"/>
+          <typeAlias type="com.kh.hello.admin.model.vo.CompanyRegistStatistics" alias="CompanyRegistStatistics"/>
+          <typeAlias type="com.kh.hello.admin.model.vo.CompanyPeriodStatistics" alias="CompanyPeriodStatistics"/>
+          <typeAlias type="com.kh.hello.admin.model.vo.CompanyAreaStatistics" alias="CompanyAreaStatistics"/>
+          <typeAlias type="com.kh.hello.admin.model.vo.PlatformStatistics" alias="PlatformStatistics"/>
           <typeAlias type="com.kh.hello.admin.model.vo.InterestStatistics" alias="InterestStatistics"/>
           <typeAlias type="com.kh.hello.admin.model.vo.NationalStatistics" alias="NationalStatistics"/>
           <typeAlias type="com.kh.hello.admin.model.vo.Deposit" alias="Deposit"/>

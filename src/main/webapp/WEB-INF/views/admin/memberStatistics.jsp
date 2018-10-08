@@ -12,12 +12,12 @@
     margin-left:auto;
     margin-right:auto;
 }
-.paging{
-    padding:2%;
-    margin-bottom:5%;
+.chartArea{
+    width:70%;
+    margin-left:auto;
+    margin-right:auto;
 }
-
- .outline{
+.outline{
     width:90%;
     margin-top:2%;
     margin-bottom:5%;
@@ -27,6 +27,9 @@
     border-style:dotted;
     border-radius: 10px;
 } 
+#columnchart_material{
+    margin-top:5%;
+}
 </style>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -73,8 +76,8 @@
     
     <script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
+      google.charts.setOnLoadCallback(drawPieChart);
+      function drawPieChart() {
 
     	  $.ajax({
 				url:"selectInterestStatistics.ad",
@@ -108,27 +111,49 @@
     
     <script type="text/javascript">
       google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart);
+      google.charts.setOnLoadCallback(drawBarChart);
 
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses', 'Profit'],
-          ['2014', 1000, 400, 200],
-          ['2015', 1170, 460, 250],
-          ['2016', 660, 1120, 300],
-          ['2017', 1030, 540, 350]
-        ]);
+      function drawBarChart(row) {
+    	  
+    	  if(row==null){
+    		  row = 1;
+    	  }
+    	  
+    	  $.ajax({
+				url:"selectPlatformStatistics.ad",
+				type:"POST",
+				data:{row:row},
+				success:function(data){
+				      
+					var platformArr = [['Month','Facebook','Google','Email']];
+					for(var i=1; i <= data.platformList.length; i++){
+						platformArr[i] = [data.platformList[i-1].month, data.platformList[i-1].facebookCount,
+							              data.platformList[i-1].googleCount, data.platformList[i-1].emailCount];
+					}
+					
+				console.log(platformArr);
+					
+				var data = google.visualization.arrayToDataTable(platformArr);
 
-        var options = {
-          chart: {
-            /* title: 'Company Performance',
-            subtitle: 'Sales, Expenses, and Profit: 2014-2017', */
-          }
-        };
+			        var options = {
+			          chart: {
+			            /* title: 'Company Performance',
+			            subtitle: 'Sales, Expenses, and Profit: 2014-2017', */
+			          }
+			        };
 
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+			        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
 
-        chart.draw(data, google.charts.Bar.convertOptions(options));
+			        chart.draw(data, google.charts.Bar.convertOptions(options));
+						
+				},
+				error:function(data){
+					console.log("에러");
+					console.log(data);
+				}
+			});
+      
+        
       }
     </script>
     
@@ -146,12 +171,13 @@
                             <ul class="breadcrumb">
                                 <li><a href="myPageView.ad"><i class="fa fa-home"></i> Home</a></li>
                                 <li><a href="salesStatisticsView.ad">통계</a></li>
-                                <li class="active">회원 통계</li>
+                                <li><a href="memberStatisticsView.ad">회원 통계</a></li>
                             </ul>
                             <!--breadcrumbs end -->
                         </div>
                     </div>
 	
+	</div>
 	
 	
 	<div class="chartArea" id="nationalChart" align="center">
@@ -162,17 +188,19 @@
 	</div>
 	
 	<div class="chartArea" id="interestChart" align="center">
-	<span class="label label-primary">회원 관심 분야</span>
+	<span class="label label-primary">회원 관심분야 분포</span>
 	<div class="outline">
 	<div id="donutchart" style="width:750px; height:300px;"></div>
 	</div>
 	</div>
 	
-	<div class="chartArea" id="interestChart" align="center">
-	<span class="label label-warning">플랫폼별 분포</span>
+	<div class="chartArea" id="platformChart" align="center">
+	<span class="label label-warning">플랫폼별 가입자 분포</span>
 	<div class="outline">
 	<div id="columnchart_material" style="width:750px; height: 500px;"></div>
 	</div>
+	</div>
+	
 	</div>
 	
 	<jsp:include page="../common/footer.jsp"/>

@@ -14,11 +14,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.hello.admin.model.dao.AdminDao;
 import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
+import com.kh.hello.admin.model.vo.CompanyAreaStatistics;
 import com.kh.hello.admin.model.vo.CompanyDetails;
+import com.kh.hello.admin.model.vo.CompanyPeriodStatistics;
+import com.kh.hello.admin.model.vo.CompanyRegistStatistics;
 import com.kh.hello.admin.model.vo.DatePick;
 import com.kh.hello.admin.model.vo.Deposit;
 import com.kh.hello.admin.model.vo.InterestStatistics;
 import com.kh.hello.admin.model.vo.NationalStatistics;
+import com.kh.hello.admin.model.vo.PlatformStatistics;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.member.model.vo.Member;
@@ -436,6 +440,30 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public ArrayList<InterestStatistics> selectInterestStatistics() {
 		return ad.selectInterestStatistics(sqlSession);
+	}
+
+	//회원 플랫폼 분포 통계
+	@Override
+	public ArrayList<PlatformStatistics> selectPlatformStatistics(int row) {
+		return ad.selectPlatformStatistics(sqlSession, row);
+	}
+
+	//업체 등록 지역별 통계
+	@Override
+	public ArrayList<CompanyAreaStatistics> selectCompanyAreaStatistics() {
+		return ad.selectCompanyAreaStatistics(sqlSession);
+	}
+
+	//업체 등록 기간 통계
+	@Override
+	public ArrayList<CompanyPeriodStatistics> selectCompanyPeriodStatistics() {
+		return ad.selectCompanyPeriodStatistics(sqlSession);
+	}
+
+	//업체 등록 건수 통계
+	@Override
+	public ArrayList<CompanyRegistStatistics> selectCompanyRegistStatistics(int row) {
+		return ad.selectCompanyRegistStatistics(sqlSession, row);
 	}
 
 
