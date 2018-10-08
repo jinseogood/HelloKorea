@@ -76,14 +76,16 @@
 	<jsp:include page="../common/searchSubmenubar.jsp"/>
 	
 	<div class="main" align="center">
-		<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" id="orderForm">
-			<input type="hidden" id="cmd" name="cmd" value="_xclick">
-			<input type="hidden" id="business" name="business" value="korea-seller@gmail.com">
-			<input type="hidden" id="item_name" name="item_name" value="singleroom">
-			<input type="hidden" id="item_number" name="item_number" value="11">
-			<input type="hidden" id="currency_code" name="currency_code" value="USD">
-			<input type="hidden" id="amount" name="amount" value="1">
-			<input type="hidden" id="charset" name="charset" value="UTF-8">
+		<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+			<input type="hidden" name="cmd" value="_xclick">
+			<input type="hidden" name="business" value="korea-seller@gmail.com">
+			
+			<input type="hidden" name="item_name" value="singleroom">
+			<input type="hidden" name="item_number" value="11">
+			<input type="hidden" name="currency_code" value="USD">
+			<input type="hidden" name="amount" value="1">
+			<input type="hidden" name="custom" value="1">
+			<input type="hidden" name="charset" value="UTF-8">
 
 			<div class="orderArea">
 				<br>
@@ -417,7 +419,12 @@
 							<td colspan="2"><b style="font-size:20px;">₩198,000</b></td>
 						</tr>
 						<tr style="text-align:center;">
-							<td colspan="3"><button style="width:100px; height:30px;">이전으로</button>&nbsp;&nbsp;&nbsp;<button type="submit" style="width:100px; height:30px;">결제하기</button></td>
+							<td colspan="3">
+								<button style="width:100px; height:30px;">이전으로</button>
+								&nbsp;&nbsp;&nbsp;
+								<!-- <button type="submit" style="width:100px; height:30px;">결제하기</button> -->
+								<input type="image" name="submit" border="0" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" alt="PayPal - The safer, easier way to pay online">
+							</td>
 						</tr>
 					</table>
 				</div>
