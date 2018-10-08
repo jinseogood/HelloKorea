@@ -30,9 +30,8 @@
 	</bean>
 
 	<bean id="googleOAuth2Parameters" class="org.springframework.social.oauth2.OAuth2Parameters">
-		<property name="scope" value="https://www.googleapis.com/auth/plus.login"></property>
-		<property name="redirectUri"
-			value="https://localhost:8443/member/googleSignInCallback.me" />
+		<property name="scope" value="https://www.googleapis.com/auth/plus.login"/>
+		<property name="redirectUri" value="https://localhost:8443/hello/googleSignInCallback.me" />
 	</bean>
 
 
@@ -50,7 +49,7 @@
 	</bean>
 	<bean id="oAuth2Parameters" class="org.springframework.social.oauth2.OAuth2Parameters">
 		<property name="scope" value="email" />
-		<property name="redirectUri" value="https://localhost:8443/hello/" />
+		<property name="redirectUri" value="https://localhost:8443/hello/facebookCallback.me" />
 	</bean>
 
 
