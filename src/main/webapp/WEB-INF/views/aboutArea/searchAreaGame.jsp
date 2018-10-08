@@ -95,10 +95,6 @@
 					var sigunguCode = ${param.sigunguCode};
 					var contenttypeid = ${param.contenttypeid};
 					var pageNo = ${param.pageNo};
-					//console.log("areaCode : " + areaCode);
-					//console.log("sigunguCode : " + sigunguCode);
-					//console.log("contenttypeid : " + contenttypeid);
-					//console.log("pageNo : " + pageNo);
 					
 					function searchGamePage(){
 						if(sigunguCode == 0){
@@ -111,11 +107,85 @@
 							dataType:"json",
 							success:function(data){
 								console.log(data);
+								var myData = data.response.body.items.item;
+								var viewArea = $("#viewArea");
+								viewArea.html("");
+								var output = "";
+								if(myData == null){
+									output += "<div align='center'><h1>정보가 없습니다.</h1></div>";
+									document.getElementById("viewArea").innerHTML += output;
+								}else if(data.response.body.totalCount == 1){
+									contenttypeid = myData.contenttypeid;
+									contentid = myData.contentid;
+									output += "<div class='tm-home-box-3' id='detailHover'>";
+									output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+									if(myData.firstimage == null){
+										output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
+									}else{
+										output += "<img src="+myData.firstimage+" alt='image' class='img-responsive1'/>";
+									}
+									output += "</div>";
+									output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+									output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData.addr1+"</p>";
+									output += "<div class='tm-home-box-2-container'>";
+									output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+									output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
+									output += "</div></div></div>";
+									document.getElementById("viewArea").innerHTML += output;
+								}else{
+									for(var i in myData){
+										contenttypeid = myData[i].contenttypeid;
+										contentid = myData[i].contentid;
+										output = "";
+										output += "<div class='tm-home-box-3' id='detailHover'>";
+										output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+										if(myData[i].firstimage == null){
+											output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
+										}else{
+											output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
+										}
+										output += "</div>";
+										output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+										output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData[i].addr1+"</p>";
+										output += "<div class='tm-home-box-2-container'>";
+										output += "<input type='hidden' value="+contenttypeid+">";
+										output += "<input type='hidden' value="+contentid+">";
+										output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+										output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
+										output += "</div></div></div>";
+										document.getElementById("viewArea").innerHTML += output;
+									}
+								}
 							},
 							error:function(data){
 								console.log(data);
 							}
 						});
+					}
+					
+					function btnGood(contenttypeid, contentid){
+						console.log(contenttypeid);
+						console.log(contentid);
+						$.ajax({
+							url:"dibsGame.good",
+							type:"GET",
+							data:{contenttypeid:contenttypeid, contentid:contentid},
+							success:function(data){
+								if(data > 0){
+									console.log("딜리트로");
+								}else{
+									console.log("인서트로");
+								}
+							}
+						});
+					}
+					
+					function insertDibsGame(){
+						
+					}
+					
+					function deleteDibsGame(){
+						
 					}
 					
 						$(function(){
@@ -306,7 +376,7 @@
 					</script>
 					
 				</div>
-				<div class="col-lg-9" align="right">
+				<div class="col-lg-9" align="right" id="viewArea">
 					
 				    <div class="tm-home-box-3" id="detailHover">
 						<div class="tm-home-box-3-img-container" id="detailClick" onclick="location.href='${contextPath}/detailGame'">

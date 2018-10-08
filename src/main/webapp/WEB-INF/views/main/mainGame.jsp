@@ -374,107 +374,144 @@
 	</section>
 	<script>
 	
-		var areaCode = 0;
-		var sigunguCode = 0;
-		var contenttypeid = 0;
-		var pageNo = 1;
+		var areaCode;
+		var areaCode1;
+		var areaCode2;
+		var sigunguCode;
+		var sigunguCode1;
+		var sigunguCode2;
+		var contenttypeid;
+		var contenttypeid1;
+		var contenttypeid2;
+		var pageNo1 = sessionStorage.setItem("pageNo", 1);
+		var pageNo = sessionStorage.getItem("pageNo");
 	
 		$(function(){
 			
 			$(".areaSearchBtn").click(function(){
-				areaCode = $(".mainSearchArea").val();
-				contenttypeid = $(".subSearchAreaa").val();
+				areaCode1 = $(".mainSearchArea").val();
+				areaCode2 = sessionStorage.setItem("areaCode", areaCode1);
+				areaCode = sessionStorage.getItem("areaCode");
+				contenttypeid1 = $(".subSearchAreaa").val();
+				contenttypeid2 = sessionStorage.setItem("contenttypeid", contenttypeid1);
+				contenttypeid = sessionStorage.getItem("contenttypeid");
 				console.log("mainSearchAreaValue : " + areaCode);
 				console.log("mainSearchAreaValue : " + contenttypeid);
 				
 				if(areaCode == 0){
 					alert("지역을 선택해 주세요.");
 				}else if(areaCode == 1){
-					sigunguCode = $("#sigungu1").val();
+					sigunguCode1 = $("#sigungu1").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
 					if(sigunguCode == 0){
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 2){
-					sigunguCode = $("#sigungu2").val();
+					sigunguCode1 = $("#sigungu2").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
 					if(sigunguCode == 0){
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 3){
-					sigunguCode = $("#sigungu3").val();
+					sigunguCode1 = $("#sigungu3").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
 					if(sigunguCode == 0){
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 4){
-					sigunguCode = $("#sigungu4").val();
+					sigunguCode1 = $("#sigungu4").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
 					if(sigunguCode == 0){
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 5){
-					sigunguCode = $("#sigungu5").val();
+					sigunguCode1 = $("#sigungu5").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
 					if(sigunguCode == 0){
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 6){
-					sigunguCode = $("#sigungu6").val();
+					sigunguCode1 = $("#sigungu6").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
 					if(sigunguCode == 0){
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 7){
-					sigunguCode = $("#sigungu7").val();
+					sigunguCode1 = $("#sigungu7").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
 					if(sigunguCode == 0){
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 8){
-					sigunguCode = $("#sigungu8").val();
+					sigunguCode1 = $("#sigungu8").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
 					if(sigunguCode == 0){
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 31){
-					sigunguCode = $("#sigungu9").val();
+					sigunguCode1 = $("#sigungu9").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
 					if(sigunguCode == 0){
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 32){
-					sigunguCode = $("#sigungu10").val();
+					sigunguCode1 = $("#sigungu10").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
 					if(sigunguCode == 0){
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 33){
-					sigunguCode = $("#sigungu11").val();
+					sigunguCode1 = $("#sigungu11").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
 					if(sigunguCode == 0){
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 34){
-					sigunguCode = $("#sigungu12").val();
+					sigunguCode1 = $("#sigungu12").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
 					if(sigunguCode == 0){
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 35){
-					sigunguCode = $("#sigungu13").val();
+					sigunguCode1 = $("#sigungu13").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
 					if(sigunguCode == 0){
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
@@ -488,21 +525,27 @@
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 37){
-					sigunguCode = $("#sigungu15").val();
+					sigunguCode1 = $("#sigungu15").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
 					if(sigunguCode == 0){
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 38){
-					sigunguCode = $("#sigungu16").val();
+					sigunguCode1 = $("#sigungu16").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
 					if(sigunguCode == 0){
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 39){
-					sigunguCode = $("#sigungu17").val();
+					sigunguCode1 = $("#sigungu17").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
 					if(sigunguCode == 0){
 						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{

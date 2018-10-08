@@ -109,6 +109,33 @@ public class GoodController {
 	}
 	
 	
+	@RequestMapping(value="dibsGame.good")
+	public void selectDibsGame(HttpServletRequest request, HttpServletResponse response, @RequestParam int contenttypeid, @RequestParam int contentid) throws IOException{
+		String user = String.valueOf(((Member)(request.getSession().getAttribute("loginUser"))).getmId());
+		int userNo = Integer.parseInt(user);
+		int result = -99;
+		Good gg = new Good();
+		gg.setMid(userNo);
+		gg.setOriginId(contentid);
+		if(contenttypeid == 12){
+			gg.setlType("관광지");
+		}else if(contenttypeid == 14){
+			gg.setlType("문화시설");
+		}else if(contenttypeid == 15){
+			gg.setlType("축제행사");
+		}else{
+			gg.setlType("레포츠");
+		}
+		result = gs.selectOneDibs(gg);
+		response.getWriter().println(result);
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
