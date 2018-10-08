@@ -263,7 +263,7 @@ public class MemberController {
 		/*return "main/main";*/
 		
 	}
-	/* @RequestMapping(value = "facebookCallback.me", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "facebookCallback.me", method = { RequestMethod.GET, RequestMethod.POST })
 	    public String facebookSignInCallback(@RequestParam String code) throws Exception {
 	 
 	        try {
@@ -310,7 +310,7 @@ public class MemberController {
 	        return "member/addUserInfo";
 	 
 	    }
-	*/
+	
 	 
 	// 회원 가입 페이지
     @RequestMapping(value = "google.me", method = { RequestMethod.GET, RequestMethod.POST })
@@ -332,13 +332,13 @@ public class MemberController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-         System.out.println("/googleLogin, url : " + googleUrl);
         //model.addAttribute("google_url", url);
+        System.out.println("/googleLogin, url : " + googleUrl);
  
         //return "common/menubar";
     }
-    @RequestMapping(value = "googleSignInCallback.me", method = { RequestMethod.GET, RequestMethod.POST })
-    public void doSessionAssignActionPage(HttpServletRequest request) throws Exception {
+    @RequestMapping(value = "/googleSignInCallback.me", method = { RequestMethod.GET, RequestMethod.POST })
+    public String doSessionAssignActionPage(HttpServletRequest request) throws Exception {
  
         String code = request.getParameter("code");
  
@@ -386,7 +386,7 @@ public class MemberController {
  
             e.printStackTrace();
         }
-        //return "redirect:/join";
+        return "main/mainHotel";
  
     }
 	

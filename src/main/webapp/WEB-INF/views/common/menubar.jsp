@@ -237,13 +237,8 @@
 			<label style="width: 180px; font-size: 30px;">Hello Korea</label>
 		</div>
 		<div id="snsBtn">
-			<div id="fb-root"></div>
-
-			<div class="fb-login-button" scope="public_profile,email,publish_pages,manage_pages" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="true" data-use-continue-as="true" onlogin="fbLogin();"></div>
-			<a href="${googleUrl}"><button id="btnJoinGoogle" class="btn btn-primary btn-round"
-                                style="width: 100%">
-                                <i class="fa fa-google" aria-hidden="true"></i>Google Login
-                            </button></a> 
+			<button  id="btnJoinFacebook"class="btn btn-primary btn-round" style="width: 100%"><i class="fa fa-facebook" aria-hidden="true"></i>Facebook Login</button>
+			<button id="btnJoinGoogle" class="btn btn-primary btn-round" style="width: 100%"><i class="fa fa-google" aria-hidden="true"></i>Google Login</button>
 		</div>
 		<hr style="	width: 400px;
 		border: solid #D8D8D8 1px;">
@@ -432,18 +427,15 @@
 		});
   		
   	</script>
-	<!-- <script>
+	 <script>
 		$("#loginOpen").click(function(){
 			$.ajax({
 				url:"facebook.me",
 				type:"post",
 				data:{},
 				success:function(data){
-					alert(data);
-					/* var f_url=$("#facebookBtn").val(data);
-					alert(f_url); */
-					
 					console.log(data);
+					$("#btnJoinFacebook").attr("onclick", "location.href =" + data);
 					
 					
 				},
@@ -454,8 +446,8 @@
 		});
 		
 	
-	</script> -->
-  	<script>
+	</script>
+  <!-- 	<script>
 		(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
 		  if (d.getElementById(id)) return;
@@ -501,22 +493,18 @@
 			js.src = "//connect.facebook.net/ko_KR/sdk.js";
 			fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
-		
-		
-		</script>
- 		<script>
+		</script>-->
+ 		
+ 		
+ 		<script> 
  		$("#loginOpen").click(function(){
 			$.ajax({
 				url:"google.me",
 				type:"post",
 				data:{},
 				success:function(data){
-					alert(data);
-					/* var f_url=$("#facebookBtn").val(data);
-					alert(f_url); */
-					
-					console.log(data);
-					
+				console.log(data);
+					$("#btnJoinGoogle").attr("onclick", "location.href =" + data);
 					
 				},
 				error:function(){
@@ -526,24 +514,6 @@
 		});
  		
  		</script>
-  		<script>
-  		$("#btnJoinGoogle").click(function(){
- 			$.ajax({
- 				url:"googleSignInCallback.me",
- 				type:"post",
- 				data:{},
- 			succecc:function(data){
- 				alert(data);
- 				
- 			},
- 			error:function(){
- 				alert("에러");
- 				console.log(data);
- 			}
- 				
- 			})
- 		});
   		
-  		</script>
 </body>
 </html>
