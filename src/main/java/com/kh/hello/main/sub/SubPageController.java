@@ -55,6 +55,9 @@ public class SubPageController {
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		
+		System.out.println(list);
+		System.out.println(pi);
+		
 		//Q 페이징
 		ArrayList<Board> list2 = null;
 		
