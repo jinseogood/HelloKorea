@@ -16,6 +16,7 @@ public class Board {
 	private float grade;
 	private int likey;
 	private int m_id;
+	private int origin_id;
 	
 	public Board(){}
 
@@ -118,7 +119,33 @@ public class Board {
 	public String toString() {
 		return "Board [bid=" + bid + ", title=" + title + ", text=" + text + ", board_type=" + board_type
 				+ ", regist_date=" + regist_date + ", status=" + status + ", modify_date=" + modify_date + ", grade="
-				+ grade + ", likey=" + likey + ", m_id=" + m_id + "]";
+				+ grade + ", likey=" + likey + ", m_id=" + m_id + ", origin_id=" + origin_id + "]";
 	}
+
+	public int getOrigin_id() {
+		return origin_id;
+	}
+
+	public void setOrigin_id(int origin_id) {
+		this.origin_id = origin_id;
+	}
+
+	public Board(int bid, String title, String text, int board_type, String regist_date, String status,
+			String modify_date, float grade, int likey, int m_id, int origin_id) {
+		super();
+		this.bid = bid;
+		this.title = title;
+		this.text = text;
+		this.board_type = board_type;
+		this.regist_date = regist_date;
+		this.status = status;
+		this.modify_date = modify_date;
+		this.grade = grade;
+		this.likey = likey;
+		this.m_id = m_id;
+		this.origin_id = origin_id;
+	}
+
+	
 	
 }

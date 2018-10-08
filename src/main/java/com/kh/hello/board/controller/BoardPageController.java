@@ -112,7 +112,7 @@ public class BoardPageController {
 			result = bs.deleteAllUpload(m.getmId());
 		}
 		
-		return "main/main";
+		return "main/mainHotel";
 	}
 	
 	@RequestMapping(value="insertReview.bo")
@@ -122,7 +122,7 @@ public class BoardPageController {
 		b.setM_id(m.getmId());
 		result = bs.updateBoard(b);
 		
-		return "main/main";
+		return "main/mainHotel";
 	}
 	
 	@RequestMapping(value="QPaging.bo", produces = "application/json; charset=utf8")

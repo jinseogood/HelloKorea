@@ -16,12 +16,13 @@
           <result property="grade" column="GRADE"/>
           <result property="likey" column="LIKEY"/>
           <result property="m_id" column="M_ID"/>
+          <result property="origin_id" column="ORIGIN_ID"/>
      </resultMap>
      
      <!-- 리뷰 인서트************2 -->
      <insert id="insertReviewBoard" parameterType="_int">
           INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, '타이틀',
-                                       '텍스트', 1, SYSDATE, 'Y', SYSDATE, null, 0, #{m_id})
+                                       '텍스트', 1, SYSDATE, 'Y', SYSDATE, null, 0, #{m_id}, 1)
      </insert>
      
      <!-- 리뷰 업데이트(실질적 글작성) -->
@@ -32,7 +33,7 @@
      </update>
      
      <select id = "selectReview" resultMap = "BoardResultSet">
-     	SELECT BID, TITLE, TEXT, BOARD_TYPE , REGIST_DATE, STATUS, MODIFY_DATE, GRADE, LIKEY, M_ID
+     	SELECT BID, TITLE, TEXT, BOARD_TYPE , REGIST_DATE, STATUS, MODIFY_DATE, GRADE, LIKEY, M_ID, ORIGIN_ID
      	FROM BOARD WHERE BOARD_TYPE = 1
      </select>
 
@@ -48,14 +49,14 @@
          
      </select> -->
      <select id = "selectQ" resultMap = "BoardResultSet">
-     	SELECT BID, TEXT, BOARD_TYPE, REGIST_DATE, STATUS, MODIFY_DATE, GRADE, LIKEY, M_ID
+     	SELECT BID, TEXT, BOARD_TYPE, REGIST_DATE, STATUS, MODIFY_DATE, GRADE, LIKEY, M_ID, ORIGIN_ID
      	FROM BOARD WHERE BOARD_TYPE = 2
      </select>
      
      <!-- Q작성 인서트 -->
      <insert id="insertQ" parameterType="Board">
      	INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, '리뷰는없음',
-                                       #{text}, 2, SYSDATE, 'Y', SYSDATE, null, 0, #{m_id})
+                                       #{text}, 2, SYSDATE, 'Y', SYSDATE, null, 0, #{m_id}, 1)
      </insert>
      
      <!-- Q내역 수 조회용 -->
