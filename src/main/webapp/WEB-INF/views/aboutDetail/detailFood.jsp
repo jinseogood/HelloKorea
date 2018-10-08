@@ -104,6 +104,12 @@
 						output = "<img src="+myData.firstimage+" alt='image' class='firstImg' />";
 					}
 					$(".firstImgArea").html(output);
+					if(typeof(myData.mapy === String)){
+						myData.mapy = parseFloat(myData.mapy);
+					}
+					if(typeof(myData.mapx === String)){
+						myData.mapx = parseFloat(myData.mapx);
+					}
 					initialize(myData.mapy, myData.mapx, myData.title);
 				},
 				error:function(data){
@@ -219,6 +225,7 @@
       	var map;
       	 
         function initialize(mapy, mapx, title) {
+        	
    
         	var mapLocation = {lat:mapy, lng:mapx};
           var mapOptions = { //구글 맵 옵션 설정

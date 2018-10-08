@@ -14,6 +14,7 @@
 	#themeText{height:164px; overflow:hidden; padding:30px 30px 54px;}
 	.mainSearchArea{font-size:15px; width:150px; height:60px; background-color:#00aef0; color:white;}
 	.subSearchArea{font-size:15px; width:150px; height:60px; background-color:#00aef0; color:white;}
+	.subSearchAreaa{font-size:15px; width:150px; height:60px; background-color:#00aef0; color:white;}
 	#searchAreaBox{position:absolute; text-align:center; top:18%; z-index:3;}
 	.areaSearchBtn{height:60px;}
 	.themeAreaSelect{cursor:pointer; color:blue;}
@@ -333,6 +334,13 @@
 			  			<option value="3">서귀포시</option>
 			  			<option value="4">제주시</option>
 			  		</select>
+			  		<select class="subSearchAreaa">
+			  			<option value="0">분류</option>
+			  			<option value="12">관광지</option>
+			  			<option value="14">문화시설</option>
+			  			<option value="15">축제공연행사</option>
+			  			<option value="28">레포츠</option>
+			  		</select>
 					<input type="button" class="tm-banner-link areaSearchBtn" value="검색">
 		</div>
 		
@@ -368,134 +376,137 @@
 	
 		var areaCode = 0;
 		var sigunguCode = 0;
+		var contenttypeid = 0;
 		var pageNo = 1;
 	
 		$(function(){
 			
 			$(".areaSearchBtn").click(function(){
 				areaCode = $(".mainSearchArea").val();
+				contenttypeid = $(".subSearchAreaa").val();
 				console.log("mainSearchAreaValue : " + areaCode);
+				console.log("mainSearchAreaValue : " + contenttypeid);
 				
 				if(areaCode == 0){
 					alert("지역을 선택해 주세요.");
 				}else if(areaCode == 1){
 					sigunguCode = $("#sigungu1").val();
 					if(sigunguCode == 0){
-						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
-						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 2){
 					sigunguCode = $("#sigungu2").val();
 					if(sigunguCode == 0){
-						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
-						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 3){
 					sigunguCode = $("#sigungu3").val();
 					if(sigunguCode == 0){
-						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
-						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 4){
 					sigunguCode = $("#sigungu4").val();
 					if(sigunguCode == 0){
-						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
-						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 5){
 					sigunguCode = $("#sigungu5").val();
 					if(sigunguCode == 0){
-						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
-						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 6){
 					sigunguCode = $("#sigungu6").val();
 					if(sigunguCode == 0){
-						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
-						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 7){
 					sigunguCode = $("#sigungu7").val();
 					if(sigunguCode == 0){
-						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
-						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 8){
 					sigunguCode = $("#sigungu8").val();
 					if(sigunguCode == 0){
-						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
-						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 31){
 					sigunguCode = $("#sigungu9").val();
 					if(sigunguCode == 0){
-						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
-						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 32){
 					sigunguCode = $("#sigungu10").val();
 					if(sigunguCode == 0){
-						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
-						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 33){
 					sigunguCode = $("#sigungu11").val();
 					if(sigunguCode == 0){
-						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
-						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 34){
 					sigunguCode = $("#sigungu12").val();
 					if(sigunguCode == 0){
-						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
-						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 35){
 					sigunguCode = $("#sigungu13").val();
 					if(sigunguCode == 0){
-						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
-						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 36){
 					sigunguCode = $("#sigungu14").val();
 					if(sigunguCode == 0){
-						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
-						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 37){
 					sigunguCode = $("#sigungu15").val();
 					if(sigunguCode == 0){
-						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
-						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 38){
 					sigunguCode = $("#sigungu16").val();
 					if(sigunguCode == 0){
-						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
-						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}else if(areaCode == 39){
 					sigunguCode = $("#sigungu17").val();
 					if(sigunguCode == 0){
-						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}else{
-						location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo;
+						location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 					}
 				}
 			});

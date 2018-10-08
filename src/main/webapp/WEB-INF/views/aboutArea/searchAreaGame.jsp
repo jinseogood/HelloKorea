@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +17,7 @@
 	#tm-home-box-2-link-2{width:445px; display:inline-block;}
 	#dibsBtn{padding:15px; width:50px; height:50px;}
 	#infoTextArea{height:175px; padding:10px 20px 44px; overflow:auto; text-align:left; }
+	.img-responsive1{width:250px; height:225px;}
 </style>
 </head>
 <body>
@@ -29,7 +31,7 @@
 			<div class="row">
 				<div class="tm-section-header section-margin-top">
 					<div class="col-lg-3 col-md-3 col-sm-3"><hr></div>
-					<div class="col-lg-6 col-md-6 col-sm-6"><h2 class="tm-section-title">서울 오락거리</h2></div>
+					<div class="col-lg-6 col-md-6 col-sm-6"><h2 class="tm-section-title tm-section-title1">서울 오락거리</h2></div>
 					<div class="col-lg-3 col-md-3 col-sm-3"><hr></div>	
 				</div>
 					<div class="col-lg-3 col-md-3 col-sm-3">
@@ -88,7 +90,37 @@
 					<br><br>
 					<!-- 축제 선택시에만 일자 고르는 select-option 나오도록 -->
 					<script>
+					
+					var areaCode = ${param.areaCode};
+					var sigunguCode = ${param.sigunguCode};
+					var contenttypeid = ${param.contenttypeid};
+					var pageNo = ${param.pageNo};
+					//console.log("areaCode : " + areaCode);
+					//console.log("sigunguCode : " + sigunguCode);
+					//console.log("contenttypeid : " + contenttypeid);
+					//console.log("pageNo : " + pageNo);
+					
+					function searchGamePage(){
+						if(sigunguCode == 0){
+							sigunguCode = "";
+						}
+						$.ajax({
+							url:"searchAreaGame.sub",
+							type:"GET",
+							data:{areaCode:areaCode, sigunguCode:sigunguCode, contenttypeid:contenttypeid},
+							dataType:"json",
+							success:function(data){
+								console.log(data);
+							},
+							error:function(data){
+								console.log(data);
+							}
+						});
+					}
+					
 						$(function(){
+							searchGamePage();
+							
 							$(".festivalSearchArea").hide();
 							
 							$("input[name=festivalgroup]").click(function(){
@@ -99,6 +131,178 @@
 								}
 							});
 						});
+						
+						if(areaCode == 1){
+							if(contenttypeid == 12){
+								$(".tm-section-title1").text("서울 관광지");
+							}else if(contenttypeid == 14){
+								$(".tm-section-title1").text("서울 문화시설");
+							}else if(contenttypeid == 15){
+								$(".tm-section-title1").text("서울 축제공연행사");
+							}else{
+								$(".tm-section-title1").text("서울 레포츠");
+							}
+						}else if(areaCode == 2){
+							if(contenttypeid == 12){
+								$(".tm-section-title1").text("인천 관광지");
+							}else if(contenttypeid == 14){
+								$(".tm-section-title1").text("인천 문화시설");
+							}else if(contenttypeid == 15){
+								$(".tm-section-title1").text("인천 축제공연행사");
+							}else{
+								$(".tm-section-title1").text("인천 레포츠");
+							}
+						}else if(areaCode == 3){
+							if(contenttypeid == 12){
+								$(".tm-section-title1").text("대전 관광지");
+							}else if(contenttypeid == 14){
+								$(".tm-section-title1").text("대전 문화시설");
+							}else if(contenttypeid == 15){
+								$(".tm-section-title1").text("대전 축제공연행사");
+							}else{
+								$(".tm-section-title1").text("대전 레포츠");
+							}
+						}else if(areaCode == 4){
+							if(contenttypeid == 12){
+								$(".tm-section-title1").text("대구 관광지");
+							}else if(contenttypeid == 14){
+								$(".tm-section-title1").text("대구 문화시설");
+							}else if(contenttypeid == 15){
+								$(".tm-section-title1").text("대구 축제공연행사");
+							}else{
+								$(".tm-section-title1").text("대구 레포츠");
+							}
+						}else if(areaCode == 5){
+							if(contenttypeid == 12){
+								$(".tm-section-title1").text("광주 관광지");
+							}else if(contenttypeid == 14){
+								$(".tm-section-title1").text("광주 문화시설");
+							}else if(contenttypeid == 15){
+								$(".tm-section-title1").text("광주 축제공연행사");
+							}else{
+								$(".tm-section-title1").text("광주 레포츠");
+							}
+						}else if(areaCode == 6){
+							if(contenttypeid == 12){
+								$(".tm-section-title1").text("부산 관광지");
+							}else if(contenttypeid == 14){
+								$(".tm-section-title1").text("부산 문화시설");
+							}else if(contenttypeid == 15){
+								$(".tm-section-title1").text("부산 축제공연행사");
+							}else{
+								$(".tm-section-title1").text("부산 레포츠");
+							}
+						}else if(areaCode == 7){
+							if(contenttypeid == 12){
+								$(".tm-section-title1").text("울산 관광지");
+							}else if(contenttypeid == 14){
+								$(".tm-section-title1").text("울산 문화시설");
+							}else if(contenttypeid == 15){
+								$(".tm-section-title1").text("울산 축제공연행사");
+							}else{
+								$(".tm-section-title1").text("울산 레포츠");
+							}
+						}else if(areaCode == 8){
+							if(contenttypeid == 12){
+								$(".tm-section-title1").text("세종시 관광지");
+							}else if(contenttypeid == 14){
+								$(".tm-section-title1").text("세종시 문화시설");
+							}else if(contenttypeid == 15){
+								$(".tm-section-title1").text("세종시 축제공연행사");
+							}else{
+								$(".tm-section-title1").text("세종시 레포츠");
+							}
+						}else if(areaCode == 31){
+							if(contenttypeid == 12){
+								$(".tm-section-title1").text("경기도 관광지");
+							}else if(contenttypeid == 14){
+								$(".tm-section-title1").text("경기도 문화시설");
+							}else if(contenttypeid == 15){
+								$(".tm-section-title1").text("경기도 축제공연행사");
+							}else{
+								$(".tm-section-title1").text("경기도 레포츠");
+							}
+						}else if(areaCode == 32){
+							if(contenttypeid == 12){
+								$(".tm-section-title1").text("강원도 관광지");
+							}else if(contenttypeid == 14){
+								$(".tm-section-title1").text("강원도 문화시설");
+							}else if(contenttypeid == 15){
+								$(".tm-section-title1").text("강원도 축제공연행사");
+							}else{
+								$(".tm-section-title1").text("강원도 레포츠");
+							}
+						}else if(areaCode == 33){
+							if(contenttypeid == 12){
+								$(".tm-section-title1").text("충청북도 관광지");
+							}else if(contenttypeid == 14){
+								$(".tm-section-title1").text("충청북도 문화시설");
+							}else if(contenttypeid == 15){
+								$(".tm-section-title1").text("충청북도 축제공연행사");
+							}else{
+								$(".tm-section-title1").text("충청북도 레포츠");
+							}
+						}else if(areaCode == 34){
+							if(contenttypeid == 12){
+								$(".tm-section-title1").text("충청남도 관광지");
+							}else if(contenttypeid == 14){
+								$(".tm-section-title1").text("충청남도 문화시설");
+							}else if(contenttypeid == 15){
+								$(".tm-section-title1").text("충청남도 축제공연행사");
+							}else{
+								$(".tm-section-title1").text("충청남도 레포츠");
+							}
+						}else if(areaCode == 35){
+							if(contenttypeid == 12){
+								$(".tm-section-title1").text("경상북도 관광지");
+							}else if(contenttypeid == 14){
+								$(".tm-section-title1").text("경상북도 문화시설");
+							}else if(contenttypeid == 15){
+								$(".tm-section-title1").text("경상북도 축제공연행사");
+							}else{
+								$(".tm-section-title1").text("경상북도 레포츠");
+							}
+						}else if(areaCode == 36){
+							if(contenttypeid == 12){
+								$(".tm-section-title1").text("경상남도 관광지");
+							}else if(contenttypeid == 14){
+								$(".tm-section-title1").text("경상남도 문화시설");
+							}else if(contenttypeid == 15){
+								$(".tm-section-title1").text("경상남도 축제공연행사");
+							}else{
+								$(".tm-section-title1").text("경상남도 레포츠");
+							}
+						}else if(areaCode == 37){
+							if(contenttypeid == 12){
+								$(".tm-section-title1").text("전라북도 관광지");
+							}else if(contenttypeid == 14){
+								$(".tm-section-title1").text("전라북도 문화시설");
+							}else if(contenttypeid == 15){
+								$(".tm-section-title1").text("전라북도 축제공연행사");
+							}else{
+								$(".tm-section-title1").text("전라북도 레포츠");
+							}
+						}else if(areaCode == 38){
+							if(contenttypeid == 12){
+								$(".tm-section-title1").text("전라남도 관광지");
+							}else if(contenttypeid == 14){
+								$(".tm-section-title1").text("전라남도 문화시설");
+							}else if(contenttypeid == 15){
+								$(".tm-section-title1").text("전라남도 축제공연행사");
+							}else{
+								$(".tm-section-title1").text("전라남도 레포츠");
+							}
+						}else if(areaCode == 39){
+							if(contenttypeid == 12){
+								$(".tm-section-title1").text("제주도 관광지");
+							}else if(contenttypeid == 14){
+								$(".tm-section-title1").text("제주도 문화시설");
+							}else if(contenttypeid == 15){
+								$(".tm-section-title1").text("제주도 축제공연행사");
+							}else{
+								$(".tm-section-title1").text("제주도 레포츠");
+							}
+						}
 					</script>
 					
 				</div>
@@ -154,10 +358,7 @@
 						</div>						
 					</div>
 			    </div>
-				
-		</div>
-			
-					
+			</div>
 		</div>
 		
 	</section>		
