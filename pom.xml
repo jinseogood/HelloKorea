@@ -173,7 +173,7 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>4.2.3.RELEASE</version>
 		</dependency>
-		
+
 
 		<!-- AOP 관련 라이브러리 추가 -->
 		<!-- aspectj 런타임 라이브러리 추가 -->
@@ -263,6 +263,18 @@
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-facebook</artifactId>
 			<version>2.0.3.RELEASE</version>
+		</dependency>
+    
+		<!-- Google Login -->
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-google</artifactId>
+			<version>1.0.0.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.3</version>
 		</dependency>
 
 	</dependencies>

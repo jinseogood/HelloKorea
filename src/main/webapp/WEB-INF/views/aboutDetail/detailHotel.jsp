@@ -78,8 +78,8 @@
 	</section>
 		<script>
 		
-			//var contentid = ${param.contentid};
-			//var contenttypeid = ${param.contenttypeid};
+			var contentid = ${param.contentid};
+			var contenttypeid = ${param.contenttypeid};
 			
 			function detailHotelInfo(){
 				console.log("deatilHotel : " + contenttypeid);
@@ -105,6 +105,12 @@
 							output = "<img src="+myData.firstimage+" alt='image' class='firstImg' />";
 						}
 						$(".firstImgArea").html(output);
+						if(typeof(myData.mapy === String)){
+							myData.mapy = parseFloat(myData.mapy);
+						}
+						if(typeof(myData.mapx === String)){
+							myData.mapx = parseFloat(myData.mapx);
+						}
 						initialize(myData.mapy, myData.mapx, myData.title);
 					},
 					error:function(data){
@@ -158,7 +164,6 @@
 						var hInfo = $(".hInfoArea");
 						hInfo.html("");
 						output += "<h3>숙박정보</h3><br>";
-						//if(myData.infocenter)
 						output += "ㆍ <b>문의 및 안내</b> : "+myData.infocenterlodging+"<br>";
 						output += "ㆍ <b>규 모</b> : "+myData.scalelodging+"<br>";
 						output += "ㆍ <b>객실 수</b> : "+myData.roomcount+"<br>";
@@ -194,11 +199,11 @@
 						for(var i in myData){
 							output = "";
 							output += "<tr>";
-							// if(myData[i].rooming1 == null){
-							//	output += "<td class='detailContent'><img src='${contextPath}/resources/img/noImage.gif' class='roomIngTd' /></td>";
-							//}else{ 
+							if(myData[i].roomimg1 == null){
+								output += "<td class='detailContent'><img src='${contextPath}/resources/img/noImage.gif' class='roomIngTd' /></td>";
+							}else{ 
 							output += "<td class='detailContent'><img src="+myData[i].roomimg1+" class='roomImgTd' /></td>";
-							//}
+							}
 							output += "<td>";
 							output += "<h4><b>객실명 : "+myData[i].roomtitle+"</b></h4>";
 							output += "ㆍ 객실크기 : "+myData[i].roomsize1+" 평<br>";
@@ -300,7 +305,7 @@
 		  	});
 
 		  	// Google Map
-		  	loadGoogleMap();
+		  	//loadGoogleMap();
 		  });
 	</script>
 	

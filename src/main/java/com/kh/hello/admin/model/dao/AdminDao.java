@@ -7,11 +7,15 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
+import com.kh.hello.admin.model.vo.CompanyAreaStatistics;
 import com.kh.hello.admin.model.vo.CompanyDetails;
+import com.kh.hello.admin.model.vo.CompanyPeriodStatistics;
+import com.kh.hello.admin.model.vo.CompanyRegistStatistics;
 import com.kh.hello.admin.model.vo.DatePick;
 import com.kh.hello.admin.model.vo.Deposit;
 import com.kh.hello.admin.model.vo.InterestStatistics;
 import com.kh.hello.admin.model.vo.NationalStatistics;
+import com.kh.hello.admin.model.vo.PlatformStatistics;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
@@ -98,6 +102,10 @@ public interface AdminDao {
 	
 	ArrayList<NationalStatistics> selectNationalStatistics(SqlSessionTemplate sqlSession);
 	ArrayList<InterestStatistics> selectInterestStatistics(SqlSessionTemplate sqlSession);
+	ArrayList<PlatformStatistics> selectPlatformStatistics(SqlSessionTemplate sqlSession, int row);
+	ArrayList<CompanyAreaStatistics> selectCompanyAreaStatistics(SqlSessionTemplate sqlSession);
+	ArrayList<CompanyPeriodStatistics> selectCompanyPeriodStatistics(SqlSessionTemplate sqlSession);
+	ArrayList<CompanyRegistStatistics> selectCompanyRegistStatistics(SqlSessionTemplate sqlSession, int row);
 	
 	
 	

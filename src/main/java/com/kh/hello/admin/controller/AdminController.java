@@ -21,11 +21,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.hello.admin.model.service.AdminService;
 import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
+import com.kh.hello.admin.model.vo.CompanyAreaStatistics;
 import com.kh.hello.admin.model.vo.CompanyDetails;
+import com.kh.hello.admin.model.vo.CompanyPeriodStatistics;
+import com.kh.hello.admin.model.vo.CompanyRegistStatistics;
 import com.kh.hello.admin.model.vo.DatePick;
 import com.kh.hello.admin.model.vo.Deposit;
 import com.kh.hello.admin.model.vo.InterestStatistics;
 import com.kh.hello.admin.model.vo.NationalStatistics;
+import com.kh.hello.admin.model.vo.PlatformStatistics;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
@@ -694,7 +698,7 @@ public class AdminController {
 		return "admin/depositHistory";
 	}
 	
-	//국가별 가입자 수(월별)
+	//국가별 가입자 수 통계
 	@RequestMapping("selectNationalStatistics.ad")
 	public @ResponseBody HashMap<String, Object> selectNationalStatistics(){
 	    
@@ -706,7 +710,7 @@ public class AdminController {
 	    return hmap;
 	}
 	
-	//관심 분야
+	//회원 관심분야 통계
 	@RequestMapping("selectInterestStatistics.ad")
     public @ResponseBody HashMap<String, Object> selectInterestStatistics(){
 	    
@@ -717,6 +721,74 @@ public class AdminController {
 		
 	    return hmap;
 	}
+	
+	//플랫폼 타입별 통계
+	@RequestMapping("selectPlatformStatistics.ad")
+    public @ResponseBody HashMap<String, Object> selectPlatformStatistics(@RequestParam String row){
+	    
+		ArrayList<PlatformStatistics> list = as.selectPlatformStatistics(Integer.parseInt(row));
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
+		
+		hmap.put("platformList", list);
+		
+	    return hmap;
+	}
+	
+	//등록업체 지역별 통계
+	@RequestMapping("selectCompanyAreaStatistics.ad")
+    public @ResponseBody HashMap<String, Object> selectCompanyAreaStatistics(){
+	    
+		ArrayList<CompanyAreaStatistics> list = as.selectCompanyAreaStatistics();
+		
+		for(CompanyAreaStatistics c : list){
+			if(c.getArea().equals("서울특")) c.setArea("서울");
+			else if(c.getArea().equals("인천광")) c.setArea("인천");
+			else if(c.getArea().equals("대전광")) c.setArea("대전");
+			else if(c.getArea().equals("대구광")) c.setArea("대구");
+			else if(c.getArea().equals("광주광")) c.setArea("광주");
+			else if(c.getArea().equals("부산광")) c.setArea("부산");
+			else if(c.getArea().equals("울산광")) c.setArea("울산");
+			else if(c.getArea().equals("세종특")) c.setArea("세종시");
+			else if(c.getArea().equals("경기도")) c.setArea("경기도");
+			else if(c.getArea().equals("강원도")) c.setArea("강원도");
+			else if(c.getArea().equals("충청북")) c.setArea("충청북도");
+			else if(c.getArea().equals("충청남")) c.setArea("충청남도");
+			else if(c.getArea().equals("경상북")) c.setArea("경상북도");
+			else if(c.getArea().equals("경상남")) c.setArea("경상남도");
+			else if(c.getArea().equals("전라북")) c.setArea("전라북도");
+			else if(c.getArea().equals("전라남")) c.setArea("전라남도");
+			else if(c.getArea().equals("제주도")) c.setArea("제주");
+		}
+		
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
+		hmap.put("companyAreaList", list);
+		
+		System.out.println(hmap);
+	    return hmap;
+	}
+	
+	//업체 등록 기간 통계
+	@RequestMapping("selectCompanyPeriodStatistics.ad")
+    public @ResponseBody HashMap<String, Object> selectCompanyPeriodStatistics(){
+	    
+		ArrayList<CompanyPeriodStatistics> list = as.selectCompanyPeriodStatistics();
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
+		hmap.put("companyPeriodList", list);
+		
+	    return hmap;
+	}
+	
+	//업체 등록/승인 건수 통계
+	@RequestMapping("selectCompanyRegistStatistics.ad")
+    public @ResponseBody HashMap<String, Object> selectCompanyRegistStatistics(@RequestParam String row){
+	    
+		ArrayList<CompanyRegistStatistics> list = as.selectCompanyRegistStatistics(Integer.parseInt(row));
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
+		hmap.put("companyRegistList", list);
+		
+	    return hmap;
+	}
+	
 	
 	@RequestMapping("salesStatisticsView.ad")
 	public String salesStatistics(){

@@ -9,11 +9,15 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
+import com.kh.hello.admin.model.vo.CompanyAreaStatistics;
 import com.kh.hello.admin.model.vo.CompanyDetails;
+import com.kh.hello.admin.model.vo.CompanyPeriodStatistics;
+import com.kh.hello.admin.model.vo.CompanyRegistStatistics;
 import com.kh.hello.admin.model.vo.DatePick;
 import com.kh.hello.admin.model.vo.Deposit;
 import com.kh.hello.admin.model.vo.InterestStatistics;
 import com.kh.hello.admin.model.vo.NationalStatistics;
+import com.kh.hello.admin.model.vo.PlatformStatistics;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
@@ -520,6 +524,29 @@ public class AdminDaoImpl implements AdminDao{
 	@Override
 	public ArrayList<InterestStatistics> selectInterestStatistics(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("selectInterestStatistics");
+	}
+
+	//회원 플랫폼 통계
+	@Override
+	public ArrayList<PlatformStatistics> selectPlatformStatistics(SqlSessionTemplate sqlSession, int row) {
+		return (ArrayList)sqlSession.selectList("selectPlatformStatistics",row);
+	}
+
+	//업체 등록 지역 통계
+	@Override
+	public ArrayList<CompanyAreaStatistics> selectCompanyAreaStatistics(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("selectCompanyAreaStatistics");
+	}
+
+	//업체 등록 기간 통계
+	@Override
+	public ArrayList<CompanyPeriodStatistics> selectCompanyPeriodStatistics(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("selectCompanyPeriodStatistics");
+	}
+
+	@Override
+	public ArrayList<CompanyRegistStatistics> selectCompanyRegistStatistics(SqlSessionTemplate sqlSession, int row) {
+		return (ArrayList)sqlSession.selectList("selectCompanyRegistStatistics",row);
 	}
 
 }
