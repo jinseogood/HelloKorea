@@ -32,7 +32,7 @@
 	<!-- 지역의 숙박상세 Page. -->
 	<jsp:include page="../common/searchMenubar.jsp"/>
 	<jsp:include page="../common/searchSubmenubar.jsp"/>
-	
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
 	<!-- gray bg -->	
 	<section class="container tm-home-section-1" id="more">
@@ -375,7 +375,17 @@
             	<br>
             	<div>
             	<input type = "hidden" id="grade" value = "${ list.grade }">
-            	<span class="rate2"></span>
+            		<%-- <c:if test = "${ list.grade = 0.0 }"> --%>
+            			<span class="StarBar">
+            				<i class="far fa-star"></i>
+            				<i class="fas fa-star"></i>
+            				<i class="fa fa-star" style = "font-size:30px"></i>
+            				<i class="fa fa-star" style = "font-size:30px"></i>
+            				<i class="fa fa-star" style = "font-size:30px"></i>
+            				<i class="fa fa-star" style = "font-size:30px"></i>
+            				<i class="fa fa-star" style = "font-size:30px"></i>
+            			</span>
+            		<%-- </c:if> --%>
             	
             	&nbsp;&nbsp;
             	<span class="ReviewUpDate">
