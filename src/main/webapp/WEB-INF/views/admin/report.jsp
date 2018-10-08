@@ -35,10 +35,6 @@
     margin-left:auto;
     margin-right:auto;
 }
-.paging{
-    padding:2%;
-    margin-bottom:5%;
-}
 .searchArea{
     width:60%; 
     margin-bottom:6%;

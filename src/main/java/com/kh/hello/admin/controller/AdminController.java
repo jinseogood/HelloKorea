@@ -35,7 +35,9 @@ import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
 import com.kh.hello.admin.model.vo.Report;
 import com.kh.hello.admin.model.vo.Reservation;
+import com.kh.hello.admin.model.vo.SalesStatistics;
 import com.kh.hello.common.Pagination;
+import com.kh.hello.common.Pagination3;
 import com.kh.hello.message.model.vo.Message;
 @Controller
 public class AdminController {
@@ -762,8 +764,6 @@ public class AdminController {
 		
 		HashMap<String, Object> hmap = new HashMap<String, Object>();
 		hmap.put("companyAreaList", list);
-		
-		System.out.println(hmap);
 	    return hmap;
 	}
 	
@@ -774,7 +774,6 @@ public class AdminController {
 		ArrayList<CompanyPeriodStatistics> list = as.selectCompanyPeriodStatistics();
 		HashMap<String, Object> hmap = new HashMap<String, Object>();
 		hmap.put("companyPeriodList", list);
-		
 	    return hmap;
 	}
 	
@@ -789,9 +788,19 @@ public class AdminController {
 	    return hmap;
 	}
 	
-	
-	@RequestMapping("salesStatisticsView.ad")
-	public String salesStatistics(){
+	//매출 통계
+	@RequestMapping("selectSalesStatistics.ad")
+    public String selectSalesStatistics(PageInfo p, Model model){
+		if(p.getCurrentPage() == 0){
+			p.setCurrentPage(1);
+		}
+		int listCount = as.selectSalesStatisticsListCount();
+		PageInfo pi = Pagination3.getPageInfo(p.getCurrentPage(), listCount);
+		
+		ArrayList<SalesStatistics> list = as.selectSalesStatisticsList(pi);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
 		return "admin/salesStatistics";
 	}
 

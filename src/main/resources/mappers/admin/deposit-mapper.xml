@@ -29,10 +29,9 @@
                               JOIN MEMBER M ON(C.M_ID=M.M_ID)
                               WHERE PD_METHOD = 'C'
                               AND TO_CHAR(RE.R_EDATE,'YYYYMM') = TO_CHAR(ADD_MONTHS(SYSDATE,-1),'YYYYMM')
-                              AND PD_ID IN ( SELECT PD_ID
-                                             FROM PAY_DETAIL
-                                             GROUP BY PD_ID
-                                             HAVING MOD(PD_ID,2) = 1))                    
+                              AND PA_ID NOT IN ( SELECT PA_ID
+                                                 FROM PAY_DETAIL
+                                                 WHERE PD_TYPE = 'R'))                    
                               GROUP BY C_ID) USING(C_ID)
                  WHERE C_ID NOT IN( SELECT C_ID
                                     FROM DEPOSIT_HISTORY
@@ -54,10 +53,9 @@
                        JOIN MEMBER M ON(C.M_ID=M.M_ID)
                        WHERE PD_METHOD = 'C'
                        AND TO_CHAR(RE.R_EDATE,'YYYYMM') = TO_CHAR(ADD_MONTHS(SYSDATE,-1),'YYYYMM')
-                       AND PD_ID IN ( SELECT PD_ID
-                                      FROM PAY_DETAIL
-                                      GROUP BY PD_ID
-                                      HAVING MOD(PD_ID,2) = 1))                    
+                       AND PA_ID NOT IN ( SELECT PA_ID
+                                          FROM PAY_DETAIL
+                                          WHERE PD_TYPE = 'R'))                    
                 GROUP BY C_ID) USING(C_ID)
          WHERE C_ID NOT IN( SELECT C_ID
                             FROM DEPOSIT_HISTORY

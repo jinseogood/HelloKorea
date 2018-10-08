@@ -125,7 +125,7 @@
 				<dl>
 					<dd>
 						<ul>
-							<li><a href="salesStatisticsView.ad">매출 통계</a></li>
+							<li><a href="selectSalesStatistics.ad">매출 통계</a></li>
 							<li><a href="companyStatisticsView.ad">업체 통계</a></li>
 							<li><a href="memberStatisticsView.ad">회원 통계</a></li>
 						</ul>

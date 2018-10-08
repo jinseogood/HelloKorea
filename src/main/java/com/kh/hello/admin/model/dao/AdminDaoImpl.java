@@ -23,6 +23,7 @@ import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
 import com.kh.hello.admin.model.vo.Report;
 import com.kh.hello.admin.model.vo.Reservation;
+import com.kh.hello.admin.model.vo.SalesStatistics;
 import com.kh.hello.message.model.vo.Message;
 @Repository
 public class AdminDaoImpl implements AdminDao{
@@ -544,9 +545,26 @@ public class AdminDaoImpl implements AdminDao{
 		return (ArrayList)sqlSession.selectList("selectCompanyPeriodStatistics");
 	}
 
+	//업체 등록 건수 통계
 	@Override
 	public ArrayList<CompanyRegistStatistics> selectCompanyRegistStatistics(SqlSessionTemplate sqlSession, int row) {
 		return (ArrayList)sqlSession.selectList("selectCompanyRegistStatistics",row);
+	}
+
+	//매출 통계 리스트 카운트
+	@Override
+	public int selectSalesStatisticsListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("selectSalesStatisticsListCount");
+	}
+
+	//매출 통계 리스트
+	@Override
+	public ArrayList<SalesStatistics> selectSalesStatisticsList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		ArrayList<SalesStatistics> list = null;
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		list = (ArrayList)sqlSession.selectList("selectSalesStatisticsList", null, rowBounds);
+		return list;
 	}
 
 }

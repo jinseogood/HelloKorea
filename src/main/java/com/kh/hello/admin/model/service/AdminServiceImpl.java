@@ -29,6 +29,7 @@ import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.admin.model.vo.Question;
 import com.kh.hello.admin.model.vo.Report;
 import com.kh.hello.admin.model.vo.Reservation;
+import com.kh.hello.admin.model.vo.SalesStatistics;
 import com.kh.hello.message.model.vo.Message;
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -464,6 +465,18 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public ArrayList<CompanyRegistStatistics> selectCompanyRegistStatistics(int row) {
 		return ad.selectCompanyRegistStatistics(sqlSession, row);
+	}
+
+	//매출 통계 리스트 카운트
+	@Override
+	public int selectSalesStatisticsListCount() {
+		return ad.selectSalesStatisticsListCount(sqlSession);
+	}
+
+	//매출 통계 리스트
+	@Override
+	public ArrayList<SalesStatistics> selectSalesStatisticsList(PageInfo pi) {
+		return ad.selectSalesStatisticsList(sqlSession, pi);
 	}
 
 

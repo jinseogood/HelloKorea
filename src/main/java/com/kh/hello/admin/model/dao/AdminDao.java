@@ -21,6 +21,7 @@ import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
 import com.kh.hello.admin.model.vo.Report;
 import com.kh.hello.admin.model.vo.Reservation;
+import com.kh.hello.admin.model.vo.SalesStatistics;
 import com.kh.hello.message.model.vo.Message;
    
 public interface AdminDao {
@@ -106,6 +107,8 @@ public interface AdminDao {
 	ArrayList<CompanyAreaStatistics> selectCompanyAreaStatistics(SqlSessionTemplate sqlSession);
 	ArrayList<CompanyPeriodStatistics> selectCompanyPeriodStatistics(SqlSessionTemplate sqlSession);
 	ArrayList<CompanyRegistStatistics> selectCompanyRegistStatistics(SqlSessionTemplate sqlSession, int row);
+	int selectSalesStatisticsListCount(SqlSessionTemplate sqlSession);
+	ArrayList<SalesStatistics> selectSalesStatisticsList(SqlSessionTemplate sqlSession, PageInfo pi);
 	
 	
 	
