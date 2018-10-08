@@ -10,18 +10,22 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAf5xrmNMwmRYe-jdx4N3ItbdKDOJryoj4&callback=initialize" async defer></script>
 <title>Hello Korea</title>
 <style>
 	#more{margin-top:5%;}
 	/* .firstImgArea{display:inline-block;} */
 	.imgArea{display:block;}
+	.firstImg{width:528px; height:435px;}
 	.secondImgArea{display:inline-block;}
 	.secondImg{width:262.5px; height:217px; display:inline-block;}
 	.contentArea{display:block;}
-	.detailHead{text-align:center; width:280px; height:40px; background-color:lightgray;}
-	.detailContent{height:350px; text-align:center;}
+	.detailHead{text-align:center; width:1120px; height:40px; background-color:lightgray;}
+	.detailContent{height:350px; text-align:center; display:inline-block;}
 	.detailBottom{height:50px;}
 	.tm-about-box-1{padding:10px 10px;}
+	.foodImgTd{width:260px; height:300px;}
+	#foodInfoArea{margin:0 auto;}
 </style>
 </head>
 <body>
@@ -35,7 +39,7 @@
 		<div class="row">
 		</div>
 		<div class="tm-section-header section-margin-top">
-			<div class="col-lg-4 col-md-4 col-sm-4"><h2 class="tm-section-title">아무개 식당</h2></div>
+			<div class="col-lg-4 col-md-4 col-sm-4"><h2 class="tm-section-title" id="foodTitleText">아무개 식당</h2></div>
 			<div class="col-lg-8 col-md-8 col-sm-8"><hr></div>	
 		</div>
 		
@@ -43,7 +47,7 @@
 			<div class="col-lg-7">
 				<div class="imgArea">
 				<div class="firstImgArea">
-					<img src="${ contextPath }/resources/img/about-1.jpg" alt="image" />
+					<img src="${ contextPath }/resources/img/about-1.jpg" alt="image" class="firstImg"/>
 				</div>
 				<div class="secondImgArea">
 					<img src="${ contextPath }/resources/img/about-1.jpg" class="secondImg" alt="image" />
@@ -57,6 +61,7 @@
 					음식점 소개영역입니다.<br>
 					음식점 소개영역입니다.<br>
 				</div>
+				<hr>
 				<div class="fInfoArea">
 					음식점 소개영역입니다.<br>
 				</div>
@@ -84,7 +89,28 @@
 				data:{contenttypeid:contenttypeid, contentid:contentid},
 				dataType:"json",
 				success:function(data){
-					console.log(data);//데이터 넘어오나 내일 다시 확인
+					console.log(data);
+					var myData = data.response.body.items.item;
+					var output = "";
+					var overviewText = myData.overview.split(". ");
+					$("#foodTitleText").text(myData.title);
+					for(var i in overviewText){
+						output += overviewText[i] + ".<br>";
+					}
+					$(".contentArea").html(output);
+					if(myData.firstimage == null){
+						output = "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='firstImg' />";
+					}else{
+						output = "<img src="+myData.firstimage+" alt='image' class='firstImg' />";
+					}
+					$(".firstImgArea").html(output);
+					if(typeof(myData.mapy === String)){
+						myData.mapy = parseFloat(myData.mapy);
+					}
+					if(typeof(myData.mapx === String)){
+						myData.mapx = parseFloat(myData.mapx);
+					}
+					initialize(myData.mapy, myData.mapx, myData.title);
 				},
 				error:function(data){
 					console.log(data);
@@ -92,52 +118,150 @@
 			});
 		}
 		
-		function detailFoodImage(){}
+		function detailFoodImage(){
+			console.log("detailFoodImage : " + contentid);
+			$.ajax({
+				url:"detailFoodImage.sub",
+				type:"get",
+				data:{contenttypeid:contenttypeid, contentid:contentid},
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					var myData = data.response.body.items.item;
+					var count = 0;
+					var output = "";
+					if(data.response.body.items == ""){
+						output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='secondImg' />";
+						output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='secondImg' />";
+					}else{
+						for(var i in myData){
+							count++;
+							output += "<img src="+myData[i].originimgurl+" alt='image' class='secondImg' />";
+							if(count == 2){break;}
+						}
+					}
+					$(".secondImgArea").html(output);
+				},
+				error:function(data){
+					console.log(data);
+				}
+			});
+		}
 		
-		function detailFoodIntro(){}
+		function detailFoodIntro(){
+			console.log("detailFoodIntro : " + contenttypeid);
+			console.log("detailFoodIntro : " + contentid);
+			$.ajax({
+				url:"detailFoodIntro.sub",
+				type:"get",
+				data:{contenttypeid:contenttypeid, contentid:contentid},
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					var myData = data.response.body.items.item;
+					var output = "";
+					var fInfo = $(".fInfoArea");
+					fInfo.html("");
+					output += "<h3>음식점</h3><br>";
+					output += "ㆍ <b>주차 시설</b> : "+myData.parkingfood+"<br>";
+					output += "ㆍ <b>개업일</b> : "+myData.opendatefood+"<br>";
+					output += "ㆍ <b>영업 시간</b> : "+myData.opentimefood+"<br>";
+					output += "ㆍ <b>쉬는 날</b> : "+myData.restdatefood+"<br>";
+					output += "ㆍ <b>대표 메뉴</b> : "+myData.firstmenu+"<br>";
+					output += "ㆍ <b>취급 메뉴</b> : "+myData.treatmenu+"<br>";
+					output += "ㆍ <b>금연/흡연</b> : "+myData.smoking+"<br>";
+					output += "ㆍ <b>신용 카드 정보</b> : "+myData.chkcreditcardfood+"<br>";
+					output += "ㆍ <b>포장 가능</b> : "+myData.packing+"<br>";
+					output += "ㆍ <b>예약 안내</b> : "+myData.reservationfood+"<br>";
+					fInfo.html(output);
+				},
+				error:function(data){
+					console.log(data);
+				}
+			});
+		}
 		
-		function detailMenuInfo(){}
+		function detailMenuInfo(){
+			console.log("detailMenuInfo : " + contenttypeid);
+			console.log("detailMenuInfo : " + contentid);
+			$.ajax({
+				url:"detailMenuInfo.sub",
+				type:"GET",
+				data:{contenttypeid:contenttypeid, contentid:contentid},
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					var myData = data.response.body.items.item;
+					var output = "";
+					var foodInfo = $("#foodInfoArea");
+					foodInfo.html("");
+					foodInfo.html("<h3 align='center'>메뉴 이미지</h3><hr>");
+					if(data.response.body.totalCount == 0){
+						output += "<h3 align='center'>정보가 없습니다.</h3>";
+						document.getElementById("foodInfoArea").innerHTML += output;
+					}else{
+						for(var i in myData){
+							output = "";
+							output += "<div class='col-lg-3 detailContent'><img src="+myData[i].originimgurl+" class='foodImgTd' /></div>";
+							document.getElementById("foodInfoArea").innerHTML += output;
+						}
+					}
+				},
+				error:function(data){
+					console.log(data);
+				}
+			});
+		}
 		
 		$(function(){
 			detailFoodInfo();//공통정보
-			//detailFoodImage();//메인,서브이미지
-			//detailFoodIntro();//음식점소개
-			//detailMenuInfo();//메뉴이미지
+			detailFoodImage();//메인,서브이미지
+			detailFoodIntro();//음식점소개
+			detailMenuInfo();//메뉴이미지
 			
 		});
 		/* Google map
       	------------------------------------------------*/
-      	var map = '';
-      	var center;
-
-      	function initialize() {
-	        var mapOptions = {
-	          	zoom: 14,
-	          	center: new google.maps.LatLng(37.769725, -122.462154),
-	          	scrollwheel: false
-        	};
-        
-	        map = new google.maps.Map(document.getElementById('google-map'),  mapOptions);
-
-	        google.maps.event.addDomListener(map, 'idle', function() {
-	          calculateCenter();
-	        });
-        
-	        google.maps.event.addDomListener(window, 'resize', function() {
-	          map.setCenter(center);
-	        });
-      	}
-
-	    function calculateCenter() {
-	        center = map.getCenter();
-	    }
-
-	    function loadGoogleMap(){
-	        var script = document.createElement('script');
-	        script.type = 'text/javascript';
-	        script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' + 'callback=initialize';
-	        document.body.appendChild(script);
-	    }
+      	var map;
+      	 
+        function initialize(mapy, mapx, title) {
+        	
+   
+        	var mapLocation = {lat:mapy, lng:mapx};
+          var mapOptions = { //구글 맵 옵션 설정
+              zoom : 16, //기본 확대율
+              center : new google.maps.LatLng(mapy, mapx), // 지도 중앙 위치
+              scrollwheel : false, //마우스 휠로 확대 축소 사용 여부
+              mapTypeControl : false //맵 타입 컨트롤 사용 여부
+          };
+   
+          map = new google.maps.Map(document.getElementById('google-map'), mapOptions); //구글 맵을 사용할 타겟
+          var size_x = 60;
+          var size_y = 60;
+          var image = new google.maps.MarkerImage('http://www.weicherthallmark.com/wp-content/themes/realty/lib/images/map-marker/map-marker-gold-fat.png', //마커 이미지 설정
+        		  		new google.maps.Size(size_x, size_y),
+        		  		'',
+        		  		'',
+        		  		new google.maps.Size(size_x, size_y));
+          				
+          var marker = new google.maps.Marker({ //마커 설정
+              map : map,
+              position : mapLocation, //마커 위치
+              icon : image,//마커 이미지
+              title : title//가게이름..
+          });
+          /* var marker = new google.maps.Marker({
+        	  position:uluru,
+        	  map:map
+          }); */
+   
+          google.maps.event.addDomListener(window, "resize", function() { //리사이즈에 따른 마커 위치
+              var center = map.getCenter();
+              google.maps.event.trigger(map, "resize");
+              map.setCenter(center); 
+          });
+   
+        }
 	
       	// DOM is ready
 		$(function() {
@@ -163,37 +287,17 @@
 		  	});
 
 		  	// Google Map
-		  	loadGoogleMap();
+		  	//loadGoogleMap();
 		  });
 	</script>
 	
 	<section class="container tm-home-section-1" id="more">
-		<!-- <div class="col-lg-12" >
-			<table border="1">
-				<thead>
-					<tr>
-						<th class="detailHead">객실유형</th>
-						<th class="detailHead">정원</th>
-						<th class="detailHead">가격</th>
-						<th class="detailHead">객실선택</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td class="detailContent">정보오오오오오오오오</td>
-						<td class="detailContent">정보오오오오오오오오</td>
-						<td class="detailContent">정보오오오오오오오오</td>
-						<td class="detailContent">정보오오오오오오오오</td>
-					</tr>
-					<tr>
-						<td class="detailBottom"></td>
-						<td class="detailBottom"></td>
-						<td class="detailBottom"></td>
-						<td class="detailBottom"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div> -->
+		<div class="col-lg-12" id="foodInfoArea">
+				<div class="col-lg-3 detailContent"></div>
+				<div class="col-lg-3 detailContent"></div>
+				<div class="col-lg-3 detailContent"></div>
+				<div class="col-lg-3 detailContent"></div>
+		</div>
 	</section>
 	
 	<section class="container tm-home-section-1" id="more">

@@ -490,7 +490,7 @@ public class SubInformationController {
 		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
 		parameter = parameter + "&" + "defaultYN=Y";
 		parameter = parameter + "&" + "firstImageYN=Y";
-		parameter = parameter + "&" + "areaCodeYN=Y";
+		parameter = parameter + "&" + "areacodeYN=Y";
 		parameter = parameter + "&" + "catcodeYN=Y";
 		parameter = parameter + "&" + "addrinfoYN=Y";
 		parameter = parameter + "&" + "mapinfoYN=Y";
@@ -513,6 +513,154 @@ public class SubInformationController {
 		JSONObject json = new JSONObject();
 		json.put("data", data);
 	}
+	
+	
+	@RequestMapping(value="detailFoodImage.sub")
+	public void detailFoodimage(HttpServletRequest request, HttpServletResponse response, @RequestParam int contenttypeid, @RequestParam int contentid) throws IOException{
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailImage?ServiceKey=";
+		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String parameter = "";
+		
+		PrintWriter out = response.getWriter();
+		parameter = parameter + "&" + "contentTypeId="+contenttypeid;
+		parameter = parameter + "&" + "contentId="+contentid;
+		parameter = parameter + "&" + "MobileOS=ETC";
+		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
+		parameter = parameter + "&" + "imageYN=Y";
+		parameter = parameter + "&" + "_type=json";
+		
+		addr = addr + serviceKey + parameter;
+		URL url = new URL(addr);
+		
+		InputStream in = url.openStream();
+		CachedOutputStream bos = new CachedOutputStream();
+		IOUtils.copy(in, bos);
+		in.close();
+		bos.close();
+		
+		String data = bos.getOut().toString();
+		out.println(data);
+		
+		JSONObject json = new JSONObject();
+		json.put("data", data);
+	}
+	
+	
+	@RequestMapping(value="detailFoodIntro.sub")
+	public void detailFoodIntro(HttpServletRequest request, HttpServletResponse response, @RequestParam int contenttypeid, @RequestParam int contentid) throws IOException{
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailIntro?ServiceKey=";
+		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String parameter = "";
+		
+		PrintWriter out = response.getWriter();
+		parameter = parameter + "&" + "contentTypeId="+contenttypeid;
+		parameter = parameter + "&" + "contentId="+contentid;
+		parameter = parameter + "&" + "MobileOS=ETC";
+		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
+		parameter = parameter + "&" + "introYN=Y";
+		parameter = parameter + "&" + "_type=json";
+		
+		addr = addr + serviceKey + parameter;
+		URL url = new URL(addr);
+		
+		InputStream in = url.openStream();
+		CachedOutputStream bos = new CachedOutputStream();
+		IOUtils.copy(in, bos);
+		in.close();
+		bos.close();
+		
+		String data = bos.getOut().toString();
+		out.println(data);
+		
+		JSONObject json = new JSONObject();
+		json.put("data", data);
+	}
+	
+	
+	@RequestMapping(value="detailMenuInfo.sub")
+	public void detailMenuInfo(HttpServletRequest request, HttpServletResponse response, @RequestParam int contenttypeid, @RequestParam int contentid) throws IOException{
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailImage?ServiceKey=";
+		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String parameter = "";
+		
+		PrintWriter out = response.getWriter();
+		parameter = parameter + "&" + "contentTypeId="+contenttypeid;
+		parameter = parameter + "&" + "contentId="+contentid;
+		parameter = parameter + "&" + "MobileOS=ETC";
+		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
+		parameter = parameter + "&" + "imageYN=N";
+		parameter = parameter + "&" + "_type=json";
+		
+		addr = addr + serviceKey + parameter;
+		URL url = new URL(addr);
+		
+		InputStream in = url.openStream();
+		CachedOutputStream bos = new CachedOutputStream();
+		IOUtils.copy(in, bos);
+		in.close();
+		bos.close();
+		
+		String data = bos.getOut().toString();
+		out.println(data);
+		
+		JSONObject json = new JSONObject();
+		json.put("data", data);
+	}
+	
+	
+	@RequestMapping(value="searchAreaGame.sub")
+	public void searchAreaGame(HttpServletRequest request, HttpServletResponse response, @RequestParam int areaCode, @RequestParam String sigunguCode, @RequestParam int contenttypeid) throws IOException{
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=";
+		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String parameter = "";
+		
+		PrintWriter out = response.getWriter();
+		parameter = parameter + "&" + "contentTypeId="+contenttypeid;
+		parameter = parameter + "&" + "areaCode="+areaCode;
+		parameter = parameter + "&" + "sigunguCode="+sigunguCode;
+		parameter = parameter + "&" + "cat1=";
+		parameter = parameter + "&" + "cat2=";
+		parameter = parameter + "&" + "cat3=";
+		parameter = parameter + "&" + "listYN=Y";
+		parameter = parameter + "&" + "MobileOS=ETC";
+		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
+		parameter = parameter + "&" + "arrange=A";
+		parameter = parameter + "&" + "numOfRows=12";
+		parameter = parameter + "&" + "pageNo=1";
+		parameter = parameter + "&" + "_type=json";
+		
+		addr = addr + serviceKey + parameter;
+		URL url = new URL(addr);
+		
+		InputStream in = url.openStream();
+		CachedOutputStream bos = new CachedOutputStream();
+		IOUtils.copy(in, bos);
+		in.close();
+		bos.close();
+		
+		String data = bos.getOut().toString();
+		out.println(data);
+		
+		JSONObject json = new JSONObject();
+		json.put("data", data);
+	}
+	
+	
+	
+	
+	
 	
 	
 	

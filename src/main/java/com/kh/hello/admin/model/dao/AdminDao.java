@@ -7,9 +7,15 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
+import com.kh.hello.admin.model.vo.CompanyAreaStatistics;
 import com.kh.hello.admin.model.vo.CompanyDetails;
+import com.kh.hello.admin.model.vo.CompanyPeriodStatistics;
+import com.kh.hello.admin.model.vo.CompanyRegistStatistics;
 import com.kh.hello.admin.model.vo.DatePick;
 import com.kh.hello.admin.model.vo.Deposit;
+import com.kh.hello.admin.model.vo.InterestStatistics;
+import com.kh.hello.admin.model.vo.NationalStatistics;
+import com.kh.hello.admin.model.vo.PlatformStatistics;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
@@ -83,12 +89,25 @@ public interface AdminDao {
 	
 	int getDepositListCount(SqlSessionTemplate sqlSession);
 	ArrayList<Deposit> selectDepositList(SqlSessionTemplate sqlSession, PageInfo pi);
-	int getSearchWordgetDepositListCount(SqlSessionTemplate sqlSession, Deposit d);
-	ArrayList<Deposit> selectSearchWordgetDepositList(SqlSessionTemplate sqlSession, Deposit d, PageInfo pi);
+	int getSearchWordDepositListCount(SqlSessionTemplate sqlSession, Deposit d);
+	ArrayList<Deposit> selectSearchWordDepositList(SqlSessionTemplate sqlSession, Deposit d, PageInfo pi);
 	int insertDepositHistory(SqlSessionTemplate sqlSession, Deposit d);
 	
 	int getDepositHistoryListCount(SqlSessionTemplate sqlSession);
 	ArrayList<Deposit> selectDepositHistoryList(SqlSessionTemplate sqlSession, PageInfo pi);
+	int getSearchDateDepositHistoryListCount(SqlSessionTemplate sqlSession, DatePick d);
+	ArrayList<Deposit> selectSearchDateDepositHistoryList(SqlSessionTemplate sqlSession, DatePick d, PageInfo pi);
+	int getSearchWordDepositHistroyListCount(SqlSessionTemplate sqlSession, Deposit d);
+	ArrayList<Deposit> selectSearchWordDepositHistoryList(SqlSessionTemplate sqlSession, Deposit d, PageInfo pi);
+	
+	ArrayList<NationalStatistics> selectNationalStatistics(SqlSessionTemplate sqlSession);
+	ArrayList<InterestStatistics> selectInterestStatistics(SqlSessionTemplate sqlSession);
+	ArrayList<PlatformStatistics> selectPlatformStatistics(SqlSessionTemplate sqlSession, int row);
+	ArrayList<CompanyAreaStatistics> selectCompanyAreaStatistics(SqlSessionTemplate sqlSession);
+	ArrayList<CompanyPeriodStatistics> selectCompanyPeriodStatistics(SqlSessionTemplate sqlSession);
+	ArrayList<CompanyRegistStatistics> selectCompanyRegistStatistics(SqlSessionTemplate sqlSession, int row);
+	
+	
 	
 	
 }

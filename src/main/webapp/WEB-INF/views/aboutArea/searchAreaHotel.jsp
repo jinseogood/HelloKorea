@@ -62,13 +62,13 @@
 					</div>
 					
 					<div class="col-lg-12 col-md-12 col-sm-12" align="left">
-						<span class="tm-section-title" style="font-size:25px; border-bottom:1px solid #ccc;"><b>시설</b></span>
+						<span class="tm-section-title" style="font-size:25px; border-bottom:1px solid #ccc;"><b>가격</b></span>
 						<br>
-						<input type="checkbox" class="hotelSearch" id="wifi" name="wifi" style="width:17px; height:17px;"/>
+						<input type="radio" class="hotelSearch" id="wifi" name="hotelSearchConditionMoney" style="width:17px; height:17px;"/>
 						<label for="wifi" class="hotelSearchText">&nbsp;&nbsp;무료 와이파이</label><br>
-						<input type="checkbox" class="hotelSearch" id="parking" name="parking" style="width:17px; height:17px;"/>
+						<input type="radio" class="hotelSearch" id="parking" name="hotelSearchConditionMoney" style="width:17px; height:17px;"/>
 						<label for="parking" class="hotelSearchText">&nbsp;&nbsp;무료 주차</label><br>
-						<input type="checkbox" class="hotelSearch" id="fitness" name="fitness" style="width:17px; height:17px;"/>
+						<input type="radio" class="hotelSearch" id="fitness" name="hotelSearchConditionMoney" style="width:17px; height:17px;"/>
 						<label for="fitness" class="hotelSearchText">&nbsp;&nbsp;피트니스 센터</label><br><br>
 					</div>
 					

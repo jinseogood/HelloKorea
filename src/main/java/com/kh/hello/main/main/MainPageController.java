@@ -24,6 +24,11 @@ public class MainPageController {
 	}
 	
 	
+	@RequestMapping(value="areaGameView.main")
+	public String areaGameView(@RequestParam int areaCode, @RequestParam int sigunguCode, @RequestParam int contenttypeid){
+		return "aboutArea/searchAreaGame";
+	}
+	
 	
 	
 	

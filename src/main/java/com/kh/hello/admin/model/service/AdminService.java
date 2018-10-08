@@ -5,9 +5,15 @@ import java.util.Map;
 
 import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
+import com.kh.hello.admin.model.vo.CompanyAreaStatistics;
 import com.kh.hello.admin.model.vo.CompanyDetails;
+import com.kh.hello.admin.model.vo.CompanyPeriodStatistics;
+import com.kh.hello.admin.model.vo.CompanyRegistStatistics;
 import com.kh.hello.admin.model.vo.DatePick;
 import com.kh.hello.admin.model.vo.Deposit;
+import com.kh.hello.admin.model.vo.InterestStatistics;
+import com.kh.hello.admin.model.vo.NationalStatistics;
+import com.kh.hello.admin.model.vo.PlatformStatistics;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.admin.model.vo.Question;
@@ -74,12 +80,23 @@ public interface AdminService {
 	
 	int getDepositListCount();
 	ArrayList<Deposit> selectDepositList(PageInfo pi);
-	int getSearchWordgetDepositListCount(Deposit d);
-	ArrayList<Deposit> selectSearchWordgetDepositList(Deposit d, PageInfo pi);
+	int getSearchWordDepositListCount(Deposit d);
+	ArrayList<Deposit> selectSearchWordDepositList(Deposit d, PageInfo pi);
 	int insertDepositHistory(Deposit d);
 	
 	int getDepositHistoryListCount();
 	ArrayList<Deposit> selectDepositHistoryList(PageInfo pi);
+	int getSearchDateDepositHistoryListCount(DatePick d);
+	ArrayList<Deposit> selectSearchDateDepositHistoryList(DatePick d, PageInfo pi);
+	int getSearchWordDepositHistroyListCount(Deposit d);
+	ArrayList<Deposit> selectSearchWordDepositHistoryList(Deposit d, PageInfo pi);
+	
+	ArrayList<NationalStatistics> selectNationalStatistics();
+	ArrayList<InterestStatistics> selectInterestStatistics();
+	ArrayList<PlatformStatistics> selectPlatformStatistics(int row);
+	ArrayList<CompanyAreaStatistics> selectCompanyAreaStatistics();
+	ArrayList<CompanyPeriodStatistics> selectCompanyPeriodStatistics();
+	ArrayList<CompanyRegistStatistics> selectCompanyRegistStatistics(int row);
 
 	
 }

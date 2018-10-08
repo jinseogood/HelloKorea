@@ -10,6 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAf5xrmNMwmRYe-jdx4N3ItbdKDOJryoj4&callback=initialize" async defer></script>
 
 <title>Hello Korea</title>
 <style>
@@ -78,8 +79,8 @@
 	</section>
 		<script>
 		
-			//var contentid = ${param.contentid};
-			//var contenttypeid = ${param.contenttypeid};
+			var contentid = ${param.contentid};
+			var contenttypeid = ${param.contenttypeid};
 			
 			function detailHotelInfo(){
 				console.log("deatilHotel : " + contenttypeid);
@@ -105,6 +106,13 @@
 							output = "<img src="+myData.firstimage+" alt='image' class='firstImg' />";
 						}
 						$(".firstImgArea").html(output);
+						if(typeof(myData.mapy === String)){
+							myData.mapy = parseFloat(myData.mapy);
+						}
+						if(typeof(myData.mapx === String)){
+							myData.mapx = parseFloat(myData.mapx);
+						}
+						initialize(myData.mapy, myData.mapx, myData.title);
 					},
 					error:function(data){
 						console.log(data);
@@ -157,18 +165,16 @@
 						var hInfo = $(".hInfoArea");
 						hInfo.html("");
 						output += "<h3>숙박정보</h3><br>";
-						//output += "<b>문의 및 안내</b> : <br>";
-						output += "<b>문의 및 안내</b> : "+myData.infocenterlodging+"<br>";
-						//output += "<b>규 모</b> : <br>";
-						output += "<b>규 모</b> : "+myData.scaleloading+"<br>";
-						output += "<b>객실 수</b> : "+myData.roomcount+"<br>";
-						output += "<b>객실 유형</b> : "+myData.roomtype+"<br>";
-						output += "<b>주차 가능</b> : "+myData.parkinglodging+"<br>";
-						output += "<b>조리 가능</b> : "+myData.chkcooking+"<br>";
-						output += "<b>체크인</b> : "+myData.checkintime+"<br>";
-						output += "<b>체크아웃</b> : "+myData.checkouttime+"<br>";
-						output += "<b>예약 안내</b> : "+myData.reservationloading+"<br>";
-						output += "<b>예약안내 홈페이지</b> : "+myData.reservationurl+"<br>";
+						output += "ㆍ <b>문의 및 안내</b> : "+myData.infocenterlodging+"<br>";
+						output += "ㆍ <b>규 모</b> : "+myData.scalelodging+"<br>";
+						output += "ㆍ <b>객실 수</b> : "+myData.roomcount+"<br>";
+						output += "ㆍ <b>객실 유형</b> : "+myData.roomtype+"<br>";
+						output += "ㆍ <b>주차 가능</b> : "+myData.parkinglodging+"<br>";
+						output += "ㆍ <b>조리 가능</b> : "+myData.chkcooking+"<br>";
+						output += "ㆍ <b>체크인</b> : "+myData.checkintime+"<br>";
+						output += "ㆍ <b>체크아웃</b> : "+myData.checkouttime+"<br>";
+						output += "ㆍ <b>예약 안내</b> : "+myData.reservationlodging+"<br>";
+						output += "ㆍ <b>예약안내 홈페이지</b> : "+myData.reservationurl+"<br>";
 						hInfo.html(output);
 					},
 					error:function(data){
@@ -194,7 +200,11 @@
 						for(var i in myData){
 							output = "";
 							output += "<tr>";
+							if(myData[i].roomimg1 == null){
+								output += "<td class='detailContent'><img src='${contextPath}/resources/img/noImage.gif' class='roomIngTd' /></td>";
+							}else{ 
 							output += "<td class='detailContent'><img src="+myData[i].roomimg1+" class='roomImgTd' /></td>";
+							}
 							output += "<td>";
 							output += "<h4><b>객실명 : "+myData[i].roomtitle+"</b></h4>";
 							output += "ㆍ 객실크기 : "+myData[i].roomsize1+" 평<br>";
@@ -233,36 +243,43 @@
 		
 		/* Google map
       	------------------------------------------------*/
-      	var map = '';
-      	var center;
-
-      	function initialize() {
-	        var mapOptions = {
-	          	zoom: 14,
-	          	center: new google.maps.LatLng(37.769725, -122.462154),
-	          	scrollwheel: false
-        	};
-        
-	        map = new google.maps.Map(document.getElementById('google-map'),  mapOptions);
-
-	        google.maps.event.addDomListener(map, 'idle', function() {
-	          calculateCenter();
-	        });
-        
-	        google.maps.event.addDomListener(window, 'resize', function() {
-	          map.setCenter(center);
-	        });
-      	}
-
-	    function calculateCenter() {
-	        center = map.getCenter();
-	    }
-
-	    function loadGoogleMap(){
-	        var script = document.createElement('script');
-	        script.type = 'text/javascript';
-	        script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' + 'callback=initialize';
-	        document.body.appendChild(script);
+      	var map;
+     	 
+        function initialize(mapy, mapx, title) {
+   
+        	var mapLocation = {lat:mapy, lng:mapx};
+          var mapOptions = { //구글 맵 옵션 설정
+              zoom : 16, //기본 확대율
+              center : new google.maps.LatLng(mapy, mapx), // 지도 중앙 위치
+              scrollwheel : false, //마우스 휠로 확대 축소 사용 여부
+              mapTypeControl : false //맵 타입 컨트롤 사용 여부
+          };
+   
+          map = new google.maps.Map(document.getElementById('google-map'), mapOptions); //구글 맵을 사용할 타겟
+          var size_x = 60;
+          var size_y = 60;
+          var image = new google.maps.MarkerImage('http://www.weicherthallmark.com/wp-content/themes/realty/lib/images/map-marker/map-marker-gold-fat.png', //마커 이미지 설정
+        		  		new google.maps.Size(size_x, size_y),
+        		  		'',
+        		  		'',
+        		  		new google.maps.Size(size_x, size_y));
+          				
+          var marker = new google.maps.Marker({ //마커 설정
+              map : map,
+              position : mapLocation, //마커 위치
+              icon : image,//마커 이미지
+              title : title//가게이름..
+          });
+          /* var marker = new google.maps.Marker({
+        	  position:uluru,
+        	  map:map
+          }); */
+   
+          google.maps.event.addDomListener(window, "resize", function() { //리사이즈에 따른 마커 위치
+              var center = map.getCenter();
+              google.maps.event.trigger(map, "resize");
+              map.setCenter(center); 
+          });
 	    }
 	
       	// DOM is ready
@@ -289,7 +306,7 @@
 		  	});
 
 		  	// Google Map
-		  	loadGoogleMap();
+		  	//loadGoogleMap();
 		  });
 	</script>
 	

@@ -237,9 +237,13 @@
 			<label style="width: 180px; font-size: 30px;">Hello Korea</label>
 		</div>
 		<div id="snsBtn">
-			<%-- <a href="${facebook_url }">Facebook</a> --%>
-			<button id="facebookBtn" onclick='location.href="${facebook_url }"'>Facebook</button>
-			<button class="loginBtn1">Google</button>
+			<div id="fb-root"></div>
+
+			<div class="fb-login-button" scope="public_profile,email,publish_pages,manage_pages" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="true" data-use-continue-as="true" onlogin="fbLogin();"></div>
+			<a href="${googleUrl}"><button id="btnJoinGoogle" class="btn btn-primary btn-round"
+                                style="width: 100%">
+                                <i class="fa fa-google" aria-hidden="true"></i>Google Login
+                            </button></a> 
 		</div>
 		<hr style="	width: 400px;
 		border: solid #D8D8D8 1px;">
@@ -428,7 +432,7 @@
 		});
   		
   	</script>
-	<script>
+	<!-- <script>
 		$("#loginOpen").click(function(){
 			$.ajax({
 				url:"facebook.me",
@@ -450,9 +454,96 @@
 		});
 		
 	
-	</script>
-  	
- 
-  	
+	</script> -->
+  	<script>
+		(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v3.1&appId=2078468609042330&autoLogAppEvents=1';
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+		
+		function fbLogin() {
+			// 로그인 여부 체크
+			FB.getLoginStatus(function(response) {
+
+				if (response.status === 'connected') {
+					FB.api('/me', function(res) {
+						// 제일 마지막에 실행
+						console.log("Success Login : " + response.name);
+						// alert("Success Login : " + response.name);
+					});
+				} else if (response.status === 'not_authorized') {
+					// 사람은 Facebook에 로그인했지만 앱에는 로그인하지 않았습니다.
+					alert('앱에 로그인해야 이용가능한 기능입니다.');
+				} else {
+					// 그 사람은 Facebook에 로그인하지 않았으므로이 앱에 로그인했는지 여부는 확실하지 않습니다.
+					alert('페이스북에 로그인해야 이용가능한 기능입니다.');
+				}
+			}, true); // 중복실행방지
+		}
+
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId   : '2078468609042330',
+				cookie  : true,
+				xfbml   : true,
+				version : 'v3.1'
+			});
+		};
+
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			// ko_KR 을 en_US 로 바꾸면 영문으로 로그인버튼을 사용할 수 있어요.
+			js.src = "//connect.facebook.net/ko_KR/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+		
+		
+		</script>
+ 		<script>
+ 		$("#loginOpen").click(function(){
+			$.ajax({
+				url:"google.me",
+				type:"post",
+				data:{},
+				success:function(data){
+					alert(data);
+					/* var f_url=$("#facebookBtn").val(data);
+					alert(f_url); */
+					
+					console.log(data);
+					
+					
+				},
+				error:function(){
+					console.log("에러");	
+				}
+			})
+		});
+ 		
+ 		</script>
+  		<script>
+  		$("#btnJoinGoogle").click(function(){
+ 			$.ajax({
+ 				url:"googleSignInCallback.me",
+ 				type:"post",
+ 				data:{},
+ 			succecc:function(data){
+ 				alert(data);
+ 				
+ 			},
+ 			error:function(){
+ 				alert("에러");
+ 				console.log(data);
+ 			}
+ 				
+ 			})
+ 		});
+  		
+  		</script>
 </body>
 </html>

@@ -389,7 +389,7 @@
 				});
 			}
 			
-			function detailView(contenttypeid, contentid){
+			function detailView(contentid, contenttpyeid){
 				location.href="${contextPath}/detailFood?contenttypeid="+contenttypeid+"&contentid="+contentid;
 			}
 		</script>
