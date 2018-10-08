@@ -11,6 +11,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAf5xrmNMwmRYe-jdx4N3ItbdKDOJryoj4&callback=initialize" async defer></script>
+
 <title>Hello Korea</title>
 <style>
 	#more{margin-top:5%;}
@@ -373,13 +374,9 @@
             <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12 line_l" style = "height:220px; padding-bottom:10px" >	
             	<br>
             	<div>
-            	<span class="StarBar" >
-            		<i class="fa fa-star"></i>
-            		<i class="fa fa-star"></i>
-            		<i class="fa fa-star"></i>
-            		<i class="fa fa-star"></i>
-            		<i class="fa fa-star"></i>
-            	</span>
+            	<input type = "hidden" id="grade" value = "${ list.grade }">
+            	<span class="rate2"></span>
+            	
             	&nbsp;&nbsp;
             	<span class="ReviewUpDate">
             		리뷰 게시 날짜 : 2018년 09월 19일
@@ -524,6 +521,8 @@
 	<jsp:include page="../common/footer.jsp"/>
 	
 	<script>
+	
+	
 		function QPaging(page){
 			console.log("page : " + page);
 			
@@ -568,15 +567,15 @@
 							output += "</div>";	
 							output += "<div class='col-lg-9 col-md-9 col-sm-6 col-xs-12 line_l' style = 'height:220px;' ><br>";
 							output += "<div class='summary' style = 'padding-top:10px; font-size:18px'>";
-							output += Q[i].text+"<span><a href="#">더 보기</a></span></div><br>";
+							output += Q[i].text+"<span><a href='#'>더 보기</a></span></div><br>";
 							output += "<div style = 'padding-top:1px' >";
 							output += "<div class='fa' style = 'width:100%'>";
 							output += "<span class='ReviewUpDate' style = 'padding-top:5px'>";
-							output += Q[i].modify_date"</span>";
-							output += "<span>|</span>";
-							output += "<span class='ReviewUpDate' style = 'padding-top:5px'><i class='fa fa-thumbs-o-up' style = 'font-size:14px; padding-top:5px'>"+Q[i].likey+"</i><i class='fa fa-flag' style = 'font-size:14px; padding-top:5px; float:right; cursor:pointer'><a onclick='reportWrite()'> 신고하기</a></i></span>";
+							output += Q[i].modify_date+"</span>";
+							output += "<span>&nbsp;|&nbsp;</span>";
+							output += "<span class='ReviewUpDate' style = 'padding-top:5px'><i class='fa fa-thumbs-o-up' style = 'font-size:14px; padding-top:5px'>&nbsp;"+Q[i].likey+"</i><i class='fa fa-flag' style = 'font-size:14px; padding-top:5px; float:right; cursor:pointer'><a onclick='reportWrite()'> 신고하기</a></i></span>";
 							output += "</div></div>";
-							output += "<div style = 'margin-top:5px'><button type='button' class='btn btn-secondary'>답변</button><button type='button' class='btn btn-secondary'>모든 답변보기</button></div></div>";
+							output += "<div style = 'margin-top:5px'><button type='button' class='btn btn-secondary'>답변</button>&nbsp;<button type='button' class='btn btn-secondary'>모든 답변보기</button></div></div>";
 							
 							$divBody.append(output);
 						}
@@ -592,7 +591,7 @@
 							if(a == p2.currentPage){
 								pOutput += "<li><a style='background-color:#ddd;''>"+a+"</a></li>";
 							}
-							if(a != p.currentPage){
+							if(a != p2.currentPage){
 								pOutput += "<li><a onclick='goPage2("+a+");'>"+a+"</a></li>";
 							}
 						}
@@ -775,6 +774,8 @@
 		    	slideshow: false
 		  	});
 		});
+		
+		
 	</script>
 </body>
 </html>
