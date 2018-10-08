@@ -44,12 +44,12 @@ public class PaymentController {
 	 private static final String PARAM_ITEM_NUMBER = "item_number";   // 상품번호
 	 private static final String PARAM_PAYMENT_STATUS = "payment_status";       // 결제 상태
 	 private static final String PARAM_MC_GROSS = "mc_gross";    // 페이팔 결제금액
-	 private static final String PARAM_MC_FEE = "mc_fee";     // 페이팔 수수료금액
 	 private static final String PARAM_MC_CURRENCY = "mc_currency";   // 화폐
 	 private static final String PARAM_TXN_ID = "txn_id";     // 거래번호
-	 private static final String PARAM_RECEIVER_EMAIL = "korea-seller@gmail.com";       // 페이팔 판매자계정 이메일 
-	 private static final String PARAM_PAYER_EMAIL = "korea-buyer@gmail.com";   // 페이팔 구매자계정 이메일
-	 private static final String PARAM_CUSTOM = "custom";     // 상점회원번호
+	 private static final String PARAM_PAYER_EMAIL = "payer_email";   // 페이팔 구매자계정 이메일
+	 private static final String PARAM_QUANTITY = "quantity";	// 수량
+	 private static final String PARAM_PAYMENT_DATE = "payment_date";	// 결제일
+	 private static final String PARAM_CUSTOM = "custom";     // 주문자 정보
 	
 	@RequestMapping(value="paymentDetailView.pay")
 	public String paymentDetailView(){
@@ -58,7 +58,6 @@ public class PaymentController {
 	
 	@RequestMapping(value="paymentConfirm.pay")
 	public String paymentConfirm(HttpServletRequest request){
-		System.out.println("결제가 완료 되었으면 좀 넘어와 줘라...");
 
 		try{
 			// PayPal로부터온 파라미터를 표시한다.
@@ -103,25 +102,50 @@ public class PaymentController {
 				HashMap vars = new HashMap();
 
 				while ((res = in.readLine()) != null) {
+					System.out.println("res : " + res);
 					temp = res.split("=");
+					System.out.println("temp : " + temp);
+					System.out.println("temp length : " + temp.length);
 					if (temp.length == 2) {
 						vars.put(temp[0], URLDecoder.decode(temp[1], "UTF-8"));
-					} else {
-						vars.put(temp[0], "");
+						logger.info("{}{}{}",new Object[]{temp[0],":",temp[1]});
 					}
-					logger.info("{}{}{}",new Object[]{temp[0],":",temp[1]});
 				}
 
 				String itemName = (String) vars.get(PARAM_ITEM_NAME);
 				int itemNumber = Integer.parseInt((String) vars.get(PARAM_ITEM_NUMBER));
 				String paymentStatus = (String) vars.get(PARAM_PAYMENT_STATUS);
 				double paymentAmount = Double.parseDouble((String) vars.get(PARAM_MC_GROSS));
-				double paymentFee = Double.parseDouble((String) vars.get(PARAM_MC_FEE));
 				String paymentCurrency = (String) vars.get(PARAM_MC_CURRENCY);
-				String txnId = (String) vars.get(PARAM_TXN_ID);
-				String receiverEmail = (String) vars.get(PARAM_RECEIVER_EMAIL);
 				String payerEmail = (String) vars.get(PARAM_PAYER_EMAIL);
-				int userseq = Integer.parseInt((String) vars.get(PARAM_CUSTOM));
+				String custom = (String) vars.get(PARAM_CUSTOM);
+				int quantity = Integer.parseInt((String) vars.get(PARAM_QUANTITY));
+				String payDate = (String) vars.get(PARAM_PAYMENT_DATE);
+				
+				System.out.println("itemName : " + itemName);
+				System.out.println("itemNumber : " + itemNumber);
+				System.out.println("paymentStatus : " + paymentStatus);
+				System.out.println("paymentAmount : " + paymentAmount);
+				System.out.println("paymentCurrency : " + paymentCurrency);
+				System.out.println("payerEmail : " + payerEmail);
+				System.out.println("custom : " + custom);
+				System.out.println("quantity : " + quantity);
+				System.out.println("payDate : " + payDate);
+				
+				/*payment
+				결제아이디
+				회원아이디
+				투숙자명
+				투숙자전화번호
+				투숙자이메일
+				
+				pay_detail
+				결제상세아이디
+				결제일
+				결제구분
+				금액
+				수단
+				결제아이디*/
 
 				//.. DB 작업 및 응답페이지 호출 등등 작업을 한다..
 

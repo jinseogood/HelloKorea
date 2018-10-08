@@ -76,15 +76,20 @@
 	<jsp:include page="../common/searchSubmenubar.jsp"/>
 	
 	<div class="main" align="center">
-		<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+		<form action="" method="post" id="payPalForm">
 			<input type="hidden" name="cmd" value="_xclick">
 			<input type="hidden" name="business" value="korea-seller@gmail.com">
+			
+			<input type="hidden" id="loginMID" value="${ sessionScope.loginUser.mId }">
 			
 			<input type="hidden" name="item_name" value="singleroom">
 			<input type="hidden" name="item_number" value="11">
 			<input type="hidden" name="currency_code" value="USD">
 			<input type="hidden" name="amount" value="1">
-			<input type="hidden" name="custom" value="1">
+			<input type="hidden" name="quantity" value="1">
+			<input type="hidden" id="orderInfo" name="custom">
+			<input type="hidden" name="return" value="https://localhost:8443/hello/paymentConfirm.pay">
+			<input type="hidden" name="cancel_return" value="https://localhost:8443/hello/paymentDetailView.pay">
 			<input type="hidden" name="charset" value="UTF-8">
 
 			<div class="orderArea">
@@ -422,8 +427,8 @@
 							<td colspan="3">
 								<button style="width:100px; height:30px;">이전으로</button>
 								&nbsp;&nbsp;&nbsp;
-								<!-- <button type="submit" style="width:100px; height:30px;">결제하기</button> -->
-								<input type="image" name="submit" border="0" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" alt="PayPal - The safer, easier way to pay online">
+								<button type="button" onclick="return pay();" id="payBtn" style="width:100px; height:30px;">결제하기</button>
+								
 							</td>
 						</tr>
 					</table>
@@ -564,6 +569,26 @@
 				$("#telWTEXT").hide();
 				$("#orderTel").css("border", "1px solid lightgray");
 			}
+		}
+		
+		function pay(){
+			var fName=$("#firstName").val();
+			var lName=$("#lastName").val();
+			
+			var nation=$("#national").val();
+			var tel=$("#orderTel").val();
+			
+			var mId=$("#loginMID").val();
+			
+			var orderName=fName + lName;
+			var orderEmail=$("#orderEmail").val();
+			var orderTel=nation + tel;
+			
+			$("#orderInfo").attr("value", (mId + "," + orderName + "," + orderEmail + "," + orderTel));
+			
+			$("#payPalForm").attr("action", "https://www.sandbox.paypal.com/cgi-bin/webscr");
+			$("#payBtn").attr("type", "submit");
+			
 		}
 		
 	</script>
