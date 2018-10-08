@@ -380,24 +380,182 @@
 	
 	<script>
 	
-		var areaCode = 0;
-		var sigunguCode = 0;
-		var cat3 = "";
-		var pageNo = 1;
+		var areaCode;
+		var areaCode1;
+		var areaCode2;
+		var sigunguCode;
+		var sigunguCode1;
+		var sigunguCode2;
+		var cat3;
+		var cat4;
+		var cat5;
+		var pageNo1 = sessionStorage.setItem("pageNo", 1);
+		var pageNo = sessionStorage.getItem("pageNo");
 	
 		$(function(){
 			
 			
 			
 			$(".areaSearchBtn").click(function(){
-				areaCode = $(".mainSearchArea").val();
-				cat3 = $(".subSearchAreaa").val();
+				areaCode1 = $(".mainSearchArea").val();
+				areaCode2 = sessionStorage.setItem("areaCode", areaCode1);
+				areaCode = sessionStorage.getItem("areaCode");
+				cat4 = $(".subSearchAreaa").val();
+				cat5 = sessionStorage.setItem("cat3", cat4);
+				cat3 = sessionStorage.getItem("cat3");
 				console.log("mainSearchAreaValue : " + areaCode);
 				console.log("subSearchAreaValue : " + cat3);
 				
 				if(areaCode == 0){
 					alert("지역을 선택해 주세요.");
 				}else if(areaCode == 1){
+					sigunguCode1 = $("#sigungu1").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
+					if(sigunguCode == 0 && cat3 == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaFoodView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&cat3="+cat3;
+					}
+				}else if(areaCode == 2){
+					sigunguCode1 = $("#sigungu2").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
+					if(sigunguCode == 0 && cat3 == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaFoodView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&cat3="+cat3;
+					}
+				}else if(areaCode == 3){
+					sigunguCode1 = $("#sigungu3").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
+					if(sigunguCode == 0 && cat3 == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaFoodView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&cat3="+cat3;
+					}
+				}else if(areaCode == 4){
+					sigunguCode1 = $("#sigungu4").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
+					if(sigunguCode == 0 && cat3 == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaFoodView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&cat3="+cat3;
+					}
+				}else if(areaCode == 5){
+					sigunguCode1 = $("#sigungu5").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
+					if(sigunguCode == 0 && cat3 == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaFoodView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&cat3="+cat3;
+					}
+				}else if(areaCode == 6){
+					sigunguCode1 = $("#sigungu6").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
+					if(sigunguCode == 0 && cat3 == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaFoodView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&cat3="+cat3;
+					}
+				}else if(areaCode == 7){
+					sigunguCode1 = $("#sigungu7").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
+					if(sigunguCode == 0 && cat3 == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaFoodView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&cat3="+cat3;
+					}
+				}else if(areaCode == 8){
+					sigunguCode1 = $("#sigungu8").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
+					if(sigunguCode == 0 && cat3 == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaFoodView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&cat3="+cat3;
+					}
+				}else if(areaCode == 31){
+					sigunguCode1 = $("#sigungu9").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
+					if(sigunguCode == 0 && cat3 == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaFoodView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&cat3="+cat3;
+					}
+				}else if(areaCode == 32){
+					sigunguCode1 = $("#sigungu10").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
+					if(sigunguCode == 0 && cat3 == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaFoodView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&cat3="+cat3;
+					}
+				}else if(areaCode == 33){
+					sigunguCode1 = $("#sigungu11").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
+					if(sigunguCode == 0 && cat3 == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaFoodView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&cat3="+cat3;
+					}
+				}else if(areaCode == 34){
+					sigunguCode1 = $("#sigungu12").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
+					if(sigunguCode == 0 && cat3 == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaFoodView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&cat3="+cat3;
+					}
+				}else if(areaCode == 35){
+					sigunguCode1 = $("#sigungu13").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
+					if(sigunguCode == 0 && cat3 == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaFoodView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&cat3="+cat3;
+					}
+				}else if(areaCode == 36){
+					sigunguCode1 = $("#sigungu14").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
+					if(sigunguCode == 0 && cat3 == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaFoodView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&cat3="+cat3;
+					}
+				}else if(areaCode == 37){
+					sigunguCode1 = $("#sigungu15").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
+					if(sigunguCode == 0 && cat3 == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaFoodView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&cat3="+cat3;
+					}
+				}else if(areaCode == 38){
+					sigunguCode1 = $("#sigungu16").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
+					if(sigunguCode == 0 && cat3 == 0){
+						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
+					}else{
+						location.href="${contextPath}/areaFoodView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&cat3="+cat3;
+					}
+				}else if(areaCode == 39){
+					sigunguCode1 = $("#sigungu17").val();
+					sigunguCode2 = sessionStorage.setItem("sigunguCode", sigunguCode1);
+					sigunguCode = sessionStorage.getItem("sigunguCode");
 					if(sigunguCode == 0 && cat3 == 0){
 						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
 					}else{
