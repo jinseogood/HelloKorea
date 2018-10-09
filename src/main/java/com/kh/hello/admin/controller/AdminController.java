@@ -50,7 +50,18 @@ public class AdminController {
 	public String myPageView(){
 		return "admin/adminMain";
 	}
-
+	
+    //업체 통계
+	@RequestMapping("companyStatisticsView.ad")
+	public String companyStatisticsView(){
+		return "admin/companyStatistics";
+	}
+	
+	//회원 통계
+	@RequestMapping("memberStatisticsView.ad")
+	public String memberStatisticsView(){
+		return "admin/memberStatistics";
+	}
 	//예약내역조회
 	@RequestMapping("selectReservationList.ad")
 	public String selectReservationList(String searchParam, String searchWord, String fromDate, String toDate, PageInfo p, Model model){
@@ -804,14 +815,48 @@ public class AdminController {
 		return "admin/salesStatistics";
 	}
 
-	@RequestMapping("companyStatisticsView.ad")
-	public String companyStatistics(){
-		return "admin/companyStatistics";
+	
+	//업체 등록 기간 통계
+	@RequestMapping("selectMainSalesStatistics.ad")
+	public @ResponseBody HashMap<String, Object> selectMainSalesStatistics(){
+		ArrayList<SalesStatistics> list = as.selectMainSalesStatistics();
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
+		hmap.put("salesList", list);
+		return hmap;
 	}
-
-	@RequestMapping("memberStatisticsView.ad")
-	public String memberStatistics(){
-		return "admin/memberStatistics";
+	
+	//메인 4개 정보
+	@RequestMapping("selectMain.ad")
+	public @ResponseBody HashMap<String, Object> selectMainProfit(){
+		//미해결 신고 수
+		Report r = new Report();
+		r.setrRecordId(-99);
+		r.setrTarget(-99);
+		int reportCount = as.getSearchWordReportListCount(r);
+		//미해결 문의 수
+		Question q = new Question();
+		q.setqRecordId(-99);
+		q.setSendId(-99);
+		int questionCount = as.getSearchWordQuestionListCount(q);;
+		//이번달 수익
+		ArrayList<SalesStatistics> list = as.selectMainProfit();
+		//미승인 업체 수
+		int companyCount = as.selectUnapprovedCompanyCount();
+		
+		//업체 만료 알림
+		ArrayList<CompanyDetails> expirationList = as.selectExpirationList();
+		SimpleDateFormat dt = new SimpleDateFormat("YYYY-MM-dd");
+		for(CompanyDetails c: expirationList){
+			c.setStartDate(dt.format(c.getApDate()));
+			c.setEndDate(dt.format(c.getCrEDate()));
+		}
+        System.out.println(expirationList); 	
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
+		hmap.put("reportCount", reportCount);
+		hmap.put("questionCount", questionCount);
+		hmap.put("profit", list.get(0).getProfit());
+		hmap.put("companyCount", companyCount);
+		hmap.put("expirationList", expirationList);
+		return hmap;
 	}
-
 }

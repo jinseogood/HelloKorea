@@ -20,11 +20,14 @@ public class CompanyDetails implements java.io.Serializable{
 	private int rCount;
 	private String rPrice;
 	private int rLimit;
+	private String startDate;
+	private String endDate;
 	
 	public CompanyDetails(){}
 
 	public CompanyDetails(int cId, int crId, String cName, String cPhone, String cAddress, String crStatus, Date crDate,
-			Date apDate, int crTerm, Date crEDate, String rType, int rCount, String rPrice, int rLimit) {
+			Date apDate, int crTerm, Date crEDate, String rType, int rCount, String rPrice, int rLimit,
+			String startDate, String endDate) {
 		super();
 		this.cId = cId;
 		this.crId = crId;
@@ -40,6 +43,8 @@ public class CompanyDetails implements java.io.Serializable{
 		this.rCount = rCount;
 		this.rPrice = rPrice;
 		this.rLimit = rLimit;
+		this.startDate = startDate;
+		this.endDate = endDate;
 	}
 
 	public int getcId() {
@@ -154,15 +159,31 @@ public class CompanyDetails implements java.io.Serializable{
 		this.rLimit = rLimit;
 	}
 
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
 	@Override
 	public String toString() {
 		return "CompanyDetails [cId=" + cId + ", crId=" + crId + ", cName=" + cName + ", cPhone=" + cPhone
 				+ ", cAddress=" + cAddress + ", crStatus=" + crStatus + ", crDate=" + crDate + ", apDate=" + apDate
 				+ ", crTerm=" + crTerm + ", crEDate=" + crEDate + ", rType=" + rType + ", rCount=" + rCount
-				+ ", rPrice=" + rPrice + ", rLimit=" + rLimit + "]";
+				+ ", rPrice=" + rPrice + ", rLimit=" + rLimit + ", startDate=" + startDate + ", endDate=" + endDate
+				+ "]";
 	}
 
 	
-
 	
 }
