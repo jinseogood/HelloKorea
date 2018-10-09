@@ -100,6 +100,12 @@ public interface AdminService {
 	ArrayList<CompanyRegistStatistics> selectCompanyRegistStatistics(int row);
 	int selectSalesStatisticsListCount();
 	ArrayList<SalesStatistics> selectSalesStatisticsList(PageInfo pi);
+	
+	ArrayList<SalesStatistics> selectMainSalesStatistics();
+	ArrayList<SalesStatistics> selectMainProfit();
+	int selectUnapprovedCompanyCount();
+	
+	ArrayList<CompanyDetails> selectExpirationList();
 
 	
 }
