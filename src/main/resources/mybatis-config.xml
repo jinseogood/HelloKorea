@@ -31,6 +31,8 @@
           <typeAlias type="com.kh.hello.seller.model.vo.OneProduct" alias="OneProduct"/>
           <typeAlias type="com.kh.hello.board.model.vo.Board" alias="Board"/>
           <typeAlias type="com.kh.hello.good.model.vo.Good" alias="Good"/>
+          <typeAlias type="com.kh.hello.payment.model.vo.Payment" alias="Payment"/>
+          <typeAlias type="com.kh.hello.payment.model.vo.PayDetail" alias="PayDetail"/>
 
       </typeAliases>
   
@@ -53,7 +55,9 @@
           <mapper resource="mappers/seller/oneproduct-mapper.xml"/>
           <mapper resource="mappers/board/board-mapper.xml"/>
           <mapper resource="mappers/board/attachment-mapper.xml"/>
-          <mapper resource="mappers/good/good-mapper.xml" />
+          <mapper resource="mappers/good/good-mapper.xml"/>
+          <mapper resource="mappers/payment/payment-mapper.xml"/>
+          <mapper resource="mappers/payment/paydetail-mapper.xml"/>
       </mappers>
   
   </configuration>
