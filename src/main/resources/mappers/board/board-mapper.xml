@@ -66,4 +66,6 @@
      	WHERE BOARD_TYPE = 2
      </select>
      
+     
+     
 </mapper>

@@ -233,11 +233,23 @@ public class BoardPageController {
 	}
 	
 	@RequestMapping(value="insertA.bo")
-	public String insertA(Model model, Reply r, HttpServletRequest request){
+	public ModelAndView insertA(Model model, Reply r, HttpServletRequest request, @RequestParam String text, @RequestParam int bid , ModelAndView mv){
 		Member m = (Member)request.getSession().getAttribute("loginUser");
-		r.setM_id(m.getmId());
+		mv.setViewName("jsonView");
 		
-		return "main/abount";
+		r.setM_id(m.getmId());
+		r.setContent(text);
+		r.setBid(bid);
+		
+		int result = 0;
+		result = bs.insertA(r);
+		if(result > 0){
+			mv.addObject("result", result);
+		}else{
+			mv.addObject("result", result);
+		}
+		
+		return mv;
 	}
 
 }
