@@ -79,7 +79,7 @@
 						<label for="shopping" class="gameSearchText">&nbsp;&nbsp;쇼핑</label><br>
 						<input type="radio" class="gameSearch" id="musium" name="festivalgroup" style="width:15px; height:15px;"/>
 						<label for="musium" class="gameSearchText">&nbsp;&nbsp;박물관</label><br>
-						<input type="radio" class="gameSearch" id="amusmenetPark" name="festivalgroup" style="width:15px; height:15px;"/>
+						<input type="radio" class="gameSearch" id="amusmentPark" name="festivalgroup" style="width:15px; height:15px;"/>
 						<label for="amusmentPark" class="gameSearchText">&nbsp;&nbsp;놀이공원</label><br>
 						<input type="radio" class="gameSearch" id="spar" name="festivalgroup" style="width:15px; height:15px;"/>
 						<label for="spar" class="gameSearchText">&nbsp;&nbsp;스파</label><br>
@@ -172,20 +172,48 @@
 							data:{contenttypeid:contenttypeid, contentid:contentid},
 							success:function(data){
 								if(data > 0){
-									console.log("딜리트로");
+									deleteDibsGame(contentid);
 								}else{
-									console.log("인서트로");
+									insertDibsGame(contentid);
 								}
 							}
 						});
 					}
 					
-					function insertDibsGame(){
-						
+					function insertDibsGame(contentid){
+						$.ajax({
+							url:"insertDibsGame.good",
+							type:"get",
+							data:{contenttypeid:contenttypeid, contentid:contentid},
+							success:function(data){
+								if(data > 0){
+									alert("찜 목록에 추가되었습니다.");
+								}
+							},
+							error:function(data){
+								console.log(data);
+							}
+						});
 					}
 					
-					function deleteDibsGame(){
-						
+					function deleteDibsGame(contentid){
+						$.ajax({
+							url:"deleteDibsGame.good",
+							type:"GET",
+							data:{contenttypeid:contenttypeid, contentid:contentid},
+							success:function(data){
+								if(data > 0){
+									alert("찜 목록에서 삭제되었습니다.");
+								}
+							},
+							error:function(data){
+								console.log(data);
+							}
+						});
+					}
+					
+					function detailView(contentid, contenttypeid){
+						location.href="${contextPath}/detailGame?contentid="+contentid+"&contenttypeid="+contenttypeid;
 					}
 					
 						$(function(){

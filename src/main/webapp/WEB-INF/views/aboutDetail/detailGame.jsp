@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,12 +10,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAf5xrmNMwmRYe-jdx4N3ItbdKDOJryoj4&callback=initialize" async defer></script>
 <title>Hello Korea</title>
 <style>
 	#more{margin-top:5%;}
 	/* .firstImgArea{display:inline-block;} */
 	.imgArea{display:block;}
 	.secondImgArea{display:inline-block;}
+	.firstImg{width:528px; height:435px;}
 	.secondImg{width:262.5px; height:217px; display:inline-block;}
 	.contentArea{display:block;}
 	.detailHead{text-align:center; width:280px; height:40px; background-color:lightgray;}
@@ -34,7 +37,7 @@
 		<div class="row">
 		</div>
 		<div class="tm-section-header section-margin-top">
-			<div class="col-lg-5 col-md-4 col-sm-4"><h2 class="tm-section-title">관광지 이름 or 행사 이름</h2></div>
+			<div class="col-lg-5 col-md-4 col-sm-4"><h2 class="tm-section-title" id="gameTitleText">관광지 이름 or 행사 이름</h2></div>
 			<div class="col-lg-6 col-md-8 col-sm-8"><hr></div>	
 		</div>
 		
@@ -42,7 +45,7 @@
 			<div class="col-lg-7">
 				<div class="imgArea">
 				<div class="firstImgArea">
-					<img src="${ contextPath }/resources/img/about-1.jpg" alt="image" />
+					<img src="${ contextPath }/resources/img/about-1.jpg" alt="image" class="firstImg"/>
 				</div>
 				<div class="secondImgArea">
 					<img src="${ contextPath }/resources/img/about-1.jpg" class="secondImg" alt="image" />
@@ -55,20 +58,10 @@
 					관광지 정보 / 축제(행사) 정보 영역입니다.<br>
 					관광지 정보 / 축제(행사) 정보 영역입니다.<br>
 					관광지 정보 / 축제(행사) 정보 영역입니다.<br>
-					관광지 정보 / 축제(행사) 정보 영역입니다.<br>
-					관광지 정보 / 축제(행사) 정보 영역입니다.<br>
-					관광지 정보 / 축제(행사) 정보 영역입니다.<br>
-					관광지 정보 / 축제(행사) 정보 영역입니다.<br>
-					관광지 정보 / 축제(행사) 정보 영역입니다.<br>
-					관광지 정보 / 축제(행사) 정보 영역입니다.<br>
-					관광지 정보 / 축제(행사) 정보 영역입니다.<br>
-					관광지 정보 / 축제(행사) 정보 영역입니다.<br>
-					관광지 정보 / 축제(행사) 정보 영역입니다.<br>
-					관광지 정보 / 축제(행사) 정보 영역입니다.<br>
-					관광지 정보 / 축제(행사) 정보 영역입니다.<br>
-					관광지 정보 / 축제(행사) 정보 영역입니다.<br>
-					관광지 정보 / 축제(행사) 정보 영역입니다.<br>
-					
+				</div>
+				<hr>
+				<div class="gInfoArea">
+					관광지 정보/ 축제(행사) 정보 영역입니다.
 				</div>
 			</div>
 		</div>
@@ -97,38 +90,191 @@
 		</div>
 	</section>
 		<script>
+		var contentid = ${param.contentid};
+		var contenttypeid = ${param.contenttypeid};
+		
+		function detailGameInfo(){
+			console.log("contenttypeid : " + contenttypeid);
+			console.log("contentid : " + contentid);
+			$.ajax({
+				url:"detailGameInformation.sub",
+				type:"GET",
+				data:{contenttypeid:contenttypeid, contentid:contentid},
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					var myData = data.response.body.items.item;
+					var output = "";
+					var overviewText = myData.overview.split(". ");
+					$("#gameTitleText").text(myData.title);
+					for(var i in overviewText){
+						output += overviewText[i] + ".<br>";
+					}
+					$(".contentArea").html(output);
+					if(myData.firstimage == null){
+						output = "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='firstImg' />";
+					}else{
+						output = "<img src="+myData.firstimage+" alt='image' class='firstImg' />";
+					}
+					$(".firstImgArea").html(output);
+					if(typeof(myData.mapy === String)){
+						myData.mapy = parseFloat(myData.mapy);
+					}
+					if(typeof(myData.mapx === String)){
+						myData.mapx = parseFloat(myData.mapx);
+					}
+					initialize(myData.mapy, myData.mapx, myData.title);
+				},
+				error:function(data){
+					console.log(data);
+				}
+			});
+		}
+		
+		function detailGameImage(){
+			$.ajax({
+				url:"detailGameImage.sub",
+				type:"GET",
+				data:{contenttypeid:contenttypeid, contentid:contentid},
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					var myData = data.response.body.items.item;
+					var count = 0;
+					var output = "";
+					if(data.response.body.items = ""){
+						output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='secondImg' />";
+						output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='secondImg' />";
+					}else if(data.response.body.totalCount == 1){
+						output += "<img src="+myData.originimgurl+" alt='image' class='secondImg' />";
+						output += "<img src="+myData.originimgurl+" alt='image' class='secondImg' />";
+					}else{
+						for(var i in myData){
+							count++;
+							output += "<img src="+myData[i].originimgurl+" alt='image' class='secondImg' />";
+							if(count == 2){break;}
+						}
+					}
+					$(".secondImgArea").html(output);
+				},
+				error:function(data){
+					console.log(data);
+				}
+			});
+		}
+		
+		function detailGameIntro(){
+			$.ajax({
+				url:"detailGameIntro.sub",
+				type:"GET",
+				data:{contenttypeid:contenttypeid, contentid:contentid},
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					var myData = data.response.body.items.item;
+					var output = "";
+					var gInfo = $(".gInfoArea");
+					gInfo.html("");
+					if(myData.contenttypeid == 12){
+						output += "<h3>관광지</h3><br>";
+						output += "ㆍ <b>문의 및 안내</b> : "+myData.infocenter+"<br>";
+						output += "ㆍ <b>쉬는날</b> : "+myData.restdate+"<br>";
+						output += "ㆍ <b>주차시설</b> : "+myData.parking+"<br>";
+						output += "ㆍ <b>유모차 대여 여부</b> : "+myData.chkbabycarriage+"<br>";
+						output += "ㆍ <b>애완동물 동반 가능 여부</b> : "+myData.chkpet+"<br>";
+						output += "ㆍ <b>신용카드 가능 여부</b> : "+myData.chkcreditcard+"<br>";
+						gInfo.html(output);
+					}else if(myData.contenttypeid == 14){
+						output += "<h3>문화시설</h3><br>";
+						output += "ㆍ <b>문의 및 안내</b> : "+myData.infocenterculture+"<br>";
+						output += "ㆍ <b>규모</b> : "+myData.scale+"<br>";
+						output += "ㆍ <b>이용시간</b> : "+myData.usetimeculture+"<br>";
+						output += "ㆍ <b>쉬는날</b> : "+myData.restdateculture+"<br>";
+						output += "ㆍ <b>이용요금</b> : "+myData.usefee+"<br>";
+						output += "ㆍ <b>주차시설</b> : "+myData.parkingculture+"<br>";
+						output += "ㆍ <b>유모차 대여 여부</b> : "+myData.chkbabycarriageculture+"<br>";
+						output += "ㆍ <b>애완동물 동반 가능 여부</b> : "+myData.chkpetculture+"<br>";
+						output += "ㆍ <b>신용카드 가능 여부</b> : "+myData.chkcreditcardculture+"<br>";
+						gInfo.html(output);
+					}else if(myData.contenttypeid == 15){
+						output += "<h3>행사</h3><br>";
+						output += "ㆍ <b>주최자 정보</b> : "+myData.sponsor1+"<br>";
+						output += "ㆍ <b>주최자 연락처</b> : "+myData.sponsor1tel+"<br>";
+						output += "ㆍ <b>주관사 연락처</b> : "+myData.sponsor2tel+"<br>";
+						output += "ㆍ <b>행사시작일</b> : "+myData.eventstartdate+"<br>";
+						output += "ㆍ <b>행사종료일</b> : "+myData.eventenddate+"<br>";
+						output += "ㆍ <b>공연시간</b> : "+myData.playtime+"<br>";
+						output += "ㆍ <b>행사장소</b> : "+myData.eventplace+"<br>";
+						output += "ㆍ <b>이용요금</b> : "+myData.usetimefestival+"<br>";
+						output += "ㆍ <b>부대행사</b> : "+myData.subevent+"<br>";
+						gInfo.html(output);
+					}else{
+						output += "<h3>레포츠</h3><br>";
+						output += "ㆍ <b>문의 및 안내</b> : "+myData.infocenterleports+"<br>";
+						output += "ㆍ <b>규모</b> : "+myData.scaleleports+"<br>";
+						//output += "ㆍ <b>개장기간</b> : "+myData.openperiod+"<br>";
+						output += "ㆍ <b>이용시간</b> : "+myData.usetimeleports+"<br>";
+						output += "ㆍ <b>예약안내</b> : "+myData.reservation+"<br>";
+						output += "ㆍ <b>주차시설</b> : "+myData.parkingleports+"<br>";
+						output += "ㆍ <b>유모차 대여 여부</b> : "+myData.chkbabycarriageleports+"<br>";
+						output += "ㆍ <b>애완동물 동반 가능 여부</b> : "+myData.chkpetleports+"<br>";
+						output += "ㆍ <b>신용카드 가능 여부</b> : "+myData.chkcreditcardleports+"<br>";
+						gInfo.html(output);
+					}
+				},
+				error:function(data){
+					console.log(data);
+				}
+			});
+		}
+		
+		$(function(){//output += "ㆍ <b></b> : ""<br>";
+			detailGameInfo();
+			detailGameImage();
+			detailGameIntro();
+			
+		});
+		
+		
 		/* Google map
       	------------------------------------------------*/
-      	var map = '';
-      	var center;
-
-      	function initialize() {
-	        var mapOptions = {
-	          	zoom: 14,
-	          	center: new google.maps.LatLng(37.769725, -122.462154),
-	          	scrollwheel: false
-        	};
-        
-	        map = new google.maps.Map(document.getElementById('google-map'),  mapOptions);
-
-	        google.maps.event.addDomListener(map, 'idle', function() {
-	          calculateCenter();
-	        });
-        
-	        google.maps.event.addDomListener(window, 'resize', function() {
-	          map.setCenter(center);
-	        });
-      	}
-
-	    function calculateCenter() {
-	        center = map.getCenter();
-	    }
-
-	    function loadGoogleMap(){
-	        var script = document.createElement('script');
-	        script.type = 'text/javascript';
-	        script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' + 'callback=initialize';
-	        document.body.appendChild(script);
+      	var map;
+    	 
+       function initialize(mapy, mapx, title) {
+   
+        	var mapLocation = {lat:mapy, lng:mapx};
+          var mapOptions = { //구글 맵 옵션 설정
+              zoom : 16, //기본 확대율
+              center : new google.maps.LatLng(mapy, mapx), // 지도 중앙 위치
+              scrollwheel : false, //마우스 휠로 확대 축소 사용 여부
+              mapTypeControl : false //맵 타입 컨트롤 사용 여부
+          };
+   
+          map = new google.maps.Map(document.getElementById('google-map'), mapOptions); //구글 맵을 사용할 타겟
+          var size_x = 60;
+          var size_y = 60;
+          var image = new google.maps.MarkerImage('http://www.weicherthallmark.com/wp-content/themes/realty/lib/images/map-marker/map-marker-gold-fat.png', //마커 이미지 설정
+        		  		new google.maps.Size(size_x, size_y),
+        		  		'',
+        		  		'',
+        		  		new google.maps.Size(size_x, size_y));
+          				
+          var marker = new google.maps.Marker({ //마커 설정
+              map : map,
+              position : mapLocation, //마커 위치
+              icon : image,//마커 이미지
+              title : title//가게이름..
+          });
+          /* var marker = new google.maps.Marker({
+        	  position:uluru,
+        	  map:map
+          }); */
+   
+          google.maps.event.addDomListener(window, "resize", function() { //리사이즈에 따른 마커 위치
+              var center = map.getCenter();
+              google.maps.event.trigger(map, "resize");
+              map.setCenter(center); 
+          });
 	    }
 	
       	// DOM is ready
@@ -155,7 +301,7 @@
 		  	});
 
 		  	// Google Map
-		  	loadGoogleMap();
+		  	//loadGoogleMap();
 		  });
 	</script>
 	

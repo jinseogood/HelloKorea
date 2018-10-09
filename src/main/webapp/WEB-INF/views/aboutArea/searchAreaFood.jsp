@@ -142,9 +142,11 @@
 			</div>
 		</div>
 		<script>
-			var areaCode = sessionStorage.getItem("areaCode");
-			var sigunguCode = sessionStorage.getItem("sigunguCode");
-			/* var getParam = function(key){
+			//var areaCode = sessionStorage.getItem("areaCode");
+			//var sigunguCode = sessionStorage.getItem("sigunguCode");
+			var areaCode = ${param.areaCode};
+			var sigunguCode = ${param.sigunguCode};
+			var getParam = function(key){
 				var _params = {};
 				document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function(){
 					function decode(s){
@@ -153,8 +155,9 @@
 					_params[decode(arguments[1])] = decode(arguments[2]);
 				});
 				return _params[key];
-			} */
-			var cat3 = sessionStorage.getItem("cat3");
+			}
+			//var cat3 = sessionStorage.getItem("cat3");
+			var cat3 = getParam("cat3");
 			var checkValue = "";
 			
 			if(areaCode == 1){
@@ -271,6 +274,9 @@
 				console.log("searchFoodStore : " + areaCode);
 				console.log("searchFoodStore : " + sigunguCode);
 				console.log("searchFoodStore : " + cat3);
+				if(sigunguCode == 0){
+					sigunguCode = "";
+				}
 				$.ajax({
 					url:"searchAreaFood.sub",
 					type:"GET",
