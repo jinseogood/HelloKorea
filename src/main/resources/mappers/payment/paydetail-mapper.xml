@@ -18,5 +18,12 @@
 		INSERT INTO PAY_DETAIL(PD_ID, PD_DATE, PD_TYPE, PRICE, PD_METHOD, PA_ID)
 		VALUES (SEQ_PD_ID.NEXTVAL, SYSDATE, #{pdType}, #{price}, #{pdMethod}, SEQ_PA_ID.CURRVAL)
 	</insert>
+	
+	<!-- 결제 완료 페이지에 보여 줄 결제 상세 정보 조회 -->
+	<select id="selectPayDetailInfo" resultMap="paydetailResultSet" parameterType="_int">
+		SELECT PD_ID, PD_DATE, PD_TYPE, PRICE, PD_METHOD, PA_ID
+		FROM PAY_DETAIL
+		WHERE PA_ID = #{paId}
+	</select>
    
 </mapper>
