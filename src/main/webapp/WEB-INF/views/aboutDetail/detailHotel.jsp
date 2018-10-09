@@ -11,7 +11,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAf5xrmNMwmRYe-jdx4N3ItbdKDOJryoj4&callback=initialize" async defer></script>
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 <title>Hello Korea</title>
 <style>
 	#more{margin-top:5%;}
@@ -26,13 +26,14 @@
 	.detailBottom{height:50px;}
 	.tm-about-box-1{padding:10px 10px;}
 	.roomImgTd{width:260px; height:300px;}
+	.QAV{display:none}
 </style>
 </head>
 <body>
 	<!-- 지역의 숙박상세 Page. -->
 	<jsp:include page="../common/searchMenubar.jsp"/>
 	<jsp:include page="../common/searchSubmenubar.jsp"/>
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	
 
 	<!-- gray bg -->	
 	<section class="container tm-home-section-1" id="more">
@@ -374,18 +375,105 @@
             <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12 line_l" style = "height:220px; padding-bottom:10px" >	
             	<br>
             	<div>
-            	<input type = "hidden" id="grade" value = "${ list.grade }">
-            		<%-- <c:if test = "${ list.grade = 0.0 }"> --%>
+            		<c:if test = "${ list.grade eq 0.0 }">
             			<span class="StarBar">
-            				<i class="far fa-star"></i>
-            				<i class="fas fa-star"></i>
-            				<i class="fa fa-star" style = "font-size:30px"></i>
-            				<i class="fa fa-star" style = "font-size:30px"></i>
-            				<i class="fa fa-star" style = "font-size:30px"></i>
-            				<i class="fa fa-star" style = "font-size:30px"></i>
-            				<i class="fa fa-star" style = "font-size:30px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
             			</span>
-            		<%-- </c:if> --%>
+            		</c:if>
+            		<c:if test = "${ list.grade eq 0.5 }">
+            			<span class="StarBar">
+            				<i class="fas fa-star-half-alt" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            			</span>
+            		</c:if>
+            		<c:if test = "${ list.grade eq 1.0 }">
+            			<span class="StarBar">
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            			</span>
+            		</c:if>
+            		<c:if test = "${ list.grade eq 1.5 }">
+            			<span class="StarBar">
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="fas fa-star-half-alt" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            			</span>
+            		</c:if>
+            		<c:if test = "${ list.grade eq 2.0 }">
+            			<span class="StarBar">
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            			</span>
+            		</c:if>
+            		<c:if test = "${ list.grade eq 2.5 }">
+            			<span class="StarBar">
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="fas fa-star-half-alt" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            			</span>
+            		</c:if>
+            		<c:if test = "${ list.grade eq 3.0 }">
+            			<span class="StarBar">
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            			</span>
+            		</c:if>
+            		<c:if test = "${ list.grade eq 3.5 }">
+            			<span class="StarBar">
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="fas fa-star-half-alt" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            			</span>
+            		</c:if>
+            		<c:if test = "${ list.grade eq 4.0 }">
+            			<span class="StarBar">
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="far fa-star" style = "font-size:20px"></i>
+            			</span>
+            		</c:if>
+            		<c:if test = "${ list.grade eq 4.5 }">
+            			<span class="StarBar">
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="fas fa-star-half-alt" style = "font-size:20px"></i>
+            			</span>
+            		</c:if>
+            		<c:if test = "${ list.grade eq 5.0 }">
+            			<span class="StarBar">
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            				<i class="fas fa-star" style = "font-size:20px"></i>
+            			</span>
+            		</c:if>
             	
             	&nbsp;&nbsp;
             	<span class="ReviewUpDate">
@@ -490,12 +578,20 @@
             		</div>
             	</div>
             	<div style = "margin-top:5px">
-            		<button type="button" class="btn btn-secondary">답변</button>
-            		<button type="button" class="btn btn-secondary">모든 답변보기</button>
+            		<button type="button" class="btn btn-secondary" onclick = "QA('${ list2.bid }');">답변</button>
+            		<button type="button" class="btn btn-secondary" onclick = "allQA('${ list2.bid }');">모든 답변보기</button>
+            		<div id = "${ list2.bid }" class = "QAV" Style ="padding-top:10px">
+            			<input type = "hidden" value = "${ list2.bid }">
+            			<textarea style="resize: none;" name = "text" rows="3" cols="110"></textarea>
+            			<button type="button" class="btn btn-secondary" onclick = "insertA(this);">확인</button>
+            		</div>
             	</div>
+            	
             </div>
             
          </div> 
+         <br><br><br>
+         <div></div>
          </c:forEach>
       </div>    
          <br>              
@@ -664,11 +760,94 @@
 							output += "</div>";
 							output += "<div class='col-lg-9 col-md-9 col-sm-6 col-xs-12 line_l' style = 'height:220px; padding-bottom:10px;' ><br>";
 							output += "<div><span class='StarBar'>";
-							output += "<i class='fa fa-star'></i>";
-							output += "<i class='fa fa-star'></i>";
-							output += "<i class='fa fa-star'></i>";
-							output += "<i class='fa fa-star'></i>";
-							output += "<i class='fa fa-star'></i>";
+							
+							if(review[i].grade == 0.0){
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+							}
+							
+							if(review[i].grade == 0.5){
+								output += "<i class='fas fa-star-half-alt' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+							}
+							
+							if(review[i].grade == 1.0){
+								output += "<i class='fa fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+							}
+							
+							if(review[i].grade == 1.5){
+								output += "<i class='fa fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star-half-alt' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+							}
+							
+							if(review[i].grade == 2.0){
+								output += "<i class='fa fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fa fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+							}
+							
+							if(review[i].grade == 2.5){
+								output += "<i class='fa fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fa fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star-half-alt' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+							}
+							
+							if(review[i].grade == 3.0){
+								output += "<i class='fa fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fa fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fa fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+							}
+							
+							if(review[i].grade == 3.5){
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star-half-alt' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+							}
+							
+							if(review[i].grade== 4.0){
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
+							}
+							
+							if(review[i].grade == 4.5){
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star-half-alt' style = 'font-size:20px'></i>";
+							}
+							
+							if(review[i].grade == 5.0){
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
+							}
 							output += "</span>&nbsp;&nbsp;";
 							output += "<span class='ReviewUpDate'>리뷰 게시 날짜 : "+review[i].regist_date+"</span></div>";
 							output += "<div class='ReviewTitle' style = 'font-size:20px; cursor:pointer; padding-top:10px;'><a href='#'><span>"+review[i].title+"</span></a></div>";
@@ -736,6 +915,27 @@
 		function goNext2(page){
 			page=page+1;
 			QPaging(page);
+		}
+		
+		function QA(element){
+			var a = document.getElementById(element);
+			//a.style.display = "block";
+			if(a.style.display == "block"){
+				a.style.display = "none";
+			}else{
+				a.style.display = "block";
+			}
+		}
+		
+		function allQA(){
+			
+		}
+		
+		function insertA(element){
+			//var b = s;
+			//var a = $("#"+element).parent().cildren().eq(1).val();
+			console.log(element);
+			//var a = $("element").
 		}
 	
 		function review(){

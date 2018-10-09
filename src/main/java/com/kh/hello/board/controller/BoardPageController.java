@@ -21,6 +21,7 @@ import com.kh.hello.board.FileUpload;
 import com.kh.hello.board.Response;
 import com.kh.hello.board.model.service.BoardService;
 import com.kh.hello.board.model.vo.Board;
+import com.kh.hello.board.model.vo.Reply;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.common.Pagination2;
@@ -229,6 +230,14 @@ public class BoardPageController {
 		result = bs.insertQ(b);
 		
 		return "main/about";
+	}
+	
+	@RequestMapping(value="insertA.bo")
+	public String insertA(Model model, Reply r, HttpServletRequest request){
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		r.setM_id(m.getmId());
+		
+		return "main/abount";
 	}
 
 }

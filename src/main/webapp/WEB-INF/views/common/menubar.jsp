@@ -222,6 +222,7 @@
 								<a class="myPage" href="userMypage.me">mypage</a>
 							</c:if>
 								<a href="reviewWrite.bo">reviewW</a>
+								<a href="QAWrite.bo">QW</a>
 								<div id="google_translate_element"></div>
 				  		</div>
 					</nav>		
