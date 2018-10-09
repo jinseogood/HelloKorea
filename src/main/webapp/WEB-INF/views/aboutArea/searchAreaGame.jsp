@@ -95,6 +95,7 @@
 					var sigunguCode = ${param.sigunguCode};
 					var contenttypeid = ${param.contenttypeid};
 					var pageNo = ${param.pageNo};
+					var checkValue = "";
 					
 					function searchGamePage(){
 						if(sigunguCode == 0){
@@ -218,6 +219,11 @@
 					
 						$(function(){
 							searchGamePage();
+							
+							$(".gameSearch").click(function(){
+								checkValue = $("input[type=radio][name=festivalgroup]:checked").val();
+								console.log(checkValue);
+							});
 							
 							$(".festivalSearchArea").hide();
 							

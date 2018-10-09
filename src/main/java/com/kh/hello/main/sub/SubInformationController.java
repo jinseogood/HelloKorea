@@ -444,7 +444,7 @@ public class SubInformationController {
 		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
-		parameter = parameter + "&" + "contentTypeid=39";
+		parameter = parameter + "&" + "contentTypeId=39";
 		parameter = parameter + "&" + "areaCode="+areaCode;
 		parameter = parameter + "&" + "sigunguCode="+sigunguCode;
 		parameter = parameter + "&" + "cat1=A05&cat2=A0502";
@@ -765,6 +765,51 @@ public class SubInformationController {
 		JSONObject json = new JSONObject();
 		json.put("data", data);
 	}
+	
+	
+	@RequestMapping(value="themeSearchCondition.sub")
+	public void themeSearchCondition(HttpServletRequest request, HttpServletResponse response, @RequestParam int areaCode, @RequestParam String sigunguCode, @RequestParam int contenttypeid, @RequestParam String cat1, @RequestParam String cat2, @RequestParam String cat3, @RequestParam int pageNo) throws IOException{
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=";
+		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String parameter = "";
+		
+		PrintWriter out = response.getWriter();
+		parameter = parameter + "&" + "contentTypeId="+contenttypeid;
+		parameter = parameter + "&" + "areaCode="+areaCode;
+		parameter = parameter + "&" + "sigunguCode="+sigunguCode;
+		parameter = parameter + "&" + "cat1="+cat1;
+		parameter = parameter + "&" + "cat2="+cat2;
+		parameter = parameter + "&" + "cat3="+cat3;
+		parameter = parameter + "&" + "listYN=Y";
+		parameter = parameter + "&" + "MobileOS=ETC";
+		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
+		parameter = parameter + "&" + "arrange=A";
+		parameter = parameter + "&" + "numOfRows=12";
+		parameter = parameter + "&" + "pageNo="+pageNo;
+		parameter = parameter + "&" + "_type=json";
+		
+		addr = addr + serviceKey + parameter;
+		URL url = new URL(addr);
+		
+		InputStream in = url.openStream();
+		CachedOutputStream bos = new CachedOutputStream();
+		IOUtils.copy(in, bos);
+		in.close();
+		bos.close();
+		
+		String data = bos.getOut().toString();
+		out.println(data);
+		
+		JSONObject json = new JSONObject();
+		json.put("data", data);
+	}
+	
+	
+	
+	
 	
 	
 	
