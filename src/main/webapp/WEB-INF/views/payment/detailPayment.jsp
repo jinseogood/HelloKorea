@@ -26,7 +26,7 @@
 		text-align:left;
 		font-size:24px;
 		color:white;
-		background:#5ED11B;
+		background:gold;
 		width:650px;
 		height:35px;
 	}
@@ -409,15 +409,15 @@
 					<table id="payTable">
 						<tr>
 							<td width="80px"><b>포인트</b></td>
-							<td width="130px"><input type="text" class="inputStyle" name="point" size="10" placeholder="0" style="text-align:right;"> P</td>
-							<td><button style="width:50px; height:26px;">조회</button> (<span id="pointView">5000</span>P 보유)</td>
+							<td width="130px"><input type="text" class="inputStyle" id="point" name="point" size="10" value="0" style="text-align:right;"> P</td>
+							<td><button class="btn btn-primary btn-sm">조회</button> (<span id="pointView">5000</span>P 보유)</td>
 						</tr>
 						<tr>
 							<td><b>결제 금액</b></td>
 							<td colspan="2">₩198,000</td>
 						</tr>
 						<tr>
-							<td colspan="3"><hr style="width:644px; border-style:dashed; border-width:2px; border-color:#5ED11B;"></td>
+							<td colspan="3"><hr style="width:644px; border-style:dashed; border-width:2px; border-color:gold;"></td>
 						</tr>
 						<tr>
 							<td><b style="font-size:20px;">총 금액</b></td>
@@ -425,9 +425,9 @@
 						</tr>
 						<tr style="text-align:center;">
 							<td colspan="3">
-								<button style="width:100px; height:30px;">이전으로</button>
+								<button class="btn btn-default" style="width:100px; height:30px;">이전으로</button>
 								&nbsp;&nbsp;&nbsp;
-								<button type="button" onclick="return pay();" id="payBtn" style="width:100px; height:30px;">결제하기</button>
+								<button type="button" onclick="return pay();" class="btn btn-success" id="payBtn" style="width:100px; height:30px;">결제하기</button>
 								
 							</td>
 						</tr>
@@ -584,10 +584,42 @@
 			var orderEmail=$("#orderEmail").val();
 			var orderTel=nation + tel;
 			
-			$("#orderInfo").attr("value", (mId + "," + orderName + "," + orderEmail + "," + orderTel));
+			var point=$("#point").val();
+			var pMethod;
 			
-			$("#payPalForm").attr("action", "https://www.sandbox.paypal.com/cgi-bin/webscr");
-			$("#payBtn").attr("type", "submit");
+			if(point != 0){
+				pMethod="pc";
+			}
+			else{
+				pMethod="c";
+			}
+			
+			if(fName == ""){
+				$("#firstName").focus();
+				$("#fnameWTEXT").show();
+				$("#firstName").css("border", "1px solid red");
+			}
+			else if(lName == ""){
+				$("#lastName").focus();
+				$("#lnameWTEXT").show();
+				$("#lastName").css("border", "1px solid red");
+			}
+			else if(orderEmail == ""){
+				$("#orderEmail").focus();
+				$("#emailWTEXT").show();
+				$("#orderEmail").css("border", "1px solid red");
+			}
+			else if(tel == ""){
+				$("#orderTel").focus();
+				$("#telWTEXT").show();
+				$("#orderTel").css("border", "1px solid red");
+			}
+			else{
+				$("#orderInfo").attr("value", (mId + "," + orderName + "," + orderTel + "," + orderEmail + "," + pMethod));
+					
+				$("#payPalForm").attr("action", "https://www.sandbox.paypal.com/cgi-bin/webscr");
+				$("#payBtn").attr("type", "submit");
+			}
 			
 		}
 		

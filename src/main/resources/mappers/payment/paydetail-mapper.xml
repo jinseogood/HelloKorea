@@ -1,0 +1,22 @@
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PayDetail">
+	<resultMap type="PayDetail" id="paydetailResultSet">
+		<id property="pdId" column="PD_ID"/>
+		<result property="pdDate" column="PD_DATE"/>
+		<result property="pdType" column="PD_TYPE"/>
+		<result property="price" column="PRICE"/>
+		<result property="pdMethod" column="PD_METHOD"/>
+		<result property="paId" column="PA_ID"/>
+	</resultMap>
+	
+	<!-- 결제 상세 정보 등록 -->
+	<insert id="insertPayDetail" parameterType="PayDetail">
+		INSERT INTO PAY_DETAIL(PD_ID, PD_DATE, PD_TYPE, PRICE, PD_METHOD, PA_ID)
+		VALUES (SEQ_PD_ID.NEXTVAL, SYSDATE, #{pdType}, #{price}, #{pdMethod}, SEQ_PA_ID.CURRVAL)
+	</insert>
+   
+</mapper>

@@ -7,6 +7,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 
@@ -14,42 +17,51 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.kh.hello.payment.model.service.PaymentService;
+import com.kh.hello.payment.model.vo.PayDetail;
+import com.kh.hello.payment.model.vo.Payment;
 
 @Controller
 public class PaymentController {
 	
-	 private Logger logger = LoggerFactory.getLogger(getClass());
+	@Autowired
+	private PaymentService ps;
+	
+	private Logger logger = LoggerFactory.getLogger(getClass());
 
-	 private static String URL_PAYPAL_VALIDATE; // PDT데이터를 페이팔로 보낼 서버주소
+	private static String URL_PAYPAL_VALIDATE; // PDT데이터를 페이팔로 보낼 서버주소
 
-	 // PDT 첫번째 응답 변수 선언
-	 private static final String PARAM_TX = "tx";
-	 private static final String PARAM_CMD = "cmd";
-	 private static final String PARAM_CMD_VALUE = "_notify-synch";
-	 private static final String PARAM_AT = "at";
-	 private static String PARAM_AT_VALUE;
+	// PDT 첫번째 응답 변수 선언
+	private static final String PARAM_TX = "tx";
+	private static final String PARAM_CMD = "cmd";
+	private static final String PARAM_CMD_VALUE = "_notify-synch";
+	private static final String PARAM_AT = "at";
+	private static String PARAM_AT_VALUE;
+	
+	private static final String RESPONSE_SUCCESS = "SUCCESS";
+	private static final String RESPONSE_FAIL = "FAIL";
 
-	 private static final String RESPONSE_SUCCESS = "SUCCESS";
-	 private static final String RESPONSE_FAIL = "FAIL";
+	static
+	{
+		URL_PAYPAL_VALIDATE = "https://www.sandbox.paypal.com/cgi-bin/webscr";
+		PARAM_AT_VALUE = "p7Hy0ZXi_EUdtMCi0MwQG8PTrbJUnK4KbhtazB7r9RPniS9YsBQZ0nlI5Sm";
+	}
 
-	 static
-	 {
-		 URL_PAYPAL_VALIDATE = "https://www.sandbox.paypal.com/cgi-bin/webscr";
-		 PARAM_AT_VALUE = "p7Hy0ZXi_EUdtMCi0MwQG8PTrbJUnK4KbhtazB7r9RPniS9YsBQZ0nlI5Sm";
-	 }
-
-	 private static final String PARAM_ITEM_NAME = "item_name";    // 상품이름
-	 private static final String PARAM_ITEM_NUMBER = "item_number";   // 상품번호
-	 private static final String PARAM_PAYMENT_STATUS = "payment_status";       // 결제 상태
-	 private static final String PARAM_MC_GROSS = "mc_gross";    // 페이팔 결제금액
-	 private static final String PARAM_MC_CURRENCY = "mc_currency";   // 화폐
-	 private static final String PARAM_TXN_ID = "txn_id";     // 거래번호
-	 private static final String PARAM_PAYER_EMAIL = "payer_email";   // 페이팔 구매자계정 이메일
-	 private static final String PARAM_QUANTITY = "quantity";	// 수량
-	 private static final String PARAM_PAYMENT_DATE = "payment_date";	// 결제일
-	 private static final String PARAM_CUSTOM = "custom";     // 주문자 정보
+	private static final String PARAM_ITEM_NAME = "item_name";    // 상품이름
+	private static final String PARAM_ITEM_NUMBER = "item_number";   // 상품번호
+	private static final String PARAM_PAYMENT_STATUS = "payment_status";       // 결제 상태
+	private static final String PARAM_MC_GROSS = "mc_gross";    // 페이팔 결제금액
+	private static final String PARAM_MC_CURRENCY = "mc_currency";   // 화폐
+	private static final String PARAM_TXN_ID = "txn_id";     // 거래번호
+	private static final String PARAM_PAYER_EMAIL = "payer_email";   // 페이팔 구매자계정 이메일
+	private static final String PARAM_QUANTITY = "quantity";	// 수량
+	private static final String PARAM_PAYMENT_DATE = "payment_date";	// 결제일
+	private static final String PARAM_CUSTOM = "custom";     // 주문자 정보
 	
 	@RequestMapping(value="paymentDetailView.pay")
 	public String paymentDetailView(){
@@ -57,7 +69,9 @@ public class PaymentController {
 	}
 	
 	@RequestMapping(value="paymentConfirm.pay")
-	public String paymentConfirm(HttpServletRequest request){
+	public String paymentConfirm(HttpServletRequest request, Model model){
+		
+		int result=-99;
 
 		try{
 			// PayPal로부터온 파라미터를 표시한다.
@@ -110,16 +124,26 @@ public class PaymentController {
 						vars.put(temp[0], URLDecoder.decode(temp[1], "UTF-8"));
 						logger.info("{}{}{}",new Object[]{temp[0],":",temp[1]});
 					}
+					System.out.println();
 				}
 
+				//상품명
 				String itemName = (String) vars.get(PARAM_ITEM_NAME);
+				//상품 번호
 				int itemNumber = Integer.parseInt((String) vars.get(PARAM_ITEM_NUMBER));
+				//결제 상태
 				String paymentStatus = (String) vars.get(PARAM_PAYMENT_STATUS);
+				//결제 금액
 				double paymentAmount = Double.parseDouble((String) vars.get(PARAM_MC_GROSS));
+				//통화
 				String paymentCurrency = (String) vars.get(PARAM_MC_CURRENCY);
+				//구매자 페이팔 이메일
 				String payerEmail = (String) vars.get(PARAM_PAYER_EMAIL);
+				//주문자 정보 및 주문 추가정보
 				String custom = (String) vars.get(PARAM_CUSTOM);
+				//상품 수량
 				int quantity = Integer.parseInt((String) vars.get(PARAM_QUANTITY));
+				//결제일
 				String payDate = (String) vars.get(PARAM_PAYMENT_DATE);
 				
 				System.out.println("itemName : " + itemName);
@@ -132,34 +156,106 @@ public class PaymentController {
 				System.out.println("quantity : " + quantity);
 				System.out.println("payDate : " + payDate);
 				
-				/*payment
-				결제아이디
-				회원아이디
-				투숙자명
-				투숙자전화번호
-				투숙자이메일
+				String[] orderInfo=custom.split(",");
+				
+				for(int i=0;i<orderInfo.length;i++){
+					System.out.println("orderInfo[" + i + "] : " + orderInfo[i]);
+				}
+				
+				/*
+				payment
+				결제아이디		seq
+				회원아이디		o
+				투숙자명		o
+				투숙자전화번호	o
+				투숙자이메일	o
 				
 				pay_detail
-				결제상세아이디
-				결제일
-				결제구분
-				금액
-				수단
-				결제아이디*/
-
-				//.. DB 작업 및 응답페이지 호출 등등 작업을 한다..
-
-			} else if (res.equals(RESPONSE_FAIL)) {
+				결제상세아이디	seq
+				결제일		o
+				결제구분		purchase로 넣고
+				금액			o
+				수단			c or p
+				결제아이디		seq.currval
+				*/
+				
+				Payment p=new Payment();
+				p.setmId(Integer.parseInt(orderInfo[0]));
+				p.setPaName(orderInfo[1]);
+				p.setPaPhone(orderInfo[2]);
+				p.setPaEmail(orderInfo[3]);
+				
+				ArrayList<PayDetail> pdList=new ArrayList<PayDetail>();
+				
+				if(orderInfo[4].equals("pc")){
+					PayDetail pd=new PayDetail();
+					pd.setPdType("purchase");
+					pd.setPrice(paymentAmount);
+					pd.setPdMethod("c");
+					
+					PayDetail pd2=new PayDetail();
+					pd2.setPdType("purchase");
+					pd2.setPrice(paymentAmount);
+					pd2.setPdMethod("c");
+					
+					pdList.add(pd);
+					pdList.add(pd2);
+					
+				}
+				else{
+					PayDetail pd=new PayDetail();
+					pd.setPdType("purchase");
+					pd.setPrice(paymentAmount);
+					pd.setPdMethod("c");
+					
+					pdList.add(pd);
+				}
+				
+				int rInsert=ps.insertAllPayment(p, pdList);
+				
+				if(rInsert > 0){
+					result=1;
+				}
+				else{
+					result=0;
+				}
+				
+			}
+			else if (res.equals(RESPONSE_FAIL)) {
 				logger.warn("페이팔서버로 부터 PDT유효성 요청이 실패했습니다. 상태:"+res);
-			} else {
+				
+				result=-88;
+			}
+			else {
 				logger.error("페이팔서버로 부터 PDT유효성 요청이 실패했습니다. 상태:"+res);
+				
+				result=-77;
+			}
+			
+			if(result > 0){
+				return "payment/confirmPayment";
+			}
+			else{
+				String errorMSG="";
+				
+				if(result == -88){
+					errorMSG="페이팔서버로 부터 PDT유효성 요청이 실패했습니다. 상태:"+res;
+				}
+				else{
+					errorMSG="페이팔서버로 부터 PDT유효성 요청이 실패했습니다. 상태:"+res;
+				}
+				
+				model.addAttribute("msg", errorMSG);
+				
+				return "common/errorPage";
 			}
 		}
 		catch (Exception e){
-			e.printStackTrace();
+			model.addAttribute("msg", e.getMessage());
+			
+			return "common/errorPage";
 		}
 
-		return "payment/confirmPayment";
 	}
 
 }

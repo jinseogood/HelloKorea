@@ -1,0 +1,21 @@
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Payment">
+	<resultMap type="Payment" id="paymentResultSet">
+		<id property="paId" column="PA_ID"/>
+		<result property="mId" column="M_ID"/>
+		<result property="paName" column="PA_NAME"/>
+		<result property="paPhone" column="PA_PHONE"/>
+		<result property="paEmail" column="PA_EMAIL"/>
+	</resultMap>
+   
+	<!-- 결제 정보 등록 -->
+	<insert id="insertPayment" parameterType="Payment">
+		INSERT INTO PAYMENT (PA_ID, M_ID, PA_NAME, PA_PHONE, PA_EMAIL)
+		VALUES (SEQ_PA_ID.NEXTVAL, #{mId}, #{paName}, #{paPhone}, #{paEmail})
+	</insert>
+   
+</mapper>
