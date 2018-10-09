@@ -117,6 +117,28 @@ public class GoodController {
 		Good gg = new Good();
 		gg.setMid(userNo);
 		gg.setOriginId(contentid);
+//		if(contenttypeid == 12){
+//			gg.setlType("관광지");
+//		}else if(contenttypeid == 14){
+//			gg.setlType("문화시설");
+//		}else if(contenttypeid == 15){
+//			gg.setlType("축제행사");
+//		}else{
+//			gg.setlType("레포츠");
+//		}
+		result = gs.selectOneDibs(gg);
+		response.getWriter().println(result);
+	}
+	
+	
+	@RequestMapping(value="insertDibsGame.good")
+	public void insertDibsGame(HttpServletRequest request, HttpServletResponse response, @RequestParam int contenttypeid, @RequestParam int contentid) throws IOException{
+		String user = String.valueOf(((Member)(request.getSession().getAttribute("loginUser"))).getmId());
+		int userNo = Integer.parseInt(user);
+		int result = -99;
+		Good gg = new Good();
+		gg.setMid(userNo);
+		gg.setOriginId(contentid);
 		if(contenttypeid == 12){
 			gg.setlType("관광지");
 		}else if(contenttypeid == 14){
@@ -126,12 +148,25 @@ public class GoodController {
 		}else{
 			gg.setlType("레포츠");
 		}
-		result = gs.selectOneDibs(gg);
+		
+		result = gs.insertDibsHotel(gg);
 		response.getWriter().println(result);
+		
 	}
 	
 	
-	
+	@RequestMapping(value="deleteDibsGame.good")
+	public void deleteDibsGame(HttpServletRequest request, HttpServletResponse response, @RequestParam int contenttypeid, @RequestParam int contentid) throws IOException{
+		String user = String.valueOf(((Member)(request.getSession().getAttribute("loginUser"))).getmId());
+		int userNo = Integer.parseInt(user);
+		int result = -99;
+		Good gg = new Good();
+		gg.setOriginId(contentid);
+		gg.setMid(userNo);
+		
+		result = gs.deleteDibsHotel(gg);
+		response.getWriter().println(result);
+	}
 	
 	
 	
