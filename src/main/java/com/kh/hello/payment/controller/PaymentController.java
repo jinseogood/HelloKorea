@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,6 +23,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.hello.common.Email;
+import com.kh.hello.common.EmailSender;
 import com.kh.hello.payment.model.service.PaymentService;
 import com.kh.hello.payment.model.vo.PayDetail;
 import com.kh.hello.payment.model.vo.Payment;
@@ -31,6 +34,8 @@ public class PaymentController {
 	
 	@Autowired
 	private PaymentService ps;
+	@Autowired
+	private EmailSender es;
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -123,7 +128,6 @@ public class PaymentController {
 						vars.put(temp[0], URLDecoder.decode(temp[1], "UTF-8"));
 						//logger.info("{}{}{}",new Object[]{temp[0],":",temp[1]});
 					}
-					System.out.println();
 				}
 
 				//상품명
@@ -145,7 +149,7 @@ public class PaymentController {
 				//결제일
 				String payDate = (String) vars.get(PARAM_PAYMENT_DATE);
 				
-				System.out.println("itemName : " + itemName);
+				/*System.out.println("itemName : " + itemName);
 				System.out.println("itemNumber : " + itemNumber);
 				System.out.println("paymentStatus : " + paymentStatus);
 				System.out.println("paymentAmount : " + paymentAmount);
@@ -153,32 +157,15 @@ public class PaymentController {
 				System.out.println("payerEmail : " + payerEmail);
 				System.out.println("custom : " + custom);
 				System.out.println("quantity : " + quantity);
-				System.out.println("payDate : " + payDate);
+				System.out.println("payDate : " + payDate);*/
 				
 				String[] orderInfo=custom.split(",");
 				
 				mId=Integer.parseInt(orderInfo[0]);
 				
-				for(int i=0;i<orderInfo.length;i++){
+				/*for(int i=0;i<orderInfo.length;i++){
 					System.out.println("orderInfo[" + i + "] : " + orderInfo[i]);
-				}
-				
-				/*
-				payment
-				결제아이디		seq
-				회원아이디		o
-				투숙자명		o
-				투숙자전화번호	o
-				투숙자이메일	o
-				
-				pay_detail
-				결제상세아이디	seq
-				결제일		o
-				결제구분		purchase로 넣고
-				금액			o
-				수단			c or p
-				결제아이디		seq.currval
-				*/
+				}*/
 				
 				Payment p=new Payment();
 				p.setmId(Integer.parseInt(orderInfo[0]));
@@ -196,7 +183,7 @@ public class PaymentController {
 					
 					PayDetail pd2=new PayDetail();
 					pd2.setPdType("purchase");
-					pd2.setPrice(paymentAmount);
+					pd2.setPrice(Double.parseDouble(orderInfo[5]));
 					pd2.setPdMethod("p");
 					
 					pdList.add(pd);
@@ -214,7 +201,7 @@ public class PaymentController {
 				
 				int rInsert=ps.insertAllPayment(p, pdList);
 				
-				System.out.println("rInsert : " + rInsert);
+				//System.out.println("rInsert : " + rInsert);
 				
 				if(rInsert > 0){
 					result=1;
@@ -238,6 +225,31 @@ public class PaymentController {
 			if(result > 0){
 				Payment p=ps.selectPayInfo(mId);
 				ArrayList<PayDetail> pdList=ps.selectPayDetailInfo(p.getPaId());
+				
+				Map<String, Object> map=new HashMap<String, Object>();
+				map.put("orderNum", 1);
+				map.put("orderDate", pdList.get(0).getPdDate());
+				map.put("orderName", p.getPaName());
+				map.put("orderPhone", p.getPaPhone());
+				map.put("proCName", "업체");
+				map.put("proRName", "객실");
+				map.put("proPrice", pdList.get(0).getPrice());
+				
+				//예약확인 메일 전송
+				Email email=new Email();
+				email.setSubject(p.getPaName() + "님 예약 확인 메일입니다.");
+				email.setReceiver(p.getPaEmail());
+				
+				//es.sendEmail(email);
+				
+				email.setHtmlYn("Y");                           // html 형식으로 세팅
+                email.setVeloTemplate("emailtemplate.vm");      // 템플릿 파일명
+                email.setEmailMap(map);
+                
+                es.sendVelocityEmail(email);           			// 메일 전송
+                 
+                // 이메일 전송 로그
+                email.setRegUsr("0");
 				
 				model.addAttribute("p", p);
 				model.addAttribute("pdList", pdList);
