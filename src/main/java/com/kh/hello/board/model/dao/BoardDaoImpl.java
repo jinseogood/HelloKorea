@@ -106,6 +106,18 @@ public class BoardDaoImpl implements BoardDao{
 	public int selectA(SqlSessionTemplate sqlSession, Reply r) {
 		
 		return sqlSession.insert("Reply.insertA", r);
+	}
+
+	@Override
+	public ArrayList<Reply> selectQAnswer(SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("Reply.selectQAnswer");
+	}
+
+	@Override
+	public Board selectReviewDetail(SqlSessionTemplate sqlSession, int bid) {
+		
+		return sqlSession.selectOne("Board.selectReviewDetail", bid);
 	} 
 
 }

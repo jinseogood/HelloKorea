@@ -21,6 +21,9 @@
                                        SYSDATE, SYSDATE, 1, 0, #{m_id}, #{bid})
      </insert>
      
+     <select id="selectQAnswer" resultMap = "ReplyResultSet">
+     	  SELECT * FROM REPLY	
+     </select>
      <!-- 리뷰 업데이트(실질적 글작성) -->
      <!-- <update id="updateReviewBoard" parameterType="_int">
          UPDATE BOARD

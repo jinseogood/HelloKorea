@@ -65,7 +65,10 @@
      	FROM BOARD 
      	WHERE BOARD_TYPE = 2
      </select>
-     
-     
+     <select id = "selectReviewDetail" parameterType="_int" resultMap = "BoardResultSet">
+     	SELECT BID, TITLE, BOARD_TYPE, REGIST_DATE, STATUS, MODIFY_DATE, GRADE, LIKEY, M_ID, ORIGIN_ID
+     	FROM BOARD
+     	WHERE BID = #{ bid }
+     </select>
      
 </mapper>
