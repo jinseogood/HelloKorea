@@ -104,8 +104,9 @@ public interface AdminService {
 	ArrayList<SalesStatistics> selectMainSalesStatistics();
 	ArrayList<SalesStatistics> selectMainProfit();
 	int selectUnapprovedCompanyCount();
-	
 	ArrayList<CompanyDetails> selectExpirationList();
+	
+	int terminateBlackList();
 
 	
 }

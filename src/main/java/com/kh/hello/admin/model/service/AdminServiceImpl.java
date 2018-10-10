@@ -497,10 +497,27 @@ public class AdminServiceImpl implements AdminService{
 		return ad.selectUnapprovedCompanyCount(sqlSession);
 	}
 
-	//제휴만료도래
+	//메인 제휴만료도래
 	@Override
 	public ArrayList<CompanyDetails> selectExpirationList() {
 		return ad.selectExpirationList(sqlSession);
+	}
+
+	//블랙리스트 해제 모듈
+	@Transactional(propagation=Propagation.REQUIRED, isolation=Isolation.SERIALIZABLE, rollbackFor={Exception.class})
+	@Override
+	public int terminateBlackList() {
+		int result = 0;
+		//블랙리스트 해지 대상자 검색
+		ArrayList<Blacklist> b = ad.selectTerminateList(sqlSession);
+		//블랙리스트 이력에 해지이력 넣기
+		int result1 = ad.insertTerminateHistroy(sqlSession, b);
+		//멤버 상태 업데이트
+		int result2 = ad.updateMemberStatus2(sqlSession, b);
+		if(result1 > 0 && result2 > 0){
+			result = 1;
+		}
+		return result;
 	}
 
 

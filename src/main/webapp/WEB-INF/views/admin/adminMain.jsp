@@ -174,11 +174,16 @@
 				$("#thisMonthProfit").text(data.profit + '원');
 				$("#companyCount").text(data.companyCount + '건');
 				console.log(data.expirationList);
-				$("#notifyText1").html('<strong>' 
-		                            + data.expirationList[0].cName +'</strong><br>&nbsp;'
-				                    + data.expirationList[0].startDate + '부터 '
-				                    + data.expirationList[0].endDate + '까지 '
-				                    + data.expirationList[0].crTerm + '개월 간의 제휴가 금일부로 종료됩니다.');
+				$(".alert").hide();
+				for(var i = 0; i < data.expirationList.length ; i++){
+					$(".notifyText").eq(i).html('<strong>' 
+                            + data.expirationList[i].cName +'</strong><br>&nbsp;'
+		                    + data.expirationList[i].startDate + '부터 '
+		                    + data.expirationList[i].endDate + '까지 '
+		                    + data.expirationList[i].crTerm + '개월 간의 제휴가 금일부로 종료됩니다.');
+		            $("#noti-box").children().eq(i).show();
+				}
+				
 				},
 				error:function(data){
 					console.log("에러");
@@ -276,29 +281,104 @@
                                             </header>
                                                 <div class="panel-body" id="noti-box" style="height:1565px;">
 
-                                                    <div class="alert alert-block alert-danger" id="notify1">
+                                                    <div class="alert alert-block alert-danger">
                                                         <button data-dismiss="alert" class="close close-sm" type="button">
                                                             <i class="fa fa-times"></i>
                                                         </button>
-                                                        <div id="notifyText1"></div>
+                                                        <div class="notifyText"></div>
                                                     </div>
-                                                    <div class="alert alert-success" id="notify2">
+                                                    <div class="alert alert-success">
                                                         <button data-dismiss="alert" class="close close-sm" type="button">
                                                             <i class="fa fa-times"></i>
                                                         </button>
-                                                        <strong>Well done!</strong> You successfully read this important alert message.
+                                                        <div class="notifyText"></div>
                                                     </div>
-                                                    <div class="alert alert-info" id="notify3">
+                                                    <div class="alert alert-info">
                                                         <button data-dismiss="alert" class="close close-sm" type="button">
                                                             <i class="fa fa-times"></i>
                                                         </button>
-                                                        <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+                                                        <div class="notifyText"></div>
                                                     </div>
-                                                    <div class="alert alert-warning" id="notify4">
+                                                    <div class="alert alert-warning">
                                                         <button data-dismiss="alert" class="close close-sm" type="button">
                                                             <i class="fa fa-times"></i>
                                                         </button>
-                                                        <strong>Warning!</strong> Best check yo self, you're not looking too good.
+                                                        <div class="notifyText"></div>
+                                                    </div>
+                                                    
+                                                    <div class="alert alert-block alert-danger">
+                                                        <button data-dismiss="alert" class="close close-sm" type="button">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                        <div class="notifyText"></div>
+                                                    </div>
+                                                    <div class="alert alert-success">
+                                                        <button data-dismiss="alert" class="close close-sm" type="button">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                        <div class="notifyText"></div>
+                                                    </div>
+                                                    <div class="alert alert-info">
+                                                        <button data-dismiss="alert" class="close close-sm" type="button">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                        <div class="notifyText"></div>
+                                                    </div>
+                                                    <div class="alert alert-warning">
+                                                        <button data-dismiss="alert" class="close close-sm" type="button">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                        <div class="notifyText"></div>
+                                                    </div>
+                                                    
+                                                    <div class="alert alert-block alert-danger">
+                                                        <button data-dismiss="alert" class="close close-sm" type="button">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                        <div class="notifyText"></div>
+                                                    </div>
+                                                    <div class="alert alert-success">
+                                                        <button data-dismiss="alert" class="close close-sm" type="button">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                        <div class="notifyText"></div>
+                                                    </div>
+                                                    <div class="alert alert-info">
+                                                        <button data-dismiss="alert" class="close close-sm" type="button">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                        <div class="notifyText"></div>
+                                                    </div>
+                                                    <div class="alert alert-warning">
+                                                        <button data-dismiss="alert" class="close close-sm" type="button">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                        <div class="notifyText"></div>
+                                                    </div>
+                                                    
+                                                    <div class="alert alert-block alert-danger">
+                                                        <button data-dismiss="alert" class="close close-sm" type="button">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                        <div class="notifyText"></div>
+                                                    </div>
+                                                    <div class="alert alert-success">
+                                                        <button data-dismiss="alert" class="close close-sm" type="button">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                        <div class="notifyText"></div>
+                                                    </div>
+                                                    <div class="alert alert-info">
+                                                        <button data-dismiss="alert" class="close close-sm" type="button">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                        <div class="notifyText"></div>
+                                                    </div>
+                                                    <div class="alert alert-warning">
+                                                        <button data-dismiss="alert" class="close close-sm" type="button">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                        <div class="notifyText"></div>
                                                     </div>
 
                                                 </div>

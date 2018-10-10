@@ -113,8 +113,11 @@ public interface AdminDao {
 	ArrayList<SalesStatistics> selectMainSalesStatistics(SqlSessionTemplate sqlSession);
 	ArrayList<SalesStatistics> selectMainProfit(SqlSessionTemplate sqlSession);
 	int selectUnapprovedCompanyCount(SqlSessionTemplate sqlSession);
-	
 	ArrayList<CompanyDetails> selectExpirationList(SqlSessionTemplate sqlSession);
+	
+	ArrayList<Blacklist> selectTerminateList(SqlSessionTemplate sqlSession);
+	int insertTerminateHistroy(SqlSessionTemplate sqlSession, ArrayList<Blacklist> b);
+	int updateMemberStatus2(SqlSessionTemplate sqlSession, ArrayList<Blacklist> b);
 	
 	
 	
