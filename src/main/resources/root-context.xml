@@ -3,12 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:task="http://www.springframework.org/schema/task"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 						http://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/task
                         http://www.springframework.org/schema/task/spring-task-3.0.xsd
 						http://www.springframework.org/schema/tx 
-   						http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+   						http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+   						http://www.springframework.org/schema/context
+   						http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
@@ -74,9 +77,39 @@
 	</tx:advice>
 	<tx:annotation-driven />
 	
-	<bean id="careerAlarmService" class="com.kh.hello.admin.controller.AdminController" />
+	<!-- <bean id="careerAlarmService" class="com.kh.hello.admin.controller.AdminController" />
     <task:scheduler id="gsScheduler" pool-size="10" />
     <task:executor id="gsTaskExecutor" pool-size="10" />
-    <task:annotation-driven executor="gsTaskExecutor" scheduler="gsScheduler" />
+    <task:annotation-driven executor="gsTaskExecutor" scheduler="gsScheduler" /> -->
+    
+    <!-- Mail -->
+	<context:component-scan base-package="com.kh.hello.common"/>
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com"/>
+		<property name="port" value="587"/>
+		<property name="username" value="helloKoreaMailService@gmail.com"/>
+		<property name="password" value="comekorea0!"/>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+               	<prop key="mail.smtp.starttls.enable">true</prop>
+               	<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="email" class="com.kh.hello.common.Email"/>
+	<bean id="emailSender" class="com.kh.hello.common.EmailSender"/>
 
+	<!-- Velocity 설정 -->
+	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+		<property name="velocityProperties">
+			<props>
+				<prop key="resource.loader">class</prop>
+				<prop key="class.resource.loader.class">org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader</prop>
+			</props>
+		</property>
+	</bean>
+    
 </beans>
