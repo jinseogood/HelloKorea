@@ -26,7 +26,8 @@
 	.detailBottom{height:50px;}
 	.tm-about-box-1{padding:10px 10px;}
 	.roomImgTd{width:260px; height:300px;}
-	.QAV{display:none}
+	.QAV{display:none;}
+	.allQAV{display:none;}
 </style>
 </head>
 <body>
@@ -477,7 +478,7 @@
             	
             	&nbsp;&nbsp;
             	<span class="ReviewUpDate">
-            		리뷰 게시 날짜 : 2018년 09월 19일
+            		리뷰 게시 날짜 : ${ list.modify_date }
             	</span>
             	</div>
             	<div class="ReviewTitle" style = "font-size:20px; cursor:pointer; padding-top:10px">
@@ -485,12 +486,12 @@
             	</div>
             	<div class="summary" style = "padding-top:10px">
             		${ list.text }
-            		<span><a href="#">더 보기</a></span>
+            		<span><a onclick = "goDetail(${ list.bid })">더 보기</a></span>
             	</div>
             	<div style = "padding-top:20px;" >
             		<div class="fa" style = "width:100%">
             			<i class="fa fa-thumbs-o-up" style = "font-size:20px; padding-top:10px"> ${ list.likey } </i>
-            			<i class="fa fa-comment" style = "font-size:20px; padding-top:10px"> 0 </i>
+            			<i class="far fa-comment-dots" style = "font-size:20px; padding-top:10px"> 0 </i>
             			<i class="fa fa-flag" style = "font-size:20px; padding-top:10px; float:right;"> 신고하기 </i>
             		
             		</div>
@@ -544,7 +545,7 @@
       <div class = "new_line2">
       	<c:forEach var = "list2" items = "${ list2 }">
          <div class="row line_b" >
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style = "height:220px">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style = "height:auto">
                <div class="tm-about-box-1" style = "height:220px; padding:10px 10px">
                   <a href="#"><img src="${ contextPath }/resources/img/about-4.jpg" alt="img" class="tm-about-box-1-img" style = "margin:0 auto 10px"></a>
                   <h3 class="tm-about-box-1-title" style = "margin-bottom:5px">Songs <span>( GOD )</span></h3>
@@ -557,11 +558,10 @@
                   </div>
                </div>
             </div>
-            <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12 line_l" style = "height:220px">	
+            <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12 line_l" style = "height:auto">	
             	<br>
             	<div class="summary" style = "padding-top:10px; font-size:18px">
             		${ list2.text }
-            		<span><a href="#">더 보기</a></span>
             	</div>
             	<br>
             	
@@ -580,6 +580,19 @@
             	<div style = "margin-top:5px">
             		<button type="button" class="btn btn-secondary" onclick = "QA('${ list2.bid }');">답변</button>
             		<button type="button" class="btn btn-secondary" onclick = "allQA('${ list2.bid }');">모든 답변보기</button>
+            		<div id = "allQAV${ list2.bid }" class = "QAV" style = "padding-top:5px;">
+            		<c:forEach var="listQAnswer" items="${ listQAnswer }">
+            		<c:if test="${ list2.bid eq listQAnswer.bid }">
+            			<div class="summary" style = "padding-top:10px; font-size:18px">
+            				${ listQAnswer.content }
+            			</div>
+            			<span class="ReviewUpDate" style = "padding-top:5px">
+            				${ listQAnswer.modify_date }
+            			</span>
+            			<span>|</span> ${ listQAnswer.bid }님의 답변
+            		</c:if>
+            		</c:forEach>
+            		</div>
             		<div id = "${ list2.bid }" class = "QAV" Style ="padding-top:10px">
             			<input type = "hidden" value = "${ list2.bid }">
             			<textarea style="resize: none;" name = "text" rows="3" cols="110"></textarea>
@@ -654,12 +667,15 @@
 					var Q = data.list2;
 					console.log(Q.length);
 					var p2 = data.pi2;
+					var QAnswer = data.listQAnswer;
+					console.log(data.listQAnswer);
 					
 					if(Q.length > 0){
 						for(var i = 0 ; i < Q.length; i++){
 							var output="";
+							output += "<br><br><br>";
 							output += "<div class='row line_b'>";
-							output += "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-12' style = 'height:220px'>";
+							output += "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-12' style = 'height:auto'>";
 							output += "<div class='tm-about-box-1' style = 'height:220px; padding:10px 10px;'>";
 							output += "<a href='#'><img src='${ contextPath }/resources/img/about-4.jpg' alt='img' class='tm-about-box-1-img' style = 'margin:0 auto 10px;'></a>";
 							output += "<h3 class='tm-about-box-1-title' style = 'margin-bottom:5px;'>Songs <span>( GOD )</span></h3>";
@@ -671,9 +687,9 @@
 							output += "</div>";
 							output += "</div>";
 							output += "</div>";	
-							output += "<div class='col-lg-9 col-md-9 col-sm-6 col-xs-12 line_l' style = 'height:220px;' ><br>";
+							output += "<div class='col-lg-9 col-md-9 col-sm-6 col-xs-12 line_l' style = 'height:auto;' ><br>";
 							output += "<div class='summary' style = 'padding-top:10px; font-size:18px'>";
-							output += Q[i].text+"<span><a href='#'>더 보기</a></span></div><br>";
+							output += Q[i].text+"<span></div><br>";
 							output += "<div style = 'padding-top:1px' >";
 							output += "<div class='fa' style = 'width:100%'>";
 							output += "<span class='ReviewUpDate' style = 'padding-top:5px'>";
@@ -681,7 +697,18 @@
 							output += "<span>&nbsp;|&nbsp;</span>";
 							output += "<span class='ReviewUpDate' style = 'padding-top:5px'><i class='fa fa-thumbs-o-up' style = 'font-size:14px; padding-top:5px'>&nbsp;"+Q[i].likey+"</i><i class='fa fa-flag' style = 'font-size:14px; padding-top:5px; float:right; cursor:pointer'><a onclick='reportWrite()'> 신고하기</a></i></span>";
 							output += "</div></div>";
-							output += "<div style = 'margin-top:5px'><button type='button' class='btn btn-secondary'>답변</button>&nbsp;<button type='button' class='btn btn-secondary'>모든 답변보기</button></div></div>";
+							output += "<div style = 'margin-top:5px'><button type='button' class='btn btn-secondary' onclick = 'QA("+Q[i].bid+");'>답변</button>&nbsp;<button type='button' class='btn btn-secondary' onclick = 'allQA("+Q[i].bid+");'>모든 답변보기</button></div>";
+							output += "<div id = 'allQAV"+Q[i].bid+"' class = 'QAV' style = 'padding-top:5px;''>";
+		            		for(var j = 0 ; j < QAnswer.length ; j++){		            			
+		            			if(Q[i].bid == QAnswer[j].bid){
+		            				output += "<div class='summary' style = 'padding-top:10px; font-size:18px'>";
+		            				output += QAnswer[j].content+"</div>";
+		            				output += "<span class='ReviewUpDate' style = 'padding-top:5px'>"+QAnswer[j].modify_date+"</span>";
+		            				output += "<span>|</span> "+QAnswer[j].bid+"님의 답변";
+		            			}
+		            		}
+		            		output += "</div>";
+							output += "<div id = "+Q[i].bid+" class = 'QAV' Style ='padding-top:10px'><input type = 'hidden' value = "+Q[i].bid+"><textarea style='resize: none;' name = 'text' rows='3' cols='110'></textarea><button type='button' class='btn btn-secondary' onclick = 'insertA(this);'>확인</button></div></div>";
 							
 							$divBody.append(output);
 						}
@@ -852,7 +879,7 @@
 							output += "<span class='ReviewUpDate'>리뷰 게시 날짜 : "+review[i].regist_date+"</span></div>";
 							output += "<div class='ReviewTitle' style = 'font-size:20px; cursor:pointer; padding-top:10px;'><a href='#'><span>"+review[i].title+"</span></a></div>";
 							output += "<div class='summary' style = 'padding-top:10px;'>"+review[i].text+"<span><a href='#'>더 보기</a></span></div>";
-							output += "<div style = 'padding-top:20px;'><div class='fa' style = 'width:100%;'><i class='fa fa-thumbs-o-up' style = 'font-size:20px; padding-top:10px;'> "+review[i].likey+" </i><i class='fa fa-comment' style = 'font-size:20px; padding-top:10px;'> 0 </i><i class='fa fa-flag' style = 'font-size:20px; padding-top:10px; float:right;'> 신고하기 </i></div></div></div></div>";
+							output += "<div style = 'padding-top:20px;'><div class='fa' style = 'width:100%;'><i class='fa fa-thumbs-o-up' style = 'font-size:20px; padding-top:10px;'> "+review[i].likey+" </i>&nbsp;<i class='far fa-comment-dots' style = 'font-size:20px; padding-top:10px;'> 0 </i><i class='fa fa-flag' style = 'font-size:20px; padding-top:10px; float:right;'> 신고하기 </i></div></div></div></div>";
 							
 							$divBody.append(output);
 						}
@@ -927,8 +954,42 @@
 			}
 		}
 		
-		function allQA(){
+		function allQA(element){
+			var a = document.getElementById("allQAV"+element);
+			if(a.style.display == "block"){
+				a.style.display = "none";
+			}else{
+				a.style.display = "block";
+			}
 			
+			$.ajax({
+				url:"selectA.bo",
+				type:"post",
+				dataType:"json",
+				success:function(data){
+					$ABody = $('#allQAV'+element);
+					$ABody.html('');
+					
+					var QAns = data.listQAnswer;
+					var output = "";
+					console.log(QAns);
+					
+					//output += "<div id = 'allQAV"+element+"' class = 'QAV' style = 'padding-top:5px;''>";
+            		for(var j = 0 ; j < QAns.length ; j++){		            			
+            			if(element == QAns[j].bid){
+            				output += "<div class='summary' style = 'padding-top:10px; font-size:18px'>";
+            				output += QAns[j].content+"</div>";
+            				output += "<span class='ReviewUpDate' style = 'padding-top:5px'>"+QAns[j].modify_date+"</span>";
+            				output += "<span>|</span> "+QAns[j].bid+"님의 답변";
+            			}
+            		}
+            		//output += "</div>";
+    				
+            		$ABody.append(output);
+				},error:function(data){
+					
+				}
+			})
 		}
 		
 		function insertA(element){
@@ -944,7 +1005,9 @@
 					dataType:"json",
 					success:function(data){
 						QA(b);
-						console.log(data.result);
+						$(element).parent().children().eq(1).val("");
+						//location.href = "https://127.0.0.1:8443/hello/detailHotel?contentid=142861&contenttypeid=32#";
+						
 					},error:function(data){
 						console.log(data);
 					}
@@ -952,7 +1015,7 @@
 		}
 	
 		function review(){
-			if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('2')})
+			if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')})
  				location.href="reviewWrite.bo";
 			else{
 				alert("로그인이 필요한 서비스 입니다.");
@@ -960,7 +1023,7 @@
  		}
 		
 		function qa(){
-			if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('2')})
+			if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')})
 				location.href="QAWrite.bo";
 			else{
 				alert("로그인이 필요한 서비스 입니다.");
@@ -970,6 +1033,11 @@
     	function reportWrite(){
     		window.open('reportWrite.bo', 'reportWrite', 'height=580, width=480, top=80, left=400 resizable=none, scrollbars=no')
    		}
+    	
+    	function goDetail(bid){
+    		location.href = "reviewDetail.bo?bid="+ bid;
+    	}
+    	
 		$(function() {
 
 			// https://css-tricks.com/snippets/jquery/smooth-scrolling/

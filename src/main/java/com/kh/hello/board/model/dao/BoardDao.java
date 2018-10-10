@@ -35,4 +35,8 @@ public interface BoardDao {
 
 	int selectA(SqlSessionTemplate sqlSession, Reply r);
 
+	ArrayList<Reply> selectQAnswer(SqlSessionTemplate sqlSession);
+
+	Board selectReviewDetail(SqlSessionTemplate sqlSession, int bid);
+
 }

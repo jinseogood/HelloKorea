@@ -33,4 +33,8 @@ public interface BoardService{
 
 	int insertA(Reply r);
 
+	ArrayList<Reply> selectQAnswer();
+
+	Board selectReviewDetail(int bid);
+
 } 

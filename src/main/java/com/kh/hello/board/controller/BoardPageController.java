@@ -135,9 +135,12 @@ public class BoardPageController {
 		int listCount = bs.selectQCount();
 		pi2 = Pagination2.getPageInfo(page, listCount);
 		list2 = bs.selectQ(pi2);
+		ArrayList<Reply> listQAnswer = bs.selectQAnswer();
+		
 		
 		mv.addObject("list2", list2);
 		mv.addObject("pi2", pi2);
+		mv.addObject("listQAnswer", listQAnswer);
 		mv.setViewName("jsonView");
 		
 		return mv;
@@ -233,23 +236,53 @@ public class BoardPageController {
 	}
 	
 	@RequestMapping(value="insertA.bo")
-	public ModelAndView insertA(Model model, Reply r, HttpServletRequest request, @RequestParam String text, @RequestParam int bid , ModelAndView mv){
+	public ModelAndView insertA(HttpServletResponse response, Model model, Reply r, HttpServletRequest request, @RequestParam String text, @RequestParam int bid , ModelAndView mv){
+		response.setContentType("text/html; charset=UTF-8");
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		mv.setViewName("jsonView");
 		
 		r.setM_id(m.getmId());
 		r.setContent(text);
 		r.setBid(bid);
-		
 		int result = 0;
 		result = bs.insertA(r);
+		ArrayList<Reply> listQAnswer = bs.selectQAnswer();
+		
 		if(result > 0){
 			mv.addObject("result", result);
+			mv.addObject("listQAnswer", listQAnswer);
 		}else{
 			mv.addObject("result", result);
+			mv.addObject("listQAnswer", listQAnswer);
 		}
 		
 		return mv;
+	}
+	
+	@RequestMapping(value="selectA.bo")
+	public ModelAndView selectA(HttpServletResponse response, Model model, Reply r, HttpServletRequest request, ModelAndView mv){
+		response.setContentType("text/html; charset=UTF-8");
+		ArrayList<Reply> listQAnswer = bs.selectQAnswer();
+		mv.setViewName("jsonView");
+
+		if(listQAnswer != null){
+			mv.addObject("listQAnswer", listQAnswer);
+		}else{
+			mv.addObject("listQAnswer", listQAnswer);
+		}
+		
+		return mv;
+		
+	}
+	
+	@RequestMapping(value="reviewDetail.bo")
+	public String reviewDetail(Model model, @RequestParam int bid){
+
+		Board b = bs.selectReviewDetail(bid);
+		
+		System.out.println(b);
+		
+		return "board/reviewDetail";
 	}
 
 }

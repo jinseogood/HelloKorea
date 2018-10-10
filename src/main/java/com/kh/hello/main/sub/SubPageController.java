@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.hello.board.model.service.BoardService;
 import com.kh.hello.board.model.vo.Board;
+import com.kh.hello.board.model.vo.Reply;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.common.Pagination2;
 
@@ -55,9 +56,6 @@ public class SubPageController {
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		
-		System.out.println(list);
-		System.out.println(pi);
-		
 		//Q 페이징
 		ArrayList<Board> list2 = null;
 		
@@ -74,8 +72,12 @@ public class SubPageController {
 		model.addAttribute("list2", list2);
 		model.addAttribute("pi2", pi2);
 		
-		System.out.println(list2);
-		System.out.println(pi2);
+		ArrayList<Reply> listQAnswer = bs.selectQAnswer();
+		
+		model.addAttribute("listQAnswer", listQAnswer);
+		
+		System.out.println(listQAnswer);
+
 		return "aboutDetail/detailHotel";
 	}
 	
