@@ -230,7 +230,7 @@
         	var mapLocation = {lat:mapy, lng:mapx};
           var mapOptions = { //구글 맵 옵션 설정
               zoom : 16, //기본 확대율
-              center : new google.maps.LatLng(mapy, mapx), // 지도 중앙 위치
+              center : mapLocation, //new google.maps.LatLng(mapy, mapx), // 지도 중앙 위치
               scrollwheel : false, //마우스 휠로 확대 축소 사용 여부
               mapTypeControl : false //맵 타입 컨트롤 사용 여부
           };

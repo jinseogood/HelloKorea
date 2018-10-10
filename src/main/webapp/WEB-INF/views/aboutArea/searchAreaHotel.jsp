@@ -161,50 +161,50 @@
 		</div>
 		<script>
 			
-			if(areaCode == 1){
+			if(sessionStorage.getItem("areaCode") == 1){
 				$(".tm-section-title1").text("서울 호텔");
-			}else if(areaCode == 2){
+			}else if(sessionStorage.getItem("areaCode") == 2){
 				$(".tm-section-title1").text("인천 호텔");
-			}else if(areaCode == 3){
+			}else if(sessionStorage.getItem("areaCode") == 3){
 				$(".tm-section-title1").text("대전 호텔");
-			}else if(areaCode == 4){
+			}else if(sessionStorage.getItem("areaCode") == 4){
 				$(".tm-section-title1").text("대구 호텔");
-			}else if(areaCode == 5){
+			}else if(sessionStorage.getItem("areaCode") == 5){
 				$(".tm-section-title1").text("광주 호텔");
-			}else if(areaCode == 6){
+			}else if(sessionStorage.getItem("areaCode") == 6){
 				$(".tm-section-title1").text("부산 호텔");
-			}else if(areaCode == 7){
+			}else if(sessionStorage.getItem("areaCode") == 7){
 				$(".tm-section-title1").text("울산 호텔");
-			}else if(areaCode == 8){
+			}else if(sessionStorage.getItem("areaCode") == 8){
 				$(".tm-section-title1").text("세종특별자치시 호텔");
-			}else if(areaCode == 31){
+			}else if(sessionStorage.getItem("areaCode") == 31){
 				$(".tm-section-title1").text("경기도 호텔");
-			}else if(areaCode == 32){
+			}else if(sessionStorage.getItem("areaCode") == 32){
 				$(".tm-section-title1").text("강원도 호텔");
-			}else if(areaCode == 33){
+			}else if(sessionStorage.getItem("areaCode") == 33){
 				$(".tm-section-title1").text("충청북도 호텔");
-			}else if(areaCode == 34){
+			}else if(sessionStorage.getItem("areaCode") == 34){
 				$(".tm-section-title1").text("충청남도 호텔");
-			}else if(areaCode == 35){
+			}else if(sessionStorage.getItem("areaCode") == 35){
 				$(".tm-section-title1").text("경상북도 호텔");
-			}else if(areaCode == 36){
+			}else if(sessionStorage.getItem("areaCode") == 36){
 				$(".tm-section-title1").text("경상남도 호텔");
-			}else if(areaCode == 37){
+			}else if(sessionStorage.getItem("areaCode") == 37){
 				$(".tm-section-title1").text("전라북도 호텔");
-			}else if(areaCode == 38){
+			}else if(sessionStorage.getItem("areaCode") == 38){
 				$(".tm-section-title1").text("전라남도 호텔");
-			}else if(areaCode == 39){
+			}else if(sessionStorage.getItem("areaCode") == 39){
 				$(".tm-section-title1").text("제주도 호텔");
 			}
 			
-			//var areaCode = sessionStorage.getItem("areaCode");
-			var areaCode = ${param.areaCode};
+			var areaCode = sessionStorage.getItem("areaCode");
+			//var areaCode = ${param.areaCode};
 			console.log("호텔검색 : " + areaCode);
-			//var sigunguCode = sessionStorage.getItem("sigunguCode");
-			var sigunguCode = ${param.sigunguCode};
+			var sigunguCode = sessionStorage.getItem("sigunguCode");
+			//var sigunguCode = ${param.sigunguCode};
 			console.log("호텔검색 : " + sigunguCode);
-			//var pageNo = sessionStorage.getItem("pageNo");
-			var pageNo = ${param.pageNo};
+			var pageNo = sessionStorage.getItem("pageNo");
+			//var pageNo = ${param.pageNo};
 			var contenttypeid = 0;
 			var contentid = 0;
 			

@@ -32,33 +32,52 @@
 			</nav>	
 		</div>
 		<script>
-			//var areaCode;// = sessionStorage.getItem("areaCode");
-			//var sigunguCode;// = sessionStorage.getItem("sigunguCode");
-			//var contenttypeid;// = sessionStorage.getItem("contenttypeid");
-			//var pageNo;// = sessionStorage.getItem("pageNo");
-			//var cat3;// = sessionStorage.getItem("cat3");
+			var areaCode;// = sessionStorage.getItem("areaCode");
+			var sigunguCode;// = sessionStorage.getItem("sigunguCode");
+			var contenttypeid;// = sessionStorage.getItem("contenttypeid");
+			var pageNo;// = sessionStorage.getItem("pageNo");
+			var cat3;// = sessionStorage.getItem("cat3");
 			//console.log("서브메뉴바 areaCode : " + areaCode);
 			//console.log("서브메뉴바 sigunguCode : " + sigunguCode);
 			//console.log("서브메뉴바 contenttypeid : " + contenttypeid);
 			//console.log("서브메뉴바 cat3 : " + cat3);
 			
 			function areaAll(){
-				//areaCode = sessionStorage.getItem("areaCode");
+				areaCode = sessionStorage.getItem("areaCode");
 				location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
 			}
 			function areaHotel(){
-				//areaCode = sessionStorage.getItem("areaCode");
-				//if(sessionStorage.getItem("sigunguCode") == 0){
-				//	sigunguCode = 1;
-				//}else{
-				//	sigunguCode = sessionStorage.getItem("sigunguCode");
-				//}
+				areaCode = sessionStorage.getItem("areaCode");
+				if(sessionStorage.getItem("sigunguCode") == 0){
+					sigunguCode = 0;
+				}else{
+					sigunguCode = sessionStorage.getItem("sigunguCode");
+				}
+				pageNo = 1;
 				location.href="${contextPath}/areaHotelView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo;
 			}
 			function areaFood(){
+				areaCode = sessionStorage.getItem("areaCode");
+				if(sessionStorage.getItem("sigunguCode") == 0){
+					sigunguCode = 0;
+				}else{
+					sigunguCode = sessionStorage.getItem("sigunguCode");
+				}
+				if(sessionStorage.getItem("cat3") == ""){
+					cat3 = "";
+				}else{
+					cat3 = sessionStorage.getItem("cat3");
+				}
 				location.href="${contextPath}/areaFoodView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&cat3="+cat3;
 			}
 			function areaGame(){
+				areaCode = sessionStorage.getItem("areaCode");
+				if(sessionStorage.getItem("sigunguCode") == 0){
+					sigunguCode = 0;
+				}else{
+					sigunguCode = sessionStorage.getItem("sigunguCode");
+				}
+				
 				location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 			}
 		</script>

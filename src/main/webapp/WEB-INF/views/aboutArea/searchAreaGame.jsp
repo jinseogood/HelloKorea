@@ -16,7 +16,7 @@
 	#tm-home-box-2-link-1{width:50px;}
 	#tm-home-box-2-link-2{width:445px; display:inline-block;}
 	#dibsBtn{padding:15px; width:50px; height:50px;}
-	#infoTextArea{height:175px; padding:10px 20px 44px; overflow:auto; text-align:left; }
+	#infoTextArea{height:175px; padding:40px 30px 44px; overflow:auto; text-align:left; }
 	.img-responsive1{width:250px; height:225px;}
 </style>
 </head>
@@ -71,19 +71,19 @@
 					<div class="col-lg-12 col-md-12 col-sm-12" align="left">
 						<span class="tm-section-title" style="font-size:25px; border-bottom:1px solid #ccc;"><b>오락거리 유형</b></span>
 						<br>
-						<input type="radio" class="gameSearch" id="festival" name="festivalgroup" style="width:15px; height:15px;"/>
+						<input type="radio" class="gameSearch" id="festival" value="1" name="festivalgroup" style="width:15px; height:15px;"/>
 						<label for="festival" class="gameSearchText">&nbsp;&nbsp;축제</label><br>
-						<input type="radio" class="gameSearch" id="landmark" name="festivalgroup" style="width:15px; height:15px;"/>
+						<input type="radio" class="gameSearch" id="landmark" value="2" name="festivalgroup" style="width:15px; height:15px;"/>
 						<label for="landmark" class="gameSearchText">&nbsp;&nbsp;랜드마크</label><br>
-						<input type="radio" class="gameSearch" id="shopping" name="festivalgroup" style="width:15px; height:15px;"/>
+						<input type="radio" class="gameSearch" id="shopping" value="3" name="festivalgroup" style="width:15px; height:15px;"/>
 						<label for="shopping" class="gameSearchText">&nbsp;&nbsp;쇼핑</label><br>
-						<input type="radio" class="gameSearch" id="musium" name="festivalgroup" style="width:15px; height:15px;"/>
+						<input type="radio" class="gameSearch" id="musium" value="4" name="festivalgroup" style="width:15px; height:15px;"/>
 						<label for="musium" class="gameSearchText">&nbsp;&nbsp;박물관</label><br>
-						<input type="radio" class="gameSearch" id="amusmentPark" name="festivalgroup" style="width:15px; height:15px;"/>
-						<label for="amusmentPark" class="gameSearchText">&nbsp;&nbsp;놀이공원</label><br>
-						<input type="radio" class="gameSearch" id="spar" name="festivalgroup" style="width:15px; height:15px;"/>
-						<label for="spar" class="gameSearchText">&nbsp;&nbsp;스파</label><br>
-						<input type="radio" class="gameSearch" id="zoo" name="festivalgroup" style="width:15px; height:15px;"/>
+						<input type="radio" class="gameSearch" id="amusmentPark" value="5" name="festivalgroup" style="width:15px; height:15px;"/>
+						<label for="amusmentPark" class="gameSearchText">&nbsp;&nbsp;공원/테마파크</label><br>
+						<input type="radio" class="gameSearch" id="spar" value="6" name="festivalgroup" style="width:15px; height:15px;"/>
+						<label for="spar" class="gameSearchText">&nbsp;&nbsp;온천/스파</label><br>
+						<input type="radio" class="gameSearch" id="zoo" value="7" name="festivalgroup" style="width:15px; height:15px;"/>
 						<label for="zoo" class="gameSearchText">&nbsp;&nbsp;동물원/아쿠아리움</label><br>
 					</div>
 					
@@ -91,11 +91,21 @@
 					<!-- 축제 선택시에만 일자 고르는 select-option 나오도록 -->
 					<script>
 					
-					var areaCode = ${param.areaCode};
-					var sigunguCode = ${param.sigunguCode};
-					var contenttypeid = ${param.contenttypeid};
-					var pageNo = ${param.pageNo};
-					var checkValue = "";
+					//var areaCode = ${param.areaCode};
+					var areaCode1;
+					var areaCode = sessionStorage.getItem("areaCode");
+					//var sigunguCode = ${param.sigunguCode};
+					//var sigunguCode1 = "";
+					var sigunguCode = sessionStorage.getItem("sigunguCode");
+					//var contenttypeid = ${param.contenttypeid};
+					var contenttypeid1;
+					var contenttypeid = sessionStorage.getItem("contenttypeid");
+					//var pageNo = ${param.pageNo};
+					var pageNo = sessionStorage.getItem("pageNo");
+					var checkvalue = "";
+					var cat1 = "";
+					var cat2 = "";
+					var cat3 = "";
 					
 					function searchGamePage(){
 						if(sigunguCode == 0){
@@ -157,6 +167,7 @@
 										document.getElementById("viewArea").innerHTML += output;
 									}
 								}
+								
 							},
 							error:function(data){
 								console.log(data);
@@ -217,12 +228,113 @@
 						location.href="${contextPath}/detailGame?contentid="+contentid+"&contenttypeid="+contenttypeid;
 					}
 					
+					function searchGameCondition(contenttypeid1, areaCode1, sigunguCode1, cat1, cat2, cat3){
+						$.ajax({
+							url:"searchGameCondition.sub",
+							type:"GET",
+							data:{contenttypeid:contenttypeid1, areaCode:areaCode1, sigunguCode:sigunguCode1, cat1:cat1, cat2:cat2, cat3:cat3, pageNo:pageNo},
+							dataType:"json",
+							success:function(data){
+								console.log("gameSearchCondition");
+								console.log(data);
+								var myData = data.response.body.items.item;
+								var viewArea = $("#viewArea");
+								viewArea.html("");
+								var output = "";
+								for(var i in myData){
+									contenttypeid = myData[i].contenttypeid;
+									contentid = myData[i].contentid;
+									output = "";
+									output += "<div class='tm-home-box-3' id='detailHover'>";
+									output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+									if(myData[i].firstimage == null){
+										output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
+									}else{
+										output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
+									}
+									output += "</div>";
+									output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+									output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData[i].addr1+"</p>";
+									output += "<div class='tm-home-box-2-container'>";
+									output += "<input type='hidden' value="+contenttypeid+">";
+									output += "<input type='hidden' value="+contentid+">";
+									output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+									output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
+									output += "</div></div></div>";
+									document.getElementById("viewArea").innerHTML += output;
+								}
+							},
+							error:function(data){
+								console.log(data);
+							}
+						});
+					}
+					
 						$(function(){
 							searchGamePage();
 							
 							$(".gameSearch").click(function(){
-								checkValue = $("input[type=radio][name=festivalgroup]:checked").val();
-								console.log(checkValue);
+								checkvalue = $("input[type=radio][name=festivalgroup]:checked").val();
+								console.log(checkvalue);
+								if(checkvalue == 1){
+									sessionStorage.removeItem("contenttypeid");
+									contenttypeid1 = sessionStorage.setItem("contenttypeid", 15);
+									contenttypeid = sessionStorage.getItem("contenttypeid");
+									areaCode1 = sessionStorage.getItem("areaCode");
+									sigunguCode1 = "";
+									cat1 = "A02";
+									cat2 = "A0207";
+									cat3 = "";
+								}else if(checkvalue == 2){
+									
+								}else if(checkvalue == 3){
+									sessionStorage.removeItem("contenttypeid");
+									contenttypeid1 = sessionStorage.setItem("contenttypeid", 38);
+									contenttypeid = sessionStorage.getItem("contenttypeid");
+									areaCode1 = sessionStorage.getItem("areaCode");
+									sigunguCode1 = "";
+									cat1 = "A04";
+									cat2 = "A0401";
+									cat3 = "";
+									$(".tm-section-title1").text("인천 쇼핑");
+								}else if(checkvalue == 4){
+									sessionStorage.removeItem("contenttypeid");
+									contenttypeid1 = sessionStorage.setItem("contenttypeid", 12);
+									contenttypeid = sessionStorage.getItem("contenttypeid");
+									areaCode1 = sessionStorage.getItem("areaCode");
+									sigunguCode1 = "";
+									cat1 = "A02";
+									cat2 = "A0206";
+									cat3 = "A02060100";
+								}else if(checkvalue == 5){
+									sessionStorage.removeItem("contenttypeid");
+									contenttypeid1 = sessionStorage.setItem("contenttypeid", 12);
+									contenttypeid = sessionStorage.getItem("contenttypeid");
+									areaCode1 = sessionStorage.getItem("areaCode");
+									sigunguCode1 = "";
+									cat1 = "A02";
+									cat2 = "A0202";
+									cat3 = "A02020600";
+								}else if(checkvalue == 6){
+									sessionStorage.removeItem("contenttypeid");
+									contenttypeid1 = sessionStorage.setItem("contenttypeid", 12);
+									contenttypeid = sessionStorage.getItem("contenttypeid");
+									areaCode1 = sessionStorage.getItem("areaCode");
+									sigunguCode1 = "";
+									cat1 = "A02";
+									cat2 = "A0202";
+									cat3 = "A02020300";
+								}else{
+									
+								}
+								console.log("condition : " + contenttypeid1);
+								console.log("condition : " + areaCode1);
+								console.log("condition : " + sigunguCode1);
+								console.log("condition : " + cat1);
+								console.log("condition : " + cat2);
+								console.log("condition : " + cat3);
+								searchGameCondition(contenttypeid, areaCode1, sigunguCode1, cat1, cat2, cat3);
+								
 							});
 							
 							$(".festivalSearchArea").hide();
@@ -236,172 +348,172 @@
 							});
 						});
 						
-						if(areaCode == 1){
-							if(contenttypeid == 12){
+						if(sessionStorage.getItem("areaCode") == 1){
+							if(sessionStorage.getItem("contenttypeid") == 12){
 								$(".tm-section-title1").text("서울 관광지");
-							}else if(contenttypeid == 14){
+							}else if(sessionStorage.getItem("contenttypeid") == 14){
 								$(".tm-section-title1").text("서울 문화시설");
-							}else if(contenttypeid == 15){
+							}else if(sessionStorage.getItem("contenttypeid") == 15){
 								$(".tm-section-title1").text("서울 축제공연행사");
 							}else{
 								$(".tm-section-title1").text("서울 레포츠");
 							}
-						}else if(areaCode == 2){
-							if(contenttypeid == 12){
+						}else if(sessionStorage.getItem("areaCode") == 2){
+							if(sessionStorage.getItem("contenttypeid") == 12){
 								$(".tm-section-title1").text("인천 관광지");
-							}else if(contenttypeid == 14){
+							}else if(sessionStorage.getItem("contenttypeid") == 14){
 								$(".tm-section-title1").text("인천 문화시설");
-							}else if(contenttypeid == 15){
+							}else if(sessionStorage.getItem("contenttypeid") == 15){
 								$(".tm-section-title1").text("인천 축제공연행사");
 							}else{
 								$(".tm-section-title1").text("인천 레포츠");
 							}
-						}else if(areaCode == 3){
-							if(contenttypeid == 12){
+						}else if(sessionStorage.getItem("areaCode") == 3){
+							if(sessionStorage.getItem("contenttypeid") == 12){
 								$(".tm-section-title1").text("대전 관광지");
-							}else if(contenttypeid == 14){
+							}else if(sessionStorage.getItem("contenttypeid") == 14){
 								$(".tm-section-title1").text("대전 문화시설");
-							}else if(contenttypeid == 15){
+							}else if(sessionStorage.getItem("contenttypeid") == 15){
 								$(".tm-section-title1").text("대전 축제공연행사");
 							}else{
 								$(".tm-section-title1").text("대전 레포츠");
 							}
-						}else if(areaCode == 4){
-							if(contenttypeid == 12){
+						}else if(sessionStorage.getItem("areaCode") == 4){
+							if(sessionStorage.getItem("contenttypeid") == 12){
 								$(".tm-section-title1").text("대구 관광지");
-							}else if(contenttypeid == 14){
+							}else if(sessionStorage.getItem("contenttypeid") == 14){
 								$(".tm-section-title1").text("대구 문화시설");
-							}else if(contenttypeid == 15){
+							}else if(sessionStorage.getItem("contenttypeid") == 15){
 								$(".tm-section-title1").text("대구 축제공연행사");
 							}else{
 								$(".tm-section-title1").text("대구 레포츠");
 							}
-						}else if(areaCode == 5){
-							if(contenttypeid == 12){
+						}else if(sessionStorage.getItem("areaCode") == 5){
+							if(sessionStorage.getItem("contenttypeid") == 12){
 								$(".tm-section-title1").text("광주 관광지");
-							}else if(contenttypeid == 14){
+							}else if(sessionStorage.getItem("contenttypeid") == 14){
 								$(".tm-section-title1").text("광주 문화시설");
-							}else if(contenttypeid == 15){
+							}else if(sessionStorage.getItem("contenttypeid") == 15){
 								$(".tm-section-title1").text("광주 축제공연행사");
 							}else{
 								$(".tm-section-title1").text("광주 레포츠");
 							}
-						}else if(areaCode == 6){
-							if(contenttypeid == 12){
+						}else if(sessionStorage.getItem("areaCode") == 6){
+							if(sessionStorage.getItem("contenttypeid") == 12){
 								$(".tm-section-title1").text("부산 관광지");
-							}else if(contenttypeid == 14){
+							}else if(sessionStorage.getItem("contenttypeid") == 14){
 								$(".tm-section-title1").text("부산 문화시설");
-							}else if(contenttypeid == 15){
+							}else if(sessionStorage.getItem("contenttypeid") == 15){
 								$(".tm-section-title1").text("부산 축제공연행사");
 							}else{
 								$(".tm-section-title1").text("부산 레포츠");
 							}
-						}else if(areaCode == 7){
-							if(contenttypeid == 12){
+						}else if(sessionStorage.getItem("areaCode") == 7){
+							if(sessionStorage.getItem("contenttypeid") == 12){
 								$(".tm-section-title1").text("울산 관광지");
-							}else if(contenttypeid == 14){
+							}else if(sessionStorage.getItem("contenttypeid") == 14){
 								$(".tm-section-title1").text("울산 문화시설");
-							}else if(contenttypeid == 15){
+							}else if(sessionStorage.getItem("contenttypeid") == 15){
 								$(".tm-section-title1").text("울산 축제공연행사");
 							}else{
 								$(".tm-section-title1").text("울산 레포츠");
 							}
-						}else if(areaCode == 8){
-							if(contenttypeid == 12){
+						}else if(sessionStorage.getItem("areaCode") == 8){
+							if(sessionStorage.getItem("contenttypeid") == 12){
 								$(".tm-section-title1").text("세종시 관광지");
-							}else if(contenttypeid == 14){
+							}else if(sessionStorage.getItem("contenttypeid") == 14){
 								$(".tm-section-title1").text("세종시 문화시설");
-							}else if(contenttypeid == 15){
+							}else if(sessionStorage.getItem("contenttypeid") == 15){
 								$(".tm-section-title1").text("세종시 축제공연행사");
 							}else{
 								$(".tm-section-title1").text("세종시 레포츠");
 							}
-						}else if(areaCode == 31){
-							if(contenttypeid == 12){
+						}else if(sessionStorage.getItem("areaCode") == 31){
+							if(sessionStorage.getItem("contenttypeid") == 12){
 								$(".tm-section-title1").text("경기도 관광지");
-							}else if(contenttypeid == 14){
+							}else if(sessionStorage.getItem("contenttypeid") == 14){
 								$(".tm-section-title1").text("경기도 문화시설");
-							}else if(contenttypeid == 15){
+							}else if(sessionStorage.getItem("contenttypeid") == 15){
 								$(".tm-section-title1").text("경기도 축제공연행사");
 							}else{
 								$(".tm-section-title1").text("경기도 레포츠");
 							}
-						}else if(areaCode == 32){
-							if(contenttypeid == 12){
+						}else if(sessionStorage.getItem("areaCode") == 32){
+							if(sessionStorage.getItem("contenttypeid") == 12){
 								$(".tm-section-title1").text("강원도 관광지");
-							}else if(contenttypeid == 14){
+							}else if(sessionStorage.getItem("contenttypeid") == 14){
 								$(".tm-section-title1").text("강원도 문화시설");
-							}else if(contenttypeid == 15){
+							}else if(sessionStorage.getItem("contenttypeid") == 15){
 								$(".tm-section-title1").text("강원도 축제공연행사");
 							}else{
 								$(".tm-section-title1").text("강원도 레포츠");
 							}
-						}else if(areaCode == 33){
-							if(contenttypeid == 12){
+						}else if(sessionStorage.getItem("areaCode") == 33){
+							if(sessionStorage.getItem("contenttypeid") == 12){
 								$(".tm-section-title1").text("충청북도 관광지");
-							}else if(contenttypeid == 14){
+							}else if(sessionStorage.getItem("contenttypeid") == 14){
 								$(".tm-section-title1").text("충청북도 문화시설");
-							}else if(contenttypeid == 15){
+							}else if(sessionStorage.getItem("contenttypeid") == 15){
 								$(".tm-section-title1").text("충청북도 축제공연행사");
 							}else{
 								$(".tm-section-title1").text("충청북도 레포츠");
 							}
-						}else if(areaCode == 34){
-							if(contenttypeid == 12){
+						}else if(sessionStorage.getItem("areaCode") == 34){
+							if(sessionStorage.getItem("contenttypeid") == 12){
 								$(".tm-section-title1").text("충청남도 관광지");
-							}else if(contenttypeid == 14){
+							}else if(sessionStorage.getItem("contenttypeid") == 14){
 								$(".tm-section-title1").text("충청남도 문화시설");
-							}else if(contenttypeid == 15){
+							}else if(sessionStorage.getItem("contenttypeid") == 15){
 								$(".tm-section-title1").text("충청남도 축제공연행사");
 							}else{
 								$(".tm-section-title1").text("충청남도 레포츠");
 							}
-						}else if(areaCode == 35){
-							if(contenttypeid == 12){
+						}else if(sessionStorage.getItem("areaCode") == 35){
+							if(sessionStorage.getItem("contenttypeid") == 12){
 								$(".tm-section-title1").text("경상북도 관광지");
-							}else if(contenttypeid == 14){
+							}else if(sessionStorage.getItem("contenttypeid") == 14){
 								$(".tm-section-title1").text("경상북도 문화시설");
-							}else if(contenttypeid == 15){
+							}else if(sessionStorage.getItem("contenttypeid") == 15){
 								$(".tm-section-title1").text("경상북도 축제공연행사");
 							}else{
 								$(".tm-section-title1").text("경상북도 레포츠");
 							}
-						}else if(areaCode == 36){
-							if(contenttypeid == 12){
+						}else if(sessionStorage.getItem("areaCode") == 36){
+							if(sessionStorage.getItem("contenttypeid") == 12){
 								$(".tm-section-title1").text("경상남도 관광지");
-							}else if(contenttypeid == 14){
+							}else if(sessionStorage.getItem("contenttypeid") == 14){
 								$(".tm-section-title1").text("경상남도 문화시설");
-							}else if(contenttypeid == 15){
+							}else if(sessionStorage.getItem("contenttypeid") == 15){
 								$(".tm-section-title1").text("경상남도 축제공연행사");
 							}else{
 								$(".tm-section-title1").text("경상남도 레포츠");
 							}
-						}else if(areaCode == 37){
-							if(contenttypeid == 12){
+						}else if(sessionStorage.getItem("areaCode") == 37){
+							if(sessionStorage.getItem("contenttypeid") == 12){
 								$(".tm-section-title1").text("전라북도 관광지");
-							}else if(contenttypeid == 14){
+							}else if(sessionStorage.getItem("contenttypeid") == 14){
 								$(".tm-section-title1").text("전라북도 문화시설");
-							}else if(contenttypeid == 15){
+							}else if(sessionStorage.getItem("contenttypeid") == 15){
 								$(".tm-section-title1").text("전라북도 축제공연행사");
 							}else{
 								$(".tm-section-title1").text("전라북도 레포츠");
 							}
-						}else if(areaCode == 38){
-							if(contenttypeid == 12){
+						}else if(sessionStorage.getItem("areaCode") == 38){
+							if(sessionStorage.getItem("contenttypeid") == 12){
 								$(".tm-section-title1").text("전라남도 관광지");
-							}else if(contenttypeid == 14){
+							}else if(sessionStorage.getItem("contenttypeid") == 14){
 								$(".tm-section-title1").text("전라남도 문화시설");
-							}else if(contenttypeid == 15){
+							}else if(sessionStorage.getItem("contenttypeid") == 15){
 								$(".tm-section-title1").text("전라남도 축제공연행사");
 							}else{
 								$(".tm-section-title1").text("전라남도 레포츠");
 							}
-						}else if(areaCode == 39){
-							if(contenttypeid == 12){
+						}else if(sessionStorage.getItem("areaCode") == 39){
+							if(sessionStorage.getItem("contenttypeid") == 12){
 								$(".tm-section-title1").text("제주도 관광지");
-							}else if(contenttypeid == 14){
+							}else if(sessionStorage.getItem("contenttypeid") == 14){
 								$(".tm-section-title1").text("제주도 문화시설");
-							}else if(contenttypeid == 15){
+							}else if(sessionStorage.getItem("contenttypeid") == 15){
 								$(".tm-section-title1").text("제주도 축제공연행사");
 							}else{
 								$(".tm-section-title1").text("제주도 레포츠");
