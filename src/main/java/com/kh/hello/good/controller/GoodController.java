@@ -169,6 +169,43 @@ public class GoodController {
 	}
 	
 	
+	@RequestMapping(value="dibsTheme.good")
+	public void dibsTheme(HttpServletRequest request, HttpServletResponse response, @RequestParam int contenttypeid, @RequestParam int contentid) throws IOException{
+		String user = String.valueOf(((Member)(request.getSession().getAttribute("loginUser"))).getmId());
+		int userNo = Integer.parseInt(user);
+		int result = -99;
+		Good gg = new Good();
+		gg.setMid(userNo);
+		gg.setOriginId(contentid);
+		
+		result = gs.selectOneDibs(gg);
+		response.getWriter().println(result);
+	}
+	
+	@RequestMapping(value="insertDibsTheme.good")
+	public void insertDibsTheme(HttpServletRequest request, HttpServletResponse response, @RequestParam int contenttypeid, @RequestParam int contentid) throws IOException{
+		String user = String.valueOf(((Member)(request.getSession().getAttribute("loginUser"))).getmId());
+		int userNo = Integer.parseInt(user);
+		int result = -99;
+		//여기 contenttypeid 별로 if문 줘서 Good객체 생성해서 서비스로 보내기.
+		response.getWriter().println(result);
+	}
+	
+	
+	@RequestMapping(value="deleteDibsTheme.good")
+	public void deleteDibsTheme(HttpServletRequest request, HttpServletResponse response, @RequestParam int contenttypeid, @RequestParam int contentid) throws IOException{
+		String user = String.valueOf(((Member)(request.getSession().getAttribute("loginUser"))).getmId());
+		int userNo = Integer.parseInt(user);
+		int result = -99;
+		Good gg = new Good();
+		gg.setMid(userNo);
+		gg.setOriginId(contentid);
+		
+		result = gs.deleteDibsHotel(gg);
+		response.getWriter().println(result);
+	}
+	
+	
 	
 	
 	
