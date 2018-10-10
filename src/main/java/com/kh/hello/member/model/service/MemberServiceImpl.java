@@ -1,5 +1,7 @@
 package com.kh.hello.member.model.service;
 
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
@@ -104,6 +106,26 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return md.photoCheck(mId,sqlSession);
 	}
+
+
+	@Override
+	public int insertFacebook(Member m) {
+		// TODO Auto-generated method stub
+		return md.insertFacebook(m,sqlSession);
+	}
+
+
+	@Override
+	public Member selectSnsChceck(HashMap<String, Object> snsInfo) {
+		// TODO Auto-generated method stub
+		return md.selectSnsChceck(snsInfo,sqlSession);
+	}
+
+
+
+
+
+
 
 
 	

@@ -1,5 +1,7 @@
 package com.kh.hello.member.model.service;
 
+import java.util.HashMap;
+
 import com.kh.hello.common.Attachment;
 import com.kh.hello.member.model.exception.LoginException;
 import com.kh.hello.member.model.vo.Member;
@@ -31,4 +33,15 @@ public interface MemberService {
 	int uploadprofile(Attachment a);
 
 	int photoCheck(int mId);
+
+	
+	//페이스북 로그인
+	int insertFacebook(Member m);
+
+
+	Member selectSnsChceck(HashMap<String, Object> snsInfo);
+
+
+	
+	
 }

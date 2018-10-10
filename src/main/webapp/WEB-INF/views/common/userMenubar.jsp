@@ -22,10 +22,10 @@
 		<div class="submenuTitle">
 			<nav class="tm-nav">
 				<ul>
-					<li><a href="#">프로필수정</a></li>
+					<li><a href="editProfile.um">프로필수정</a></li>
 					<li><a href="#">예약내역</a></li>
 					<li><a href="#">포인트내역</a></li>
-					<li><a href="#">찜목록</a></li>
+					<li><a href="watchList.um">찜목록</a></li>
 					<li><a href="#">활동내역</a></li>
 				</ul>
 			</nav>	

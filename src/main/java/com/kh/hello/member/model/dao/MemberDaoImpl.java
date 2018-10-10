@@ -1,5 +1,7 @@
 package com.kh.hello.member.model.dao;
 
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -75,6 +77,21 @@ public class MemberDaoImpl implements MemberDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("Attachment.photoCheck",mId);
 	}
+
+
+	@Override
+	public int insertFacebook(Member m, SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("Member.insertFacebook",m);
+	}
+
+	@Override
+	public Member selectSnsChceck(HashMap<String, Object> snsInfo, SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("Member.selectSnsCheck", snsInfo);
+	}
+
+
 
 
 

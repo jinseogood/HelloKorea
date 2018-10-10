@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -171,68 +172,10 @@ public class MemberController {
 		return "main/mainHotel";
 		
 	}
-	@RequestMapping(value="userMypage.me")
-	public String userMypage(Model model, HttpServletRequest request){
-		
-		 Member m=(Member)request.getSession().getAttribute("loginUser");
-		
-		int mId= m.getmId();
-		 
-		System.out.println("mid :" + mId);
-		//int result = ms.photoCheck(mId);
-		
-		 
-		
-		//model.addAttribute("result", result);
-		return "userMypage/editProfile";
-	}
 	
 	
-	@RequestMapping(value="editProfile.me")
-	public String editProfile(Model model, Member m ,
-								HttpServletRequest request,@RequestParam(name="photo",required=false)MultipartFile photo){
-		
-		System.out.println("editProfile : " + m);
-		
-		int result = ms.editProfile(m);
-		
-		String root = request.getSession().getServletContext().getRealPath("resources");
-		System.out.println("root" + root);
-		String filePath = root+"\\uploadFiles\\member";
-		System.out.println("filePath :"+filePath);
-		
-		String originName = photo.getOriginalFilename();
-		String ext = originName.substring(originName.lastIndexOf("."));
-		String changeName = CommonUtils.getRandomString();
-		
-		Attachment a = new Attachment();
-		a.setOriginName(originName);
-		a.setChangeName(changeName);
-		a.setRefId(m.getmId());
-		a.setFilePath(filePath);
-		
-		int result2 = ms.uploadprofile(a);
-		
-		try {
-			photo.transferTo(new File(filePath +"\\"+changeName +ext));
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		if(result >0){
-			
-			return "userMypage/editProfile";
-			
-		}else{
-			return "common/errorPage";
-		}
-		
-	}
+	
+	
 
 	@RequestMapping(value="facebook.me")
 	public void facebookLogin(Model model,HttpServletResponse response){
@@ -264,7 +207,7 @@ public class MemberController {
 		
 	}
 	@RequestMapping(value = "facebookCallback.me", method = { RequestMethod.GET, RequestMethod.POST })
-	    public String facebookSignInCallback(@RequestParam String code) throws Exception {
+	    public String facebookSignInCallback(@RequestParam String code,Member m,Model model) throws Exception {
 	 
 	        try {
 	             String redirectUri = oAuth2Parameters.getRedirectUri();
@@ -288,6 +231,8 @@ public class MemberController {
 	            Facebook facebook = connection == null ? new FacebookTemplate(accessToken) : connection.getApi();
 	            UserOperations userOperations = facebook.userOperations();
 	            
+	            
+	            
 	            try
 	 
 	            {            
@@ -296,6 +241,39 @@ public class MemberController {
 	                System.out.println("유저이메일 : " + userProfile.getEmail());
 	                System.out.println("유저 id : " + userProfile.getId());
 	                System.out.println("유저 name : " + userProfile.getName());
+	                
+	                String snsId = userProfile.getId();
+	                
+	                HashMap<String,Object> snsInfo = new HashMap<String,Object>();
+	                snsInfo.put("platForm", "facebook");
+	                snsInfo.put("snsId", snsId);
+	                
+	                
+	               Member result = ms.selectSnsChceck(snsInfo);
+	               	System.out.println(result);
+	               
+	               	if(result == null){
+	                	m.setEmail(userProfile.getEmail());
+	                	m.setNickname(userProfile.getName());
+	                	m.setSnsId(userProfile.getId());
+	                	
+	                	int result1 = ms.insertFacebook(m);
+	                	
+	                	if(result1 >0){
+	                		int mid = ms.selectMemberSequence();
+	                		model.addAttribute("mid", mid);
+	                		return "member/addUserInfo";
+	                	}
+	                	
+	                	
+	                }else{
+	                	model.addAttribute("loginUser", result);
+	        			System.out.println("로그인 성공");
+	                	return "main/mainHotel";
+	                }
+	                
+	                
+	                
 	                
 	            } catch (MissingAuthorizationException e) {
 	                e.printStackTrace();
@@ -307,8 +285,7 @@ public class MemberController {
 	            e.printStackTrace();
 	 
 	        }
-	        return "member/addUserInfo";
-	 
+	        return "main/mainHotel";
 	    }
 	
 	 
@@ -390,6 +367,12 @@ public class MemberController {
  
     }
 	
+    
+    
+    
+    
+    
+    
 
 
 }

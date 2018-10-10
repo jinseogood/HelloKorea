@@ -219,7 +219,7 @@
 							</c:if>
 							<c:if test="${! empty sessionScope.loginUser }">
 								<a class="logout" href="logout.me">Logout</a>
-								<a class="myPage" href="userMypage.me">mypage</a>
+								<a class="myPage" href="userMypage.um">mypage</a>
 							</c:if>
 								<a href="reviewWrite.bo">reviewW</a>
 								<a href="QAWrite.bo">QW</a>
