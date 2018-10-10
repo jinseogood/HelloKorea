@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hello.board.model.vo.Board;
+import com.kh.hello.board.model.vo.Reply;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 
@@ -99,6 +100,12 @@ public class BoardDaoImpl implements BoardDao{
 		list = (ArrayList)sqlSession.selectList("Board.selectQ", offset, rowBounds);
 		
 		return list;
+	}
+
+	@Override
+	public int selectA(SqlSessionTemplate sqlSession, Reply r) {
+		
+		return sqlSession.insert("Reply.insertA", r);
 	} 
 
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.hello.board.model.dao.BoardDao;
 import com.kh.hello.board.model.vo.Board;
+import com.kh.hello.board.model.vo.Reply;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 
@@ -99,6 +100,12 @@ public class BoardServiceImpl implements BoardService{
 	public ArrayList<Board> selectQ(PageInfo pi) {
 		
 		return bd.selectQ(sqlSession, pi);
+	}
+
+	@Override
+	public int insertA(Reply r) {
+
+		return bd.selectA(sqlSession, r);
 	}
  
 }

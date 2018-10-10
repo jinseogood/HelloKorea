@@ -3,6 +3,7 @@ package com.kh.hello.board.model.service;
 import java.util.ArrayList;
 
 import com.kh.hello.board.model.vo.Board;
+import com.kh.hello.board.model.vo.Reply;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 
@@ -29,5 +30,7 @@ public interface BoardService{
 	int selectQCount();
 
 	ArrayList<Board> selectQ(PageInfo pi);
+
+	int insertA(Reply r);
 
 } 

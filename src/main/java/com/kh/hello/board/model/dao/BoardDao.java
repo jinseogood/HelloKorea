@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.hello.board.model.vo.Board;
+import com.kh.hello.board.model.vo.Reply;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 
@@ -31,5 +32,7 @@ public interface BoardDao {
 	int selectQCount(SqlSessionTemplate sqlSession);
 
 	ArrayList<Board> selectQ(SqlSessionTemplate sqlSession, PageInfo pi);
+
+	int selectA(SqlSessionTemplate sqlSession, Reply r);
 
 }

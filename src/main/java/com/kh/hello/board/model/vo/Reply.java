@@ -1,5 +1,8 @@
 package com.kh.hello.board.model.vo;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class Reply {
 	private int reply_id;
 	private String content;

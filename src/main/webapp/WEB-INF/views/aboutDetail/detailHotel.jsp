@@ -932,10 +932,23 @@
 		}
 		
 		function insertA(element){
-			//var b = s;
-			//var a = $("#"+element).parent().cildren().eq(1).val();
-			console.log(element);
-			//var a = $("element").
+			var a = $(element).parent().children().eq(1).val();
+			var b = $(element).parent().children().eq(0).val();
+			
+			console.log(b);
+			console.log(a);
+			$.ajax({
+					url:"insertA.bo",
+					type:"post",
+					data:{text:a, bid:b},
+					dataType:"json",
+					success:function(data){
+						QA(b);
+						console.log(data.result);
+					},error:function(data){
+						console.log(data);
+					}
+			})
 		}
 	
 		function review(){
