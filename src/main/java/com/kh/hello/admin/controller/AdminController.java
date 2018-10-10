@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +47,14 @@ public class AdminController {
 	@Autowired
 	private AdminService as;
 
+	//블랙리스트 해지 스케쥴러
+	//매일 9시 가동
+	 @Scheduled(cron="0 00 09 * * ?") 
+	 public void terminateBlacklist(){
+		int result = as.terminateBlackList();
+	    System.out.println("call : " +new Date());
+	 }
+	 
 	//관리자 마이페이지	
 	@RequestMapping("myPageView.ad")
 	public String myPageView(){

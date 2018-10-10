@@ -253,7 +253,7 @@ table.type09 td {
                                                           </div>
                                                       </div>
                                                       <div class="form-group">
-                                                          <label for="title" class="col-lg-2 col-sm-2 control-label">문의 제목</label>
+                                                          <label for="title" class="col-lg-2 col-sm-2 control-label">문의제목</label>
                                                           <div class="col-lg-10">
                                                               <input type="text" class="form-control" id="title" readonly>
                                                           </div>
@@ -267,18 +267,6 @@ table.type09 td {
                                                       </div>
                                                       
                                               <div id="sendAnswer">
-                                                      <div class="input-group m-b-10">
-                                                  <div class="input-group-btn" align="right">
-                                                      <button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">자주 묻는 질문에 답하기<span class="caret"></span></button>
-                                                      <ul class="dropdown-menu pull-right">
-                                                          <li><a href="#">ㅇㅇ관련답변</a></li>
-                                                          <li><a href="#">xx관련답변</a></li>
-                                                          <li><a href="#">**관련답변</a></li>
-                                                          <li class="divider"></li>
-                                                          <li><a href="#">%%관련답변</a></li>
-                                                      </ul>
-                                                  </div>
-                                              </div>
                                                       <div class="form-group">
                                                           <label for="content2" class="col-lg-2 col-sm-2 control-label">답변내용</label>
                                                           <div class="col-lg-10">

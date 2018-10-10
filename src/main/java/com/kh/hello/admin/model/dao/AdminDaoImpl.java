@@ -591,4 +591,23 @@ public class AdminDaoImpl implements AdminDao{
 		return (ArrayList)sqlSession.selectList("selectExpirationList");
 	}
 
+	//블랙리스트 해지 
+	//해당자 검색
+	@Override
+	public ArrayList<Blacklist> selectTerminateList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("selectTerminateList");
+	}
+
+	//블랙리스트 이력내에서 업데이트
+	@Override
+	public int insertTerminateHistroy(SqlSessionTemplate sqlSession, ArrayList<Blacklist> b) {
+		return sqlSession.insert("insertTerminateHistroy", b);
+	}
+
+	@Override
+	public int updateMemberStatus2(SqlSessionTemplate sqlSession, ArrayList<Blacklist> b) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
