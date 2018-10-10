@@ -580,7 +580,7 @@
 			
 			var mId=$("#loginMID").val();
 			
-			var orderName=fName + lName;
+			var orderName=fName + " " + lName;
 			var orderEmail=$("#orderEmail").val();
 			var orderTel=nation + tel;
 			

@@ -82,7 +82,7 @@ public class PaymentController {
 				String paramValue = request.getParameter(paramName);
 				readString = readString + "&" + paramName + "=" + URLDecoder.decode(paramValue, "UTF-8");
 			}
-			logger.info("Received PDT from PayPal:" + readString);
+			//logger.info("Received PDT from PayPal:" + readString);
 
 			// 다시 PayPal로 게시하기 위해 파라미터를 구성한다.
 			String str = PARAM_CMD + "=" + PARAM_CMD_VALUE;
@@ -93,7 +93,7 @@ public class PaymentController {
 				str = str + "&" + paramName + "=" + URLEncoder.encode(paramValue, "UTF-8");
 			}
 			str = str + "&" + PARAM_AT + "=" + PARAM_AT_VALUE;
-			logger.info("Sending PDT to PayPal:" + str);
+			//logger.info("Sending PDT to PayPal:" + str);
 
 			// 유효성을 검사하기 위해 PayPal로 다시 전송시작.
 			URL u = new URL(URL_PAYPAL_VALIDATE);
@@ -107,6 +107,8 @@ public class PaymentController {
 			BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
 
 			String res = in.readLine();
+			
+			int mId=0;
 
 			if (res.equals(RESPONSE_SUCCESS)) {
 
@@ -116,13 +118,10 @@ public class PaymentController {
 				HashMap vars = new HashMap();
 
 				while ((res = in.readLine()) != null) {
-					System.out.println("res : " + res);
 					temp = res.split("=");
-					System.out.println("temp : " + temp);
-					System.out.println("temp length : " + temp.length);
 					if (temp.length == 2) {
 						vars.put(temp[0], URLDecoder.decode(temp[1], "UTF-8"));
-						logger.info("{}{}{}",new Object[]{temp[0],":",temp[1]});
+						//logger.info("{}{}{}",new Object[]{temp[0],":",temp[1]});
 					}
 					System.out.println();
 				}
@@ -157,6 +156,8 @@ public class PaymentController {
 				System.out.println("payDate : " + payDate);
 				
 				String[] orderInfo=custom.split(",");
+				
+				mId=Integer.parseInt(orderInfo[0]);
 				
 				for(int i=0;i<orderInfo.length;i++){
 					System.out.println("orderInfo[" + i + "] : " + orderInfo[i]);
@@ -196,7 +197,7 @@ public class PaymentController {
 					PayDetail pd2=new PayDetail();
 					pd2.setPdType("purchase");
 					pd2.setPrice(paymentAmount);
-					pd2.setPdMethod("c");
+					pd2.setPdMethod("p");
 					
 					pdList.add(pd);
 					pdList.add(pd2);
@@ -212,6 +213,8 @@ public class PaymentController {
 				}
 				
 				int rInsert=ps.insertAllPayment(p, pdList);
+				
+				System.out.println("rInsert : " + rInsert);
 				
 				if(rInsert > 0){
 					result=1;
@@ -233,6 +236,12 @@ public class PaymentController {
 			}
 			
 			if(result > 0){
+				Payment p=ps.selectPayInfo(mId);
+				ArrayList<PayDetail> pdList=ps.selectPayDetailInfo(p.getPaId());
+				
+				model.addAttribute("p", p);
+				model.addAttribute("pdList", pdList);
+				
 				return "payment/confirmPayment";
 			}
 			else{

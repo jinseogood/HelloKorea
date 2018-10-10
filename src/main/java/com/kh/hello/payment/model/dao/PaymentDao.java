@@ -15,4 +15,10 @@ public interface PaymentDao {
 	//결제 상세 정보 등록
 	int insertPayDetail(ArrayList<PayDetail> pdList, SqlSessionTemplate sqlSession);
 
+	//결제 완료 페이지에 보여 줄 결제 정보 조회
+	Payment selectPayInfo(int mId, SqlSessionTemplate sqlSession);
+
+	//결제 완료 페이지에 보여 줄 결제 상세 정보 조회
+	ArrayList<PayDetail> selectPayDetailInfo(int paId, SqlSessionTemplate sqlSession);
+
 }

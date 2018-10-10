@@ -41,5 +41,17 @@ public class PaymentServiceImpl implements PaymentService{
 		
 		return result;
 	}
+	
+	//결제 완료 페이지에 보여 줄 결제 정보 조회
+	@Override
+	public Payment selectPayInfo(int mId) {
+		return pd.selectPayInfo(mId, sqlSession);
+	}
+
+	//결제 완료 페이지에 보여 줄 결제 상세 정보 조회
+	@Override
+	public ArrayList<PayDetail> selectPayDetailInfo(int paId) {
+		return pd.selectPayDetailInfo(paId, sqlSession);
+	}
 
 }

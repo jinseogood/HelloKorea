@@ -23,10 +23,21 @@ public class PaymentDaoImpl implements PaymentDao{
 		int result=0;
 		for(int i=0;i<pdList.size();i++){
 			PayDetail pd=pdList.get(i);
-			System.out.println("dao PayDetail : " + pd);
 			result=sqlSession.insert("PayDetail.insertPayDetail", pd);
 		}
 		return result;
+	}
+
+	//결제 완료 페이지에 보여 줄 결제 정보 조회
+	@Override
+	public Payment selectPayInfo(int mId, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("Payment.selectPayInfo", mId);
+	}
+
+	//결제 완료 페이지에 보여 줄 결제 상세 정보 조회
+	@Override
+	public ArrayList<PayDetail> selectPayDetailInfo(int paId, SqlSessionTemplate sqlSession) {
+		return (ArrayList) sqlSession.selectList("PayDetail.selectPayDetailInfo", paId);
 	}
 
 }
