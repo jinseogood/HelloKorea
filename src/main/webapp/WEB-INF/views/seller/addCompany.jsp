@@ -433,7 +433,7 @@
 			  						<select id="sigungu14" style="width:90%;">
 			  							<option value="0">시군구 선택</option>
 			  							<option value="1">거제시</option>
-			  							<option value="2">고창군</option>
+			  							<option value="2">거창군</option>
 			  							<option value="3">김해시</option>
 			  							<option value="4">남해군</option>
 			  							<option value="5">마산시</option>

@@ -479,5 +479,29 @@ public class AdminServiceImpl implements AdminService{
 		return ad.selectSalesStatisticsList(sqlSession, pi);
 	}
 
+	//매출 통계(메인)
+	@Override
+	public ArrayList<SalesStatistics> selectMainSalesStatistics() {
+		return ad.selectMainSalesStatistics(sqlSession);
+	}
+
+	//메인 이번달 수익
+	@Override
+	public ArrayList<SalesStatistics> selectMainProfit() {
+		return ad.selectMainProfit(sqlSession);
+	}
+
+	//메인 미승인 업체 수
+	@Override
+	public int selectUnapprovedCompanyCount() {
+		return ad.selectUnapprovedCompanyCount(sqlSession);
+	}
+
+	//제휴만료도래
+	@Override
+	public ArrayList<CompanyDetails> selectExpirationList() {
+		return ad.selectExpirationList(sqlSession);
+	}
+
 
 }

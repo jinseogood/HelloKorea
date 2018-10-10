@@ -567,4 +567,28 @@ public class AdminDaoImpl implements AdminDao{
 		return list;
 	}
 
+	//매출 통계(메인)
+	@Override
+	public ArrayList<SalesStatistics> selectMainSalesStatistics(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("selectMainSalesStatistics");
+	}
+
+	//메인 이번달 수익
+	@Override
+	public ArrayList<SalesStatistics> selectMainProfit(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("selectMainProfit");
+	}
+
+	//메인 미승인 업체 수
+	@Override
+	public int selectUnapprovedCompanyCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("selectUnapprovedCompanyCount");
+	}
+
+	//제휴만료도래 
+	@Override
+	public ArrayList<CompanyDetails> selectExpirationList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("selectExpirationList");
+	}
+
 }

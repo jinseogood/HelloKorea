@@ -177,4 +177,23 @@
          SET CR_STATUS = 'T', AP_DATE = SYSDATE
          WHERE CR_ID = #{crId}
      </update>
+     
+     <!-- 메인 미승인 회사(이번달) 수 -->
+     <select id="selectUnapprovedCompanyCount" resultType="_int">
+         SELECT COUNT(*)
+         FROM ( SELECT CR.CR_ID, CR.CR_DATE, CR.CR_STATUS, CR.C_ID, C.C_NAME, C.C_PHONE, CR.CR_TERM, CR.AP_DATE 
+                FROM COM_REGIST CR
+                JOIN COMPANY C ON(CR.C_ID=C.C_ID)
+                WHERE AP_DATE IS NULL
+                AND TO_CHAR(CR_DATE,'YYYY-MM') = TO_CHAR(SYSDATE,'YYYY-MM'))
+     </select>
+     
+     <!-- 계약 만료일 도래 알림-->
+     <select id="selectExpirationList" resultMap="companyDetailsResultSet">
+         SELECT C_NAME, AP_DATE, CR_TERM, CR_EDATE
+         FROM COM_REGIST
+         JOIN COMPANY USING(C_ID)
+         WHERE TO_CHAR(CR_EDATE,'YYYY-MM-DD') = TO_CHAR(SYSDATE,'YYYY-MM-DD')
+         AND CR_STATUS = 'Y'
+     </select>
 </mapper>

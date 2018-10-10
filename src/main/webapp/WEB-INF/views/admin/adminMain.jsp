@@ -32,11 +32,161 @@
           </style>
       </head>
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {
+        'packages':['geochart'],
+        'mapsApiKey': 'AIzaSyAv6qO0dHIqqLmX9cg6JoSxweaAXfIwr2A'
+      });
+      google.charts.setOnLoadCallback(drawRegionsMap);
+
+      function drawRegionsMap() {
+
+    	  $.ajax({
+				url:"selectNationalStatistics.ad",
+				type:"POST",
+				success:function(data){
+				      
+					var nationalArr = [['국가','가입자수(명)']];
+					for(var i=1; i <= data.nationalList.length; i++){
+						nationalArr[i] = [data.nationalList[i-1].national, data.nationalList[i-1].count];
+					}
+					
+					var data = google.visualization.arrayToDataTable(nationalArr);
+
+				        var options = {
+				        		
+				        };
+
+				        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+				        chart.draw(data, options);
+						
+				},
+				error:function(data){
+					console.log("에러");
+					console.log(data);
+				}
+			});
+    	  
+      }
+      
+    </script>
+    
+    <script type='text/javascript'>
+     google.charts.load('current', {
+       'packages': ['geochart'],
+       // Note: you will need to get a mapsApiKey for your project.
+       // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+       'mapsApiKey': 'AIzaSyAv6qO0dHIqqLmX9cg6JoSxweaAXfIwr2A'
+     });
+     google.charts.setOnLoadCallback(drawMarkersMap);
+
+      function drawMarkersMap() {
+    	  
+    	  $.ajax({
+				url:"selectCompanyAreaStatistics.ad",
+				type:"POST",
+				success:function(data){
+				      
+					var companyAreaArr = [['지역','등록 업체 수']];
+					for(var i=1; i <= data.companyAreaList.length; i++){
+						companyAreaArr[i] = [data.companyAreaList[i-1].area, data.companyAreaList[i-1].count];
+					}
+					
+				var data = google.visualization.arrayToDataTable(companyAreaArr);
+
+			      var options = {
+			        region: 'KR',
+			        displayMode: 'markers',
+			        colorAxis: {colors: ['green']}
+			      };
+
+			      var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
+			      chart.draw(data, options);
+						
+				},
+				error:function(data){
+					console.log("에러");
+					console.log(data);
+				}
+			});
+    	  
+    	  
+      
+    };
+    </script>
+    
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      
+      function drawChart() {
+    	  
+    	  $.ajax({
+				url:"selectMainSalesStatistics.ad",
+				type:"POST",
+				success:function(data){
+				      
+					var salesArr = [['Term','Sales','Profit']];
+					for(var i=1; i <= data.salesList.length; i++){
+						salesArr[i] = [data.salesList[i-1].term, data.salesList[i-1].sales,
+							           data.salesList[i-1].profit];
+					}
+					
+				var data = google.visualization.arrayToDataTable(salesArr);
+
+			        var options = {
+			          /* title: 'Company Performance', */
+			          hAxis: {title: 'Month',  titleTextStyle: {color: '#333'}},
+			          vAxis: {minValue: 0}
+			        };
+
+			        var chart = new google.visualization.AreaChart(document.getElementById('chart_div2'));
+			        chart.draw(data, options);
+						
+				},
+				error:function(data){
+					console.log("에러");
+					console.log(data);
+				}
+			});
+      
+      }
+    </script>
+   
 <body>
+
+
 	<jsp:include page="../common/menubar.jsp"/>
 	<jsp:include page="../common/adminMenubar.jsp"/>
 	<div class="main">
 	
+    <script>
+     $(function(){
+    	 $.ajax({
+				url:"selectMain.ad",
+				type:"POST",
+				success:function(data){
+				$("#reportCount").text(data.reportCount + '건');
+				$("#questionCount").text(data.questionCount + '건');
+				$("#thisMonthProfit").text(data.profit + '원');
+				$("#companyCount").text(data.companyCount + '건');
+				console.log(data.expirationList);
+				$("#notifyText1").html('<strong>' 
+		                            + data.expirationList[0].cName +'</strong><br>&nbsp;'
+				                    + data.expirationList[0].startDate + '부터 '
+				                    + data.expirationList[0].endDate + '까지 '
+				                    + data.expirationList[0].crTerm + '개월 간의 제휴가 금일부로 종료됩니다.');
+				},
+				error:function(data){
+					console.log("에러");
+					console.log(data);
+				}
+			});
+     });
+    </script> 
 	<!-- Main content -->
                 <section class="content">
 
@@ -47,7 +197,7 @@
                             <div class="sm-st clearfix">
                                 <span class="sm-st-icon st-red"><i class="fa fa-check-square-o"></i></span>
                                 <div class="sm-st-info">
-                                    <span><a href="selectReportList.ad">35건</a></span>
+                                    <span><a href="selectReportList.ad" id="reportCount"></a></span>
                                                                                  미해결 신고
                                 </div>
                             </div>
@@ -56,7 +206,7 @@
                             <div class="sm-st clearfix">
                                 <span class="sm-st-icon st-violet"><i class="fa fa-envelope-o"></i></span>
                                 <div class="sm-st-info">
-                                    <span><a href="questionView.ad">45건</a></span>
+                                    <span><a href="selectQuestionList.ad" id="questionCount"></a></span>
                                                                                 미해결 문의
                                 </div>
                             </div>
@@ -65,8 +215,8 @@
                             <div class="sm-st clearfix">
                                 <span class="sm-st-icon st-blue"><i class="fa fa-dollar"></i></span>
                                 <div class="sm-st-info">
-                                    <span><a href="salesStatisticsView.ad">100,320원</a></span>
-                                                                                이번달 수익
+                                    <span><a href="selectSalesStatistics.ad" id="thisMonthProfit"></a></span>
+                                                                                금월 수익
                                 </div>
                             </div>
                         </div>
@@ -74,8 +224,8 @@
                             <div class="sm-st clearfix">
                                 <span class="sm-st-icon st-green"><i class="fa fa-paperclip"></i></span>
                                 <div class="sm-st-info">
-                                    <span><a href="approvalView.ad">16건</a></span>
-                                                                                미승인 업체
+                                    <span><a href="selectCompanyList.ad" id="companyCount"></a></span>
+                                                                                금월 미승인 업체
                                 </div>
                             </div>
                         </div>
@@ -88,30 +238,30 @@
                             <!--earning graph start-->
                             <section class="panel">
                                 <header class="panel-heading">
-                                                                                금월 매출 통계
+                                                                                국가별 회원 분포
                                 </header>
                                 <div class="panel-body">
-                                    <canvas id="linechart" width="600" height="330"></canvas>
+                                <div id="regions_div" style="width:800px;height:450px;" align="center"></div>                   
                                 </div>
                                         </section>
                                         <!--earning graph end-->
                                         <!--earning graph start-->
                             <section class="panel">
                                 <header class="panel-heading">
-                                                                                 금월 업체 통계
+                                                                                 지역별 업체 분포
                                 </header>
                                 <div class="panel-body">
-                                    <canvas id="linechart" width="600" height="330"></canvas>
+                                    <div id="chart_div" style="width:800px; height:450px;"></div>
                                 </div>
                                         </section>
                                         <!--earning graph end-->
                                         <!--earning graph start-->
                             <section class="panel">
                                 <header class="panel-heading">
-                                                                                 금월 회원 통계
+                                                                                 매출 통계
                                 </header>
                                 <div class="panel-body">
-                                    <canvas id="linechart" width="600" height="330"></canvas>
+                                    <div id="chart_div2" style="width:800px; height:450px;"></div>
                                 </div>
                                         </section>
                                         <!--earning graph end-->
@@ -122,111 +272,44 @@
                                         <!--chat start-->
                                         <section class="panel">
                                             <header class="panel-heading">
-                                                                                                        제휴 해지일 임박 안내
+                                                                                                        제휴 해지일 도래 안내
                                             </header>
-                                                <div class="panel-body" id="noti-box">
+                                                <div class="panel-body" id="noti-box" style="height:1565px;">
 
-                                                    <div class="alert alert-block alert-danger">
+                                                    <div class="alert alert-block alert-danger" id="notify1">
                                                         <button data-dismiss="alert" class="close close-sm" type="button">
                                                             <i class="fa fa-times"></i>
                                                         </button>
-                                                        <strong>Oh snap!</strong> Change a few things up and try submitting again.
+                                                        <div id="notifyText1"></div>
                                                     </div>
-                                                    <div class="alert alert-success">
+                                                    <div class="alert alert-success" id="notify2">
                                                         <button data-dismiss="alert" class="close close-sm" type="button">
                                                             <i class="fa fa-times"></i>
                                                         </button>
                                                         <strong>Well done!</strong> You successfully read this important alert message.
                                                     </div>
-                                                    <div class="alert alert-info">
+                                                    <div class="alert alert-info" id="notify3">
                                                         <button data-dismiss="alert" class="close close-sm" type="button">
                                                             <i class="fa fa-times"></i>
                                                         </button>
                                                         <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
                                                     </div>
-                                                    <div class="alert alert-warning">
+                                                    <div class="alert alert-warning" id="notify4">
                                                         <button data-dismiss="alert" class="close close-sm" type="button">
                                                             <i class="fa fa-times"></i>
                                                         </button>
                                                         <strong>Warning!</strong> Best check yo self, you're not looking too good.
                                                     </div>
-
-
-                                                    <div class="alert alert-block alert-danger">
-                                                        <button data-dismiss="alert" class="close close-sm" type="button">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                        <strong>Oh snap!</strong> Change a few things up and try submitting again.
-                                                    </div>
-                                                    <div class="alert alert-success">
-                                                        <button data-dismiss="alert" class="close close-sm" type="button">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                        <strong>Well done!</strong> You successfully read this important alert message.
-                                                    </div>
-                                                    <div class="alert alert-info">
-                                                        <button data-dismiss="alert" class="close close-sm" type="button">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                        <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
-                                                    </div>
-                                                    <div class="alert alert-warning">
-                                                        <button data-dismiss="alert" class="close close-sm" type="button">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                        <strong>Warning!</strong> Best check yo self, you're not looking too good.
-                                                    </div>
-
 
                                                 </div>
                                         </section>
 
-
-
                       </div>
-                                    <div class="col-lg-4">
-
-                                        <!--chat start-->
-                                        <section class="panel">
-                                            <header class="panel-heading">
-                                                                                                        기타 안내
-                                            </header>
-                                                <div class="panel-body" id="noti-box2" style="height:390px">
-
-                                                    <div class="alert alert-block alert-danger">
-                                                        <button data-dismiss="alert" class="close close-sm" type="button">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                        <strong>Oh snap!</strong> Change a few things up and try submitting again.
-                                                    </div>
-                                                    <div class="alert alert-success">
-                                                        <button data-dismiss="alert" class="close close-sm" type="button">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                        <strong>Well done!</strong> You successfully read this important alert message.
-                                                    </div>
-                                                    <div class="alert alert-info">
-                                                        <button data-dismiss="alert" class="close close-sm" type="button">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                        <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
-                                                    </div>
-                                                    <div class="alert alert-warning">
-                                                        <button data-dismiss="alert" class="close close-sm" type="button">
-                                                            <i class="fa fa-times"></i>
-                                                        </button>
-                                                        <strong>Warning!</strong> Best check yo self, you're not looking too good.
-                                                    </div>
-
-
-
-                                                </div>
-                                        </section>
-
-
-
-                      </div>
-
+                               
+                               
+                               
+                               
+                                    
                   </div>
                   
               </div>

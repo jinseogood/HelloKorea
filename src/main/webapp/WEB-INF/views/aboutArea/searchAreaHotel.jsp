@@ -197,12 +197,14 @@
 				$(".tm-section-title1").text("제주도 호텔");
 			}
 			
-			//var areaCode = ${param.areaCode};
-			var areaCode = sessionStorage.getItem("areaCode");
+			//var areaCode = sessionStorage.getItem("areaCode");
+			var areaCode = ${param.areaCode};
 			console.log("호텔검색 : " + areaCode);
-			var sigunguCode = sessionStorage.getItem("sigunguCode");
+			//var sigunguCode = sessionStorage.getItem("sigunguCode");
+			var sigunguCode = ${param.sigunguCode};
 			console.log("호텔검색 : " + sigunguCode);
-			var pageNo = sessionStorage.getItem("pageNo");
+			//var pageNo = sessionStorage.getItem("pageNo");
+			var pageNo = ${param.pageNo};
 			var contenttypeid = 0;
 			var contentid = 0;
 			

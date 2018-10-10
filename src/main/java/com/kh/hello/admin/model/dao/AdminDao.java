@@ -110,6 +110,12 @@ public interface AdminDao {
 	int selectSalesStatisticsListCount(SqlSessionTemplate sqlSession);
 	ArrayList<SalesStatistics> selectSalesStatisticsList(SqlSessionTemplate sqlSession, PageInfo pi);
 	
+	ArrayList<SalesStatistics> selectMainSalesStatistics(SqlSessionTemplate sqlSession);
+	ArrayList<SalesStatistics> selectMainProfit(SqlSessionTemplate sqlSession);
+	int selectUnapprovedCompanyCount(SqlSessionTemplate sqlSession);
+	
+	ArrayList<CompanyDetails> selectExpirationList(SqlSessionTemplate sqlSession);
+	
 	
 	
 	

@@ -108,7 +108,7 @@
          WHERE RNUM BETWEEN #{row} AND #{row}+4
      </select>
      
-     <!-- 업체 월별 매출 리스트 -->
+     <!-- 월별 매출 리스트 -->
      <select id="selectSalesStatisticsListCount" resultType="_int">
          SELECT COUNT(*)
          FROM ( SELECT TERM, SALES, PREPROFIT-NVL(POINT,0) AS PROFIT
@@ -124,7 +124,7 @@
                             WHERE PD_METHOD = 'P'
                             GROUP BY TO_CHAR(PD_DATE,'YYYY-MM')) USING(TERM))
      </select>
-     <!-- 업체 월별 매출 -->
+     <!-- 월별 매출 -->
      <select id="selectSalesStatisticsList" resultMap="salesResultSet">
          SELECT TERM, SALES, PREPROFIT-NVL(POINT,0) AS PROFIT
          FROM ( SELECT TO_CHAR(PD_DATE,'YYYY-MM') AS TERM, SUM(PRICE) AS SALES, SUM(PRICE*0.15) AS PREPROFIT
@@ -140,4 +140,41 @@
                      GROUP BY TO_CHAR(PD_DATE,'YYYY-MM')) USING(TERM)
          ORDER BY TERM DESC
      </select>
+     
+     <!-- 매출 통계(메인) -->
+     <select id="selectMainSalesStatistics" resultMap="salesResultSet">
+         SELECT ROWNUM, TERM, SALES, PREPROFIT-NVL(POINT,0) AS PROFIT
+         FROM ( SELECT TO_CHAR(PD_DATE,'YYYY-MM') AS TERM, SUM(PRICE) AS SALES, SUM(PRICE*0.15) AS PREPROFIT
+                FROM PAY_DETAIL
+                WHERE PD_METHOD = 'C'
+                AND PA_ID NOT IN ( SELECT PA_ID
+                                   FROM PAY_DETAIL
+                                   WHERE PD_TYPE = 'R')
+                GROUP BY TO_CHAR(PD_DATE,'YYYY-MM')
+                ORDER BY TERM DESC)
+         LEFT JOIN ( SELECT TO_CHAR(PD_DATE,'YYYY-MM') AS TERM, SUM(PRICE) AS POINT
+                     FROM PAY_DETAIL
+                     WHERE PD_METHOD = 'P'
+                     GROUP BY TO_CHAR(PD_DATE,'YYYY-MM')
+                     ORDER BY TERM DESC) USING(TERM)
+         WHERE ROWNUM <![CDATA[<]]>= 5
+     </select>
+     
+     <!-- 메인 이번달 수익 -->
+     <select id="selectMainProfit" resultMap="salesResultSet">
+         SELECT TERM, SALES, PREPROFIT-NVL(POINT,0) AS PROFIT
+         FROM ( SELECT TO_CHAR(PD_DATE,'YYYY-MM') AS TERM, SUM(PRICE) AS SALES, SUM(PRICE*0.15) AS PREPROFIT
+                FROM PAY_DETAIL
+                WHERE PD_METHOD = 'C'
+                AND PA_ID NOT IN ( SELECT PA_ID
+                                   FROM PAY_DETAIL
+                                   WHERE PD_TYPE = 'R')
+                GROUP BY TO_CHAR(PD_DATE,'YYYY-MM'))
+         LEFT JOIN ( SELECT TO_CHAR(PD_DATE,'YYYY-MM') AS TERM, SUM(PRICE) AS POINT
+                     FROM PAY_DETAIL
+                     WHERE PD_METHOD = 'P'
+                     GROUP BY TO_CHAR(PD_DATE,'YYYY-MM')) USING(TERM)
+         WHERE TERM = TO_CHAR(SYSDATE,'YYYY-MM')
+     </select>
+     
 </mapper>
