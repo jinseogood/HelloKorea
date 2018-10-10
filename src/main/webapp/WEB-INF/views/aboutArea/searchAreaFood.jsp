@@ -142,10 +142,11 @@
 			</div>
 		</div>
 		<script>
-			//var areaCode = sessionStorage.getItem("areaCode");
-			//var sigunguCode = sessionStorage.getItem("sigunguCode");
-			var areaCode = ${param.areaCode};
-			var sigunguCode = ${param.sigunguCode};
+			var areaCode = sessionStorage.getItem("areaCode");
+			var sigunguCode = sessionStorage.getItem("sigunguCode");
+			//var areaCode = ${param.areaCode};
+			//var sigunguCode = ${param.sigunguCode};
+			//var getParam = function(key){
 			var getParam = function(key){
 				var _params = {};
 				document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function(){
@@ -156,52 +157,56 @@
 				});
 				return _params[key];
 			}
-			//var cat3 = sessionStorage.getItem("cat3");
-			var cat3 = getParam("cat3");
+			var cat3 = sessionStorage.getItem("cat3");
+			var cat4;
+			//var cat3 = getParam("cat3");
 			var checkValue = "";
 			
-			if(areaCode == 1){
+			if(sessionStorage.getItem("areaCode") == 1){
 				$(".tm-section-title1").text("서울 음식점");
-			}else if(areaCode == 2){
+			}else if(sessionStorage.getItem("areaCode") == 2){
 				$(".tm-section-title1").text("인천 음식점");
-			}else if(areaCode == 3){
+			}else if(sessionStorage.getItem("areaCode") == 3){
 				$(".tm-section-title1").text("대전 음식점");
-			}else if(areaCode == 4){
+			}else if(sessionStorage.getItem("areaCode") == 4){
 				$(".tm-section-title1").text("대구 음식점");
-			}else if(areaCode == 5){
+			}else if(sessionStorage.getItem("areaCode") == 5){
 				$(".tm-section-title1").text("광주 음식점");
-			}else if(areaCode == 6){
+			}else if(sessionStorage.getItem("areaCode") == 6){
 				$(".tm-section-title1").text("부산 음식점");
-			}else if(areaCode == 7){
+			}else if(sessionStorage.getItem("areaCode") == 7){
 				$(".tm-section-title1").text("울산 음식점");
-			}else if(areaCode == 8){
+			}else if(sessionStorage.getItem("areaCode") == 8){
 				$(".tm-section-title1").text("세종시 음식점");
-			}else if(areaCode == 31){
+			}else if(sessionStorage.getItem("areaCode") == 31){
 				$(".tm-section-title1").text("경기도 음식점");
-			}else if(areaCode == 32){
+			}else if(sessionStorage.getItem("areaCode") == 32){
 				$(".tm-section-title1").text("강원도 음식점");
-			}else if(areaCode == 33){
+			}else if(sessionStorage.getItem("areaCode") == 33){
 				$(".tm-section-title1").text("충청북도 음식점");
-			}else if(areaCode == 34){
+			}else if(sessionStorage.getItem("areaCode") == 34){
 				$(".tm-section-title1").text("충청남도 음식점");
-			}else if(areaCode == 35){
+			}else if(sessionStorage.getItem("areaCode") == 35){
 				$(".tm-section-title1").text("경상북도 음식점");
-			}else if(areaCode == 36){
+			}else if(sessionStorage.getItem("areaCode") == 36){
 				$(".tm-section-title1").text("경상남도 음식점");
-			}else if(areaCode == 37){
+			}else if(sessionStorage.getItem("areaCode") == 37){
 				$(".tm-section-title1").text("전라북도 음식점");
-			}else if(areaCode == 38){
+			}else if(sessionStorage.getItem("areaCode") == 38){
 				$(".tm-section-title1").text("전라남도 음식점");
-			}else if(areaCode == 39){
+			}else if(sessionStorage.getItem("areaCode") == 39){
 				$(".tm-section-title1").text("제주도 음식점");
 			}
 			
 			$(function(){
 				searchFoodStore();
 				$(".foodSearch").click(function(){
+					sessionStorage.removeItem("cat3");
 					checkValue = $("input[type=radio][name=foodSearchCondition]:checked").val();
+					cat4 = sessionStorage.setItem("cat3", checkValue);
+					cat3 = sessionStorage.getItem("cat3");
 					console.log(checkValue);
-					searchFoodCondition(areaCode, sigunguCode, checkValue);
+					searchFoodCondition(areaCode, sigunguCode, cat3);
 				})
 			});
 			
@@ -274,7 +279,7 @@
 				console.log("searchFoodStore : " + areaCode);
 				console.log("searchFoodStore : " + sigunguCode);
 				console.log("searchFoodStore : " + cat3);
-				if(sigunguCode == 0){
+				if(sessionStorage.getItem("sigunguCode") == 0){
 					sigunguCode = "";
 				}
 				$.ajax({
