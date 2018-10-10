@@ -1,5 +1,7 @@
 package com.kh.hello.member.model.dao;
 
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.hello.common.Attachment;
@@ -32,6 +34,13 @@ public interface MemberDao {
 	int uploadprofile(Attachment a, SqlSessionTemplate sqlSession);
 
 	int photoCheck(int mId, SqlSessionTemplate sqlSession);
+
+
+	int insertFacebook(Member m, SqlSessionTemplate sqlSession);
+
+
+	Member selectSnsChceck(HashMap<String, Object> snsInfo, SqlSessionTemplate sqlSession);
+
 
 	
 }

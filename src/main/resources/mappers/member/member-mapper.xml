@@ -41,6 +41,11 @@
 		INSERT INTO MEMBER(M_ID,PLATFORM_TYPE,M_TYPE,REGIST_DATE,STATUS,EMAIL,PASSWORD)
 		VALUES (SEQ_M_ID.NEXTVAL,'email','2',SYSDATE,'Y',#{email},#{password})
 	</insert>
+	<!-- 페이스북 -->
+	<insert id="insertFacebook" parameterType="Member">
+		INSERT INTO MEMBER(M_ID,PLATFORM_TYPE,M_TYPE,REGIST_DATE,STATUS,EMAIL,NICKNAME,SNS_ID)
+		VALUES (SEQ_M_ID.NEXTVAL,'facebook','2',SYSDATE,'Y',#{email},#{nickname},#{snsId})
+	</insert>
 	
 	<update id="updateAddUser">
 		UPDATE MEMBER
@@ -69,6 +74,13 @@
 	<select id="selectSellerSequence" resultType="_int">
       SELECT SEQ_M_ID.currval FROM DUAL
 	</select>
+	<!--  -->
+	<select id="selectSnsCheck" resultMap="memberResultSet" parameterType="java.util.Map">
+		SELECT *
+		FROM MEMBER
+		WHERE PLATFORM_TYPE=#{platForm} AND
+        SNS_ID=#{snsId}
+	</select>
 	<update id="updateAddSeller">
 		UPDATE MEMBER
 		SET NICKNAME=#{nickname},
@@ -84,6 +96,5 @@
 			INTEREST=#{interest}
 		WHERE M_ID =#{mId}
 	</update>
-	
 	
 </mapper>
