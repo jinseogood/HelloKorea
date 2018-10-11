@@ -27,6 +27,8 @@ public class EmailSender {
     VelocityEngine velocityEngine;
      
     Logger log = LoggerFactory.getLogger(this.getClass());
+    
+    private static String path="D:/git/HelloKorea/src/main/webapp/resources/templates/emailtemplate.vm";
      
     // 템플릿 사용한 이메일(Velocity 사용)
     public void sendVelocityEmail(Email email) {
@@ -37,7 +39,7 @@ public class EmailSender {
              
             MimeMessageHelper helper = new MimeMessageHelper(msg, false);
             
-            String veloTemplate = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "/HelloKorea/src/main/webapp/resources/templates/" + email.getVeloTemplate(), "UTF-8", email.getEmailMap());
+            String veloTemplate = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, path, "UTF-8", email.getEmailMap());
             helper.setSubject(email.getSubject());
             helper.setFrom(email.getFrom());
             helper.setTo(email.getReceiver());
