@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,8 +17,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-  <link rel="stylesheet" href="${ contextPath }/resources/css/ccFileUpload.css">
+
 
 
 <style>
@@ -96,55 +96,71 @@ body{ margin:50px 0px; }
 
    <jsp:include page="../common/menubar.jsp"/>
    
-   
-   <section class="container tm-home-section-1" id="more" style = "width:80%; padding:100px">
-   <form action="insertQ.bo" method = "post">
+   <section class="container tm-home-section-1" id="more" style = "width:100%; padding:100px">
+   <c:set var = "b" value = "${ b }" scope = "request"/>
       <div class="row">
          
       </div> 
 
       <div class="tm-section-header section-margin-top" >
 					<div class="col-lg-4 col-md-3 col-sm-3"><hr></div>
-					<div class="col-lg-4 col-md-6 col-sm-6"><h2 class="tm-section-title">R E V I E W - D E T A I L</h2></div>
+					<div class="col-lg-4 col-md-6 col-sm-6"><h2 class="tm-section-title">REVIEW DETAIL</h2></div>
 					<div class="col-lg-4 col-md-3 col-sm-3"><hr></div>	
 	  </div>	
       <div id="google-map" style = "text-align:center; width:100%; height:300px">
       
-      		<div class="col-lg-12 col-md-12 col-sm-12">
-      		<div class="row">		
-      		
-			</div>
-         	<div class="col-lg-6" style = "align:center">
-              	 <img src="${ contextPath }/resources/img/about-1.jpg" alt="image" style = "width:100%; height:270px" />
+
+      		<div class="row line_b" >
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style = "height:auto">
+               <div class="tm-about-box-1" style = "height:220px; padding:10px 10px">
+                  <a href="#"><img src="${ contextPath }/resources/img/about-4.jpg" alt="img" class="tm-about-box-1-img" style = "margin:0 auto 10px"></a>
+                  <h3 class="tm-about-box-1-title" style = "margin-bottom:5px">Songs <span>( GOD )</span></h3>
+                  <!-- <p class="margin-bottom-15 gray-text">Proin gravida nibhvell aliquet. Aenean sollicitudin bibum auctor nisi elit.</p> -->
+                  <div class="gray-text">
+                     <a href="#" class="tm-social-icon"><i class="fa fa-twitter"></i></a>
+                     <a href="#" class="tm-social-icon"><i class="fa fa-facebook"></i></a>
+                     <a href="#" class="tm-social-icon"><i class="fa fa-pinterest"></i></a>
+                     <a href="#" class="tm-social-icon"><i class="fa fa-google-plus"></i></a>
+                  </div>
+               </div>
             </div>
-         	<div class="col-lg-6" style = "display:table;">
-         		<div style = "vertical-align:middle; display:table-cell; height:270px">
-         			<span><h1>바이스로이 발리</h1></span>
-         			<br>
-         			<div style = "padding-top:50px">
-         				<span>Jln. Lanyahan, Br. Nagi, Ubud 80571, Indonesia</span>
-         			</div>
-         		</div>
-        	</div>
-        	</div>
-        	<br>
-        	<div class="col-lg-12 col-md-12 col-sm-12"><hr>
-           	 	<div style = "text-align:left; padding-bottom:20px; height:250px">
-            		<div>
-            		<span>질문내용</span><br>
-            			<textarea style="resize: none;" name="text" placeholder="객실 위치, 편의시설등에 대한 고객님의 궁금증을 질문하세요." rows="10" cols="50"></textarea>
+            <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12 line_l" style = "height:auto; text-align:left">	
+            	<br>
+            	<h1 style = "padding-bottom:10px;">${ b.title }</h1>
+            	<div class="summary" style = "padding-top:10px; font-size:18px">
+					${ b.text }
+            	</div>
+            	<br>
+            	
+            	<div style = "padding-top:1px" >
+            		<div class="fa" style = "width:100%">
+            			<span class="ReviewUpDate" style = "padding-top:5px">
+							리뷰 게시 날짜 : ${ b.modify_date }
+            			</span>
+            			&nbsp;
+            			<span>|</span>
+            			&nbsp;
+            			<span class="ReviewUpDate" style = "padding-top:5px">
+            				<i class="fa fa-thumbs-o-up" style = "font-size:14px; padding-top:5px">&nbsp;${ b.likey }</i>
+            				<i class="fa fa-flag" style = "font-size:14px; padding-top:5px; float:right; cursor:pointer"><a onclick="reportWrite()"> 신고하기</a></i>
+            			</span>	
             		</div>
-						
-        		</div>
-        	</div>
+            		<div class = "tripDate">
+            			<br>
+            			<span style = "font-weight:bold">숙박시기:</span>와우우우년와우우월
+            		</div>
+            	</div>
+            	
+            </div>
+            
+         </div>
+         <!-- 여기사진넣고 그아래에 댓글 넣을거임 -->
+         <div>
+         	
+         </div>
         	
-        	
-      </div>          	
-        	<div class="col-lg-12 col-md-12 col-sm-12"><hr>
-        		<input type="submit" class="btn btn-secondary" value = "확인">
-        		<button type="button" class="btn btn-secondary">취소</button>
-        	</div>
-        	</form>
+        	</div> 
+          	
    </section>
    
    <!-- white bg -->
