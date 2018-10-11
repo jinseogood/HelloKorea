@@ -37,4 +37,8 @@ public interface BoardService{
 
 	Board selectReviewDetail(int bid);
 
+	ArrayList<Attachment> selectAttachDetail(int bid);
+
+	ArrayList<Reply> selectRAnswer(int bid);
+
 } 

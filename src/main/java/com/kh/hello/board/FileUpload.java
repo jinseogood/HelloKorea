@@ -11,11 +11,10 @@ import com.kh.hello.common.CommonUtils;
 public class FileUpload {
 	private static final String[] ALLOWED_FILE_TYPES = {"image/jpeg", "image/jpg", "image/gif", "image/png"};
     private static final Long MAX_FILE_SIZE = 1048576L; //1MB
-    private static final String UPLOAD_FILE_PATH = "D:/git/HelloKorea/src/main/webapp/resources/uploadFiles/board/";
     private String originalName;
     private String changeName;
     
-    public String process(MultipartFile file) {
+    public String process(MultipartFile file,String root) {
         if (!file.isEmpty()) {
             String contentType = file.getContentType().toString().toLowerCase();
             if (isValidContentType(contentType)) {
@@ -23,7 +22,7 @@ public class FileUpload {
                 	String ext = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
                 	originalName = file.getOriginalFilename();
                 	changeName = CommonUtils.getRandomString() + ext;
-                    String newFile = UPLOAD_FILE_PATH + changeName;
+                    String newFile = root+ "\\uploadFiles\\board\\" + changeName;
                     try {
                         file.transferTo(new File(newFile));
                         return changeName;

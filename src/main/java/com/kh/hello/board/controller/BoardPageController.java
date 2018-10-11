@@ -46,7 +46,13 @@ public class BoardPageController {
 	}
 	
 	@RequestMapping("reportWrite.bo")
-	public String reportWrite(){
+	public String reportWrite(Model model, @RequestParam int m_id, @RequestParam int ref_id){
+		
+		System.out.println("m_id : " + m_id + " ref_id : " + ref_id);
+		
+		model.addAttribute("m_id", m_id);
+		model.addAttribute("ref_id", ref_id);
+		
 		return "common/reportWrite";
 	}
 	
@@ -58,16 +64,16 @@ public class BoardPageController {
 	@RequestMapping(value="/upload.bo", method=RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public Response handleFileUpload(@RequestParam("file") MultipartFile[] file, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
 
         List<String> result = new ArrayList<String>();
         FileUpload fileUpload = new FileUpload();
         for (int i = 0; i < file.length; i++) {
-            result.add(fileUpload.process(file[i]));
+            result.add(fileUpload.process(file[i], root));
         }
-
         Attachment a = new Attachment();
         a.setOriginName(fileUpload.originalName());
-        a.setFilePath("D:/git/HelloKorea/src/main/webapp/resources/uploadFiles/"+fileUpload.changeName());
+        a.setFilePath(root + "\\uploadFiles\\board\\"+fileUpload.changeName());
         a.setChangeName(fileUpload.changeName());
         a.setStatus("Y");
         a.setaLevel(0);
@@ -85,10 +91,11 @@ public class BoardPageController {
     public Response handleFileDeleteUpload(HttpServletRequest request) {
 		String changeFileName = request.getParameter("response1");
 		Member m = (Member)request.getSession().getAttribute("loginUser");
+		String root = request.getSession().getServletContext().getRealPath("resources");
 		
         List<String> result = new ArrayList<String>();
         FileDeleteUpload fileDeleteUpload = new FileDeleteUpload();
-        result.add(fileDeleteUpload.process(changeFileName));
+        result.add(fileDeleteUpload.process(changeFileName, root));
 
         //선택삭제
         int result1 = bs.deleteAttachment(changeFileName);
@@ -101,13 +108,13 @@ public class BoardPageController {
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		FileDeleteUpload fileDeleteUpload = new FileDeleteUpload();
 		int result = 0;
-		
+		String root = request.getSession().getServletContext().getRealPath("resources");
 		ArrayList<Attachment> at = null;
 		at = bs.selectUpload(m.getmId());
 		
 		if(at != null){
 			for(int i = 0 ; i < at.size() ; i++){
-				fileDeleteUpload.process(at.get(i).getChangeName());
+				fileDeleteUpload.process(at.get(i).getChangeName(), root);
 			} 
 			//취소시 일괄삭제
 			result = bs.deleteAllUpload(m.getmId());
@@ -277,11 +284,15 @@ public class BoardPageController {
 	
 	@RequestMapping(value="reviewDetail.bo")
 	public String reviewDetail(Model model, @RequestParam int bid, HttpServletRequest request){
-
+		//Member m = (Member)request.getSession().getAttribute("loginUser");
 		Board b = bs.selectReviewDetail(bid);
+		ArrayList<Attachment> a = bs.selectAttachDetail(bid);
+		ArrayList<Reply> listRAnswer = bs.selectRAnswer(bid);
 		
 		System.out.println(b);
 		model.addAttribute("b", b);
+		model.addAttribute("a", a);
+		model.addAttribute("listRAnswer", listRAnswer);
 		
 		return "board/reviewDetail";
 	}

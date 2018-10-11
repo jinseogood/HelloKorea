@@ -87,9 +87,14 @@ textarea {
 	color: orange;
 }
 body{ margin:50px 0px; }
-        .thumbnail{ padding:0px; }
-        .stageParent{ background:#fff; border:3px dashed #444; border-radius:5px; padding:10px; }
-        .stage{ min-height:220px; max-height:400px; overflow-y:auto; }
+.thumbnail{ padding:0px; }
+.stageParent{ background:#fff; border:3px dashed #444; border-radius:5px; padding:10px; }
+.stage{ min-height:220px; max-height:400px; overflow-y:auto; }
+.detailImgArea{
+	display:inline-block;
+	width:200px;
+	height:200px;
+}
 </style>
 </head>
 <body>
@@ -107,7 +112,7 @@ body{ margin:50px 0px; }
 					<div class="col-lg-4 col-md-6 col-sm-6"><h2 class="tm-section-title">REVIEW DETAIL</h2></div>
 					<div class="col-lg-4 col-md-3 col-sm-3"><hr></div>	
 	  </div>	
-      <div id="google-map" style = "text-align:center; width:100%; height:300px">
+      <div id="google-map" style = "text-align:center; width:100%; height:auto">
       
 
       		<div class="row line_b" >
@@ -128,7 +133,7 @@ body{ margin:50px 0px; }
             	<br>
             	<h1 style = "padding-bottom:10px;">${ b.title }</h1>
             	<div class="summary" style = "padding-top:10px; font-size:18px">
-					${ b.text }
+					<span>${ b.text }</span>
             	</div>
             	<br>
             	
@@ -155,11 +160,36 @@ body{ margin:50px 0px; }
             
          </div>
          <!-- 여기사진넣고 그아래에 댓글 넣을거임 -->
-         <div>
-         	
+         <c:if test="${ a.size() > 0 }">
+         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style = "height:220px; padding-top:20px; text-align:left">
+         	<c:forEach var = "a" items = "${ a }">
+         		<div class = "detailImgArea">
+         			<img src = "/hello/resources/uploadFiles/board/${ a.changeName }" style = "width:190px; height:180px; padding-right:5px">
+         		</div>
+         	</c:forEach>
          </div>
-        	
-        	</div> 
+         </c:if>
+         <div id = "" class = "QAV" Style ="padding-top:10px">
+            			<input type = "hidden" value = "${ b.bid }">
+            			<textarea style="resize: none;" name = "text" rows="5" cols="110"></textarea>
+            			<div style = "height:38px">
+            			<button type="button" style = "float:left" class="btn btn-secondary" onclick = "insertA(this);">확인</button>
+            			</div>
+            			<div style = "float:left">
+         				<c:if test="${ listRAnswer.size() > 0 }">
+         					<c:forEach var = "list" items = "${ listRAnswer }">
+         						<div class="summary" style = "padding-top:10px; font-size:20px; text-align:left">
+            						${ list.content }
+            					</div>
+            				<span class="ReviewUpDate" style = "padding-top:5px">
+            					${ list.modify_date }
+            				</span>
+            				<span>|</span> ${ list.bid }님의 답변
+         					</c:forEach>
+         				</c:if>
+         				</div>
+         </div>
+       </div> 
           	
    </section>
    
@@ -170,9 +200,27 @@ body{ margin:50px 0px; }
    <jsp:include page="../common/footer.jsp"/>
 
 <script>
-	/* function test(){
-		location.href="starTest.bo";
-	} */
+
+function insertA(element){
+	var a = $(element).parent().children().eq(1).val();
+	var b = $(element).parent().children().eq(0).val();
+	
+	console.log(b);
+	console.log(a);
+	$.ajax({
+			url:"insertA.bo",
+			type:"post",
+			data:{text:a, bid:b},
+			dataType:"json",
+			success:function(data){
+				$(element).parent().children().eq(1).val("");
+				location.reload();
+			},error:function(data){
+				console.log(data);
+			}
+	})
+}
+
 </script>
 </body>
 </html>

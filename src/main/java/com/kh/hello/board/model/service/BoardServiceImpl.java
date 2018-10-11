@@ -119,5 +119,17 @@ public class BoardServiceImpl implements BoardService{
 		
 		return bd.selectReviewDetail(sqlSession, bid);
 	}
+
+	@Override
+	public ArrayList<Attachment> selectAttachDetail(int bid) {
+		
+		return bd.selectAttachDetail(sqlSession, bid);
+	}
+
+	@Override
+	public ArrayList<Reply> selectRAnswer(int bid) {
+
+		return bd.selectRAnswer(sqlSession, bid);
+	}
  
 }

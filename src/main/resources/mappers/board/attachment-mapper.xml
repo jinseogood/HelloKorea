@@ -45,6 +45,10 @@
          FROM ATTACHMENT
          WHERE REF_ID = (SELECT MAX(BID) FROM BOARD WHERE M_ID = #{mId})
      </select>
-  
-     
+
+     <select id="selectAttachDetail" parameterType="_int" resultMap="AttachmentResultSet">
+     	 SELECT FID, ORIGIN_NAME, FILE_PATH, UPLOAD_DATE, CHANGE_NAME, STATUS, A_LEVEL, REF_ID
+     	 FROM ATTACHMENT
+     	 WHERE REF_ID = #{bid}
+     </select>
 </mapper>
