@@ -125,9 +125,16 @@ public class MemberServiceImpl implements MemberService {
 
 
 	@Override
-	public ArrayList<MemberGoods> selectGoodsList(int mid) {
+	public ArrayList<MemberGoods> selectGoodsList(int mId) {
 		// TODO Auto-generated method stub
-		return md.selectGoodsList(mid,sqlSession);
+		return md.selectGoodsList(mId,sqlSession);
+	}
+
+
+	@Override
+	public Attachment selectMemberProfile(int mId) {
+		// TODO Auto-generated method stub
+		return md.selectMemberProfile(mId,sqlSession);
 	}
 
 

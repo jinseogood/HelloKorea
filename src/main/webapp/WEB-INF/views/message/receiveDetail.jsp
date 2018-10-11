@@ -66,7 +66,7 @@ th, td {
                                 <ul class="nav nav-tabs">
                                     
                                     <li class="active">
-                                        <a data-toggle="tab" onclick="recieveMsg()">
+                                        <a data-toggle="tab" onclick="receiveMsg()">
                                             <i class="fa fa-envelope-o"></i>
                                                                                                  받은 메세지
                                         </a>
@@ -92,23 +92,31 @@ th, td {
 <div class="msgTable">
 <div align="right"><a onclick="report()"><i class="fa fa-flag"> 신고하기 </i></a></div>
 <div class="form-group">
-							<input type="text" id="contact_subject" class="form-control" placeholder="제목" readonly/>
+							<input type="text" id="title" class="form-control" placeholder="${m.title}" readonly/>
 						</div>
 						<div class="form-group">
-							<input type="text" id="contact_subject" class="form-control" placeholder="보낸 사람" readonly/>
+							<input type="text" id="nickname" class="form-control" placeholder="${m.nickname}" readonly/>
 						</div>
 						<div class="form-group">
-							<input type="text" id="contact_subject" class="form-control" placeholder="보낸 일자" readonly/>
+							<input type="text" id="sendDate" class="form-control" placeholder="${m.sendDate}" readonly/>
 						</div>
 						<div class="form-group">
-							<textarea id="contact_message" class="form-control" rows="6" placeholder="내용" readonly></textarea>
+							<textarea id="content" class="form-control" rows="6" placeholder="${m.content}" readonly></textarea>
 						</div>
 						<div class="form-group" align="center">
-						    <button class="btn btn-success" onclick="recieveMsg()">&nbsp;&nbsp;목록&nbsp;&nbsp;</button>
+						    <form action="sendView" method="post">
+						    <input type="hidden" id="mId" name="mId" value="${m.receiveId}">
+						    <button class="btn btn-success" onclick="receiveMsg()">&nbsp;&nbsp;목록&nbsp;&nbsp;</button>
 							&nbsp;&nbsp;&nbsp;&nbsp;
+							
+							<input type="hidden" id="receiveId" name="receiveId" value="${m.sendId}">
+							<input type="hidden" id="nickname" name="nickname" value="${m.nickname}">
 							<button class="btn btn-info" onclick="send()">&nbsp;&nbsp;답장&nbsp;&nbsp;</button>
+							
 							&nbsp;&nbsp;&nbsp;&nbsp;
-							<button class="btn btn-flat" onclick="deleteMsg()">&nbsp;&nbsp;삭제&nbsp;&nbsp;</button> 
+							<input type="hidden" id="msgId" value="${m.msgId}">
+							<button class="btn btn-flat" onclick="deleteMsg()">&nbsp;&nbsp;삭제&nbsp;&nbsp;</button>
+							</form> 
 						</div> 
 
 
@@ -116,28 +124,34 @@ th, td {
 
 
  </div>
- 
- 
-                                    
-                                   <script>
-                                        function recieveMsg(){
-                                        	location.href="recieveMessageView";
-                                        }
-                                        function sendMsg(){
-                                        	location.href="sendMessageView";
-                                        }
-                                        function sendQuestion(){
-                                        	location.href="sendQuestionView";
-                                        }
-                                        function send(){
-                                        	location.href="sendView";
-                                        }
-                                        function report(){
-                                        	confirm('정말 신고하시겠습니까?');
-                                        }
-                                        function deleteMsg(){
-                                        	confirm('정말 삭제하시겠습니까?');
-                                        }
-                                   </script>
+
+	<script>
+      function receiveMsg(){
+    	 var mId = $("#mId").val();
+    	 console.log(mId);
+         location.href="receiveMessageView?mId="+mId;
+      }
+      function sendMsg(){
+         location.href="sendMessageView";
+      }
+      function sendQuestion(){
+         location.href="sendQuestionView";
+      }
+     /*  function send(){
+    	 var receiveId = $("#sendId").val();
+    	 var nickname = $("#nickname").val();
+         location.href="sendView?receiveId="+receiveId+"&nickname="+nickname;
+      } */
+      function report(){
+         confirm('정말 신고하시겠습니까?');
+      }
+      function deleteMsg(){
+    	  if (confirm('정말 삭제하시겠습니까?')) {
+    		  var mId = $("#mId").val();
+    		  var msgId = $("#msgId").val();
+    		  location.href="deleteMessage?msgId="+msgId+"&mId="+mId;
+    		}
+      }
+  </script>
 </body>
 </html>

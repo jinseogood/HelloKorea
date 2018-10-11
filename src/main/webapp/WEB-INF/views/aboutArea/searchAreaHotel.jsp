@@ -402,7 +402,7 @@
 				});
 			}
 			
-			function searchHotelPage(){
+			/* function searchHotelPage(){
 				$.ajax({
 					url:"searchHotelAreaPage.com",
 					type:"GET",
@@ -457,7 +457,8 @@
 					}
 				});
 			}
-			
+			 */
+
 			/* function hotelImageLoad(contentid){
 				console.log("호텔이미지로드 : " + contentid);
 				var imageArea = $("#detailClick");
@@ -556,7 +557,7 @@
 						console.log(data);
 					}
 				});
-			} */
+			} 
 			
 			function btnGood(contenttypeid, contentid){
 				console.log(contenttypeid);

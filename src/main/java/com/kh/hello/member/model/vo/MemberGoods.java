@@ -3,9 +3,9 @@ package com.kh.hello.member.model.vo;
 import java.sql.Date;
 
 public class MemberGoods implements java.io.Serializable{
-	private int lId;
-	private String lType;
-	private int originId;
+	private int lId;// 찜아이디
+	private String lType;//찜타입
+	private int originId;//
 	private Date endDate;
 	private int mId;
 	private int cId;

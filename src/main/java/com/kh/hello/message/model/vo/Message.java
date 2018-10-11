@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class Message implements java.io.Serializable{
 	private int msgId;
-	private int recieveId;
+	private int receiveId;
 	private int sendId;
 	private String title;
 	private String content;
@@ -21,11 +21,11 @@ public class Message implements java.io.Serializable{
 	
 	public Message(){}
 
-	public Message(int msgId, int recieveId, int sendId, String title, String content, Date sendDate, Date readDate,
+	public Message(int msgId, int receiveId, int sendId, String title, String content, Date sendDate, Date readDate,
 			String status, String mLevel, Date pDate, String nickname) {
 		super();
 		this.msgId = msgId;
-		this.recieveId = recieveId;
+		this.receiveId = receiveId;
 		this.sendId = sendId;
 		this.title = title;
 		this.content = content;
@@ -45,12 +45,12 @@ public class Message implements java.io.Serializable{
 		this.msgId = msgId;
 	}
 
-	public int getRecieveId() {
-		return recieveId;
+	public int getReceiveId() {
+		return receiveId;
 	}
 
-	public void setRecieveId(int recieveId) {
-		this.recieveId = recieveId;
+	public void setReceiveId(int receiveId) {
+		this.receiveId = receiveId;
 	}
 
 	public int getSendId() {
@@ -127,11 +127,11 @@ public class Message implements java.io.Serializable{
 
 	@Override
 	public String toString() {
-		return "Message [msgId=" + msgId + ", recieveId=" + recieveId + ", sendId=" + sendId + ", title=" + title
+		return "Message [msgId=" + msgId + ", receiveId=" + receiveId + ", sendId=" + sendId + ", title=" + title
 				+ ", content=" + content + ", sendDate=" + sendDate + ", readDate=" + readDate + ", status=" + status
 				+ ", mLevel=" + mLevel + ", pDate=" + pDate + ", nickname=" + nickname + "]";
 	}
-	
+
 	
 	
 }
