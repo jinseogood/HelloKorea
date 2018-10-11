@@ -1,12 +1,15 @@
 package com.kh.hello.member.model.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hello.common.Attachment;
 import com.kh.hello.member.model.vo.Member;
+import com.kh.hello.member.model.vo.MemberGoods;
 @Repository
 public class MemberDaoImpl implements MemberDao {
 
@@ -89,6 +92,14 @@ public class MemberDaoImpl implements MemberDao {
 	public Member selectSnsChceck(HashMap<String, Object> snsInfo, SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("Member.selectSnsCheck", snsInfo);
+	}
+
+	@Override
+	public ArrayList<MemberGoods> selectGoodsList(int mid, SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub, 
+		ArrayList<MemberGoods> list =(ArrayList) sqlSession.selectList("MemberGoods.selectGoodList", mid);
+		
+		return list;
 	}
 
 

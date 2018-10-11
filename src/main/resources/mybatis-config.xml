@@ -34,7 +34,7 @@
           <typeAlias type="com.kh.hello.good.model.vo.Good" alias="Good"/>
           <typeAlias type="com.kh.hello.payment.model.vo.Payment" alias="Payment"/>
           <typeAlias type="com.kh.hello.payment.model.vo.PayDetail" alias="PayDetail"/>
-
+		  <typeAlias type="com.kh.hello.member.model.vo.MemberGoods" alias="MemberGoods"/>
       </typeAliases>
   
       <mappers>
@@ -48,6 +48,7 @@
           <mapper resource="mappers/admin/message-mapper.xml"/>
           <mapper resource="mappers/member/member-mapper.xml"/>
           <mapper resource="mappers/member/profileAT-mapper.xml"/>
+          <mapper resource="mappers/member/memberGoods-mapper.xml"/>
           <mapper resource="mappers/seller/company-mapper.xml"/>
           <mapper resource="mappers/seller/room-mapper.xml"/>
           <mapper resource="mappers/seller/rh-mapper.xml"/>

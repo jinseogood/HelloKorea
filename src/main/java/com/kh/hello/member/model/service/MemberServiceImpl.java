@@ -1,5 +1,6 @@
 package com.kh.hello.member.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -12,6 +13,7 @@ import com.kh.hello.member.model.exception.LoginException;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.member.model.dao.MemberDao;
 import com.kh.hello.member.model.vo.Member;
+import com.kh.hello.member.model.vo.MemberGoods;
 @Service
 public class MemberServiceImpl implements MemberService {
 	@Autowired private SqlSessionTemplate sqlSession;
@@ -20,7 +22,7 @@ public class MemberServiceImpl implements MemberService {
 	private BCryptPasswordEncoder passwordEncoder;
 	
 	
-	//
+	//회원
 	@Override
 	public int insertMember(Member m) {
 	
@@ -28,7 +30,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
-	//
+	//판매자
 	@Override
 	public int insertSeller(Member m) {
 	
@@ -120,6 +122,15 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return md.selectSnsChceck(snsInfo,sqlSession);
 	}
+
+
+	@Override
+	public ArrayList<MemberGoods> selectGoodsList(int mid) {
+		// TODO Auto-generated method stub
+		return md.selectGoodsList(mid,sqlSession);
+	}
+
+
 
 
 

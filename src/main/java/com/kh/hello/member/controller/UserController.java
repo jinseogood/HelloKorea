@@ -2,6 +2,7 @@ package com.kh.hello.member.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,6 +19,7 @@ import com.kh.hello.common.Attachment;
 import com.kh.hello.common.CommonUtils;
 import com.kh.hello.member.model.service.MemberService;
 import com.kh.hello.member.model.vo.Member;
+import com.kh.hello.member.model.vo.MemberGoods;
 
 @Controller
 @SessionAttributes("loginUser")
@@ -89,7 +91,8 @@ public class UserController {
 		
 		int mid = m.getmId();
 		
-		//ArrayList<>
+		ArrayList<MemberGoods> goodsList = ms.selectGoodsList(mid);
+		
 		
 		
 		
