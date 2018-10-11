@@ -320,7 +320,7 @@ table.type09 td {
 		
 		function answerQuestion(){
 			var msgId = $("#msgId").val();
-			var recieveId = $("#sendId").val();
+			var receiveId = $("#sendId").val();
 			var content = $("#content2").val();
 			location.href="answerQuestion.ad?recieveId="+recieveId+"&msgId="+msgId+"&content="+content;
 		}

@@ -382,9 +382,9 @@ public class AdminController {
 
 	//문의 답변하기
 	@RequestMapping("answerQuestion.ad")
-	public String insertAnswerMsg(String recieveId, String content, String msgId, Model model){
+	public String insertAnswerMsg(String receiveId, String content, String msgId, Model model){
 		Message m = new Message();
-		m.setRecieveId(Integer.parseInt(recieveId));
+		m.setReceiveId(Integer.parseInt(receiveId));
 		m.setContent(content);
 	    m.setMsgId(Integer.parseInt(msgId));
 	    

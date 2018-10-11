@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,7 +67,7 @@ th, td {
                                 <ul class="nav nav-tabs">
                                     
                                     <li class="active">
-                                        <a data-toggle="tab" onclick="recieveMsg()">
+                                        <a data-toggle="tab" onclick="receiveMsg()">
                                             <i class="fa fa-envelope-o"></i>
                                                                                                  받은 메세지
                                         </a>
@@ -94,7 +95,7 @@ th, td {
 							<input type="text" id="contact_subject" class="form-control" placeholder="제목">
 						</div>
 						<div class="form-group">
-							<input type="text" id="contact_subject" class="form-control" placeholder="받는 사람" readonly/>
+							<input type="text" id="contact_subject" class="form-control" placeholder="${nickname}" readonly/>
 						</div>
 						<div class="form-group">
 							<textarea id="contact_message" class="form-control" rows="6" placeholder="내용"></textarea>
@@ -103,7 +104,8 @@ th, td {
 						    
 							<button class="btn btn-info" type="submit" name="submit">&nbsp;&nbsp;발송&nbsp;&nbsp;</button>
 							&nbsp;&nbsp;&nbsp;&nbsp;
-							<button class="btn btn-flat" onclick="recieveMsg()" name="submit">&nbsp;&nbsp;취소&nbsp;&nbsp;</button> 
+							<input type="hidden" id="mId" value="${mId}">
+							<button class="btn btn-flat" onclick="receiveMsg()" name="submit">&nbsp;&nbsp;취소&nbsp;&nbsp;</button> 
 						</div> 
 
 
@@ -112,16 +114,17 @@ th, td {
 
  </div>
                                     
-                                   <script>
-                                        function recieveMsg(){
-                                        	location.href="recieveMessageView";
-                                        }
-                                        function sendMsg(){
-                                        	location.href="sendMessageView";
-                                        }
-                                        function sendQuestion(){
-                                        	location.href="sendQuestionView";
-                                        }
+       <script>
+          function receiveMsg(){
+             var mId = $("#mId").val();
+             location.href="receiveMessageView?mId="+mId;
+          }
+          function sendMsg(){
+             location.href="sendMessageView";
+          }
+          function sendQuestion(){
+              location.href="sendQuestionView";
+          }
                                    </script>
 </body>
 </html>
