@@ -6,99 +6,102 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class Email {
-	private String receiver;						// 받는사람
-	private String subject;							// 제목
-	private String content;							// 내용
-	private String htmlYn;                          // html 사용 여부
-    private String from;                            // 보낸사람
-    private String regUsr;                          // 등록자(로그에 사용하기 위함)
-    private String veloTemplate;                    // Velocity 템플릿 파일
-    private Map<String, Object> emailMap = null;	// velocity 에서 사용하기 위한 map 객체
+	private String mailFrom;
+	private String mailTo;
+	private String mailCc;
+	private String mailBcc;
+	private String mailSubject;
+	private String mailContent;
+	private String templateName;
+	private String contentType;
+	
+	public Email() {
+		contentType = "text/html"; 
+	}
 
-	public Email(){}
-
-	public Email(String receiver, String subject, String content, String htmlYn, String from, String regUsr,
-			String veloTemplate, Map<String, Object> emailMap) {
+	public Email(String mailFrom, String mailTo, String mailCc, String mailBcc, String mailSubject, String mailContent,
+			String templateName, String contentType) {
 		super();
-		this.receiver = receiver;
-		this.subject = subject;
-		this.content = content;
-		this.htmlYn = htmlYn;
-		this.from = from;
-		this.regUsr = regUsr;
-		this.veloTemplate = veloTemplate;
-		this.emailMap = emailMap;
+		this.mailFrom = mailFrom;
+		this.mailTo = mailTo;
+		this.mailCc = mailCc;
+		this.mailBcc = mailBcc;
+		this.mailSubject = mailSubject;
+		this.mailContent = mailContent;
+		this.templateName = templateName;
+		this.contentType = contentType;
 	}
 
-	public String getReceiver() {
-		return receiver;
+	public String getMailFrom() {
+		return mailFrom;
 	}
 
-	public void setReceiver(String receiver) {
-		this.receiver = receiver;
+	public void setMailFrom(String mailFrom) {
+		this.mailFrom = mailFrom;
 	}
 
-	public String getSubject() {
-		return subject;
+	public String getMailTo() {
+		return mailTo;
 	}
 
-	public void setSubject(String subject) {
-		this.subject = subject;
+	public void setMailTo(String mailTo) {
+		this.mailTo = mailTo;
 	}
 
-	public String getContent() {
-		return content;
+	public String getMailCc() {
+		return mailCc;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setMailCc(String mailCc) {
+		this.mailCc = mailCc;
 	}
 
-	public String getHtmlYn() {
-		return htmlYn;
+	public String getMailBcc() {
+		return mailBcc;
 	}
 
-	public void setHtmlYn(String htmlYn) {
-		this.htmlYn = htmlYn;
+	public void setMailBcc(String mailBcc) {
+		this.mailBcc = mailBcc;
 	}
 
-	public String getFrom() {
-		return from;
+	public String getMailSubject() {
+		return mailSubject;
 	}
 
-	public void setFrom(String from) {
-		this.from = from;
+	public void setMailSubject(String mailSubject) {
+		this.mailSubject = mailSubject;
 	}
 
-	public String getRegUsr() {
-		return regUsr;
+	public String getMailContent() {
+		return mailContent;
 	}
 
-	public void setRegUsr(String regUsr) {
-		this.regUsr = regUsr;
+	public void setMailContent(String mailContent) {
+		this.mailContent = mailContent;
 	}
 
-	public String getVeloTemplate() {
-		return veloTemplate;
+	public String getTemplateName() {
+		return templateName;
 	}
 
-	public void setVeloTemplate(String veloTemplate) {
-		this.veloTemplate = veloTemplate;
+	public void setTemplateName(String templateName) {
+		this.templateName = templateName;
 	}
 
-	public Map<String, Object> getEmailMap() {
-		return emailMap;
+	public String getContentType() {
+		return contentType;
 	}
 
-	public void setEmailMap(Map<String, Object> emailMap) {
-		this.emailMap = emailMap;
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
 	}
 
 	@Override
 	public String toString() {
-		return "Email [receiver=" + receiver + ", subject=" + subject + ", content=" + content + ", htmlYn=" + htmlYn
-				+ ", from=" + from + ", regUsr=" + regUsr + ", veloTemplate=" + veloTemplate + ", emailMap=" + emailMap
-				+ "]";
+		return "Email [mailFrom=" + mailFrom + ", mailTo=" + mailTo + ", mailCc=" + mailCc + ", mailBcc=" + mailBcc
+				+ ", mailSubject=" + mailSubject + ", mailContent=" + mailContent + ", templateName=" + templateName
+				+ ", contentType=" + contentType + "]";
 	}
+
 
 }

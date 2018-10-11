@@ -83,35 +83,34 @@
     <task:annotation-driven executor="gsTaskExecutor" scheduler="gsScheduler" />
     
     <!-- Mail -->
-	<context:component-scan base-package="com.kh.hello.common"/>
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.gmail.com"/>
-		<property name="port" value="587"/>
-		<property name="username" value="helloKoreaMailService@gmail.com"/>
-		<property name="password" value="comekorea0!"/>
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="helloKoreaMailService@gmail.com" />
+		<property name="password" value="comekorea0!" />
 		<property name="javaMailProperties">
 			<props>
-				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.debug">true</prop>
 				<prop key="mail.smtp.auth">true</prop>
-               	<prop key="mail.smtp.starttls.enable">true</prop>
-               	<prop key="mail.debug">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.mime.charset">UTF-8</prop>
+				<prop key="mail.transport.protocol">smtp</prop>
 			</props>
 		</property>
 	</bean>
 	
-	<bean id="email" class="com.kh.hello.common.Email"/>
-	<bean id="emailSender" class="com.kh.hello.common.EmailSender"/>
-
-	<!-- Velocity 설정 -->
+	<bean id="mailer" class="com.kh.hello.common.EmailSender">
+		<property name="mailSender" ref="mailSender" /><!--mailSender bean참조-->
+		<property name="velocityEngine" ref="velocityEngine" /><!--velocityEngine bean참조-->
+	</bean>
+	
 	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
 		<property name="velocityProperties">
 			<props>
-				<!-- <prop key="resource.loader">class</prop>
-				<prop key="class.resource.loader.class">org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader</prop> -->
 				<prop key="resource.loader">file</prop>
-				<prop key="class.resource.loader.class">org.apache.velocity.runtime.resource.loader.FileResourceLoader</prop>
+				<prop key="class.resource.loader.class"> org.apache.velocity.runtime.resource.loader.FileResourceLoader </prop>
 			</props>
 		</property>
 	</bean>
-    
+
 </beans>
