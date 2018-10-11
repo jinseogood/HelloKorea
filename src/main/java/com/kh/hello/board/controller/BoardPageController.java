@@ -276,11 +276,12 @@ public class BoardPageController {
 	}
 	
 	@RequestMapping(value="reviewDetail.bo")
-	public String reviewDetail(Model model, @RequestParam int bid){
+	public String reviewDetail(Model model, @RequestParam int bid, HttpServletRequest request){
 
 		Board b = bs.selectReviewDetail(bid);
 		
 		System.out.println(b);
+		model.addAttribute("b", b);
 		
 		return "board/reviewDetail";
 	}

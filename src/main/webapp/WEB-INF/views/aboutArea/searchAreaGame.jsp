@@ -296,7 +296,7 @@
 									cat1 = "A04";
 									cat2 = "A0401";
 									cat3 = "";
-									$(".tm-section-title1").text("인천 쇼핑");
+									//$(".tm-section-title1").text("인천 쇼핑");
 								}else if(checkvalue == 4){
 									sessionStorage.removeItem("contenttypeid");
 									contenttypeid1 = sessionStorage.setItem("contenttypeid", 12);

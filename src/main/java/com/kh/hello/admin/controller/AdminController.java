@@ -1,5 +1,5 @@
 package com.kh.hello.admin.controller;
-   
+       
 import java.io.File;
 import java.net.URLEncoder;
 import java.text.Format;
@@ -49,11 +49,11 @@ public class AdminController {
 
 	//블랙리스트 해지 스케쥴러
 	//매일 9시 가동
-	 @Scheduled(cron="0 00 09 * * ?") 
+	/* @Scheduled(cron="0 33 17 * * ?") 
 	 public void terminateBlacklist(){
 		int result = as.terminateBlackList();
 	    System.out.println("call : " +new Date());
-	 }
+	 }*/
 	 
 	//관리자 마이페이지	
 	@RequestMapping("myPageView.ad")

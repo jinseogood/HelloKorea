@@ -243,7 +243,7 @@ public class PaymentController {
 				//es.sendEmail(email);
 				
 				email.setHtmlYn("Y");                           // html 형식으로 세팅
-                email.setVeloTemplate("emailtemplate.vm");      // 템플릿 파일명
+                //email.setVeloTemplate("emailtemplate.vm");      // 템플릿 파일명
                 email.setEmailMap(map);
                 
                 es.sendVelocityEmail(email);           			// 메일 전송
