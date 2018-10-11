@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Blacklist">
-   
+         
      <!-- 블랙리스트 결과 셋 -->
      <resultMap type="Blacklist" id="blacklistResultSet">
           <id property="bRecordId" column="B_RECORD_ID"/>
