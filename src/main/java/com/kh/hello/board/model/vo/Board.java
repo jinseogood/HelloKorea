@@ -5,7 +5,7 @@ import java.sql.Date;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class Board {
+public class Board implements java.io.Serializable{
 	private int bid;
 	private String title;
 	private String text;

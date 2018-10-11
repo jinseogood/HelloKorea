@@ -588,7 +588,9 @@
             			<span>|</span>
             			<span class="ReviewUpDate" style = "padding-top:5px">
             				<i class="fa fa-thumbs-o-up" style = "font-size:14px; padding-top:5px"> ${ list2.likey } </i>
-            				<i class="fa fa-flag" style = "font-size:14px; padding-top:5px; float:right; cursor:pointer"><a onclick="reportWrite()"> 신고하기</a></i>
+            				<i class="fa fa-flag" style = "font-size:14px; padding-top:5px; float:right; cursor:pointer"><a onclick="reportWrite(this)"> 신고하기</a></i>
+            				<input type = "hidden" value="${ list2.m_id }">
+            				<input type = "hidden" value="${ list2.bid }">
             			</span>	
             		</div>
             	</div>
@@ -893,7 +895,7 @@
 							output += "</span>&nbsp;&nbsp;";
 							output += "<span class='ReviewUpDate'>리뷰 게시 날짜 : "+review[i].regist_date+"</span></div>";
 							output += "<div class='ReviewTitle' style = 'font-size:20px; cursor:pointer; padding-top:10px;'><a href='#'><span>"+review[i].title+"</span></a></div>";
-							output += "<div class='summary' style = 'padding-top:10px;'>"+review[i].text+"<span><a href='#'>더 보기</a></span></div>";
+							output += "<div class='summary' style = 'padding-top:10px;'>"+review[i].text+"<span><a onclick = 'goDetail("+review[i].bid+")'>더 보기</a></span></div>";
 							output += "<div style = 'padding-top:20px;'><div class='fa' style = 'width:100%;'><i class='fa fa-thumbs-o-up' style = 'font-size:20px; padding-top:10px;'> "+review[i].likey+" </i>&nbsp;<i class='far fa-comment-dots' style = 'font-size:20px; padding-top:10px;'> 0 </i><i class='fa fa-flag' style = 'font-size:20px; padding-top:10px; float:right;'> 신고하기 </i></div></div></div></div>";
 							
 							$divBody.append(output);
@@ -1045,8 +1047,10 @@
 			}
 		}
  	  
-    	function reportWrite(){
-    		window.open('reportWrite.bo', 'reportWrite', 'height=580, width=480, top=80, left=400 resizable=none, scrollbars=no')
+    	function reportWrite(element){
+    		var m_id = #(element).parent().children().eq(2);
+    		var ref_id = #(element).parent().children().eq(3);
+    		window.open('reportWrite.bo?m_id='+m_id+'&ref_id='+ref_id, 'reportWrite', 'height=380, width=450, top=80, left=400 resizable=none, scrollbars=no')
    		}
     	
     	function goDetail(bid){

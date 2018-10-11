@@ -39,4 +39,8 @@ public interface BoardDao {
 
 	Board selectReviewDetail(SqlSessionTemplate sqlSession, int bid);
 
+	ArrayList<Attachment> selectAttachDetail(SqlSessionTemplate sqlSession, int bid);
+
+	ArrayList<Reply> selectRAnswer(SqlSessionTemplate sqlSession, int bid);
+
 }

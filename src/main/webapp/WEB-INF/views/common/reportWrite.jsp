@@ -80,15 +80,26 @@ th, td {
 <p>적절한 신고사유를 하단에 작성하시어 신고하기를 누르시면</p>
 <p>확인 후 해당 글을 삭제 처리하겠습니다.</p>
 <div><br>
-						<div class="form-group">
+						<!-- <div class="form-group">
 							<input type="text" id="contact_subject" class="form-control" placeholder="제목을 입력하세요" required/>
 						</div>
 						<div class="form-group">
 							<textarea id="contact_message" class="form-control" rows="6" placeholder="신고 내용을 입력하세요" required></textarea>
-						</div>
-						<div class="form-group">
-							<button class="tm-submit-btn" type="submit" name="submit">신고하기</button> 
-						</div>               
+						</div> -->
+						<form action = "insertReport.bo" method = "post">
+							<select name = "reportReason">
+								<option value = "집단간 싸움 유발(학과, 직업간 서열/비교, 지역감정, 종교 등)">집단간 싸움 유발(학과, 직업간 서열/비교, 지역감정, 종교 등)</option>
+								<option value = "성 관련 순환주제(양성평등, 군대, 혼전순결, 외모/몸매 등)">성 관련 순환주제(양성평등, 군대, 혼전순결, 외모/몸매 등)</option>
+								<option value = "욕설, 비속어, 인신공격(심한 불쾌감 유발)">욕설, 비속어, 인신공격(심한 불쾌감 유발)</option>
+								<option value = "선정적, 음란성(신고자가 선정적이라고 판단)">선정적, 음란성(신고자가 선정적이라고 판단)</option>
+								<option value = "낚시성, 도배, 무의미(무의미한 짧은 글 포함)">낚시성, 도배, 무의미(무의미한 짧은 글 포함)</option>
+								<option value = "기타(악성코드, 홍보성, 사생활침해 등)">기타(악성코드, 홍보성, 사생활침해 등)</option>
+							</select>
+							<br><br>
+							<div class="form-group">
+								<button class="tm-submit-btn" type="submit" name="submit">신고하기</button> 
+							</div>        
+						</form>       
 					</div>
 </div>
 </div>

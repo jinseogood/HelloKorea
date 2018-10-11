@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rReport">
+     <!-- 신고 -->
+
+     <resultMap type="rReport" id="ReportResultSet">
+          <id property="r_record_id" column="R_RECORD_ID"/>
+          <result property="reason" column="REASON" />
+          <result property="r_date" column="R_DATE"/>
+          <result property="r_level" column="R_LEVEL"/>
+          <result property="m_id" column="M_ID"/>
+          <result property="r_target" column="R_TARGET"/>
+          <result property="ref_id" column="REF_ID"/>
+          <result property="result" column="RESULT"/>
+     </resultMap>
+     
+     <!-- 신고인서트 -->
+     <insert id="insertReport" parameterType="rReport">
+          INSERT INTO REPORT VALUES(SEQ_R_RECORD_ID.NEXTVAL, #{reason},
+                                       SYSDATE, #{r_level}, #{m_id}, #{r_target}, #{ref_id}, #{result})
+     </insert>
+     <!-- 
+     <select id="selectQAnswer" resultMap = "ReplyResultSet">
+     	  SELECT * FROM REPLY	
+     </select>
+     
+     <select id="selectRAnswer" resultMap = "ReplyResultSet" parameterType="_int">
+     	  SELECT REPLY_ID, CONTENT, REGIST_DATE, MODIFY_DATE, REGIST_STATUS, HELP_POINT, M_ID, BID
+     	  FROM REPLY
+     	  WHERE BID = #{bid}	
+     </select> -->
+
+  
+</mapper>

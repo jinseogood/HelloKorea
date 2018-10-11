@@ -24,6 +24,12 @@
      <select id="selectQAnswer" resultMap = "ReplyResultSet">
      	  SELECT * FROM REPLY	
      </select>
+     
+     <select id="selectRAnswer" resultMap = "ReplyResultSet" parameterType="_int">
+     	  SELECT REPLY_ID, CONTENT, REGIST_DATE, MODIFY_DATE, REGIST_STATUS, HELP_POINT, M_ID, BID
+     	  FROM REPLY
+     	  WHERE BID = #{bid}	
+     </select>
      <!-- 리뷰 업데이트(실질적 글작성) -->
      <!-- <update id="updateReviewBoard" parameterType="_int">
          UPDATE BOARD

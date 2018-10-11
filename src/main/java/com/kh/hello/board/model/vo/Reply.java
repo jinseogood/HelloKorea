@@ -3,7 +3,7 @@ package com.kh.hello.board.model.vo;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class Reply {
+public class Reply implements java.io.Serializable{
 	private int reply_id;
 	private String content;
 	private String regist_date;
