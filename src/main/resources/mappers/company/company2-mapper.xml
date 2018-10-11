@@ -1,0 +1,26 @@
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Company2">
+   <resultMap type="Company2" id="company2ResultSet">
+      <id property="cid" column="C_ID"/>
+      <result property="cAddress" column="C_ADDRESS"/>
+      <result property="contentid" column="C_ORIGINID"/>
+      <result property="cName" column="C_NAME"/>
+      <result property="cPhone" column="C_PHONE"/>
+      <result property="mid" column="M_ID"/>
+   </resultMap>
+   
+   <!-- 호텔 조회 -->
+   <select id="selectList" resultMap="company2ResultSet">
+   		SELECT *
+   		FROM COMPANY
+   		WHERE C_ADDRESS LIKE '%' || #{areaName} || '%'
+   		<if test="sigunguName != null">
+   			AND C_ADDRESS LIKE '%' || #{sigunguName} || '%'
+   		</if>
+   </select>
+	
+</mapper>
