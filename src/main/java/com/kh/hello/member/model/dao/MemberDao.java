@@ -1,11 +1,13 @@
 package com.kh.hello.member.model.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.hello.common.Attachment;
 import com.kh.hello.member.model.vo.Member;
+import com.kh.hello.member.model.vo.MemberGoods;
 
 public interface MemberDao {
 
@@ -29,17 +31,21 @@ public interface MemberDao {
 
 	int updateAddSeller(Member m, SqlSessionTemplate sqlSession);
 
-	int editProfile(Member m, SqlSessionTemplate sqlSession);
-
-	int uploadprofile(Attachment a, SqlSessionTemplate sqlSession);
 
 	int photoCheck(int mId, SqlSessionTemplate sqlSession);
 
 
 	int insertFacebook(Member m, SqlSessionTemplate sqlSession);
 
-
+	//sns체크
 	Member selectSnsChceck(HashMap<String, Object> snsInfo, SqlSessionTemplate sqlSession);
+	
+	//마이페이지
+	int editProfile(Member m, SqlSessionTemplate sqlSession);
+	
+	int uploadprofile(Attachment a, SqlSessionTemplate sqlSession);
+	//찜목록
+	ArrayList<MemberGoods> selectGoodsList(int mid, SqlSessionTemplate sqlSession);
 
 
 	

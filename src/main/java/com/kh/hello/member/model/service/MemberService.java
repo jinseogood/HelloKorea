@@ -1,10 +1,12 @@
 package com.kh.hello.member.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.kh.hello.common.Attachment;
 import com.kh.hello.member.model.exception.LoginException;
 import com.kh.hello.member.model.vo.Member;
+import com.kh.hello.member.model.vo.MemberGoods;
 
 public interface MemberService {
 
@@ -28,19 +30,24 @@ public interface MemberService {
 	
 	int updateAddSeller(Member m);
 
-	int editProfile(Member m);
 
 	int uploadprofile(Attachment a);
 
-	int photoCheck(int mId);
 
 	
 	//페이스북 로그인
 	int insertFacebook(Member m);
 
-
+	//facebook check
 	Member selectSnsChceck(HashMap<String, Object> snsInfo);
-
+	
+	//마이페이지
+	//프로필 수정
+	int editProfile(Member m);
+	//프로필사진 체크
+	int photoCheck(int mId);
+	//찜목록
+	ArrayList<MemberGoods> selectGoodsList(int mid);
 
 	
 	
