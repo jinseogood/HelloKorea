@@ -123,7 +123,9 @@ public class MemberController {
 
 		try {
 			model.addAttribute("loginUser", ms.loginMember(m));
+			System.out.println(m);
 			System.out.println("로그인 성공");
+			
 
 			return "main/mainHotel";
 		} catch (LoginException e) {
