@@ -40,7 +40,7 @@
 		<property name="scope" value="https://www.googleapis.com/auth/plus.login"/>
 		<property name="redirectUri" value="https://localhost:8443/hello/googleSignInCallback.me" />
 	</bean>
-
+      
 
 	<!-- 트랜젝션 매니져 bean등록 -->
 	<bean id="transactionManager"
@@ -77,10 +77,10 @@
 	</tx:advice>
 	<tx:annotation-driven />
 	
-	<!-- <bean id="careerAlarmService" class="com.kh.hello.admin.controller.AdminController" />
+	<bean id="careerAlarmService" class="com.kh.hello.admin.controller.AdminSchedulerController" />
     <task:scheduler id="gsScheduler" pool-size="10" />
     <task:executor id="gsTaskExecutor" pool-size="10" />
-    <task:annotation-driven executor="gsTaskExecutor" scheduler="gsScheduler" /> -->
+    <task:annotation-driven executor="gsTaskExecutor" scheduler="gsScheduler" />
     
     <!-- Mail -->
 	<context:component-scan base-package="com.kh.hello.common"/>
