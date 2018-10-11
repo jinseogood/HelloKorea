@@ -7,18 +7,17 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,8 +33,6 @@ public class PaymentController {
 	
 	@Autowired
 	private PaymentService ps;
-	@Autowired
-	private EmailSender es;
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -226,30 +223,24 @@ public class PaymentController {
 				Payment p=ps.selectPayInfo(mId);
 				ArrayList<PayDetail> pdList=ps.selectPayDetailInfo(p.getPaId());
 				
-				Map<String, Object> map=new HashMap<String, Object>();
-				map.put("orderNum", 1);
-				map.put("orderDate", pdList.get(0).getPdDate());
-				map.put("orderName", p.getPaName());
-				map.put("orderPhone", p.getPaPhone());
-				map.put("proCName", "업체");
-				map.put("proRName", "객실");
-				map.put("proPrice", pdList.get(0).getPrice());
+				int orderNum=1;
+				String orderDate=pdList.get(0).getPdDate();
+				String orderName=p.getPaName();
+				String orderPhone=p.getPaPhone();
+				String proCName="업체";
+				String proRName="객실";
+				double proPrice=pdList.get(0).getPrice();
 				
 				//예약확인 메일 전송
-				Email email=new Email();
-				email.setSubject(p.getPaName() + "님 예약 확인 메일입니다.");
-				email.setReceiver(p.getPaEmail());
+				/*Email email=new Email();
+				email.setMailFrom("hellokoreamailservice@gmail.com");
+				email.setMailTo(p.getPaEmail());
+				email.setMailSubject(p.getPaName() + "님 예약 확인 메일입니다.");
+				email.setTemplateName("emailtemplate.vm");
+				ApplicationContext context = new FileSystemXmlApplicationContext("D:/git/HelloKorea/src/main/resources/root-context.xml");
+				EmailSender es = (EmailSender) context.getBean("mailer");
 				
-				//es.sendEmail(email);
-				
-				email.setHtmlYn("Y");                           // html 형식으로 세팅
-                //email.setVeloTemplate("emailtemplate.vm");      // 템플릿 파일명
-                email.setEmailMap(map);
-                
-                es.sendVelocityEmail(email);           			// 메일 전송
-                 
-                // 이메일 전송 로그
-                email.setRegUsr("0");
+				es.sendMail(email, orderNum, orderDate, orderName, orderPhone, proCName, proRName, proPrice);*/
 				
 				model.addAttribute("p", p);
 				model.addAttribute("pdList", pdList);
