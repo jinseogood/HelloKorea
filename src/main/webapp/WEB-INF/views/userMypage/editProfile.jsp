@@ -48,13 +48,13 @@
 		<jsp:include page="../common/userMenubar.jsp"/>
 		
 		<div id="profileDiv">
-			<%-- <c:if test="${sessionScope.loginUser.mid }">
-			
-			</c:if> --%>
+			<c:if test="${a eq null }">
 			<div id="photoDiv">
 				<img src="${contextPath}/resources/img/user.png" id="myPhoto">
 			</div>
-			<form action="editProfile.me" method="post" encType="multipart/form-data">
+			
+			</c:if>
+			<form action="editProfile.um" method="post" encType="multipart/form-data">
 				<table id="profileTable">
 					<input type="hidden" value="${sessionScope.loginUser.mId}"name="mId">
 					

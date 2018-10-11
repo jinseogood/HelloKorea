@@ -402,14 +402,14 @@
 				});
 			}
 			
-			function searchHotelPage(){
+			/* function searchHotelPage(){
 				$.ajax({
 					
 				});
 			}
+			 */
 			
-			
-			/* function searchHotelPage(){
+			 function searchHotelPage(){
 				
 				$.ajax({
 					url:"searchAreaHotel.sub",
@@ -472,7 +472,7 @@
 						console.log(data);
 					}
 				});
-			} */
+			} 
 			
 			function btnGood(contenttypeid, contentid){
 				console.log(contenttypeid);

@@ -19,8 +19,7 @@
    		SELECT G.L_TYPE,G.ORIGIN_ID,G.END_DATE,G.M_ID,G.C_ID,C.C_NAME,C.C_PHONE
 		FROM GOOD G
 		JOIN COMPANY C ON (G.C_ID =C.C_ID)
-		WHERE C.M_ID= #{mid};
-   
+		WHERE G.M_ID= #{mId} AND G.L_TYPE='숙박'
    </select>
    
   

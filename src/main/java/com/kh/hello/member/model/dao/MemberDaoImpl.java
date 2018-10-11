@@ -95,11 +95,17 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public ArrayList<MemberGoods> selectGoodsList(int mid, SqlSessionTemplate sqlSession) {
+	public ArrayList<MemberGoods> selectGoodsList(int mId, SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub, 
-		ArrayList<MemberGoods> list =(ArrayList) sqlSession.selectList("MemberGoods.selectGoodList", mid);
+		ArrayList<MemberGoods> list =(ArrayList) sqlSession.selectList("MemberGoods.selectGoodList", mId);
 		
 		return list;
+	}
+
+	@Override
+	public Attachment selectMemberProfile(int mId, SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("Attachment.selectMemberProfile",mId);
 	}
 
 

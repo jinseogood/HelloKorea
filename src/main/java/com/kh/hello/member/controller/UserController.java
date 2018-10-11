@@ -33,9 +33,15 @@ public class UserController {
 		 Member m=(Member)request.getSession().getAttribute("loginUser");
 		
 		int mId= m.getmId();
+		
+		System.out.println("mid : " + mId);
+		
+		Attachment a = ms.selectMemberProfile(mId);
+		System.out.println("a"+a);
+		
 		 
 		System.out.println("mid :" + mId);
-	
+		model.addAttribute("a", a);
 		return "userMypage/editProfile";
 	}
 	@RequestMapping(value="editProfile.um")
@@ -85,17 +91,18 @@ public class UserController {
 	}
 	@RequestMapping(value="watchList.um")
 	public String wachList(Model model,HttpServletRequest request){
-		
+
 		Member m=(Member)request.getSession().getAttribute("loginUser");
 		
 		
-		int mid = m.getmId();
+		int mId = m.getmId();
+		System.out.println("마이페이지mId : "+mId);
 		
-		ArrayList<MemberGoods> goodsList = ms.selectGoodsList(mid);
+		ArrayList<MemberGoods> goodsList = ms.selectGoodsList(mId);
 		
+		System.out.println("goodList : "+ goodsList);
 		
-		
-		
+		model.addAttribute("goodsList", goodsList);
 		return "userMypage/watchList";
 		
 	}

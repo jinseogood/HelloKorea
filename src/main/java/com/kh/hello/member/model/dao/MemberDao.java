@@ -45,7 +45,10 @@ public interface MemberDao {
 	
 	int uploadprofile(Attachment a, SqlSessionTemplate sqlSession);
 	//찜목록
-	ArrayList<MemberGoods> selectGoodsList(int mid, SqlSessionTemplate sqlSession);
+	ArrayList<MemberGoods> selectGoodsList(int mId, SqlSessionTemplate sqlSession);
+	
+	
+	Attachment selectMemberProfile(int mId,SqlSessionTemplate sqlSession);
 
 
 	
