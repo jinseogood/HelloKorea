@@ -23,11 +23,12 @@
 	.contentArea{display:block;}
 	.detailHead{text-align:center; width:280px; height:40px; background-color:lightgray;}
 	.detailContent{height:350px; text-align:center;}
-	.detailBottom{height:50px;}
+	.detailBottom{height:50px; text-align:center;}
 	.tm-about-box-1{padding:10px 10px;}
 	.roomImgTd{width:260px; height:300px;}
 	.QAV{display:none;}
 	.allQAV{display:none;}
+	.selectRoom{width:150px; height:45px;}
 </style>
 </head>
 <body>
@@ -226,6 +227,12 @@
 							output += "ㆍ 비수기 주중최소 : "+myData[i].roomoffseasonminfee1+" (성수기 : "+myData[i].roompeakseasonminfee1+")<br>";
 							output += "ㆍ 비수기 주말최소 : "+myData[i].roomoffseasonminfee2+" (성수기 : "+myData[i].roompeakseasonminfee2+")<br>";
 							output += "</td>";
+							output += "<td class='detailContent'>"
+							output += "<select class='selectRoom'>";
+							output += "<option value='1'>1</option>";
+							output += "<option value='2'>2</option>";
+							output += "</select>"
+							output += "</td>";
 							output += "</tr>"
 							document.getElementById("roomInfoArea").innerHTML += output;
 						}
@@ -241,6 +248,11 @@
 				detailHotelImage();
 				detailHotelIntro();
 				detailRoomInfo();
+				
+				$("#paymentBtn").click(function(){
+					console.log($(".selectRoom").val());
+				});
+				
 			});
 		
 		/* Google map
@@ -330,13 +342,16 @@
 						<td class="detailContent">정보오오오오오오오오</td>
 						<td class="detailContent">정보오오오오오오오오</td>
 					</tr>
+					
+				</tbody>
+				<tfoot>
 					<tr>
 						<td class="detailBottom"></td>
 						<td class="detailBottom"></td>
 						<td class="detailBottom"></td>
-						<td class="detailBottom"></td>
+						<td class="detailBottom"><input type="button" class="btn" id="paymentBtn" value="결제하기" style="background-color:#00aef0; color:white; width:200px; height:45px;"/></td>
 					</tr>
-				</tbody>
+				</tfoot>
 			</table>
 		</div>
 	</section>
