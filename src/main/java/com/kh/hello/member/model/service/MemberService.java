@@ -45,13 +45,14 @@ public interface MemberService {
 	//프로필 수정
 	int editProfile(Member m);
 	
-	//프로필사진 체크
-	int photoCheck(int mId);
 	//찜목록
 	ArrayList<MemberGoods> selectGoodsList(int mId);
 	
 	//프로필사진
 	Attachment selectMemberProfile(int mId);
+	
+	//프로필사진이 있을경우
+	Attachment selectMemberProfile1(int mId);
 
 	
 	

@@ -38,15 +38,25 @@ public class UserController {
 		
 		Attachment a = ms.selectMemberProfile(mId);
 		System.out.println("a"+a);
+		if(a ==null){
+			model.addAttribute("a", a);
+			model.addAttribute("mId", mId);
+			return "userMypage/editProfile";
+		}else{
+			//Attachment a1 = ms.selectMemberProfile1(mId);
+			String changeName = a.getChangeName();
+			
+			model.addAttribute("a", a);
+			model.addAttribute("changeName", changeName);
+			return "userMypage/editProfile";
+		}
 		
+		}
 		 
-		System.out.println("mid :" + mId);
-		model.addAttribute("a", a);
-		return "userMypage/editProfile";
-	}
 	@RequestMapping(value="editProfile.um")
 	public String editProfile(Model model, Member m ,
 								HttpServletRequest request,@RequestParam(name="photo",required=false)MultipartFile photo){
+		
 		
 		System.out.println("editProfile : " + m);
 		
