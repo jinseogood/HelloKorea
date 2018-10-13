@@ -15,11 +15,6 @@ public class SellerPageController {
 		return "seller/addCompany";
 	}
 	
-	@RequestMapping("reservationView.sell")
-	public String reservationView(){
-		return "seller/reservation";
-	}
-	
 	@RequestMapping("manageRevenueView.sell")
 	public String manageRevenueView(){
 		return "seller/manageRevenue";
