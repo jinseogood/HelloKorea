@@ -32,7 +32,6 @@ public interface MemberDao {
 	int updateAddSeller(Member m, SqlSessionTemplate sqlSession);
 
 
-	int photoCheck(int mId, SqlSessionTemplate sqlSession);
 
 
 	int insertFacebook(Member m, SqlSessionTemplate sqlSession);
@@ -49,6 +48,9 @@ public interface MemberDao {
 	
 	
 	Attachment selectMemberProfile(int mId,SqlSessionTemplate sqlSession);
+	
+	//사진이 있을경우
+	Attachment selectMemberProfile1(int mId, SqlSessionTemplate sqlSession);
 
 
 	

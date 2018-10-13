@@ -75,11 +75,6 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.insert("Attachment.uploadprofile",a);
 	}
 
-	@Override
-	public int photoCheck(int mId, SqlSessionTemplate sqlSession) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("Attachment.photoCheck",mId);
-	}
 
 
 	@Override
@@ -106,6 +101,12 @@ public class MemberDaoImpl implements MemberDao {
 	public Attachment selectMemberProfile(int mId, SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("Attachment.selectMemberProfile",mId);
+	}
+
+	@Override
+	public Attachment selectMemberProfile1(int mId, SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("Attachment.selectMemberProfile1",mId);
 	}
 
 

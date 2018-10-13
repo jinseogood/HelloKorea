@@ -103,11 +103,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
-	@Override
-	public int photoCheck(int mId) {
-		// TODO Auto-generated method stub
-		return md.photoCheck(mId,sqlSession);
-	}
+
 
 
 	@Override
@@ -135,6 +131,13 @@ public class MemberServiceImpl implements MemberService {
 	public Attachment selectMemberProfile(int mId) {
 		// TODO Auto-generated method stub
 		return md.selectMemberProfile(mId,sqlSession);
+	}
+
+
+	@Override
+	public Attachment selectMemberProfile1(int mId) {
+		// TODO Auto-generated method stub
+		return md.selectMemberProfile1(mId,sqlSession);
 	}
 
 

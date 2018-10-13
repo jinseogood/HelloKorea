@@ -32,7 +32,7 @@
 		width:200px;
 		text-align:center;
 	}
-	#photoDiv{
+	.photoDiv{
 	margin-left:auto;
 	margin-right:auto;
 	background:red;	
@@ -48,12 +48,15 @@
 		<jsp:include page="../common/userMenubar.jsp"/>
 		
 		<div id="profileDiv">
-			<c:if test="${a eq null }">
-			<div id="photoDiv">
+			<c:if test="${a eq null }"> 
+			<div class="photoDiv">
 				<img src="${contextPath}/resources/img/user.png" id="myPhoto">
 			</div>
 			
-			</c:if>
+		</c:if>
+			 	<div  class="photoDiv">
+			 		<img src="${contextPath}/resources/uploadFiles/member/${changeName}" id="myPhoto">
+			 	</div>
 			<form action="editProfile.um" method="post" encType="multipart/form-data">
 				<table id="profileTable">
 					<input type="hidden" value="${sessionScope.loginUser.mId}"name="mId">
@@ -80,7 +83,7 @@
 					</tr>	
 				</table>	
 				<div align="center">
-					<button>완료</button>
+					<button type="submit">완료</button>
 				</div>		
 			</form>		
 		</div>		
