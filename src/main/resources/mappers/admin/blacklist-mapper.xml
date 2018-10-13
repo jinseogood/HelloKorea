@@ -11,13 +11,13 @@
           <result property="mId" column="M_ID"/>
           <result property="reason" column="REASON"/>
           <result property="period" column="PERIOD"/>
-          <result property="bType" column="B_TYPE"/>
+          <result property="outDate" column="OUT_DATE"/>
      </resultMap>
      
      <!-- 블랙리스트 입력 -->
      <insert id="insertBlacklist" parameterType="Blacklist">
           INSERT INTO BLACKLIST VALUES(SEQ_B_RECORD_ID.NEXTVAL, SYSDATE,
-                                       #{mId}, #{reason}, #{period}, 'R')
+                                       #{mId}, #{reason}, #{period}, NULL)
      </insert>
      
      <!-- 블랙리스트 멤버 상태 업데이트 -->
@@ -67,16 +67,14 @@
          SELECT COUNT(*)
          FROM ( SELECT *
                 FROM BLACKLIST
-                WHERE B_TYPE = 'R'
-                AND TO_CHAR(IN_DATE,'YYYYMMDD') BETWEEN #{fromDate} AND #{toDate})
+                WHERE TO_CHAR(IN_DATE,'YYYYMMDD') BETWEEN #{fromDate} AND #{toDate})
      </select>
      
      <!-- 블랙리스트 등록일 검색 -->
      <select id="selectSearchRDateBlacklist" resultMap="blacklistResultSet">
          SELECT *
          FROM BLACKLIST
-         WHERE B_TYPE = 'R'
-         AND TO_CHAR(IN_DATE,'YYYYMMDD') BETWEEN #{fromDate} AND #{toDate}
+         WHERE TO_CHAR(IN_DATE,'YYYYMMDD') BETWEEN #{fromDate} AND #{toDate}
          ORDER BY B_RECORD_ID DESC
      </select>
      
@@ -85,15 +83,13 @@
          SELECT COUNT(*)
          FROM ( SELECT *
                 FROM BLACKLIST
-                WHERE B_TYPE = 'T'
-                AND IN_DATE BETWEEN TO_DATE(#{fromDate}) AND TO_DATE(#{toDate}))
+                WHERE OUT_DATE BETWEEN TO_DATE(#{fromDate}) AND TO_DATE(#{toDate}))
      </select>
      <!-- 블랙리스트 해지일 검색 -->
      <select id="selectSearchTDateBlacklist" resultMap="blacklistResultSet">
          SELECT *
          FROM BLACKLIST
-         WHERE B_TYPE = 'T'
-         AND IN_DATE BETWEEN TO_DATE(#{fromDate}) AND TO_DATE(#{toDate})
+         WHERE OUT_DATE BETWEEN TO_DATE(#{fromDate}) AND TO_DATE(#{toDate})
          ORDER BY B_RECORD_ID DESC
      </select>
      
@@ -102,23 +98,14 @@
          SELECT COUNT(*)
          FROM ( SELECT *
                 FROM BLACKLIST
-                WHERE M_ID IN ( SELECT M_ID
-                                FROM BLACKLIST
-                                GROUP BY M_ID
-                                HAVING MOD(COUNT(*),2) = 1 )
-                AND ROWNUM = 1
-                ORDER BY B_RECORD_ID DESC )
+                WHERE OUT_DATE IS NULL )
      </select>
      
      <!-- 블랙리스트 미해지건 검색 -->
      <select id="selectnoTBlacklist" resultMap="blacklistResultSet">
          SELECT *
          FROM BLACKLIST
-         WHERE M_ID IN (SELECT M_ID
-                        FROM BLACKLIST
-                        GROUP BY M_ID
-                        HAVING MOD(COUNT(*),2) = 1 )
-         AND ROWNUM = 1
+         WHERE OUT_DATE IS NULL
          ORDER BY B_RECORD_ID DESC
      </select>
      <!-- 블랙리스트 검색 카운트 -->
@@ -153,23 +140,23 @@
      </select>
      
      <!-- 블랙리스트 해지 대상 검색 -->
-     <select id="selectTerminateList" resultMap="blacklistResultSet">
+     <!-- <select id="selectTerminateList" resultMap="blacklistResultSet">
          SELECT B_RECORD_ID, M_ID
          FROM BLACKLIST
          WHERE TO_CHAR(IN_DATE+PERIOD,'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD')
-     </select>
+     </select> -->
 
      <!-- 블랙리스트 해지 이력 입력하기 -->
-     <insert id="insertTerminateHistroy" parameterType="Blacklist">
+     <!-- <insert id="insertTerminateHistroy" parameterType="Blacklist">
          INSERT INTO BLACKLIST VALUES(SEQ_B_RECORD_ID.NEXTVAL, SYSDATE,
                                       #{mId}, null, null, 'T')
-     </insert>
+     </insert> -->
 
      <!-- 블랙리스트 해지 멤버 상태 업데이트 하기-->
-     <update id="updateMemberStatus2" parameterType="_int">
+     <!-- <update id="updateMemberStatus2" parameterType="_int">
          UPDATE MEMBER
          SET STATUS = 'Y'
          WHERE M_ID = #{mId}
-     </update>
+     </update> -->
      
 </mapper>

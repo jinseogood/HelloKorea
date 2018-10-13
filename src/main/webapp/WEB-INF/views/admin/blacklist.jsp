@@ -159,8 +159,9 @@ table.type09 td {
         <th>블랙리스트 번호</th>
         <th>신고대상</th>
         <th>신고사유</th>
-        <th>구분</th>
-        <th>일자</th>
+        <th>등록일자</th>
+        <th>등록기간</th>
+        <th>해지일자</th>
     </tr>
     </thead>
     <tbody>
@@ -169,8 +170,14 @@ table.type09 td {
         <th scope="row">${b.bRecordId}</th>
         <td>${b.mId}</td>
         <td>${b.reason}</td>
-        <td>${b.bTypeText}</td>
         <td>${b.inDate}</td>
+        <c:if test="${b.period == 0}">
+        <td>영구 정지</td>
+        </c:if>
+        <c:if test="${b.period != 0}">
+        <td>${b.period}일</td>
+        </c:if>
+        <td>${b.outDate}</td>
     </tr>
     </c:forEach>
     
