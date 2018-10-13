@@ -12,8 +12,10 @@ import com.kh.hello.seller.model.vo.Company;
 import com.kh.hello.seller.model.vo.OneProduct;
 import com.kh.hello.seller.model.vo.Registration;
 import com.kh.hello.seller.model.vo.RegistrationHistory;
+import com.kh.hello.seller.model.vo.SellerReservation;
 import com.kh.hello.seller.model.vo.Room;
 import com.kh.hello.seller.model.vo.SearchProduct;
+import com.kh.hello.seller.model.vo.SellerOneReservation;
 
 @Repository
 public class SellerDaoImpl implements SellerDao{
@@ -107,8 +109,7 @@ public class SellerDaoImpl implements SellerDao{
 	public ArrayList<SearchProduct> selectProductList(int mId, PageInfo pi, SqlSessionTemplate sqlSession) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
-		ArrayList<SearchProduct> list=(ArrayList)sqlSession.selectList("Product.selectProductList", mId, rowBounds);
-		return list;
+		return (ArrayList)sqlSession.selectList("Product.selectProductList", mId, rowBounds);
 	}
 
 	//등록 기간 검색 상품 조회 리스트 카운트
@@ -131,8 +132,7 @@ public class SellerDaoImpl implements SellerDao{
 		list.add(mId);
 		list.add(fromDate);
 		list.add(toDate);
-		ArrayList<SearchProduct> rlist=(ArrayList)sqlSession.selectList("Product.selectSearchDateProductList", list, rowBounds);
-		return rlist;
+		return (ArrayList)sqlSession.selectList("Product.selectSearchDateProductList", list, rowBounds);
 	}
 
 	//검색 상품 조회 리스트 카운트
@@ -146,15 +146,14 @@ public class SellerDaoImpl implements SellerDao{
 	
 	//검색 상품 조회 리스트
 	@Override
-	public ArrayList<SearchProduct> selectSearchWordProductListCount(int mId, SearchProduct spd, PageInfo pi,
+	public ArrayList<SearchProduct> selectSearchWordProductList(int mId, SearchProduct spd, PageInfo pi,
 			SqlSessionTemplate sqlSession) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
 		ArrayList<Object> list=new ArrayList<Object>();
 		list.add(mId);
 		list.add(spd);
-		ArrayList<SearchProduct> rlist=(ArrayList)sqlSession.selectList("Product.selectSearchWordProductList", list, rowBounds);
-		return rlist;
+		return (ArrayList)sqlSession.selectList("Product.selectSearchWordProductList", list, rowBounds);
 	}
 
 	//선택 상품 조회
@@ -163,8 +162,7 @@ public class SellerDaoImpl implements SellerDao{
 		ArrayList<Object> list=new ArrayList<Object>();
 		list.add(cId);
 		list.add(crId);
-		ArrayList<OneProduct> opList=(ArrayList)sqlSession.selectList("OneProduct.selectOneProduct", list);
-		return opList;
+		return (ArrayList)sqlSession.selectList("OneProduct.selectOneProduct", list);
 	}
 
 	//업체 수정
@@ -188,6 +186,81 @@ public class SellerDaoImpl implements SellerDao{
 		epList.add(period);
 		
 		return sqlSession.insert("RH.extendsPeriod", epList);
+	}
+
+	//예약 내역 전체 조회 리스트 카운트
+	@Override
+	public int getReservationListCount(int mId, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("SellerReservation.getReservationListCount", mId);
+	}
+
+	//예약 내역 전체 조회 리스트
+	@Override
+	public ArrayList<SellerReservation> selectReservationList(int mId, PageInfo pi, SqlSessionTemplate sqlSession) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		
+		return (ArrayList) sqlSession.selectList("SellerReservation.selectReservationList", mId, rowBounds);
+	}
+
+	//예약 기간 검색 리스트 카운트
+	@Override
+	public int getSearchDateReservationListCount(int mId, String toDate, String fromDate,
+			SqlSessionTemplate sqlSession) {
+		ArrayList<Object> list=new ArrayList<Object>();
+		list.add(mId);
+		list.add(fromDate);
+		list.add(toDate);
+		return sqlSession.selectOne("SellerReservation.getSearchDateReservationListCount", list);
+	}
+
+	//예약 기간 검색 리스트
+	@Override
+	public ArrayList<SellerReservation> selectSearchDateReservationList(int mId, String toDate, String fromDate,
+			PageInfo pi, SqlSessionTemplate sqlSession) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		ArrayList<Object> list=new ArrayList<Object>();
+		list.add(mId);
+		list.add(fromDate);
+		list.add(toDate);
+		return (ArrayList) sqlSession.selectList("SellerReservation.selectSearchDateReservationList", list, rowBounds);
+	}
+
+	//예약 검색 내역 리스트 카운트
+	@Override
+	public int getSearchWordReservationListCount(int mId, SellerReservation sr, SqlSessionTemplate sqlSession) {
+		ArrayList<Object> list=new ArrayList<Object>();
+		list.add(mId);
+		list.add(sr);
+		return sqlSession.selectOne("SellerReservation.getSearchWordReservationListCount", list);
+	}
+
+	//예약 검색 내역 리스트
+	@Override
+	public ArrayList<SellerReservation> selectSearchWordReservationList(int mId, SellerReservation sr, PageInfo pi,
+			SqlSessionTemplate sqlSession) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		ArrayList<Object> list=new ArrayList<Object>();
+		list.add(mId);
+		list.add(sr);
+		return (ArrayList) sqlSession.selectList("SellerReservation.selectSearchWordReservationList", list, rowBounds);
+	}
+
+	//예약 상세 조회
+	@Override
+	public ArrayList<SellerOneReservation> selectOneReservation(int oId, SqlSessionTemplate sqlSession) {
+		return (ArrayList) sqlSession.selectList("SellerOneReservation.selectOneReservation", oId);
+	}
+
+	//예약 결제 상태 변경
+	@Override
+	public int changeRPType(int oId, String rStatus, SqlSessionTemplate sqlSession) {
+		ArrayList<Object> list=new ArrayList<Object>();
+		list.add(oId);
+		list.add(rStatus);
+		return sqlSession.update("SellerOneReservation.changeRPType", list);
 	}
 
 }

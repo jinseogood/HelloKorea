@@ -2,10 +2,12 @@ package com.kh.hello.seller.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,10 @@ import com.kh.hello.seller.model.vo.Registration;
 import com.kh.hello.seller.model.vo.RegistrationHistory;
 import com.kh.hello.seller.model.vo.Room;
 import com.kh.hello.seller.model.vo.SearchProduct;
+import com.kh.hello.seller.model.vo.SellerOneReservation;
+import com.kh.hello.seller.model.vo.SellerReservation;
+
+import net.sf.json.JSONObject;
 
 @Controller
 public class CompanyManageController {
@@ -146,7 +152,7 @@ public class CompanyManageController {
 			
 			listCount=ss.getSearchWordProductListCount(m.getmId(), spd);
 			pi=Pagination.getPageInfo(p.getCurrentPage(), listCount);
-			list=ss.selectSearchWordProductListCount(m.getmId(), spd, pi);
+			list=ss.selectSearchWordProductList(m.getmId(), spd, pi);
 		}
 		
 		for(int i=0;i<list.size();i++){
@@ -662,56 +668,53 @@ public class CompanyManageController {
 			p.setCurrentPage(1);
 		}
 		
-		ArrayList<SearchProduct> list=null;
+		ArrayList<SellerReservation> list=null;
 		PageInfo pi=null;
 		int listCount=0;
-
+		
 		if(searchParam == null && searchWord == null){
-			listCount=ss.getProductListCount(m.getmId());
+			listCount=ss.getReservationListCount(m.getmId());
 			pi=Pagination.getPageInfo(p.getCurrentPage(), listCount);
-			list=ss.selectProductList(m.getmId(), pi);
+			list=ss.selectReservationList(m.getmId(), pi);
 		}
 		else if(searchParam.equals("datePick")){
-			listCount=ss.getSearchDateProductListCount(m.getmId(), toDate, fromDate);
+			listCount=ss.getSearchDateReservationListCount(m.getmId(), toDate, fromDate);
 			pi=Pagination.getPageInfo(p.getCurrentPage(), listCount);
-			list=ss.selectSearchDateProductList(m.getmId(), toDate, fromDate, pi);
+			list=ss.selectSearchDateReservationList(m.getmId(), toDate, fromDate, pi);
 		}
 		else{
-			SearchProduct spd=new SearchProduct();
+			SellerReservation sr=new SellerReservation();
 			
-			if(searchParam.equals("comName")){
-				spd.setCompanyName(searchWord);
-			}
-			else if(searchParam.equals("comAddr")){
-				spd.setCompanyAddress(searchWord);
+			if(searchParam.equals("oName")){
+				sr.setPaName(searchWord);
 			}
 			else{
-				if(searchWord.equals("승인완료")){
-					searchWord="Y";
+				if(searchWord.equals("결제완료")){
+					searchWord="purchase";
 				}
-				else if(searchWord.equals("미승인")){
-					searchWord="N";
+				else if(searchWord.equals("환불요청")){
+					searchWord="refundREQ";
 				}
-				else if(searchWord.equals("중도해지")){
-					searchWord="T";
+				else if(searchWord.equals("환불완료")){
+					searchWord="refund";
 				}
-				spd.setStatus(searchWord);
+				sr.setStatus(searchWord);
 			}
 			
-			listCount=ss.getSearchWordProductListCount(m.getmId(), spd);
+			listCount=ss.getSearchWordReservationListCount(m.getmId(), sr);
 			pi=Pagination.getPageInfo(p.getCurrentPage(), listCount);
-			list=ss.selectSearchWordProductListCount(m.getmId(), spd, pi);
+			list=ss.selectSearchWordReservationList(m.getmId(), sr, pi);
 		}
 			
 		for(int i=0;i<list.size();i++){
-			if(list.get(i).getStatus().equals("Y")){
-				list.get(i).setStatus("승인완료");
+			if(list.get(i).getStatus().equals("purchase")){
+				list.get(i).setStatus("결제완료");
 			}
-			else if(list.get(i).getStatus().equals("N")){
-				list.get(i).setStatus("미승인");
+			else if(list.get(i).getStatus().equals("refundREQ")){
+				list.get(i).setStatus("환불요청");
 			}
-			else if(list.get(i).getStatus().equals("T")){
-				list.get(i).setStatus("중도해지");
+			else if(list.get(i).getStatus().equals("refund")){
+				list.get(i).setStatus("환불완료");
 			}
 		}
 			
@@ -721,4 +724,54 @@ public class CompanyManageController {
 		return "seller/reservation";
 	}
 	
+	//예약 상세 보기
+	@RequestMapping(value="reservationDetail.sell")
+	public void reservationDetail(int oId, HttpServletResponse response){
+		
+		try {
+			ArrayList<SellerOneReservation> sor=ss.selectOneReservation(oId);
+			
+			response.setContentType("text/html; charset=utf-8");
+			
+			PrintWriter out=response.getWriter();
+			JSONObject json=new JSONObject();
+			json.put("data", sor);
+			
+			out.print(json);
+			
+			out.flush();
+			out.close();
+			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//예약 결제 상태 변경
+	@RequestMapping(value="changeRPType.sell")
+	public void changeRPType(int oId, String rStatus, HttpServletResponse response){
+		try {
+			PrintWriter out=response.getWriter();
+			
+			boolean changeResult;
+			
+			int result=ss.changeRPType(oId, rStatus);
+			
+			if(result > 0){
+				changeResult=true;
+			}
+			else{
+				changeResult=false;
+			}
+			
+			out.print(changeResult);
+			
+			out.flush();
+			out.close();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
