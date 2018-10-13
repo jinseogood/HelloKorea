@@ -91,24 +91,26 @@ th, td {
 </div>
 <br>
 <div class="msgTable">
+<form action="sendMessage" method="post">
 <div class="form-group">
-							<input type="text" id="contact_subject" class="form-control" placeholder="제목">
+                             <input type="hidden" id="receiveId" name="receiveId" value="${receiveId}">
+							<input type="text" id="title" name="title" class="form-control" placeholder="제목">
 						</div>
 						<div class="form-group">
-							<input type="text" id="contact_subject" class="form-control" placeholder="${nickname}" readonly/>
+							<input type="text" id="nickname" name="nickname" class="form-control" placeholder="${nickname}" readonly/>
 						</div>
 						<div class="form-group">
-							<textarea id="contact_message" class="form-control" rows="6" placeholder="내용"></textarea>
+							<textarea id="content" name="content" class="form-control" rows="6" placeholder="내용"></textarea>
 						</div>
 						<div class="form-group" align="center">
 						    
-							<button class="btn btn-info" type="submit" name="submit">&nbsp;&nbsp;발송&nbsp;&nbsp;</button>
+							<button class="btn btn-info" type="submit">&nbsp;&nbsp;발송&nbsp;&nbsp;</button>
 							&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="hidden" id="mId" value="${mId}">
-							<button class="btn btn-flat" onclick="receiveMsg()" name="submit">&nbsp;&nbsp;취소&nbsp;&nbsp;</button> 
+							<input type="hidden" id="mId" name="sendId" value="${mId}">
+							<button class="btn btn-flat" onclick="receiveMsg()" type="button">&nbsp;&nbsp;취소&nbsp;&nbsp;</button> 
 						</div> 
 
-
+</form>
 </div>
 
 
@@ -123,8 +125,9 @@ th, td {
              location.href="sendMessageView";
           }
           function sendQuestion(){
-              location.href="sendQuestionView";
-          }
+         	 var mId = $("#mId").val();
+             location.href="sendQuestionView?mId="+mId;
+           }
                                    </script>
 </body>
 </html>

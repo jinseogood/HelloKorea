@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -106,16 +107,16 @@ th, td {
 						<div class="form-group" align="center">
 						    <form action="sendView" method="post">
 						    <input type="hidden" id="mId" name="mId" value="${m.receiveId}">
-						    <button class="btn btn-success" onclick="receiveMsg()">&nbsp;&nbsp;목록&nbsp;&nbsp;</button>
+						    <button class="btn btn-success" type="button" onclick="receiveMsg()">&nbsp;&nbsp;목록&nbsp;&nbsp;</button>
 							&nbsp;&nbsp;&nbsp;&nbsp;
-							
+							<c:if test="${ m.sendId != 0}">
 							<input type="hidden" id="receiveId" name="receiveId" value="${m.sendId}">
 							<input type="hidden" id="nickname" name="nickname" value="${m.nickname}">
 							<button class="btn btn-info" onclick="send()">&nbsp;&nbsp;답장&nbsp;&nbsp;</button>
-							
+							</c:if>
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="hidden" id="msgId" value="${m.msgId}">
-							<button class="btn btn-flat" onclick="deleteMsg()">&nbsp;&nbsp;삭제&nbsp;&nbsp;</button>
+							<button class="btn btn-flat" onclick="deleteMsg()" type="button">&nbsp;&nbsp;삭제&nbsp;&nbsp;</button>
 							</form> 
 						</div> 
 
@@ -128,20 +129,16 @@ th, td {
 	<script>
       function receiveMsg(){
     	 var mId = $("#mId").val();
-    	 console.log(mId);
          location.href="receiveMessageView?mId="+mId;
       }
       function sendMsg(){
-         location.href="sendMessageView";
+    	 var mId = $("#mId").val();
+         location.href="sendMessageView?mId="+mId;
       }
       function sendQuestion(){
-         location.href="sendQuestionView";
+    	 var mId = $("#mId").val();
+         location.href="sendQuestionView?mId="+mId;
       }
-     /*  function send(){
-    	 var receiveId = $("#sendId").val();
-    	 var nickname = $("#nickname").val();
-         location.href="sendView?receiveId="+receiveId+"&nickname="+nickname;
-      } */
       function report(){
          confirm('정말 신고하시겠습니까?');
       }

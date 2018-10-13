@@ -12,6 +12,11 @@ public interface MessageService {
 	int updateMessageReadDate(String msgId);
 	Message selectReceiveMessageDetail(String msgId);
 	int updateMessageStatus(String msgId);
+	int getSendMessageCount(int sendId);
+	ArrayList<Message> selectSendMessage(int sendId, PageInfo pi);
+	int sendMessage(Message m);
+	int insertQuestion(Message m);
+	Message selectSendMessageDetail(String msgId);
 
 
 }

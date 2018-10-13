@@ -46,5 +46,35 @@ public class MessageServiceImpl implements MessageService{
 		return md.updateMessageStatus(sqlSession, msgId);
 	}
 
+	//보낸 메세지함 페이징
+	@Override
+	public int getSendMessageCount(int sendId) {
+		return md.getSendMessageCount(sqlSession, sendId);
+	}
+
+	//보낸 메세지함 select
+	@Override
+	public ArrayList<Message> selectSendMessage(int sendId, PageInfo pi) {
+		return md.selectSendMessage(sqlSession, sendId, pi);
+	}
+
+	//메세지 답장(발송)
+	@Override
+	public int sendMessage(Message m) {
+		return md.sendMessage(sqlSession, m);
+	}
+
+	//문의 발송
+	@Override
+	public int insertQuestion(Message m) {
+		return md.insertQuestion(sqlSession, m);
+	}
+
+	//보낸 메세지 상세
+	@Override
+	public Message selectSendMessageDetail(String msgId) {
+		return md.selectSendMessageDetail(sqlSession, msgId);
+	}
+
 
 }

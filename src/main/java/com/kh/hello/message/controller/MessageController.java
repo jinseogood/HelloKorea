@@ -78,19 +78,69 @@ public class MessageController {
 		return "message/send";
 	}
 	
+	//답장 보내기
+	@RequestMapping("sendMessage")
+	public String sendMessage(Message m, Model model){
+		int result = ms.sendMessage(m);
+		if(result > 0){
+			int listCount = ms.getSendMessageCount(m.getSendId());
+			PageInfo pi = Pagination.getPageInfo(1, listCount);		
+			ArrayList<Message> list = ms.selectSendMessage(m.getSendId(), pi); 
+			model.addAttribute("list", list);
+			model.addAttribute("pi", pi);
+			return "message/sendMessage";
+		}else{
+			model.addAttribute("msg","메세지 삭제 실패");
+			return "common/errorPage";
+		}
+		
+	}
+	
+	//보낸 메세지함
 	@RequestMapping("sendMessageView")
-	public String sendMessageView(){
+	public String sendMessageView(String mId, PageInfo p, Model model){
+		if(p.getCurrentPage() == 0){
+			p.setCurrentPage(1);
+		}
+		int listCount = ms.getSendMessageCount(Integer.parseInt(mId));
+		PageInfo pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);		
+		ArrayList<Message> list = ms.selectSendMessage(Integer.parseInt(mId), pi); 
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
 		return "message/sendMessage";
 	}
 	
+	//보낸 메세지 상세
 	@RequestMapping("sendDetailView")
-	public String sendDatailView(){
+	public String sendDatailView(String msgId, Model model){
+		Message m = ms.selectSendMessageDetail(msgId);
+		model.addAttribute("m", m);				
 		return "message/sendDetail";
 	}
 	
+	//문의하기 창
 	@RequestMapping("sendQuestionView")
-	public String sendQuestionView(){
+	public String sendQuestionView(String mId, Model model){
+		model.addAttribute("mId", mId);	
 		return "message/sendQuestion";
+	}
+	
+	//문의 전송
+	@RequestMapping("insertQuestion")
+	public String insertQuestion(Message m, Model model){
+		int result = ms.insertQuestion(m);
+		if(result > 0){
+			int listCount = ms.getSendMessageCount(m.getSendId());
+			PageInfo pi = Pagination.getPageInfo(1, listCount);		
+			ArrayList<Message> list = ms.selectSendMessage(m.getSendId(), pi); 
+			model.addAttribute("list", list);
+			model.addAttribute("pi", pi);
+			return "message/sendMessage"; 
+		}else{
+			model.addAttribute("msg","문의 전송 실패");
+			return "common/errorPage";
+		}
+		
 	}
 	
 }

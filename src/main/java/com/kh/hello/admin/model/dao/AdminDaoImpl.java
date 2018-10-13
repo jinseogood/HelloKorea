@@ -418,8 +418,8 @@ public class AdminDaoImpl implements AdminDao{
 
 	//해지 메세지 발송을 위해 찾아오기
 	@Override
-	public Message selectRecieveId(SqlSessionTemplate sqlSession, String crId) {
-		return sqlSession.selectOne("selectRecieveId", Integer.parseInt(crId));
+	public Message selectReceiveId(SqlSessionTemplate sqlSession, String crId) {
+		return sqlSession.selectOne("selectReceiveId", Integer.parseInt(crId));
 	}
 
 	//해지 메세지 발송

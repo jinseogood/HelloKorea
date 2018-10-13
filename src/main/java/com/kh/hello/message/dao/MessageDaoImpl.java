@@ -46,6 +46,40 @@ public class MessageDaoImpl implements MessageDao{
 		return sqlSession.update("updateMessageStatus", Integer.parseInt(msgId));
 	}
 
+	//보낸 메세지 페이징
+	@Override
+	public int getSendMessageCount(SqlSessionTemplate sqlSession, int sendId) {
+		return sqlSession.selectOne("getSendMessageCount", sendId);
+	}
+	
+    //보낸메세지함
+	@Override
+	public ArrayList<Message> selectSendMessage(SqlSessionTemplate sqlSession, int sendId, PageInfo pi) {
+		ArrayList<Message> list = null;
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		list = (ArrayList)sqlSession.selectList("selectSendMessage", sendId, rowBounds);
+		return list;
+	}
+
+	//메세지 답장(발송)
+	@Override
+	public int sendMessage(SqlSessionTemplate sqlSession, Message m) {
+		return sqlSession.insert("sendMessage", m);
+	}
+
+	//문의 발송
+	@Override
+	public int insertQuestion(SqlSessionTemplate sqlSession, Message m) {
+		return sqlSession.insert("insertQuestion", m);
+	}
+
+	//보낸 메세지 상세
+	@Override
+	public Message selectSendMessageDetail(SqlSessionTemplate sqlSession, String msgId) {
+		return sqlSession.selectOne("selectSendMessageDetail", Integer.parseInt(msgId));
+	}
+
 
 	
 }

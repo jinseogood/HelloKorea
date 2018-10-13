@@ -66,7 +66,7 @@ th, td {
                                 <ul class="nav nav-tabs">
                                     
                                     <li class="">
-                                        <a data-toggle="tab" onclick="recieveMsg()">
+                                        <a data-toggle="tab" onclick="receiveMsg()">
                                             <i class="fa fa-envelope-o"></i>
                                                                                                  받은 메세지
                                         </a>
@@ -91,18 +91,19 @@ th, td {
 <br>
 <div class="msgTable">
 <div class="form-group">
-							<input type="text" id="contact_subject" class="form-control" placeholder="제목" readonly/>
+							<input type="text" id="contact_subject" class="form-control" placeholder="${m.title}" readonly/>
 						</div>
 						<div class="form-group">
-							<input type="text" id="contact_subject" class="form-control" placeholder="받는 사람" readonly/>
+							<input type="text" id="contact_subject" class="form-control" placeholder="${m.nickname}" readonly/>
 						</div>
 						<div class="form-group">
-							<input type="text" id="contact_subject" class="form-control" placeholder="보낸 일자" readonly/>
+							<input type="text" id="contact_subject" class="form-control" placeholder="${m.sendDate}" readonly/>
 						</div>
 						<div class="form-group">
-							<textarea id="contact_message" class="form-control" rows="6" placeholder="내용" readonly></textarea>
+							<textarea id="contact_message" class="form-control" rows="6" placeholder="${m.content}" readonly></textarea>
 						</div>
 						<div class="form-group" align="center">
+						    <input type="hidden" id="mId" value="${m.sendId}">
 						    <button class="btn btn-success" onclick="sendMsg()">&nbsp;목록&nbsp;</button>
 						</div> 
 </div>
@@ -110,16 +111,19 @@ th, td {
 
  </div>
                                     
-                                   <script>
-                                   function sendMsg(){
-                                   	location.href="sendMessageView";
-                                   }
-                                        function recieveMsg(){
-                                        	location.href="recieveMessageView";
-                                        }
-                                        function sendQuestion(){
-                                        	location.href="sendQuestionView";
-                                        }
-                                   </script>
+      <script>
+          function sendMsg(){
+        	 var mId = $("#mId").val();
+             location.href="sendMessageView?mId="+mId;
+          }
+          function recieveMsg(){
+        	 var mId = $("#mId").val();
+             location.href="recieveMessageView?mId="+mId;
+          }
+          function sendQuestion(){
+         	 var mId = $("#mId").val();
+              location.href="sendQuestionView?mId="+mId;
+           }
+       </script>
 </body>
 </html>

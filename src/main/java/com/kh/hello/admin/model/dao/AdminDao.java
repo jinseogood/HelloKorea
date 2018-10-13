@@ -85,7 +85,7 @@ public interface AdminDao {
 	Map<String, Object> selectFileInfo(SqlSessionTemplate sqlSession, int fId);
 	int updateCompanyRegist(SqlSessionTemplate sqlSession, CompanyDetails cd);
 	int updateCompanyStatus(SqlSessionTemplate sqlSession, String crId);
-	Message selectRecieveId(SqlSessionTemplate sqlSession, String crId);
+	Message selectReceiveId(SqlSessionTemplate sqlSession, String crId);
 	int insertTerminateMsg(SqlSessionTemplate sqlSession, Message m);
 	
 	int getDepositListCount(SqlSessionTemplate sqlSession);
