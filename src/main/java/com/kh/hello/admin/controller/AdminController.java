@@ -469,14 +469,7 @@ public class AdminController {
 			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
 			list = as.selectSearchWordBlacklist(b, pi);
 		}
-		for(int i = 0; i < list.size(); i++){
-			//구분
-			if(list.get(i).getbType().equals("R")){
-				list.get(i).setbTypeText("등록");
-			}else{
-				list.get(i).setbTypeText("해지");
-			}
-		}
+		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		return "admin/blacklist";

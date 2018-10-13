@@ -12,20 +12,18 @@ public class Blacklist implements java.io.Serializable{
 	private int mId;
 	private String reason;
 	private int period;
-	private String bType;
-	private String bTypeText;
+	private Date outDate;
 	
 	public Blacklist(){}
 
-	public Blacklist(int bRecordId, Date inDate, int mId, String reason, int period, String bType, String bTypeText) {
+	public Blacklist(int bRecordId, Date inDate, int mId, String reason, int period, Date outDate) {
 		super();
 		this.bRecordId = bRecordId;
 		this.inDate = inDate;
 		this.mId = mId;
 		this.reason = reason;
 		this.period = period;
-		this.bType = bType;
-		this.bTypeText = bTypeText;
+		this.outDate = outDate;
 	}
 
 	public int getbRecordId() {
@@ -68,27 +66,20 @@ public class Blacklist implements java.io.Serializable{
 		this.period = period;
 	}
 
-	public String getbType() {
-		return bType;
+	public Date getOutDate() {
+		return outDate;
 	}
 
-	public void setbType(String bType) {
-		this.bType = bType;
-	}
-
-	public String getbTypeText() {
-		return bTypeText;
-	}
-
-	public void setbTypeText(String bTypeText) {
-		this.bTypeText = bTypeText;
+	public void setOutDate(Date outDate) {
+		this.outDate = outDate;
 	}
 
 	@Override
 	public String toString() {
 		return "Blacklist [bRecordId=" + bRecordId + ", inDate=" + inDate + ", mId=" + mId + ", reason=" + reason
-				+ ", period=" + period + ", bType=" + bType + ", bTypeText=" + bTypeText + "]";
+				+ ", period=" + period + ", outDate=" + outDate + "]";
 	}
 
-
+	
+	
 }
