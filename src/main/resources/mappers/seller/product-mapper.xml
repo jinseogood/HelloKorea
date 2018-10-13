@@ -40,10 +40,9 @@
 		SELECT COUNT(*)
 		FROM COMPANY
 		JOIN COM_REGIST USING(C_ID)
-		WHERE CR_STATUS = 'Y'
-		AND M_ID = ${list.get(0)}
-		AND AP_DATE <![CDATA[<]]>= ${list.get(1)}
-		AND CR_EDATE <![CDATA[>]]>= ${list.get(2)}
+		WHERE M_ID = ${list.get(0)}
+		AND TO_CHAR(AP_DATE, 'YYYY-MM-DD') <![CDATA[>]]>= '${list.get(1)}'
+		AND TO_CHAR(CR_EDATE, 'YYYY-MM-DD') <![CDATA[<]]>= '${list.get(2)}'
 		ORDER BY AP_DATE
 	</select>
 	
@@ -52,10 +51,9 @@
 		SELECT C_ID, C_NAME, C_ADDRESS, C_PHONE, CR_ID, CR_TERM, CR_STATUS, CR_DATE, AP_DATE, CR_EDATE
 		FROM COMPANY
 		JOIN COM_REGIST USING(C_ID)
-		WHERE CR_STATUS = 'Y'
-		AND M_ID = ${list.get(0)}
-		AND AP_DATE <![CDATA[<]]>= ${list.get(1)}
-		AND CR_EDATE <![CDATA[>]]>= ${list.get(2)}
+		WHERE M_ID = ${list.get(0)}
+		AND TO_CHAR(AP_DATE, 'YYYY-MM-DD') <![CDATA[>]]>= '${list.get(1)}'
+		AND TO_CHAR(CR_EDATE, 'YYYY-MM-DD') <![CDATA[<]]>= '${list.get(2)}'
 		ORDER BY AP_DATE
 	</select>
 	

@@ -653,4 +653,72 @@ public class CompanyManageController {
 		}
 	}
 	
+	//예약 관리
+	@RequestMapping(value="reservation.sell")
+	public String reservation(Model model, HttpServletRequest request, PageInfo p, String searchParam, String searchWord, String fromDate, String toDate){
+		Member m=(Member)request.getSession().getAttribute("loginUser");
+		
+		if(p.getCurrentPage() == 0){
+			p.setCurrentPage(1);
+		}
+		
+		ArrayList<SearchProduct> list=null;
+		PageInfo pi=null;
+		int listCount=0;
+
+		if(searchParam == null && searchWord == null){
+			listCount=ss.getProductListCount(m.getmId());
+			pi=Pagination.getPageInfo(p.getCurrentPage(), listCount);
+			list=ss.selectProductList(m.getmId(), pi);
+		}
+		else if(searchParam.equals("datePick")){
+			listCount=ss.getSearchDateProductListCount(m.getmId(), toDate, fromDate);
+			pi=Pagination.getPageInfo(p.getCurrentPage(), listCount);
+			list=ss.selectSearchDateProductList(m.getmId(), toDate, fromDate, pi);
+		}
+		else{
+			SearchProduct spd=new SearchProduct();
+			
+			if(searchParam.equals("comName")){
+				spd.setCompanyName(searchWord);
+			}
+			else if(searchParam.equals("comAddr")){
+				spd.setCompanyAddress(searchWord);
+			}
+			else{
+				if(searchWord.equals("승인완료")){
+					searchWord="Y";
+				}
+				else if(searchWord.equals("미승인")){
+					searchWord="N";
+				}
+				else if(searchWord.equals("중도해지")){
+					searchWord="T";
+				}
+				spd.setStatus(searchWord);
+			}
+			
+			listCount=ss.getSearchWordProductListCount(m.getmId(), spd);
+			pi=Pagination.getPageInfo(p.getCurrentPage(), listCount);
+			list=ss.selectSearchWordProductListCount(m.getmId(), spd, pi);
+		}
+			
+		for(int i=0;i<list.size();i++){
+			if(list.get(i).getStatus().equals("Y")){
+				list.get(i).setStatus("승인완료");
+			}
+			else if(list.get(i).getStatus().equals("N")){
+				list.get(i).setStatus("미승인");
+			}
+			else if(list.get(i).getStatus().equals("T")){
+				list.get(i).setStatus("중도해지");
+			}
+		}
+			
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+			
+		return "seller/reservation";
+	}
+	
 }
