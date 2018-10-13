@@ -354,7 +354,7 @@ public class AdminServiceImpl implements AdminService{
 	public int terminateCompany(String crId, String content) {
 		int result= -99;
 		int result1 = ad.updateCompanyStatus(sqlSession, crId);
-		Message m = ad.selectRecieveId(sqlSession, crId);
+		Message m = ad.selectReceiveId(sqlSession, crId);
 		m.setContent(content);
 		int result2 = ad.insertTerminateMsg(sqlSession, m);
 		if(result1 > 0 && result2 > 0){

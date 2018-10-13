@@ -96,7 +96,7 @@ th, td {
 <div class="msgTable">
 <table class="table table-condensed" id="msgTable">
     <tr>
-        <th></th>
+        <th><input type="hidden" id="mId" value="${ sessionScope.loginUser.mId }"></th>
         <th style="width: 40px">제목</th>
         <th style="width: 10px">보낸이</th>
         <th style="width: 10px">보낸 날짜</th>
@@ -171,11 +171,13 @@ th, td {
                                     
    <script>
       function sendMsg(){
-         location.href="sendMessageView";
+    	 var mId = $("#mId").val();
+         location.href="sendMessageView?mId="+mId;
       }
       function sendQuestion(){
-         location.href="sendQuestionView";
-      }
+     	 var mId = $("#mId").val();
+          location.href="sendQuestionView?mId="+mId;
+       }
       
       $(function(){
   		<% for(int i = 0; i < 11; i++){%>
@@ -186,9 +188,11 @@ th, td {
       
       $(function(){
            $("#msgTable tr").click(function(){
+        	   if($(this).children().eq(0).text()!=''){
         	   var msgId = $(this).children().eq(0).text();
         	   var pDate = $(this).children().eq(4).text();
         	   location.href="receiveDetailView?msgId="+msgId+"&pDate="+pDate;
+        	   }
            });
    		
   	  });

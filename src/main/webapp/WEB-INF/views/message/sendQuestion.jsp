@@ -66,7 +66,7 @@ th, td {
                                 <ul class="nav nav-tabs">
                                     
                                     <li class="">
-                                        <a data-toggle="tab" onclick="recieveMsg()">
+                                        <a data-toggle="tab" onclick="receiveMsg()">
                                             <i class="fa fa-envelope-o"></i>
                                                                                                  받은 메세지
                                         </a>
@@ -88,30 +88,35 @@ th, td {
 
 </div>
 <br>
+<form action="insertQuestion" method="post">
 <div class="msgTable">
 <h4>관리자에게 1:1로 문의하기</h4>
 <p>관리자에게 궁금한 점을 하단에 작성하시어 문의하기를 누르시면</p>
 <p>메세지로 1:1 답변을 받으실 수 있습니다.</p>
 <div><br>
 						<div class="form-group">
-							<input type="text" id="contact_subject" class="form-control" placeholder="제목을 입력하세요" required/>
+						    <input type="hidden" id="mId" name="sendId" value="${mId}">
+							<input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력하세요" required/>
 						</div>
 						<div class="form-group">
-							<textarea id="contact_message" class="form-control" rows="6" placeholder="문의 내용을 입력하세요" required></textarea>
+							<textarea id="content" name="content" class="form-control" rows="6" placeholder="문의 내용을 입력하세요" required></textarea>
 						</div>
 						<div class="form-group">
 							<button class="tm-submit-btn" type="submit" name="submit">문의하기</button> 
 						</div>               
 					</div>
 </div>
+</form>
 </div>
                                     
                                    <script>
                                         function sendMsg(){
-                                        	location.href="sendMessageView";
+                                        	var mId = $("#mId").val();
+                                        	location.href="sendMessageView?mId="+mId;
                                         }
-                                        function recieveMsg(){
-                                        	location.href="recieveMessageView";
+                                        function receiveMsg(){
+                                        	var mId = $("#mId").val();
+                                        	location.href="receiveMessageView?mId="+mId;
                                         }
                                    </script>
 </body>

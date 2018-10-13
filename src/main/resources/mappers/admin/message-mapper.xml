@@ -34,7 +34,7 @@
 	</update>
 	
 	<!-- 제휴 해지 알림을 위해 아이디 찾아오기 -->
-	<select id="selectRecieveId" parameterType="_int" resultMap="messageResultSet">
+	<select id="selectReceiveId" parameterType="_int" resultMap="messageResultSet">
 	    SELECT M.M_ID AS RECEIVE_ID
 	    FROM MEMBER M
         JOIN COMPANY C ON(M.M_ID=C.M_ID)
@@ -95,26 +95,44 @@
 	</update> 
     
     <!-- 보낸 메세지 개수 조회용 쿼리문 -->
-    <!-- <select id="selectSeMsgListCount" resultType="_int">
+    <select id="getSendMessageCount" resultType="_int">
         SELECT COUNT(*)
-        FROM (SELECT *
-		      FROM MESSAGE MS
-		      JOIN MEMBER M
-		      ON(MS.RECEIVE_ID=M.M_ID)
-		      WHERE MS.SEND_ID = #{mId}
-		      AND MS.STATUS = 'N')
-    </select> -->
+        FROM ( SELECT MS.MSG_ID, MS.RECEIVE_ID, MS.SEND_ID, MS.TITLE, MS.CONTENT, MS.SEND_DATE, MS.READ_DATE, MS.P_DATE, M.NICKNAME 
+		       FROM MESSAGE MS
+		       JOIN MEMBER M
+		       ON(MS.RECEIVE_ID=M.M_ID)
+		       WHERE MS.SEND_ID = #{sendId})
+    </select> 
     
     <!-- 보낸 메세지 리스트 조회용 쿼리문  -->
-	<!-- <select id="selectSeMsgList" parameterType="_int" resultMap="messageResultSet">
-		SELECT *
+	<select id="selectSendMessage" parameterType="_int" resultMap="messageResultSet">
+		SELECT MS.MSG_ID, MS.RECEIVE_ID, MS.SEND_ID, MS.TITLE, MS.CONTENT, MS.SEND_DATE, MS.READ_DATE, MS.P_DATE, M.NICKNAME 
 		FROM MESSAGE MS
 		JOIN MEMBER M
 		ON(MS.RECEIVE_ID=M.M_ID)
-		WHERE MS.SEND_ID = #{mId}
-		AND MS.STATUS = 'N'
-		ORDER BY MSG_ID
-	</select> -->
+		WHERE MS.SEND_ID = #{sendId}
+		ORDER BY MSG_ID DESC
+	</select>
 	
+	<!-- 보낸 메세지 상세  -->
+	 <select id="selectSendMessageDetail" parameterType="_int" resultMap="messageResultSet">
+		SELECT MS.MSG_ID, MS.RECEIVE_ID, MS.SEND_ID, MS.TITLE, MS.CONTENT, MS.SEND_DATE, MS.READ_DATE, MS.P_DATE, M.NICKNAME 
+        FROM MESSAGE MS
+        JOIN MEMBER M
+        ON(MS.RECEIVE_ID=M.M_ID)
+        WHERE MS.MSG_ID = #{msgId}
+	</select>
 	
+	<!-- 메세지 답장(발송) -->
+	<insert id="sendMessage">
+	    INSERT INTO MESSAGE
+        VALUES (SEQ_MSG_ID.NEXTVAL, #{receiveId}, #{sendId}, #{title},
+                #{content}, SYSDATE, NULL, 'Y', 'G', NULL)
+	</insert>
+	<!-- 문의 발송 -->
+	<insert id="insertQuestion">
+	    INSERT INTO MESSAGE
+        VALUES (SEQ_MSG_ID.NEXTVAL, 0, #{sendId}, #{title},
+                #{content}, SYSDATE, NULL, 'Y', 'Q', NULL)
+	</insert>
 </mapper>

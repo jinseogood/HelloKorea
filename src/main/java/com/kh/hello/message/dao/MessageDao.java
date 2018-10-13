@@ -14,5 +14,10 @@ public interface MessageDao {
 	int updateMessageReadDate(SqlSessionTemplate sqlSession, String msgId);
 	Message selectReceiveMessageDetail(SqlSessionTemplate sqlSession, String msgId);
 	int updateMessageStatus(SqlSessionTemplate sqlSession, String msgId);
+	int getSendMessageCount(SqlSessionTemplate sqlSession, int sendId);
+	ArrayList<Message> selectSendMessage(SqlSessionTemplate sqlSession, int sendId, PageInfo pi);
+	int sendMessage(SqlSessionTemplate sqlSession, Message m);
+	int insertQuestion(SqlSessionTemplate sqlSession, Message m);
+	Message selectSendMessageDetail(SqlSessionTemplate sqlSession, String msgId);
 
 }
