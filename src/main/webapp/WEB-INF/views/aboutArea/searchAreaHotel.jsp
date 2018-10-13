@@ -402,7 +402,7 @@
 				});
 			}
 			
-			/* function searchHotelPage(){
+			 function searchHotelPage(){
 				$.ajax({
 					url:"searchHotelAreaPage.com",
 					type:"GET",
@@ -416,11 +416,13 @@
 						viewArea.html("");
 						var titleArea = $("#tm-home-box-2-link-2");
 						var output = "";
+						var cid = 0;
 						for(var i = 0; i < data.length; i++){
 							contentid = data[i].contentid;
+							cid = data[i].cid;
 							output = "";
 							output += "<div class='tm-home-box-3' id='detailHover'>";
-							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+","+cid+");'>";
 							if(data[i].firstimage == null){
 								//hotelImageLoad(contentid);
 								$.ajax({
@@ -435,7 +437,7 @@
 										}else{
 											output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
 										}
-									},error:function(result){console.log(result)}
+									},error:function(result){console.log(result);}
 								});
 							}else{
 								output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
@@ -457,7 +459,7 @@
 					}
 				});
 			}
-			 */
+			 
 
 			/* function hotelImageLoad(contentid){
 				console.log("호텔이미지로드 : " + contentid);
@@ -557,7 +559,7 @@
 						console.log(data);
 					}
 				});
-			} 
+			} */
 			
 			function btnGood(contenttypeid, contentid){
 				console.log(contenttypeid);
@@ -613,8 +615,8 @@
 				});
 			}
 			
-			function detailView(contentid,contenttypeid){
-				location.href="${contextPath}/detailHotel?contentid="+contentid+"&contenttypeid="+contenttypeid;
+			function detailView(contentid,contenttypeid,cid){
+				location.href="${contextPath}/detailHotel?contentid="+contentid+"&contenttypeid="+contenttypeid+"&cid="+cid;
 			}
 			
 		
