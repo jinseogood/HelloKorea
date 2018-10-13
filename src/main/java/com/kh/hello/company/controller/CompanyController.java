@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.hello.company.model.service.CompanyService;
 import com.kh.hello.company.model.vo.Company2;
+import com.kh.hello.company.model.vo.Room2;
 
 @Controller
 public class CompanyController {
@@ -154,5 +155,21 @@ public class CompanyController {
 //		response.setContentType("application/json");
 //		response.getWriter().println(list);
 	}
-
+	
+	
+	@RequestMapping(value="detailRoom.com")
+	public void detailRoom(HttpServletRequest request, HttpServletResponse response, @RequestParam int contentid, @RequestParam int cid) throws IOException{
+		response.setContentType("text/html; charset=UTF-8");
+		ObjectMapper mapper = new ObjectMapper();
+		Room2 roomList = new Room2();
+		roomList.setCid(cid);
+		
+		ArrayList<Room2> list = cs.selectRoomList(roomList);
+		response.getWriter().print(mapper.writeValueAsString(list));
+	}
+	
+	
+	
+	
+	
 }

@@ -10,6 +10,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link href="${ contextPath }/resources/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<script type="text/javascript" src="${ contextPath }/resources/js/bootstrap-datetimepicker.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAf5xrmNMwmRYe-jdx4N3ItbdKDOJryoj4&callback=initialize" async defer></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 <title>Hello Korea</title>
@@ -84,6 +86,7 @@
 		
 			var contentid = ${param.contentid};
 			var contenttypeid = ${param.contenttypeid};
+			var cid = ${param.cid};
 			
 			function detailHotelInfo(){
 				console.log("deatilHotel : " + contenttypeid);
@@ -200,42 +203,71 @@
 						var output = "";
 						var roomInfo = $("#roomInfoArea");
 						roomInfo.html("");
-						for(var i in myData){
-							output = "";
-							output += "<tr>";
-							if(myData[i].roomimg1 == null){
-								output += "<td class='detailContent'><img src='${contextPath}/resources/img/noImage.gif' class='roomIngTd' /></td>";
-							}else{ 
-							output += "<td class='detailContent'><img src="+myData[i].roomimg1+" class='roomImgTd' /></td>";
-							}
-							output += "<td>";
-							output += "<h4><b>객실명 : "+myData[i].roomtitle+"</b></h4>";
-							output += "ㆍ 객실크기 : "+myData[i].roomsize1+" 평<br>";
-							output += "ㆍ 객실수 : "+myData[i].roomcount+"<br>";
-							output += "ㆍ 기준인원 : "+myData[i].roombasecount+" (최대인원 : "+myData[i].roommaxcount+")<br>";
-							output += "ㆍ 목욕시설 : "+myData[i].roombathfacility+"<br>";
-							output += "ㆍ 욕조 : "+myData[i].roombath+"<br>";
-							output += "ㆍ 에어컨 : "+myData[i].roomaircondition+"<br>";
-							output += "ㆍ TV : "+myData[i].roomtv+"<br>";
-							output += "ㆍ 케이블설치 : "+myData[i].roomcable+"<br>";
-							output += "ㆍ 인터넷 : "+myData[i].roominternet+"<br>";
-							output += "ㆍ 냉장고 : "+myData[i].roomrefrigerator+"<br>";
-							output += "ㆍ 세면도구 : "+myData[i].roomtoiletries+"<br>";
-							output += "ㆍ 드라이기 : "+myData[i].roomhairdryer+"<br>";
-							output += "</td>"
-							output += "<td>";
-							output += "ㆍ 비수기 주중최소 : "+myData[i].roomoffseasonminfee1+" (성수기 : "+myData[i].roompeakseasonminfee1+")<br>";
-							output += "ㆍ 비수기 주말최소 : "+myData[i].roomoffseasonminfee2+" (성수기 : "+myData[i].roompeakseasonminfee2+")<br>";
-							output += "</td>";
-							output += "<td class='detailContent'>"
-							output += "<select class='selectRoom'>";
-							output += "<option value='1'>1</option>";
-							output += "<option value='2'>2</option>";
-							output += "</select>"
-							output += "</td>";
-							output += "</tr>"
-							document.getElementById("roomInfoArea").innerHTML += output;
-						}
+						var rid = 0;
+						var price = 0;
+						var rType = "";
+						$.ajax({
+							url:"detailRoom.com",
+							type:"GET",
+							data:{contentid:contentid, cid:cid},
+							dataType:"json",
+							success:function(result){
+								console.log("여기와?");
+								console.log(result);
+								for(var i in myData){
+									rid = result[i].rid;
+									price = result[i].rPrice;
+									rType = result[i].rType;
+									output = "";
+									output += "<tr>";
+									if(myData[i].roomimg1 == null){
+										output += "<td class='detailContent'><img src='${contextPath}/resources/img/noImage.gif' class='roomIngTd' /></td>";
+									}else{ 
+									output += "<td class='detailContent'><img src="+myData[i].roomimg1+" class='roomImgTd' /></td>";
+									}
+									output += "<td>";
+									output += "<h4><b>객실명 : "+result[i].rType+"</b></h4>";
+									output += "ㆍ 객실크기 : "+myData[i].roomsize1+" 평<br>";
+									output += "ㆍ 객실수 : "+myData[i].roomcount+"<br>";
+									//output += "ㆍ 기준인원 : "+myData[i].roombasecount+" (최대인원 : "+myData[i].roommaxcount+")<br>";
+									output += "ㆍ 목욕시설 : "+myData[i].roombathfacility+"<br>";
+									output += "ㆍ 욕조 : "+myData[i].roombath+"<br>";
+									output += "ㆍ 에어컨 : "+myData[i].roomaircondition+"<br>";
+									output += "ㆍ TV : "+myData[i].roomtv+"<br>";
+									output += "ㆍ 케이블설치 : "+myData[i].roomcable+"<br>";
+									output += "ㆍ 인터넷 : "+myData[i].roominternet+"<br>";
+									output += "ㆍ 냉장고 : "+myData[i].roomrefrigerator+"<br>";
+									output += "ㆍ 세면도구 : "+myData[i].roomtoiletries+"<br>";
+									output += "ㆍ 드라이기 : "+myData[i].roomhairdryer+"<br>";
+									output += "</td>"
+									output += "<td>";
+									output += "ㆍ 정원 : "+myData[i].roombasecount+"명<br>";
+									output += "ㆍ 최대인원 : "+result[i].rLimit+"명<br>";
+									output += "ㆍ 가격 : "+result[i].rPrice+"원<br>";
+									//output += "ㆍ 비수기 주중최소 : "+myData[i].roomoffseasonminfee1+" (성수기 : "+myData[i].roompeakseasonminfee1+")<br>";
+									//output += "ㆍ 비수기 주말최소 : "+myData[i].roomoffseasonminfee2+" (성수기 : "+myData[i].roompeakseasonminfee2+")<br>";
+									output += "</td>";
+									output += "<td class='detailContent'>";
+									output += "<input type='hidden' name='roomRid' value="+rid+">";
+									output += "<input type='hidden' name='roomPrice' value="+price+">";
+									output += "<input type='hidden' name='rType' value="+rType+">";
+									output += "<select class='selectRoom' name='selectRoom'>";
+									output += "<option>선택</option>";
+									if(result[i].rCount > 1){
+										for(var r = 0; r < result[i].rCount; r++){
+											output += "<option value="+r+">"+r+"</option>";
+										}
+									}else{
+										output += "<option value='1'>1</option>";
+									}
+									output += "</select>"
+									output += "</td>";
+									output += "</tr>"
+									document.getElementById("roomInfoArea").innerHTML += output;
+								}
+							},error:function(result){console.log(data);}
+						});
+						
 					},
 					error:function(data){
 						console.log(data);
@@ -248,13 +280,23 @@
 				detailHotelImage();
 				detailHotelIntro();
 				detailRoomInfo();
+				console.log("cid : "+ cid);
+				
 				
 				$("#paymentBtn").click(function(){
-					console.log($(".selectRoom").val());
+					var values = [];
+					var value ;
+					$(".selectRoom").each(function(){
+						value = $("select[name=selectRoom] option:selected").text();
+						values += value;
+					});
+					console.log(values);
 				});
-				
+				/* $('.date').datetimepicker({
+	            	format: 'MM/DD/YYYY'
+	            });
+	            $('.date-time').datetimepicker(); */
 			});
-		
 		/* Google map
       	------------------------------------------------*/
       	var map;
@@ -281,7 +323,7 @@
           var marker = new google.maps.Marker({ //마커 설정
               map : map,
               position : mapLocation, //마커 위치
-              icon : image,//마커 이미지
+              //icon : image,//마커 이미지
               title : title//가게이름..
           });
           /* var marker = new google.maps.Marker({
@@ -298,9 +340,12 @@
 	
       	// DOM is ready
 		$(function() {
+			
+			
+
 
 			// https://css-tricks.com/snippets/jquery/smooth-scrolling/
-			$('a[href*=#]:not([href=#])').click(function() {
+			/* $('a[href*=#]:not([href=#])').click(function() {
 				if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
 					var target = $(this.hash);
 					target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
@@ -311,7 +356,7 @@
 						return false;
 					}
 				}
-			});
+			}); */
 
 		  	// Flexslider
 		  	$('.flexslider').flexslider({
@@ -321,7 +366,7 @@
 
 		  	// Google Map
 		  	//loadGoogleMap();
-		  });
+		  })(jQuery);
 	</script>
 	
 	<section class="container tm-home-section-1" id="more">
@@ -347,12 +392,32 @@
 				<tfoot>
 					<tr>
 						<td class="detailBottom"></td>
-						<td class="detailBottom"></td>
-						<td class="detailBottom"></td>
+						<td class="detailBottom">
+						<div class="form-group">
+							<div class='input-group date' id='datetimepicker1'>
+								<input type='text' class="form-control" placeholder="Check-in Date" />
+									<span class="input-group-addon">
+										<span class="fa fa-calendar"></span>
+									</span>
+							</div>
+						</div>
+						</td>
+						<td class="detailBottom">
+						<div class="form-group">
+							<div class='input-group date' id='datetimepicker2'>
+								<input type='text' class="form-control" placeholder="Check-out Date" />
+									<span class="input-group-addon">
+										<span class="fa fa-calendar"></span>
+									</span>
+							</div>
+						</div>
+						</td>
 						<td class="detailBottom"><input type="button" class="btn" id="paymentBtn" value="결제하기" style="background-color:#00aef0; color:white; width:200px; height:45px;"/></td>
 					</tr>
 				</tfoot>
 			</table>
+			
+					
 		</div>
 	</section>
 	<section class="container tm-home-section-1" id="more">
