@@ -1,0 +1,27 @@
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Reservation2">
+   <resultMap type="Reservation2" id="reservation2ResultSet">
+      <id property="oid" column="O_ID"/>
+      <result property="rSdate" column="R_SDATE"/>
+      <result property="rEdate" column="R_EDATE"/>
+      <result property="people" column="PEOPLE"/>
+      <result property="oRcount" column="O_RCOUNT"/>
+      <result property="rid" column="R_ID"/>
+      <result property="paId" column="PA_ID"/>
+   </resultMap>
+   
+   <!-- 객실 주문 -->
+   <insert id="insertReservation" parameterType="_int">
+   	INSERT INTO RESERVATION VALUES(SEQ_O_ID.NEXTVAL, SYSDATE, SYSDATE, #{people}, #{oRcount}, #{rid}, #{paId})
+   </insert>
+   
+   
+   <select id="selectOneCurrval" resultType="_int">
+   	SELECT SEQ_O_ID.CURRVAL FROM DUAL
+   </select>
+	
+</mapper>

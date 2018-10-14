@@ -38,6 +38,7 @@
 		  <typeAlias type="com.kh.hello.member.model.vo.MemberGoods" alias="MemberGoods"/>
 		  <typeAlias type="com.kh.hello.company.model.vo.Company2" alias="Company2"/>
 		  <typeAlias type="com.kh.hello.company.model.vo.Room2" alias="Room2"/>
+		  <typeAlias type="com.kh.hello.company.model.vo.Reservation2" alias="Reservation2"/>
       </typeAliases>
   
       <mappers>
@@ -68,6 +69,7 @@
           <mapper resource="mappers/payment/paydetail-mapper.xml"/>
           <mapper resource="mappers/company/company2-mapper.xml"/>
           <mapper resource="mappers/company/room2-mapper.xml"/>
+          <mapper resource="mappers/company/reservation2-mapper.xml"/>
       </mappers>
   
   </configuration>
