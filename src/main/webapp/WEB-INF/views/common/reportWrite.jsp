@@ -127,8 +127,7 @@ th, td {
                                         		data:{reason:reason, r_target:r_target, ref_id:ref_id},
                                         		dataType:"json",
                                         		success:function(data){
-                                        			alert("신고완료");
-                                        			console.log(data.msg);
+                                        			alert(data.msg);
                                         			window.close();
                                         		},error:function(data){
                                         			
@@ -137,20 +136,6 @@ th, td {
                                         	
                                         	//location.href = "insertReport.bo?reason="+reason+"&r_target="+r_target+"&ref_id="+ref_id;
                                         }
-                                        $.ajax({
-                        					url:"insertA.bo",
-                        					type:"post",
-                        					data:{text:a, bid:b},
-                        					dataType:"json",
-                        					success:function(data){
-                        						QA(b);
-                        						$(element).parent().children().eq(1).val("");
-                        						//location.href = "https://127.0.0.1:8443/hello/detailHotel?contentid=142861&contenttypeid=32#";
-                        						
-                        					},error:function(data){
-                        						console.log(data);
-                        					}
-                        			})
                                    </script>
 </body>
 </html>

@@ -17,8 +17,28 @@ public class Board implements java.io.Serializable{
 	private int likey;
 	private int m_id;
 	private int origin_id;
+	private String travel_date;
 	
 	public Board(){}
+
+	public Board(int bid, String title, String text, int board_type, String regist_date, String status,
+			String modify_date, float grade, int likey, int m_id, int origin_id, String travel_date) {
+		super();
+		this.bid = bid;
+		this.title = title;
+		this.text = text;
+		this.board_type = board_type;
+		this.regist_date = regist_date;
+		this.status = status;
+		this.modify_date = modify_date;
+		this.grade = grade;
+		this.likey = likey;
+		this.m_id = m_id;
+		this.origin_id = origin_id;
+		this.travel_date = travel_date;
+	}
+
+
 
 	public Board(int bid, String title, String text, int board_type, String regist_date, String status, String modify_date,
 			float grade, int likey, int m_id) {
@@ -119,7 +139,8 @@ public class Board implements java.io.Serializable{
 	public String toString() {
 		return "Board [bid=" + bid + ", title=" + title + ", text=" + text + ", board_type=" + board_type
 				+ ", regist_date=" + regist_date + ", status=" + status + ", modify_date=" + modify_date + ", grade="
-				+ grade + ", likey=" + likey + ", m_id=" + m_id + ", origin_id=" + origin_id + "]";
+				+ grade + ", likey=" + likey + ", m_id=" + m_id + ", origin_id=" + origin_id + ", travel_date="
+				+ travel_date + "]";
 	}
 
 	public int getOrigin_id() {
@@ -144,6 +165,14 @@ public class Board implements java.io.Serializable{
 		this.likey = likey;
 		this.m_id = m_id;
 		this.origin_id = origin_id;
+	}
+
+	public String getTravel_date() {
+		return travel_date;
+	}
+
+	public void setTravel_date(String travel_date) {
+		this.travel_date = travel_date;
 	}
 
 	

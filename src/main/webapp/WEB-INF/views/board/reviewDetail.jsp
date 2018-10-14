@@ -147,12 +147,14 @@ body{ margin:50px 0px; }
             			&nbsp;
             			<span class="ReviewUpDate" style = "padding-top:5px">
             				<i class="fa fa-thumbs-o-up" style = "font-size:14px; padding-top:5px">&nbsp;${ b.likey }</i>
-            				<i class="fa fa-flag" style = "font-size:14px; padding-top:5px; float:right; cursor:pointer"><a onclick="reportWrite()"> 신고하기</a></i>
+            				<i class="fa fa-flag" style = "font-size:14px; padding-top:5px; float:right; cursor:pointer"><a onclick="reportWrite(this);"> 신고하기</a></i>
+            				<input type = "hidden" value="${ b.m_id }">
+            				<input type = "hidden" value="${ b.bid }">
             			</span>	
             		</div>
             		<div class = "tripDate">
             			<br>
-            			<span style = "font-weight:bold">숙박시기:</span>와우우우년와우우월
+            			<span style = "font-weight:bold">숙박시기 :</span>&nbsp;${ b.travel_date }
             		</div>
             	</div>
             	
@@ -202,8 +204,8 @@ body{ margin:50px 0px; }
 <script>
 
 function insertA(element){
-	var a = $(element).parent().children().eq(1).val();
-	var b = $(element).parent().children().eq(0).val();
+	var a = $(element).parent().parent().children().eq(1).val();
+	var b = $(element).parent().parent().children().eq(0).val();
 	
 	console.log(b);
 	console.log(a);
@@ -213,12 +215,23 @@ function insertA(element){
 			data:{text:a, bid:b},
 			dataType:"json",
 			success:function(data){
-				$(element).parent().children().eq(1).val("");
+				$(element).parent().parent().children().eq(1).val("");
 				location.reload();
 			},error:function(data){
 				console.log(data);
 			}
 	})
+}
+
+function reportWrite(element){
+	var m_id = $(element).parent().parent().children().eq(2).val();
+	var ref_id = $(element).parent().parent().children().eq(3).val();
+	
+	if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')})
+		window.open('reportWrite.bo?m_id='+m_id+'&ref_id='+ref_id, 'reportWrite', 'height=380, width=450, top=80, left=400 resizable=none, scrollbars=no');
+	else{
+		alert("로그인이 필요한 서비스 입니다.");
+	}
 }
 
 </script>

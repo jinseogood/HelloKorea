@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.hello.board.model.dao.BoardDao;
 import com.kh.hello.board.model.vo.Board;
 import com.kh.hello.board.model.vo.Reply;
+import com.kh.hello.board.model.vo.Report;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 
@@ -130,6 +131,30 @@ public class BoardServiceImpl implements BoardService{
 	public ArrayList<Reply> selectRAnswer(int bid) {
 
 		return bd.selectRAnswer(sqlSession, bid);
+	}
+
+	@Override
+	public int insertReport(Report report) {
+		
+		return bd.insertReport(sqlSession, report);
+	}
+
+	@Override
+	public Report selectReport(Report report) {
+	
+		return bd.selectReport(sqlSession, report);
+	}
+
+	@Override
+	public int updateReport(Report report) {
+		
+		return bd.updateReport(sqlSession, report);
+	}
+
+	@Override
+	public int deletePrevReview(int mid) {
+
+		return bd.deletePrevReview(sqlSession, mid);
 	}
  
 }

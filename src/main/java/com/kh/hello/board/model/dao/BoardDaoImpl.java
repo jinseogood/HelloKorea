@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.hello.board.model.vo.Board;
 import com.kh.hello.board.model.vo.Reply;
+import com.kh.hello.board.model.vo.Report;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 
@@ -130,6 +131,30 @@ public class BoardDaoImpl implements BoardDao{
 	public ArrayList<Reply> selectRAnswer(SqlSessionTemplate sqlSession, int bid) {
 
 		return (ArrayList)sqlSession.selectList("Reply.selectRAnswer", bid);
+	}
+
+	@Override
+	public int insertReport(SqlSessionTemplate sqlSession, Report report) {
+		
+		return sqlSession.insert("rReport.insertReport", report);
+	}
+
+	@Override
+	public Report selectReport(SqlSessionTemplate sqlSession, Report report) {
+		
+		return sqlSession.selectOne("rReport.selectReport", report);
+	}
+
+	@Override
+	public int updateReport(SqlSessionTemplate sqlSession, Report report) {
+		
+		return sqlSession.update("rReport.updateReport", report);
+	}
+
+	@Override
+	public int deletePrevReview(SqlSessionTemplate sqlSession, int mid) {
+
+		return sqlSession.delete("Board.deletePrevReview", mid);
 	} 
 
 }

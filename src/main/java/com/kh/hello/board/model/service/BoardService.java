@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.hello.board.model.vo.Board;
 import com.kh.hello.board.model.vo.Reply;
+import com.kh.hello.board.model.vo.Report;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 
@@ -40,5 +41,13 @@ public interface BoardService{
 	ArrayList<Attachment> selectAttachDetail(int bid);
 
 	ArrayList<Reply> selectRAnswer(int bid);
+
+	int insertReport(Report report);
+
+	Report selectReport(Report report);
+
+	int updateReport(Report report);
+
+	int deletePrevReview(int getmId);
 
 } 
