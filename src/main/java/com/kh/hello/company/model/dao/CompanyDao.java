@@ -18,6 +18,10 @@ public interface CompanyDao {
 
 	int selectCurrval(SqlSessionTemplate sqlSession, Reservation2 reservation);
 
+	Reservation2 selectOneReservation(SqlSessionTemplate sqlSession, Reservation2 reservation);
+
+	ArrayList<Company2> selectOrderByName(SqlSessionTemplate sqlSession, Company2 cp);
+
 
 
 

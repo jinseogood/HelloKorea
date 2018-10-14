@@ -14,6 +14,8 @@ public interface CompanyService {
 
 	Reservation2 insertReservation(Reservation2 reservation);
 
+	ArrayList<Company2> selectOrderByName(Company2 cp);
+
 
 
 

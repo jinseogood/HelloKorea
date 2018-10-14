@@ -40,13 +40,22 @@ public class CompanyServiceImpl implements CompanyService {
 	@Transactional(propagation=Propagation.REQUIRED, isolation=Isolation.SERIALIZABLE, rollbackFor={Exception.class})
 	public Reservation2 insertReservation(Reservation2 reservation) {
 		int result = -99;
-		int count = 0;
+		int oid = 0;
 		result = cd.insertReservation(sqlSession, reservation);
 		System.out.println("객실주문 서비스메소드 result : " + result);
-		count = cd.selectCurrval(sqlSession, reservation);
-		System.out.println("객실주문 서비스 메소드 currval : " + count);
+		oid = cd.selectCurrval(sqlSession, reservation);
+		System.out.println("객실주문 서비스 메소드 currval : " + oid);
+		reservation.setOid(oid);
+		reservation = cd.selectOneReservation(sqlSession, reservation);
+		System.out.println("객실주문 서비스 메소드 reservation : " + reservation);
 		
 		return reservation;
+	}
+
+//	이름순서 정렬
+	@Override
+	public ArrayList<Company2> selectOrderByName(Company2 cp) {
+		return cd.selectOrderByName(sqlSession, cp);
 	}
 
 

@@ -22,5 +22,16 @@
    			AND C_ADDRESS LIKE '%' || #{sigunguName} || '%'
    		</if>
    </select>
+   
+   <!-- 이름순 정렬 -->
+   <select id="selectListOrderName" resultMap="company2ResultSet">
+   	SELECT *
+   	FROM COMPANY
+   	WHERE C_ADDRESS LIKE '%' || #{areaName} || '%'
+   	<if test="sigunguName != null">
+   		AND C_ADDRESS LIKE '%' || #{sigunguName} || '%'
+   	</if>
+   	ORDER BY C_NAME
+   </select>
 	
 </mapper>

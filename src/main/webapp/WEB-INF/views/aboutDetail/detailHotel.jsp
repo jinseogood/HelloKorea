@@ -231,9 +231,9 @@
 									}else{ 
 										output += "<td class='detailContent detailContent1'><img src="+myData[i].roomimg1+" class='roomImgTd' />";
 									}
-									output += "<input type='text' class='roomRid' name='roomRid' value="+rid+">";
-									output += "<input type='text' class='roomPrice' name='roomPrice' value="+price+">";
-									output += "<input type='text' class='roomType' name='roomType' value="+rType+">";
+									output += "<input type='hidden' class='roomRid' name='roomRid' value="+rid+">";
+									output += "<input type='hidden' class='roomPrice' name='roomPrice' value="+price+">";
+									output += "<input type='hidden' class='roomType' name='roomType' value="+rType+">";
 									output += "</td>";
 									output += "<td>";
 									output += "<h4><b>객실명 : "+result[i].rType+"</b></h4>";

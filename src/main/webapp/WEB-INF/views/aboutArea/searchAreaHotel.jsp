@@ -18,6 +18,7 @@
 	#dibsBtn{padding:20px; width:55px; height:60px;}
 	#infoTextArea{height:175px; padding:10px 20px 44px; overflow:auto; text-align:left; }
 	.img-responsive1{width:250px; height:225px;}
+	.oderByClass{cursor:pointer;}
 </style>
 </head>
 <body>
@@ -39,7 +40,7 @@
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6"></div>
 					<div class="col-lg-3 col-md-3 col-sm-3" align="right">
-						<span class="tm-section-title" style="font-size:20px;">정렬 : <a href="#">이름</a> <a href="#">평점</a></span>
+						<span class="tm-section-title" style="font-size:20px;">정렬 : <a class="orderByClass" onclick="orderByHotel('name');">이름</a> <a class="oderByClass" onclick="orderByHotel('grade');">평점</a></span>
 					</div>	
 					<br><br>
 				<div class="col-lg-3" align="left">
@@ -207,6 +208,8 @@
 			//var pageNo = ${param.pageNo};
 			var contenttypeid = 32;
 			var contentid = 0;
+			var name = "name";
+			var grade = "grade";
 			
 			function searchHotelGoodStay(){
 				var searchValue = $(".hotelSearchGoodStay").val();
@@ -564,6 +567,7 @@
 			function btnGood(contenttypeid, contentid){
 				console.log(contenttypeid);
 				console.log(contentid);
+				
 				if(contenttypeid == 32){
 					$.ajax({
 						url:"dibsHotel.good",
@@ -619,15 +623,73 @@
 				location.href="${contextPath}/detailHotel?contentid="+contentid+"&contenttypeid="+contenttypeid+"&cid="+cid;
 			}
 			
+			function orderByHotel(value){
+				console.log("value: " + value);
+				$.ajax({
+					url:"orderByHotel.com",
+					type:"GET",
+					data:{areaCode:areaCode, sigunguCode:sigunguCode, value:value},
+					dataType:"json",
+					async:false,
+					success:function(data){
+						console.log("와줘");
+						console.log(data);
+						var viewArea = $("#viewArea");
+						viewArea.html("");
+						var titleArea = $("#tm-home-box-2-link-2");
+						var output = "";
+						var cid = 0;
+						for(var i = 0; i < data.length; i++){
+							contentid = data[i].contentid;
+							cid = data[i].cid;
+							output = "";
+							output += "<div class='tm-home-box-3' id='detailHover'>";
+							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+","+cid+");'>";
+							if(data[i].firstimage == null){
+								//hotelImageLoad(contentid);
+								$.ajax({
+									url:"hotelImageLoad.sub",
+									type:"get",
+									data:{contentid:contentid},
+									dataType:"json",
+									async:false,
+									success:function(result){
+										if(result.response.body.items.item.firstimage != null){
+											output += "<img src="+result.response.body.items.item.firstimage+" alt='image' class='img-responsive1' />";
+										}else{
+											output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
+										}
+									},error:function(result){console.log(result);}
+								});
+							}else{
+								output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
+							}
+							output += "</div>";
+							output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+							output += "<p class='tm-home-box-3-description' id='infoTextArea'><b>주소</b> : "+data[i].cAddress+"</p>";
+							output += "<div class='tm-home-box-2-container'>";
+							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							output += "<a onclick='detailView("+contentid+","+contenttypeid+","+cid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+data[i].cName+"</span></a>";
+							output += "</div></div></div>";
+							document.getElementById("viewArea").innerHTML += output;
+							//hotelImageLoad(contentid);
+						}
+					},
+					error:function(data){
+						console.log("오지말아줘");
+						console.log(data);
+					}
+				});
+			}
+			
+			
 		
 			$(function(){
 				
 				searchHotelPage();
 				
 			});
-			
 		</script>
-		
 	</section>		
 	
 	<!-- white bg -->

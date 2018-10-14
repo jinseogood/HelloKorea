@@ -12,6 +12,7 @@
       <result property="oRcount" column="O_RCOUNT"/>
       <result property="rid" column="R_ID"/>
       <result property="paId" column="PA_ID"/>
+      <result property="roomName" column="R_TYPE"/>
    </resultMap>
    
    <!-- 객실 주문 -->
@@ -19,9 +20,17 @@
    	INSERT INTO RESERVATION VALUES(SEQ_O_ID.NEXTVAL, SYSDATE, SYSDATE, #{people}, #{oRcount}, #{rid}, #{paId})
    </insert>
    
-   
+   <!-- 객실 주문 후 currval 구하기 -->
    <select id="selectOneCurrval" resultType="_int">
    	SELECT SEQ_O_ID.CURRVAL FROM DUAL
+   </select>
+   
+   <!-- 객실 주문 후 currval 구해온 뒤 정보담기 -->
+   <select id="selectOneReservation" parameterType="Reservation2" resultMap="reservation2ResultSet">
+   	SELECT O_ID, R_SDATE, R_EDATE, PEOPLE, O_RCOUNT, R_TYPE, PA_ID
+   	FROM RESERVATION R1
+   	JOIN ROOM R2 ON (R1.R_ID = R2.R_ID)
+   	WHERE O_ID = #{oid}
    </select>
 	
 </mapper>
