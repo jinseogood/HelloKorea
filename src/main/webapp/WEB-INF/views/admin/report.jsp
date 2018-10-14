@@ -73,6 +73,10 @@ table.type09 td {
     border-bottom: 1px solid #ccc;
 }
 
+table.type09 tr:hover{
+    cursor:pointer;
+}
+
 .modal-body{
     width:90%;
     margin-left:auto;
@@ -173,16 +177,22 @@ table.type09 td {
 <table class="type09" id="reportTable">
     <thead>
     <tr>
-        <th>신고번호</th>
-        <th>구분</th>
-        <th>신고대상</th>
-        <th>신고일</th>
-        <th>신고사유</th>
-        <th>처리상황</th>
+        <th style="width:10%">신고번호</th>
+        <th style="width:10%">구분</th>
+        <th style="width:10%">신고대상</th>
+        <th style="width:15%">신고일</th>
+        <th style="width:40%">신고사유</th>
+        <th style="width:15%">처리상황</th>
         <th></th>
     </tr>
     </thead>
     <tbody>
+    <c:if test="${category != null}">
+    <tr>
+    <td></td>
+    <th colspan="6">검색 카테고리 : ${category}, 검색어 : ${word} 의 결과</th>
+    </tr>
+    </c:if>
     <c:forEach var="r" items="${ list }">
     <tr>
         <th scope="row">${r.rRecordId}</th>
@@ -338,7 +348,7 @@ table.type09 td {
 	
 	$(function(){
 		$("#reportTable tr").click(function(){
-			
+			if($(this).children().eq(6).text()!=''){
 		    var rLevelText = $(this).children().eq(1).text();
 		    var rLevel = -99;
 		    var refId = $(this).children().eq(6).text();
@@ -393,7 +403,7 @@ table.type09 td {
 			});
 		
 			$(this).attr({"data-toggle":"modal", "data-target":"#myModal-1"});
-			
+			}
 		});
 		
 	});

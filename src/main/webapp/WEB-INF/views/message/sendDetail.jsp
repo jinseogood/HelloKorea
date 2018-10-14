@@ -53,6 +53,16 @@ th, td {
     background-color:#00aef0;
     color:white;
 }
+label{
+    margin-top:2%;
+}
+#btnArea{
+    margin-top:5%;
+}
+
+.form-control[readonly]{
+    background-color:white;
+}
 </style>
 </head>
 <body>
@@ -88,26 +98,28 @@ th, td {
 
 
 </div>
-<br>
 <div class="msgTable">
-<div class="form-group">
-							<input type="text" id="contact_subject" class="form-control" placeholder="${m.title}" readonly/>
+<label for="title" class="col-lg-2 col-sm-2 control-label">&nbsp;제목</label>
+<div class="col-lg-10">
+						<input type="text" id="title" class="form-control" placeholder="${m.title}" readonly/> 	
 						</div>
-						<div class="form-group">
-							<input type="text" id="contact_subject" class="form-control" placeholder="${m.nickname}" readonly/>
+						<label for="nickname" class="col-lg-2 col-sm-2 control-label">&nbsp;받는이</label>
+						<div class="col-lg-10">
+							<input type="text" id="nickname" class="form-control" placeholder="${m.nickname}" readonly/>
 						</div>
-						<div class="form-group">
-							<input type="text" id="contact_subject" class="form-control" placeholder="${m.sendDate}" readonly/>
+						<label for="sendDate" class="col-lg-2 col-sm-2 control-label">&nbsp;보낸날짜</label>
+						<div class="col-lg-10">
+							<input type="text" id="sendDate" class="form-control" placeholder="${m.sendDate}" readonly/>
 						</div>
-						<div class="form-group">
-							<textarea id="contact_message" class="form-control" rows="6" placeholder="${m.content}" readonly></textarea>
+						<label for="content" class="col-lg-2 col-sm-2 control-label">&nbsp;내용</label>
+						<div class="col-lg-10">
+							<textarea id="content" class="form-control" rows="5" placeholder="${m.content}" readonly></textarea>
 						</div>
-						<div class="form-group" align="center">
+						<div class="form-group" align="center" id="btnArea">
 						    <input type="hidden" id="mId" value="${m.sendId}">
 						    <button class="btn btn-success" onclick="sendMsg()">&nbsp;목록&nbsp;</button>
 						</div> 
 </div>
-<br>
 
  </div>
                                     
@@ -116,9 +128,9 @@ th, td {
         	 var mId = $("#mId").val();
              location.href="sendMessageView?mId="+mId;
           }
-          function recieveMsg(){
+          function receiveMsg(){
         	 var mId = $("#mId").val();
-             location.href="recieveMessageView?mId="+mId;
+             location.href="receiveMessageView?mId="+mId;
           }
           function sendQuestion(){
          	 var mId = $("#mId").val();

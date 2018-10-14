@@ -31,6 +31,11 @@
 th, td {
     text-align:center;
 }
+
+#msgTable tr:hover{
+    cursor:pointer;
+}
+
 .pagination-sm>li>a, .pagination-sm>li>span{
     font-size:9px;
 }
@@ -97,14 +102,14 @@ th, td {
 <table class="table table-condensed" id="msgTable">
     <tr>
         <th><input type="hidden" id="mId" value="${ sessionScope.loginUser.mId }"></th>
-        <th style="width: 40px">제목</th>
-        <th style="width: 10px">보낸이</th>
-        <th style="width: 10px">보낸 날짜</th>
+        <th style="width: 130px">제목</th>
+        <th style="width: 67px">보낸이</th>
+        <th style="width: 67px">보낸 날짜</th>
         <c:if test="${ sessionScope.loginUser.mType.equals('admin') }">
-        <th style="width: 10px">처리 날짜</th>
+        <th style="width: 67px">처리 날짜</th>
         </c:if>
         <c:if test="${ !sessionScope.loginUser.mType.equals('admin') }">
-        <th style="width: 10px">읽은 날짜</th>
+        <th style="width: 67px">읽은 날짜</th>
         </c:if>
     </tr>
     <c:forEach var="m" items="${ list }">
@@ -141,6 +146,7 @@ th, td {
             </c:if>
             <c:if test="${ pi.currentPage > 1 }">
                 <c:url var="mlistBack" value="recieveMessageView">
+                    <c:param name="mId" value="${ sessionScope.loginUser.mId }"/>
                     <c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
                 </c:url>
                 <li><a href="${ mlistBack }">&laquo;</a></li>
@@ -151,6 +157,7 @@ th, td {
                 </c:if>
                 <c:if test="${ p ne pi.currentPage }">
                     <c:url var="mlistCheck" value="recieveMessageView">
+                         <c:param name="mId" value="${ sessionScope.loginUser.mId }"/>
                          <c:param name="currentPage" value="${ p }"/>
                     </c:url>
                     <li><a href="${ mlistCheck }">${ p }</a></li>  
@@ -161,6 +168,7 @@ th, td {
             </c:if>
             <c:if test="${ pi.currentPage < pi.maxPage }">
                 <c:url var="mlistEnd" value="recieveMessageView">
+                    <c:param name="mId" value="${ sessionScope.loginUser.mId }"/>
                     <c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
                 </c:url>
                 <li><a href="${ mlistEnd }">&raquo;</a></li>

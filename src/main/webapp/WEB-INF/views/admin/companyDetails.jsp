@@ -82,7 +82,12 @@ table.type09 td {
 						<th>상호명</th>
 						<td>${list.get(0).cName}</td>
 						<th>전화번호</th>
-						<td>${list.get(0).cPhone}</td>
+						<c:if test="${list.get(0).cPhone != 'undefined'}">
+                        <td>${list.get(0).cPhone}</td>
+                        </c:if>
+                        <c:if test="${list.get(0).cPhone == 'undefined'}">
+                        <td></td>
+                        </c:if>
 					</tr>
 					<tr>
 						<th>주소</th>

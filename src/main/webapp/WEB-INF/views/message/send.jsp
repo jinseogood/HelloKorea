@@ -54,6 +54,16 @@ th, td {
     background-color:#00aef0;
     color:white;
 }
+label{
+    margin-top:2%;
+}
+#btnArea{
+    margin-top:3%;
+    margin-bottom:3%;
+}
+.form-control[readonly]{
+    background-color:white;
+}
 </style>
 </head>
 <body>
@@ -89,20 +99,22 @@ th, td {
 
 
 </div>
-<br>
 <div class="msgTable">
 <form action="sendMessage" method="post">
-<div class="form-group">
+<label for="title" class="col-lg-2 col-sm-2 control-label">&nbsp;제목</label>
+<div class="col-lg-10">
                              <input type="hidden" id="receiveId" name="receiveId" value="${receiveId}">
 							<input type="text" id="title" name="title" class="form-control" placeholder="제목">
 						</div>
-						<div class="form-group">
+						<label for="nickname" class="col-lg-2 col-sm-2 control-label">&nbsp;받는이</label>
+						<div class="col-lg-10">
 							<input type="text" id="nickname" name="nickname" class="form-control" placeholder="${nickname}" readonly/>
 						</div>
-						<div class="form-group">
+						<label for="content" class="col-lg-2 col-sm-2 control-label">&nbsp;내용</label>
+						<div class="col-lg-10">
 							<textarea id="content" name="content" class="form-control" rows="6" placeholder="내용"></textarea>
 						</div>
-						<div class="form-group" align="center">
+						<div class="col-lg-10" align="center" id="btnArea">
 						    
 							<button class="btn btn-info" type="submit">&nbsp;&nbsp;발송&nbsp;&nbsp;</button>
 							&nbsp;&nbsp;&nbsp;&nbsp;
@@ -122,7 +134,8 @@ th, td {
              location.href="receiveMessageView?mId="+mId;
           }
           function sendMsg(){
-             location.href="sendMessageView";
+        	 var mId = $("#mId").val();
+             location.href="sendMessageView?mId="+mId;
           }
           function sendQuestion(){
          	 var mId = $("#mId").val();

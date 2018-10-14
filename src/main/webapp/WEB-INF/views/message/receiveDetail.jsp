@@ -54,6 +54,17 @@ th, td {
     background-color:#00aef0;
     color:white;
 }
+
+label{
+    margin-top:2%;
+}
+#btnArea{
+    margin-top:3%;
+}
+
+.form-control[readonly]{
+    background-color:white;
+}
 </style>
 </head>
 <body>
@@ -89,22 +100,26 @@ th, td {
 
 
 </div>
-<br>
 <div class="msgTable">
 <div align="right"><a onclick="report()"><i class="fa fa-flag"> 신고하기 </i></a></div>
-<div class="form-group">
+<label for="title" class="col-lg-2 col-sm-2 control-label">&nbsp;제목</label>
+<div class="col-lg-10">
+
 							<input type="text" id="title" class="form-control" placeholder="${m.title}" readonly/>
 						</div>
-						<div class="form-group">
+						<label for="nickname" class="col-lg-2 col-sm-2 control-label">&nbsp;보낸이</label>
+						<div class="col-lg-10">
 							<input type="text" id="nickname" class="form-control" placeholder="${m.nickname}" readonly/>
 						</div>
-						<div class="form-group">
+					    <label for="sendDate" class="col-lg-2 col-sm-2 control-label">&nbsp;보낸날짜</label>
+						<div class="col-lg-10">
 							<input type="text" id="sendDate" class="form-control" placeholder="${m.sendDate}" readonly/>
 						</div>
-						<div class="form-group">
-							<textarea id="content" class="form-control" rows="6" placeholder="${m.content}" readonly></textarea>
+						<label for="content" class="col-lg-2 col-sm-2 control-label">&nbsp;내용</label>
+						<div class="col-lg-10">
+							<textarea id="content" class="form-control" rows="5" placeholder="${m.content}" readonly></textarea>
 						</div>
-						<div class="form-group" align="center">
+						<div class="form-group" align="center" id="btnArea">
 						    <form action="sendView" method="post">
 						    <input type="hidden" id="mId" name="mId" value="${m.receiveId}">
 						    <button class="btn btn-success" type="button" onclick="receiveMsg()">&nbsp;&nbsp;목록&nbsp;&nbsp;</button>

@@ -31,6 +31,9 @@
 th, td {
     text-align:center;
 }
+#msgTable tr:hover{
+    cursor:pointer;
+}
 .pagination-sm>li>a, .pagination-sm>li>span{
     font-size:9px;
 }
@@ -96,10 +99,10 @@ th, td {
 <table class="table table-condensed" id="msgTable">
     <tr>
         <th><input type="hidden" id="mId" value="${list.get(0).sendId}"></th>
-        <th style="width: 40px">제목</th>
-        <th style="width: 10px">받는이</th>
-        <th style="width: 10px">보낸 날짜</th>
-        <th style="width: 10px">읽은 날짜</th>
+        <th style="width: 130px">제목</th>
+        <th style="width: 67px">받는이</th>
+        <th style="width: 67px">보낸 날짜</th>
+        <th style="width: 67px">읽은 날짜</th>
     </tr>
     <c:forEach var="m" items="${ list }">
     <tr>
@@ -125,6 +128,7 @@ th, td {
             </c:if>
             <c:if test="${ pi.currentPage > 1 }">
                 <c:url var="mlistBack" value="sendMessageView">
+                    <c:param name="mId" value="${list.get(0).sendId}"/>
                     <c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
                 </c:url>
                 <li><a href="${ mlistBack }">&laquo;</a></li>
@@ -135,6 +139,7 @@ th, td {
                 </c:if>
                 <c:if test="${ p ne pi.currentPage }">
                     <c:url var="mlistCheck" value="sendMessageView">
+                         <c:param name="mId" value="${list.get(0).sendId}"/>
                          <c:param name="currentPage" value="${ p }"/>
                     </c:url>
                     <li><a href="${ mlistCheck }">${ p }</a></li>  
@@ -145,6 +150,7 @@ th, td {
             </c:if>
             <c:if test="${ pi.currentPage < pi.maxPage }">
                 <c:url var="mlistEnd" value="sendMessageView">
+                    <c:param name="mId" value="${list.get(0).sendId}"/>
                     <c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
                 </c:url>
                 <li><a href="${ mlistEnd }">&raquo;</a></li>

@@ -62,7 +62,9 @@ table.type09 td {
     vertical-align: top;
     border-bottom: 1px solid #ccc;
 }
-
+table.type09 tr:hover{
+    cursor:pointer;
+}
 #detailBtn{
     font-size:12px;
     line-height:0.8;
@@ -164,19 +166,30 @@ table.type09 td {
 <table class="type09" id="companyTable">
     <thead>
     <tr>
-        <th style="min-width:60px;">등록번호</th>
-        <th>업체명</th>
-        <th>연락처</th>
-        <th>신청일</th>
-        <th>승인일</th>
+        <th style="width:9%">등록번호</th>
+        <th style="width:50%">업체명</th>
+        <th style="width:17%">연락처</th>
+        <th style="width:12%">신청일</th>
+        <th style="width:12%">승인일</th>
     </tr>
     </thead>
     <tbody>
+    <c:if test="${category != null}">
+    <tr>
+    <td></td>
+    <th colspan="4">검색 카테고리 : ${category}, 검색어 : ${word} 의 결과</th>
+    </tr>
+    </c:if>
     <c:forEach var="c" items="${ list }">
     <tr>
         <th scope="row">${c.crId}</th>
         <td>${c.cName}</td>
+        <c:if test="${c.cPhone != 'undefined'}">
         <td>${c.cPhone}</td>
+        </c:if>
+        <c:if test="${c.cPhone == 'undefined'}">
+        <td></td>
+        </c:if>
         <td>${c.crDate}</td>
         <td>${c.apDate}</td>
     </tr>
@@ -224,8 +237,10 @@ table.type09 td {
 	
 	$(function(){
 		$("#companyTable tr").click(function(){
+			if($(this).children().eq(0).text()!='등록번호'){
 		    var crId = $(this).children().eq(0).text();
 			location.href="selectOneCompany.ad?crId="+crId;
+			}
 		});
 	});
 	</script>
