@@ -17,18 +17,19 @@
           <result property="likey" column="LIKEY"/>
           <result property="m_id" column="M_ID"/>
           <result property="origin_id" column="ORIGIN_ID"/>
+          <result property="travel_date" column="TRAVEL_DATE"/>
      </resultMap>
      
      <!-- 리뷰 인서트************2 -->
      <insert id="insertReviewBoard" parameterType="_int">
           INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, '타이틀',
-                                       '텍스트', 1, SYSDATE, 'Y', SYSDATE, null, 0, #{m_id}, 1)
+                                       '텍스트', 1, SYSDATE, 'Y', SYSDATE, null, 0, #{m_id}, 1, '여행일자')
      </insert>
      
      <!-- 리뷰 업데이트(실질적 글작성) -->
      <update id="updateReviewBoard" parameterType="Board">
          UPDATE BOARD
-         SET TITLE = #{title}, TEXT = #{text}, REGIST_DATE = SYSDATE, GRADE = #{grade}, MODIFY_DATE = SYSDATE
+         SET TITLE = #{title}, TEXT = #{text}, REGIST_DATE = SYSDATE, GRADE = #{grade}, MODIFY_DATE = SYSDATE, TRAVEL_DATE = #{travel_date}
          WHERE bid = (SELECT MAX(BID) FROM BOARD WHERE M_ID = #{m_id})
      </update>
      
@@ -45,9 +46,10 @@
      </select>
      
      <!-- 리뷰 삭제(취소시 미리 인서트해놓은 것) -->
-     <!-- <select id="selectAttachment" resultMap="AttachmentResultSet">
-         
-     </select> -->
+     <delete id = "deletePrevReview" parameterType="_int">
+     	DELETE FROM BOARD
+     	WHERE BID = (SELECT MAX(BID) FROM BOARD WHERE M_ID = #{mid})
+     </delete>
      <select id = "selectQ" resultMap = "BoardResultSet">
      	SELECT BID, TEXT, BOARD_TYPE, REGIST_DATE, STATUS, MODIFY_DATE, GRADE, LIKEY, M_ID, ORIGIN_ID
      	FROM BOARD WHERE BOARD_TYPE = 2
@@ -55,8 +57,8 @@
      
      <!-- Q작성 인서트 -->
      <insert id="insertQ" parameterType="Board">
-     	INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, '리뷰는없음',
-                                       #{text}, 2, SYSDATE, 'Y', SYSDATE, null, 0, #{m_id}, 1)
+     	INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, 'Q는 없음',
+                                       #{text}, 2, SYSDATE, 'Y', SYSDATE, null, 0, #{m_id}, 1, 'Q는 없음')
      </insert>
      
      <!-- Q내역 수 조회용 -->
@@ -66,7 +68,7 @@
      	WHERE BOARD_TYPE = 2
      </select>
      <select id = "selectReviewDetail" parameterType="_int" resultMap = "BoardResultSet">
-     	SELECT BID, TITLE, TEXT, BOARD_TYPE, REGIST_DATE, STATUS, MODIFY_DATE, GRADE, LIKEY, M_ID, ORIGIN_ID
+     	SELECT BID, TITLE, TEXT, BOARD_TYPE, REGIST_DATE, STATUS, MODIFY_DATE, GRADE, LIKEY, M_ID, ORIGIN_ID, TRAVEL_DATE
      	FROM BOARD
      	WHERE BID = #{ bid }
      </select>

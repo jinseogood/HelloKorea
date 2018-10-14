@@ -154,7 +154,6 @@ body{ margin:50px 0px; }
          				       max_value: 5,
         				       step_size: 0.5,
        				           selected_symbol_type: 'fontawesome_star',
-       				           url: 'reviewWrite.bo',
        				           initial_value: 3,
       				           update_input_field_name: $("#input2")
             				}
@@ -192,7 +191,7 @@ body{ margin:50px 0px; }
             		
             		<span>여행시기는 언제였나요?</span><br><br>
             				<i class="fa fa-calendar" id = "btn_monthpicker" style = "font-size:40px; "></i><br><br>
-            				<input id="monthpicker" type="text" style = "height:35px; box-sizing:border-box; text-align:center"/>
+            				<input id="monthpicker" name="travel_date" type="text" style = "height:35px; box-sizing:border-box; text-align:center"/>
 							<script type="text/javascript" src="${ contextPath }/resources/js/jquery-1.11.1.min.js"></script>
 							<script type="text/javascript" src="${ contextPath }/resources/js/jquery-ui.min.js"></script>
 							<script type="text/javascript" src="${ contextPath }/resources/js/jquery.mtz.monthpicker.js"></script>

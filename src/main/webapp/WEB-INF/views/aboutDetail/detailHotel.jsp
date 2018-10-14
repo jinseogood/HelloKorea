@@ -32,6 +32,11 @@
 	.allQAV{display:none;}
 	.selectRoom{width:150px; height:45px;}
 	.selectPeople{width:150px; height:45px;}
+	.summary p{ 
+	 		display: inline-block; width: 500px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+			white-space: normal; line-height: 1.2; height: 52px; text-align: left; word-wrap: break-word; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+
+  	}
 </style>
 </head>
 <body>
@@ -465,7 +470,7 @@
          <div class="row"> 
          </div>         
          <div class="tm-section-header section-margin-top">
-       		   <div class="col-lg-4 col-md-4 col-sm-4"><h2 class="tm-section-title">R E V I E W (1,123)</h2></div>
+       		   <div class="col-lg-4 col-md-4 col-sm-4"><h2 class="tm-section-title">R E V I E W (${ listCount })</h2></div>
       		   <div class="col-lg-8 col-md-8 col-sm-8"><hr></div>
 	      	   <div style = "height:200px; width:100%; position:relative">
 	      	   		<button type="button" class="btn btn-secondary" 
@@ -601,18 +606,19 @@
             	</span>
             	</div>
             	<div class="ReviewTitle" style = "font-size:20px; cursor:pointer; padding-top:10px">
-            		<a href="#"><span>${ list.title }</span></a>
+            		<a onclick = "goDetail(${ list.bid })"><span>${ list.title }</span></a>
             	</div>
             	<div class="summary" style = "padding-top:10px">
-            		${ list.text }
-            		<span><a onclick = "goDetail(${ list.bid })">더 보기</a></span>
+            		<p>${ list.text }</p>
+            		<span><a onclick = "goDetail(${ list.bid })" style = "font-weight:bold">자세히 보기</a></span>
             	</div>
             	<div style = "padding-top:20px;" >
             		<div class="fa" style = "width:100%">
             			<i class="fa fa-thumbs-o-up" style = "font-size:20px; padding-top:10px"> ${ list.likey } </i>
             			<i class="far fa-comment-dots" style = "font-size:20px; padding-top:10px"> 0 </i>
-            			<i class="fa fa-flag" style = "font-size:20px; padding-top:10px; float:right;"> 신고하기 </i>
-            		
+            			<i class="fa fa-flag" style = "font-size:20px; padding-top:10px; float:right;"><a onclick="reportWrite1(this)"> 신고하기</a> </i>
+            			<input type = "hidden" value="${ list.m_id }">
+            			<input type = "hidden" value="${ list.bid }">
             		</div>
             	</div>
             </div>
@@ -653,7 +659,7 @@
          <div class="row">   
          </div>         
          <div class="tm-section-header section-margin-top">
-       		   <div class="col-lg-4 col-md-4 col-sm-4"><h2 class="tm-section-title">Q & A (6,143)</h2></div>
+       		   <div class="col-lg-4 col-md-4 col-sm-4"><h2 class="tm-section-title">Q & A (${ listCount2 })</h2></div>
       		   <div class="col-lg-8 col-md-8 col-sm-8"><hr></div>
 	      	   <div style = "height:200px; width:100%; position:relative">
 	      	   		<button type="button" class="btn btn-secondary" style = "position:absolute; right:10px; bottom:10px" onclick="qa()">Q&A 쓰기</button>
@@ -926,7 +932,7 @@
 							}
 							
 							if(review[i].grade == 1.0){
-								output += "<i class='fa fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
 								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
 								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
 								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
@@ -934,7 +940,7 @@
 							}
 							
 							if(review[i].grade == 1.5){
-								output += "<i class='fa fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
 								output += "<i class='fas fa-star-half-alt' style = 'font-size:20px'></i>";
 								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
 								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
@@ -942,25 +948,25 @@
 							}
 							
 							if(review[i].grade == 2.0){
-								output += "<i class='fa fa-star' style = 'font-size:20px'></i>";
-								output += "<i class='fa fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
 								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
 								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
 								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
 							}
 							
 							if(review[i].grade == 2.5){
-								output += "<i class='fa fa-star' style = 'font-size:20px'></i>";
-								output += "<i class='fa fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
 								output += "<i class='fas fa-star-half-alt' style = 'font-size:20px'></i>";
 								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
 								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
 							}
 							
 							if(review[i].grade == 3.0){
-								output += "<i class='fa fa-star' style = 'font-size:20px'></i>";
-								output += "<i class='fa fa-star' style = 'font-size:20px'></i>";
-								output += "<i class='fa fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
+								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
 								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
 								output += "<i class='far fa-star' style = 'font-size:20px'></i>";
 							}
@@ -998,8 +1004,8 @@
 							}
 							output += "</span>&nbsp;&nbsp;";
 							output += "<span class='ReviewUpDate'>리뷰 게시 날짜 : "+review[i].regist_date+"</span></div>";
-							output += "<div class='ReviewTitle' style = 'font-size:20px; cursor:pointer; padding-top:10px;'><a href='#'><span>"+review[i].title+"</span></a></div>";
-							output += "<div class='summary' style = 'padding-top:10px;'>"+review[i].text+"<span><a onclick = 'goDetail("+review[i].bid+")'>더 보기</a></span></div>";
+							output += "<div class='ReviewTitle' style = 'font-size:20px; cursor:pointer; padding-top:10px;'><a onclick='goDetail("+review[i].bid+")'><span>"+review[i].title+"</span></a></div>";
+							output += "<div class='summary' style = 'padding-top:10px;'><p>"+review[i].text+"</p><span><a style = 'font-weight:bold' onclick = 'goDetail("+review[i].bid+")'>자세히 보기</a></span></div>";
 							output += "<div style = 'padding-top:20px;'><div class='fa' style = 'width:100%;'><i class='fa fa-thumbs-o-up' style = 'font-size:20px; padding-top:10px;'> "+review[i].likey+" </i>&nbsp;<i class='far fa-comment-dots' style = 'font-size:20px; padding-top:10px;'> 0 </i><i class='fa fa-flag' style = 'font-size:20px; padding-top:10px; float:right;'> 신고하기 </i></div></div></div></div>";
 							
 							$divBody.append(output);
@@ -1154,11 +1160,23 @@
 		function reportWrite(element){
     		var m_id = $(element).parent().parent().children().eq(2).val();
     		var ref_id = $(element).parent().parent().children().eq(3).val();
-    		
-    		console.log(m_id);
-    		console.log(ref_id);
 
-    		window.open('reportWrite.bo?m_id='+m_id+'&ref_id='+ref_id, 'reportWrite', 'height=380, width=450, top=80, left=400 resizable=none, scrollbars=no')
+    		if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')})
+    			window.open('reportWrite.bo?m_id='+m_id+'&ref_id='+ref_id, 'reportWrite', 'height=380, width=450, top=80, left=400 resizable=none, scrollbars=no');
+    		else{
+    			alert("로그인이 필요한 서비스 입니다.");
+    		}
+   		}
+		
+		function reportWrite1(element){
+    		var m_id = $(element).parent().parent().children().eq(3).val();
+    		var ref_id = $(element).parent().parent().children().eq(4).val();
+
+    		if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')})
+    			window.open('reportWrite.bo?m_id='+m_id+'&ref_id='+ref_id, 'reportWrite', 'height=380, width=450, top=80, left=400 resizable=none, scrollbars=no');
+    		else{
+    			alert("로그인이 필요한 서비스 입니다.");
+    		}
    		}
     	
     	function goDetail(bid){

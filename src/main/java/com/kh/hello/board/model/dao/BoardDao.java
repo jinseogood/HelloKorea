@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.hello.board.model.vo.Board;
 import com.kh.hello.board.model.vo.Reply;
+import com.kh.hello.board.model.vo.Report;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 
@@ -42,5 +43,13 @@ public interface BoardDao {
 	ArrayList<Attachment> selectAttachDetail(SqlSessionTemplate sqlSession, int bid);
 
 	ArrayList<Reply> selectRAnswer(SqlSessionTemplate sqlSession, int bid);
+
+	int insertReport(SqlSessionTemplate sqlSession, Report report);
+
+	Report selectReport(SqlSessionTemplate sqlSession, Report report);
+
+	int updateReport(SqlSessionTemplate sqlSession, Report report);
+
+	int deletePrevReview(SqlSessionTemplate sqlSession, int mid);
 
 }

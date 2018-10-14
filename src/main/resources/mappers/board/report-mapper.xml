@@ -16,21 +16,25 @@
           <result property="result" column="RESULT"/>
      </resultMap>
      
-     <!-- 신고인서트 -->
-     <insert id="insertReport" parameterType="rReport">
-          INSERT INTO REPORT VALUES(SEQ_R_RECORD_ID.NEXTVAL, #{reason},
-                                       SYSDATE, #{r_level}, #{m_id}, #{r_target}, #{ref_id}, #{result})
-     </insert>
-     <!-- 
-     <select id="selectQAnswer" resultMap = "ReplyResultSet">
-     	  SELECT * FROM REPLY	
+     <!-- 신고 셀렉트 -->
+     <select id="selectReport" parameterType="rReport" resultMap="ReportResultSet">
+     	  SELECT R_RECORD_ID, REASON, R_DATE, R_LEVEL, M_ID, R_TARGET, REF_ID, RESULT
+     	  FROM REPORT_HISTORY
+     	  WHERE REF_ID = #{ref_id}
      </select>
      
-     <select id="selectRAnswer" resultMap = "ReplyResultSet" parameterType="_int">
-     	  SELECT REPLY_ID, CONTENT, REGIST_DATE, MODIFY_DATE, REGIST_STATUS, HELP_POINT, M_ID, BID
-     	  FROM REPLY
-     	  WHERE BID = #{bid}	
-     </select> -->
+     <!-- 신고인서트 -->
+     <insert id="insertReport" parameterType="rReport">
+          INSERT INTO REPORT_HISTORY VALUES(SEQ_R_RECORD_ID.NEXTVAL, #{reason},
+                                       SYSDATE, 1, #{m_id}, #{r_target}, #{ref_id}, 'N')
+     </insert>
+     
+     <!-- 신고 업데이트 -->
+     <update id="updateReport" parameterType="rReport">
+     	  UPDATE REPORT_HISTORY 
+     	  SET REASON = REASON||', '||#{reason}, M_ID = M_ID||', '||#{m_id}
+     	  WHERE REF_ID = #{ref_id}
+     </update>
 
   
 </mapper>

@@ -53,8 +53,11 @@ public class SubPageController {
 		pi = Pagination2.getPageInfo(p.getCurrentPage(), listCount);
 		list= bs.selectReview(pi);	
 		
-		model.addAttribute("list", list);
-		model.addAttribute("pi", pi);
+		if(list != null){
+			model.addAttribute("list", list);
+			model.addAttribute("pi", pi);
+			model.addAttribute("listCount", listCount);
+		}
 		
 		//Q 페이징
 		ArrayList<Board> list2 = null;
@@ -69,14 +72,17 @@ public class SubPageController {
 		pi2 = Pagination2.getPageInfo(p.getCurrentPage(), listCount2);
 		list2 = bs.selectQ(pi2);
 		
-		model.addAttribute("list2", list2);
-		model.addAttribute("pi2", pi2);
+		if(list2 != null){
+			model.addAttribute("list2", list2);
+			model.addAttribute("pi2", pi2);
+			model.addAttribute("listCount2", listCount2);
+		}
 		
 		ArrayList<Reply> listQAnswer = bs.selectQAnswer();
 		
 		model.addAttribute("listQAnswer", listQAnswer);
 		
-		System.out.println(listQAnswer);
+		//System.out.println(listQAnswer);
 
 		return "aboutDetail/detailHotel";
 	}

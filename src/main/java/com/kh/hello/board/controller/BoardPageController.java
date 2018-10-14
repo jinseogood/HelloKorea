@@ -111,6 +111,7 @@ public class BoardPageController {
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		FileDeleteUpload fileDeleteUpload = new FileDeleteUpload();
 		int result = 0;
+		int result1 = 0;
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		ArrayList<Attachment> at = null;
 		at = bs.selectUpload(m.getmId());
@@ -119,8 +120,9 @@ public class BoardPageController {
 			for(int i = 0 ; i < at.size() ; i++){
 				fileDeleteUpload.process(at.get(i).getChangeName(), root);
 			} 
-			//취소시 일괄삭제
+			//취소시 사진 일괄삭제
 			result = bs.deleteAllUpload(m.getmId());
+			result1 = bs.deletePrevReview(m.getmId());
 		}
 		
 		return "main/mainHotel";
@@ -131,6 +133,7 @@ public class BoardPageController {
 		int result = 0;
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		b.setM_id(m.getmId());
+		//System.out.println(b);
 		result = bs.updateBoard(b);
 		
 		return "main/mainHotel";
@@ -301,19 +304,51 @@ public class BoardPageController {
 	}
 	
 	@RequestMapping(value="insertReport.bo")
-	public ModelAndView insertReport(Model model, HttpServletRequest request, @RequestParam String reason, @RequestParam int r_target,
+	public ModelAndView insertReport(Model model, HttpServletResponse response, HttpServletRequest request, @RequestParam String reason, @RequestParam int r_target,
 						@RequestParam int ref_id, ModelAndView mv){
+		response.setContentType("text/html; charset=UTF-8");
 		mv.setViewName("jsonView");
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		Report report = new Report();
-		report.setM_id(m.getmId());
+		report.setM_id(String.valueOf(m.getmId()));
 		report.setR_target(r_target);
 		report.setReason(reason);
 		report.setRef_id(ref_id);
 		
-		mv.addObject("msg", "성공");
+		Report r = null;
+		r = bs.selectReport(report);
 		
-		System.out.println(report);
+		if(m.getmId() != report.getR_target()){
+			if(r != null){
+				if(r.getM_id().contains(report.getM_id())){
+					mv.addObject("msg", "이미 신고한 글입니다.");
+				}else{
+					int result = 0;
+					result = bs.updateReport(report);
+
+					if(result > 0){
+						mv.addObject("msg", "신고 성공");	
+					}else{
+						mv.addObject("msg", "신고 실패");
+					}
+				}
+			}else{
+				int result2 = 0;
+				result2 = bs.insertReport(report);
+
+				if(result2 > 0){
+					mv.addObject("msg", "신고 성공");			
+				}else{
+					mv.addObject("msg", "신고 실패");
+				}
+			}
+		}else{
+			mv.addObject("msg", "본인 글은 신고할 수 없습니다.");
+		}
+		
+		
+		
+		//System.out.println(report);
 		
 		return mv;
 	}
