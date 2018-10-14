@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,13 +15,13 @@
 	}
 	.titleArea{
     	padding:3%;
-    	width:700px;
+    	width:60%;
     	margin-left:auto;
     	margin-right:auto;
 	}
 	.searchArea{
-	    width:300px;
-	    margin-bottom:5%;
+	    width:800px;
+	    margin-bottom:3%;
 	    margin-left:auto;
 	    margin-right:auto;
 	}
@@ -102,48 +103,100 @@
 			</div>
 			
 			<div class="searchArea" align="center">
-				<div class="input-group m-b-10">
-            		<input type="text" class="form-control">
-                    	<div class="input-group-btn">
-                        	<button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조회 선택하기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
-                            	<ul class="dropdown-menu pull-right">
-                                	<li><a href="#">주문번호로 조회</a></li>
-                                    <li><a href="#">주문자로 조회</a></li>
-                                    <li><a href="#">상태로 조회</a></li>
-                                </ul>
+            	<form action="reservation.sell">
+					<div class="col-xs-8 col-xs-offset-2">
+		    			<div class="input-group">
+                			<div class="input-group-btn search-panel">
+                    			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    				<span id="search_concept">검색 카테고리</span> <span class="caret"></span>
+                    			</button>
+                    			<ul class="dropdown-menu" role="menu">
+                      				<li><a href="#oName" onclick="other();">예약자</a></li>
+                      				<li><a href="#oStatus" onclick="other();">상태</a></li>
+                      				<li class="divider"></li>
+                      				<li><a href="#datePick" onclick="showDatePicker();">기간</a></li>
+                    			</ul>
+                			</div>
+                			<input type="hidden" name="searchParam" value="all" id="searchParam">         
+                			<input type="text" class="form-control" name="searchWord" placeholder="검색어를 입력하세요">
+                			<span class="input-group-btn">
+                    			<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                			</span>
                 		</div>
-            	</div>
-			</div>	
+						<div id="datePicker" align="center">
+				           	<br>
+				           	<jsp:include page="../common/datePicker.jsp"/>
+				           	<br>
+				        </div>
+                	</div>
+                </form>
+			</div>
+			
+			<br>
+			<br>
 		
 			<table id="reservationTable" align="center">
 				<thead>
 					<tr>
 						<th width="50px">No</th>
 						<th width="150px">주문번호</th>
-						<th width="100px">주문자</th>
-						<th width="200px">예약 시작일</th>
-						<th width="200px">예약 종료일</th>
+						<th width="200px">주문자</th>
+						<th width="150px">예약 시작일</th>
+						<th width="150px">예약 종료일</th>
 						<th width="100px">상태</th>
 					</tr>
 				</thead>
 				<tbody>
+					<c:set var="no" value="1"/>
+					<c:if test="${ list != null }">
+						<c:forEach var="r" items="${ list }">
+							<tr>
+								<input type="hidden" id="OID" value="${ r.oId }">
+								<input type="hidden" id="PAID" value="${ r.paId }">
+								<th>${ no }</th>
+								<td>${ r.oId }</td>
+								<td>${ r.paName }</td>
+								<td>${ r.rSDate }</td>
+								<td>${ r.rEDate }</td>
+								<td>${ r.status }</td>
+								<c:set var="no" value="${ no + 1 }"/>
+							</tr>
+						</c:forEach>
+					</c:if>
 				</tbody>
 			</table>
 			
 			<div class="paging" align="center">
             	<ul class="pagination pagination-sm">
-                	<li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">6</a></li>
-                    <li><a href="#">7</a></li>
-                    <li><a href="#">8</a></li>
-                    <li><a href="#">9</a></li>
-                    <li><a href="#">10</a></li>
-                    <li><a href="#">&raquo;</a></li>
+            		<c:if test="${ pi.currentPage <= 1 }">
+						<li><a href="#">&laquo;</a></li>
+					</c:if>
+                    <c:if test="${ pi.currentPage > 1 }">
+                    	<c:url var="listFirst" value="reservation.sell">
+                    		<c:param name="currentPage" value="${ pi.startPage }"/>
+                    	</c:url>
+	                	<li><a href="${ listFirst }">&laquo;</a></li>
+					</c:if>
+					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+						<c:if test="${ p eq pi.currentPage }">
+							<li><a href="#">${ p }</a></li>	
+						</c:if>
+						<c:if test="${ p ne pi.currentPage }">
+							<c:url var="listCheck" value="reservation.sell">
+								<c:param name="currentPage" value="${ p }"/>
+							</c:url>
+							<li><a href="${ listCheck }">${ p }</a></li>
+						</c:if>
+					</c:forEach>
+					<c:if test="${ pi.currentPage >= pi.maxPage }">
+						<li><a href="#">&raquo;</a></li>
+					</c:if>
+					<c:if test="${ pi.currentPage < pi.maxPage }">
+						<c:url var="listEnd" value="reservation.sell">
+							<c:param name="currentPage" value="${ pi.endPage }"/>
+						</c:url>
+	                    <li><a href="${ listEnd }">&raquo;</a></li>
+					</c:if>
                 </ul>
             </div>
 
@@ -165,45 +218,9 @@
 		  		</div>
 		  		<div class="modal-body">
 		  			<table id="reservationDetailTable">
-		  				<tr>
-		  					<th>예약자</th>
-		  					<td colspan="3"><p>김진서</p></td>
-		  				</tr>
-		  				<tr>
-		  					<th>기간</th>
-		  					<td colspan="3">
-		  						<p>2018/09/20 - 2018/10/20</p>
-		  					</td>
-		  				</tr>
-		  				<tr>
-		  					<th style="border-right:3px solid orangered;">객실 타입</th>
-		  					<td><p>스위트룸</p></td>
-		  					<th style="border-right:3px solid orangered;">객실 수</th>
-		  					<td><p>1 개</p></td>
-		  				</tr>
-		  				<tr>
-		  					<th style="border-right:3px solid orangered;">객실 타입</th>
-		  					<td><p>일반실</p></td>
-		  					<th style="border-right:3px solid orangered;">객실 수</th>
-		  					<td><p>1 개</p></td>
-		  				</tr>
-		  				<tr>
-		  					<th>인원 수</th>
-		  					<td colspan="3"><p>5 명</p></td>
-		  				</tr>
-		  				<tr>
-		  					<th>금액</th>
-		  					<td><p>380,000 원</p></td>
-		  					<th>상태</th>
-		  					<td>
-		  						<select name="rStatus">
-		  							<option value="wait">결제 대기</option>
-		  							<option value="ok">결제 완료</option>
-		  						</select>
-		  						&nbsp;
-		  						<button type="button" class="btn btn-warning btn-sm">설정</button>
-		  					</td>
-		  				</tr>
+		  				<tbody>
+		  				
+		  				</tbody>
 		  			</table>
 		  		</div>
 		  		<div class="modal-footer" align="center">
@@ -215,8 +232,80 @@
 	
 	<script>
 		$(function(){
+			$("#datePicker").hide();
+			
 			$("#reservationTable td").click(function(){
+				var oId=$("#OID").val();
+				
 				$(this).attr({"data-toggle":"modal", "data-target":"#reservationDetailModal"});
+				
+				$.ajax({
+					url:"reservationDetail.sell",
+					type:"get",
+					data:{oId:oId},
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						
+						$tableBody = $("#reservationDetailTable");
+						$tableBody.html('');
+						
+						var rDetail=data.data;
+						var tPrice=0;
+						
+						var output="";
+						
+						output += "<tr><th>예약자</th><td colspan='3'><p>" + rDetail[0].paName + "</p></td></tr>";
+						output += "<tr><th>기간</th><td colspan='3'>" + rDetail[0].rSDate + " ~ " + rDetail[0].rEDate + "</td></tr>";
+						
+						for(var i=0;i<rDetail.length;i++){
+							output += "<tr><th style='border-right:3px solid orangered;'>객실 타입</th><td><p>" + rDetail[i].rType + "</p></td>";
+							output += "<th style='border-right:3px solid orangered;'>객실 수</th><td><p>" + rDetail[i].oRCount + " 개</p></td></tr>";
+							tPrice += rDetail[i].price;
+						}
+						
+						output += "<tr><th>인원 수</th><td colspan='3'><p>" + rDetail[0].people + " 명</p></td></tr>";
+						output += "<tr><th>금액</th><td><p>" + tPrice + " 원</p></td><th>상태</th>";
+						output += "<td><select name='rStatus' id='rStatus'><option value='purchase'>결제 완료</option><option value='refund'>환불 완료</option></select>&nbsp;";
+						output += "<button type='button' class='btn btn-warning btn-sm' onclick='changePType(" + oId + ")'>설정</button></td></tr>";
+						
+						$tableBody.append(output);
+						
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+			});
+		});
+		function changePType(oId){
+			var rStatus=$("#rStatus").val();
+			
+			$.ajax({
+				url:"changeRPType.sell",
+				type:"get",
+				data:{oId:oId, rStatus:rStatus},
+				success:function(data){
+					alert("결제 상태가 변경되었습니다.");
+				},
+				error:function(data){
+					console.log(data);
+				}
+			});
+		}
+		function showDatePicker(){
+	    	$("#datePicker").show();
+	    }
+	    function other(){
+	    	$("#datePicker").hide();
+	    }
+		$(document).ready(function(e){
+			$('.search-panel .dropdown-menu').find('a').click(function(e) {
+				e.preventDefault();
+				var param = $(this).attr("href").replace("#","");
+				var concept = $(this).text();
+				$('.search-panel span#search_concept').text(concept);
+				$('.input-group #searchParam').val(param);
 			});
 		});
 	</script>

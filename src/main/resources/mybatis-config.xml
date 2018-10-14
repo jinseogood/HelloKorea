@@ -29,6 +29,8 @@
           <typeAlias type="com.kh.hello.seller.model.vo.RegistrationHistory" alias="RH"/>
           <typeAlias type="com.kh.hello.seller.model.vo.SearchProduct" alias="Product"/>
           <typeAlias type="com.kh.hello.seller.model.vo.OneProduct" alias="OneProduct"/>
+          <typeAlias type="com.kh.hello.seller.model.vo.SellerReservation" alias="SellerReservation"/>
+          <typeAlias type="com.kh.hello.seller.model.vo.SellerOneReservation" alias="SellerOneReservation"/>
           <typeAlias type="com.kh.hello.board.model.vo.Board" alias="Board"/>
           <typeAlias type="com.kh.hello.board.model.vo.Reply" alias="Reply"/>
 		  <typeAlias type="com.kh.hello.board.model.vo.Report" alias="rReport"/>
@@ -58,6 +60,8 @@
           <mapper resource="mappers/seller/sellerAT-mapper.xml"/>
           <mapper resource="mappers/seller/product-mapper.xml"/>
           <mapper resource="mappers/seller/oneproduct-mapper.xml"/>
+          <mapper resource="mappers/seller/reservation-mapper.xml"/>
+          <mapper resource="mappers/seller/onereservation-mapper.xml"/>
           <mapper resource="mappers/board/board-mapper.xml"/>
           <mapper resource="mappers/board/attachment-mapper.xml"/>
           <mapper resource="mappers/board/reply-mapper.xml"/>

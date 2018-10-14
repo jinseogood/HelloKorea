@@ -10,8 +10,10 @@ import com.kh.hello.seller.model.vo.Company;
 import com.kh.hello.seller.model.vo.OneProduct;
 import com.kh.hello.seller.model.vo.Registration;
 import com.kh.hello.seller.model.vo.RegistrationHistory;
+import com.kh.hello.seller.model.vo.SellerReservation;
 import com.kh.hello.seller.model.vo.Room;
 import com.kh.hello.seller.model.vo.SearchProduct;
+import com.kh.hello.seller.model.vo.SellerOneReservation;
 
 public interface SellerDao {
 
@@ -71,7 +73,7 @@ public interface SellerDao {
 	int getSearchWordProductListCount(int mId, SearchProduct spd, SqlSessionTemplate sqlSession);
 
 	//검색 상품 조회 리스트
-	ArrayList<SearchProduct> selectSearchWordProductListCount(int mId, SearchProduct spd, PageInfo pi,
+	ArrayList<SearchProduct> selectSearchWordProductList(int mId, SearchProduct spd, PageInfo pi,
 			SqlSessionTemplate sqlSession);
 
 	//선택 상품 조회
@@ -82,5 +84,30 @@ public interface SellerDao {
 
 	//등록 기간 연장
 	int extendsPeriod(String cId, String term, SqlSessionTemplate sqlSession);
+
+	//예약 내역 전체 조회 리스트 카운트
+	int getReservationListCount(int mId, SqlSessionTemplate sqlSession);
+
+	//예약 내역 전체 조회 리스트
+	ArrayList<SellerReservation> selectReservationList(int mId, PageInfo pi, SqlSessionTemplate sqlSession);
+
+	//예약 기간 검색 리스트 카운트
+	int getSearchDateReservationListCount(int mId, String toDate, String fromDate, SqlSessionTemplate sqlSession);
+
+	//예약 기간 검색 리스트
+	ArrayList<SellerReservation> selectSearchDateReservationList(int mId, String toDate, String fromDate, PageInfo pi,
+			SqlSessionTemplate sqlSession);
+
+	//예약 검색 내역 리스트 카운트
+	int getSearchWordReservationListCount(int mId, SellerReservation sr, SqlSessionTemplate sqlSession);
+
+	//예약 검색 내역 리스트
+	ArrayList<SellerReservation> selectSearchWordReservationList(int mId, SellerReservation sr, PageInfo pi, SqlSessionTemplate sqlSession);
+
+	//예약 상세 조회
+	ArrayList<SellerOneReservation> selectOneReservation(int oId, SqlSessionTemplate sqlSession);
+
+	//예약 결제 상태 변경
+	int changeRPType(int oId, String rStatus, SqlSessionTemplate sqlSession);
 
 }

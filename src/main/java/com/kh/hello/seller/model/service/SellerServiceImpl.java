@@ -17,8 +17,10 @@ import com.kh.hello.seller.model.vo.Company;
 import com.kh.hello.seller.model.vo.OneProduct;
 import com.kh.hello.seller.model.vo.Registration;
 import com.kh.hello.seller.model.vo.RegistrationHistory;
+import com.kh.hello.seller.model.vo.SellerReservation;
 import com.kh.hello.seller.model.vo.Room;
 import com.kh.hello.seller.model.vo.SearchProduct;
+import com.kh.hello.seller.model.vo.SellerOneReservation;
 
 @Service
 public class SellerServiceImpl implements SellerService{
@@ -765,9 +767,7 @@ public class SellerServiceImpl implements SellerService{
 	//전체 상품 조회 리스트
 	@Override
 	public ArrayList<SearchProduct> selectProductList(int mId, PageInfo pi) {
-		ArrayList<SearchProduct> list=sd.selectProductList(mId, pi, sqlSession);
-		
-		return list;
+		return sd.selectProductList(mId, pi, sqlSession);
 	}
 
 	//등록 기간 검색 상품 조회 리스트 카운트
@@ -779,9 +779,7 @@ public class SellerServiceImpl implements SellerService{
 	//등록 기간 검색 상품 조회 리스트
 	@Override
 	public ArrayList<SearchProduct> selectSearchDateProductList(int mId, String toDate, String fromDate, PageInfo pi) {
-		ArrayList<SearchProduct> list=sd.selectSearchDateProductList(mId, toDate, fromDate, pi, sqlSession);
-		
-		return list;
+		return sd.selectSearchDateProductList(mId, toDate, fromDate, pi, sqlSession);
 	}
 
 	//검색 상품 조회 리스트 카운트
@@ -792,17 +790,14 @@ public class SellerServiceImpl implements SellerService{
 
 	//검색 상품 조회 리스트
 	@Override
-	public ArrayList<SearchProduct> selectSearchWordProductListCount(int mId, SearchProduct spd, PageInfo pi) {
-		ArrayList<SearchProduct> list=sd.selectSearchWordProductListCount(mId, spd, pi, sqlSession);
-		
-		return list;
+	public ArrayList<SearchProduct> selectSearchWordProductList(int mId, SearchProduct spd, PageInfo pi) {
+		return sd.selectSearchWordProductList(mId, spd, pi, sqlSession);
 	}
 
 	//선택 상품 조회
 	@Override
 	public ArrayList<OneProduct> selectOneProduct(int cId, int crId) {
-		ArrayList<OneProduct> opList=sd.selectOneProduct(cId, crId, sqlSession);
-		return opList;
+		return sd.selectOneProduct(cId, crId, sqlSession);
 	}
 
 	//업체 수정
@@ -815,6 +810,56 @@ public class SellerServiceImpl implements SellerService{
 	@Override
 	public int extendsPeriod(String cId, String term) {
 		return sd.extendsPeriod(cId, term, sqlSession);
+	}
+
+	//예약 내역 전체 조회 리스트 카운트
+	@Override
+	public int getReservationListCount(int mId) {
+		return sd.getReservationListCount(mId, sqlSession);
+	}
+
+	//예약 내역 전체 조회 리스트
+	@Override
+	public ArrayList<SellerReservation> selectReservationList(int mId, PageInfo pi) {
+		return sd.selectReservationList(mId, pi, sqlSession);
+	}
+
+	//예약 기간 검색 리스트 카운트
+	@Override
+	public int getSearchDateReservationListCount(int mId, String toDate, String fromDate) {
+		return sd.getSearchDateReservationListCount(mId, toDate, fromDate, sqlSession);
+	}
+
+	//예약 기간 검색 리스트
+	@Override
+	public ArrayList<SellerReservation> selectSearchDateReservationList(int mId, String toDate, String fromDate,
+			PageInfo pi) {
+		return sd.selectSearchDateReservationList(mId, toDate, fromDate, pi, sqlSession);
+	}
+
+	//예약 검색 내역 리스트 카운트
+	@Override
+	public int getSearchWordReservationListCount(int mId, SellerReservation sr) {
+		return sd.getSearchWordReservationListCount(mId, sr, sqlSession);
+	}
+
+	//예약 검색 내역 리스트
+	@Override
+	public ArrayList<SellerReservation> selectSearchWordReservationList(int mId, SellerReservation sr,
+			PageInfo pi) {
+		return sd.selectSearchWordReservationList(mId, sr, pi, sqlSession);
+	}
+
+	//예약 상세 조회
+	@Override
+	public ArrayList<SellerOneReservation> selectOneReservation(int oId) {
+		return sd.selectOneReservation(oId, sqlSession);
+	}
+
+	//예약 결제 상태 변경
+	@Override
+	public int changeRPType(int oId, String rStatus) {
+		return sd.changeRPType(oId, rStatus, sqlSession);
 	}
 
 
