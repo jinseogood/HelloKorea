@@ -120,6 +120,21 @@ public class AdminController {
 			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
 			list = as.selectSearchWordReservationList(r, pi);
 		}
+		if(searchParam != null){
+			if(searchParam.equals("oId")){
+				model.addAttribute("category", "예약번호");
+				model.addAttribute("word", searchWord);
+			}else if(searchParam.equals("cName")){
+				model.addAttribute("category", "예약처");
+				model.addAttribute("word", searchWord);
+			}else if(searchParam.equals("paName")){
+				model.addAttribute("category", "예약자");
+				model.addAttribute("word", searchWord);
+			}else{
+				model.addAttribute("category", "숙박일");
+				model.addAttribute("word", fromDate + " ~ " + toDate);
+			}
+		}
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
@@ -190,6 +205,23 @@ public class AdminController {
 				}
 			}
 		}
+		
+		if(searchParam != null){
+			if(searchParam.equals("rRecordId")){
+				model.addAttribute("category", "신고번호");
+				model.addAttribute("word", searchWord);
+			}else if(searchParam.equals("rTarget")){
+				model.addAttribute("category", "신고대상");
+				model.addAttribute("word", searchWord);
+			}else if(searchParam.equals("noResult")){
+				model.addAttribute("category", "미처리건");
+				model.addAttribute("word", "");
+			}else{
+				model.addAttribute("category", "신고일");
+				model.addAttribute("word", fromDate + " ~ " + toDate);
+			}
+		}
+		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		return "admin/report";
@@ -375,6 +407,21 @@ public class AdminController {
 			}
 			
 		}
+		if(searchParam != null){
+			if(searchParam.equals("qRecordId")){
+				model.addAttribute("category", "문의번호");
+				model.addAttribute("word", searchWord);
+			}else if(searchParam.equals("sendId")){
+				model.addAttribute("category", "문의자");
+				model.addAttribute("word", searchWord);
+			}else if(searchParam.equals("noP")){
+				model.addAttribute("category", "미처리건");
+				model.addAttribute("word", "");
+			}else{
+				model.addAttribute("category", "문의일");
+				model.addAttribute("word", fromDate + " ~ " + toDate);
+			}
+		}
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		return "admin/question";
@@ -469,7 +516,24 @@ public class AdminController {
 			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
 			list = as.selectSearchWordBlacklist(b, pi);
 		}
-		
+		if(searchParam != null){
+			if(searchParam.equals("bRecordId")){
+				model.addAttribute("category", "블랙리스트 번호");
+				model.addAttribute("word", searchWord);
+			}else if(searchParam.equals("mId")){
+				model.addAttribute("category", "대상");
+				model.addAttribute("word", searchWord);
+			}else if(searchParam.equals("noT")){
+				model.addAttribute("category", "미처리건");
+				model.addAttribute("word", "");
+			}else if(searchParam.equals("datePick")){
+				model.addAttribute("category", "등록일자");
+				model.addAttribute("word", fromDate + " ~ " + toDate);
+			}else{
+				model.addAttribute("category", "해지일자");
+				model.addAttribute("word", fromDate + " ~ " + toDate);
+			}
+		}
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		return "admin/blacklist";
@@ -528,6 +592,29 @@ public class AdminController {
 			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
 			list = as.selectSearchWordCompanyList(a, pi);
 		}
+		
+		if(searchParam != null){
+			if(searchParam.equals("crId")){
+				model.addAttribute("category", "등록번호");
+				model.addAttribute("word", searchWord);
+			}else if(searchParam.equals("cName")){
+				model.addAttribute("category", "업체명");
+				model.addAttribute("word", searchWord);
+			}else if(searchParam.equals("cPhone")){
+				model.addAttribute("category", "연락처");
+				model.addAttribute("word", searchWord);
+			}else if(searchParam.equals("noA")){
+				model.addAttribute("category", "미승인건");
+				model.addAttribute("word", "");
+			}else if(searchParam.equals("datePick")){
+				model.addAttribute("category", "신청일");
+				model.addAttribute("word", fromDate + " ~ " + toDate);
+			}else{
+				model.addAttribute("category", "승인일");
+				model.addAttribute("word", fromDate + " ~ " + toDate);
+			}
+		}
+		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		return "admin/approval";
@@ -641,6 +728,20 @@ public class AdminController {
 			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
 			list = as.selectSearchWordDepositList(d, pi);
 		}
+		
+		if(searchParam != null){
+			if(searchParam.equals("cId")){
+				model.addAttribute("category", "업체번호");
+				model.addAttribute("word", searchWord);
+			}else if(searchParam.equals("cName")){
+				model.addAttribute("category", "업체명");
+				model.addAttribute("word", searchWord);
+			}else{
+				model.addAttribute("category", "입금액순");
+				model.addAttribute("word", "");
+			}
+		}
+		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		return "admin/deposit";
@@ -708,6 +809,22 @@ public class AdminController {
 			listCount = as.getSearchWordDepositHistroyListCount(d);
 			pi = Pagination.getPageInfo(p.getCurrentPage(), listCount);
 			list = as.selectSearchWordDepositHistoryList(d, pi);
+		}
+		
+		if(searchParam != null){
+			if(searchParam.equals("cId")){
+				model.addAttribute("category", "업체번호");
+				model.addAttribute("word", searchWord);
+			}else if(searchParam.equals("cName")){
+				model.addAttribute("category", "업체명");
+				model.addAttribute("word", searchWord);
+			}else if(searchParam.equals("descD")){
+				model.addAttribute("category", "입금액순");
+				model.addAttribute("word", "");
+			}else{
+				model.addAttribute("category", "입금일");
+				model.addAttribute("word", fromDate + " ~ " + toDate);
+			}
 		}
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);

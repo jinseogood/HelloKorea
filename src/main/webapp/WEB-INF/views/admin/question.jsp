@@ -60,6 +60,9 @@ table.type09 td {
     vertical-align: top;
     border-bottom: 1px solid #ccc;
 }
+table.type09 tr:hover{
+    cursor:pointer;
+}
 .modal-body{
     width:90%;
     margin-left:auto;
@@ -158,16 +161,22 @@ table.type09 td {
 <table class="type09">
     <thead>
     <tr>
-        <th>문의번호</th>
-        <th>문의자</th>
-        <th>문의 제목</th>
-        <th>문의일</th>
-        <th>처리상황</th>
+        <th style="width:10%">문의번호</th>
+        <th style="width:10%">문의자</th>
+        <th style="width:50%">문의 제목</th>
+        <th style="width:15%">문의일</th>
+        <th style="width:15%">처리상황</th>
         <th></th>
         <th></th>
     </tr>
     </thead>
     <tbody>
+    <c:if test="${category != null}">
+    <tr>
+    <td></td>
+    <th colspan="6">검색 카테고리 : ${category}, 검색어 : ${word} 의 결과</th>
+    </tr>
+    </c:if>
     <c:forEach var="q" items="${ list }">
     <tr>
         <th scope="row">${q.qRecordId}</th>
@@ -299,6 +308,9 @@ table.type09 td {
 			<% } %>
 			
 			$("#questionTable tr").click(function(){
+				if($(this).children().eq(5).text()!=''){
+					
+				
 				$("#qRecordId").val($(this).children().eq(0).text());
 				$("#msgId").val($(this).children().eq(6).text());
 				$("#sendId").val($(this).children().eq(1).text());
@@ -315,6 +327,8 @@ table.type09 td {
 				}
 				
 				$(this).attr({"data-toggle":"modal", "data-target":"#myModal-1"});
+				
+				}
 			});
 		});
 		

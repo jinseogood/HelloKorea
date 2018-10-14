@@ -133,15 +133,21 @@ table.type09 td {
 <table class="type09">
     <thead>
     <tr>
-        <th>번호</th>
-        <th>업체명</th>
-        <th>계좌번호</th>
-        <th>입금액</th>
-        <th>입금예정일</th>
-        <th>입금처리</th>
+        <th style="width:9%">번호</th>
+        <th style="width:37%">업체명</th>
+        <th style="width:15%">계좌번호</th>
+        <th style="width:15%">입금액</th>
+        <th style="width:12%">입금예정일</th>
+        <th style="width:12%">입금처리</th>
     </tr>
     </thead>
     <tbody>
+    <c:if test="${category != null}">
+    <tr>
+    <td></td>
+    <th colspan="5">검색 카테고리 : ${category}, 검색어 : ${word} 의 결과</th>
+    </tr>
+    </c:if>
     <c:forEach var="d" items="${ list }">
     <tr>
         <th scope="row">${d.cId}</th>

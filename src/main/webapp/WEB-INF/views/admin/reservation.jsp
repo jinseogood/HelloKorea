@@ -38,6 +38,9 @@ table.type09 {
     line-height: 1.5;
 
 }
+.searchResult{
+width:80%;
+}
 table.type09 thead th {
     padding: 10px;
     font-weight: bold;
@@ -62,7 +65,9 @@ table.type09 td {
     border-bottom: 1px solid #ccc;
 }
 
-	
+table.type09 tr:hover{
+    cursor:pointer;
+}
 	#reservationDetailTable{
 		width:500px;
 		line-height: 1.5;
@@ -132,7 +137,6 @@ table.type09 td {
                 </form>
             </div>
             
-            
             <div id="datePicker">
             <br>
             <jsp:include page="../common/datePicker.jsp"/>
@@ -142,7 +146,9 @@ table.type09 td {
             </div>
             
                 </div>
+                
                 </div>
+                
         </div>
 
 
@@ -174,24 +180,29 @@ table.type09 td {
 	});
 	
 	</script>
-	
 	<div class="tableArea" align="center">
 <table class="type09" id="reservationTable">
     <thead>
     <tr>
-        <th>예약번호</th>
-        <th>예약처</th>
-        <th>예약자</th>
-        <th>숙박일</th>
-        <th>예약일</th>
+        <th style="width:9%">예약번호</th>
+        <th style="width:40%">예약처</th>
+        <th style="width:10%">예약자</th>
+        <th style="width:20%">숙박일</th>
+        <th style="width:12%">예약일</th>
         <th></th>
         <th></th>
         <th></th>
         <th></th>
-        <th>결제상황</th>
+        <th style="width:9%">결제상황</th>
     </tr>
     </thead>
     <tbody>
+    <c:if test="${category != null}">
+    <tr>
+    <td></td>
+    <th colspan="9">검색 카테고리 : ${category}, 검색어 : ${word} 의 결과</th>
+    </tr>
+    </c:if>
     <c:forEach var="r" items="${ list }">
     <tr>
         <th scope="row">${ r.oId }</th>
@@ -323,6 +334,7 @@ table.type09 td {
 			$("#reservationTable tr").eq(<%=i%>).children().eq(8).hide();
 			<% } %>
 			$("#reservationTable tr").click(function(){
+				if($(this).children().eq(5).text()!=''){
 				$("#oId").text($(this).children().eq(0).text());
 				$("#cName").text($(this).children().eq(1).text());
 				$("#paName").text($(this).children().eq(2).text());
@@ -334,6 +346,7 @@ table.type09 td {
 				$("#r_price").text($(this).children().eq(8).text() + "원");
 				$("#pdType").text($(this).children().eq(9).text());
 				$(this).attr({"data-toggle":"modal", "data-target":"#reservationDetailModal"});
+				}
 			});
 		});
 	</script>

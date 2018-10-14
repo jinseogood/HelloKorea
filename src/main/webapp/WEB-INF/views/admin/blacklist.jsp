@@ -156,15 +156,21 @@ table.type09 td {
 <table class="type09">
     <thead>
     <tr>
-        <th>블랙리스트 번호</th>
-        <th>신고대상</th>
-        <th>신고사유</th>
-        <th>등록일자</th>
-        <th>등록기간</th>
-        <th>해지일자</th>
+        <th style="width:10%">번호</th>
+        <th style="width:10%">신고대상</th>
+        <th style="width:44%">신고사유</th>
+        <th style="width:13%">등록일자</th>
+        <th style="width:10%">등록기간</th>
+        <th style="width:13%">해지일자</th>
     </tr>
     </thead>
     <tbody>
+    <c:if test="${category != null}">
+    <tr>
+    <td></td>
+    <th colspan="6">검색 카테고리 : ${category}, 검색어 : ${word} 의 결과</th>
+    </tr>
+    </c:if>
      <c:forEach var="b" items="${ list }">
     <tr>
         <th scope="row">${b.bRecordId}</th>
