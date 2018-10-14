@@ -22,6 +22,7 @@ import com.kh.hello.board.Response;
 import com.kh.hello.board.model.service.BoardService;
 import com.kh.hello.board.model.vo.Board;
 import com.kh.hello.board.model.vo.Reply;
+import com.kh.hello.board.model.vo.Report;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.common.Pagination2;
@@ -46,12 +47,14 @@ public class BoardPageController {
 	}
 	
 	@RequestMapping("reportWrite.bo")
-	public String reportWrite(Model model, @RequestParam int m_id, @RequestParam int ref_id){
+	public String reportWrite(Model model, @RequestParam String m_id, @RequestParam String ref_id){
 		
 		System.out.println("m_id : " + m_id + " ref_id : " + ref_id);
 		
 		model.addAttribute("m_id", m_id);
 		model.addAttribute("ref_id", ref_id);
+		
+		//int result = bs.insertReport(m_id, ref_id);
 		
 		return "common/reportWrite";
 	}
@@ -295,6 +298,24 @@ public class BoardPageController {
 		model.addAttribute("listRAnswer", listRAnswer);
 		
 		return "board/reviewDetail";
+	}
+	
+	@RequestMapping(value="insertReport.bo")
+	public ModelAndView insertReport(Model model, HttpServletRequest request, @RequestParam String reason, @RequestParam int r_target,
+						@RequestParam int ref_id, ModelAndView mv){
+		mv.setViewName("jsonView");
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		Report report = new Report();
+		report.setM_id(m.getmId());
+		report.setR_target(r_target);
+		report.setReason(reason);
+		report.setRef_id(ref_id);
+		
+		mv.addObject("msg", "성공");
+		
+		System.out.println(report);
+		
+		return mv;
 	}
 
 }

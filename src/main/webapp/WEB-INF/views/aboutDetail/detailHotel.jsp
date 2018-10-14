@@ -777,7 +777,7 @@
 							output += "<span class='ReviewUpDate' style = 'padding-top:5px'>";
 							output += Q[i].modify_date+"</span>";
 							output += "<span>&nbsp;|&nbsp;</span>";
-							output += "<span class='ReviewUpDate' style = 'padding-top:5px'><i class='fa fa-thumbs-o-up' style = 'font-size:14px; padding-top:5px'>&nbsp;"+Q[i].likey+"</i><i class='fa fa-flag' style = 'font-size:14px; padding-top:5px; float:right; cursor:pointer'><a onclick='reportWrite()'> 신고하기</a></i></span>";
+							output += "<span class='ReviewUpDate' style = 'padding-top:5px'><i class='fa fa-thumbs-o-up' style = 'font-size:14px; padding-top:5px'>&nbsp;"+Q[i].likey+"</i><i class='fa fa-flag' style = 'font-size:14px; padding-top:5px; float:right; cursor:pointer'><a onclick='reportWrite(this);'> 신고하기</a></i></span>";
 							output += "</div></div>";
 							output += "<div style = 'margin-top:5px'><button type='button' class='btn btn-secondary' onclick = 'QA("+Q[i].bid+");'>답변</button>&nbsp;<button type='button' class='btn btn-secondary' onclick = 'allQA("+Q[i].bid+");'>모든 답변보기</button></div>";
 							output += "<div id = 'allQAV"+Q[i].bid+"' class = 'QAV' style = 'padding-top:5px;''>";
@@ -1112,9 +1112,13 @@
 			}
 		}
  	  
-    	function reportWrite(element){
-    		var m_id = #(element).parent().children().eq(2);
-    		var ref_id = #(element).parent().children().eq(3);
+		function reportWrite(element){
+    		var m_id = $(element).parent().parent().children().eq(2).val();
+    		var ref_id = $(element).parent().parent().children().eq(3).val();
+    		
+    		console.log(m_id);
+    		console.log(ref_id);
+
     		window.open('reportWrite.bo?m_id='+m_id+'&ref_id='+ref_id, 'reportWrite', 'height=380, width=450, top=80, left=400 resizable=none, scrollbars=no')
    		}
     	

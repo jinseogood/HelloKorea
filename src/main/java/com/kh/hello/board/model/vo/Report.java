@@ -5,14 +5,14 @@ public class Report implements java.io.Serializable{
 	private String reason;
 	private String r_date;
 	private int r_level;
-	private String m_id;
+	private int m_id;
 	private int r_target;
 	private int ref_id;
 	private String result;
 	
 	public Report(){}
 
-	public Report(int r_record_id, String reason, String r_date, int r_level, String m_id, int r_target, int ref_id,
+	public Report(int r_record_id, String reason, String r_date, int r_level, int m_id, int r_target, int ref_id,
 			String result) {
 		super();
 		this.r_record_id = r_record_id;
@@ -57,11 +57,11 @@ public class Report implements java.io.Serializable{
 		this.r_level = r_level;
 	}
 
-	public String getM_id() {
+	public int getM_id() {
 		return m_id;
 	}
 
-	public void setM_id(String m_id) {
+	public void setM_id(int m_id) {
 		this.m_id = m_id;
 	}
 
