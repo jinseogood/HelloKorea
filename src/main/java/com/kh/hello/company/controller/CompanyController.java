@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.hello.company.model.service.CompanyService;
 import com.kh.hello.company.model.vo.Company2;
+import com.kh.hello.company.model.vo.Reservation2;
 import com.kh.hello.company.model.vo.Room2;
+import com.kh.hello.member.model.vo.Member;
 
 @Controller
 public class CompanyController {
@@ -166,6 +168,29 @@ public class CompanyController {
 		
 		ArrayList<Room2> list = cs.selectRoomList(roomList);
 		response.getWriter().print(mapper.writeValueAsString(list));
+	}
+	
+	
+	@RequestMapping(value="reservationRoom.com")
+	public String reservationRoom(HttpServletRequest request, HttpServletResponse response, @RequestParam int rid, @RequestParam int price, @RequestParam String rType, @RequestParam int count, @RequestParam int limit) throws IOException{
+		String user = String.valueOf(((Member)(request.getSession().getAttribute("loginUser"))).getmId());
+		int userNo = Integer.parseInt(user);
+		System.out.println("resrvation rid : " + rid);
+		System.out.println("reservation price : " + price);
+		System.out.println("reservation rType : " + rType);
+		System.out.println("reservation count : " + count);
+		System.out.println("reservation limit : " + limit);
+		System.out.println("reservation user : " + userNo);
+		
+		Reservation2 reservation = new Reservation2();
+		reservation.setPaId(userNo);
+		reservation.setPeople(limit);
+		reservation.setoRcount(count);
+		reservation.setRid(rid);
+		
+		reservation = cs.insertReservation(reservation);
+		
+		return "payment/detailPayment";
 	}
 	
 	

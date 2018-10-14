@@ -20,5 +20,6 @@
    		JOIN COMPANY C ON (R.C_ID = C.C_ID)
    		WHERE C.C_ID = #{cid}
    </select>
+   
 	
 </mapper>

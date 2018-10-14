@@ -31,6 +31,7 @@
 	.QAV{display:none;}
 	.allQAV{display:none;}
 	.selectRoom{width:150px; height:45px;}
+	.selectPeople{width:150px; height:45px;}
 </style>
 </head>
 <body>
@@ -189,6 +190,9 @@
 				});
 			}
 			
+			var rid = 0;
+			var price = 0;
+			var rType = "";
 			function detailRoomInfo(){
 				console.log("detailRoomInfo : " + contenttypeid);
 				console.log("detailRoomInfo : " + contentid);
@@ -203,9 +207,6 @@
 						var output = "";
 						var roomInfo = $("#roomInfoArea");
 						roomInfo.html("");
-						var rid = 0;
-						var price = 0;
-						var rType = "";
 						$.ajax({
 							url:"detailRoom.com",
 							type:"GET",
@@ -219,12 +220,16 @@
 									price = result[i].rPrice;
 									rType = result[i].rType;
 									output = "";
-									output += "<tr>";
+									output += "<tr class='detailRow'>";
 									if(myData[i].roomimg1 == null){
-										output += "<td class='detailContent'><img src='${contextPath}/resources/img/noImage.gif' class='roomIngTd' /></td>";
+										output += "<td class='detailContent detailContent1'><img src='${contextPath}/resources/img/noImage.gif' class='roomIngTd' />";
 									}else{ 
-									output += "<td class='detailContent'><img src="+myData[i].roomimg1+" class='roomImgTd' /></td>";
+										output += "<td class='detailContent detailContent1'><img src="+myData[i].roomimg1+" class='roomImgTd' />";
 									}
+									output += "<input type='text' class='roomRid' name='roomRid' value="+rid+">";
+									output += "<input type='text' class='roomPrice' name='roomPrice' value="+price+">";
+									output += "<input type='text' class='roomType' name='roomType' value="+rType+">";
+									output += "</td>";
 									output += "<td>";
 									output += "<h4><b>객실명 : "+result[i].rType+"</b></h4>";
 									output += "ㆍ 객실크기 : "+myData[i].roomsize1+" 평<br>";
@@ -247,11 +252,14 @@
 									//output += "ㆍ 비수기 주중최소 : "+myData[i].roomoffseasonminfee1+" (성수기 : "+myData[i].roompeakseasonminfee1+")<br>";
 									//output += "ㆍ 비수기 주말최소 : "+myData[i].roomoffseasonminfee2+" (성수기 : "+myData[i].roompeakseasonminfee2+")<br>";
 									output += "</td>";
-									output += "<td class='detailContent'>";
-									output += "<input type='hidden' name='roomRid' value="+rid+">";
-									output += "<input type='hidden' name='roomPrice' value="+price+">";
-									output += "<input type='hidden' name='rType' value="+rType+">";
-									output += "<select class='selectRoom' name='selectRoom'>";
+									output += "<td class='detailContent detailCount'>";
+									output += "인　원　<select class='selectPeople' id='selectPeople"+rid+"'>";
+									output += "<option>선택</option>";
+									for(var p = 1; p < result[i].rLimit+1; p++){
+										output += "<option value="+p+">"+p+"</option>";
+									}
+									output += "</select><br>";
+									output += "객실수　<select class='selectRoom' id='selectRoom"+rid+"' name='selectRoom'>";
 									output += "<option>선택</option>";
 									if(result[i].rCount > 1){
 										for(var r = 0; r < result[i].rCount; r++){
@@ -260,14 +268,15 @@
 									}else{
 										output += "<option value='1'>1</option>";
 									}
-									output += "</select>"
+									output += "</select>";
+									output += "<br><br><br><br><br><br><br>";
+									output += "<input type='button' class='btn' onclick='payment("+rid+","+price+","+'rType'+")' value='결제하기' style='background-color:#00aef0; color:white; width:200px; height:45px;'/>";
 									output += "</td>";
 									output += "</tr>"
 									document.getElementById("roomInfoArea").innerHTML += output;
 								}
 							},error:function(result){console.log(data);}
 						});
-						
 					},
 					error:function(data){
 						console.log(data);
@@ -275,6 +284,33 @@
 				});//output += "ㆍ ";
 			}
 			
+			function payment(rid, price, rType){
+				console.log("paymentrid : " + rid);
+				console.log("paymentprice : " + price);
+				console.log("paymentrType : " + rType);
+				var count = $("#selectRoom"+rid).val();
+				var limit = $("#selectPeople"+rid).val();
+				console.log(count);
+				console.log(limit);
+				
+				location.href="${contextPath}/reservationRoom.com?rid="+rid+"&price="+price+"&rType="+rType+"&count="+count+"&limit="+limit;
+			}
+			
+			/* function payment(){
+	      		var JsonArrays = new Array();
+	      		var rowNum = ($(".detailRow").length);
+	      		console.log("rowNum : " + rowNum);
+	      		for(var i = 0; i < rowNum; i++){
+	      			
+	      			var param = {
+	      				"rid" : $("tbody").find("tr").eq(i).find("td .detailContent1").find("input .roomRid").val(),
+	      				"rPrice" : $("tbody").find("tr").eq(i).find("td .detailContent1").find("input .roomPrice").val(),
+	      				"rType" : $("tbody").find("tr").eq(i).find("td .detailContent1").find("input .roomType").val(),
+	      				"count" : $("tbody").find("tr").eq(i).find("td .detailCount").find("select option").val()
+	      			}
+	      		}
+	      		console.log("param : " + param);
+	      	} */
 			$(function(){
 				detailHotelInfo();
 				detailHotelImage();
@@ -283,7 +319,7 @@
 				console.log("cid : "+ cid);
 				
 				
-				$("#paymentBtn").click(function(){
+				/* $("#paymentBtn").click(function(){
 					var values = [];
 					var value ;
 					$(".selectRoom").each(function(){
@@ -291,7 +327,7 @@
 						values += value;
 					});
 					console.log(values);
-				});
+				}); */
 				/* $('.date').datetimepicker({
 	            	format: 'MM/DD/YYYY'
 	            });
@@ -367,11 +403,12 @@
 		  	// Google Map
 		  	//loadGoogleMap();
 		  })(jQuery);
+		
 	</script>
 	
 	<section class="container tm-home-section-1" id="more">
 		<div class="col-lg-12" >
-			<table border="1">
+			<table border="1" class="infoTable">
 				<thead>
 					<tr>
 						<th class="detailHead">객실유형</th>
@@ -381,11 +418,11 @@
 					</tr>
 				</thead>
 				<tbody id="roomInfoArea">
-					<tr>
+					<tr class="detailRow">
+						<td class="detailContent detailContent1">정보오오오오오오오오</td>
 						<td class="detailContent">정보오오오오오오오오</td>
 						<td class="detailContent">정보오오오오오오오오</td>
-						<td class="detailContent">정보오오오오오오오오</td>
-						<td class="detailContent">정보오오오오오오오오</td>
+						<td class="detailContent detailCount">정보오오오오오오오오</td>
 					</tr>
 					
 				</tbody>
@@ -412,7 +449,9 @@
 							</div>
 						</div>
 						</td>
-						<td class="detailBottom"><input type="button" class="btn" id="paymentBtn" value="결제하기" style="background-color:#00aef0; color:white; width:200px; height:45px;"/></td>
+						<td class="detailBottom">
+						<!-- <input type="button" class="btn" onclick="payment();" id="paymentBtn" value="결제하기" style="background-color:#00aef0; color:white; width:200px; height:45px;"/> -->
+						</td>
 					</tr>
 				</tfoot>
 			</table>
