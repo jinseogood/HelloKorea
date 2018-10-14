@@ -14,10 +14,11 @@ public class Reservation2 implements Serializable{
 	private int oRcount;			//객실수
 	private int rid;				//객실아이디
 	private int paId;				//결제아이디
+	private String roomName;
 	
 	public Reservation2(){}
 
-	public Reservation2(int oid, String rSdate, String rEdate, int people, int oRcount, int rid, int paId) {
+	public Reservation2(int oid, String rSdate, String rEdate, int people, int oRcount, int rid, int paId, String roomName) {
 		super();
 		this.oid = oid;
 		this.rSdate = rSdate;
@@ -26,6 +27,7 @@ public class Reservation2 implements Serializable{
 		this.oRcount = oRcount;
 		this.rid = rid;
 		this.paId = paId;
+		this.roomName = roomName;
 	}
 
 	public int getOid() {
@@ -84,11 +86,20 @@ public class Reservation2 implements Serializable{
 		this.paId = paId;
 	}
 
+	public String getRoomName() {
+		return roomName;
+	}
+
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
+	}
+
 	@Override
 	public String toString() {
-		return "Reservation [oid=" + oid + ", rSdate=" + rSdate + ", rEdate=" + rEdate + ", people=" + people
-				+ ", oRcount=" + oRcount + ", rid=" + rid + ", paId=" + paId + "]";
+		return "Reservation2 [oid=" + oid + ", rSdate=" + rSdate + ", rEdate=" + rEdate + ", people=" + people
+				+ ", oRcount=" + oRcount + ", rid=" + rid + ", paId=" + paId + ", roomName=" + roomName + "]";
 	}
+
 	
 	
 

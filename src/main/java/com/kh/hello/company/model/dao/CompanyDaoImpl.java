@@ -29,9 +29,22 @@ public class CompanyDaoImpl implements CompanyDao {
 		return sqlSession.insert("Reservation2.insertReservation", reservation);
 	}
 
+//	객실 insert 후 currval 구해오기.
 	@Override
 	public int selectCurrval(SqlSessionTemplate sqlSession, Reservation2 reservation) {
 		return sqlSession.selectOne("Reservation2.selectOneCurrval", reservation);
+	}
+
+//	currval 구해온 후 객실정보 객체에 담기.
+	@Override
+	public Reservation2 selectOneReservation(SqlSessionTemplate sqlSession, Reservation2 reservation) {
+		return sqlSession.selectOne("Reservation2.selectOneReservation", reservation);
+	}
+
+//	이름순 정렬
+	@Override
+	public ArrayList<Company2> selectOrderByName(SqlSessionTemplate sqlSession, Company2 cp) {
+		return (ArrayList)sqlSession.selectList("Company2.selectListOrderName", cp);
 	}
 
 

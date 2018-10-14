@@ -485,9 +485,30 @@
 		</div>
 	</div>
 	
+	<input type="hidden" id="oid" value="${reservation.oid}">
+	<input type="hidden" id="sdate" value="${reservation.rSdate}">
+	<input type="hidden" id="edate" value="${reservation.rEdate}">
+	<input type="hidden" id="people" value="${reservation.people}">
+	<input type="hidden" id="orCount" value="${reservation.oRcount}">
+	<input type="hidden" id="rid" value="${reservation.roomName}">
+	<input type="hidden" id="paId" value="${reservation.paId}">
 	<jsp:include page="../common/footer.jsp"/>
 	
 	<script>
+	var oid = $("#oid").val();
+	var startdate = $("#sdate").val();
+	var enddate = $("#edate").val();
+	var people = $("#people").val();
+	var oRcount = $("#orCount").val();
+	var rid = $("#rid").val();
+	var paId = $("#paId").val();
+	console.log("oid : " + oid);
+	console.log("startDate : " + startdate);
+	console.log("endDate : " + enddate);
+	console.log("people : " + people);
+	console.log("oRcount : " + oRcount);
+	console.log("rid : " + rid);
+	console.log("paId : " + paId);
 		$(function(){
 			
 			$("#fnameWTEXT").hide();
