@@ -86,8 +86,8 @@ th, td {
 						<div class="form-group">
 							<textarea id="contact_message" class="form-control" rows="6" placeholder="신고 내용을 입력하세요" required></textarea>
 						</div> -->
-						<form action = "insertReport.bo" method = "post">
-							<select name = "reportReason">
+						<!-- <form action = "insertReport.bo" method = "post"> -->
+							<select id = "reason" name = "reason">
 								<option value = "집단간 싸움 유발(학과, 직업간 서열/비교, 지역감정, 종교 등)">집단간 싸움 유발(학과, 직업간 서열/비교, 지역감정, 종교 등)</option>
 								<option value = "성 관련 순환주제(양성평등, 군대, 혼전순결, 외모/몸매 등)">성 관련 순환주제(양성평등, 군대, 혼전순결, 외모/몸매 등)</option>
 								<option value = "욕설, 비속어, 인신공격(심한 불쾌감 유발)">욕설, 비속어, 인신공격(심한 불쾌감 유발)</option>
@@ -95,11 +95,13 @@ th, td {
 								<option value = "낚시성, 도배, 무의미(무의미한 짧은 글 포함)">낚시성, 도배, 무의미(무의미한 짧은 글 포함)</option>
 								<option value = "기타(악성코드, 홍보성, 사생활침해 등)">기타(악성코드, 홍보성, 사생활침해 등)</option>
 							</select>
+							<input type = "hidden" id = "r_target" name = "r_target" value = "${ m_id }">
+							<input type = "hidden" id = "ref_id" name = "ref_id" value = "${ ref_id }">
 							<br><br>
 							<div class="form-group">
-								<button class="tm-submit-btn" type="submit" name="submit">신고하기</button> 
+								<button class="tm-submit-btn" type="button" onclick = "report();">신고하기</button> 
 							</div>        
-						</form>       
+						<!-- </form>   -->     
 					</div>
 </div>
 </div>
@@ -111,6 +113,44 @@ th, td {
                                         function recieveMsg(){
                                         	location.href="recieveMessageView";
                                         }
+                                        function report(){
+                                        	var reason = $("#reason").val();
+                                        	var r_target = $("#r_target").val();
+                                        	var ref_id = $("#ref_id").val();
+                                        	console.log(reason);
+                                        	console.log(r_target);
+                                        	console.log(ref_id);
+                                        	
+                                        	$.ajax({
+                                        		url:"insertReport.bo",
+                                        		type:"post",
+                                        		data:{reason:reason, r_target:r_target, ref_id:ref_id},
+                                        		dataType:"json",
+                                        		success:function(data){
+                                        			alert("신고완료");
+                                        			console.log(data.msg);
+                                        			window.close();
+                                        		},error:function(data){
+                                        			
+                                        		}
+                                        	})
+                                        	
+                                        	//location.href = "insertReport.bo?reason="+reason+"&r_target="+r_target+"&ref_id="+ref_id;
+                                        }
+                                        $.ajax({
+                        					url:"insertA.bo",
+                        					type:"post",
+                        					data:{text:a, bid:b},
+                        					dataType:"json",
+                        					success:function(data){
+                        						QA(b);
+                        						$(element).parent().children().eq(1).val("");
+                        						//location.href = "https://127.0.0.1:8443/hello/detailHotel?contentid=142861&contenttypeid=32#";
+                        						
+                        					},error:function(data){
+                        						console.log(data);
+                        					}
+                        			})
                                    </script>
 </body>
 </html>
