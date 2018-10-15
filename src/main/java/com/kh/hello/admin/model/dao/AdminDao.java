@@ -115,9 +115,9 @@ public interface AdminDao {
 	int selectUnapprovedCompanyCount(SqlSessionTemplate sqlSession);
 	ArrayList<CompanyDetails> selectExpirationList(SqlSessionTemplate sqlSession);
 	
-	ArrayList<Blacklist> selectTerminateList(SqlSessionTemplate sqlSession);
-	int insertTerminateHistroy(SqlSessionTemplate sqlSession, ArrayList<Blacklist> b);
-	int updateMemberStatus2(SqlSessionTemplate sqlSession, ArrayList<Blacklist> b);
+	
+	int updateTerminateHistroy(SqlSessionTemplate sqlSession);
+	int updateMemberStatus2(SqlSessionTemplate sqlSession);
 	
 	
 	

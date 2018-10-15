@@ -508,12 +508,10 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int terminateBlackList() {
 		int result = 0;
-		//블랙리스트 해지 대상자 검색
-		ArrayList<Blacklist> b = ad.selectTerminateList(sqlSession);
 		//블랙리스트 이력에 해지이력 넣기
-		int result1 = ad.insertTerminateHistroy(sqlSession, b);
+		int result1 = ad.updateTerminateHistroy(sqlSession);
 		//멤버 상태 업데이트
-		int result2 = ad.updateMemberStatus2(sqlSession, b);
+		int result2 = ad.updateMemberStatus2(sqlSession);
 		if(result1 > 0 && result2 > 0){
 			result = 1;
 		}

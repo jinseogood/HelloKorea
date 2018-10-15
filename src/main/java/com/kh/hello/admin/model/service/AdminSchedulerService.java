@@ -19,15 +19,13 @@ public class AdminSchedulerService {
 	public int terminateBlacklist() {
 		int result = 0;
 		AdminSchedulerDao asd = new AdminSchedulerDao();
-		SqlSession session = getSqlSession();
+		SqlSession sqlSession = getSqlSession();
 		//블랙리스트 해지 대상자 검색
-		ArrayList<Blacklist> b = asd.selectTerminateList(session);
-		System.out.println(b);
 		//블랙리스트 이력에 해지이력 넣기
-		int result1 = asd.insertTerminateHistroy(session, b);
+		int result1 = asd.updateTerminateHistroy(sqlSession);
 		System.out.println(result1);
 		//멤버 상태 업데이트
-		int result2 = asd.updateMemberStatus2(session, b);
+		int result2 = asd.updateMemberStatus2(sqlSession);
 		System.out.println(result2);
 		if(result1 > 0 && result2 > 0){
 			result = 1;
@@ -42,7 +40,6 @@ public class AdminSchedulerService {
 		try {
 			InputStream stream = Resources.getResourceAsStream("D:\\git\\HelloKorea\\src\\main\\resources\\mybatis-config2.xml");
 			
-//			openSession(false) : autocommit에 대한 설정.
 			session = new SqlSessionFactoryBuilder().build(stream).openSession(false);
 			System.out.println(session);
 			

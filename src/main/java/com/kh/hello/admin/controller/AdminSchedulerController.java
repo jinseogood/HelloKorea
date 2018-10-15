@@ -10,10 +10,10 @@ import com.kh.hello.admin.model.service.AdminSchedulerService;
 @Controller
 public class AdminSchedulerController {
 	
-	/*@Scheduled(cron="30 05 18 * * ?") 
+	@Scheduled(cron="30 13 15 * * ?") 
 	 public void terminateBlacklist(){
 		AdminSchedulerService ass = new AdminSchedulerService();
 		int result = ass.terminateBlacklist();
 	    System.out.println("controller" +new Date());
-	 }*/
+	 }
 }
