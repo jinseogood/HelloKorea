@@ -177,16 +177,19 @@ body{ margin:50px 0px; }
             			<div style = "height:38px">
             			<button type="button" style = "float:left" class="btn btn-secondary" onclick = "insertA(this);">확인</button>
             			</div>
-            			<div style = "float:left">
+            			<div style = "float:left; width:100%">
          				<c:if test="${ listRAnswer.size() > 0 }">
          					<c:forEach var = "list" items = "${ listRAnswer }">
          						<div class="summary" style = "padding-top:10px; font-size:20px; text-align:left">
             						${ list.content }
             					</div>
+            					<div style = "text-align:left">
             				<span class="ReviewUpDate" style = "padding-top:5px">
             					${ list.modify_date }
             				</span>
             				<span>|</span> ${ list.bid }님의 답변
+            				<i class="fa fa-flag" style = "font-size:14px; padding-top:5px; float:right; cursor:pointer"><input type = "hidden" value = "${ list.m_id }"><input type = "hidden" value = "${ list.reply_id }"><a onclick="reportWriteA(this)"> 신고하기</a></i>
+            				</div>
          					</c:forEach>
          				</c:if>
          				</div>
@@ -204,6 +207,7 @@ body{ margin:50px 0px; }
 <script>
 
 function insertA(element){
+	if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')}){
 	var a = $(element).parent().parent().children().eq(1).val();
 	var b = $(element).parent().parent().children().eq(0).val();
 	
@@ -221,14 +225,30 @@ function insertA(element){
 				console.log(data);
 			}
 	})
+	}else{
+		alert('로그인이 필요한 서비스입니다.');
+	}
 }
 
 function reportWrite(element){
 	var m_id = $(element).parent().parent().children().eq(2).val();
 	var ref_id = $(element).parent().parent().children().eq(3).val();
+	var r_level = 0;
 	
 	if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')})
-		window.open('reportWrite.bo?m_id='+m_id+'&ref_id='+ref_id, 'reportWrite', 'height=380, width=450, top=80, left=400 resizable=none, scrollbars=no');
+		window.open('reportWrite.bo?m_id='+m_id+'&ref_id='+ref_id+'&r_level='+r_level, 'reportWrite', 'height=380, width=450, top=80, left=400 resizable=none, scrollbars=no');
+	else{
+		alert("로그인이 필요한 서비스 입니다.");
+	}
+}
+
+function reportWriteA(element){
+	var m_id = $(element).parent().children().eq(0).val();
+	var ref_id = $(element).parent().children().eq(1).val();
+	var r_level = 1;
+	
+	if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')})
+		window.open('reportWrite.bo?m_id='+m_id+'&ref_id='+ref_id+'&r_level='+r_level, 'reportWrite', 'height=380, width=450, top=80, left=400 resizable=none, scrollbars=no');
 	else{
 		alert("로그인이 필요한 서비스 입니다.");
 	}
