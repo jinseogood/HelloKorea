@@ -199,8 +199,7 @@ table.type09 tr:hover{
     <tbody>
     <c:if test="${category != null}">
     <tr>
-    <td></td>
-    <th colspan="9">검색 카테고리 : ${category}, 검색어 : ${word} 의 결과</th>
+    <th colspan="10">검색 카테고리 : ${category}, 검색어 : ${word} 의 결과</th>
     </tr>
     </c:if>
     <c:forEach var="r" items="${ list }">

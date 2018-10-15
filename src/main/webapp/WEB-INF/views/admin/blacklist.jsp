@@ -167,8 +167,7 @@ table.type09 td {
     <tbody>
     <c:if test="${category != null}">
     <tr>
-    <td></td>
-    <th colspan="6">검색 카테고리 : ${category}, 검색어 : ${word} 의 결과</th>
+    <th colspan="7">검색 카테고리 : ${category}, 검색어 : ${word} 의 결과</th>
     </tr>
     </c:if>
      <c:forEach var="b" items="${ list }">

@@ -17,6 +17,7 @@ public interface MessageService {
 	int sendMessage(Message m);
 	int insertQuestion(Message m);
 	Message selectSendMessageDetail(String msgId);
+	ArrayList<Message> checkNewMessage(String mId);
 
 
 }

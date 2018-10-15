@@ -76,5 +76,11 @@ public class MessageServiceImpl implements MessageService{
 		return md.selectSendMessageDetail(sqlSession, msgId);
 	}
 
+	//메뉴바 새메세지 여부
+	@Override
+	public ArrayList<Message> checkNewMessage(String mId) {
+		return md.checkNewMessage(sqlSession, mId);
+	}
+
 
 }
