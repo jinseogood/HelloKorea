@@ -1,6 +1,7 @@
 package com.kh.hello.company.model.vo;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import org.springframework.stereotype.Repository;
 
@@ -8,17 +9,18 @@ import org.springframework.stereotype.Repository;
 public class Reservation2 implements Serializable{
 	
 	private int oid;				//주문아이디
-	private String rSdate;			//예약시작일
-	private String rEdate;			//예약종료일
+	private Date rSdate;			//예약시작일
+	private Date rEdate;			//예약종료일
 	private int people;				//인원
 	private int oRcount;			//객실수
 	private int rid;				//객실아이디
 	private int paId;				//결제아이디
-	private String roomName;
+	private String roomName;		//객실이름
+	private String cAddress;		//업체주소
 	
 	public Reservation2(){}
 
-	public Reservation2(int oid, String rSdate, String rEdate, int people, int oRcount, int rid, int paId, String roomName) {
+	public Reservation2(int oid, Date rSdate, Date rEdate, int people, int oRcount, int rid, int paId, String roomName, String cAddress) {
 		super();
 		this.oid = oid;
 		this.rSdate = rSdate;
@@ -28,6 +30,7 @@ public class Reservation2 implements Serializable{
 		this.rid = rid;
 		this.paId = paId;
 		this.roomName = roomName;
+		this.cAddress = cAddress;
 	}
 
 	public int getOid() {
@@ -38,19 +41,19 @@ public class Reservation2 implements Serializable{
 		this.oid = oid;
 	}
 
-	public String getrSdate() {
+	public Date getrSdate() {
 		return rSdate;
 	}
 
-	public void setrSdate(String rSdate) {
+	public void setrSdate(Date rSdate) {
 		this.rSdate = rSdate;
 	}
 
-	public String getrEdate() {
+	public Date getrEdate() {
 		return rEdate;
 	}
 
-	public void setrEdate(String rEdate) {
+	public void setrEdate(Date rEdate) {
 		this.rEdate = rEdate;
 	}
 
@@ -94,11 +97,21 @@ public class Reservation2 implements Serializable{
 		this.roomName = roomName;
 	}
 
+	public String getcAddress() {
+		return cAddress;
+	}
+
+	public void setcAddress(String cAddress) {
+		this.cAddress = cAddress;
+	}
+
 	@Override
 	public String toString() {
 		return "Reservation2 [oid=" + oid + ", rSdate=" + rSdate + ", rEdate=" + rEdate + ", people=" + people
-				+ ", oRcount=" + oRcount + ", rid=" + rid + ", paId=" + paId + ", roomName=" + roomName + "]";
+				+ ", oRcount=" + oRcount + ", rid=" + rid + ", paId=" + paId + ", roomName=" + roomName + ", cAddress="
+				+ cAddress + "]";
 	}
+
 
 	
 	

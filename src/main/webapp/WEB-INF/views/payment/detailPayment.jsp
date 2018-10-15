@@ -492,6 +492,8 @@
 	<input type="hidden" id="orCount" value="${reservation.oRcount}">
 	<input type="hidden" id="rid" value="${reservation.roomName}">
 	<input type="hidden" id="paId" value="${reservation.paId}">
+	<input type="hidden" id="price" value="${param.price}">
+	<input type="hidden" id="address" value="${reservation.cAddress }">
 	<jsp:include page="../common/footer.jsp"/>
 	
 	<script>
@@ -502,6 +504,10 @@
 	var oRcount = $("#orCount").val();
 	var rid = $("#rid").val();
 	var paId = $("#paId").val();
+	var price = $("#price").val();
+	var address = $("#address").val();
+	console.log("address : " + address);
+	console.log("price : " + price);
 	console.log("oid : " + oid);
 	console.log("startDate : " + startdate);
 	console.log("endDate : " + enddate);
@@ -509,6 +515,7 @@
 	console.log("oRcount : " + oRcount);
 	console.log("rid : " + rid);
 	console.log("paId : " + paId);
+	
 		$(function(){
 			
 			$("#fnameWTEXT").hide();

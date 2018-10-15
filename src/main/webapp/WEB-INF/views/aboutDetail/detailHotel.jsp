@@ -333,10 +333,6 @@
 					});
 					console.log(values);
 				}); */
-				/* $('.date').datetimepicker({
-	            	format: 'MM/DD/YYYY'
-	            });
-	            $('.date-time').datetimepicker(); */
 			});
 		/* Google map
       	------------------------------------------------*/

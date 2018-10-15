@@ -22,7 +22,7 @@
    </select>
    
    <insert id="insertOneDibsHotel" parameterType="Good">
-   	INSERT INTO GOOD VALUES(SEQ_L_ID.NEXTVAL, '숙박', #{originId}, NULL, #{mid}, NULL)
+   	INSERT INTO GOOD VALUES(SEQ_L_ID.NEXTVAL, #{lType}, #{originId}, NULL, #{mid}, #{cid})
    </insert>
    
    <delete id="deleteOneDibsHotel" parameterType="Good">

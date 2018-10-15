@@ -449,7 +449,7 @@
 							output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
 							output += "<p class='tm-home-box-3-description' id='infoTextArea'><b>주소</b> : "+data[i].cAddress+"</p>";
 							output += "<div class='tm-home-box-2-container'>";
-							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 							output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+data[i].cName+"</span></a>";
 							output += "</div></div></div>";
 							document.getElementById("viewArea").innerHTML += output;
@@ -563,8 +563,10 @@
 					}
 				});
 			} */
-			
-			function btnGood(contenttypeid, contentid){
+			</script>
+			<c:if test="${!empty sessionScope.loginUser}">
+			<script>
+			function btnGood(contenttypeid, contentid, cid){
 				console.log(contenttypeid);
 				console.log(contentid);
 				
@@ -572,14 +574,14 @@
 					$.ajax({
 						url:"dibsHotel.good",
 						type:"GET",
-						data:{contenttypeid:contenttypeid, contentid:contentid},
+						data:{contenttypeid:contenttypeid, contentid:contentid, cid:cid},
 						success:function(data){
 							// 1일시, 이미 찜한 목록 => delete요청.
 							// 0일시, 새로 찜에 추가 => insert요청.
 							if(data > 0){
-								deleteDibsHotel(contentid);
+								deleteDibsHotel(contentid, cid);
 							}else{
-								insertDibsHotel(contentid);
+								insertDibsHotel(contentid, cid);
 							}
 						},
 						error:function(data){
@@ -588,12 +590,21 @@
 					});
 				}
 			}
-			
-			function insertDibsHotel(contentid){
+			</script>
+			</c:if>
+			<c:if test="${empty sessionScope.loginUser}">
+			<script>
+				function btnGood(contenttypeid, contentid, cid){
+					alert("로그인이 필요한 서비스입니다.");
+				}
+			</script>
+			</c:if>
+			<script>
+			function insertDibsHotel(contentid, cid){
 				$.ajax({
 					url:"insertDibsHotel.good",
 					type:"GET",
-					data:{contenttypeid:contenttypeid, contentid:contentid},
+					data:{contenttypeid:contenttypeid, contentid:contentid, cid:cid},
 					success:function(data){
 						if(data > 0){
 							alert("찜 목록에 추가되었습니다.");
