@@ -60,14 +60,15 @@ button {
 
 				<tr>
 					<input type="hidden" name="mId" value="${mid}" />
-					<th>NickName</th>
+					<th>닉네임</th>
 				</tr>
 				<tr>
 					<td><input type="text" name="nickname" id="nickname"></td>
+					<td><a onclick="nicknameCheck()"></a></td>
 				</tr>
 				<tr>
 
-					<th>National</th>
+					<th>국가</th>
 				</tr>
 				<tr>
 					<td><select name="national" id="national">
@@ -198,7 +199,7 @@ button {
 					
 				</tr>
 				<tr>
-					<th>Interest</th>
+					<th>관심</th>
 				</tr>
 				<tr>
 					<td><select name="interest" id="interest">
@@ -216,5 +217,33 @@ button {
 			</div>
 		</form>
 	</div>
+	<script>
+		function nicknameCheck(){
+				var nickCh = $("#nickname").val();
+				
+				$.ajax({
+					url:"nicknameCheck.me",
+					type:"post",
+					data:{
+						nickname:nickname	
+					},
+					success: function(data){
+						if(data ==0){
+							nicknameCheck();
+						}else{
+							alert("중복되는  email입니다");
+						}
+					},
+					error:function(){
+						alert("실패");
+					}
+	
+				})
+			
+			
+		}
+	
+	
+	</script>
 </body>
 </html>

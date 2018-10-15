@@ -369,7 +369,20 @@ public class MemberController {
  
     }
 	
-    
+    //닉네임중복확인
+    @RequestMapping("nicknameCheck.me")
+    public void nicknameCheck(String nickname, HttpServletResponse response){
+    	
+    	int result = ms.nicknameCheck(nickname);
+    	 ObjectMapper mapper = new ObjectMapper();
+    	 
+    	 try {
+			response.getWriter().println(mapper.writer());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
     
     
     

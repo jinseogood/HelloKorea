@@ -53,6 +53,9 @@ public interface MemberService {
 	
 	//프로필사진이 있을경우
 	Attachment selectMemberProfile1(int mId);
+	
+	//닉네임체크
+	int nicknameCheck(String nickname);
 
 	
 	

@@ -108,6 +108,13 @@ public class MemberDaoImpl implements MemberDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("Attachment.selectMemberProfile1",mId);
 	}
+	
+	//닉네임체크
+	@Override
+	public int nicknameCheck(String nickname, SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("Member.nicknameCheck",nickname);
+	}
 
 
 
