@@ -140,7 +140,7 @@
 				</tr>
 				<tr style="border-bottom:none; height:50px;">
 					<td colspan="4" style="text-align:center;">
-						<button type="button" class="btn btn-success" onclick="goMyPage();" style="margin-top:10px;">주문내역 바로가기</button>
+						<button type="button" class="btn btn-success" onclick="goMyPage();" style="margin-top:10px;">마이페이지 바로가기</button>
 						&nbsp;&nbsp;
 						<button type="button" class="btn btn-success" onclick="goProduct();" style="margin-top:10px;">상품페이지 바로가기</button>
 					</td>
@@ -153,10 +153,10 @@
 	
 	<script>
 		function goMyPage(){
-			location.href="myPageView.sell";
+			location.href="userMypage.um";
 		}
 		function goProduct(){
-			location.href="manageProduct.sell";
+			location.href="detailHotel";
 		}
 	</script>
 	
