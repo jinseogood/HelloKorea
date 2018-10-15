@@ -220,7 +220,8 @@
 							    <input type="hidden" id="msgBtn" value="${ sessionScope.loginUser.mId }">
 							    <a onclick="openMsg()"><img src="${ contextPath }/resources/img/msgIcon.png"></a>
 								<a class="logout" href="logout.me">Logout</a>
-								
+								<br>
+								<span>${ sessionScope.loginUser.nickname } 님</span>
 							</c:if>
 								<div id="google_translate_element"></div>
 				  		</div>

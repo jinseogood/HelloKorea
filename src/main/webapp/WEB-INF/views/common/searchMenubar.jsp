@@ -48,19 +48,23 @@
 				  		<div id="menuIconArea">
 				  			<c:if test="${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('admin') }">
 								<a href="myPageView.ad"><img src="${ contextPath }/resources/img/myPageIcon.png"></a>
-								<a onclick="openMsg()"><img src="${ contextPath }/resources/img/msgIcon.png"></a>
 							</c:if>
 							<c:if test="${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1') }">
-					  			<a onclick="openMsg()"><img src="${ contextPath }/resources/img/msgIcon.png"></a>
+							    <a class="myPage" href="userMypage.um">mypage(일반)</a>
 							</c:if>
-							<c:if test="${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('2') }">
-								<a onclick="openMsg()"><img src="${ contextPath }/resources/img/msgIcon.png"></a>
+							<c:if test="${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('2') }">		
 								<a href="myPageView.sell"><img src="${ contextPath }/resources/img/myPageIcon.png"></a>
 							</c:if>
 							<c:if test="${ sessionScope.loginUser == null }">
 					  			<a class="fas fa-angry" id="loginOpen" data-toggle="modal" data-target="#loginDiv">Login</a>
 							</c:if>
-								<a href="reviewWrite.bo">reviewW</a>
+							<c:if test="${! empty sessionScope.loginUser }">
+							    <input type="hidden" id="msgBtn" value="${ sessionScope.loginUser.mId }">
+							    <a onclick="openMsg()"><img src="${ contextPath }/resources/img/msgIcon.png"></a>
+								<a class="logout" href="logout.me">Logout</a>
+								<br>
+								<span>${ sessionScope.loginUser.nickname } 님</span>
+							</c:if>
 								<div id="google_translate_element"></div>
 				  		</div>
 			  		</nav>
