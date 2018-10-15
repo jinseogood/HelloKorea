@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.hello.payment.model.dao.PaymentDao;
 import com.kh.hello.payment.model.vo.PayDetail;
 import com.kh.hello.payment.model.vo.Payment;
+import com.kh.hello.seller.model.vo.SellerReservation;
 
 @Service
 public class PaymentServiceImpl implements PaymentService{
@@ -58,6 +59,12 @@ public class PaymentServiceImpl implements PaymentService{
 	@Override
 	public int updateReservation(int oId) {
 		return pd.updateReservation(oId, sqlSession);
+	}
+
+	//결제 확인 창에 보여줄 예약 정보 조회
+	@Override
+	public SellerReservation selectReservation(int paId) {
+		return pd.selectReservation(paId, sqlSession);
 	}
 
 }

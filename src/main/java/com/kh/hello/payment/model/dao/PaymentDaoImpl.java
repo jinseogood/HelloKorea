@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.hello.payment.model.vo.PayDetail;
 import com.kh.hello.payment.model.vo.Payment;
+import com.kh.hello.seller.model.vo.SellerReservation;
 
 @Repository
 public class PaymentDaoImpl implements PaymentDao{
@@ -44,6 +45,12 @@ public class PaymentDaoImpl implements PaymentDao{
 	@Override
 	public int updateReservation(int oId, SqlSessionTemplate sqlSession) {
 		return sqlSession.update("SellerReservation.updateReservation", oId);
+	}
+
+	//결제 확인 창에 보여 줄 예약 정보 조회
+	@Override
+	public SellerReservation selectReservation(int paId, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("SellerReservation.selectReservation", paId);
 	}
 
 }

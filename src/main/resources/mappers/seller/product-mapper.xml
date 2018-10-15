@@ -32,7 +32,7 @@
 		FROM COMPANY
 		JOIN COM_REGIST USING(C_ID)
 		WHERE M_ID = #{mId}
-		ORDER BY AP_DATE
+		ORDER BY CR_DATE
 	</select>
 	
 	<!-- 등록기간 검색 리스트 카운트 -->
@@ -43,7 +43,6 @@
 		WHERE M_ID = ${list.get(0)}
 		AND TO_CHAR(AP_DATE, 'YYYY-MM-DD') <![CDATA[>]]>= '${list.get(1)}'
 		AND TO_CHAR(CR_EDATE, 'YYYY-MM-DD') <![CDATA[<]]>= '${list.get(2)}'
-		ORDER BY AP_DATE
 	</select>
 	
 	<!-- 등록기간 검색 상품 조회 -->
@@ -54,7 +53,7 @@
 		WHERE M_ID = ${list.get(0)}
 		AND TO_CHAR(AP_DATE, 'YYYY-MM-DD') <![CDATA[>]]>= '${list.get(1)}'
 		AND TO_CHAR(CR_EDATE, 'YYYY-MM-DD') <![CDATA[<]]>= '${list.get(2)}'
-		ORDER BY AP_DATE
+		ORDER BY CR_DATE
 	</select>
 	
 	<!-- 검색 상품 리스트 카운트 -->
@@ -93,6 +92,7 @@
 				AND CR_STATUS = ${list.get(1).status}
 			</otherwise>
 		</choose>
+		ORDER BY CR_DATE
 	</select>
 	
 </mapper>
