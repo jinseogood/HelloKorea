@@ -1,11 +1,14 @@
 package com.kh.hello.message.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.common.Pagination;
@@ -141,6 +144,19 @@ public class MessageController {
 			return "common/errorPage";
 		}
 		
+	}
+	
+	@RequestMapping("checkNewMessage")
+	public @ResponseBody HashMap<String, Object> checkNewMessage(@RequestParam String mId, Model model){
+		ArrayList<Message> m = ms.checkNewMessage(mId);
+		HashMap<String, Object> hmap = new HashMap<String, Object>();
+		if(m.size() != 0){
+			hmap.put("newMessage", "Y");
+		}else{
+			hmap.put("newMessage", "N");
+		}
+		System.out.println(m);
+		return hmap;
 	}
 	
 }

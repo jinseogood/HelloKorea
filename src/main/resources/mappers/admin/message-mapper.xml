@@ -135,4 +135,15 @@
         VALUES (SEQ_MSG_ID.NEXTVAL, 0, #{sendId}, #{title},
                 #{content}, SYSDATE, NULL, 'Y', 'Q', NULL)
 	</insert>
+	
+	<!-- 메인 새로운 메세지 존재 여부 -->
+	<select id="selectNewMessage" parameterType="_int" resultMap="messageResultSet">
+	    SELECT MS.MSG_ID, MS.RECEIVE_ID, MS.SEND_ID, MS.TITLE, MS.CONTENT, MS.SEND_DATE, MS.READ_DATE, MS.P_DATE, M.NICKNAME 
+        FROM MESSAGE MS
+        JOIN MEMBER M
+        ON(MS.SEND_ID=M.M_ID)
+        WHERE MS.RECEIVE_ID = #{mId}
+        AND MS.STATUS = 'Y'
+        AND MS.READ_DATE IS NULL
+	</select>
 </mapper>

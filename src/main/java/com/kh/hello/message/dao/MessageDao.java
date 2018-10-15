@@ -19,5 +19,6 @@ public interface MessageDao {
 	int sendMessage(SqlSessionTemplate sqlSession, Message m);
 	int insertQuestion(SqlSessionTemplate sqlSession, Message m);
 	Message selectSendMessageDetail(SqlSessionTemplate sqlSession, String msgId);
+	ArrayList<Message> checkNewMessage(SqlSessionTemplate sqlSession, String mId);
 
 }

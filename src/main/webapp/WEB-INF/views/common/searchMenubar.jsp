@@ -25,10 +25,6 @@
 		height:80px;
 		float:right;
 	}
-	#menuIconArea img{
-		width:20px;
-		height:20px;
-	}
 </style>
 </head>
 <body>
@@ -47,23 +43,22 @@
 		            <nav class="tm-nav">
 				  		<div id="menuIconArea">
 				  			<c:if test="${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('admin') }">
-								<a href="myPageView.ad"><img src="${ contextPath }/resources/img/myPageIcon.png"></a>
+								<a href="myPageView.ad"><img src="${ contextPath }/resources/img/myPageIcon.png" style="width:35px;height:35px;"></a>
 							</c:if>
 							<c:if test="${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1') }">
-							    <a class="myPage" href="userMypage.um">mypage(일반)</a>
+							    <a class="myPage" href="userMypage.um"><img src="${ contextPath }/resources/img/myPageIcon.png" style="width:35px;height:35px;"></a>
 							</c:if>
 							<c:if test="${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('2') }">		
-								<a href="myPageView.sell"><img src="${ contextPath }/resources/img/myPageIcon.png"></a>
+								<a href="myPageView.sell"><img src="${ contextPath }/resources/img/myPageIcon.png" style="width:35px;height:35px;"></a>
 							</c:if>
 							<c:if test="${ sessionScope.loginUser == null }">
-					  			<a class="fas fa-angry" id="loginOpen" data-toggle="modal" data-target="#loginDiv">Login</a>
+					  			<a class="fas fa-angry" id="loginOpen" data-toggle="modal" data-target="#loginDiv"><img src="${ contextPath }/resources/img/loginIcon.png" style="width:32px;height:32px;margin-top:2%;"></a>
 							</c:if>
 							<c:if test="${! empty sessionScope.loginUser }">
 							    <input type="hidden" id="msgBtn" value="${ sessionScope.loginUser.mId }">
-							    <a onclick="openMsg()"><img src="${ contextPath }/resources/img/msgIcon.png"></a>
-								<a class="logout" href="logout.me">Logout</a>
-								<br>
-								<span>${ sessionScope.loginUser.nickname } 님</span>
+							    <a onclick="openMsg()" id="noMsg"><img src="${ contextPath }/resources/img/msgIcon.png" style="width:38px;height:38px;"></a>
+							    <a onclick="openMsg()" id="newMsg"><img src="${ contextPath }/resources/img/msgIcon2.png" style="width:38px;height:38px;"></a>
+								<a class="logout" href="logout.me"><img src="${ contextPath }/resources/img/logoutIcon.png" style="width:30px;height:30px;margin-left:1%;"></a>
 							</c:if>
 								<div id="google_translate_element"></div>
 				  		</div>
@@ -78,9 +73,38 @@
   	  		jQuery('.goog-logo-link').css('display', 'none');
         	jQuery('.goog-te-gadget').css('font-size', '0');
   		}
+  		
+  		//메세지창 열기
   		function openMsg(){
-  	    	window.open('recieveMessageView', 'Hello', 'width=480px, height=580px, top=80px, left=400px');
+  			var mId = $("#msgBtn").val(); 
+  	    	window.open('receiveMessageView?mId='+mId, 'Hello', 'width=480px, height=580px, top=80px, left=400px');
   	    }
+  		
+  	//메세지 알림 이미지
+		$(function(){
+			$("#newMsg").hide();
+			$("#noMsg").hide();
+			var mId = $("#msgBtn").val(); 
+			
+			$.ajax({
+				url:"checkNewMessage",
+				type:"post",
+				data:{mId:mId},
+				success:function(data){
+					console.log(data);
+					if(data.newMessage == 'Y'){
+						$("#newMsg").show();
+						$("#noMsg").hide();
+					}else{
+						$("#newMsg").hide();
+						$("#noMsg").show();
+					}
+				},
+				errror:function(){
+					console.log("에러");	
+				}
+			});
+		});
   	</script>
 
 </body>

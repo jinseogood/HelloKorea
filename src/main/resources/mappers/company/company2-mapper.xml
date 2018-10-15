@@ -33,5 +33,41 @@
    	</if>
    	ORDER BY C_NAME
    </select>
+   
+   <!-- 가격대 1번 정렬 -->
+   <select id="selectListOrderMoney1" resultMap="company2ResultSet">
+   	SELECT DISTINCT C.C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, M_ID
+   	FROM COMPANY C
+   	JOIN ROOM R ON (C.C_ID = R.C_ID)
+   	WHERE R_PRICE BETWEEN 1000 AND 9900
+   	AND C_ADDRESS LIKE '%' || #{areaName} || '%'
+   	AND C_ADDRESS LIKE '%' || #{sigunguName} || '%'
+   	ORDER BY C_NAME
+   </select>
+   
+   <!-- 가격대 2번 정렬 -->
+    <select id="selectListOrderMoney2" resultMap="company2ResultSet">
+   	SELECT DISTINCT C.C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, M_ID
+   	FROM COMPANY C
+   	JOIN ROOM R ON (C.C_ID = R.C_ID)
+   	WHERE R_PRICE BETWEEN 10000 AND 99000
+   	AND C_ADDRESS LIKE '%' || #{areaName} || '%'
+   	AND C_ADDRESS LIKE '%' || #{sigunguName} || '%'
+   	ORDER BY C_NAME
+   </select>
+   
+   <!-- 가격대 3번 정렬 -->
+   <select id="selectListOrderMoney3" resultMap="company2ResultSet">
+   	SELECT DISTINCT C.C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, M_ID
+   	FROM COMPANY C
+   	JOIN ROOM R ON (C.C_ID = R.C_ID)
+   	WHERE R_PRICE > 100000
+   	AND C_ADDRESS LIKE '%' || #{areaName} || '%'
+   	AND C_ADDRESS LIKE '%' || #{sigunguName} || '%'
+   	ORDER BY C_NAME
+   </select>
+   
+   
+   
 	
 </mapper>
