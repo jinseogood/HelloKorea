@@ -97,6 +97,7 @@ th, td {
 							</select>
 							<input type = "hidden" id = "r_target" name = "r_target" value = "${ m_id }">
 							<input type = "hidden" id = "ref_id" name = "ref_id" value = "${ ref_id }">
+							<input type = "hidden" id = "r_level" name = "r_level" value = "${ r_level }">
 							<br><br>
 							<div class="form-group">
 								<button class="tm-submit-btn" type="button" onclick = "report();">신고하기</button> 
@@ -117,14 +118,15 @@ th, td {
                                         	var reason = $("#reason").val();
                                         	var r_target = $("#r_target").val();
                                         	var ref_id = $("#ref_id").val();
-                                        	console.log(reason);
-                                        	console.log(r_target);
-                                        	console.log(ref_id);
+                                        	var r_level = $("#r_level").val();
+                                        	//console.log(reason);
+                                        	//console.log(r_target);
+                                        	//console.log(ref_id);
                                         	
                                         	$.ajax({
                                         		url:"insertReport.bo",
                                         		type:"post",
-                                        		data:{reason:reason, r_target:r_target, ref_id:ref_id},
+                                        		data:{reason:reason, r_target:r_target, ref_id:ref_id, r_level:r_level},
                                         		dataType:"json",
                                         		success:function(data){
                                         			alert(data.msg);

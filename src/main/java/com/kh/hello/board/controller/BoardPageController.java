@@ -36,6 +36,7 @@ public class BoardPageController {
 	
 	@RequestMapping(value = "reviewWrite.bo")
 	public String reviewWrite(Model model, HttpServletRequest request, @RequestParam int contentid/*, @RequestParam("file") MultipartFile[] file*/){
+
 		System.out.println(contentid);
 		Board b = new Board();
 		Member m = (Member)request.getSession().getAttribute("loginUser");
@@ -48,10 +49,10 @@ public class BoardPageController {
 	}
 	
 	@RequestMapping("reportWrite.bo")
-	public String reportWrite(Model model, @RequestParam String m_id, @RequestParam String ref_id){
+	public String reportWrite(Model model, @RequestParam String m_id, @RequestParam String ref_id, @RequestParam int r_level){
 		
-		System.out.println("m_id : " + m_id + " ref_id : " + ref_id);
-		
+		//System.out.println("m_id : " + m_id + " ref_id : " + ref_id);
+		model.addAttribute("r_level", r_level);
 		model.addAttribute("m_id", m_id);
 		model.addAttribute("ref_id", ref_id);
 		
@@ -59,6 +60,8 @@ public class BoardPageController {
 		
 		return "common/reportWrite";
 	}
+	
+	
 	
 	/*@RequestMapping("starTest.bo")
 	public String starTest(){
@@ -308,7 +311,7 @@ public class BoardPageController {
 	
 	@RequestMapping(value="insertReport.bo")
 	public ModelAndView insertReport(Model model, HttpServletResponse response, HttpServletRequest request, @RequestParam String reason, @RequestParam int r_target,
-						@RequestParam int ref_id, ModelAndView mv){
+						@RequestParam int ref_id, @RequestParam int r_level, ModelAndView mv){
 		response.setContentType("text/html; charset=UTF-8");
 		mv.setViewName("jsonView");
 		Member m = (Member)request.getSession().getAttribute("loginUser");
@@ -317,6 +320,7 @@ public class BoardPageController {
 		report.setR_target(r_target);
 		report.setReason(reason);
 		report.setRef_id(ref_id);
+		report.setR_level(r_level);
 		
 		Report r = null;
 		r = bs.selectReport(report);
