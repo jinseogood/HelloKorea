@@ -110,5 +110,12 @@
 			</otherwise>
 		</choose>
 	</select>
-		
+	
+	<!-- 예약 정보에 결제 번호 추가 -->
+	<update id="updateReservation" parameterType="_int">
+		UPDATE RESERVATION
+		SET PA_ID = SEQ_PA_ID.CURRVAL
+		WHERE O_ID = #{oId}
+	</update>
+	
 </mapper>

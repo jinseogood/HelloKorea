@@ -40,4 +40,10 @@ public class PaymentDaoImpl implements PaymentDao{
 		return (ArrayList) sqlSession.selectList("PayDetail.selectPayDetailInfo", paId);
 	}
 
+	//예약 정보에 결제 번호 추가
+	@Override
+	public int updateReservation(int oId, SqlSessionTemplate sqlSession) {
+		return sqlSession.update("SellerReservation.updateReservation", oId);
+	}
+
 }

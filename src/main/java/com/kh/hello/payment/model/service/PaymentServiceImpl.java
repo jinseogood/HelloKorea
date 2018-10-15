@@ -54,4 +54,10 @@ public class PaymentServiceImpl implements PaymentService{
 		return pd.selectPayDetailInfo(paId, sqlSession);
 	}
 
+	//예약 정보에 결제 번호 추가
+	@Override
+	public int updateReservation(int oId) {
+		return pd.updateReservation(oId, sqlSession);
+	}
+
 }
