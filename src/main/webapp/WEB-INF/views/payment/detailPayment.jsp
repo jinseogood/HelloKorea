@@ -85,15 +85,15 @@
 			<input type="hidden" name="item_name" value="${ reservation.roomName }">
 			<input type="hidden" name="item_number" value="${ reservation.oid }">
 			<input type="hidden" name="currency_code" value="USD">
-			<input type="hidden" name="amount" value="${ (param.price + (param.price * 0.1)) * 0.00088 }">
+			<input type="hidden" id="orderPrice" name="amount">
 			<input type="hidden" name="quantity" value="${ reservation.oRcount }">
 			<input type="hidden" id="orderInfo" name="custom">
 			<input type="hidden" name="return" value="https://localhost:8443/hello/paymentConfirm.pay">
 			<input type="hidden" name="cancel_return" value="https://localhost:8443/hello/paymentDetailView.pay">
 			<input type="hidden" name="charset" value="UTF-8">
 			
-			<input type="hidden" id="oid" value="${ reservation.oid }">
-			<input type="hidden" id="paId" value="${ reservation.paId }">
+			<input type="hidden" id="oId" value="${ reservation.oid }">
+			<input type="hidden" id="price" value="${ param.price + (param.price * 0.1) }">
 
 			<div class="orderArea">
 				<br>
@@ -427,7 +427,7 @@
 						</tr>
 						<tr>
 							<td><b style="font-size:20px;">총 금액</b></td>
-							<td colspan="2"><b style="font-size:20px;">₩${ param.price + (param.price * 0.1) }</b></td>
+							<td colspan="2"><b style="font-size:20px;" id="totalPrice">₩${ param.price + (param.price * 0.1) }</b></td>
 						</tr>
 						<tr style="text-align:center;">
 							<td colspan="3">
@@ -512,6 +512,10 @@
 			$("#orderTel").blur(function(){
 				oTelCheck();
 			});
+			
+			$("#point").blur(function(){
+				calPrice();
+			});
 		});
 		
 		function fNameCheck(){
@@ -581,6 +585,16 @@
 			console.log("포인트 조회 버튼 클릭");
 		}
 		
+		function calPrice(){
+			var price=$("#price").val();
+			var point=$("#point").val();
+			
+			var totalPrice=price - point;
+			
+			$("#totalPrice").html("₩" + totalPrice);
+			$("#orderPrice").attr("value", (totalPrice * 0.00088));
+		}
+		
 		function pay(){
 			var point=$("#point").val();
 			var fName=$("#firstName").val();
@@ -590,6 +604,8 @@
 			var tel=$("#orderTel").val();
 			
 			var mId=$("#loginMID").val();
+			
+			var oId=$("#oId").val();
 			
 			var orderName=fName + " " + lName;
 			var orderEmail=$("#orderEmail").val();
@@ -627,8 +643,8 @@
 			}
 			else{
 				console.log(point);
-				$("#orderInfo").attr("value", (mId + "," + orderName + "," + orderTel + "," + orderEmail + "," + pMethod + "," + point));
-					
+				$("#orderInfo").attr("value", (mId + "," + orderName + "," + orderTel + "," + orderEmail + "," + pMethod + "," + point + "," + oId));
+				
 				$("#payPalForm").attr("action", "https://www.sandbox.paypal.com/cgi-bin/webscr");
 				$("#payBtn").attr("type", "submit");
 			}

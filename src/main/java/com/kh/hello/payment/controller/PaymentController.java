@@ -201,7 +201,14 @@ public class PaymentController {
 				//System.out.println("rInsert : " + rInsert);
 				
 				if(rInsert > 0){
-					result=1;
+					int rUpdate=ps.updateReservation(Integer.parseInt(orderInfo[6]));
+					
+					if(rUpdate > 0){
+						result=1;
+					}
+					else{
+						result=0;
+					}
 				}
 				else{
 					result=0;

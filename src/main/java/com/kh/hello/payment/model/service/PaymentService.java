@@ -16,4 +16,7 @@ public interface PaymentService {
 	//결제 완료 페이지에 보여 줄 결제 상세 정보 조회
 	ArrayList<PayDetail> selectPayDetailInfo(int paId);
 
+	//예약 정보에 결제 번호 추가
+	int updateReservation(int oId);
+
 }
