@@ -27,6 +27,7 @@ import com.kh.hello.common.EmailSender;
 import com.kh.hello.payment.model.service.PaymentService;
 import com.kh.hello.payment.model.vo.PayDetail;
 import com.kh.hello.payment.model.vo.Payment;
+import com.kh.hello.seller.model.vo.SellerReservation;
 
 @Controller
 public class PaymentController {
@@ -111,6 +112,8 @@ public class PaymentController {
 			String res = in.readLine();
 			
 			int mId=0;
+			
+			double paymentAmount=0;
 
 			if (res.equals(RESPONSE_SUCCESS)) {
 
@@ -134,7 +137,7 @@ public class PaymentController {
 				//결제 상태
 				String paymentStatus = (String) vars.get(PARAM_PAYMENT_STATUS);
 				//결제 금액
-				double paymentAmount = Double.parseDouble((String) vars.get(PARAM_MC_GROSS));
+				paymentAmount = Double.parseDouble((String) vars.get(PARAM_MC_GROSS));
 				//통화
 				String paymentCurrency = (String) vars.get(PARAM_MC_CURRENCY);
 				//구매자 페이팔 이메일
@@ -174,14 +177,14 @@ public class PaymentController {
 				
 				if(orderInfo[4].equals("pc")){
 					PayDetail pd=new PayDetail();
-					pd.setPdType("purchase");
-					pd.setPrice(paymentAmount);
-					pd.setPdMethod("c");
+					pd.setPdType("P");
+					pd.setPrice(Double.parseDouble(orderInfo[7]));
+					pd.setPdMethod("C");
 					
 					PayDetail pd2=new PayDetail();
-					pd2.setPdType("purchase");
+					pd2.setPdType("P");
 					pd2.setPrice(Double.parseDouble(orderInfo[5]));
-					pd2.setPdMethod("p");
+					pd2.setPdMethod("P");
 					
 					pdList.add(pd);
 					pdList.add(pd2);
@@ -189,9 +192,9 @@ public class PaymentController {
 				}
 				else{
 					PayDetail pd=new PayDetail();
-					pd.setPdType("purchase");
-					pd.setPrice(paymentAmount);
-					pd.setPdMethod("c");
+					pd.setPdType("P");
+					pd.setPrice(Double.parseDouble(orderInfo[7]));
+					pd.setPdMethod("C");
 					
 					pdList.add(pd);
 				}
@@ -230,7 +233,11 @@ public class PaymentController {
 				Payment p=ps.selectPayInfo(mId);
 				ArrayList<PayDetail> pdList=ps.selectPayDetailInfo(p.getPaId());
 				
-				int orderNum=1;
+				pdList.get(0).setPrice(paymentAmount);
+				
+				SellerReservation r=ps.selectReservation(p.getPaId());
+				
+				/*int orderNum=1;
 				String orderDate=pdList.get(0).getPdDate();
 				String orderName=p.getPaName();
 				String orderPhone=p.getPaPhone();
@@ -239,7 +246,7 @@ public class PaymentController {
 				double proPrice=pdList.get(0).getPrice();
 				
 				//예약확인 메일 전송
-				/*Email email=new Email();
+				Email email=new Email();
 				email.setMailFrom("hellokoreamailservice@gmail.com");
 				email.setMailTo(p.getPaEmail());
 				email.setMailSubject(p.getPaName() + "님 예약 확인 메일입니다.");

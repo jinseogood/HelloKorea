@@ -585,14 +585,15 @@
 			console.log("포인트 조회 버튼 클릭");
 		}
 		
+		var totalPrice=0;
+		
 		function calPrice(){
 			var price=$("#price").val();
 			var point=$("#point").val();
 			
-			var totalPrice=price - point;
+			totalPrice=price - point;
 			
 			$("#totalPrice").html("₩" + totalPrice);
-			$("#orderPrice").attr("value", (totalPrice * 0.00088));
 		}
 		
 		function pay(){
@@ -643,8 +644,8 @@
 			}
 			else{
 				console.log(point);
-				$("#orderInfo").attr("value", (mId + "," + orderName + "," + orderTel + "," + orderEmail + "," + pMethod + "," + point + "," + oId));
-				
+				$("#orderInfo").attr("value", (mId + "," + orderName + "," + orderTel + "," + orderEmail + "," + pMethod + "," + point + "," + oId + "," + totalPrice));
+				$("#orderPrice").attr("value", (totalPrice * 0.00088));
 				$("#payPalForm").attr("action", "https://www.sandbox.paypal.com/cgi-bin/webscr");
 				$("#payBtn").attr("type", "submit");
 			}

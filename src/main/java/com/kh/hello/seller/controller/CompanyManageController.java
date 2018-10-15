@@ -690,13 +690,10 @@ public class CompanyManageController {
 			}
 			else{
 				if(searchWord.equals("결제완료")){
-					searchWord="purchase";
-				}
-				else if(searchWord.equals("환불요청")){
-					searchWord="refundREQ";
+					searchWord="P";
 				}
 				else if(searchWord.equals("환불완료")){
-					searchWord="refund";
+					searchWord="R";
 				}
 				sr.setStatus(searchWord);
 			}
@@ -707,13 +704,10 @@ public class CompanyManageController {
 		}
 			
 		for(int i=0;i<list.size();i++){
-			if(list.get(i).getStatus().equals("purchase")){
+			if(list.get(i).getStatus().equals("P")){
 				list.get(i).setStatus("결제완료");
 			}
-			else if(list.get(i).getStatus().equals("refundREQ")){
-				list.get(i).setStatus("환불요청");
-			}
-			else if(list.get(i).getStatus().equals("refund")){
+			else if(list.get(i).getStatus().equals("R")){
 				list.get(i).setStatus("환불완료");
 			}
 		}

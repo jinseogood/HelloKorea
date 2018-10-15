@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.hello.payment.model.vo.PayDetail;
 import com.kh.hello.payment.model.vo.Payment;
+import com.kh.hello.seller.model.vo.SellerReservation;
 
 public interface PaymentService {
 
@@ -18,5 +19,8 @@ public interface PaymentService {
 
 	//예약 정보에 결제 번호 추가
 	int updateReservation(int oId);
+
+	//결제 확인 창에 보여줄 예약 정보 조회
+	SellerReservation selectReservation(int paId);
 
 }

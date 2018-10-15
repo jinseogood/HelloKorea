@@ -25,6 +25,7 @@
 		JOIN PAYMENT USING(PA_ID)
 		JOIN PAY_DETAIL USING(PA_ID)
 		WHERE O_ID = #{oId}
+		AND PD_METHOD LIKE 'C'
 	</select>
 	
 	<!-- 예약 결제 상태 변경 -->
