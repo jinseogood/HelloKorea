@@ -85,7 +85,7 @@
 			<input type="hidden" name="item_name" value="${ reservation.roomName }">
 			<input type="hidden" name="item_number" value="${ reservation.oid }">
 			<input type="hidden" name="currency_code" value="USD">
-			<input type="hidden" name="amount" value="${ param.price }">
+			<input type="hidden" name="amount" value="${ (param.price + (param.price * 0.1)) * 0.00088 }">
 			<input type="hidden" name="quantity" value="${ reservation.oRcount }">
 			<input type="hidden" id="orderInfo" name="custom">
 			<input type="hidden" name="return" value="https://localhost:8443/hello/paymentConfirm.pay">
@@ -107,10 +107,10 @@
 							<td width="350px" colspan="2">
 								<font style="font-size:16px; font-weight:bold;">${ reservation.roomName }</font>
 								<br>
-								<font style="font-size:10px;">주소</font>
+								<font style="font-size:10px;">${ reservation.cAddress }</font>
 							</td>
 							<td width="100px" style="text-align:center;">
-								<b style="font-size:16px;">${ param.price }/</b><sub>박</sub>
+								<b style="font-size:16px;">₩${ param.price }/</b><sub>박</sub>
 							</td>
 						</tr>
 					</table>
@@ -420,14 +420,14 @@
 						</tr>
 						<tr>
 							<td><b>결제 금액</b></td>
-							<td colspan="2">₩198,000</td>
+							<td colspan="2">₩${ param.price + (param.price * 0.1) }</td>
 						</tr>
 						<tr>
 							<td colspan="3"><hr style="width:644px; border-style:dashed; border-width:2px; border-color:gold;"></td>
 						</tr>
 						<tr>
 							<td><b style="font-size:20px;">총 금액</b></td>
-							<td colspan="2"><b style="font-size:20px;">₩198,000</b></td>
+							<td colspan="2"><b style="font-size:20px;">₩${ param.price + (param.price * 0.1) }</b></td>
 						</tr>
 						<tr style="text-align:center;">
 							<td colspan="3">
@@ -471,22 +471,20 @@
 					</tr>
 					<tr height="40px">
 						<td>소계</td>
-						<td style="text-align:right;">${ param.price }</td>
+						<td style="text-align:right;">₩${ param.price }</td>
 					</tr>
 					<tr height="40px">
 						<td>세금 및 봉사료</td>
-						<td style="text-align:right;">₩18,000</td>
+						<td style="text-align:right;">₩${ param.price * 0.1 }</td>
 					</tr>
 					<tr height="60px" style="background:lightgray;">
 						<th style="font-size:18px;">합계</th>
-						<th style="text-align:right; font-size:18px;">₩198,000</th>
+						<th style="text-align:right; font-size:18px;">₩${ param.price + (param.price * 0.1) }</th>
 					</tr>
 				</table>
 			</div>
 		</div>
 	</div>
-	
-	<input type="hidden" id="address" value="${reservation.cAddress }">
 	
 	<jsp:include page="../common/footer.jsp"/>
 	
