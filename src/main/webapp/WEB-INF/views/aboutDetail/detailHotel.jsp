@@ -301,6 +301,13 @@
 				location.href="${contextPath}/reservationRoom.com?rid="+rid+"&price="+price+"&rType="+rType+"&count="+count+"&limit="+limit;
 			}
 			
+			function paymentTest(){
+				var startDate = $("#fromDate").val();
+				var endDate = $("#toDate").val();
+				console.log(startDate);
+				console.log(endDate);
+			}
+			
 			/* function payment(){
 	      		var JsonArrays = new Array();
 	      		var rowNum = ($(".detailRow").length);
@@ -325,15 +332,6 @@
 				console.log("cid : "+ cid);
 				
 				
-				/* $("#paymentBtn").click(function(){
-					var values = [];
-					var value ;
-					$(".selectRoom").each(function(){
-						value = $("select[name=selectRoom] option:selected").text();
-						values += value;
-					});
-					console.log(values);
-				}); */
 			});
 		/* Google map
       	------------------------------------------------*/
@@ -431,28 +429,10 @@
 				<tfoot>
 					<tr>
 						<td class="detailBottom"></td>
+						<td class="detailBottom">이용일자</td>
+						<td class="detailBottom"><jsp:include page="../common/datePicker.jsp"/></td>
 						<td class="detailBottom">
-						<div class="form-group">
-							<div class='input-group date' id='datetimepicker1'>
-								<input type='text' class="form-control" placeholder="Check-in Date" />
-									<span class="input-group-addon">
-										<span class="fa fa-calendar"></span>
-									</span>
-							</div>
-						</div>
-						</td>
-						<td class="detailBottom">
-						<div class="form-group">
-							<div class='input-group date' id='datetimepicker2'>
-								<input type='text' class="form-control" placeholder="Check-out Date" />
-									<span class="input-group-addon">
-										<span class="fa fa-calendar"></span>
-									</span>
-							</div>
-						</div>
-						</td>
-						<td class="detailBottom">
-						<!-- <input type="button" class="btn" onclick="payment();" id="paymentBtn" value="결제하기" style="background-color:#00aef0; color:white; width:200px; height:45px;"/> -->
+						<input type="button" class="btn" onclick="paymentTest();" id="paymentBtn" value="결제하기" style="background-color:#00aef0; color:white; width:200px; height:45px;"/>
 						</td>
 					</tr>
 				</tfoot>

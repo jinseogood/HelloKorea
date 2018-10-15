@@ -44,33 +44,16 @@
 					</div>	
 					<br><br>
 				<div class="col-lg-3" align="left">
-					
-					<div class="form-group">
-						<div class='input-group date-time' id='datetimepicker3'>
-							<input type='text' class="form-control" placeholder="체크인" />
-								<span class="input-group-addon">
-									<span class="fa fa-calendar"></span>
-								</span>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class='input-group date-time' id='datetimepicker4'>
-							<input type='text' class="form-control" placeholder="체크아웃" />
-								<span class="input-group-addon">
-									<span class="fa fa-calendar"></span>
-								</span>
-						</div>
-					</div>
-					
+					<br>
 					<div class="col-lg-12 col-md-12 col-sm-12" align="left">
 						<span class="tm-section-title" style="font-size:25px; border-bottom:1px solid #ccc;"><b>가격</b></span>
 						<br>
 						<input type="radio" class="hotelSearch" id="wifi" name="hotelSearchConditionMoney" style="width:17px; height:17px;"/>
-						<label for="wifi" class="hotelSearchText">&nbsp;&nbsp;무료 와이파이</label><br>
+						<label for="wifi" class="hotelSearchText">&nbsp;&nbsp;100,000 ~ 199,000</label><br>
 						<input type="radio" class="hotelSearch" id="parking" name="hotelSearchConditionMoney" style="width:17px; height:17px;"/>
-						<label for="parking" class="hotelSearchText">&nbsp;&nbsp;무료 주차</label><br>
+						<label for="parking" class="hotelSearchText">&nbsp;&nbsp;200,000 ~ 299,000</label><br>
 						<input type="radio" class="hotelSearch" id="fitness" name="hotelSearchConditionMoney" style="width:17px; height:17px;"/>
-						<label for="fitness" class="hotelSearchText">&nbsp;&nbsp;피트니스 센터</label><br><br>
+						<label for="fitness" class="hotelSearchText">&nbsp;&nbsp;300,000 ~</label><br><br>
 					</div>
 					
 					<br><br>
