@@ -35,7 +35,7 @@
 					<div class="col-lg-3 col-md-3 col-sm-3"><hr></div>	
 				</div>
 					<div class="col-lg-3 col-md-3 col-sm-3">
-					<div class="festivalSearchArea">
+					<!-- <div class="festivalSearchArea">
 						<select name="festivalYear" style="width:80px; height:25px;">
 							<option>------</option>
 							<option value="2018">2018년</option>
@@ -58,11 +58,11 @@
 							<option value="nov">11월</option>
 							<option value="dec">12월</option>
 						</select>
-					</div>	
+					</div> -->	
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6"></div>
 					<div class="col-lg-3 col-md-3 col-sm-3" align="right">
-						<span class="tm-section-title" style="font-size:20px;">정렬 : <a href="#">이름</a> <a href="#">평점</a></span>
+						<!-- <span class="tm-section-title" style="font-size:20px;">정렬 : <a href="#">이름</a> <a href="#">평점</a></span> -->
 					</div>	
 					<br><br>
 				<div class="col-lg-3" align="left">
@@ -73,8 +73,8 @@
 						<br>
 						<input type="radio" class="gameSearch" id="festival" value="1" name="festivalgroup" style="width:15px; height:15px;"/>
 						<label for="festival" class="gameSearchText">&nbsp;&nbsp;축제</label><br>
-						<input type="radio" class="gameSearch" id="landmark" value="2" name="festivalgroup" style="width:15px; height:15px;"/>
-						<label for="landmark" class="gameSearchText">&nbsp;&nbsp;랜드마크</label><br>
+						<!-- <input type="radio" class="gameSearch" id="landmark" value="2" name="festivalgroup" style="width:15px; height:15px;"/>
+						<label for="landmark" class="gameSearchText">&nbsp;&nbsp;랜드마크</label><br> -->
 						<input type="radio" class="gameSearch" id="shopping" value="3" name="festivalgroup" style="width:15px; height:15px;"/>
 						<label for="shopping" class="gameSearchText">&nbsp;&nbsp;쇼핑</label><br>
 						<input type="radio" class="gameSearch" id="musium" value="4" name="festivalgroup" style="width:15px; height:15px;"/>
@@ -83,8 +83,12 @@
 						<label for="amusmentPark" class="gameSearchText">&nbsp;&nbsp;공원/테마파크</label><br>
 						<input type="radio" class="gameSearch" id="spar" value="6" name="festivalgroup" style="width:15px; height:15px;"/>
 						<label for="spar" class="gameSearchText">&nbsp;&nbsp;온천/스파</label><br>
-						<input type="radio" class="gameSearch" id="zoo" value="7" name="festivalgroup" style="width:15px; height:15px;"/>
-						<label for="zoo" class="gameSearchText">&nbsp;&nbsp;동물원/아쿠아리움</label><br>
+						<input type="radio" class="gameSearch" id="culture" value="7" name="festivalgroup" style="width:15px; height:15px;"/>
+						<label for="culture" class="gameSearchText">&nbsp;&nbsp;문화시설</label><br>
+						<input type="radio" class="gameSearch" id="reports" value="8" name="festivalgroup" style="width:15px; height:15px;"/>
+						<label for="reports" class="gameSearchText">&nbsp;&nbsp;레포츠</label><br>
+						<!-- <input type="radio" class="gameSearch" id="zoo" value="7" name="festivalgroup" style="width:15px; height:15px;"/>
+						<label for="zoo" class="gameSearchText">&nbsp;&nbsp;동물원/아쿠아리움</label><br> -->
 					</div>
 					
 					<br><br>
@@ -269,7 +273,9 @@
 							}
 						});
 					}
-					
+					console.log(areaCode);
+					console.log(contenttypeid);
+					console.log(cat1);
 						$(function(){
 							searchGamePage();
 							
@@ -281,28 +287,26 @@
 									contenttypeid1 = sessionStorage.setItem("contenttypeid", 15);
 									contenttypeid = sessionStorage.getItem("contenttypeid");
 									areaCode1 = sessionStorage.getItem("areaCode");
-									sigunguCode1 = "";
+									sigunguCode1 = sessionStorage.getItem("sigunguCode");
 									cat1 = "A02";
 									cat2 = "A0207";
 									cat3 = "";
-								}else if(checkvalue == 2){
-									
 								}else if(checkvalue == 3){
 									sessionStorage.removeItem("contenttypeid");
 									contenttypeid1 = sessionStorage.setItem("contenttypeid", 38);
 									contenttypeid = sessionStorage.getItem("contenttypeid");
 									areaCode1 = sessionStorage.getItem("areaCode");
-									sigunguCode1 = "";
+									sigunguCode1 = sessionStorage.getItem("sigunguCode");
 									cat1 = "A04";
 									cat2 = "A0401";
 									cat3 = "";
 									//$(".tm-section-title1").text("인천 쇼핑");
 								}else if(checkvalue == 4){
 									sessionStorage.removeItem("contenttypeid");
-									contenttypeid1 = sessionStorage.setItem("contenttypeid", 12);
+									contenttypeid1 = sessionStorage.setItem("contenttypeid", 14);
 									contenttypeid = sessionStorage.getItem("contenttypeid");
 									areaCode1 = sessionStorage.getItem("areaCode");
-									sigunguCode1 = "";
+									sigunguCode1 = sessionStorage.getItem("sigunguCode");
 									cat1 = "A02";
 									cat2 = "A0206";
 									cat3 = "A02060100";
@@ -324,8 +328,24 @@
 									cat1 = "A02";
 									cat2 = "A0202";
 									cat3 = "A02020300";
-								}else{
-									
+								}else if(checkvalue == 7){
+									sessionStorage.removeItem("contenttypeid");
+									contenttypeid1 = sessionStorage.setItem("contenttypeid", 14);
+									contenttypeid = sessionStorage.getItem("contenttypeid");
+									areaCode1 = sessionStorage.getItem("areaCode");
+									sigunguCode1 = sessionStorage.getItem("sigunguCode");
+									cat1 = "A02";
+									cat2 = "";
+									cat3 = "";
+								}else if(checkvalue ==8){
+									sessionStorage.removeItem("contenttypeid");
+									contenttypeid1 = sessionStorage.setItem("contenttypeid", 28);
+									contenttypeid = sessionStorage.getItem("contenttypeid");
+									areaCode1 = sessionStorage.getItem("areaCode");
+									sigunguCode1 = sessionStorage.getItem("sigunguCode");
+									cat1 = "A03";
+									cat2 = "";
+									cat3 = "";
 								}
 								console.log("condition : " + contenttypeid1);
 								console.log("condition : " + areaCode1);
@@ -337,7 +357,7 @@
 								
 							});
 							
-							$(".festivalSearchArea").hide();
+							/* $(".festivalSearchArea").hide();
 							
 							$("input[name=festivalgroup]").click(function(){
 								if($("#festival").is(":checked") == true){
@@ -345,7 +365,7 @@
 								}else{
 									$(".festivalSearchArea").hide();
 								}
-							});
+							}); */
 						});
 						
 						if(sessionStorage.getItem("areaCode") == 1){

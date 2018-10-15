@@ -39,7 +39,7 @@
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6"></div>
 					<div class="col-lg-3 col-md-3 col-sm-3" align="right">
-						<span class="tm-section-title" style="font-size:20px;">정렬 : <a href="#">이름</a> <a href="#">평점</a></span>
+						<!-- <span class="tm-section-title" style="font-size:20px;">정렬 : <a href="#">이름</a> <a href="#">평점</a></span> -->
 					</div>	
 					<br><br>
 				<div class="col-lg-3" align="left">
@@ -70,7 +70,7 @@
 						<label for="club">클럽</label><br>
 					</div>
 					<br>
-					<div class="col-lg-12 col-md-12 col-sm-12" align="left"><br>
+					<!-- <div class="col-lg-12 col-md-12 col-sm-12" align="left"><br>
 						<span class="tm-section-title" style="font-size:25px; border-bottom:1px solid #ccc;"><b>평점</b></span>
 						<br>
 						<input type="radio" class="foodSearch" id="fiveStar" name="foodAvg" style="width:15px; height:15px;"/>
@@ -81,7 +81,7 @@
 						<label for="threeStar" class="foodSearchText">&nbsp;&nbsp;★★★☆☆ 이상</label><br>
 						<input type="radio" class="foodSearch" id="twoStar" name="foodAvg" style="width:15px; height:15px;"/>
 						<label for="twoStar" class="foodSearchText">&nbsp;&nbsp;★★☆☆☆ 이상</label><br>
-					</div>
+					</div> -->
 						
 						
 					

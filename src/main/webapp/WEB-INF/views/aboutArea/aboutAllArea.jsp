@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAf5xrmNMwmRYe-jdx4N3ItbdKDOJryoj4&callback=initialize" async defer></script>
 <title>Hello Korea</title>
 <style>
 	#more{margin-top:5%;}
@@ -266,7 +267,7 @@
 		  	});
 
 		  	// Google Map
-		  	loadGoogleMap();
+		  	//loadGoogleMap();
 		  });
 	</script>
 	
