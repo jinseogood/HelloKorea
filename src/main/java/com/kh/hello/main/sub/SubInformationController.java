@@ -671,7 +671,7 @@ public class SubInformationController {
 	
 	
 	@RequestMapping(value="searchAreaGame.sub")
-	public void searchAreaGame(HttpServletRequest request, HttpServletResponse response, @RequestParam int areaCode, @RequestParam String sigunguCode, @RequestParam int contenttypeid) throws IOException{
+	public void searchAreaGame(HttpServletRequest request, HttpServletResponse response, @RequestParam int areaCode, @RequestParam String sigunguCode, @RequestParam String contenttypeid) throws IOException{
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		

@@ -1,6 +1,7 @@
 package com.kh.hello.company.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -256,13 +257,16 @@ public class CompanyController {
 		System.out.println("reservation user : " + userNo);
 		
 		Reservation2 reservation = new Reservation2();
-		reservation.setPaId(userNo);
 		reservation.setPeople(limit);
 		reservation.setoRcount(count);
 		reservation.setRid(rid);
 		
 		reservation = cs.insertReservation(reservation);
 		System.out.println("모두 다녀온 컨트롤러 reservation : " + reservation);
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY/MM/dd");
+//		reservation.setrSdate(sdf.format(reservation.getrSdate()));
+//		reservation.setrEdate(sdf.format(reservation.getrEdate()));
+		
 		model.addAttribute("reservation", reservation);
 		
 		return "payment/detailPayment";

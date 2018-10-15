@@ -21,7 +21,7 @@ public class GoodController {
 	private GoodService gs;
 	
 	@RequestMapping(value="dibsHotel.good")
-	public void selectDibsHotel(HttpServletRequest request, HttpServletResponse response, @RequestParam int contenttypeid, @RequestParam int contentid) throws IOException{
+	public void selectDibsHotel(HttpServletRequest request, HttpServletResponse response, @RequestParam int contenttypeid, @RequestParam int contentid, @RequestParam int cid) throws IOException{
 		String user = String.valueOf(((Member)(request.getSession().getAttribute("loginUser"))).getmId());
 		int userNo = Integer.parseInt(user);
 		int result = -99;
@@ -29,6 +29,7 @@ public class GoodController {
 		gg.setlType("숙박");
 		gg.setMid(userNo);
 		gg.setOriginId(contentid);
+		gg.setCid(cid);
 		
 //		이미 찜한 목록이 있는지 확인
 		result = gs.selectOneDibs(gg);
@@ -37,7 +38,7 @@ public class GoodController {
 	
 	
 	@RequestMapping(value="insertDibsHotel.good")
-	public void insertDibsHotel(HttpServletRequest request, HttpServletResponse response, @RequestParam int contenttypeid, @RequestParam int contentid) throws IOException{
+	public void insertDibsHotel(HttpServletRequest request, HttpServletResponse response, @RequestParam int contenttypeid, @RequestParam int contentid, @RequestParam int cid) throws IOException{
 		String user = String.valueOf(((Member)(request.getSession().getAttribute("loginUser"))).getmId());
 		int userNo = Integer.parseInt(user);
 		int result = -99;
@@ -45,6 +46,7 @@ public class GoodController {
 		gg.setlType("숙박");
 		gg.setMid(userNo);
 		gg.setOriginId(contentid);
+		gg.setCid(cid);
 		
 		result = gs.insertDibsHotel(gg);
 		response.getWriter().println(result);

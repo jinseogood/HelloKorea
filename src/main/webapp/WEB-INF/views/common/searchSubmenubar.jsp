@@ -77,7 +77,6 @@
 				}else{
 					sigunguCode = sessionStorage.getItem("sigunguCode");
 				}
-				
 				location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 			}
 		</script>

@@ -108,7 +108,7 @@
 					var cat3 = "";
 					
 					function searchGamePage(){
-						if(sigunguCode == 0){
+						if(sessionStorage.getItem("sigunguCode") == 0){
 							sigunguCode = "";
 						}
 						$.ajax({

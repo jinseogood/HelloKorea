@@ -486,6 +486,8 @@
 		</div>
 	</div>
 	
+	<input type="hidden" id="address" value="${reservation.cAddress }">
+	
 	<jsp:include page="../common/footer.jsp"/>
 	
 	<script>
