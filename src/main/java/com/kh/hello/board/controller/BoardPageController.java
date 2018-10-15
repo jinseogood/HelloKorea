@@ -35,11 +35,12 @@ public class BoardPageController {
 	private BoardService bs;
 	
 	@RequestMapping(value = "reviewWrite.bo")
-	public String reviewWrite(Model model, HttpServletRequest request/*, @RequestParam("file") MultipartFile[] file*/){
-		
+	public String reviewWrite(Model model, HttpServletRequest request, @RequestParam int contentid/*, @RequestParam("file") MultipartFile[] file*/){
+		System.out.println(contentid);
 		Board b = new Board();
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		b.setM_id(m.getmId());
+		b.setOrigin_id(contentid);
 		
 		int result = bs.insertBoard(b);
 		

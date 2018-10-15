@@ -22,6 +22,12 @@ public interface CompanyDao {
 
 	ArrayList<Company2> selectOrderByName(SqlSessionTemplate sqlSession, Company2 cp);
 
+	ArrayList<Company2> selectOrderByMoney1(SqlSessionTemplate sqlSession, Company2 cp);
+
+	ArrayList<Company2> selectOrderByMoney2(SqlSessionTemplate sqlSession, Company2 cp);
+
+	ArrayList<Company2> selectOrderByMoney3(SqlSessionTemplate sqlSession, Company2 cp);
+
 
 
 

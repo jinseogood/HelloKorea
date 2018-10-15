@@ -47,6 +47,24 @@ public class CompanyDaoImpl implements CompanyDao {
 		return (ArrayList)sqlSession.selectList("Company2.selectListOrderName", cp);
 	}
 
+//	가격정렬 1번. 10 ~ 19.9만
+	@Override
+	public ArrayList<Company2> selectOrderByMoney1(SqlSessionTemplate sqlSession, Company2 cp) {
+		return (ArrayList)sqlSession.selectList("Company2.selectListOrderMoney1", cp);
+	}
+
+//	가격정렬2번. 20~29.9만
+	@Override
+	public ArrayList<Company2> selectOrderByMoney2(SqlSessionTemplate sqlSession, Company2 cp) {
+		return (ArrayList)sqlSession.selectList("Company2.selectListOrderMoney2", cp);
+	}
+
+//	가격정렬3번. 30만 ~
+	@Override
+	public ArrayList<Company2> selectOrderByMoney3(SqlSessionTemplate sqlSession, Company2 cp) {
+		return (ArrayList)sqlSession.selectList("Company2.selectListOrderMoney3", cp);
+	}
+
 
 
 

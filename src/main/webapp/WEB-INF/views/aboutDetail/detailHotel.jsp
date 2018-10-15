@@ -350,7 +350,7 @@
           map = new google.maps.Map(document.getElementById('google-map'), mapOptions); //구글 맵을 사용할 타겟
           var size_x = 60;
           var size_y = 60;
-          var image = new google.maps.MarkerImage('http://www.weicherthallmark.com/wp-content/themes/realty/lib/images/map-marker/map-marker-gold-fat.png', //마커 이미지 설정
+          var image = new google.maps.MarkerImage('https://www.weicherthallmark.com/wp-content/themes/realty/lib/images/map-marker/map-marker-gold-fat.png', //마커 이미지 설정
         		  		new google.maps.Size(size_x, size_y),
         		  		'',
         		  		'',
@@ -1134,7 +1134,7 @@
 	
 		function review(){
 			if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')})
- 				location.href="reviewWrite.bo";
+ 				location.href="reviewWrite.bo?contentid="+contentid;
 			else{
 				alert("로그인이 필요한 서비스 입니다.");
 			}

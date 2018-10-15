@@ -58,6 +58,24 @@ public class CompanyServiceImpl implements CompanyService {
 		return cd.selectOrderByName(sqlSession, cp);
 	}
 
+//	가격정렬 10만 ~ 19만9천
+	@Override
+	public ArrayList<Company2> selectOrderByMoney1(Company2 cp) {
+		return cd.selectOrderByMoney1(sqlSession, cp);
+	}
+
+//	가격정렬 20만 ~ 29만9천
+	@Override
+	public ArrayList<Company2> selectOrderByMoney2(Company2 cp) {
+		return cd.selectOrderByMoney2(sqlSession, cp);
+	}
+
+//	가격정렬 30만 ~
+	@Override
+	public ArrayList<Company2> selectOrderByMoney3(Company2 cp) {
+		return cd.selectOrderByMoney3(sqlSession, cp);
+	}
+
 
 
 

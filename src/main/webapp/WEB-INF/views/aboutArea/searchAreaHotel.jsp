@@ -48,12 +48,12 @@
 					<div class="col-lg-12 col-md-12 col-sm-12" align="left">
 						<span class="tm-section-title" style="font-size:25px; border-bottom:1px solid #ccc;"><b>가격</b></span>
 						<br>
-						<input type="radio" class="hotelSearch" id="wifi" name="hotelSearchConditionMoney" style="width:17px; height:17px;"/>
-						<label for="wifi" class="hotelSearchText">&nbsp;&nbsp;100,000 ~ 199,000</label><br>
-						<input type="radio" class="hotelSearch" id="parking" name="hotelSearchConditionMoney" style="width:17px; height:17px;"/>
-						<label for="parking" class="hotelSearchText">&nbsp;&nbsp;200,000 ~ 299,000</label><br>
-						<input type="radio" class="hotelSearch" id="fitness" name="hotelSearchConditionMoney" style="width:17px; height:17px;"/>
-						<label for="fitness" class="hotelSearchText">&nbsp;&nbsp;300,000 ~</label><br><br>
+						<input type="radio" class="hotelSearchMoney" value="1" id="price1" name="hotelSearchConditionMoney" style="width:17px; height:17px;"/>
+						<label for="price1" class="hotelSearchText">&nbsp;&nbsp;100,000 ~ 199,000</label><br>
+						<input type="radio" class="hotelSearchMoney" value="2" id="price2" name="hotelSearchConditionMoney" style="width:17px; height:17px;"/>
+						<label for="price2" class="hotelSearchText">&nbsp;&nbsp;200,000 ~ 299,000</label><br>
+						<input type="radio" class="hotelSearchMoney" value="3" id="price3" name="hotelSearchConditionMoney" style="width:17px; height:17px;"/>
+						<label for="price3" class="hotelSearchText">&nbsp;&nbsp;300,000 ~</label><br><br>
 					</div>
 					
 					<br><br>
@@ -409,7 +409,7 @@
 							output = "";
 							output += "<div class='tm-home-box-3' id='detailHover'>";
 							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+","+cid+");'>";
-							if(data[i].firstimage == null){
+							/* if(data[i].firstimage == null){
 								//hotelImageLoad(contentid);
 								$.ajax({
 									url:"hotelImageLoad.sub",
@@ -418,6 +418,8 @@
 									dataType:"json",
 									async:false,
 									success:function(result){
+										console.log("이미지로드 펑션 ajax : ");
+										console.log(result);
 										if(result.response.body.items.item.firstimage != null){
 											output += "<img src="+result.response.body.items.item.firstimage+" alt='image' class='img-responsive1' />";
 										}else{
@@ -427,17 +429,17 @@
 								});
 							}else{
 								output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
-							}
+							} */
 							output += "</div>";
 							output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
 							output += "<p class='tm-home-box-3-description' id='infoTextArea'><b>주소</b> : "+data[i].cAddress+"</p>";
 							output += "<div class='tm-home-box-2-container'>";
 							output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-							output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+data[i].cName+"</span></a>";
+							output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3' onclick='detailView("+contentid+","+contenttypeid+","+cid+");'>"+data[i].cName+"</span></a>";
 							output += "</div></div></div>";
 							document.getElementById("viewArea").innerHTML += output;
-							//hotelImageLoad(contentid);
 						}
+						
 					},
 					error:function(data){
 						console.log("오지말아줘");
@@ -445,42 +447,6 @@
 					}
 				});
 			}
-			 
-
-			/* function hotelImageLoad(contentid){
-				console.log("호텔이미지로드 : " + contentid);
-				var imageArea = $("#detailClick");
-				imageArea.html("");
-					$.ajax({
-						url:"hotelImageLoad.sub",
-						type:"get",
-						data:{contentid:contentid},
-						dataType:"json",
-						async:false,
-						success:function(result){
-							console.log("성공와줘..");
-							console.log(result);
-							var myData = result.response.body.items.item;
-							var output = "";
-							output += "<img src="+myData.firstimage+" alt='image' class='img-responsive1' />";
-							return output;
-							for(var ii in myData){
-								output = "";
-								if(myData.firstimage == null){
-									output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1' />";
-								}else{
-									output += "<img src="+myData[ii].firstimage+" alt='image' class='img-responsive1' />";
-								}
-								//document.getElementById("detailClick").innerHTML += output;
-							}
-						},
-						error:function(data){
-							console.log("에러오지마..");
-							console.log(data);
-						}
-					});
-				} */
-			
 			
 			/* function searchHotelPage(){
 				
@@ -553,7 +519,6 @@
 				console.log(contenttypeid);
 				console.log(contentid);
 				
-				if(contenttypeid == 32){
 					$.ajax({
 						url:"dibsHotel.good",
 						type:"GET",
@@ -571,7 +536,6 @@
 							console.log(data);
 						}
 					});
-				}
 			}
 			</script>
 			</c:if>
@@ -648,6 +612,7 @@
 									dataType:"json",
 									async:false,
 									success:function(result){
+										console.log(result);
 										if(result.response.body.items.item.firstimage != null){
 											output += "<img src="+result.response.body.items.item.firstimage+" alt='image' class='img-responsive1' />";
 										}else{
@@ -681,6 +646,12 @@
 			$(function(){
 				
 				searchHotelPage();
+				
+				$(".hotelSearchMoney").click(function(){
+					var value = $("input[name=hotelSearchConditionMoney]:checked").val();
+					console.log(value);
+					orderByHotel(value);
+				});
 				
 			});
 		</script>

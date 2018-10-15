@@ -263,9 +263,6 @@ public class CompanyController {
 		
 		reservation = cs.insertReservation(reservation);
 		System.out.println("모두 다녀온 컨트롤러 reservation : " + reservation);
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYY/MM/dd");
-//		reservation.setrSdate(sdf.format(reservation.getrSdate()));
-//		reservation.setrEdate(sdf.format(reservation.getrEdate()));
 		
 		model.addAttribute("reservation", reservation);
 		
@@ -401,14 +398,26 @@ public class CompanyController {
 		}
 		
 		System.out.println("value : " + value);
-		if(value.equals("name")){
+		if(value.equals("name")){//이름순정렬
 			System.out.println("value는 " + value + " 입니다.");
 			ArrayList<Company2> list = cs.selectOrderByName(cp);
 			response.getWriter().print(mapper.writeValueAsString(list));
-		}else if(value.equals("grade")){
+		}else if(value.equals("grade")){//평점..
 			System.out.println("value는 " + value + " 입니다.");
 //			ArrayList<Company2> list = cs.selectOrderByGrade(cp);
 //			response.getWriter().print(mapper.writeValueAsString(list));
+		}else if(value.equals("1")){//가격대 1번. 10만 ~ 19만9천
+			System.out.println("value는 " + value + " 입니다.");
+			ArrayList<Company2> list = cs.selectOrderByMoney1(cp);
+			response.getWriter().print(mapper.writeValueAsString(list));
+		}else if(value.equals("2")){//가격대2번. 20만 ~ 29만9천
+			System.out.println("value는 " + value + " 입니다.");
+			ArrayList<Company2> list = cs.selectOrderByMoney2(cp);
+			response.getWriter().print(mapper.writeValueAsString(list));
+		}else if(value.equals("3")){//가격대3번. 30만 ~
+			System.out.println("value는 " + value + " 입니다.");
+			ArrayList<Company2> list = cs.selectOrderByMoney3(cp);
+			response.getWriter().print(mapper.writeValueAsString(list));
 		}
 	}
 	
