@@ -15,12 +15,10 @@
 	.mainDiv{
 		margin-left:auto;
 		margin-right:auto;
-		background:yellow;
 	}
 	#profileDiv{
 		margin-left:auto;
 		margin-right:auto;
-		background:blue;
 		width:500px;
 	}
 	#profileTable tr{
@@ -35,7 +33,6 @@
 	.photoDiv{
 	margin-left:auto;
 	margin-right:auto;
-	background:red;	
 	width:128px;
 	height:128px;
 	}
