@@ -322,11 +322,11 @@ public class BoardPageController {
 		
 		if(m.getmId() != report.getR_target()){
 			if(r != null){
-				if(r.getM_id().contains(report.getM_id())){
+				if(r.getM_id().equals(report.getM_id())){
 					mv.addObject("msg", "이미 신고한 글입니다.");
 				}else{
 					int result = 0;
-					result = bs.updateReport(report);
+					result = bs.insertReport(report);
 
 					if(result > 0){
 						mv.addObject("msg", "신고 성공");	

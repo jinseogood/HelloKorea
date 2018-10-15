@@ -613,7 +613,7 @@
             		<div class="fa" style = "width:100%">
             			<i class="fa fa-thumbs-o-up" style = "font-size:20px; padding-top:10px"> ${ list.likey } </i>
             			<i class="far fa-comment-dots" style = "font-size:20px; padding-top:10px"> 0 </i>
-            			<i class="fa fa-flag" style = "font-size:20px; padding-top:10px; float:right;"><a onclick="reportWrite1(this)"> 신고하기</a> </i>
+            			<i class="fa fa-flag" style = "font-size:20px; padding-top:10px; float:right;"><a onclick="reportWrite(this)"> 신고하기</a> </i>
             			<input type = "hidden" value="${ list.m_id }">
             			<input type = "hidden" value="${ list.bid }">
             		</div>
@@ -798,7 +798,7 @@
 					$pageTitle.html('');
 					
 					var count2 = data.listCount2;
-					$pageTitle.append("R E V I E W ("+count2+")");
+					$pageTitle.append("Q & A ("+count2+")");
 					
 					if(Q.length > 0){
 						for(var i = 0 ; i < Q.length; i++){
@@ -825,7 +825,7 @@
 							output += "<span class='ReviewUpDate' style = 'padding-top:5px'>";
 							output += Q[i].modify_date+"</span>";
 							output += "<span>&nbsp;|&nbsp;</span>";
-							output += "<span class='ReviewUpDate' style = 'padding-top:5px'><i class='fa fa-thumbs-o-up' style = 'font-size:14px; padding-top:5px'>&nbsp;"+Q[i].likey+"</i><i class='fa fa-flag' style = 'font-size:14px; padding-top:5px; float:right; cursor:pointer'><a onclick='reportWrite(this);'> 신고하기</a></i></span>";
+							output += "<span class='ReviewUpDate' style = 'padding-top:5px'><i class='fa fa-thumbs-o-up' style = 'font-size:14px; padding-top:5px'>&nbsp;"+Q[i].likey+"</i><i class='fa fa-flag' style = 'font-size:14px; padding-top:5px; float:right; cursor:pointer'><a onclick='reportWrite(this);'> 신고하기</a></i><input type = 'hidden' value="+Q[i].m_id+"><input type = 'hidden' value="+Q[i].bid+"></span>";
 							output += "</div></div>";
 							output += "<div style = 'margin-top:5px'><button type='button' class='btn btn-secondary' onclick = 'QA("+Q[i].bid+");'>답변</button>&nbsp;<button type='button' class='btn btn-secondary' onclick = 'allQA("+Q[i].bid+");'>모든 답변보기</button></div>";
 							output += "<div id = 'allQAV"+Q[i].bid+"' class = 'QAV' style = 'padding-top:5px;''>";
@@ -1016,7 +1016,8 @@
 							output += "<span class='ReviewUpDate'>리뷰 게시 날짜 : "+review[i].regist_date+"</span></div>";
 							output += "<div class='ReviewTitle' style = 'font-size:20px; cursor:pointer; padding-top:10px;'><a onclick='goDetail("+review[i].bid+")'><span>"+review[i].title+"</span></a></div>";
 							output += "<div class='summary' style = 'padding-top:10px;'><p>"+review[i].text+"</p><span><a style = 'font-weight:bold' onclick = 'goDetail("+review[i].bid+")'>자세히 보기</a></span></div>";
-							output += "<div style = 'padding-top:20px;'><div class='fa' style = 'width:100%;'><i class='fa fa-thumbs-o-up' style = 'font-size:20px; padding-top:10px;'> "+review[i].likey+" </i>&nbsp;<i class='far fa-comment-dots' style = 'font-size:20px; padding-top:10px;'> 0 </i><i class='fa fa-flag' style = 'font-size:20px; padding-top:10px; float:right;'> 신고하기 </i></div></div></div></div>";
+							output += "<div style = 'padding-top:20px;'><div class='fa' style = 'width:100%;'>";
+							output += "<i class='fa fa-thumbs-o-up' style = 'font-size:20px; padding-top:10px;'> "+review[i].likey+" </i>&nbsp;<i class='far fa-comment-dots' style = 'font-size:20px; padding-top:10px;'> 0 </i><i class='fa fa-flag' style = 'font-size:20px; padding-top:10px; float:right;'><a onclick='reportWrite1(this);'> 신고하기</a></i><input type = 'hidden' value="+review[i].m_id+"><input type = 'hidden' value="+review[i].bid+"></div></div></div></div>";
 							
 							$divBody.append(output);
 						}
