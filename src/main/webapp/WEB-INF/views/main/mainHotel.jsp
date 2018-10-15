@@ -341,25 +341,18 @@
 		  <ul class="slides">
 		    <li>
 			    <div class="tm-banner-inner">
-					<h1 class="tm-banner-title">Find <span class="tm-yellow-text">The Best</span> Place</h1>
-					<p class="tm-banner-subtitle">For Your Holidays</p>
-				</div>
-				<img src="${ contextPath }/resources/img/banner-1.jpg" alt="Image" />	
-		    </li>
-		    <li>
-			    <div class="tm-banner-inner">
-					<h1 class="tm-banner-title">Lorem <span class="tm-yellow-text">Ipsum</span> Dolor</h1>
-					<p class="tm-banner-subtitle">Wonderful Destinations</p>
+					<h1 class="tm-banner-title"><span class="tm-yellow-text"></span></h1>
+					<p class="tm-banner-subtitle"></p>
 					
 				</div>
-		      <img src="${ contextPath }/resources/img/banner-2.jpg" alt="Image" />
+		      <img src="${ contextPath }/resources/img/hanok1.jpg" style="width:1903px; height:769.11px;" alt="Image" />
 		    </li>
 		    <li>
 			    <div class="tm-banner-inner">
-					<h1 class="tm-banner-title">Proin <span class="tm-yellow-text">Gravida</span> Nibhvell</h1>
-					<p class="tm-banner-subtitle">Velit Auctor</p>
+					<h1 class="tm-banner-title"><span class="tm-yellow-text"></span></h1>
+					<p class="tm-banner-subtitle"></p>
 				</div>
-		      <img src="${ contextPath }/resources/img/banner-3.jpg" alt="Image" />
+		      <img src="${ contextPath }/resources/img/namsan.PNG" style="width:1903px; height:769.11px;" alt="Image" />
 		    </li>
 		  </ul>
 		</div>
