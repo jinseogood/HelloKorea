@@ -80,6 +80,12 @@ public class MessageDaoImpl implements MessageDao{
 		return sqlSession.selectOne("selectSendMessageDetail", Integer.parseInt(msgId));
 	}
 
+	//메뉴바 새 메세지 여부
+	@Override
+	public ArrayList<Message> checkNewMessage(SqlSessionTemplate sqlSession, String mId) {
+		return (ArrayList)sqlSession.selectList("selectNewMessage", Integer.parseInt(mId));
+	}
+
 
 	
 }
