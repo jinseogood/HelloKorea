@@ -140,6 +140,13 @@ public class MemberServiceImpl implements MemberService {
 		return md.selectMemberProfile1(mId,sqlSession);
 	}
 
+	//닉네임중복체크
+	@Override
+	public int nicknameCheck(String nickname) {
+		// TODO Auto-generated method stub
+		return md.nicknameCheck(nickname,sqlSession);
+	}
+
 
 
 

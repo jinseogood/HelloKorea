@@ -51,31 +51,35 @@
 			</div>
 			
 		</c:if>
+			<c:if test="${a ne null }">
 			 	<div  class="photoDiv">
 			 		<img src="${contextPath}/resources/uploadFiles/member/${changeName}" id="myPhoto">
 			 	</div>
+			</c:if>
+			
 			<form action="editProfile.um" method="post" encType="multipart/form-data">
 				<table id="profileTable">
 					<input type="hidden" value="${sessionScope.loginUser.mId}"name="mId">
 					
 					<tr>
-						<th>Email</th>
+						<th>이메일</th>
 						<td><input type="email" readonly=""  value="${sessionScope.loginUser.email }"></td>
 					</tr>	
 					<tr>
-						<th>Nickname</th>
+						<th>닉네임</th>
 						<td><input type="text" name="nickname"></td>
+						<td><a onclick="nicknameCheck()"></a></td>
 					</tr>	
 					<tr>
-						<th>National</th>
+						<th>국가</th>
 						<td><input type="text" name="national"></td>
 					</tr>
 					<tr>
-						<th>Interest</th>
+						<th>관심</th>
 						<td><input type="text" name="interest"></td>
 					</tr>	
 					<tr>
-						<th>profile photo</th>
+						<th>프로필  사진</th>
 						<td><input type="file" name="photo"></td>
 					</tr>	
 				</table>	
@@ -85,5 +89,10 @@
 			</form>		
 		</div>		
 	</div>
+	<script>
+		
+	
+	
+	</script>
 </body>
 </html>

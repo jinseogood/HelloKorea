@@ -46,20 +46,20 @@ input[type='text']{
 			<table id="sellerTable">
 			<input type="hidden" name="mId" value="${mid}"/>
 				<tr>
-					<th>Name</th>
+					<th>이름</th>
 					<td><input type="text" name="nickname" class="inputStyle"></td>
 				</tr>
 				<tr>
-					<th>Phone</th>
+					<th>휴대전화</th>
 					<td><input type="text" name="phone" class="inputStyle"></td>
 				</tr>
 				<tr>
-				<th>Birth</th>
+				<th>생년월일</th>
 				<td><input type="text" name="birthDay" size="6" maxlength="6" placeholder="생년월일 6자리를 입력하세요"></td>
 				
 				</tr>
 				<tr>
-					<th>Account</th>
+					<th>계좌번호</th>
 					<td><input type="text" name="bankNum" placeholder="'-'없이 입력하세요"></td>
 				</tr>
 					<input type="hidden" class="input-sm" id="tran_dtime" name="tran_dtime">

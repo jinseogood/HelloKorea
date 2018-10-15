@@ -97,4 +97,11 @@
 		WHERE M_ID =#{mId}
 	</update>
 	
+	<!-- 닉네임  -->
+	<select id="nicknameCheck" parameterType="java.lang.String" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE NICKNAME=#{nickname} AND STATUS ='Y'
+	</select>
+	
 </mapper>

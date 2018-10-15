@@ -51,6 +51,9 @@ public interface MemberDao {
 	
 	//사진이 있을경우
 	Attachment selectMemberProfile1(int mId, SqlSessionTemplate sqlSession);
+	
+	//닉네임체크'
+	int nicknameCheck(String nickname, SqlSessionTemplate sqlSession);
 
 
 	
