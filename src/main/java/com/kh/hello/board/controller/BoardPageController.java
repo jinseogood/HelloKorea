@@ -136,7 +136,7 @@ public class BoardPageController {
 		//System.out.println(b);
 		result = bs.updateBoard(b);
 		
-		return "main/mainHotel";
+		return "aboutDetail/detailHotel";
 	}
 	
 	@RequestMapping(value="QPaging.bo", produces = "application/json; charset=utf8")
@@ -145,14 +145,15 @@ public class BoardPageController {
 		ArrayList<Board> list2 = null;
 		PageInfo pi2 = null;
 		
-		int listCount = bs.selectQCount();
-		pi2 = Pagination2.getPageInfo(page, listCount);
+		int listCount2 = bs.selectQCount();
+		pi2 = Pagination2.getPageInfo(page, listCount2);
 		list2 = bs.selectQ(pi2);
 		ArrayList<Reply> listQAnswer = bs.selectQAnswer();
 		
 		
 		mv.addObject("list2", list2);
 		mv.addObject("pi2", pi2);
+		mv.addObject("listCount2", listCount2);
 		mv.addObject("listQAnswer", listQAnswer);
 		mv.setViewName("jsonView");
 		
@@ -179,6 +180,7 @@ public class BoardPageController {
 		
 		mv.addObject("list", list);
 		mv.addObject("pi", pi);
+		mv.addObject("listCount", listCount);
 		mv.setViewName("jsonView");
 
 		/*System.out.println(list);
@@ -245,7 +247,7 @@ public class BoardPageController {
 		int result = 0;
 		result = bs.insertQ(b);
 		
-		return "main/about";
+		return "aboutDetail/detailHotel";
 	}
 	
 	@RequestMapping(value="insertA.bo")

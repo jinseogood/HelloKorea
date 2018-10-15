@@ -14,10 +14,10 @@
 	    text-align: center;
 	    line-height: 1.5;
 	}
-	#goodListTable tr{
+ tr{
 		height:30px;
 	}
-	#goodListTable thead th{
+ thead th{
 		padding: 10px;
 	    font-weight: bold;
 	    text-align: center;
@@ -25,7 +25,7 @@
 	    color: #369;
 	    border-bottom: 3px solid #036;
 	}
-	#goodListTable tbody th {
+	 tbody th {
 	    padding: 10px;
 	    font-weight: bold;
 	    text-align: center;
@@ -33,12 +33,26 @@
 	    border-bottom: 1px solid #ccc;
 	    background: #f3f6f7;
 	}
-	#goodListTable td {
+	 td {
 	    padding: 10px;
 	    vertical-align: top;
 	    border-bottom: 1px solid #ccc;
 	}
+	#foodListTable{
+		margin-top:80px;
+		width:700px;
+		border-collapse: collapse;
+	    text-align: center;
+	    line-height: 1.5;
+	}
+	#entertainmentTable{
+		margin-top:80px;
+		width:700px;
+		border-collapse: collapse;
+	    text-align: center;
+	    line-height: 1.5;
 	
+	}
 </style>
 <script type="text/javascript" src="${ contextPath }/resources/js/jquery-1.11.2.min.js"></script>      		<!-- jQuery -->
 <script type="text/javascript" src="${ contextPath }/resources/js/bootstrap.min.js"></script>					<!-- bootstrap js -->
@@ -58,13 +72,13 @@
 		  <ul class="nav nav-tabs" role="tablist" style="width:80%;margin-left:100px;margin-top:30px;">
 		    <li role="presentation" class="active"><a href="#lodgment" aria-controls=lodgment role="tab" data-toggle="tab">숙박</a></li>
 		    <li role="presentation"><a href="#food" aria-controls="food" role="tab" data-toggle="tab">먹거리</a></li>
-		    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+		    <li role="presentation"><a href="#entertainment" aria-controls="entertainment" role="tab" data-toggle="tab">오락거리</a></li>
 		  </ul>
 		
 		  <!-- Tab panes -->
 		  <div class="tab-content">
 		    <div role="tabpanel" class="tab-pane active" id="lodgment">
-		    	<div id="lodgmentDiv">
+		    	<div class="lodgmentDiv">
 						<table id="goodListTable" align="center">
 							<thead>
 								<tr>
@@ -82,7 +96,6 @@
 										<td>${item.lType}</td>
 										<td>${item.cName }</td>
 										<td>${item.cPhone }</td>
-										
 									</tr>
 								</tbody>
 								</c:if>
@@ -94,10 +107,58 @@
 				</div> 
 		    </div>
 		    <div role="tabpanel" class="tab-pane" id="food">
-		    	
+		    	<div class="foodDiv">
+		    		<table id="foodListTable" align="center">
+		    			<thead>
+								<tr>
+									<th width="55px">찜번호</th>
+									<th width="150px">관심</th>
+									<th width="200px">업체이름</th>
+									<th width="200px">업체번호</th>
+								</tr>
+								</thead>
+								<c:forEach var="item" items="${goodsList}">
+								<c:if test='${item.lType eq "먹거리"}'>
+								<tbody>
+									<tr>
+										<th>${item.lId}</th>
+										<td>${item.lType}</td>
+										<td>${item.cName }</td>
+										<td>${item.cPhone }</td>
+									</tr>
+								</tbody>
+								</c:if>
+							</c:forEach>
+		    		</table>
+		    	</div>
 		    
 		    </div>
-		    <div role="tabpanel" class="tab-pane" id="messages">...</div>
+		    <div role="tabpanel" class="tab-pane" id="entertainment">
+		    		<div class="entertainmentDiv">
+		    			<table id="entertainmentTable" align="center">
+		    				<thead>
+								<tr>
+									<th width="55px">찜번호</th>
+									<th width="150px">관심</th>
+									<th width="200px">업체이름</th>
+									<th width="200px">업체번호</th>
+								</tr>
+								</thead>
+								<c:forEach var="item" items="${goodsList}">
+								<c:if test='${item.lType eq "오락거리"}'>
+								<tbody>
+									<tr>
+										<th>${item.lId}</th>
+										<td>${item.lType}</td>
+										<td>${item.cName }</td>
+										<td>${item.cPhone }</td>
+									</tr>
+								</tbody>
+								</c:if>
+							</c:forEach>
+		    			</table>
+		    		</div>
+		    </div>
   </div>
 
 </div>

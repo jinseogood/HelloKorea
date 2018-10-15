@@ -321,6 +321,7 @@
 				detailHotelImage();
 				detailHotelIntro();
 				detailRoomInfo();
+				
 				console.log("cid : "+ cid);
 				
 				
@@ -466,7 +467,7 @@
          <div class="row"> 
          </div>         
          <div class="tm-section-header section-margin-top">
-       		   <div class="col-lg-4 col-md-4 col-sm-4"><h2 class="tm-section-title">R E V I E W (${ listCount })</h2></div>
+       		   <div class="col-lg-4 col-md-4 col-sm-4 title1"><h2 class="tm-section-title1">R E V I E W (${ listCount })</h2></div>
       		   <div class="col-lg-8 col-md-8 col-sm-8"><hr></div>
 	      	   <div style = "height:200px; width:100%; position:relative">
 	      	   		<button type="button" class="btn btn-secondary" 
@@ -655,7 +656,7 @@
          <div class="row">   
          </div>         
          <div class="tm-section-header section-margin-top">
-       		   <div class="col-lg-4 col-md-4 col-sm-4"><h2 class="tm-section-title">Q & A (${ listCount2 })</h2></div>
+       		   <div class="col-lg-4 col-md-4 col-sm-4 title2"><h2 class="tm-section-title2">Q & A (${ listCount2 })</h2></div>
       		   <div class="col-lg-8 col-md-8 col-sm-8"><hr></div>
 	      	   <div style = "height:200px; width:100%; position:relative">
 	      	   		<button type="button" class="btn btn-secondary" style = "position:absolute; right:10px; bottom:10px" onclick="qa()">Q&A 쓰기</button>
@@ -793,6 +794,12 @@
 					var QAnswer = data.listQAnswer;
 					console.log(data.listQAnswer);
 					
+					$pageTitle = $(".tm-section-title2");
+					$pageTitle.html('');
+					
+					var count2 = data.listCount2;
+					$pageTitle.append("R E V I E W ("+count2+")");
+					
 					if(Q.length > 0){
 						for(var i = 0 ; i < Q.length; i++){
 							var output="";
@@ -884,6 +891,12 @@
 					$pageBody = $(".paging ul");
 					$pageBody.html('');
 					
+					$pageTitle = $(".tm-section-title1");
+					$pageTitle.html('');
+					
+					var count1 = data.listCount;
+					$pageTitle.append("R E V I E W ("+count1+")");
+					
 					console.log(data.list);
 					console.log(data.list[0].bid);
 					console.log(data.pi);
@@ -891,6 +904,7 @@
 					var review = data.list;
 					console.log(review.length);
 					var p = data.pi;
+					
 					
 					if(review.length > 0){
 						for(var i = 0 ; i < review.length; i++){
@@ -1178,6 +1192,11 @@
     	function goDetail(bid){
     		location.href = "reviewDetail.bo?bid="+ bid;
     	}
+    	
+    	$(function(){
+    		QPaging(1);
+			reviewPaging(1);
+    	});
     	
 		$(function() {
 
