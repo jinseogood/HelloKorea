@@ -49,11 +49,11 @@ public class AdminController {
 
 	//블랙리스트 해지 스케쥴러
 	//매일 9시 가동
-	/* @Scheduled(cron="0 33 17 * * ?") 
+	@Scheduled(cron="00 08 15 * * ?") 
 	 public void terminateBlacklist(){
-		int result = as.terminateBlackList();
+		//int result = as.terminateBlackList();
 	    System.out.println("call : " +new Date());
-	 }*/
+	 }
 	 
 	//관리자 마이페이지	
 	@RequestMapping("myPageView.ad")
@@ -338,7 +338,7 @@ public class AdminController {
 				if(list.get(i).getResult() == null){
 					list.get(i).setResultText("미처리");
 				}else{
-					if(list.get(i).getResult().equals('Y')){
+					if(list.get(i).getResult().equals("Y")){
 						list.get(i).setResultText("블랙리스트");
 					}else{
 						list.get(i).setResultText("반려");

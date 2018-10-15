@@ -336,7 +336,7 @@ table.type09 tr:hover{
 			var msgId = $("#msgId").val();
 			var receiveId = $("#sendId").val();
 			var content = $("#content2").val();
-			location.href="answerQuestion.ad?recieveId="+recieveId+"&msgId="+msgId+"&content="+content;
+			location.href="answerQuestion.ad?receiveId="+receiveId+"&msgId="+msgId+"&content="+content;
 		}
 	</script>
 

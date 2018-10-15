@@ -592,22 +592,15 @@ public class AdminDaoImpl implements AdminDao{
 	}
 
 	//블랙리스트 해지 
-	//해당자 검색
-	@Override
-	public ArrayList<Blacklist> selectTerminateList(SqlSessionTemplate sqlSession) {
-		return (ArrayList)sqlSession.selectList("Blacklist.selectTerminateList");
-	}
-
 	//블랙리스트 이력내에서 업데이트
 	@Override
-	public int insertTerminateHistroy(SqlSessionTemplate sqlSession, ArrayList<Blacklist> b) {
-		return sqlSession.insert("Blacklist.insertTerminateHistroy", b);
+	public int updateTerminateHistroy(SqlSessionTemplate sqlSession) {
+		return sqlSession.update("Blacklist.updateTerminateHistroy");
 	}
 
 	@Override
-	public int updateMemberStatus2(SqlSessionTemplate sqlSession, ArrayList<Blacklist> b) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateMemberStatus2(SqlSessionTemplate sqlSession) {
+		return sqlSession.update("Blacklist.updateMemberStatus2");
 	}
 
 }
