@@ -82,15 +82,18 @@
 			
 			<input type="hidden" id="loginMID" value="${ sessionScope.loginUser.mId }">
 			
-			<input type="hidden" name="item_name" value="singleroom">
-			<input type="hidden" name="item_number" value="11">
+			<input type="hidden" name="item_name" value="${ reservation.roomName }">
+			<input type="hidden" name="item_number" value="${ reservation.oid }">
 			<input type="hidden" name="currency_code" value="USD">
-			<input type="hidden" name="amount" value="1">
-			<input type="hidden" name="quantity" value="1">
+			<input type="hidden" name="amount" value="${ param.price }">
+			<input type="hidden" name="quantity" value="${ reservation.oRcount }">
 			<input type="hidden" id="orderInfo" name="custom">
 			<input type="hidden" name="return" value="https://localhost:8443/hello/paymentConfirm.pay">
 			<input type="hidden" name="cancel_return" value="https://localhost:8443/hello/paymentDetailView.pay">
 			<input type="hidden" name="charset" value="UTF-8">
+			
+			<input type="hidden" id="oid" value="${ reservation.oid }">
+			<input type="hidden" id="paId" value="${ reservation.paId }">
 
 			<div class="orderArea">
 				<br>
@@ -102,14 +105,12 @@
 						<tr>
 							<td width="200px" style="text-align:center;">이미지</td>
 							<td width="350px" colspan="2">
-								<font style="font-size:16px; font-weight:bold;">객실 명</font>
-								<br>
-								<font style="font-size:12px;">업체 명</font>
+								<font style="font-size:16px; font-weight:bold;">${ reservation.roomName }</font>
 								<br>
 								<font style="font-size:10px;">주소</font>
 							</td>
 							<td width="100px" style="text-align:center;">
-								<b style="font-size:16px;">₩180,000/</b><sub>박</sub>
+								<b style="font-size:16px;">${ param.price }/</b><sub>박</sub>
 							</td>
 						</tr>
 					</table>
@@ -447,18 +448,18 @@
 				<table id="priceTable">
 					<tr height="100px" style="border-bottom:1px solid lightgray;">
 						<th colspan="2">
-							<font style="font-size:16px;">객실 명</font>
+							<font style="font-size:16px;">${ reservation.roomName }</font>
 							<br>
-							<font style="font-size:10px; font-weight:normal;">예약 시작일 - 예약 종료일</font>
+							<font style="font-size:10px; font-weight:normal;">${ reservation.rSdate } - ${ reservation.rEdate }</font>
 						</th>
 					</tr>
 					<tr height="40px">
 						<td>1박 요금</td>
-						<td style="text-align:right;">₩180,000</td>
+						<td style="text-align:right;">${ param.price }</td>
 					</tr>
 					<tr height="40px">
 						<td>객실 수</td>
-						<td style="text-align:right;">1</td>
+						<td style="text-align:right;">${ reservation.oRcount }</td>
 					</tr>
 					<tr height="40px">
 						<td>박</td>
@@ -466,11 +467,11 @@
 					</tr>
 					<tr height="40px">
 						<td>인원 수</td>
-						<td style="text-align:right;">1</td>
+						<td style="text-align:right;">${ reservation.people }</td>
 					</tr>
 					<tr height="40px">
 						<td>소계</td>
-						<td style="text-align:right;">₩180,000</td>
+						<td style="text-align:right;">${ param.price }</td>
 					</tr>
 					<tr height="40px">
 						<td>세금 및 봉사료</td>
@@ -485,30 +486,9 @@
 		</div>
 	</div>
 	
-	<input type="hidden" id="oid" value="${reservation.oid}">
-	<input type="hidden" id="sdate" value="${reservation.rSdate}">
-	<input type="hidden" id="edate" value="${reservation.rEdate}">
-	<input type="hidden" id="people" value="${reservation.people}">
-	<input type="hidden" id="orCount" value="${reservation.oRcount}">
-	<input type="hidden" id="rid" value="${reservation.roomName}">
-	<input type="hidden" id="paId" value="${reservation.paId}">
 	<jsp:include page="../common/footer.jsp"/>
 	
 	<script>
-	var oid = $("#oid").val();
-	var startdate = $("#sdate").val();
-	var enddate = $("#edate").val();
-	var people = $("#people").val();
-	var oRcount = $("#orCount").val();
-	var rid = $("#rid").val();
-	var paId = $("#paId").val();
-	console.log("oid : " + oid);
-	console.log("startDate : " + startdate);
-	console.log("endDate : " + enddate);
-	console.log("people : " + people);
-	console.log("oRcount : " + oRcount);
-	console.log("rid : " + rid);
-	console.log("paId : " + paId);
 		$(function(){
 			
 			$("#fnameWTEXT").hide();
