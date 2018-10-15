@@ -50,5 +50,6 @@
      	 SELECT FID, ORIGIN_NAME, FILE_PATH, UPLOAD_DATE, CHANGE_NAME, STATUS, A_LEVEL, REF_ID
      	 FROM ATTACHMENT
      	 WHERE REF_ID = #{bid}
+     	 AND A_LEVEL = 0
      </select>
 </mapper>
