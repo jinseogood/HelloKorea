@@ -1,11 +1,13 @@
 package com.kh.hello.company.model.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.hello.company.model.vo.Company2;
 import com.kh.hello.company.model.vo.Reservation2;
+import com.kh.hello.company.model.vo.Reservations;
 import com.kh.hello.company.model.vo.Room2;
 
 public interface CompanyDao {
@@ -27,6 +29,8 @@ public interface CompanyDao {
 	ArrayList<Company2> selectOrderByMoney2(SqlSessionTemplate sqlSession, Company2 cp);
 
 	ArrayList<Company2> selectOrderByMoney3(SqlSessionTemplate sqlSession, Company2 cp);
+
+	List<Reservations> insertReservations(SqlSessionTemplate sqlSession, List<Reservations> list);
 
 
 

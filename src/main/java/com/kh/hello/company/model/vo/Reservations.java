@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class Reservations implements java.io.Serializable{
 //	oid시퀀스, startdate, enddate, 인원, 객실수, rid(객실명) 업체주소
+	private int oid;
 	private String people;
 	private String roomcount;
 	private int rid;
@@ -16,11 +17,15 @@ public class Reservations implements java.io.Serializable{
 	private String end;
 	private String cName;
 	private String cAddress;
+	private String paId;
+	private String roomName;
 	
 	public Reservations(){}
 
-	public Reservations(String people, String roomcount, int rid, String price, String rType, String start, String end, String cName, String cAddress) {
+	public Reservations(int oid, String people, String roomcount, int rid, String price, String rType, String start, 
+			String end, String cName, String cAddress, String paId, String roomName) {
 		super();
+		this.oid = oid;
 		this.people = people;
 		this.roomcount = roomcount;
 		this.rid = rid;
@@ -30,6 +35,16 @@ public class Reservations implements java.io.Serializable{
 		this.end = end;
 		this.cName = cName;
 		this.cAddress = cAddress;
+		this.paId = paId;
+		this.roomName = roomName;
+	}
+
+	public int getOid() {
+		return oid;
+	}
+
+	public void setOid(int oid) {
+		this.oid = oid;
 	}
 
 	public String getPeople() {
@@ -104,12 +119,31 @@ public class Reservations implements java.io.Serializable{
 		this.cAddress = cAddress;
 	}
 
+	public String getPaId() {
+		return paId;
+	}
+
+	public void setPaId(String paId) {
+		this.paId = paId;
+	}
+
+	public String getRoomName() {
+		return roomName;
+	}
+
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
+	}
+
 	@Override
 	public String toString() {
-		return "Reservations [people=" + people + ", roomcount=" + roomcount + ", rid=" + rid + ", price=" + price
-				+ ", rType=" + rType + ", start=" + start + ", end=" + end + ", cName=" + cName + ", cAddress="
-				+ cAddress + "]";
+		return "Reservations [oid=" + oid + ", people=" + people + ", roomcount=" + roomcount + ", rid=" + rid
+				+ ", price=" + price + ", rType=" + rType + ", start=" + start + ", end=" + end + ", cName=" + cName
+				+ ", cAddress=" + cAddress + ", paId=" + paId + ", roomName=" + roomName + "]";
 	}
+
+
+
 
 
 	

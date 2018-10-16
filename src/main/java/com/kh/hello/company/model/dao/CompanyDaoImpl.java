@@ -1,12 +1,14 @@
 package com.kh.hello.company.model.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hello.company.model.vo.Company2;
 import com.kh.hello.company.model.vo.Reservation2;
+import com.kh.hello.company.model.vo.Reservations;
 import com.kh.hello.company.model.vo.Room2;
 
 @Repository
@@ -63,6 +65,20 @@ public class CompanyDaoImpl implements CompanyDao {
 	@Override
 	public ArrayList<Company2> selectOrderByMoney3(SqlSessionTemplate sqlSession, Company2 cp) {
 		return (ArrayList)sqlSession.selectList("Company2.selectListOrderMoney3", cp);
+	}
+
+	@Override
+	public List<Reservations> insertReservations(SqlSessionTemplate sqlSession, List<Reservations> list) {
+		List<Reservations> list2 = new ArrayList<Reservations>();
+		Reservations res = null;
+		for(int i = 0; i < list.size(); i++){
+			res = new Reservations();
+			sqlSession.insert("Reservations.insertReservations", list.get(i));
+			res = sqlSession.selectOne("Reservations.selectListReservations", list.get(i));
+			list2.add(res);
+		}
+		
+		return list2;
 	}
 
 

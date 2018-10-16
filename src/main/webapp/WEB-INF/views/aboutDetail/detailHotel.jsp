@@ -272,9 +272,9 @@
 									}
 									output += "</select>";
 									output += "<br><br><br><br><br><br><br>";
-									output += "<input type='text' class='roomRid' name='roomRid' value="+rid+">";
-									output += "<input type='text' class='roomPrice' name='roomPrice' value="+price+">";
-									output += "<input type='text' class='roomType' name='roomType' value='"+rType+"'>";
+									output += "<input type='hidden' class='roomRid' name='roomRid' value="+rid+">";
+									output += "<input type='hidden' class='roomPrice' name='roomPrice' value="+price+">";
+									output += "<input type='hidden' class='roomType' name='roomType' value='"+rType+"'>";
 									//output += "<input type='button' class='btn' onclick='payment("+rid+","+price+","+'rType'+")' value='결제하기' style='background-color:#00aef0; color:white; width:200px; height:45px;'/>";
 									//output += "<input type='text' id='roomInfo"+rid+"' value='"+rid+","+price+","+rType+"'>";
 									output += "</td>";
