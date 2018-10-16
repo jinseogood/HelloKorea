@@ -316,7 +316,7 @@ public class MemberController {
  
         //return "common/menubar";
     }
-    @RequestMapping(value = "/googleSignInCallback.me", method = { RequestMethod.GET, RequestMethod.POST })
+    @RequestMapping(value = "googleSignInCallback.me", method = { RequestMethod.GET, RequestMethod.POST })
     public String doSessionAssignActionPage(HttpServletRequest request) throws Exception {
  
         String code = request.getParameter("code");

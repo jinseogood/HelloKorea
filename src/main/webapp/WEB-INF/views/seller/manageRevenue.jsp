@@ -8,20 +8,20 @@
 <title>Insert title here</title>
 <style>
 	.content{
-		width:800px;
+		width:1100px;
 		height:800px;
 		margin-left:auto;
 		margin-right:auto;
 	}
 	.titleArea{
     	padding:3%;
-    	width:700px;
+    	width:60%;
     	margin-left:auto;
     	margin-right:auto;
 	}
 	.searchArea{
-	    width:300px;
-	    margin-bottom:5%;
+	    width:800px;
+	    margin-bottom:3%;
 	    margin-left:auto;
 	    margin-right:auto;
 	}
@@ -30,10 +30,12 @@
 	    margin-bottom:5%;
 	}
 	#revenueTable{
-		width:700px;
+		width:1000px;
 		border-collapse: collapse;
 	    text-align: center;
 	    line-height: 1.5;
+	    margin-left:auto;
+	    margin-right:auto;
 	}
 	#revenueTable tr{
 		height:30px;
@@ -80,7 +82,7 @@
 			</div>
 			
 			<div class="searchArea" align="center">
-            	<form action="manageProduct.sell">
+            	<form action="manageRevenue.sell">
 					<div class="col-xs-8 col-xs-offset-2">
 		    			<div class="input-group">
                 			<div class="input-group-btn search-panel">
@@ -115,7 +117,7 @@
 				<thead>
 					<tr>
 						<th width="50px">No</th>
-						<th width="200px">상호명</th>
+						<th width="300px">상호명</th>
 						<th width="100px">예약 건수</th>
 						<th width="250px">입금일</th>
 						<th width="100px">입금액</th>
@@ -123,7 +125,22 @@
 					</tr>
 				</thead>
 				<tbody>
-					
+					<c:set var="no" value="1"/>
+					<c:if test="${ list != null }">
+						<c:forEach var="r" items="${ list }">
+							<tr>
+								<input type="hidden" id="DHID" value="${ r.dhId }">
+								<input type="hidden" id="CID" value="${ r.cId }">
+								<th>${ no }</th>
+								<td>${ r.cName }</td>
+								<td>${ r.rCount } 건</td>
+								<td>${ r.rDate }</td>
+								<td>${ r.price } 원</td>
+								<td>${ r.status }</td>
+								<c:set var="no" value="${ no + 1 }"/>
+							</tr>
+						</c:forEach>
+					</c:if>
 				</tbody>
 			</table>
 			

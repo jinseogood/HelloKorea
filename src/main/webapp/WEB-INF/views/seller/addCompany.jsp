@@ -1054,9 +1054,9 @@
 		});
 		
 		function searchCompany(page){
-			console.log("area : " + area);
+			/* console.log("area : " + area);
 			console.log("sigungu : " + sigungu);
-			console.log("page : " + page);
+			console.log("page : " + page); */
 			
 			$.ajax({
 				url:"searchCompany.sell",
@@ -1078,7 +1078,8 @@
 						if(company.length > 0){
 							for(var i=0;i<company.length;i++){
 								var output="";
-								output += "<tr><td><a onclick=\"valueSetting("+ company[i].contentid + ", '" + company[i].title + "', '" + company[i].tel + "', '" + company[i].addr1 + "');\" data-dismiss='modal'><b><font style='font-size:13px;'>" + company[i].title + "</font></b></a><br>";
+								/* output += "<tr><td><a onclick=\"valueSetting("+ company[i].contentid + ", '" + company[i].title + "', '" + company[i].tel + "', '" + company[i].addr1 + "', '" + i + "');\" data-dismiss='modal'><b><font style='font-size:13px;'>" + company[i].title + "</font></b></a><br>"; */
+								output += "<tr><td><a onclick=\"valueSetting("+ company[i].contentid + ", '" + company[i].title + "', '" + company[i].tel + "', '" + company[i].addr1 + "', '" + i + "');\" data-dismiss='none'><b><font style='font-size:13px;'>" + company[i].title + "</font></b></a><br>";
 								output += "<font style='font-size:11px;'>" + company[i].addr1 + "</font></td></tr>";
 								$tableBody.append(output);
 							}
@@ -1097,7 +1098,8 @@
 						}
 						else{
 							var output="";
-							output += "<tr><td><a onclick=\"valueSetting("+ company.contentid + ", '" + company.title + "', '" + company.tel + "', '" + company.addr1 + "');\" data-dismiss='modal'><b><font style='font-size:13px;'>" + company.title + "</font></b></a><br>";
+							/* output += "<tr><td><a onclick=\"valueSetting("+ company.contentid + ", '" + company.title + "', '" + company.tel + "', '" + company.addr1 + "', '" + i + "');\" data-dismiss='modal'><b><font style='font-size:13px;'>" + company.title + "</font></b></a><br>"; */
+							output += "<tr><td><a onclick=\"valueSetting("+ company.contentid + ", '" + company.title + "', '" + company.tel + "', '" + company.addr1 + "', '" + i + "');\" data-dismiss='none'><b><font style='font-size:13px;'>" + company.title + "</font></b></a><br>";
 							output += "<font style='font-size:11px;'>" + company.addr1 + "</font></td></tr>";
 							$tableBody.append(output);
 							
@@ -1135,7 +1137,7 @@
 			searchCompany(page);
 		}
 		
-		function valueSetting(contentId, title, tel, addr){
+		function valueSetting(contentId, title, tel, addr, i){
 			$.ajax({
 				url:"duplicationTitle.sell",
 				type:"post",
@@ -1145,9 +1147,13 @@
 					
 					if(data == 1){
 						alert("이미 등록된 업체 입니다.");
-						$("#resultTable").find("a").attr("data-dismiss", "none");
+						/* $("#resultTable tr").eq(i).find("a").attr("data-dismiss", "none"); */
 					}
 					else{
+						console.log(i);
+						console.log($("#resultTable tr").eq(i).find("a").text());
+						console.log($("#resultTable tr").eq(i).find("a"));
+						$("#resultTable tr").eq(i).find("a").attr("data-dismiss", "modal");
 						$("#contentId").attr("value", contentId);
 						$("#companyName").attr("value", title);
 						$("#companyPhone").attr("value", tel);
@@ -1172,16 +1178,10 @@
 					var rTotalCount=data.response.body.totalCount;
 					var room=data.response.body.items.item;
 					
-					console.log(rTotalCount);
-					console.log(room);
-					console.log(room.length);
-					
 					$roomBody=$("#addTable tbody");
-					console.log($roomBody);
 					$roomBody.html('');
 					
 					for(var i=0;i<room.length;i++){
-						console.log(i);
 						var output="";
 						output += "<tr><th>객실 타입</th><td colspan='2'><input type='text' name='roomType" + (i+1) + "' value='" + room[i].roomtitle + "' size='25' readonly></td>";
 						output += "<th style='width:60px;'>객실 수</th>";
