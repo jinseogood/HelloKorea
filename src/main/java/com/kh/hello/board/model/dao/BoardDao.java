@@ -59,4 +59,12 @@ public interface BoardDao {
 
 	int insertThumbs(SqlSessionTemplate sqlSession, Thumbs thumb);
 
+	int selectThumbsCount(SqlSessionTemplate sqlSession, Thumbs thumb);
+
+	int updateReply(SqlSessionTemplate sqlSession, int ref_id);
+
+	int updateThumbsReview(SqlSessionTemplate sqlSession, int ref_id);
+
+	int updateThumbsR(SqlSessionTemplate sqlSession, Thumbs thumb);
+
 }

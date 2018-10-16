@@ -1036,7 +1036,7 @@
 							output += "<div class='ReviewTitle' style = 'font-size:20px; cursor:pointer; padding-top:10px;'><a onclick='goDetail("+review[i].bid+")'><span>"+review[i].title+"</span></a></div>";
 							output += "<div class='summary' style = 'padding-top:10px;'><p>"+review[i].text+"</p><span><a style = 'font-weight:bold' onclick = 'goDetail("+review[i].bid+")'>자세히 보기</a></span></div>";
 							output += "<div style = 'padding-top:20px;'><div class='fa' style = 'width:100%;'>";
-							output += "<i class='fa fa-thumbs-o-up' style = 'font-size:20px; padding-top:10px;'> "+review[i].likey+" </i>&nbsp;<i class='far fa-comment-dots' style = 'font-size:20px; padding-top:10px;'> 0 </i><i class='fa fa-flag' style = 'font-size:20px; padding-top:10px; float:right;'><a onclick='reportWrite1(this);'> 신고하기</a></i><input type = 'hidden' value="+review[i].m_id+"><input type = 'hidden' value="+review[i].bid+"></div></div></div></div>";
+							output += "<input type = 'hidden' value = "+review[i].m_id+"><input type = 'hidden' value = "+review[i].bid+"><i class='fa fa-thumbs-o-up' style = 'font-size:20px; padding-top:10px; cursor:pointer;' onclick=RUp(this);> "+review[i].likey+" </i>&nbsp;<i class='far fa-comment-dots' style = 'font-size:20px; padding-top:10px;'> </i><i class='fa fa-flag' style = 'font-size:20px; padding-top:10px; float:right;'><a onclick='reportWrite1(this);'> 신고하기</a></i><input type = 'hidden' value="+review[i].m_id+"><input type = 'hidden' value="+review[i].bid+"></div></div></div></div>";
 							
 							$divBody.append(output);
 						}
@@ -1101,11 +1101,40 @@
 			QPaging(page);
 		}
 		
+		function RUp(element){
+			var m_id = $(element).parent().children().eq(0).val();
+			var ref_id = $(element).parent().children().eq(1).val();
+		
+			if(${ sessionScope.loginUser != null }){ 
+				if(${!sessionScope.loginUser.mType.equals('admin')}){
+			
+					if(m_id != ${sessionScope.loginUser.mId}){
+						$.ajax({
+							url:"thumbsR.bo",
+							type:"post",
+							data:{target_id:m_id, ref_id:ref_id},
+							dataType:"json",
+							success:function(data){
+								var t_Count = data.thumbsCount;
+								$(element).parent().children().eq(2).text(" "+t_Count);
+								alert(data.msg);
+								
+							},error:function(data){
+								alert(data.msg);
+							}
+						})
+				}else{
+					alert("본인 글에는 (도움이 되었어요)를 할 수 없습니다");
+				}
+				}
+			}else{
+				alert("로그인이 필요한 기능 입니다.");
+			}
+		}
+		
 		function AUp(element){
 			var m_id = $(element).parent().children().eq(2).val();
 			var reply_id = $(element).parent().children().eq(3).val();
-			//console.log(m_id);
-			//console.log(reply_id);
 		
 			if(${ sessionScope.loginUser != null }){ 
 				if(${!sessionScope.loginUser.mType.equals('admin')}){
@@ -1117,7 +1146,10 @@
 							data:{target_id:m_id, reply_id:reply_id},
 							dataType:"json",
 							success:function(data){
+								var t_Count = data.thumbsCount;
+								$(element).parent().children().eq(4).text(" "+t_Count);
 								alert(data.msg);
+								
 							},error:function(data){
 								alert(data.msg);
 							}
@@ -1225,8 +1257,8 @@
 		}
  	  
 		function reportWrite(element){
-    		var m_id = $(element).parent().parent().children().eq(2).val();
-    		var ref_id = $(element).parent().parent().children().eq(3).val();
+    		var m_id = $(element).parent().parent().children().eq(4).val();
+    		var ref_id = $(element).parent().parent().children().eq(5).val();
     		var r_level = 0;
     		
     		if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')})
@@ -1237,8 +1269,8 @@
    		}
 		
 		function reportWrite1(element){
-    		var m_id = $(element).parent().parent().children().eq(3).val();
-    		var ref_id = $(element).parent().parent().children().eq(4).val();
+    		var m_id = $(element).parent().parent().children().eq(5).val();
+    		var ref_id = $(element).parent().parent().children().eq(6).val();
     		var r_level = 0;
 
     		if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')})
