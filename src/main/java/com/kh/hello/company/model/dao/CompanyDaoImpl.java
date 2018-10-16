@@ -81,6 +81,12 @@ public class CompanyDaoImpl implements CompanyDao {
 		return list2;
 	}
 
+//	평점 높은순서로 정렬
+	@Override
+	public ArrayList<Company2> selectOrderByGrade(SqlSessionTemplate sqlSession, Company2 cp) {
+		return (ArrayList)sqlSession.selectList("Company2.selectListOrderByGrade", cp);
+	}
+
 
 
 

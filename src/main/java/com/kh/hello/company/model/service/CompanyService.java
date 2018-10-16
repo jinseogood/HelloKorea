@@ -26,6 +26,8 @@ public interface CompanyService {
 
 	List<Reservations> insertReservations(List<Reservations> list);
 
+	ArrayList<Company2> selectOrderByGrade(Company2 cp);
+
 
 
 

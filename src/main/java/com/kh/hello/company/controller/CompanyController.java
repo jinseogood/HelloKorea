@@ -408,8 +408,8 @@ public class CompanyController {
 			response.getWriter().print(mapper.writeValueAsString(list));
 		}else if(value.equals("grade")){//평점..
 			System.out.println("value는 " + value + " 입니다.");
-//			ArrayList<Company2> list = cs.selectOrderByGrade(cp);
-//			response.getWriter().print(mapper.writeValueAsString(list));
+			ArrayList<Company2> list = cs.selectOrderByGrade(cp);
+			response.getWriter().print(mapper.writeValueAsString(list));
 		}else if(value.equals("1")){//가격대 1번. 10만 ~ 19만9천
 			System.out.println("value는 " + value + " 입니다.");
 			ArrayList<Company2> list = cs.selectOrderByMoney1(cp);
