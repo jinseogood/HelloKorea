@@ -84,6 +84,12 @@ public class CompanyServiceImpl implements CompanyService {
 		return cd.insertReservations(sqlSession, list);
 	}
 
+//	평점 높은순서대로 정렬
+	@Override
+	public ArrayList<Company2> selectOrderByGrade(Company2 cp) {
+		return cd.selectOrderByGrade(sqlSession, cp);
+	}
+
 
 
 

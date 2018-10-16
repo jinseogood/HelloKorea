@@ -19,11 +19,12 @@ public class Company2 implements Serializable{
 	private int sigunguCode;
 	private String areaName;
 	private String sigunguName;
+	private double grade;
 	
 	public Company2(){}
 
 	public Company2(int cid, String contentid, String cAddress, String cName, String cRnum, String cPhone, String cType,
-			String cpRnum, int mid, int areaCode, int sigunguCode, String areaName, String sigunguName) {
+			String cpRnum, int mid, int areaCode, int sigunguCode, String areaName, String sigunguName, double grade) {
 		super();
 		this.cid = cid;
 		this.contentid = contentid;
@@ -38,6 +39,7 @@ public class Company2 implements Serializable{
 		this.sigunguCode = sigunguCode;
 		this.areaName = areaName;
 		this.sigunguName = sigunguName;
+		this.grade = grade;
 	}
 
 	public int getCid() {
@@ -144,13 +146,22 @@ public class Company2 implements Serializable{
 		this.sigunguName = sigunguName;
 	}
 
+	public double getGrade() {
+		return grade;
+	}
+
+	public void setGrade(double grade) {
+		this.grade = grade;
+	}
+
 	@Override
 	public String toString() {
-		return "Company [cid=" + cid + ", contentid=" + contentid + ", cAddress=" + cAddress + ", cName=" + cName
+		return "Company2 [cid=" + cid + ", contentid=" + contentid + ", cAddress=" + cAddress + ", cName=" + cName
 				+ ", cRnum=" + cRnum + ", cPhone=" + cPhone + ", cType=" + cType + ", cpRnum=" + cpRnum + ", mid=" + mid
 				+ ", areaCode=" + areaCode + ", sigunguCode=" + sigunguCode + ", areaName=" + areaName
-				+ ", sigunguName=" + sigunguName + "]";
+				+ ", sigunguName=" + sigunguName + ", grade=" + grade + "]";
 	}
+
 
 
 

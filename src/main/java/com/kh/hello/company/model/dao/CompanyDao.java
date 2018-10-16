@@ -32,6 +32,8 @@ public interface CompanyDao {
 
 	List<Reservations> insertReservations(SqlSessionTemplate sqlSession, List<Reservations> list);
 
+	ArrayList<Company2> selectOrderByGrade(SqlSessionTemplate sqlSession, Company2 cp);
+
 
 
 
