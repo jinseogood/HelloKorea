@@ -120,6 +120,7 @@ public interface AdminDao {
 	int updateTerminateHistroy(SqlSessionTemplate sqlSession);
 	int updateMemberStatus2(SqlSessionTemplate sqlSession);
 	ArrayList<Deposit> listExcelDownload(SqlSessionTemplate sqlSession);
+	void excelUpload(SqlSessionTemplate sqlSession, ArrayList<Deposit> list);
 	
 	
 	

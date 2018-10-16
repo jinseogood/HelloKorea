@@ -1,6 +1,7 @@
 package com.kh.hello.admin.controller;
        
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.text.Format;
@@ -20,8 +21,12 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
 import com.kh.hello.admin.model.service.AdminService;
@@ -439,8 +444,6 @@ public class AdminController {
 		m.setContent(content);
 	    m.setMsgId(Integer.parseInt(msgId));
 	    
-	    System.out.println(m.getMsgId());
-	    
 		int result = as.insertAnswerMsg(m);
 		
 		if(result > 0){
@@ -751,15 +754,15 @@ public class AdminController {
 		return "admin/deposit";
 	}
 
-	//업체에 입금하기
+/*	//업체에 입금하기
 	@RequestMapping("makeDeposit.ad")
 	public String makeDeposit(String cId, String dAmount, Model model){
 		System.out.println("오니");
 		
-		/*Deposit d = new Deposit();
+		Deposit d = new Deposit();
 		d.setcId(Integer.parseInt(cId));
 		d.setdAmount(Integer.parseInt(dAmount));
-		int result = as.insertDepositHistory(d);*/
+		int result = as.insertDepositHistory(d);
 		
 		//if(result > 0){
 			int listCount = as.getDepositListCount();
@@ -768,12 +771,13 @@ public class AdminController {
 			model.addAttribute("list", list);
 			model.addAttribute("pi", pi);
 			return "admin/deposit";
-		/*}else{
+		}else{
 			model.addAttribute("msg","업체 입금 실패");
 			return "common/errorPage";
-		}*/
+		}
 		
-	}
+	}*/
+	
 	//업체 입금 내역 보기
 	@RequestMapping("selectDepositHistoryList.ad")
 	public String selectDepositHistroyList(String searchParam, String searchWord, String fromDate, String toDate, PageInfo p, Model model){
@@ -976,7 +980,6 @@ public class AdminController {
 			c.setStartDate(dt.format(c.getApDate()));
 			c.setEndDate(dt.format(c.getCrEDate()));
 		}
-        System.out.println(expirationList); 	
 		HashMap<String, Object> hmap = new HashMap<String, Object>();
 		hmap.put("reportCount", reportCount);
 		hmap.put("questionCount", questionCount);
@@ -996,5 +999,34 @@ public class AdminController {
 
         return new listExcelDownload();
     }
+	
+	    @RequestMapping(value = "/excelUpload.ad", method = RequestMethod.POST)
+	    public String excelUploadAjax(MultipartHttpServletRequest request, Model model)  throws Exception{
+	        MultipartFile excelFile =request.getFile("excelFile");
+	        //System.out.println("엑셀 파일 업로드 컨트롤러");
+	        if(excelFile==null || excelFile.isEmpty()){
+	            throw new RuntimeException("엑셀파일을 선택 해 주세요.");
+	        }
+	        
+	        File destFile = new File("D:\\"+excelFile.getOriginalFilename());
+	        try{
+	            excelFile.transferTo(destFile);
+	        }catch(IOException e){
+	            throw new RuntimeException(e.getMessage(),e);
+	        }
+	        
+	        as.excelUpload(destFile);
+	        
+	        //FileUtils.delete(destFile.getAbsolutePath());
+	        
+	        int listCount = as.getDepositHistoryListCount();
+			PageInfo pi = Pagination.getPageInfo(1, listCount);		
+			ArrayList<Deposit> list = as.selectDepositHistoryList(pi);
+				
+			model.addAttribute("list", list);
+			model.addAttribute("pi", pi);
+			return "admin/depositHistory";
+	    }
+
 
 }

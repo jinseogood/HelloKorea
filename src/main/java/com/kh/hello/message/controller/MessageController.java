@@ -146,6 +146,7 @@ public class MessageController {
 		
 	}
 	
+	//새로온 메세지가 있는지 여부
 	@RequestMapping("checkNewMessage")
 	public @ResponseBody HashMap<String, Object> checkNewMessage(@RequestParam String mId, Model model){
 		ArrayList<Message> m = ms.checkNewMessage(mId);
@@ -155,8 +156,7 @@ public class MessageController {
 		}else{
 			hmap.put("newMessage", "N");
 		}
-		System.out.println(m);
+		//System.out.println(m);
 		return hmap;
 	}
-	
 }

@@ -68,7 +68,7 @@ public class listExcelDownload extends AbstractXlsxView {
         row.createCell(2).setCellValue("계좌번호");
         row.createCell(3).setCellValue("입금액");
         row.createCell(4).setCellValue("입금 예정일");
-        row.createCell(5).setCellValue("입금일시");
+        row.createCell(5).setCellValue("입금여부");
          
         int rowIndex = 1;
          
@@ -80,7 +80,7 @@ public class listExcelDownload extends AbstractXlsxView {
             row.createCell(2).setCellValue(d.getBankNum());
             row.createCell(3).setCellValue(d.getdAmount());
             row.createCell(4).setCellValue(d.getdDate());
-            row.createCell(5).setCellValue(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA).format(new Date()));
+            row.createCell(5).setCellValue("N");
              
             rowIndex++;
         }

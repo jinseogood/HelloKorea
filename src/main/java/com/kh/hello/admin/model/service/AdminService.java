@@ -1,5 +1,6 @@
 package com.kh.hello.admin.model.service;
       
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -111,6 +112,7 @@ public interface AdminService {
 	
 	int terminateBlackList();
 	ArrayList<Deposit> listExcelDownload();
+	void excelUpload(File destFile) throws Exception;
 
 	
 }

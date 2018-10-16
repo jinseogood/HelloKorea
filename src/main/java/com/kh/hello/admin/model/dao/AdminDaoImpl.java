@@ -609,4 +609,12 @@ public class AdminDaoImpl implements AdminDao{
 		return (ArrayList)sqlSession.selectList("Deposit.listExcelDownload");
 	}
 
+	//엑셀 업로드 파일 insert
+	@Override
+	public void excelUpload(SqlSessionTemplate sqlSession, ArrayList<Deposit> list) {
+		for(Deposit d:list){
+			sqlSession.insert("insertDepositHistory", d);
+		}
+	}
+
 }

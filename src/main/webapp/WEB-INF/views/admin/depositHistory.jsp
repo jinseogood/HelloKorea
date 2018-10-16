@@ -63,8 +63,8 @@ table.type09 td {
     border-bottom: 1px solid #ccc;
 }
 
-
 </style>
+<script src="https://malsup.github.com/jquery.form.js"></script> 
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp"/>
@@ -151,7 +151,10 @@ table.type09 td {
 	
 	</script>
 
-	<div class="tableArea" align="center">
+	<div class="tableArea" align="center"> 
+	<div align="right" style="width:80%">
+	<button id="btn-excel" class="btn btn-success">Excel Upload</button>
+	</div>
 <table class="type09">
     <thead>
     <tr>
@@ -214,9 +217,77 @@ table.type09 td {
             </ul>
     </div>
 	<jsp:include page="../common/footer.jsp"/>
-	
+
+
+	<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
+		tabindex="-1" id="myModal-1" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button aria-hidden="true" data-dismiss="modal" class="close"
+						type="button">×</button>
+					<h4 class="modal-title" align="center" style="font-weight: bold;">Excel Upload</h4>
+				</div>
+				<div class="modal-body">
+					<form id="excelUploadForm" name="excelUploadForm"
+						enctype="multipart/form-data" method="post"
+						action="excelUpload.ad">
+						<div class="contents" align="center">
+							<div>업체 입금 처리가 완료된 규격에 맞는 Excel 파일을 첨부해주세요.</div>
+							<dl class="vm_name">
+								<dt class="down w90">첨부 파일</dt>
+								<dd>
+									<input id="excelFile" type="file" name="excelFile" />
+								</dd>
+							</dl>
+						</div>
+
+						<div class="bottom" align="center">
+							<button type="submit" id="addExcelImpoartBtn" class="btn btn-primary"
+								onclick="check()">
+								<span>File Upload</span>
+							</button>
+						</div>
+					</form>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+
 	<script>
+	$(function(){
+	    $("#btn-excel").on("click", function () {
+	    	$(this).attr({"data-toggle":"modal", "data-target":"#myModal-1"});
+	    });
+	});
 	
+	function checkFileType(filePath) {
+        var fileFormat = filePath.split(".");
+        if (fileFormat.indexOf("xlsx") > -1) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    function check() {
+        var file = $("#excelFile").val();
+        if (file == "" || file == null) {
+            alert("파일을 선택해주세요.");
+            return false;
+        } else if (!checkFileType(file)) {
+            alert("엑셀 파일만 업로드 가능합니다.");
+            return false;
+        }
+        if (confirm("업로드 하시겠습니까?")) {
+        	return true;
+        }
+    }
 	</script>
 </body>
 </html>
