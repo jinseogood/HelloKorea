@@ -231,9 +231,6 @@
 									}else{ 
 										output += "<td class='detailContent detailContent1'><img src="+myData[i].roomimg1+" class='roomImgTd' />";
 									}
-									output += "<input type='hidden' class='roomRid' name='roomRid' value="+rid+">";
-									output += "<input type='hidden' class='roomPrice' name='roomPrice' value="+price+">";
-									output += "<input type='hidden' class='roomType' name='roomType' value="+rType+">";
 									output += "</td>";
 									output += "<td>";
 									output += "<h4><b>객실명 : "+result[i].rType+"</b></h4>";
@@ -258,7 +255,7 @@
 									//output += "ㆍ 비수기 주말최소 : "+myData[i].roomoffseasonminfee2+" (성수기 : "+myData[i].roompeakseasonminfee2+")<br>";
 									output += "</td>";
 									output += "<td class='detailContent detailCount'>";
-									output += "인　원　<select class='selectPeople' id='selectPeople"+rid+"'>";
+									output += "인　원　<select class='selectPeople' id='selectPeople"+rid+"' name='selectPeople'>";
 									output += "<option>선택</option>";
 									for(var p = 1; p < result[i].rLimit+1; p++){
 										output += "<option value="+p+">"+p+"</option>";
@@ -267,7 +264,7 @@
 									output += "객실수　<select class='selectRoom' id='selectRoom"+rid+"' name='selectRoom'>";
 									output += "<option>선택</option>";
 									if(result[i].rCount > 1){
-										for(var r = 0; r < result[i].rCount; r++){
+										for(var r = 1; r < result[i].rCount+1; r++){
 											output += "<option value="+r+">"+r+"</option>";
 										}
 									}else{
@@ -275,7 +272,11 @@
 									}
 									output += "</select>";
 									output += "<br><br><br><br><br><br><br>";
-									output += "<input type='button' class='btn' onclick='payment("+rid+","+price+","+'rType'+")' value='결제하기' style='background-color:#00aef0; color:white; width:200px; height:45px;'/>";
+									output += "<input type='text' class='roomRid' name='roomRid' value="+rid+">";
+									output += "<input type='text' class='roomPrice' name='roomPrice' value="+price+">";
+									output += "<input type='text' class='roomType' name='roomType' value='"+rType+"'>";
+									//output += "<input type='button' class='btn' onclick='payment("+rid+","+price+","+'rType'+")' value='결제하기' style='background-color:#00aef0; color:white; width:200px; height:45px;'/>";
+									//output += "<input type='text' id='roomInfo"+rid+"' value='"+rid+","+price+","+rType+"'>";
 									output += "</td>";
 									output += "</tr>"
 									document.getElementById("roomInfoArea").innerHTML += output;
@@ -304,25 +305,57 @@
 			function paymentTest(){
 				var startDate = $("#fromDate").val();
 				var endDate = $("#toDate").val();
-				console.log(startDate);
-				console.log(endDate);
+				console.log("startDate : " + startDate);
+				console.log("endDate : " + endDate);
+				var people = "";
+				var roomcount = "";
+				var rid;
+				var price;
+				var rType;
+				
+				var jsonArray = new Array();
+				$("select[name=selectPeople]").each(function(index, value){
+					people += index + " : " + value.value + " ";
+					if(value.value != "선택"){
+						//console.log(index +"번 객실");
+						$("select[name=selectRoom]").each(function(i, v){
+							if(index == i){
+								//console.log(value.value, v.value);
+								rid = $("table tbody").children("tr").eq(i).children("td").eq(3).children("input").eq(0).val();
+								price = $("table tbody").children("tr").eq(i).children("td").eq(3).children("input").eq(1).val();
+								rType = $("table tbody").children("tr").eq(i).children("td").eq(3).children("input").eq(2).val();
+								console.log("인원 : " + value.value);
+								console.log("객실수 : " + v.value);
+								console.log("rid : " + rid);
+								console.log("price : " + price);
+								console.log("rType : " + rType);
+								var param = {
+										"people" : value.value,
+										"roomcount" : v.value,
+										"rid" : rid,
+										"price" : price,
+										"rType" : rType,
+										"start" : startDate,
+										"end" : endDate
+								};
+								jsonArray.push(param);
+							}
+						});
+					}
+				});
+				var myJSON = JSON.stringify(jsonArray);
+				console.log(myJSON);
+				
+				var $form = $("#reservationRooms");
+					$form.attr("action","${contextPath}/reservationRooms.com");
+					$form.attr("method","post");
+					$form.append("<input type='hidden' value='"+myJSON+"' name='myJson'>");
+					$form.submit();
+					//alert($("input[name=myJson]").val());
+				
 			}
 			
-			/* function payment(){
-	      		var JsonArrays = new Array();
-	      		var rowNum = ($(".detailRow").length);
-	      		console.log("rowNum : " + rowNum);
-	      		for(var i = 0; i < rowNum; i++){
-	      			
-	      			var param = {
-	      				"rid" : $("tbody").find("tr").eq(i).find("td .detailContent1").find("input .roomRid").val(),
-	      				"rPrice" : $("tbody").find("tr").eq(i).find("td .detailContent1").find("input .roomPrice").val(),
-	      				"rType" : $("tbody").find("tr").eq(i).find("td .detailContent1").find("input .roomType").val(),
-	      				"count" : $("tbody").find("tr").eq(i).find("td .detailCount").find("select option").val()
-	      			}
-	      		}
-	      		console.log("param : " + param);
-	      	} */
+			//객실번호, 주소, 업체명(rid로 join), 예약시작일, 예약종료일, 인원, 객실수, rid, null, 객실이름, 가격(파람으로넘기기)
 			$(function(){
 				detailHotelInfo();
 				detailHotelImage();
@@ -408,6 +441,11 @@
 	
 	<section class="container tm-home-section-1" id="more">
 		<div class="col-lg-12" >
+		 <form id="reservationRooms">
+			<div class="col-lg-12 dateArea" align="center">
+				<span>이용일자　　</span><jsp:include page="../common/datePicker.jsp"/>
+			</div>
+		
 			<table border="1" class="infoTable">
 				<thead>
 					<tr>
@@ -429,15 +467,15 @@
 				<tfoot>
 					<tr>
 						<td class="detailBottom"></td>
-						<td class="detailBottom">이용일자</td>
-						<td class="detailBottom"><jsp:include page="../common/datePicker.jsp"/></td>
+						<td class="detailBottom"></td>
+						<td class="detailBottom"></td>
 						<td class="detailBottom">
 						<input type="button" class="btn" onclick="paymentTest();" id="paymentBtn" value="결제하기" style="background-color:#00aef0; color:white; width:200px; height:45px;"/>
 						</td>
 					</tr>
 				</tfoot>
 			</table>
-			
+			</form>
 					
 		</div>
 	</section>
