@@ -145,7 +145,7 @@ public class BoardPageController {
 	}
 	
 	@RequestMapping(value="QPaging.bo", produces = "application/json; charset=utf8")
-	public ModelAndView QPaging(HttpServletResponse response, @RequestParam int page, ModelAndView mv){
+	public ModelAndView QPaging(HttpServletResponse response, @RequestParam int page, ModelAndView mv, @RequestParam int contentid){
 		response.setContentType("text/html; charset=UTF-8");
 		ArrayList<Board> list2 = null;
 		PageInfo pi2 = null;
@@ -166,7 +166,7 @@ public class BoardPageController {
 	}
 	
 	@RequestMapping(value="reviewPaging.bo", produces = "application/json; charset=utf8")
-	public ModelAndView reviewPaging(/*Model model, */HttpServletResponse response, @RequestParam int page, ModelAndView mv){
+	public ModelAndView reviewPaging(/*Model model, */HttpServletResponse response, @RequestParam int page, @RequestParam int contentid, ModelAndView mv){
 		//ModelAndView mv = new ModelAndView();
 		response.setContentType("text/html; charset=UTF-8");
 		ArrayList<Board> list = null;
@@ -182,6 +182,10 @@ public class BoardPageController {
 			list.get(i).setRegist_date(tempDate);
 			System.out.println(list.get(i).getRegist_date());
 		}*/
+		
+		for(int i = 0 ; i < list.size() ; i++){
+			list.get(i).setrCount(bs.selectReplyCount(list.get(i).getBid()));
+		}
 		
 		mv.addObject("list", list);
 		mv.addObject("pi", pi);
@@ -236,21 +240,27 @@ public class BoardPageController {
 
 	
 	@RequestMapping(value="QAWrite.bo")
-	public String QAWrite(Model model, HttpServletRequest request){
-		/*Board b = new Board();
+	public String QAWrite(Model model, HttpServletRequest request, @RequestParam int contentid){
+		Board b = new Board();
 		Member m = (Member)request.getSession().getAttribute("loginUser");
-		b.setM_id(m.getmId());*/
+		b.setM_id(m.getmId());
+		b.setOrigin_id(contentid);
+		
+		model.addAttribute("b", b);
 		
 		return "board/QAWrite";
 	}
 	
 	@RequestMapping(value="insertQ.bo")
-	public String insertQ(Model model, Board b , HttpServletRequest request){
+	public String insertQ(Model model, Board b , HttpServletRequest request, @RequestParam int contentid){
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		b.setM_id(m.getmId());
+		b.setOrigin_id(contentid);
 		
 		int result = 0;
 		result = bs.insertQ(b);
+		
+		model.addAttribute("b", b);
 		
 		return "aboutDetail/detailHotel";
 	}

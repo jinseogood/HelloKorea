@@ -133,6 +133,7 @@ body{ margin:50px 0px; }
             		<div>
             		<span>질문내용</span><br>
             			<textarea style="resize: none;" name="text" placeholder="객실 위치, 편의시설등에 대한 고객님의 궁금증을 질문하세요." rows="10" cols="50"></textarea>
+            			<input type = "hidden" name="contentid" value="${b.origin_id}">
             		</div>
 						
         		</div>

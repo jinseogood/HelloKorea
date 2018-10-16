@@ -18,8 +18,27 @@ public class Board implements java.io.Serializable{
 	private int m_id;
 	private int origin_id;
 	private String travel_date;
+	private int rCount;
 	
 	public Board(){}
+
+	public Board(int bid, String title, String text, int board_type, String regist_date, String status,
+			String modify_date, float grade, int likey, int m_id, int origin_id, String travel_date, int rCount) {
+		super();
+		this.bid = bid;
+		this.title = title;
+		this.text = text;
+		this.board_type = board_type;
+		this.regist_date = regist_date;
+		this.status = status;
+		this.modify_date = modify_date;
+		this.grade = grade;
+		this.likey = likey;
+		this.m_id = m_id;
+		this.origin_id = origin_id;
+		this.travel_date = travel_date;
+		this.rCount = rCount;
+	}
 
 	public Board(int bid, String title, String text, int board_type, String regist_date, String status,
 			String modify_date, float grade, int likey, int m_id, int origin_id, String travel_date) {
@@ -135,12 +154,13 @@ public class Board implements java.io.Serializable{
 		this.m_id = m_id;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Board [bid=" + bid + ", title=" + title + ", text=" + text + ", board_type=" + board_type
 				+ ", regist_date=" + regist_date + ", status=" + status + ", modify_date=" + modify_date + ", grade="
 				+ grade + ", likey=" + likey + ", m_id=" + m_id + ", origin_id=" + origin_id + ", travel_date="
-				+ travel_date + "]";
+				+ travel_date + ", rCount=" + rCount + "]";
 	}
 
 	public int getOrigin_id() {
@@ -173,6 +193,14 @@ public class Board implements java.io.Serializable{
 
 	public void setTravel_date(String travel_date) {
 		this.travel_date = travel_date;
+	}
+
+	public int getrCount() {
+		return rCount;
+	}
+
+	public void setrCount(int rCount) {
+		this.rCount = rCount;
 	}
 
 	

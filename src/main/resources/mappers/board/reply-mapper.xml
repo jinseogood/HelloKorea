@@ -41,6 +41,12 @@
      	  WHERE REPLY_ID = #{ref_id}
      </update>
      
+     <select id="selectReplyCount" parameterType="_int" resultType="_int">
+     	  SELECT COUNT(*)
+     	  FROM REPLY
+     	  WHERE BID = #{bid}
+     </select>
+     
      <!-- 리뷰 업데이트(실질적 글작성) -->
      <!-- <update id="updateReviewBoard" parameterType="_int">
          UPDATE BOARD

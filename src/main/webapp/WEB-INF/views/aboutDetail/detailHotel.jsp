@@ -272,9 +272,9 @@
 									}
 									output += "</select>";
 									output += "<br><br><br><br><br><br><br>";
-									output += "<input type='hidden' class='roomRid' name='roomRid' value="+rid+">";
-									output += "<input type='hidden' class='roomPrice' name='roomPrice' value="+price+">";
-									output += "<input type='hidden' class='roomType' name='roomType' value='"+rType+"'>";
+									output += "<input type='text' class='roomRid' name='roomRid' value="+rid+">";
+									output += "<input type='text' class='roomPrice' name='roomPrice' value="+price+">";
+									output += "<input type='text' class='roomType' name='roomType' value='"+rType+"'>";
 									//output += "<input type='button' class='btn' onclick='payment("+rid+","+price+","+'rType'+")' value='결제하기' style='background-color:#00aef0; color:white; width:200px; height:45px;'/>";
 									//output += "<input type='text' id='roomInfo"+rid+"' value='"+rid+","+price+","+rType+"'>";
 									output += "</td>";
@@ -790,7 +790,7 @@
 			$.ajax({ 
 				url:"QPaging.bo",
 				type:"post",
-				data:{page:page},
+				data:{page:page,contentid:contentid},
 				dataType:"json",
 				success:function(data){
 					console.log("오나");
@@ -843,7 +843,7 @@
 							output += "<span class='ReviewUpDate' style = 'padding-top:5px'>";
 							output += Q[i].modify_date+"</span>";
 							output += "<span>&nbsp;|&nbsp;</span>";
-							output += "<span class='ReviewUpDate' style = 'padding-top:5px'><i class='fa fa-flag' style = 'font-size:14px; padding-top:5px; float:right; cursor:pointer'><a onclick='reportWrite(this);'> 신고하기</a></i><input type = 'hidden' value="+Q[i].m_id+"><input type = 'hidden' value="+Q[i].bid+"></span>";
+							output += "<span class='ReviewUpDate' style = 'padding-top:5px'><i class='fa fa-flag' style = 'font-size:14px; padding-top:5px; float:right; cursor:pointer'><input type = 'hidden' value="+Q[i].m_id+"><input type = 'hidden' value="+Q[i].bid+"><a onclick='reportWrite(this);'> 신고하기</a></i></span>";
 							output += "</div></div>";
 							output += "<div style = 'margin-top:5px'><button type='button' class='btn btn-secondary' onclick = 'QA("+Q[i].bid+");'>답변</button>&nbsp;<button type='button' class='btn btn-secondary' onclick = 'allQA("+Q[i].bid+");'>모든 답변보기</button></div>";
 							output += "<div id = 'allQAV"+Q[i].bid+"' class = 'QAV' style = 'padding-top:5px;''>";
@@ -898,7 +898,7 @@
 			$.ajax({ 
 				url:"reviewPaging.bo",
 				type:"post",
-				data:{page:page},
+				data:{page:page,contentid:contentid},
 				dataType:"json",
 				success:function(data){
 					console.log("오나");
@@ -1036,7 +1036,7 @@
 							output += "<div class='ReviewTitle' style = 'font-size:20px; cursor:pointer; padding-top:10px;'><a onclick='goDetail("+review[i].bid+")'><span>"+review[i].title+"</span></a></div>";
 							output += "<div class='summary' style = 'padding-top:10px;'><p>"+review[i].text+"</p><span><a style = 'font-weight:bold' onclick = 'goDetail("+review[i].bid+")'>자세히 보기</a></span></div>";
 							output += "<div style = 'padding-top:20px;'><div class='fa' style = 'width:100%;'>";
-							output += "<input type = 'hidden' value = "+review[i].m_id+"><input type = 'hidden' value = "+review[i].bid+"><i class='fa fa-thumbs-o-up' style = 'font-size:20px; padding-top:10px; cursor:pointer;' onclick=RUp(this);> "+review[i].likey+" </i>&nbsp;<i class='far fa-comment-dots' style = 'font-size:20px; padding-top:10px;'> </i><i class='fa fa-flag' style = 'font-size:20px; padding-top:10px; float:right;'><a onclick='reportWrite1(this);'> 신고하기</a></i><input type = 'hidden' value="+review[i].m_id+"><input type = 'hidden' value="+review[i].bid+"></div></div></div></div>";
+							output += "<input type = 'hidden' value = "+review[i].m_id+"><input type = 'hidden' value = "+review[i].bid+"><i class='fa fa-thumbs-o-up' style = 'font-size:20px; padding-top:10px; cursor:pointer;' onclick=RUp(this);> "+review[i].likey+" </i>&nbsp;<i class='far fa-comment-dots' style = 'font-size:20px; padding-top:10px; cursor:pointer;' onclick = goDetail("+review[i].bid+")> "+review[i].rCount+"</i><i class='fa fa-flag' style = 'font-size:20px; padding-top:10px; float:right;'><a onclick='reportWrite1(this);'> 신고하기</a></i><input type = 'hidden' value="+review[i].m_id+"><input type = 'hidden' value="+review[i].bid+"></div></div></div></div>";
 							
 							$divBody.append(output);
 						}
@@ -1105,8 +1105,8 @@
 			var m_id = $(element).parent().children().eq(0).val();
 			var ref_id = $(element).parent().children().eq(1).val();
 		
-			if(${ sessionScope.loginUser != null }){ 
-				if(${!sessionScope.loginUser.mType.equals('admin')}){
+			if(${ sessionScope.loginUser != null && !sessionScope.loginUser.mType.equals('admin')}){ 
+
 			
 					if(m_id != ${sessionScope.loginUser.mId}){
 						$.ajax({
@@ -1120,13 +1120,13 @@
 								alert(data.msg);
 								
 							},error:function(data){
-								alert(data.msg);
+								alert(data.msg); 
 							}
 						})
 				}else{
 					alert("본인 글에는 (도움이 되었어요)를 할 수 없습니다");
 				}
-				}
+				
 			}else{
 				alert("로그인이 필요한 기능 입니다.");
 			}
@@ -1157,6 +1157,8 @@
 				}else{
 					alert("본인 글에는 (도움이 되었어요)를 할 수 없습니다");
 				}
+				}else{
+					alert("관리자 계정으로는 작성할 수 없습니다.");
 				}
 			}else{
 				alert("로그인이 필요한 기능 입니다.");
@@ -1250,15 +1252,15 @@
 		
 		function qa(){
 			if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')})
-				location.href="QAWrite.bo";
+				location.href="QAWrite.bo?contentid="+contentid;
 			else{
 				alert("로그인이 필요한 서비스 입니다.");
 			}
 		}
  	  
 		function reportWrite(element){
-    		var m_id = $(element).parent().parent().children().eq(4).val();
-    		var ref_id = $(element).parent().parent().children().eq(5).val();
+    		var m_id = $(element).parent().children().eq(0).val();
+    		var ref_id = $(element).parent().children().eq(1).val();
     		var r_level = 0;
     		
     		if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')})
@@ -1276,7 +1278,7 @@
     		if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')})
     			window.open('reportWrite.bo?m_id='+m_id+'&ref_id='+ref_id+'&r_level='+r_level, 'reportWrite', 'height=380, width=450, top=80, left=400 resizable=none, scrollbars=no');
     		else{
-    			alert("로그인이 필요한 서비스 입니다.");
+    			alert("로그인이 필요한 서비스 입니다."); 
     		}
    		}
 		

@@ -200,5 +200,17 @@ public class BoardServiceImpl implements BoardService{
 		
 		return bd.updateThumbsR(sqlSession, thumb);
 	}
+
+	@Override
+	public int selectReviewCount2(int bid) {
+		
+		return bd.selectReviewCount2(sqlSession, bid);
+	}
+
+	@Override
+	public int selectReplyCount(int bid) {
+		
+		return bd.selectReplyCount(sqlSession, bid);
+	}
  
 }

@@ -37,6 +37,11 @@
      	SELECT BID, TITLE, TEXT, BOARD_TYPE , REGIST_DATE, STATUS, MODIFY_DATE, GRADE, LIKEY, M_ID, ORIGIN_ID
      	FROM BOARD WHERE BOARD_TYPE = 1
      </select>
+     
+     <select id = "selectReviewCount2" parameterType="_int" resultType = "_int">
+     	SELECT COUNT(*)
+     	FROM BOARD WHERE BOARD_TYPE = 1 AND BID = #{ bid }
+     </select>
 
      <!-- 리뷰 내역 수 조회용 -->
      <select id= "selectReviewCount" resultType = "_int">
@@ -58,7 +63,7 @@
      <!-- Q작성 인서트 -->
      <insert id="insertQ" parameterType="Board">
      	INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, 'Q는 없음',
-                                       #{text}, 2, SYSDATE, 'Y', SYSDATE, null, 0, #{m_id}, 1, 'Q는 없음')
+                                       #{text}, 2, SYSDATE, 'Y', SYSDATE, null, 0, #{m_id}, #{origin_id}, 'Q는 없음')
      </insert>
      
      <!-- Q내역 수 조회용 -->
