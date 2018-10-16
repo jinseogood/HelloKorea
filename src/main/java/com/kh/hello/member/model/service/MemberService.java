@@ -60,6 +60,8 @@ public interface MemberService {
 	
 	//활동내역
 	ArrayList<BoardAndReply> selectboreList(int mId);
+	//구글로그인
+	int insertGoogole(Member m);
 
 	
 	

@@ -129,6 +129,7 @@ public class UserController {
 		System.out.println("boreList : "+boreList);
 		
 		
+		
 		model.addAttribute("boreList", boreList);
 		return  "userMypage/activities";
 		

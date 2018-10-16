@@ -103,5 +103,9 @@
 		FROM MEMBER
 		WHERE NICKNAME LIKE #{nickname} AND STATUS ='Y'
 	</select>
-	
+	<!-- 구글 -->
+	<insert id="insertGoogole" parameterType="Member">
+	INSERT INTO MEMBER(M_ID,PLATFORM_TYPE,M_TYPE,REGIST_DATE,STATUS,EMAIL,NICKNAME,SNS_ID)
+	VALUES (SEQ_M_ID.NEXTVAL,'google','2',SYSDATE,'Y',#{email},#{nickname},#{snsId})
+	</insert>
 </mapper>

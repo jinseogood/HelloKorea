@@ -238,8 +238,8 @@
 			<label style="width: 180px; font-size: 30px;">Hello Korea</label>
 		</div>
 		<div id="snsBtn">
-			<button  id="btnJoinFacebook"class="btn btn-primary btn-round" style="width: 100%"><i class="fa fa-facebook" aria-hidden="true"></i>Facebook Login</button>
-			<button id="btnJoinGoogle" class="btn btn-primary btn-round" style="width: 100%"><i class="fa fa-google" aria-hidden="true"></i>Google Login</button>
+			<button  id="btnJoinFacebook"class="btn btn-primary btn-round" style="width: 100%;"><i class="fa fa-facebook" aria-hidden="true"></i>Facebook Login</button>
+			<button id="btnJoinGoogle" class="btn btn-primary btn-round" style="width: 100%;"> <i class="fa fa-google" aria-hidden="true"></i>Google Login</button>
 		</div>
 		<hr style="	width: 400px;
 		border: solid #D8D8D8 1px;">
