@@ -1,6 +1,7 @@
 package com.kh.hello.admin.model.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -118,6 +119,7 @@ public interface AdminDao {
 	
 	int updateTerminateHistroy(SqlSessionTemplate sqlSession);
 	int updateMemberStatus2(SqlSessionTemplate sqlSession);
+	ArrayList<Deposit> listExcelDownload(SqlSessionTemplate sqlSession);
 	
 	
 	

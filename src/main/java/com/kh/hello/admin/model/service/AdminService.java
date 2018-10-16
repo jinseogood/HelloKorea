@@ -1,7 +1,10 @@
 package com.kh.hello.admin.model.service;
       
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
@@ -107,6 +110,7 @@ public interface AdminService {
 	ArrayList<CompanyDetails> selectExpirationList();
 	
 	int terminateBlackList();
+	ArrayList<Deposit> listExcelDownload();
 
 	
 }
