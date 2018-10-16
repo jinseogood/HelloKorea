@@ -19,7 +19,11 @@
 <title>Message</title>
 <style>
 
-
+@font-face { font-family: 'Chosunilbo_myungjo'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Chosunilbo_myungjo.woff') format('woff'); font-weight: normal; font-style: normal; }
+	
+	body, div, p, a, h1,h2,h3,h4, input, select {
+		font-family: Chosunilbo_myungjo,meiryo,Chosunilbo_myungjo !important
+	}
 .msgTable{
    width:80%;
    margin-left:auto;

@@ -87,7 +87,7 @@ table.type09 td {
 	
 	</div>
 				<div class="searchArea" align="center">
-    <form action="selectDepositList.ad">
+    <form action="selectDepositList.ad" onsubmit="return checkForm();">
 			<div class="col-xs-8 col-xs-offset-2">
 		    <div class="input-group">
                 <div class="input-group-btn search-panel">
@@ -101,7 +101,7 @@ table.type09 td {
                     </ul>
                 </div>
                 <input type="hidden" name="searchParam" value="all" id="searchParam">         
-                <input type="text" class="form-control" name="searchWord" placeholder="검색어를 입력하세요">
+                <input type="text" class="form-control" id="searchWord" name="searchWord" placeholder="검색어를 입력하세요">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                 </span>
@@ -127,6 +127,17 @@ table.type09 td {
 		});
 	});
 	
+	function checkForm(){
+   	 var searchWord = $('#searchWord').val();
+		 var param = $('.input-group #searchParam').val();
+		 if(param=='cId'){
+				if(isNaN(searchWord)){
+					alert("업체 번호는 숫자만 입력 가능합니다.");
+					return false;
+				}
+			}
+		 return true;
+     }
 	</script>
 
 	<div class="tableArea" align="center">

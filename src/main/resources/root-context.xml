@@ -19,6 +19,7 @@
 	</bean>
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		<property name="configLocation2" value="classpath:mybatis-config2.xml" />
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"

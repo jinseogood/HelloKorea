@@ -84,7 +84,7 @@ table.type09 td {
 	
 	</div>
 	<div class="searchArea" align="center">
- <form action="selectBlacklist.ad">
+ <form action="selectBlacklist.ad" onsubmit="return checkForm();">
 			<div class="col-xs-8 col-xs-offset-2">
 		    <div class="input-group">
                 <div class="input-group-btn search-panel">
@@ -93,7 +93,7 @@ table.type09 td {
                     </button>
                     <ul class="dropdown-menu" role="menu">
                       <li><a href="#bRecordId" class="search">블랙리스트 번호</a></li>
-                      <li><a href="#mId" class="search">대상</a></li>
+                      <li><a href="#mId" class="search">블랙리스트 대상</a></li>
                       <li><a href="#noT" class="search">미해지건</a></li>
                       <li class="divider"></li>
                       <li><a href="#datePick" onclick="showDatePicker()">등록일자</a></li>
@@ -101,7 +101,7 @@ table.type09 td {
                     </ul>
                 </div>
                 <input type="hidden" name="searchParam" value="all" id="searchParam">                       
-                <input type="text" class="form-control" name="searchWord" placeholder="검색어를 입력하세요">
+                <input type="text" class="form-control" id="searchWord" name="searchWord" placeholder="검색어를 입력하세요">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                 </span>
@@ -138,7 +138,23 @@ table.type09 td {
     	 $("#datePicker").show();
     	 
      }
-     
+     function checkForm(){
+    	 var searchWord = $('#searchWord').val();
+		 var param = $('.input-group #searchParam').val();
+		 if(param=='bRecordId'){
+				if(isNaN(searchWord)){
+					alert("블랙리스트 번호는 숫자만 입력 가능합니다.");
+					return false;
+				}
+			}
+		 if(param=='mId'){
+			 if(isNaN(searchWord)){
+					alert("블랙리스트 대상은 숫자만 입력 가능합니다.");
+					return false;
+				}
+		 }
+		 return true;
+      }
 	$(document).ready(function(e){
 	    $('.search-panel .dropdown-menu').find('a').click(function(e) {
 			e.preventDefault();

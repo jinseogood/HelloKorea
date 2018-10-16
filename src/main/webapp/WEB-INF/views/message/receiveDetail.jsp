@@ -19,7 +19,11 @@
 <link href="${ contextPath }/resources/css/templatemo-style.css" rel="stylesheet">
 <title>Message</title>
 <style>
-
+@font-face { font-family: 'Chosunilbo_myungjo'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Chosunilbo_myungjo.woff') format('woff'); font-weight: normal; font-style: normal; }
+	
+	body, div, p, a, h1,h2,h3,h4, input, select {
+		font-family: Chosunilbo_myungjo,meiryo,Chosunilbo_myungjo !important
+	}
 
 .msgTable{
    width:80%;
@@ -101,7 +105,7 @@ label{
 
 </div>
 <div class="msgTable">
-<div align="right"><a onclick="report()"><i class="fa fa-flag"> 신고하기 </i></a></div>
+<div align="right"><a onclick="report()"><i class="fa fa-flag"> </i> 신고하기</a></div>
 <label for="title" class="col-lg-2 col-sm-2 control-label">&nbsp;제목</label>
 <div class="col-lg-10">
 
@@ -162,7 +166,7 @@ label{
     		  var mId = $("#mId").val();
     		  var msgId = $("#msgId").val();
     		  location.href="deleteMessage?msgId="+msgId+"&mId="+mId;
-    		  if (confirm('정말 삭제하시겠습니까?')) {
+          }
       }
   </script>
 </body>
