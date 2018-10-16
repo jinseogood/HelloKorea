@@ -374,6 +374,7 @@ public class MemberController {
     public void nicknameCheck(String nickname, HttpServletResponse response){
     	System.out.println(nickname);
     	int result = ms.nicknameCheck(nickname);
+    	System.out.println("result"+result);
     	 ObjectMapper mapper = new ObjectMapper();
     	 
     	 try {

@@ -1,0 +1,25 @@
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardAndReply">
+   <resultMap type="BoardAndReply" id="boardAndReplyResultSet">
+      <id property="bId" column="B_ID"/>
+      <result property="title" column="TITLE"/>
+      <result property="boardType" column="BOARD_TYPE"/>
+      <result property="likey" column="LIKEY"/>
+      <result property="mId" column="M_ID"/>
+      <result property="replyId" column="REPLY_ID"/>
+      <result property="content" column="CONTENT"/>
+   </resultMap>
+  
+	<select id="selectboreList" resultMap="boardAndReplyResultSet" parameterType="BoardAndReply">
+	SELECT  B.BID,B.TITLE,B.BOARD_TYPE,B.LIKEY,B.M_ID,R.REPLY_ID,R.CONTENT
+	FROM  REPLY R
+	RIGHT JOIN BOARD B ON (B.BID=R.BID)
+	WHERE B.M_ID= #{mId}
+	</select>
+   
+  
+</mapper>
