@@ -255,7 +255,7 @@
 									//output += "ㆍ 비수기 주말최소 : "+myData[i].roomoffseasonminfee2+" (성수기 : "+myData[i].roompeakseasonminfee2+")<br>";
 									output += "</td>";
 									output += "<td class='detailContent detailCount'>";
-									output += "인　원　<select class='selectPeople' id='selectPeople"+rid+"' name='selectPeople'>";
+									output += "인　원 &nbsp;&nbsp;<select class='selectPeople' id='selectPeople"+rid+"' name='selectPeople'>";
 									output += "<option>선택</option>";
 									for(var p = 1; p < result[i].rLimit+1; p++){
 										output += "<option value="+p+">"+p+"</option>";
@@ -272,10 +272,10 @@
 									}
 									output += "</select>";
 									output += "<br><br><br><br><br><br><br>";
-									output += "<input type='text' class='roomRid' name='roomRid' value="+rid+">";
-									output += "<input type='text' class='roomPrice' name='roomPrice' value="+price+">";
-									output += "<input type='text' class='roomType' name='roomType' value='"+rType+"'>";
-									//output += "<input type='button' class='btn' onclick='payment("+rid+","+price+","+'rType'+")' value='결제하기' style='background-color:#00aef0; color:white; width:200px; height:45px;'/>";
+									output += "<input type='hidden' class='roomRid' name='roomRid' value="+rid+">";
+									output += "<input type='hidden' class='roomPrice' name='roomPrice' value="+price+">";
+									output += "<input type='hidden' class='roomType' name='roomType' value='"+rType+"'>";
+									output += "<input type='button' class='btn' onclick='payment("+rid+","+price+","+'rType'+")' value='예약' style='background-color:#00aef0; color:white; width:200px; height:45px;'/>";
 									//output += "<input type='text' id='roomInfo"+rid+"' value='"+rid+","+price+","+rType+"'>";
 									output += "</td>";
 									output += "</tr>"
@@ -289,19 +289,35 @@
 					}
 				});//output += "ㆍ ";
 			}
+			</script>
 			
+			<c:if test="${!empty sessionScope.loginUser}">
+			<script>
 			function payment(rid, price, rType){
 				console.log("paymentrid : " + rid);
 				console.log("paymentprice : " + price);
 				console.log("paymentrType : " + rType);
 				var count = $("#selectRoom"+rid).val();
 				var limit = $("#selectPeople"+rid).val();
+				var startDate = $("#fromDate").val();
+				var endDate = $("#toDate").val();
+				//alert("startDate : " + startDate);
+				//alert("endDate : " + endDate);
 				console.log(count);
 				console.log(limit);
 				
-				location.href="${contextPath}/reservationRoom.com?rid="+rid+"&price="+price+"&rType="+rType+"&count="+count+"&limit="+limit;
+				location.href="${contextPath}/reservationRoom.com?rid="+rid+"&price="+price+"&rType="+rType+"&count="+count+"&limit="+limit+"&startDate="+startDate+"&endDate="+endDate;
 			}
-			
+			</script>
+			</c:if>
+			<c:if test="${empty sessionScope.loginUser}">
+			<script>
+			function payment(rid, price, rType){
+				alert("로그인이 필요한 서비스입니다.");
+			}
+			</script>
+			</c:if>
+			<script>
 			function paymentTest(){
 				var startDate = $("#fromDate").val();
 				var endDate = $("#toDate").val();
@@ -470,7 +486,7 @@
 						<td class="detailBottom"></td>
 						<td class="detailBottom"></td>
 						<td class="detailBottom">
-						<input type="button" class="btn" onclick="paymentTest();" id="paymentBtn" value="결제하기" style="background-color:#00aef0; color:white; width:200px; height:45px;"/>
+						<!-- <input type="button" class="btn" onclick="paymentTest();" id="paymentBtn" value="결제하기" style="background-color:#00aef0; color:white; width:200px; height:45px;"/> -->
 						</td>
 					</tr>
 				</tfoot>

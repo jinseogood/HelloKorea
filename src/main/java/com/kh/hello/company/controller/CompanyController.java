@@ -1,6 +1,7 @@
 package com.kh.hello.company.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -248,7 +249,8 @@ public class CompanyController {
 	
 	
 	@RequestMapping(value="reservationRoom.com")
-	public String reservationRoom(Model model, HttpServletRequest request, HttpServletResponse response, @RequestParam int rid, @RequestParam int price, @RequestParam String rType, @RequestParam int count, @RequestParam int limit) throws IOException{
+	public String reservationRoom(Model model, HttpServletRequest request, HttpServletResponse response, @RequestParam int rid, @RequestParam int price, 
+			@RequestParam String rType, @RequestParam int count, @RequestParam int limit, @RequestParam Date startDate, @RequestParam Date endDate) throws IOException{
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		String user = String.valueOf(((Member)(request.getSession().getAttribute("loginUser"))).getmId());
@@ -264,6 +266,10 @@ public class CompanyController {
 		reservation.setPeople(limit);
 		reservation.setoRcount(count);
 		reservation.setRid(rid);
+		reservation.setrSdate(startDate);
+		reservation.setrEdate(endDate);
+		
+		System.out.println("가기 전 컨트롤러 reservation : " + reservation);
 		
 		reservation = cs.insertReservation(reservation);
 		System.out.println("모두 다녀온 컨트롤러 reservation : " + reservation);
@@ -421,6 +427,22 @@ public class CompanyController {
 		}else if(value.equals("3")){//가격대3번. 30만 ~
 			System.out.println("value는 " + value + " 입니다.");
 			ArrayList<Company2> list = cs.selectOrderByMoney3(cp);
+			response.getWriter().print(mapper.writeValueAsString(list));
+		}else if(value.equals("twoAvg")){
+			System.out.println("value는 " + value + " 입니다.");
+			ArrayList<Company2> list = cs.selectOrderByTwoAvg(cp);
+			response.getWriter().print(mapper.writeValueAsString(list));
+		}else if(value.equals("threeAvg")){
+			System.out.println("value는 " + value + " 입니다.");
+			ArrayList<Company2> list = cs.selectOrderByThreeAvg(cp);
+			response.getWriter().print(mapper.writeValueAsString(list));
+		}else if(value.equals("fourAvg")){
+			System.out.println("value는 " + value + " 입니다.");
+			ArrayList<Company2> list = cs.selectOrderByFourAvg(cp);
+			response.getWriter().print(mapper.writeValueAsString(list));			
+		}else if(value.equals("fiveAvg")){
+			System.out.println("value는 " + value + " 입니다.");
+			ArrayList<Company2> list = cs.selectOrderByFiveAvg(cp);
 			response.getWriter().print(mapper.writeValueAsString(list));
 		}
 	}

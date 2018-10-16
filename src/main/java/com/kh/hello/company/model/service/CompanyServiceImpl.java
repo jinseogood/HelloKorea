@@ -39,19 +39,18 @@ public class CompanyServiceImpl implements CompanyService {
 
 //	객실 주문 insert.
 	@Override
-	@Transactional(propagation=Propagation.REQUIRED, isolation=Isolation.SERIALIZABLE, rollbackFor={Exception.class})
 	public Reservation2 insertReservation(Reservation2 reservation) {
-		int result = -99;
-		int oid = 0;
-		result = cd.insertReservation(sqlSession, reservation);
-		System.out.println("객실주문 서비스메소드 result : " + result);
-		oid = cd.selectCurrval(sqlSession, reservation);
-		System.out.println("객실주문 서비스 메소드 currval : " + oid);
-		reservation.setOid(oid);
-		reservation = cd.selectOneReservation(sqlSession, reservation);
-		System.out.println("객실주문 서비스 메소드 reservation : " + reservation);
+//		int result = -99;
+//		int oid = 0;
+//		result = cd.insertReservation(sqlSession, reservation);
+//		System.out.println("객실주문 서비스메소드 result : " + result);
+//		oid = cd.selectCurrval(sqlSession, reservation);
+//		System.out.println("객실주문 서비스 메소드 currval : " + oid);
+//		reservation.setOid(oid);
+//		reservation = cd.selectOneReservation(sqlSession, reservation);
+//		System.out.println("객실주문 서비스 메소드 reservation : " + reservation);
 		
-		return reservation;
+		return cd.insertReservation(sqlSession, reservation);
 	}
 
 //	이름순서 정렬
@@ -88,6 +87,29 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public ArrayList<Company2> selectOrderByGrade(Company2 cp) {
 		return cd.selectOrderByGrade(sqlSession, cp);
+	}
+
+//	평점 2점 이상 조회
+	@Override
+	public ArrayList<Company2> selectOrderByTwoAvg(Company2 cp) {
+		return cd.selectOrderByTwoAvg(sqlSession, cp);
+	}
+
+//	평점 3점이상 조회
+	@Override
+	public ArrayList<Company2> selectOrderByThreeAvg(Company2 cp) {
+		return cd.selectOrderByThreeAvg(sqlSession, cp);
+	}
+
+//	평점 4점이상 조회
+	@Override
+	public ArrayList<Company2> selectOrderByFourAvg(Company2 cp) {
+		return cd.selectOrderByFourAvg(sqlSession, cp);
+	}
+
+	@Override
+	public ArrayList<Company2> selectOrderByFiveAvg(Company2 cp) {
+		return cd.selectOrderByFiveAvg(sqlSession, cp);
 	}
 
 

@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 <title>Hello Korea</title>
 <style>
 	#more{margin-top:5%;}
@@ -73,13 +74,13 @@
 					<div class="col-lg-12 col-md-12 col-sm-12" align="left">
 						<span class="tm-section-title" style="font-size:25px; border-bottom:1px solid #ccc;"><b>평점</b></span>
 						<br>
-						<input type="radio" class="hotelSearch" id="fiveStar" name="hotelAvg" style="width:15px; height:15px;"/>
+						<input type="radio" class="hotelSearchAvg" value="fiveAvg" id="fiveStar" name="hotelAvg" style="width:15px; height:15px;"/>
 						<label for="fiveStar" class="hotelSearchText">&nbsp;&nbsp;★★★★★</label><br>
-						<input type="radio" class="hotelSearch" id="fourStar" name="hotelAvg" style="width:15px; height:15px;"/>
+						<input type="radio" class="hotelSearchAvg" value="fourAvg" id="fourStar" name="hotelAvg" style="width:15px; height:15px;"/>
 						<label for="fourStar" class="hotelSearchText">&nbsp;&nbsp;★★★★☆ 이상</label><br>
-						<input type="radio" class="hotelSearch" id="threeStar" name="hotelAvg" style="width:15px; height:15px;"/>
+						<input type="radio" class="hotelSearchAvg" value="threeAvg" id="threeStar" name="hotelAvg" style="width:15px; height:15px;"/>
 						<label for="threeStar" class="hotelSearchText">&nbsp;&nbsp;★★★☆☆ 이상</label><br>
-						<input type="radio" class="hotelSearch" id="twoStar" name="hotelAvg" style="width:15px; height:15px;"/>
+						<input type="radio" class="hotelSearchAvg" value="twoAvg" id="twoStar" name="hotelAvg" style="width:15px; height:15px;"/>
 						<label for="twoStar" class="hotelSearchText">&nbsp;&nbsp;★★☆☆☆ 이상</label><br>
 					</div>
 					
@@ -225,8 +226,8 @@
 							output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
 							output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData.addr1+"</p>";
 							output += "<div class='tm-home-box-2-container'>";
-							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-							output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
+							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
 							output += "</div></div></div>";
 							document.getElementById("viewArea").innerHTML += output;
 						}else{
@@ -246,7 +247,7 @@
 								output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData[i].addr1+"</p>";
 								output += "<div class='tm-home-box-2-container'>";
 								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-								output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
+								output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
 								output += "</div></div></div>";
 								document.getElementById("viewArea").innerHTML += output;
 							}
@@ -290,7 +291,7 @@
 							output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData.addr1+"</p>";
 							output += "<div class='tm-home-box-2-container'>";
 							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-							output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
+							output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
 							output += "</div></div></div>";
 							document.getElementById("viewArea").innerHTML += output;
 						}else{
@@ -310,7 +311,7 @@
 								output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData[i].addr1+"</p>";
 								output += "<div class='tm-home-box-2-container'>";
 								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-								output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
+								output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
 								output += "</div></div></div>";
 								document.getElementById("viewArea").innerHTML += output;
 							}
@@ -353,8 +354,8 @@
 							output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
 							output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData.addr1+"</p>";
 							output += "<div class='tm-home-box-2-container'>";
-							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-							output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
+							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
 							output += "</div></div></div>";
 							document.getElementById("viewArea").innerHTML += output;
 						}else{
@@ -375,8 +376,8 @@
 								output += "<div class='tm-home-box-2-container'>";
 								output += "<input type='hidden' value="+contenttypeid+">";
 								output += "<input type='hidden' value="+contentid+">";
-								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-								output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
+								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+								output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
 								output += "</div></div></div>";
 								document.getElementById("viewArea").innerHTML += output;
 							}
@@ -409,7 +410,7 @@
 							output = "";
 							output += "<div class='tm-home-box-3' id='detailHover'>";
 							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+","+cid+");'>";
-							/* if(data[i].firstimage == null){
+							if(data[i].firstimage == null){
 								//hotelImageLoad(contentid);
 								$.ajax({
 									url:"hotelImageLoad.sub",
@@ -429,13 +430,102 @@
 								});
 							}else{
 								output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
-							} */
+							}
 							output += "</div>";
 							output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
-							output += "<p class='tm-home-box-3-description' id='infoTextArea'><b>주소</b> : "+data[i].cAddress+"</p>";
+							output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+							output += "<span style='font-size:23px;'>"+data[i].cName +"</span><br>";
+							$.ajax({
+								url:"detailHotelInformation.sub",
+								type:"GET",
+								data:{contenttypeid:contenttypeid, contentid:contentid},
+								dataType:"json",
+								async:false,
+								success:function(ddate){
+									var overview = ddate.response.body.items.item.overview;
+									if(overview.length > 190){
+										output += overview.substring(0, 191) + "...";
+									}else{
+										output += overview;
+									}
+								},error:function(ddate){console.log(ddate);}
+							});
+							output += "</p>";
 							output += "<div class='tm-home-box-2-container'>";
-							output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-							output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3' onclick='detailView("+contentid+","+contenttypeid+","+cid+");'>"+data[i].cName+"</span></a>";
+							output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'>";
+							output += "<span class='tm-home-box-2-description box-3' onclick='detailView("+contentid+","+contenttypeid+","+cid+");'>";
+							if(data[i].grade > 0 && data[i].grade <= 0.5){
+								output += "<i class='far fa-star-half-alt' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+							}
+							if(data[i].grade > 0.5 && data[i].grade <= 1){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 1 && data[i].grade <= 1.5){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star-half-alt' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 1.5 && data[i].grade <= 2){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 2 && data[i].grade <= 2.5){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star-half-alt' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 2.5 && data[i].grade <= 3){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 3 && data[i].grade <= 3.5){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star-half-alt' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 3.5 && data[i].grade <= 4){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 4 && data[i].grade <= 4.5){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star-half-alt' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 4.5 && data[i].grade <= 5){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+							}
+							output += "</span></a>";
 							output += "</div></div></div>";
 							document.getElementById("viewArea").innerHTML += output;
 						}
@@ -448,70 +538,6 @@
 				});
 			}
 			
-			/* function searchHotelPage(){
-				
-				$.ajax({
-					url:"searchAreaHotel.sub",
-					type:"GET",
-					data:{areaCode:areaCode, sigunguCode:sigunguCode},
-					dataType:"json",
-					success:function(data){
-						console.log(data);
-						var myData = data.response.body.items.item;
-						var viewArea = $("#viewArea");
-						viewArea.html("");
-						var output = "";
-						if(myData == null){
-							output += "<div align='center'><h1>정보가 없습니다.</h1></div>";
-							document.getElementById("viewArea").innerHTML += output;
-						}else if(data.response.body.totalCount == 1){
-							contenttypeid = myData.contenttypeid;
-							contentid = myData.contentid;
-							output += "<div class='tm-home-box-3' id='detailHover'>";
-							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
-							if(myData.firstimage == null){
-								output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
-							}else{
-								output += "<img src="+myData.firstimage+" alt='image' class='img-responsive1'>";
-							}
-							output += "</div>";
-							output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
-							output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData.addr1+"</p>";
-							output += "<div class='tm-home-box-2-container'>";
-							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-							output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
-							output += "</div></div></div>";
-							document.getElementById("viewArea").innerHTML += output;
-						}else{
-							for(var i = 0; i < myData.length; i++){
-								contenttypeid = myData[i].contenttypeid;
-								contentid = myData[i].contentid;
-								output = "";
-								output += "<div class='tm-home-box-3' id='detailHover'>";
-								output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
-								if(myData[i].firstimage == null){
-									output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
-								}else{
-									output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
-								}
-								output += "</div>";
-								output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
-								output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData[i].addr1+"</p>";
-								output += "<div class='tm-home-box-2-container'>";
-								output += "<input type='hidden' value="+contenttypeid+">";
-								output += "<input type='hidden' value="+contentid+">";
-								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-								output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
-								output += "</div></div></div>";
-								document.getElementById("viewArea").innerHTML += output;
-							}
-						}
-					},
-					error:function(data){
-						console.log(data);
-					}
-				});
-			} */
 			</script>
 			<c:if test="${!empty sessionScope.loginUser}">
 			<script>
@@ -528,8 +554,10 @@
 							// 0일시, 새로 찜에 추가 => insert요청.
 							if(data > 0){
 								deleteDibsHotel(contentid, cid);
+								
 							}else{
 								insertDibsHotel(contentid, cid);
+								$(this).children("i").addClass("fa fa-heart");
 							}
 						},
 						error:function(data){
@@ -603,7 +631,7 @@
 							output = "";
 							output += "<div class='tm-home-box-3' id='detailHover'>";
 							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+","+cid+");'>";
-							if(data[i].firstimage == null){
+							/* if(data[i].firstimage == null){
 								//hotelImageLoad(contentid);
 								$.ajax({
 									url:"hotelImageLoad.sub",
@@ -622,13 +650,102 @@
 								});
 							}else{
 								output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
-							}
+							} */
 							output += "</div>";
 							output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
-							output += "<p class='tm-home-box-3-description' id='infoTextArea'><b>주소</b> : "+data[i].cAddress+"</p>";
+							output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+							output += "<span style='font-size:23px;'>"+data[i].cName +"</span><br>";
+							$.ajax({
+								url:"detailHotelInformation.sub",
+								type:"GET",
+								data:{contenttypeid:contenttypeid, contentid:contentid},
+								dataType:"json",
+								async:false,
+								success:function(ddate){
+									var overview = ddate.response.body.items.item.overview;
+									if(overview.length > 190){
+										output += overview.substring(0, 191) + "...";
+									}else{
+										output += overview;
+									}
+								},error:function(ddate){console.log(ddate);}
+							});
+							output += "</p>";
 							output += "<div class='tm-home-box-2-container'>";
-							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-							output += "<a onclick='detailView("+contentid+","+contenttypeid+","+cid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+data[i].cName+"</span></a>";
+							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							output += "<a onclick='detailView("+contentid+","+contenttypeid+","+cid+");' class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'>";
+							output += "<span class='tm-home-box-2-description box-3'>";
+							if(data[i].grade > 0 && data[i].grade <= 0.5){
+								output += "<i class='far fa-star-half-alt' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+							}
+							if(data[i].grade > 0.5 && data[i].grade <= 1){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 1 && data[i].grade <= 1.5){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star-half-alt' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 1.5 && data[i].grade <= 2){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 2 && data[i].grade <= 2.5){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star-half-alt' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 2.5 && data[i].grade <= 3){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 3 && data[i].grade <= 3.5){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star-half-alt' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 3.5 && data[i].grade <= 4){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 4 && data[i].grade <= 4.5){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star-half-alt' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 4.5 && data[i].grade <= 5){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+							}
+							output += "</span></a>";
 							output += "</div></div></div>";
 							document.getElementById("viewArea").innerHTML += output;
 							//hotelImageLoad(contentid);
@@ -649,6 +766,12 @@
 				
 				$(".hotelSearchMoney").click(function(){
 					var value = $("input[name=hotelSearchConditionMoney]:checked").val();
+					console.log(value);
+					orderByHotel(value);
+				});
+				
+				$(".hotelSearchAvg").click(function(){
+					var value = $("input[name=hotelAvg]:checked").val();
 					console.log(value);
 					orderByHotel(value);
 				});

@@ -115,6 +115,9 @@
 						if(sessionStorage.getItem("sigunguCode") == 0){
 							sigunguCode = "";
 						}
+						if(sessionStorage.getItem("cat3") != 0){
+							cat3 = "";
+						}
 						$.ajax({
 							url:"searchAreaGame.sub",
 							type:"GET",

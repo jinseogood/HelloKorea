@@ -68,8 +68,8 @@ public class SubInformationController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
-		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-//		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
+//		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
 		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
@@ -109,8 +109,8 @@ public class SubInformationController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchStay?ServiceKey=";
-		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-//		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
+//		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
 		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
@@ -148,8 +148,8 @@ public class SubInformationController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=";
-		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-//		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
+//		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
 		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
@@ -188,8 +188,8 @@ public class SubInformationController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=";
-		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-//		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
+//		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
 		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
@@ -229,8 +229,8 @@ public class SubInformationController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
-		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-//		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
+//		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
 		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
@@ -271,8 +271,8 @@ public class SubInformationController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailImage?ServiceKey=";
-		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-//		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
+//		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
 		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
@@ -306,8 +306,8 @@ public class SubInformationController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailIntro?ServiceKey=";
-		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-//		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
+//		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
 		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
@@ -341,8 +341,8 @@ public class SubInformationController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailInfo?ServiceKey=";
-		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-//		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
+//		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
 		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
@@ -376,8 +376,8 @@ public class SubInformationController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchStay?ServiceKey=";
-		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-//		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
+//		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
 		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
@@ -415,8 +415,8 @@ public class SubInformationController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchStay?ServiceKey=";
-		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-//		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
+//		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
 		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
@@ -454,8 +454,8 @@ public class SubInformationController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchStay?ServiceKey=";
-		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
-//		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
+//		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
 		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
@@ -488,26 +488,27 @@ public class SubInformationController {
 	
 	
 	@RequestMapping(value="searchAreaFood.sub")
-	public void searchAreaFood(HttpServletRequest request, HttpServletResponse response, @RequestParam int areaCode, @RequestParam String sigunguCode, @RequestParam String cat3) throws IOException{
+	public void searchAreaFood(HttpServletRequest request, HttpServletResponse response, @RequestParam String pageNo, @RequestParam int areaCode, @RequestParam String sigunguCode, @RequestParam String cat3) throws IOException{
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=";
-		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+//		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
 		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
 		parameter = parameter + "&" + "contentTypeId=39";
 		parameter = parameter + "&" + "areaCode="+areaCode;
 		parameter = parameter + "&" + "sigunguCode="+sigunguCode;
-		parameter = parameter + "&" + "cat1=A05&cat2=A0502";
+		parameter = parameter + "&" + "cat1=A05&cat2=";
 		parameter = parameter + "&" + "cat3="+cat3;
 		parameter = parameter + "&" + "listYN=Y";
 		parameter = parameter + "&" + "MobileOS=ETC";
 		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
 		parameter = parameter + "&" + "arrange=A";
 		parameter = parameter + "&" + "numOfRows=12";
-		parameter = parameter + "&" + "pageNo=1";
+		parameter = parameter + "&" + "pageNo="+pageNo;
 		parameter = parameter + "&" + "_type=json";
 		
 		addr = addr + serviceKey + parameter;
@@ -533,7 +534,8 @@ public class SubInformationController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
-		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+//		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
 		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
@@ -574,7 +576,8 @@ public class SubInformationController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailImage?ServiceKey=";
-		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+//		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
 		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
@@ -608,7 +611,8 @@ public class SubInformationController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailIntro?ServiceKey=";
-		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+//		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
 		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
@@ -642,7 +646,8 @@ public class SubInformationController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailImage?ServiceKey=";
-		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+//		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
 		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
@@ -676,7 +681,8 @@ public class SubInformationController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=";
-		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+//		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
 		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
@@ -717,7 +723,8 @@ public class SubInformationController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
-		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+//		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
 		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
@@ -758,7 +765,8 @@ public class SubInformationController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailImage?ServiceKey=";
-		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+//		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
 		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
@@ -792,7 +800,8 @@ public class SubInformationController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailIntro?ServiceKey=";
-		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+//		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
 		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
@@ -826,7 +835,8 @@ public class SubInformationController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=";
-		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+//		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
 		String parameter = "";
 		
 		PrintWriter out = response.getWriter();
@@ -867,7 +877,8 @@ public class SubInformationController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=";
-		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+//		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
+		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
 		String parameter = "";
 		
 		PrintWriter out = response.getWriter();

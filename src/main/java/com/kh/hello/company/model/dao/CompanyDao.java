@@ -16,7 +16,7 @@ public interface CompanyDao {
 
 	ArrayList<Room2> selectRoomList(SqlSessionTemplate sqlSession, Room2 roomList);
 
-	int insertReservation(SqlSessionTemplate sqlSession, Reservation2 reservation);
+	Reservation2 insertReservation(SqlSessionTemplate sqlSession, Reservation2 reservation);
 
 	int selectCurrval(SqlSessionTemplate sqlSession, Reservation2 reservation);
 
@@ -33,6 +33,14 @@ public interface CompanyDao {
 	List<Reservations> insertReservations(SqlSessionTemplate sqlSession, List<Reservations> list);
 
 	ArrayList<Company2> selectOrderByGrade(SqlSessionTemplate sqlSession, Company2 cp);
+
+	ArrayList<Company2> selectOrderByTwoAvg(SqlSessionTemplate sqlSession, Company2 cp);
+
+	ArrayList<Company2> selectOrderByThreeAvg(SqlSessionTemplate sqlSession, Company2 cp);
+
+	ArrayList<Company2> selectOrderByFourAvg(SqlSessionTemplate sqlSession, Company2 cp);
+
+	ArrayList<Company2> selectOrderByFiveAvg(SqlSessionTemplate sqlSession, Company2 cp);
 
 
 
