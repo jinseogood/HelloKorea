@@ -198,6 +198,18 @@ public class BoardDaoImpl implements BoardDao{
 	public int updateThumbsR(SqlSessionTemplate sqlSession, Thumbs thumb) {
 		
 		return sqlSession.update("Thumbs.updateThumbsR", thumb);
+	}
+
+	@Override
+	public int selectReviewCount2(SqlSessionTemplate sqlSession, int bid) {
+		
+		return sqlSession.selectOne("Board.selectReviewCount2", bid);
+	}
+
+	@Override
+	public int selectReplyCount(SqlSessionTemplate sqlSession, int bid) {
+		
+		return sqlSession.selectOne("Reply.selectReplyCount", bid);
 	} 
 
 }

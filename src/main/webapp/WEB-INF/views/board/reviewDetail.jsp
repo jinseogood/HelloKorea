@@ -146,7 +146,7 @@ body{ margin:50px 0px; }
             			<span>|</span>
             			&nbsp;
             			<span class="ReviewUpDate" style = "padding-top:5px">
-            				<i class="fa fa-thumbs-o-up" style = "font-size:14px; padding-top:5px">&nbsp;${ b.likey }</i>
+            				<i class="fa fa-thumbs-o-up" style = "font-size:14px; padding-top:5px; cursor:pointer" onclick = "RUp(this);">&nbsp;${ b.likey }</i>
             				<i class="fa fa-flag" style = "font-size:14px; padding-top:5px; float:right; cursor:pointer"><a onclick="reportWrite(this);"> 신고하기</a></i>
             				<input type = "hidden" value="${ b.m_id }">
             				<input type = "hidden" value="${ b.bid }">
@@ -188,6 +188,7 @@ body{ margin:50px 0px; }
             					${ list.modify_date }
             				</span>
             				<span>|</span> ${ list.bid }님의 답변
+            				<i class="fa fa-thumbs-o-up" style = "font-size:14px; padding-top:5px; cursor:pointer" onclick = "AUp(this);">&nbsp;${ b.likey }</i>
             				<i class="fa fa-flag" style = "font-size:14px; padding-top:5px; float:right; cursor:pointer"><input type = "hidden" value = "${ list.m_id }"><input type = "hidden" value = "${ list.reply_id }"><a onclick="reportWriteA(this)"> 신고하기</a></i>
             				</div>
          					</c:forEach>
@@ -227,6 +228,68 @@ function insertA(element){
 	})
 	}else{
 		alert('로그인이 필요한 서비스입니다.');
+	}
+}
+
+function RUp(element){
+	var m_id = $(element).parent().children().eq(2).val();
+	var ref_id = $(element).parent().children().eq(3).val();
+
+	if(${ sessionScope.loginUser != null }){ 
+		if(${!sessionScope.loginUser.mType.equals('admin')}){
+	
+			if(m_id != ${sessionScope.loginUser.mId}){
+				$.ajax({
+					url:"thumbsR.bo",
+					type:"post",
+					data:{target_id:m_id, ref_id:ref_id},
+					dataType:"json",
+					success:function(data){
+						var t_Count = data.thumbsCount;
+						$(element).text(" "+t_Count);
+						alert(data.msg);
+						
+					},error:function(data){
+						alert(data.msg);
+					}
+				})
+		}else{
+			alert("본인 글에는 (도움이 되었어요)를 할 수 없습니다");
+		}
+		}
+	}else{
+		alert("로그인이 필요한 기능 입니다.");
+	}
+}
+
+function AUp(element){
+	var m_id = $(element).parent().children().eq(3).children().eq(0).val();
+	var reply_id = $(element).parent().children().eq(3).children().eq(1).val();
+
+	if(${ sessionScope.loginUser != null }){ 
+		if(${!sessionScope.loginUser.mType.equals('admin')}){
+	
+			if(m_id != ${sessionScope.loginUser.mId}){
+				$.ajax({
+					url:"thumbsA.bo",
+					type:"post",
+					data:{target_id:m_id, reply_id:reply_id},
+					dataType:"json",
+					success:function(data){
+						var t_Count = data.thumbsCount;
+						$(element).text(" "+t_Count);
+						alert(data.msg);
+						
+					},error:function(data){
+						alert(data.msg);
+					}
+				})
+		}else{
+			alert("본인 글에는 (도움이 되었어요)를 할 수 없습니다");
+		}
+		}
+	}else{
+		alert("로그인이 필요한 기능 입니다.");
 	}
 }
 

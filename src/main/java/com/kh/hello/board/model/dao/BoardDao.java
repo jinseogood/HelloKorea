@@ -67,4 +67,8 @@ public interface BoardDao {
 
 	int updateThumbsR(SqlSessionTemplate sqlSession, Thumbs thumb);
 
+	int selectReviewCount2(SqlSessionTemplate sqlSession, int bid);
+
+	int selectReplyCount(SqlSessionTemplate sqlSession, int bid);
+
 }

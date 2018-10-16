@@ -61,9 +61,12 @@ public interface BoardService{
 
 	int updateReply(int reply_id);
 
-
 	int updateThumbsReview(int ref_id);
 
-	int updateThumbsR(Thumbs thumb); 
+	int updateThumbsR(Thumbs thumb);
+
+	int selectReviewCount2(int bid);
+
+	int selectReplyCount(int bid); 
 
 } 
