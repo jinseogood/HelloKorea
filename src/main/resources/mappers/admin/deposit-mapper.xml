@@ -214,4 +214,29 @@
              </otherwise>
          </choose>
       </select>
+      
+      <!-- 엑셀 파일 셀렉 -->
+      <select id="listExcelDownload" resultMap="depositResultSet">
+	      SELECT C_ID, C_NAME, BANK_NUM, ROUND(PRICE*0.85) AS D_AMOUNT, TO_CHAR(SYSDATE,'YYYY-MM') || '-05' AS D_DATE
+         FROM COMPANY C
+         JOIN MEMBER M ON(C.M_ID=M.M_ID)
+         JOIN ( SELECT C_ID, SUM(PRICE) AS PRICE              
+                FROM ( SELECT PD.PD_ID, PD.PRICE, P.PA_ID, RE.R_SDATE, RE.R_EDATE, RO.R_ID, C.C_ID, C.C_NAME, M.BANK_NUM
+                       FROM PAY_DETAIL PD
+                       JOIN PAYMENT P ON(PD.PA_ID=P.PA_ID)
+                       JOIN RESERVATION RE ON(RE.PA_ID=PD.PA_ID)
+                       JOIN ROOM RO ON(RE.R_ID=RO.R_ID)
+                       JOIN COMPANY C ON(RO.C_ID=C.C_ID)
+                       JOIN MEMBER M ON(C.M_ID=M.M_ID)
+                       WHERE PD_METHOD = 'C'
+                       AND TO_CHAR(RE.R_EDATE,'YYYYMM') = TO_CHAR(ADD_MONTHS(SYSDATE,-1),'YYYYMM')
+                       AND PA_ID NOT IN ( SELECT PA_ID
+                                          FROM PAY_DETAIL
+                                          WHERE PD_TYPE = 'R'))                    
+                GROUP BY C_ID) USING(C_ID)
+         WHERE C_ID NOT IN( SELECT C_ID
+                            FROM DEPOSIT_HISTORY
+                            WHERE TO_CHAR(D_DATE,'YYYYMM') = TO_CHAR(SYSDATE,'YYYYMM'))
+         ORDER BY C_ID
+      </select>
 </mapper>

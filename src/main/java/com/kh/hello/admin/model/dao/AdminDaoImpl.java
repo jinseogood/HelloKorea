@@ -1,6 +1,7 @@
 package com.kh.hello.admin.model.dao;
     
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
@@ -601,6 +602,11 @@ public class AdminDaoImpl implements AdminDao{
 	@Override
 	public int updateMemberStatus2(SqlSessionTemplate sqlSession) {
 		return sqlSession.update("Blacklist.updateMemberStatus2");
+	}
+
+	@Override
+	public ArrayList<Deposit> listExcelDownload(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("Deposit.listExcelDownload");
 	}
 
 }

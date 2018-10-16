@@ -264,7 +264,7 @@
 			<artifactId>spring-social-facebook</artifactId>
 			<version>2.0.3.RELEASE</version>
 		</dependency>
-    
+
 		<!-- Google Login -->
 		<dependency>
 			<groupId>org.springframework.social</groupId>
@@ -276,7 +276,7 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.5.3</version>
 		</dependency>
-		
+
 		<!-- Mail 관련 -->
 		<!-- smtp -->
 		<dependency>
@@ -284,19 +284,19 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 			<version>2.0.1.RELEASE</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 			<version>3.2.8.RELEASE</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
 			<version>1.4</version>
 		</dependency>
-		
+
 		<!-- Velocity -->
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
@@ -311,6 +311,21 @@
           <artifactId>gson</artifactId>
           <version>2.8.0</version>
       </dependency>
+
+		<!-- EXCEL -->
+		<!-- excel xls -->
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.13</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.13</version>
+		</dependency>
 
 	</dependencies>
 	<build>

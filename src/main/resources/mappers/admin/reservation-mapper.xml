@@ -28,7 +28,8 @@
 		JOIN ROOM RO ON(R.R_ID=RO.R_ID)
 		JOIN COMPANY C ON(RO.C_ID=C.C_ID)
 		JOIN PAYMENT PA ON(R.PA_ID = PA.PA_ID)
-		RIGHT OUTER JOIN PAY_DETAIL PD ON(PA.PA_ID = PD.PA_ID))
+		RIGHT OUTER JOIN PAY_DETAIL PD ON(PA.PA_ID = PD.PA_ID)
+		WHERE PD_METHOD = 'C')
 	</select>
 
 	<!-- 예약 내역 리스트 조회용 쿼리문 -->
@@ -40,6 +41,7 @@
 		JOIN COMPANY C ON(RO.C_ID=C.C_ID)
 		JOIN PAYMENT PA ON(R.PA_ID = PA.PA_ID)
 		RIGHT OUTER JOIN PAY_DETAIL PD ON(PA.PA_ID = PD.PA_ID)
+		WHERE PD_METHOD = 'C'
 		ORDER BY O_ID DESC, PD_TYPE DESC
 	</select>
 
@@ -53,15 +55,16 @@
 		JOIN COMPANY C ON(RO.C_ID=C.C_ID)
 		JOIN PAYMENT PA ON(R.PA_ID = PA.PA_ID)
 		RIGHT OUTER JOIN PAY_DETAIL PD ON(PA.PA_ID = PD.PA_ID)
+		WHERE PD_METHOD = 'C'
 		<choose>
 			<when test="oId != -99">
-				WHERE O_ID = #{oId}
+				AND O_ID = #{oId}
 			</when>
 			<when test="cName != null">
-				WHERE C_NAME LIKE '%' || #{cName} || '%'
+				AND C_NAME LIKE '%' || #{cName} || '%'
 			</when>
 			<otherwise>
-				WHERE PA_NAME LIKE '%' || #{paName}|| '%'
+				AND PA_NAME LIKE '%' || #{paName}|| '%'
 			</otherwise>
 		</choose>
 		)
@@ -76,15 +79,16 @@
 		JOIN COMPANY C ON(RO.C_ID=C.C_ID)
 		JOIN PAYMENT PA ON(R.PA_ID = PA.PA_ID)
 		RIGHT OUTER JOIN PAY_DETAIL PD ON(PA.PA_ID = PD.PA_ID)
+		WHERE PD_METHOD = 'C'
 		<choose>
 			<when test="oId != -99">
-				WHERE O_ID = #{oId}
+				AND O_ID = #{oId}
 			</when>
 			<when test="cName != null">
-				WHERE C_NAME LIKE '%' || #{cName} || '%'
+				AND C_NAME LIKE '%' || #{cName} || '%'
 			</when>
 			<otherwise>
-				WHERE PA_NAME LIKE '%' || #{paName}|| '%'
+				AND PA_NAME LIKE '%' || #{paName}|| '%'
 			</otherwise>
 		</choose>
 		ORDER BY R.O_ID DESC
@@ -101,7 +105,8 @@
 		       JOIN PAYMENT PA ON(R.PA_ID = PA.PA_ID)
 		       RIGHT OUTER JOIN PAY_DETAIL PD ON(PA.PA_ID = PD.PA_ID)
                WHERE TO_CHAR(R_SDATE,'YYYYMMDD') <![CDATA[>]]>= #{fromDate}
-               AND TO_CHAR(R_EDATE,'YYYYMMDD') <![CDATA[<]]>= #{toDate} )
+               AND TO_CHAR(R_EDATE,'YYYYMMDD') <![CDATA[<]]>= #{toDate}
+               AND PD_METHOD = 'C')
 	</select>
 	<!-- 예약 내역 날짜 검색 -->
 	<select id="selectSearchDateReservationList" resultMap="reservationResultSet">
@@ -114,6 +119,7 @@
 		RIGHT OUTER JOIN PAY_DETAIL PD ON(PA.PA_ID = PD.PA_ID)
         WHERE TO_CHAR(R_SDATE,'YYYYMMDD') <![CDATA[>]]>= #{fromDate}
         AND TO_CHAR(R_EDATE,'YYYYMMDD') <![CDATA[<]]>= #{toDate}
+        AND PD_METHOD = 'C'
         ORDER BY R.O_ID DESC
 	</select>
 	

@@ -1,14 +1,17 @@
 package com.kh.hello.admin.controller;
        
 import java.io.File;
+import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
@@ -19,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.View;
 
 import com.kh.hello.admin.model.service.AdminService;
 import com.kh.hello.admin.model.vo.Approval;
@@ -750,22 +754,24 @@ public class AdminController {
 	//업체에 입금하기
 	@RequestMapping("makeDeposit.ad")
 	public String makeDeposit(String cId, String dAmount, Model model){
-		Deposit d = new Deposit();
+		System.out.println("오니");
+		
+		/*Deposit d = new Deposit();
 		d.setcId(Integer.parseInt(cId));
 		d.setdAmount(Integer.parseInt(dAmount));
-		int result = as.insertDepositHistory(d);
+		int result = as.insertDepositHistory(d);*/
 		
-		if(result > 0){
+		//if(result > 0){
 			int listCount = as.getDepositListCount();
 			PageInfo pi = Pagination.getPageInfo(1, listCount);		
 			ArrayList<Deposit> list = as.selectDepositList(pi);
 			model.addAttribute("list", list);
 			model.addAttribute("pi", pi);
 			return "admin/deposit";
-		}else{
+		/*}else{
 			model.addAttribute("msg","업체 입금 실패");
 			return "common/errorPage";
-		}
+		}*/
 		
 	}
 	//업체 입금 내역 보기
@@ -979,4 +985,16 @@ public class AdminController {
 		hmap.put("expirationList", expirationList);
 		return hmap;
 	}
+	
+	//입금처리 엑셀파일 다운로드용
+	@RequestMapping(value = "/excelDownload")
+    public View excelDownload(HttpServletRequest request, HttpServletResponse response, Model model)
+            throws Exception {
+         
+        ArrayList<Deposit> list = as.listExcelDownload();
+        model.addAttribute("list", list);
+
+        return new listExcelDownload();
+    }
+
 }

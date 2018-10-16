@@ -130,15 +130,17 @@ table.type09 td {
 	</script>
 
 	<div class="tableArea" align="center">
+	<div align="right" style="width:80%">
+	<button id="btn-excel" class="btn btn-success">Excel Download</button>
+	</div>
 <table class="type09">
     <thead>
     <tr>
         <th style="width:9%">번호</th>
-        <th style="width:37%">업체명</th>
-        <th style="width:15%">계좌번호</th>
+        <th style="width:43%">업체명</th>
+        <th style="width:20%">계좌번호</th>
         <th style="width:15%">입금액</th>
         <th style="width:12%">입금예정일</th>
-        <th style="width:12%">입금처리</th>
     </tr>
     </thead>
     <tbody>
@@ -154,7 +156,7 @@ table.type09 td {
         <td>${d.bankNum}</td>
         <td>${d.dAmount}원</td>
         <td>${d.dDate}</td>
-        <td><button class="btn btn-success" onclick="makeDeposit(${d.cId},${d.dAmount})">입금하기</button></td>
+        <%-- <td><button class="btn btn-success" onclick="makeDeposit(${d.cId},${d.dAmount})">입금하기</button></td> --%>
     </tr>
     </c:forEach>
     </tbody>
@@ -193,6 +195,7 @@ table.type09 td {
             </c:if>
             </ul>
     </div>
+    
 	<jsp:include page="../common/footer.jsp"/>
 	
 	<script>
@@ -200,5 +203,18 @@ table.type09 td {
 		location.href="makeDeposit.ad?cId="+cId+"&dAmount="+dAmount;
 	}
 	</script>
+	
+	<script type="text/javascript">
+$(function(){
+    $("#btn-excel").on("click", function () {
+    	if(confirm('엑셀 파일을 다운 받아 일괄 입금처리를 진행하시겠습니까?')){
+    	    location.href="excelDownload";
+    	    
+    	    
+    	}
+    	
+    });
+});
+</script>
 </body>
 </html>

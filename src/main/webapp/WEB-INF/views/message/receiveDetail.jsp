@@ -162,7 +162,7 @@ label{
     		  var mId = $("#mId").val();
     		  var msgId = $("#msgId").val();
     		  location.href="deleteMessage?msgId="+msgId+"&mId="+mId;
-    		}
+    		  if (confirm('정말 삭제하시겠습니까?')) {
       }
   </script>
 </body>
