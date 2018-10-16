@@ -1,6 +1,7 @@
 package com.kh.hello.company.model.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.hello.company.model.dao.CompanyDao;
 import com.kh.hello.company.model.vo.Company2;
 import com.kh.hello.company.model.vo.Reservation2;
+import com.kh.hello.company.model.vo.Reservations;
 import com.kh.hello.company.model.vo.Room2;
 
 @Service
@@ -74,6 +76,12 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public ArrayList<Company2> selectOrderByMoney3(Company2 cp) {
 		return cd.selectOrderByMoney3(sqlSession, cp);
+	}
+
+//	List로 객실주문 insert.
+	@Override
+	public List<Reservations> insertReservations(List<Reservations> list) {
+		return cd.insertReservations(sqlSession, list);
 	}
 
 
