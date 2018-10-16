@@ -64,7 +64,7 @@ button {
 				</tr>
 				<tr>
 					<td><input type="text" name="nickname" id="nickname"></td>
-					<td><a onclick="nicknameCheck()"></a></td>
+					<td><a onclick="nicknameCheck()">중복확인</a></td>
 				</tr>
 				<tr>
 
@@ -219,8 +219,7 @@ button {
 	</div>
 	<script>
 		function nicknameCheck(){
-				var nickCh = $("#nickname").val();
-				
+				var nickname = $("#nickname").val();
 				$.ajax({
 					url:"nicknameCheck.me",
 					type:"post",
@@ -231,7 +230,7 @@ button {
 						if(data ==0){
 							nicknameCheck();
 						}else{
-							alert("중복되는  email입니다");
+							alert("중복되는  닉네임입니다");
 						}
 					},
 					error:function(){

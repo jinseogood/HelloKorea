@@ -101,7 +101,7 @@
 	<select id="nicknameCheck" parameterType="java.lang.String" resultType="_int">
 		SELECT COUNT(*)
 		FROM MEMBER
-		WHERE NICKNAME=#{nickname} AND STATUS ='Y'
+		WHERE NICKNAME LIKE #{nickname} AND STATUS ='Y'
 	</select>
 	
 </mapper>
