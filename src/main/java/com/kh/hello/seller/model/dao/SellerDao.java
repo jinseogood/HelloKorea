@@ -10,6 +10,7 @@ import com.kh.hello.seller.model.vo.Company;
 import com.kh.hello.seller.model.vo.OneProduct;
 import com.kh.hello.seller.model.vo.Registration;
 import com.kh.hello.seller.model.vo.RegistrationHistory;
+import com.kh.hello.seller.model.vo.Revenue;
 import com.kh.hello.seller.model.vo.SellerReservation;
 import com.kh.hello.seller.model.vo.Room;
 import com.kh.hello.seller.model.vo.SearchProduct;
@@ -115,5 +116,24 @@ public interface SellerDao {
 
 	//예약 상세 조회
 	ArrayList<SellerOneReservation> selectOneReservation(int oId, SqlSessionTemplate sqlSession);
+
+	//수익 전체 조회 리스트 카운트
+	int getRevenueListCount(int mId, SqlSessionTemplate sqlSession);
+
+	//수익 전체 조회 리스트
+	ArrayList<Revenue> selectRevenueList(int mId, PageInfo pi, SqlSessionTemplate sqlSession);
+
+	//수익 기간 검색 조회 리스트 카운트
+	int getSearchDateRevenueListCount(int mId, String toDate, String fromDate, SqlSessionTemplate sqlSession);
+
+	//수익 기간 검색 조회 리스트
+	ArrayList<Revenue> selectSearchDateRevenueList(int mId, String toDate, String fromDate, PageInfo pi,
+			SqlSessionTemplate sqlSession);
+
+	//수익 검색 조회 리스트 카운트
+	int getSearchWordRevenueListCount(int mId, Revenue r, SqlSessionTemplate sqlSession);
+
+	//수익 검색 조회 리스트
+	ArrayList<Revenue> selectSearchWordRevenueList(int mId, Revenue r, PageInfo pi, SqlSessionTemplate sqlSession);
 
 }

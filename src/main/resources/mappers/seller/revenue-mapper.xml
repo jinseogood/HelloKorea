@@ -1,0 +1,59 @@
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Revenue">
+	<resultMap type="Revenue" id="revenueResultSet">
+		<id property="dhId" column="DH_ID"/>
+		<result property="cId" column="C_ID"/>
+		<result property="cName" column="C_NAME"/>
+		<result property="rCount" column="O_ID"/>
+		<result property="rDate" column="D_DATE"/>
+		<result property="price" column="PRICE"/>
+	</resultMap>
+	
+	<!-- 수익 전체 조회 리스트 카운트 -->
+	<select id="getRevenueListCount" parameterType="_int">
+		SELECT COUNT(*)
+		FROM DEPOSIT_HISTORY
+		JOIN COMPANY USING(C_ID)
+		WHERE M_ID = #{mId}
+		GROUP BY TO_CHAR(D_DATE, 'YYYY-MM')
+	</select>
+	
+	<!-- 수익 전체 조회 리스트 -->
+	<select id="selectRevenueList" resultMap="revenueResultSet" parameterType="_int">
+		SELECT DH_ID, C_ID, C_NAME, TO_CHAR(D_DATE, 'YYYY-MM') D_DATE, SUM(PRICE)
+		FROM DEPOSIT_HISTORY
+		JOIN COMPANY USING(C_ID)
+		JOIN ROOM USING(C_ID)
+		JOIN RESERVATION USING(R_ID)
+		JOIN PAYMENT USING(PA_ID)
+		JOIN PAY_DETAIL USING(PA_ID)
+		WHERE COMPANY.M_ID = #{mId}
+		GROUP BY DH_ID, C_ID, C_NAME, TO_CHAR(D_DATE, 'YYYY-MM'), O_ID, PA_ID
+	</select>
+	
+	<!-- 수익 기간 검색 조회 리스트 카운트 -->
+	<select id="getSearchDateRevenueListCount" parameterType="arraylist">
+	
+	</select>
+	
+	<!-- 수익 기간 검색 조회 리스트 -->
+	<select id="selectSearchDateRevenueList" resultType="revenueResultSet" parameterType="arraylist">
+	
+	</select>
+	
+	<!-- 수익 검색 조회 리스트 카운트 -->
+	<select id="getSearchWordRevenueListCount" parameterType="arraylist">
+	
+	</select>
+	
+	<!-- 수익 검색 조회 리스트 -->
+	<select id="selectSearchWordRevenueList" resultType="revenueResultSet" parameterType="arraylist">
+	
+	</select>
+	
+	
+</mapper>
