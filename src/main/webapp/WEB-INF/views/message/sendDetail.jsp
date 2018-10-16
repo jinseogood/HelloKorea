@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,11 @@
 <link href="${ contextPath }/resources/css/templatemo-style.css" rel="stylesheet">
 <title>Message</title>
 <style>
-
+@font-face { font-family: 'Chosunilbo_myungjo'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Chosunilbo_myungjo.woff') format('woff'); font-weight: normal; font-style: normal; }
+	
+	body, div, p, a, h1,h2,h3,h4, input, select {
+		font-family: Chosunilbo_myungjo,meiryo,Chosunilbo_myungjo !important
+	}
 
 .msgTable{
    width:80%;
@@ -63,6 +68,7 @@ label{
 .form-control[readonly]{
     background-color:white;
 }
+
 </style>
 </head>
 <body>
@@ -99,8 +105,8 @@ label{
 
 </div>
 <div class="msgTable">
-<label for="title" class="col-lg-2 col-sm-2 control-label">&nbsp;제목</label>
-<div class="col-lg-10">
+                        <label for="title" class="col-lg-2 col-sm-2 control-label">&nbsp;제목</label>
+                        <div class="col-lg-10">
 						<input type="text" id="title" class="form-control" placeholder="${m.title}" readonly/> 	
 						</div>
 						<label for="nickname" class="col-lg-2 col-sm-2 control-label">&nbsp;받는이</label>
@@ -114,7 +120,7 @@ label{
 						<label for="content" class="col-lg-2 col-sm-2 control-label">&nbsp;내용</label>
 						<div class="col-lg-10">
 							<textarea id="content" class="form-control" rows="5" placeholder="${m.content}" readonly></textarea>
-						</div>
+						</div> 
 						<div class="form-group" align="center" id="btnArea">
 						    <input type="hidden" id="mId" value="${m.sendId}">
 						    <button class="btn btn-success" onclick="sendMsg()">&nbsp;목록&nbsp;</button>

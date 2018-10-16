@@ -19,7 +19,11 @@
 <link href="${ contextPath }/resources/css/templatemo-style.css" rel="stylesheet">
 <title>Message</title>
 <style>
-
+@font-face { font-family: 'Chosunilbo_myungjo'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Chosunilbo_myungjo.woff') format('woff'); font-weight: normal; font-style: normal; }
+	
+	body, div, p, a, h1,h2,h3,h4, input, select {
+		font-family: Chosunilbo_myungjo,meiryo,Chosunilbo_myungjo !important
+	}
 
 .msgTable{
    width:80%;
@@ -98,7 +102,7 @@ th, td {
 <div class="msgTable">
 <table class="table table-condensed" id="msgTable">
     <tr>
-        <th><input type="hidden" id="mId" value="${list.get(0).sendId}"></th>
+        <th><input type="hidden" id="mId" value="${mId}"></th>
         <th style="width: 130px">제목</th>
         <th style="width: 67px">받는이</th>
         <th style="width: 67px">보낸 날짜</th>
