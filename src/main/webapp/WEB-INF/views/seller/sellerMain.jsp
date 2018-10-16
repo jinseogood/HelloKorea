@@ -65,7 +65,7 @@
     			<div class="sm-st clearfix">
     				<span class="sm-st-icon st-red"><i class="fa fa-check-square-o"></i></span>
     				<div class="sm-st-info">
-    					<span><a href="reservationView.sell">${ rCount }건</a></span>
+    					<span><a href="reservation.sell">${ rCount }건</a></span>
        					예약 내역
     				</div>
     			</div>

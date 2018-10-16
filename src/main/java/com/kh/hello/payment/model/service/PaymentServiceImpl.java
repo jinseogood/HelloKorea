@@ -67,4 +67,10 @@ public class PaymentServiceImpl implements PaymentService{
 		return pd.selectReservation(paId, sqlSession);
 	}
 
+	//회원 포인트 조회
+	@Override
+	public int selectUserPoint(int mId) {
+		return pd.selectUserPoint(mId, sqlSession);
+	}
+
 }

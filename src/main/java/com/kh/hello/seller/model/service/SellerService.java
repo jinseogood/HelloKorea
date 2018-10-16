@@ -21,6 +21,9 @@ public interface SellerService {
 	//판매자 메인페이지 메인 수익 조회
 	double selectReservationPrice(int mId);
 	
+	//업체명 중복 조회
+	int duplicationTitle(String title);
+	
 	//업체 등록
 	int insertRegistration(Registration r, Attachment perFileDB, Attachment comFileDB);
 	

@@ -133,7 +133,7 @@
 	
 	<!-- 판매자 마이페이지 메인 예약 건수 조회 -->
 	<select id="selectReservationCount" resultType="_int" parameterType="_int">
-		SELECT COUNT(*)
+		SELECT NVL(COUNT(*), 0)
 		FROM RESERVATION
 		WHERE O_ID = (SELECT O_ID
 					  FROM RESERVATION
@@ -144,7 +144,7 @@
 	
 	<!-- 판매자 마이페이지 메인 수익 조회 -->
 	<select id="selectReservationPrice" resultType="_double" parameterType="_int">
-		SELECT SUM(PRICE)
+		SELECT NVL(SUM(PRICE), 0)
 		FROM PAY_DETAIL
 		JOIN PAYMENT USING(PA_ID)
 		JOIN RESERVATION USING(PA_ID)

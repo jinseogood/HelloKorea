@@ -42,6 +42,12 @@ public class SellerServiceImpl implements SellerService{
 	public double selectReservationPrice(int mId) {
 		return sd.selectReservationPrice(mId, sqlSession);
 	}
+	
+	//업체명 중복 조회
+	@Override
+	public int duplicationTitle(String title) {
+		return sd.duplicationTitle(title, sqlSession);
+	}
 
 	//업체 등록
 	@Override

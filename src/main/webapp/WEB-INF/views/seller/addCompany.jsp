@@ -1136,11 +1136,29 @@
 		}
 		
 		function valueSetting(contentId, title, tel, addr){
-			$("#contentId").attr("value", contentId);
-			$("#companyName").attr("value", title);
-			$("#companyPhone").attr("value", tel);
-			$("#companyAddress").attr("value", addr);
-			searchRoom(contentId);
+			$.ajax({
+				url:"duplicationTitle.sell",
+				type:"post",
+				data:{title:title},
+				success:function(data){
+					console.log(data);
+					
+					if(data == 1){
+						alert("이미 등록된 업체 입니다.");
+						$("#resultTable").find("a").attr("data-dismiss", "none");
+					}
+					else{
+						$("#contentId").attr("value", contentId);
+						$("#companyName").attr("value", title);
+						$("#companyPhone").attr("value", tel);
+						$("#companyAddress").attr("value", addr);
+						searchRoom(contentId);
+					}
+				},
+				error:function(data){
+					console.log(data);
+				}
+			});
 		}
 		
 		function searchRoom(contentId){

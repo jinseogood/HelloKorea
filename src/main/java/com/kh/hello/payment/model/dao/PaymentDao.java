@@ -28,4 +28,7 @@ public interface PaymentDao {
 	//결제 확인창에 보여 줄 예약 정보 조회
 	SellerReservation selectReservation(int paId, SqlSessionTemplate sqlSession);
 
+	//회원 포인트 조회
+	int selectUserPoint(int mId, SqlSessionTemplate sqlSession);
+
 }

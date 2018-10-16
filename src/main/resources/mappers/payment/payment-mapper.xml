@@ -27,5 +27,12 @@
                        WHERE M_ID = #{mId}
                        GROUP BY M_ID)
 	</select>
+	
+	<!-- 회원 포인트 조회 -->
+	<select id="selectUserPoint" resultType="_int" parameterType="_int">
+		SELECT NVL(SUM(AMOUNT), 0)
+		FROM POINT
+		WHERE M_ID = #{mId}
+	</select>
    
 </mapper>

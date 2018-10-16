@@ -414,8 +414,8 @@
 								<input type="text" class="inputStyle" id="point" name="point" size="10" value="0" style="text-align:right;"> P
 							</td>
 							<td>
-								<button type="button" class="btn btn-primary btn-sm" onclick="return point();">조회</button>
-								 (<span id="pointView">5000</span>P 보유)
+								<button type="button" class="btn btn-primary btn-sm" onclick="return pointCheck();">조회</button>
+								 ( <span id="pointView">0</span> P 보유 )
 							</td>
 						</tr>
 						<tr>
@@ -581,8 +581,22 @@
 			}
 		}
 		
-		function point(){
-			console.log("포인트 조회 버튼 클릭");
+		function pointCheck(){
+			$.ajax({
+				url:"selectUserPoint.pay",
+				type:"post",
+				success:function(data){
+					console.log(data);
+					
+					$pointBody=$("#pointView");
+					$pointBody.html('');
+					
+					$pointBody.append(data);
+				},
+				error:function(data){
+					console.log(data);
+				}
+			});
 		}
 		
 		var totalPrice=0;
