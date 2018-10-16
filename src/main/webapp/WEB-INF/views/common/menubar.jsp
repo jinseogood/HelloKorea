@@ -179,7 +179,7 @@
 	}
 
 </style>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 </head>
 <body>
 	<!-- Header -->
@@ -198,7 +198,6 @@
 							<li><a href="hotelView">숙박</a></li>
 							<li><a href="foodView">음식점</a></li>
 							<li><a href="toursView">오락거리</a></li>
-							<li><a href="contactView">Contact</a></li>
 						</ul>
 				  		<div id="menuIconArea">
 				  			<c:if test="${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('admin') }">

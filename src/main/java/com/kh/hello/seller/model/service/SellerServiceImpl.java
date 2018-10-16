@@ -30,6 +30,18 @@ public class SellerServiceImpl implements SellerService{
 	private SellerDao sd;
 	@Autowired
 	private DataSourceTransactionManager transactionManager;
+	
+	//판매자 마이페이지 메인 예약 건수 조회
+	@Override
+	public int selectReservationCount(int mId) {
+		return sd.selectReservationCount(mId, sqlSession);
+	}
+	
+	//판매자 마이페이지 메인 수익 조회
+	@Override
+	public double selectReservationPrice(int mId) {
+		return sd.selectReservationPrice(mId, sqlSession);
+	}
 
 	//업체 등록
 	@Override
@@ -855,12 +867,5 @@ public class SellerServiceImpl implements SellerService{
 	public ArrayList<SellerOneReservation> selectOneReservation(int oId) {
 		return sd.selectOneReservation(oId, sqlSession);
 	}
-
-	//예약 결제 상태 변경
-	@Override
-	public int changeRPType(int oId, String rStatus) {
-		return sd.changeRPType(oId, rStatus, sqlSession);
-	}
-
 
 }

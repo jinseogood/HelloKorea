@@ -103,7 +103,7 @@
 				<div class="itemDetail" align="center">
 					<table id="itemTable" border="1">
 						<tr>
-							<td width="200px" style="text-align:center;">이미지</td>
+							<td width="200px" style="text-align:center;">업체명 보여줄 곳</td>
 							<td width="350px" colspan="2">
 								<font style="font-size:16px; font-weight:bold;">${ reservation.roomName }</font>
 								<br>

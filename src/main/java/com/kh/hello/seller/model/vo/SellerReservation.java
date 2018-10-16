@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class SellerReservation implements java.io.Serializable{
 	private int oId;
+	private String cName;
 	private String rSDate;
 	private String rEDate;
 	private int paId;
@@ -13,9 +14,11 @@ public class SellerReservation implements java.io.Serializable{
 	
 	public SellerReservation(){}
 
-	public SellerReservation(int oId, String rSDate, String rEDate, int paId, String paName, String status) {
+	public SellerReservation(int oId, String cName, String rSDate, String rEDate, int paId, String paName,
+			String status) {
 		super();
 		this.oId = oId;
+		this.cName = cName;
 		this.rSDate = rSDate;
 		this.rEDate = rEDate;
 		this.paId = paId;
@@ -29,6 +32,14 @@ public class SellerReservation implements java.io.Serializable{
 
 	public void setoId(int oId) {
 		this.oId = oId;
+	}
+
+	public String getcName() {
+		return cName;
+	}
+
+	public void setcName(String cName) {
+		this.cName = cName;
 	}
 
 	public String getrSDate() {
@@ -73,8 +84,8 @@ public class SellerReservation implements java.io.Serializable{
 
 	@Override
 	public String toString() {
-		return "Reservation [oId=" + oId + ", rSDate=" + rSDate + ", rEDate=" + rEDate + ", paId=" + paId + ", paName="
-				+ paName + ", status=" + status + "]";
+		return "SellerReservation [oId=" + oId + ", cName=" + cName + ", rSDate=" + rSDate + ", rEDate=" + rEDate
+				+ ", paId=" + paId + ", paName=" + paName + ", status=" + status + "]";
 	}
 
 	

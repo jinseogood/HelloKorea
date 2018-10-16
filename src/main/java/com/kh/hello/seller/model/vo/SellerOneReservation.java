@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class SellerOneReservation implements java.io.Serializable{
 	private int oId;
+	private String cName;
 	private String rSDate;
 	private String rEDate;
 	private String paName;
@@ -17,10 +18,11 @@ public class SellerOneReservation implements java.io.Serializable{
 	
 	public SellerOneReservation(){}
 
-	public SellerOneReservation(int oId, String rSDate, String rEDate, String paName, int people, int oRCount, int rId,
-			String rType, int price, String status) {
+	public SellerOneReservation(int oId, String cName, String rSDate, String rEDate, String paName, int people,
+			int oRCount, int rId, String rType, int price, String status) {
 		super();
 		this.oId = oId;
+		this.cName = cName;
 		this.rSDate = rSDate;
 		this.rEDate = rEDate;
 		this.paName = paName;
@@ -38,6 +40,14 @@ public class SellerOneReservation implements java.io.Serializable{
 
 	public void setoId(int oId) {
 		this.oId = oId;
+	}
+
+	public String getcName() {
+		return cName;
+	}
+
+	public void setcName(String cName) {
+		this.cName = cName;
 	}
 
 	public String getrSDate() {
@@ -114,11 +124,10 @@ public class SellerOneReservation implements java.io.Serializable{
 
 	@Override
 	public String toString() {
-		return "SellerOneReservation [oId=" + oId + ", rSDate=" + rSDate + ", rEDate=" + rEDate + ", paName=" + paName
-				+ ", people=" + people + ", oRCount=" + oRCount + ", rId=" + rId + ", rType=" + rType + ", price="
-				+ price + ", status=" + status + "]";
+		return "SellerOneReservation [oId=" + oId + ", cName=" + cName + ", rSDate=" + rSDate + ", rEDate=" + rEDate
+				+ ", paName=" + paName + ", people=" + people + ", oRCount=" + oRCount + ", rId=" + rId + ", rType="
+				+ rType + ", price=" + price + ", status=" + status + "]";
 	}
 
-	
 	
 }

@@ -5,10 +5,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class SellerPageController {
-	@RequestMapping("myPageView.sell")
-	public String myPageView(){
-		return "seller/sellerMain";
-	}
 	
 	@RequestMapping("addCompanyView.sell")
 	public String addCompanyView(){

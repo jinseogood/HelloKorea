@@ -20,6 +20,18 @@ import com.kh.hello.seller.model.vo.SellerOneReservation;
 @Repository
 public class SellerDaoImpl implements SellerDao{
 
+	//판매자 마이페이지 메인 예약 건수 조회
+	@Override
+	public int selectReservationCount(int mId, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("SellerReservation.selectReservationCount", mId);
+	}
+	
+	//판매자 마이페이지 메인 수익 조회
+	@Override
+	public double selectReservationPrice(int mId, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("SellerReservation.selectReservationPrice", mId);
+	}
+	
 	//업체 등록
 	@Override
 	public int insertCompany(Company c, SqlSessionTemplate sqlSession) {
@@ -252,15 +264,6 @@ public class SellerDaoImpl implements SellerDao{
 	@Override
 	public ArrayList<SellerOneReservation> selectOneReservation(int oId, SqlSessionTemplate sqlSession) {
 		return (ArrayList) sqlSession.selectList("SellerOneReservation.selectOneReservation", oId);
-	}
-
-	//예약 결제 상태 변경
-	@Override
-	public int changeRPType(int oId, String rStatus, SqlSessionTemplate sqlSession) {
-		ArrayList<Object> list=new ArrayList<Object>();
-		list.add(oId);
-		list.add(rStatus);
-		return sqlSession.update("SellerOneReservation.changeRPType", list);
 	}
 
 }
