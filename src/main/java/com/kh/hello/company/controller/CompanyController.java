@@ -3,6 +3,8 @@ package com.kh.hello.company.controller;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,9 +16,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.google.gson.Gson;
 import com.kh.hello.company.model.service.CompanyService;
 import com.kh.hello.company.model.vo.Company2;
 import com.kh.hello.company.model.vo.Reservation2;
+import com.kh.hello.company.model.vo.Reservations;
 import com.kh.hello.company.model.vo.Room2;
 import com.kh.hello.member.model.vo.Member;
 
@@ -419,6 +423,25 @@ public class CompanyController {
 			ArrayList<Company2> list = cs.selectOrderByMoney3(cp);
 			response.getWriter().print(mapper.writeValueAsString(list));
 		}
+	}
+	
+	
+//	oid시퀀스, startdate, enddate, 인원, 객실수, rid(객실명) 업체주소
+	@RequestMapping(value="reservationRooms.com")
+	public String reservationRooms(HttpServletRequest request, HttpServletResponse response, String myJson) throws IOException{
+		System.out.println(myJson);
+		Gson gson = new Gson();
+		Reservations[] array = gson.fromJson(myJson, Reservations[].class);
+		List<Reservations> list = Arrays.asList(array);
+		System.out.println(list.size());
+		for(int i = 0; i < list.size(); i++){
+			System.out.println(list.get(i).toString());
+		}
+		
+//		list = cs.insertReservations(list);
+		
+		
+		return "payment/detailPayment";
 	}
 	
 	
