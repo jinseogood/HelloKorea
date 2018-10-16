@@ -1,5 +1,6 @@
 package com.kh.hello.admin.model.service;
        
+import java.io.File;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,6 +25,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.hello.admin.controller.ExcelRead;
+import com.kh.hello.admin.controller.ExcelReadOption;
 import com.kh.hello.admin.model.dao.AdminDao;
 import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
@@ -537,5 +540,37 @@ public class AdminServiceImpl implements AdminService{
 		return ad.listExcelDownload(sqlSession);
 	}
 
-
+	//엑셀 업로드
+	@Override
+    public void excelUpload(File destFile) throws Exception{
+        ExcelReadOption excelReadOption = new ExcelReadOption();
+        excelReadOption.setFilePath(destFile.getAbsolutePath());
+        excelReadOption.setOutputColumns("A","B","C","D","E","F");
+        excelReadOption.setStartRow(2);
+        
+        List<Map<String, String>>excelContent =ExcelRead.read(excelReadOption);
+        ArrayList<Deposit> list = new ArrayList<Deposit>();
+        
+        for(Map<String, String> article: excelContent){
+        	if(article.get("A") != null){
+        		
+        		Deposit d = new Deposit();
+            	
+            	d.setcId((int)Double.parseDouble(article.get("A")));
+            	d.setcName(article.get("B"));
+            	d.setBankNum(article.get("C"));
+            	d.setdAmount((int)Double.parseDouble(article.get("D")));
+            	d.setdDate(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+            	d.setdStatus(article.get("F"));
+            	
+            	if(d.getdStatus().equals("Y")){
+                	list.add(d);
+            	}
+        		
+        	}
+        	
+        }
+        
+        ad.excelUpload(sqlSession, list);
+	}
 }

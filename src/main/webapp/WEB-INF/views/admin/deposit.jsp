@@ -198,21 +198,16 @@ table.type09 td {
     
 	<jsp:include page="../common/footer.jsp"/>
 	
-	<script>
+	<!-- <script>
 	function makeDeposit(cId, dAmount){
 		location.href="makeDeposit.ad?cId="+cId+"&dAmount="+dAmount;
 	}
-	</script>
+	</script> -->
 	
 	<script type="text/javascript">
 $(function(){
     $("#btn-excel").on("click", function () {
-    	if(confirm('엑셀 파일을 다운 받아 일괄 입금처리를 진행하시겠습니까?')){
-    	    location.href="excelDownload";
-    	    
-    	    
-    	}
-    	
+    	    location.href="excelDownload"; 
     });
 });
 </script>
