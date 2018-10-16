@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.hello.board.model.vo.Board;
 import com.kh.hello.board.model.vo.Reply;
 import com.kh.hello.board.model.vo.Report;
+import com.kh.hello.board.model.vo.Thumbs;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 
@@ -49,5 +50,11 @@ public interface BoardService{
 	int updateReport(Report report);
 
 	int deletePrevReview(int getmId);
+
+	Thumbs selectThumbs(Thumbs thumb);
+
+	int updateThumbs(Thumbs thumb);
+
+	int insertThumbs(Thumbs thumb); 
 
 } 

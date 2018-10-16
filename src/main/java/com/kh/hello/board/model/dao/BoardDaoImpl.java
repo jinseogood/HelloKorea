@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.hello.board.model.vo.Board;
 import com.kh.hello.board.model.vo.Reply;
 import com.kh.hello.board.model.vo.Report;
+import com.kh.hello.board.model.vo.Thumbs;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 
@@ -155,6 +156,24 @@ public class BoardDaoImpl implements BoardDao{
 	public int deletePrevReview(SqlSessionTemplate sqlSession, int mid) {
 
 		return sqlSession.delete("Board.deletePrevReview", mid);
+	}
+
+	@Override
+	public Thumbs selectThumbs(SqlSessionTemplate sqlSession, Thumbs thumb) {
+		
+		return sqlSession.selectOne("Thumbs.selectThumbs", thumb);
+	}
+
+	@Override
+	public int updateThumbs(SqlSessionTemplate sqlSession, Thumbs thumb) {
+		
+		return sqlSession.update("Thumbs.updateThumbs", thumb);
+	}
+
+	@Override
+	public int insertThumbs(SqlSessionTemplate sqlSession, Thumbs thumb) { 
+		
+		return sqlSession.insert("Thumbs.insertThumbs", thumb);
 	} 
 
 }

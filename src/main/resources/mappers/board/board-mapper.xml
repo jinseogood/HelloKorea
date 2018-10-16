@@ -70,7 +70,7 @@
      <select id = "selectReviewDetail" parameterType="_int" resultMap = "BoardResultSet">
      	SELECT BID, TITLE, TEXT, BOARD_TYPE, REGIST_DATE, STATUS, MODIFY_DATE, GRADE, LIKEY, M_ID, ORIGIN_ID, TRAVEL_DATE
      	FROM BOARD
-     	WHERE BID = #{ bid }
+     	WHERE BID = #{ bid } 
      </select>
      
 </mapper>
