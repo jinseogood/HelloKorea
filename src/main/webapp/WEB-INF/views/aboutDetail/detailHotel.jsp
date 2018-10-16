@@ -1069,7 +1069,7 @@
 			//console.log(m_id);
 			//console.log(reply_id);
 		
-			if(${ sessionScope.loginUser != null }){
+			if(${ sessionScope.loginUser != null }){ 
 				if(${!sessionScope.loginUser.mType.equals('admin')}){
 			
 					if(m_id != ${sessionScope.loginUser.mId}){

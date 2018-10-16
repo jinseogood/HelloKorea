@@ -33,7 +33,7 @@
      <insert id="insertThumbs" parameterType="Thumbs">
           INSERT INTO THUMBS_UP VALUES(SEQ_T_ID.NEXTVAL, #{m_id},
                                        #{t_type}, #{t_target}, #{ref_id}, #{status})
-     </insert>
+     </insert> 
      
 
      <update id="updateThumbs" parameterType="Thumbs">

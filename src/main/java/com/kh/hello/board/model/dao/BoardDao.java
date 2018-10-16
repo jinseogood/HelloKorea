@@ -53,7 +53,7 @@ public interface BoardDao {
 
 	int deletePrevReview(SqlSessionTemplate sqlSession, int mid);
 
-	Thumbs selectThumbs(SqlSessionTemplate sqlSession, Thumbs thumb);
+	Thumbs selectThumbs(SqlSessionTemplate sqlSession, Thumbs thumb); 
 
 	int updateThumbs(SqlSessionTemplate sqlSession, Thumbs thumb);
 

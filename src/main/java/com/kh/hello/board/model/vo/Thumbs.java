@@ -1,6 +1,6 @@
 package com.kh.hello.board.model.vo;
 
-public class Thumbs {
+public class Thumbs { 
 	private int t_id;
 	private int m_id;
 	private int t_type;

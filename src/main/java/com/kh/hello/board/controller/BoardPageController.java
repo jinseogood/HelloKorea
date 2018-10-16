@@ -349,7 +349,7 @@ public class BoardPageController {
 				mv.addObject("msg", "도움이 되었어요 되었습니다.");
 			}else{
 				mv.addObject("msg", "에러입니다.");
-			}
+			} 
 		}
 		
 		return mv;

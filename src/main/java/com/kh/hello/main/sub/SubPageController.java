@@ -13,7 +13,7 @@ import com.kh.hello.board.model.vo.Board;
 import com.kh.hello.board.model.vo.Reply;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.common.Pagination2;
-
+ 
 
 
 @Controller

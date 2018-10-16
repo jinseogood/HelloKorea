@@ -171,7 +171,7 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 	@Override
-	public int insertThumbs(SqlSessionTemplate sqlSession, Thumbs thumb) {
+	public int insertThumbs(SqlSessionTemplate sqlSession, Thumbs thumb) { 
 		
 		return sqlSession.insert("Thumbs.insertThumbs", thumb);
 	} 

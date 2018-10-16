@@ -173,7 +173,7 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int insertThumbs(Thumbs thumb) {
 		
-		return bd.insertThumbs(sqlSession, thumb);
+		return bd.insertThumbs(sqlSession, thumb); 
 	}
  
 }

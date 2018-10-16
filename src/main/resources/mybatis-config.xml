@@ -76,6 +76,6 @@
           <mapper resource="mappers/company/company2-mapper.xml"/>
           <mapper resource="mappers/company/room2-mapper.xml"/>
           <mapper resource="mappers/company/reservation2-mapper.xml"/>
-      </mappers>
+      </mappers> 
   
   </configuration>
