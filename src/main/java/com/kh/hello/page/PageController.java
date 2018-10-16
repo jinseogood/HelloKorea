@@ -20,9 +20,4 @@ public class PageController {
 		return "main/mainGame";
 	}
 	
-	@RequestMapping("contactView")
-	public String contactView(){
-		return "main/contact";
-	}
-	
 }

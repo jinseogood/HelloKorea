@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <style>
 	.content{
-		width:800px;
+		width:1100px;
 		height:800px;
 		margin-left:auto;
 		margin-right:auto;
@@ -30,10 +30,12 @@
 	    margin-bottom:5%;
 	}
 	#reservationTable{
-		width:700px;
+		width:1100px;
 		border-collapse: collapse;
 	    text-align: center;
 	    line-height: 1.5;
+	    margin-left:auto;
+	    margin-right:auto;
 	}
 	#reservationTable tr{
 		height:30px;
@@ -139,8 +141,9 @@
 				<thead>
 					<tr>
 						<th width="50px">No</th>
-						<th width="150px">주문번호</th>
-						<th width="200px">주문자</th>
+						<th width="150px">예약번호</th>
+						<th width="300px">업체명</th>
+						<th width="200px">예약자</th>
 						<th width="150px">예약 시작일</th>
 						<th width="150px">예약 종료일</th>
 						<th width="100px">상태</th>
@@ -155,6 +158,7 @@
 								<input type="hidden" id="PAID" value="${ r.paId }">
 								<th>${ no }</th>
 								<td>${ r.oId }</td>
+								<td>${ r.cName }</td>
 								<td>${ r.paName }</td>
 								<td>${ r.rSDate }</td>
 								<td>${ r.rEDate }</td>
@@ -256,6 +260,7 @@
 						var output="";
 						
 						output += "<tr><th>예약자</th><td colspan='3'><p>" + rDetail[0].paName + "</p></td></tr>";
+						output += "<tr><th style='border-right:3px solid orangered;'>업체명</th><td colspan='3'><p>" + rDetail[0].cName + "</p></td></tr>";
 						output += "<tr><th>기간</th><td colspan='3'>" + rDetail[0].rSDate + " ~ " + rDetail[0].rEDate + "</td></tr>";
 						
 						for(var i=0;i<rDetail.length;i++){
@@ -265,9 +270,13 @@
 						}
 						
 						output += "<tr><th>인원 수</th><td colspan='3'><p>" + rDetail[0].people + " 명</p></td></tr>";
-						output += "<tr><th>금액</th><td><p>" + tPrice + " 원</p></td><th>상태</th>";
-						output += "<td><select name='rStatus' id='rStatus'><option value='purchase'>결제 완료</option><option value='refund'>환불 완료</option></select>&nbsp;";
-						output += "<button type='button' class='btn btn-warning btn-sm' onclick='changePType(" + oId + ")'>설정</button></td></tr>";
+						output += "<tr><th>금액</th><td><p>" + tPrice + " 원</p></td>";
+						if(rDetail[0].status == "P"){
+							output += "<th>상태</th><td>결제완료</td></tr>";	
+						}
+						else{
+							output += "<th>상태</th><td>환불완료</td></tr>";
+						}
 						
 						$tableBody.append(output);
 						
@@ -278,21 +287,6 @@
 				});
 			});
 		});
-		function changePType(oId){
-			var rStatus=$("#rStatus").val();
-			
-			$.ajax({
-				url:"changeRPType.sell",
-				type:"get",
-				data:{oId:oId, rStatus:rStatus},
-				success:function(data){
-					alert("결제 상태가 변경되었습니다.");
-				},
-				error:function(data){
-					console.log(data);
-				}
-			});
-		}
 		function showDatePicker(){
 	    	$("#datePicker").show();
 	    }

@@ -16,6 +16,12 @@ import com.kh.hello.seller.model.vo.SearchProduct;
 import com.kh.hello.seller.model.vo.SellerOneReservation;
 
 public interface SellerDao {
+	
+	//판매자 마이페이지 메인 예약 건수 조회
+	int selectReservationCount(int mId, SqlSessionTemplate sqlSession);
+	
+	//판매자 마이페이지 메인 수익 조회
+	double selectReservationPrice(int mId, SqlSessionTemplate sqlSession);
 
 	//업체 등록
 	int insertCompany(Company c, SqlSessionTemplate sqlSession);
@@ -106,8 +112,5 @@ public interface SellerDao {
 
 	//예약 상세 조회
 	ArrayList<SellerOneReservation> selectOneReservation(int oId, SqlSessionTemplate sqlSession);
-
-	//예약 결제 상태 변경
-	int changeRPType(int oId, String rStatus, SqlSessionTemplate sqlSession);
 
 }

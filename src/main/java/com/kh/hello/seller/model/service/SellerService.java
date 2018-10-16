@@ -15,6 +15,12 @@ import com.kh.hello.seller.model.vo.SellerOneReservation;
 
 public interface SellerService {
 
+	//판매자 메인페이지 메인 예약 건수 조회
+	int selectReservationCount(int mId);
+	
+	//판매자 메인페이지 메인 수익 조회
+	double selectReservationPrice(int mId);
+	
 	//업체 등록
 	int insertRegistration(Registration r, Attachment perFileDB, Attachment comFileDB);
 	
@@ -66,9 +72,5 @@ public interface SellerService {
 
 	//예약 상세 조회
 	ArrayList<SellerOneReservation> selectOneReservation(int oId);
-
-	//예약 결제 상태 변경
-	int changeRPType(int oId, String rStatus);
-
 
 }

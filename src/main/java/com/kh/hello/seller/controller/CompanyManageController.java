@@ -39,6 +39,32 @@ public class CompanyManageController {
 	@Autowired
 	private SellerService ss;
 	
+	//판매자 마이페이지 메인 정보 조회
+	@RequestMapping("myPageView.sell")
+	public String myPageView(Model model, HttpServletRequest request){
+		Member m=(Member) request.getSession().getAttribute("loginUser");
+		
+		//예약 건수 조회
+		int reservationCount=ss.selectReservationCount(m.getmId());
+		
+		//수익 조회
+		double totalPrice=ss.selectReservationPrice(m.getmId());
+		
+		if(reservationCount > 0 && totalPrice > 0){
+			model.addAttribute("rCount", reservationCount);
+			model.addAttribute("tPrice", totalPrice);
+				
+			return "seller/sellerMain";
+		}
+		else{
+			model.addAttribute("msg", "건수 아니면 수익 조회 에러");
+			
+			return "common/errorPage";
+		}
+		
+		
+	}
+	
 	//업체 등록
 	@RequestMapping(value="addCompany.sell", method=RequestMethod.POST)
 	public String addCompany(Registration r, Model model, HttpServletRequest request, @RequestParam(name="companyFile", required=false)MultipartFile companyFile, @RequestParam(name="personalFile")MultipartFile personalFile){
@@ -742,30 +768,4 @@ public class CompanyManageController {
 		}
 	}
 	
-	//예약 결제 상태 변경
-	@RequestMapping(value="changeRPType.sell")
-	public void changeRPType(int oId, String rStatus, HttpServletResponse response){
-		try {
-			PrintWriter out=response.getWriter();
-			
-			boolean changeResult;
-			
-			int result=ss.changeRPType(oId, rStatus);
-			
-			if(result > 0){
-				changeResult=true;
-			}
-			else{
-				changeResult=false;
-			}
-			
-			out.print(changeResult);
-			
-			out.flush();
-			out.close();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 }

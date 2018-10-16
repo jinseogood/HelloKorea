@@ -25,7 +25,7 @@
     <link href="${ contextPath }/resources/css/all.css" rel="stylesheet" type="text/css" />
     <!-- bootstrap wysihtml5 - text editor -->
     <!-- <link href="css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" /> -->
-    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <!-- Theme style -->
     <link href="${ contextPath }/resources/css/style.css" rel="stylesheet" type="text/css" />
 
@@ -55,7 +55,7 @@
 
 			<div class="col-md-3">
 				<div class="sm-st clearfix">
-					<span class="sm-st-icon st-green"><i class="fa fa-paperclip"></i></span>
+					<span class="sm-st-icon st-green"><i class="fa fa-plus-square-o"></i></span>
 					<div class="sm-st-info">
 						<span><a href="addCompanyView.sell">업체 등록</a></span>
 					</div>
@@ -65,7 +65,7 @@
     			<div class="sm-st clearfix">
     				<span class="sm-st-icon st-red"><i class="fa fa-check-square-o"></i></span>
     				<div class="sm-st-info">
-    					<span><a href="reservationView.sell">35건</a></span>
+    					<span><a href="reservationView.sell">${ rCount }건</a></span>
        					예약 내역
     				</div>
     			</div>
@@ -74,16 +74,16 @@
 				<div class="sm-st clearfix">
 					<span class="sm-st-icon st-blue"><i class="fa fa-dollar"></i></span>
 					<div class="sm-st-info">
-						<span><a href="manageRevenueView.sell">100,320원</a></span>
+						<span><a href="manageRevenueView.sell">${ tPrice } 원</a></span>
 						이번달 수익
 					</div>
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="sm-st clearfix">
-					<span class="sm-st-icon st-violet"><i class="fa fa-envelope-o"></i></span>
+					<span class="sm-st-icon st-violet"><i class="fa fa-bed"></i></span>
 					<div class="sm-st-info">
-						<span><a href="paymentDetailView.pay">결제페이지</a></span>
+						<span><a href="manageProduct.pay">업체 관리</a></span>
 					</div>
 				</div>
 			</div>

@@ -6,6 +6,7 @@
 <mapper namespace="SellerOneReservation">
 	<resultMap type="SellerOneReservation" id="selleronereservationResultSet">
 		<id property="oId" column="O_ID"/>
+		<result property="cName" column="C_NAME"/>
 		<result property="rSDate" column="R_SDATE"/>
 		<result property="rEDate" column="R_EDATE"/>
 		<result property="paName" column="PA_NAME"/>
@@ -19,22 +20,14 @@
 	
 	<!-- 예약 상세 조회 -->	
 	<select id="selectOneReservation" resultMap="selleronereservationResultSet" parameterType="_int">
-		SELECT O_ID, TO_CHAR(R_SDATE, 'YYYY-MM-DD') R_SDATE, TO_CHAR(R_EDATE, 'YYYY-MM-DD') R_EDATE, PA_NAME, PEOPLE, O_RCOUNT, R_ID, R_TYPE, R_PRICE, PD_TYPE
+		SELECT O_ID, C_NAME, TO_CHAR(R_SDATE, 'YYYY-MM-DD') R_SDATE, TO_CHAR(R_EDATE, 'YYYY-MM-DD') R_EDATE, PA_NAME, PEOPLE, O_RCOUNT, R_ID, R_TYPE, R_PRICE, PD_TYPE
 		FROM RESERVATION
-		JOIN ROOM USING(R_ID)
 		JOIN PAYMENT USING(PA_ID)
 		JOIN PAY_DETAIL USING(PA_ID)
+		JOIN ROOM USING(R_ID)
+		JOIN COMPANY USING(C_ID)
 		WHERE O_ID = #{oId}
 		AND PD_METHOD LIKE 'C'
 	</select>
-	
-	<!-- 예약 결제 상태 변경 -->
-	<update id="changeRPType" parameterType="arraylist">
-		UPDATE PAY_DETAIL
-		SET PD_TYPE = '${list.get(1)}'
-		WHERE PA_ID = (SELECT PA_ID
-					   FROM RESERVATION
-					   WHERE O_ID = ${list.get(0)})
-	</update>
 		
 </mapper>
