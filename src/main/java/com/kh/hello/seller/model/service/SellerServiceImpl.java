@@ -17,6 +17,7 @@ import com.kh.hello.seller.model.vo.Company;
 import com.kh.hello.seller.model.vo.OneProduct;
 import com.kh.hello.seller.model.vo.Registration;
 import com.kh.hello.seller.model.vo.RegistrationHistory;
+import com.kh.hello.seller.model.vo.Revenue;
 import com.kh.hello.seller.model.vo.SellerReservation;
 import com.kh.hello.seller.model.vo.Room;
 import com.kh.hello.seller.model.vo.SearchProduct;
@@ -872,6 +873,42 @@ public class SellerServiceImpl implements SellerService{
 	@Override
 	public ArrayList<SellerOneReservation> selectOneReservation(int oId) {
 		return sd.selectOneReservation(oId, sqlSession);
+	}
+
+	//수익 전체 조회 리스트 카운트
+	@Override
+	public int getRevenueListCount(int mId) {
+		return sd.getRevenueListCount(mId, sqlSession);
+	}
+
+	//수익 전체 조회 리스트
+	@Override
+	public ArrayList<Revenue> selectRevenueList(int mId, PageInfo pi) {
+		return sd.selectRevenueList(mId, pi, sqlSession);
+	}
+
+	//수익 기간 검색 조회 리스트 카운트
+	@Override
+	public int getSearchDateRevenueListCount(int mId, String toDate, String fromDate) {
+		return sd.getSearchDateRevenueListCount(mId, toDate, fromDate, sqlSession);
+	}
+
+	//수익 기간 검색 조회 리스트
+	@Override
+	public ArrayList<Revenue> selectSearchDateRevenueList(int mId, String toDate, String fromDate, PageInfo pi) {
+		return sd.selectSearchDateRevenueList(mId, toDate, fromDate, pi, sqlSession);
+	}
+
+	//수익 검색 조회 리스트 카운트
+	@Override
+	public int getSearchWordRevenueListCount(int mId, Revenue r) {
+		return sd.getSearchWordRevenueListCount(mId, r, sqlSession);
+	}
+
+	//수익 검색 조회 리스트
+	@Override
+	public ArrayList<Revenue> selectSearchWordRevenueList(int mId, Revenue r, PageInfo pi) {
+		return sd.selectSearchWordRevenueList(mId, r, pi, sqlSession);
 	}
 
 }

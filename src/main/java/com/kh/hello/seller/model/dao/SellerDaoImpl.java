@@ -12,6 +12,7 @@ import com.kh.hello.seller.model.vo.Company;
 import com.kh.hello.seller.model.vo.OneProduct;
 import com.kh.hello.seller.model.vo.Registration;
 import com.kh.hello.seller.model.vo.RegistrationHistory;
+import com.kh.hello.seller.model.vo.Revenue;
 import com.kh.hello.seller.model.vo.SellerReservation;
 import com.kh.hello.seller.model.vo.Room;
 import com.kh.hello.seller.model.vo.SearchProduct;
@@ -270,6 +271,64 @@ public class SellerDaoImpl implements SellerDao{
 	@Override
 	public ArrayList<SellerOneReservation> selectOneReservation(int oId, SqlSessionTemplate sqlSession) {
 		return (ArrayList) sqlSession.selectList("SellerOneReservation.selectOneReservation", oId);
+	}
+
+	//수익 전체 조회 리스트 카운트
+	@Override
+	public int getRevenueListCount(int mId, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("Revenue.getRevenueListCount", mId);
+	}
+
+	//수익 전체 조회 리스트
+	@Override
+	public ArrayList<Revenue> selectRevenueList(int mId, PageInfo pi, SqlSessionTemplate sqlSession) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		return (ArrayList) sqlSession.selectList("Revenue.selectRevenueList", mId, rowBounds);
+	}
+
+	//수익 기간 검색 조회 리스트 카운트
+	@Override
+	public int getSearchDateRevenueListCount(int mId, String toDate, String fromDate, SqlSessionTemplate sqlSession) {
+		ArrayList<Object> list=new ArrayList<Object>();
+		list.add(mId);
+		list.add(fromDate);
+		list.add(toDate);
+		return sqlSession.selectOne("Revenue.getSearchDateRevenueListCount", list);
+	}
+
+	//수익 기간 검색 조회 리스트
+	@Override
+	public ArrayList<Revenue> selectSearchDateRevenueList(int mId, String toDate, String fromDate, PageInfo pi,
+			SqlSessionTemplate sqlSession) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		ArrayList<Object> list=new ArrayList<Object>();
+		list.add(mId);
+		list.add(fromDate);
+		list.add(toDate);
+		return (ArrayList) sqlSession.selectList("Revenue.selectSearchDateRevenueList", list, rowBounds);
+	}
+
+	//수익 검색 조회 리스트 카운트
+	@Override
+	public int getSearchWordRevenueListCount(int mId, Revenue r, SqlSessionTemplate sqlSession) {
+		ArrayList<Object> list=new ArrayList<Object>();
+		list.add(mId);
+		list.add(r);
+		return sqlSession.selectOne("Revenue.getSearchWordRevenueListCount", list);
+	}
+
+	//수익 검색 조회 리스트
+	@Override
+	public ArrayList<Revenue> selectSearchWordRevenueList(int mId, Revenue r, PageInfo pi,
+			SqlSessionTemplate sqlSession) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
+		ArrayList<Object> list=new ArrayList<Object>();
+		list.add(mId);
+		list.add(r);
+		return (ArrayList) sqlSession.selectList("Revenue.selectSearchWordRevenueList", list, rowBounds);
 	}
 
 }

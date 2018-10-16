@@ -74,7 +74,7 @@
 				<div class="sm-st clearfix">
 					<span class="sm-st-icon st-blue"><i class="fa fa-dollar"></i></span>
 					<div class="sm-st-info">
-						<span><a href="manageRevenueView.sell">${ tPrice } 원</a></span>
+						<span><a href="manageRevenue.sell">${ tPrice } 원</a></span>
 						이번달 수익
 					</div>
 				</div>

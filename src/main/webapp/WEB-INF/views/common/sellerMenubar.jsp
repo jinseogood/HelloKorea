@@ -25,7 +25,7 @@
 					<li><a href="addCompanyView.sell" style="padding:10px 34px 10px 34px;">업체등록</a></li>
 					<li><a href="manageProduct.sell" style="padding:10px 34px 10px 34px;">업체관리</a></li>
 					<li><a href="reservation.sell" style="padding:10px 34px 10px 34px;">예약내역</a></li>
-					<li><a href="manageRevenueView.sell" style="padding:10px 34px 10px 34px;">수익관리</a></li>
+					<li><a href="manageRevenue.sell" style="padding:10px 34px 10px 34px;">수익관리</a></li>
 				</ul>
 			</nav>	
 		</div>

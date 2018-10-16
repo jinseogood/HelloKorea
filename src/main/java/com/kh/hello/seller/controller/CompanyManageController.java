@@ -27,6 +27,7 @@ import com.kh.hello.seller.model.vo.Company;
 import com.kh.hello.seller.model.vo.OneProduct;
 import com.kh.hello.seller.model.vo.Registration;
 import com.kh.hello.seller.model.vo.RegistrationHistory;
+import com.kh.hello.seller.model.vo.Revenue;
 import com.kh.hello.seller.model.vo.Room;
 import com.kh.hello.seller.model.vo.SearchProduct;
 import com.kh.hello.seller.model.vo.SellerOneReservation;
@@ -769,6 +770,65 @@ public class CompanyManageController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	//수익 관리
+	@RequestMapping("manageRevenue.sell")
+	public String manageRevenue(Model model, HttpServletRequest request, PageInfo p, String searchParam, String searchWord, String fromDate, String toDate){
+		/*Member m=(Member)request.getSession().getAttribute("loginUser");
+		
+		if(p.getCurrentPage() == 0){
+			p.setCurrentPage(1);
+		}
+		
+		ArrayList<Revenue> list=null;
+		PageInfo pi=null;
+		int listCount=0;
+		
+		if(searchParam == null && searchWord == null){
+			listCount=ss.getRevenueListCount(m.getmId());
+			pi=Pagination.getPageInfo(p.getCurrentPage(), listCount);
+			list=ss.selectRevenueList(m.getmId(), pi);
+		}
+		else if(searchParam.equals("datePick")){
+			listCount=ss.getSearchDateRevenueListCount(m.getmId(), toDate, fromDate);
+			pi=Pagination.getPageInfo(p.getCurrentPage(), listCount);
+			list=ss.selectSearchDateRevenueList(m.getmId(), toDate, fromDate, pi);
+		}
+		else{
+			Revenue r=new Revenue();
+			
+			if(searchParam.equals("cName")){
+				r.setcName(searchWord);
+			}
+			else{
+				if(searchWord.equals("입금대기")){
+					searchWord="P";
+				}
+				else if(searchWord.equals("입금완료")){
+					searchWord="R";
+				}
+				r.setStatus(searchWord);
+			}
+			
+			listCount=ss.getSearchWordRevenueListCount(m.getmId(), r);
+			pi=Pagination.getPageInfo(p.getCurrentPage(), listCount);
+			list=ss.selectSearchWordRevenueList(m.getmId(), r, pi);
+		}
+			
+		for(int i=0;i<list.size();i++){
+			if(list.get(i).getStatus().equals("P")){
+				list.get(i).setStatus("입금대기");
+			}
+			else if(list.get(i).getStatus().equals("R")){
+				list.get(i).setStatus("입금완료");
+			}
+		}
+			
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);*/
+		
+		return "seller/manageRevenue";
 	}
 	
 }
