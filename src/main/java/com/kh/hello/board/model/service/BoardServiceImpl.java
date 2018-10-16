@@ -11,6 +11,7 @@ import com.kh.hello.board.model.dao.BoardDao;
 import com.kh.hello.board.model.vo.Board;
 import com.kh.hello.board.model.vo.Reply;
 import com.kh.hello.board.model.vo.Report;
+import com.kh.hello.board.model.vo.Thumbs;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 
@@ -155,6 +156,24 @@ public class BoardServiceImpl implements BoardService{
 	public int deletePrevReview(int mid) {
 
 		return bd.deletePrevReview(sqlSession, mid);
+	}
+
+	@Override
+	public Thumbs selectThumbs(Thumbs thumb) {
+		
+		return bd.selectThumbs(sqlSession, thumb);
+	}
+
+	@Override
+	public int updateThumbs(Thumbs thumb) {
+	
+		return bd.updateThumbs(sqlSession, thumb);
+	}
+
+	@Override
+	public int insertThumbs(Thumbs thumb) {
+		
+		return bd.insertThumbs(sqlSession, thumb);
 	}
  
 }

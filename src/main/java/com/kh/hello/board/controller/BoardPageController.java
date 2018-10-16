@@ -23,6 +23,7 @@ import com.kh.hello.board.model.service.BoardService;
 import com.kh.hello.board.model.vo.Board;
 import com.kh.hello.board.model.vo.Reply;
 import com.kh.hello.board.model.vo.Report;
+import com.kh.hello.board.model.vo.Thumbs;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.common.Pagination2;
@@ -309,6 +310,51 @@ public class BoardPageController {
 		return "board/reviewDetail";
 	}
 	
+	@RequestMapping(value="thumbsA.bo")
+	public ModelAndView thumbsA(Model model, @RequestParam int target_id, @RequestParam int reply_id, HttpServletResponse response
+						,HttpServletRequest request){
+		response.setContentType("text/html; charset=UTF-8");
+		ModelAndView mv = new ModelAndView("jsonView");
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		Thumbs thumb = new Thumbs();
+		thumb.setM_id(m.getmId());
+		thumb.setRef_id(reply_id);
+		thumb.setT_target(target_id);
+		
+		thumb.setT_type(1);
+		Thumbs result = bs.selectThumbs(thumb);
+		
+		if(result != null){
+			if(result.getStatus().equals("Y")){
+				thumb.setStatus("N");
+				int result1 = bs.updateThumbs(thumb);
+					if(result1 > 0){
+						mv.addObject("msg", "도움이 되었어요가 취소되었습니다.");
+					}else{
+						mv.addObject("msg", "에러입니다.");
+					}
+			}else{
+				thumb.setStatus("Y");
+				int result1 = bs.updateThumbs(thumb);
+				if(result1 > 0){
+					mv.addObject("msg", "도움이 되었어요 되었습니다.");
+				}else{
+					mv.addObject("msg", "에러입니다.");
+				}
+			}
+		}else{
+			thumb.setStatus("Y");
+			int result1 = bs.insertThumbs(thumb);
+			if(result1 > 0){
+				mv.addObject("msg", "도움이 되었어요 되었습니다.");
+			}else{
+				mv.addObject("msg", "에러입니다.");
+			}
+		}
+		
+		return mv;
+	}
+	
 	@RequestMapping(value="insertReport.bo")
 	public ModelAndView insertReport(Model model, HttpServletResponse response, HttpServletRequest request, @RequestParam String reason, @RequestParam int r_target,
 						@RequestParam int ref_id, @RequestParam int r_level, ModelAndView mv){
@@ -352,10 +398,6 @@ public class BoardPageController {
 		}else{
 			mv.addObject("msg", "본인 글은 신고할 수 없습니다.");
 		}
-		
-		
-		
-		//System.out.println(report);
 		
 		return mv;
 	}

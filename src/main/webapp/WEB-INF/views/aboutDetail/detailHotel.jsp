@@ -805,7 +805,7 @@
 							output += "<span class='ReviewUpDate' style = 'padding-top:5px'>";
 							output += Q[i].modify_date+"</span>";
 							output += "<span>&nbsp;|&nbsp;</span>";
-							output += "<span class='ReviewUpDate' style = 'padding-top:5px'><input type = 'hidden' value = "+Q[i].m_id+"><i class='fa fa-thumbs-o-up' style = 'font-size:14px; padding-top:5px; cursor:pointer' onclick = QUp(this);><input type = 'hidden' value = "+Q[i].m_id+"><a onclick = QUp(this);>&nbsp;"+Q[i].likey+"</a></i><i class='fa fa-flag' style = 'font-size:14px; padding-top:5px; float:right; cursor:pointer'><a onclick='reportWrite(this);'> 신고하기</a></i><input type = 'hidden' value="+Q[i].m_id+"><input type = 'hidden' value="+Q[i].bid+"></span>";
+							output += "<span class='ReviewUpDate' style = 'padding-top:5px'><i class='fa fa-flag' style = 'font-size:14px; padding-top:5px; float:right; cursor:pointer'><a onclick='reportWrite(this);'> 신고하기</a></i><input type = 'hidden' value="+Q[i].m_id+"><input type = 'hidden' value="+Q[i].bid+"></span>";
 							output += "</div></div>";
 							output += "<div style = 'margin-top:5px'><button type='button' class='btn btn-secondary' onclick = 'QA("+Q[i].bid+");'>답변</button>&nbsp;<button type='button' class='btn btn-secondary' onclick = 'allQA("+Q[i].bid+");'>모든 답변보기</button></div>";
 							output += "<div id = 'allQAV"+Q[i].bid+"' class = 'QAV' style = 'padding-top:5px;''>";
@@ -815,6 +815,7 @@
 		            				output += QAnswer[j].content+"</div>";
 		            				output += "<span class='ReviewUpDate' style = 'padding-top:5px'>"+QAnswer[j].modify_date+"</span>";
 		            				output += "<span>|</span> "+QAnswer[j].bid+"님의 답변";
+		            				
 		            			}
 		            		}
 		            		output += "</div>";
@@ -1062,18 +1063,33 @@
 			QPaging(page);
 		}
 		
-		function QUp(element){
-			var m_id = $(element).parent().children().eq(0).val();
+		function AUp(element){
+			var m_id = $(element).parent().children().eq(2).val();
+			var reply_id = $(element).parent().children().eq(3).val();
+			//console.log(m_id);
+			//console.log(reply_id);
 		
-			if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')}){
-				if(m_id != sessionScope.loginUser.mId){
-					location.href = "Uplikey.bo";
+			if(${ sessionScope.loginUser != null }){
+				if(${!sessionScope.loginUser.mType.equals('admin')}){
+			
+					if(m_id != ${sessionScope.loginUser.mId}){
+						$.ajax({
+							url:"thumbsA.bo",
+							type:"post",
+							data:{target_id:m_id, reply_id:reply_id},
+							dataType:"json",
+							success:function(data){
+								alert(data.msg);
+							},error:function(data){
+								alert(data.msg);
+							}
+						})
 				}else{
 					alert("본인 글에는 (도움이 되었어요)를 할 수 없습니다");
 				}
-				
+				}
 			}else{
-				
+				alert("로그인이 필요한 기능 입니다.");
 			}
 		}
 		
@@ -1113,9 +1129,10 @@
             				output += "<div class='summary' style = 'padding-top:10px; font-size:18px'>";
             				output += QAns[j].content+"</div>";
             				//output += "<input type = 'hidden' value="+QAns[j].m_id+"><input type = 'hidden' value="+QAns[j].reply_id+">";
-            				output += "<span class='ReviewUpDate' style = 'padding-top:5px'>"+QAns[j].modify_date+"</span>";
+            				output += "<div><span class='ReviewUpDate' style = 'padding-top:5px'>"+QAns[j].modify_date+"</span>";
             				output += "<span>|</span> "+QAns[j].bid+"님의 답변";
-            				output += "<i class='fa fa-flag' style = 'font-size:12px; padding-top:5px; float:right;'><input type = 'hidden' value="+QAns[j].m_id+"><input type = 'hidden' value="+QAns[j].reply_id+"><a onclick='reportWriteA1(this);'> 신고하기</a></i>";
+            				output += "<input type = 'hidden' value = "+QAns[j].m_id+"><input type = 'hidden' value = "+QAns[j].reply_id+"><i class='fa fa-thumbs-o-up' style = 'font-size:14px; padding-top:5px; cursor:pointer' onclick = AUp(this);>&nbsp;"+QAns[j].help_point+"</i>";
+            				output += "<i class='fa fa-flag' style = 'font-size:12px; padding-top:5px; float:right;'><input type = 'hidden' value="+QAns[j].m_id+"><input type = 'hidden' value="+QAns[j].reply_id+"><a onclick='reportWriteA1(this);'> 신고하기</a></i></div>";
             			}
             		}
             		//output += "</div>";

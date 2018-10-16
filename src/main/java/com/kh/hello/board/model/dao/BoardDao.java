@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import com.kh.hello.board.model.vo.Board;
 import com.kh.hello.board.model.vo.Reply;
 import com.kh.hello.board.model.vo.Report;
+import com.kh.hello.board.model.vo.Thumbs;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 
@@ -51,5 +52,11 @@ public interface BoardDao {
 	int updateReport(SqlSessionTemplate sqlSession, Report report);
 
 	int deletePrevReview(SqlSessionTemplate sqlSession, int mid);
+
+	Thumbs selectThumbs(SqlSessionTemplate sqlSession, Thumbs thumb);
+
+	int updateThumbs(SqlSessionTemplate sqlSession, Thumbs thumb);
+
+	int insertThumbs(SqlSessionTemplate sqlSession, Thumbs thumb);
 
 }
