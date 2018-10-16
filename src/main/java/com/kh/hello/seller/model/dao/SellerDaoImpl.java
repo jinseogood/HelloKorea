@@ -32,6 +32,12 @@ public class SellerDaoImpl implements SellerDao{
 		return sqlSession.selectOne("SellerReservation.selectReservationPrice", mId);
 	}
 	
+	//업체명 중복 조회
+	@Override
+	public int duplicationTitle(String title, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("Company.duplicationTitle", title);
+	}
+	
 	//업체 등록
 	@Override
 	public int insertCompany(Company c, SqlSessionTemplate sqlSession) {

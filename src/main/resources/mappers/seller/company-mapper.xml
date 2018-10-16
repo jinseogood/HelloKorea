@@ -4,19 +4,26 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Company">
-   <resultMap type="Company" id="companyResultSet">
-      <id property="cId" column="C_ID"/>
-      <result property="contentId" column="C_ORIGINID"/>
-      <result property="sellerType" column="C_TYPE"/>
-      <result property="companyNum" column="CP_RNUM"/>
-      <result property="personalNum" column="C_RNUM"/>
-      <result property="companyName" column="C_NAME"/>
-      <result property="companyPhone" column="C_PHONE"/>
-      <result property="companyAddress" column="C_ADDRESS"/>
-      <result property="mId" column="M_ID"/>
-   </resultMap>
+	<resultMap type="Company" id="companyResultSet">
+		<id property="cId" column="C_ID"/>
+		<result property="contentId" column="C_ORIGINID"/>
+		<result property="sellerType" column="C_TYPE"/>
+		<result property="companyNum" column="CP_RNUM"/>
+		<result property="personalNum" column="C_RNUM"/>
+		<result property="companyName" column="C_NAME"/>
+		<result property="companyPhone" column="C_PHONE"/>
+		<result property="companyAddress" column="C_ADDRESS"/>
+		<result property="mId" column="M_ID"/>
+	</resultMap>
    
-   <!-- 업체 등록 -->
+	<!-- 업체명 중복 확인 -->
+	<select id="duplicationTitle" resultType="_int" parameterType="string">
+		SELECT COUNT(*)
+		FROM COMPANY
+		WHERE C_NAME LIKE #{title}
+	</select>
+   
+	<!-- 업체 등록 -->
 	<insert id="insertCompany" parameterType="Company">
 		INSERT INTO COMPANY (C_ID, C_ORIGINID, C_TYPE, CP_RNUM, C_RNUM, C_NAME, C_PHONE, C_ADDRESS, M_ID) 
 		VALUES (SEQ_C_ID.NEXTVAL, #{contentId}, #{sellerType}, #{companyNum}, #{personalNum}, #{companyName}, #{companyPhone}, #{companyAddress}, #{mId})

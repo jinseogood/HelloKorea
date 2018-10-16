@@ -11,14 +11,22 @@ import org.aspectj.weaver.GeneratedReferenceTypeDelegate;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.kh.hello.seller.model.service.SellerService;
 
 import net.sf.json.JSONObject;
 
 @Controller
 public class CompanySearchController {
+	
+	@Autowired
+	private SellerService ss;
+	
+	//API에서 업체 조회
 	@RequestMapping(value="searchCompany.sell")
 	public void searchCompany(@RequestParam String area, @RequestParam String sigungu, @RequestParam String page, HttpServletResponse response){
         response.setContentType("text/html; charset=utf-8");
@@ -60,6 +68,7 @@ public class CompanySearchController {
 		}
 	}
 	
+	//선택 업체명 객실 조회
 	@RequestMapping(value="searchRoom.sell")
 	public void searchRoom(@RequestParam String contentId, HttpServletResponse response){
 		response.setContentType("text/html; charset=utf-8");
@@ -97,5 +106,31 @@ public class CompanySearchController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	//업체명 중복확인
+	@RequestMapping(value="duplicationTitle.sell")
+	public void duplicationTitle(String title, HttpServletResponse response){
+		
+		int result=ss.duplicationTitle(title);
+		
+		try {
+			PrintWriter out=response.getWriter();
+			
+			if(result > 0){
+				out.print(result);
+			}
+			else{
+				out.print(result);
+			}
+			
+			out.flush();
+			out.close();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+			
 	}
 }

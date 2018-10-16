@@ -53,4 +53,10 @@ public class PaymentDaoImpl implements PaymentDao{
 		return sqlSession.selectOne("SellerReservation.selectReservation", paId);
 	}
 
+	//회원 포인트 조회
+	@Override
+	public int selectUserPoint(int mId, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("Payment.selectUserPoint", mId);
+	}
+
 }

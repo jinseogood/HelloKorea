@@ -1,6 +1,7 @@
 package com.kh.hello.payment.controller;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
@@ -12,6 +13,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.hello.common.Email;
 import com.kh.hello.common.EmailSender;
+import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.payment.model.service.PaymentService;
 import com.kh.hello.payment.model.vo.PayDetail;
 import com.kh.hello.payment.model.vo.Payment;
@@ -66,11 +69,13 @@ public class PaymentController {
 	private static final String PARAM_PAYMENT_DATE = "payment_date";	// 결제일
 	private static final String PARAM_CUSTOM = "custom";     // 주문자 정보
 	
+	//결제 페이지 이동
 	@RequestMapping(value="paymentDetailView.pay")
 	public String paymentDetailView(){
 		return "payment/detailPayment";
 	}
 	
+	//결제 완료 페이지 이동
 	@RequestMapping(value="paymentConfirm.pay")
 	public String paymentConfirm(HttpServletRequest request, Model model){
 		
@@ -282,6 +287,25 @@ public class PaymentController {
 			return "common/errorPage";
 		}
 
+	}
+	
+	//회원 포인트 조회
+	@RequestMapping(value="selectUserPoint.pay")
+	public void selectUserPoint(HttpServletRequest request, HttpServletResponse response){
+		Member m=(Member) request.getSession().getAttribute("loginUser");
+		
+		int rPoint=ps.selectUserPoint(m.getmId());
+		
+		try {
+			PrintWriter out = response.getWriter();
+			
+			out.print(rPoint);
+			out.flush();
+			out.close();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

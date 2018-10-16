@@ -23,4 +23,7 @@ public interface PaymentService {
 	//결제 확인 창에 보여줄 예약 정보 조회
 	SellerReservation selectReservation(int paId);
 
+	//회원 포인트 조회
+	int selectUserPoint(int mId);
+
 }
