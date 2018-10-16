@@ -310,6 +310,61 @@ public class BoardPageController {
 		return "board/reviewDetail";
 	}
 	
+	@RequestMapping(value="thumbsR.bo")
+	public ModelAndView thumbsR(Model model, @RequestParam int target_id, @RequestParam int ref_id, HttpServletResponse response
+						,HttpServletRequest request){
+		response.setContentType("text/html; charset=UTF-8");
+		ModelAndView mv = new ModelAndView("jsonView");
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		Thumbs thumb = new Thumbs();
+		thumb.setM_id(m.getmId());
+		thumb.setRef_id(ref_id);
+		thumb.setT_target(target_id);
+		
+		thumb.setT_type(0);
+		Thumbs result = bs.selectThumbs(thumb);
+		int count = 0;
+		
+		if(result != null){
+			if(result.getStatus().equals("Y")){
+				thumb.setStatus("N");
+				int result1 = bs.updateThumbsR(thumb);
+				int result2 = bs.updateThumbsReview(ref_id);
+				count = bs.selectThumbsCount(thumb);
+					if(result1 > 0 && result2 >0){
+						mv.addObject("msg", "도움이 되었어요가 취소되었습니다.");
+						mv.addObject("thumbsCount", count);
+					}else{
+						mv.addObject("msg", "에러입니다.");
+					}
+			}else{
+				thumb.setStatus("Y");
+				int result1 = bs.updateThumbsR(thumb);
+				int result2 = bs.updateThumbsReview(ref_id);
+				count = bs.selectThumbsCount(thumb);
+				if(result1 > 0 && result2 >0){
+					mv.addObject("msg", "도움이 되었어요 되었습니다.");
+					mv.addObject("thumbsCount", count);
+				}else{
+					mv.addObject("msg", "에러입니다.");
+				}
+			}
+		}else{
+			thumb.setStatus("Y");
+			int result1 = bs.insertThumbs(thumb);
+			int result2 = bs.updateThumbsReview(ref_id);
+			count = bs.selectThumbsCount(thumb);
+			if(result1 > 0 && result2 >0){
+				mv.addObject("msg", "도움이 되었어요 되었습니다.");
+				mv.addObject("thumbsCount", count);
+			}else{
+				mv.addObject("msg", "에러입니다.");
+			} 
+		}
+		
+		return mv;
+	}
+	
 	@RequestMapping(value="thumbsA.bo")
 	public ModelAndView thumbsA(Model model, @RequestParam int target_id, @RequestParam int reply_id, HttpServletResponse response
 						,HttpServletRequest request){
@@ -323,21 +378,28 @@ public class BoardPageController {
 		
 		thumb.setT_type(1);
 		Thumbs result = bs.selectThumbs(thumb);
+		int count = 0;
 		
 		if(result != null){
 			if(result.getStatus().equals("Y")){
 				thumb.setStatus("N");
 				int result1 = bs.updateThumbs(thumb);
-					if(result1 > 0){
+				int result2 = bs.updateReply(reply_id);
+				count = bs.selectThumbsCount(thumb);
+					if(result1 > 0 && result2 >0){
 						mv.addObject("msg", "도움이 되었어요가 취소되었습니다.");
+						mv.addObject("thumbsCount", count);
 					}else{
 						mv.addObject("msg", "에러입니다.");
 					}
 			}else{
 				thumb.setStatus("Y");
 				int result1 = bs.updateThumbs(thumb);
-				if(result1 > 0){
+				int result2 = bs.updateReply(reply_id);
+				count = bs.selectThumbsCount(thumb);
+				if(result1 > 0 && result2 >0){
 					mv.addObject("msg", "도움이 되었어요 되었습니다.");
+					mv.addObject("thumbsCount", count);
 				}else{
 					mv.addObject("msg", "에러입니다.");
 				}
@@ -345,8 +407,11 @@ public class BoardPageController {
 		}else{
 			thumb.setStatus("Y");
 			int result1 = bs.insertThumbs(thumb);
-			if(result1 > 0){
+			int result2 = bs.updateReply(reply_id);
+			count = bs.selectThumbsCount(thumb);
+			if(result1 > 0 && result2 >0){
 				mv.addObject("msg", "도움이 되었어요 되었습니다.");
+				mv.addObject("thumbsCount", count);
 			}else{
 				mv.addObject("msg", "에러입니다.");
 			} 

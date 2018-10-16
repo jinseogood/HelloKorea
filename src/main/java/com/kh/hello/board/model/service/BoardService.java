@@ -55,6 +55,15 @@ public interface BoardService{
 
 	int updateThumbs(Thumbs thumb);
 
-	int insertThumbs(Thumbs thumb); 
+	int insertThumbs(Thumbs thumb);
+
+	int selectThumbsCount(Thumbs thumb);
+
+	int updateReply(int reply_id);
+
+
+	int updateThumbsReview(int ref_id);
+
+	int updateThumbsR(Thumbs thumb); 
 
 } 

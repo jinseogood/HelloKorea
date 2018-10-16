@@ -30,6 +30,17 @@
      	  FROM REPLY
      	  WHERE BID = #{bid}	
      </select>
+     
+     <!-- 도움이 되었어요 카운트 -->
+     <update id = "updateThumbs" parameterType="_int">
+     	  UPDATE REPLY
+     	  SET HELP_POINT = (SELECT COUNT(*)
+     	 					FROM THUMBS_UP
+     	  					WHERE REF_ID = #{ref_id}
+     	  					AND STATUS = 'Y')
+     	  WHERE REPLY_ID = #{ref_id}
+     </update>
+     
      <!-- 리뷰 업데이트(실질적 글작성) -->
      <!-- <update id="updateReviewBoard" parameterType="_int">
          UPDATE BOARD

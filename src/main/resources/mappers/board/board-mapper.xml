@@ -73,4 +73,13 @@
      	WHERE BID = #{ bid } 
      </select>
      
+     <update id = "updateThumbsReview" parameterType="_int">
+     	UPDATE BOARD
+     	SET LIKEY = (SELECT COUNT(*)
+     				 FROM THUMBS_UP
+     				 WHERE REF_ID = #{ref_id}
+     				 AND STATUS ='Y')
+     	WHERE BID = #{ref_id}			 
+     </update>
+     
 </mapper>

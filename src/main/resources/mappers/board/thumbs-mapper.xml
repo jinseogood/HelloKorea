@@ -20,14 +20,16 @@
      	  FROM THUMBS_UP
      	  WHERE M_ID = #{m_id}
      	  AND REF_ID = #{ref_id}
+     	  AND T_TYPE = #{t_type}
      </select>
           
-     <!-- <select id="selectThumbsCount" parameterType="Thumbs" resultMap="ThumbResultSet">
+     <select id="selectThumbsCount" parameterType="Thumbs" resultType="_int">
      	  SELECT COUNT(*)
      	  FROM THUMBS_UP
      	  WHERE REF_ID = #{ref_id}
+     	  AND T_TYPE = #{t_type}
      	  AND STATUS = 'Y'
-     </select> -->
+     </select>
      
      <!-- 도움 인서트 -->
      <insert id="insertThumbs" parameterType="Thumbs">
@@ -41,6 +43,15 @@
      	  SET STATUS =  #{status}
      	  WHERE M_ID = #{m_id}
      	  AND REF_ID = #{ref_id}
+     	  AND T_TYPE = 1
+     </update>
+     
+     <update id="updateThumbsR" parameterType="Thumbs">
+     	  UPDATE THUMBS_UP 
+     	  SET STATUS =  #{status}
+     	  WHERE M_ID = #{m_id}
+     	  AND REF_ID = #{ref_id}
+     	  AND T_TYPE = 0
      </update>
 
   
