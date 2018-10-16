@@ -372,12 +372,12 @@ public class MemberController {
     //닉네임중복확인
     @RequestMapping("nicknameCheck.me")
     public void nicknameCheck(String nickname, HttpServletResponse response){
-    	
+    	System.out.println(nickname);
     	int result = ms.nicknameCheck(nickname);
     	 ObjectMapper mapper = new ObjectMapper();
     	 
     	 try {
-			response.getWriter().println(mapper.writer());
+			response.getWriter().println(mapper.writeValueAsString(result));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
