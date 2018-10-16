@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.kh.hello.member.model.exception.LoginException;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.member.model.dao.MemberDao;
+import com.kh.hello.member.model.vo.BoardAndReply;
 import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.member.model.vo.MemberGoods;
 @Service
@@ -145,6 +146,13 @@ public class MemberServiceImpl implements MemberService {
 	public int nicknameCheck(String nickname) {
 		// TODO Auto-generated method stub
 		return md.nicknameCheck(nickname,sqlSession);
+	}
+
+	//활동내역
+	@Override
+	public ArrayList<BoardAndReply> selectboreList(int mId) {
+		// TODO Auto-generated method stub
+		return md.selectboreList(mId,sqlSession);
 	}
 
 

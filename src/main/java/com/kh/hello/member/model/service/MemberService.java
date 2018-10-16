@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import com.kh.hello.common.Attachment;
 import com.kh.hello.member.model.exception.LoginException;
+import com.kh.hello.member.model.vo.BoardAndReply;
 import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.member.model.vo.MemberGoods;
 
@@ -56,6 +57,9 @@ public interface MemberService {
 	
 	//닉네임체크
 	int nicknameCheck(String nickname);
+	
+	//활동내역
+	ArrayList<BoardAndReply> selectboreList(int mId);
 
 	
 	

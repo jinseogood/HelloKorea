@@ -228,7 +228,7 @@ button {
 					},
 					success: function(data){
 						if(data ==0){
-							nicknameCheck();
+							alert("사용가능한 닉네임입니다");
 						}else{
 							alert("중복되는  닉네임입니다");
 						}

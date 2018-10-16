@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.hello.common.Attachment;
+import com.kh.hello.member.model.vo.BoardAndReply;
 import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.member.model.vo.MemberGoods;
 
@@ -54,6 +55,9 @@ public interface MemberDao {
 	
 	//닉네임체크'
 	int nicknameCheck(String nickname, SqlSessionTemplate sqlSession);
+	
+	//활동내역
+	ArrayList<BoardAndReply> selectboreList(int mId, SqlSessionTemplate sqlSession);
 
 
 	

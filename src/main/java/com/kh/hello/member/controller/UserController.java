@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.CommonUtils;
 import com.kh.hello.member.model.service.MemberService;
+import com.kh.hello.member.model.vo.BoardAndReply;
 import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.member.model.vo.MemberGoods;
 
@@ -114,6 +115,22 @@ public class UserController {
 		
 		model.addAttribute("goodsList", goodsList);
 		return "userMypage/watchList";
+		
+	}
+	@RequestMapping(value="activities.um")
+	public String activities(Model model,HttpServletRequest request){
+		
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		
+		int mId = m.getmId();
+		
+		ArrayList<BoardAndReply> boreList = ms.selectboreList(mId);
+		
+		System.out.println("boreList : "+boreList);
+		
+		
+		model.addAttribute("boreList", boreList);
+		return  "userMypage/activities";
 		
 	}
 }

@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hello.common.Attachment;
+import com.kh.hello.member.model.vo.BoardAndReply;
 import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.member.model.vo.MemberGoods;
 @Repository
@@ -114,6 +115,13 @@ public class MemberDaoImpl implements MemberDao {
 	public int nicknameCheck(String nickname, SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("Member.nicknameCheck",nickname);
+	}
+
+	@Override
+	public ArrayList<BoardAndReply> selectboreList(int mId, SqlSessionTemplate sqlSession) {
+		ArrayList<BoardAndReply> list =(ArrayList) sqlSession.selectList("BoardAndReply.selectboreList",mId);
+		
+		return list;
 	}
 
 
