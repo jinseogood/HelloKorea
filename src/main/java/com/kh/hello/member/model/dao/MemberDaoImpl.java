@@ -129,6 +129,12 @@ public class MemberDaoImpl implements MemberDao {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("Member.insertGoogole", m);
 	}
+	//댓글갯수
+	@Override
+	public int selectReplyCount(int mId, SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("BoardAndReply.selectReplyCount", mId);
+	}
 
 
 

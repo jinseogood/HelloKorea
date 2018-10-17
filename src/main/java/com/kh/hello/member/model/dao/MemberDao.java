@@ -60,6 +60,8 @@ public interface MemberDao {
 	ArrayList<BoardAndReply> selectboreList(int mId, SqlSessionTemplate sqlSession);
 	//구글
 	int insertGoogole(Member m, SqlSessionTemplate sqlSession);
+	//댓글갯수
+	int selectReplyCount(int mId, SqlSessionTemplate sqlSession);
 
 
 	

@@ -71,11 +71,11 @@
 					<th width="100px">글 종류</th>
 					<th width="100px">좋아요</th>
 					<th width="60px">댓글수</th>
-					<th width="200px">댓글내용</th>
+					
 				</tr>
 			</thead>
 			<c:forEach var="item" items="${ boreList}">
-				<c:if test="${item.bId ne null }">
+				<c:if test="${item.mId eq mId }">
 					<tbody>
 					<tr>
 					<td>${item.bId }</td>
@@ -86,9 +86,8 @@
 					<c:if test="${item.boardType eq 1 }">
 					<td>Q</td>
 					</c:if>
-					<td>2</td>
+					<td>${replyCount}</td>
 					<td>${item.likey }</td>
-					<td>${item.content}</td>
 					</tr>
 					</tbody>
 				</c:if>

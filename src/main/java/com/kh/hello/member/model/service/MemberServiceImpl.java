@@ -162,6 +162,13 @@ public class MemberServiceImpl implements MemberService {
 		return md.insertGoogole(m,sqlSession);
 	}
 
+	//댓글갯수
+	@Override
+	public int selectReplyCount(int mId) {
+		// TODO Auto-generated method stub
+		return md.selectReplyCount(mId,sqlSession);
+	}
+
 
 
 

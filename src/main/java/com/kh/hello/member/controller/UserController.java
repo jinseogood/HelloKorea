@@ -124,13 +124,18 @@ public class UserController {
 		
 		int mId = m.getmId();
 		
+		//활동내역 리스트
 		ArrayList<BoardAndReply> boreList = ms.selectboreList(mId);
+		
 		
 		System.out.println("boreList : "+boreList);
 		
+		int replyCount = ms.selectReplyCount(mId);
+		System.out.println("replyCount :"+replyCount);
 		
-		
+		model.addAttribute("mId", mId);
 		model.addAttribute("boreList", boreList);
+		model.addAttribute("replyCount",replyCount);
 		return  "userMypage/activities";
 		
 	}
