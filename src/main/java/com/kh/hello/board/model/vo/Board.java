@@ -27,8 +27,42 @@ public class Board implements java.io.Serializable{
 	private int reply_count;
 	private String attach;
 	private String create_date;
+	private String email;
 	
 	public Board(){}
+	
+	
+
+	public Board(int bid, String title, String text, int board_type, String regist_date, String status,
+			String modify_date, float grade, int likey, int m_id, int origin_id, String travel_date, int rCount,
+			String national, String nickname, String interesting, int help_count, int board_count, int reply_count,
+			String attach, String create_date, String email) {
+		super();
+		this.bid = bid;
+		this.title = title;
+		this.text = text;
+		this.board_type = board_type;
+		this.regist_date = regist_date;
+		this.status = status;
+		this.modify_date = modify_date;
+		this.grade = grade;
+		this.likey = likey;
+		this.m_id = m_id;
+		this.origin_id = origin_id;
+		this.travel_date = travel_date;
+		this.rCount = rCount;
+		this.national = national;
+		this.nickname = nickname;
+		this.interesting = interesting;
+		this.help_count = help_count;
+		this.board_count = board_count;
+		this.reply_count = reply_count;
+		this.attach = attach;
+		this.create_date = create_date;
+		this.email = email;
+	}
+
+
 
 	public Board(int bid, String title, String text, int board_type, String regist_date, String status,
 			String modify_date, float grade, int likey, int m_id, int origin_id, String travel_date, int rCount,
@@ -315,6 +349,18 @@ public class Board implements java.io.Serializable{
 
 
 
+	public String getEmail() {
+		return email;
+	}
+
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Board [bid=" + bid + ", title=" + title + ", text=" + text + ", board_type=" + board_type
@@ -322,8 +368,13 @@ public class Board implements java.io.Serializable{
 				+ grade + ", likey=" + likey + ", m_id=" + m_id + ", origin_id=" + origin_id + ", travel_date="
 				+ travel_date + ", rCount=" + rCount + ", national=" + national + ", nickname=" + nickname
 				+ ", interesting=" + interesting + ", help_count=" + help_count + ", board_count=" + board_count
-				+ ", reply_count=" + reply_count + ", attach=" + attach + ", create_date=" + create_date + "]";
+				+ ", reply_count=" + reply_count + ", attach=" + attach + ", create_date=" + create_date + ", email="
+				+ email + "]";
 	}
+
+
+
+	
 
 
 

@@ -36,15 +36,21 @@ public class BoardPageController {
 	private BoardService bs;
 	
 	@RequestMapping(value = "reviewWrite.bo")
-	public String reviewWrite(Model model, HttpServletRequest request, @RequestParam int contentid/*, @RequestParam("file") MultipartFile[] file*/){
+	public String reviewWrite(Model model, HttpServletRequest request, @RequestParam int contentid, @RequestParam int contenttypeid, @RequestParam int cid/*, @RequestParam("file") MultipartFile[] file*/){
 
 		System.out.println(contentid);
 		Board b = new Board();
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		b.setM_id(m.getmId());
 		b.setOrigin_id(contentid);
-		
+		String referer = request.getHeader("Referer");
+
 		int result = bs.insertBoard(b);
+		
+		model.addAttribute("uri", referer);
+		model.addAttribute("contentid", contentid);
+		model.addAttribute("contenttypeid", contenttypeid);
+		model.addAttribute("cid", cid);
 		
 		return "board/reviewWrite";
 	}
@@ -134,14 +140,16 @@ public class BoardPageController {
 	}
 	
 	@RequestMapping(value="insertReview.bo")
-	public String insertReview(Model model, Board b, HttpServletRequest request){
+	public String insertReview(Model model, Board b, HttpServletRequest request, 
+			@RequestParam String uri,@RequestParam int contentid, @RequestParam int contenttypeid, @RequestParam int cid){
 		int result = 0;
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		b.setM_id(m.getmId());
 		//System.out.println(b);
 		result = bs.updateBoard(b);
-		
-		return "aboutDetail/detailHotel";
+		System.out.println(uri);
+		System.out.println(contentid + " " + contenttypeid + " " + cid);
+		return "redirect:"+uri;
 	}
 	
 	@RequestMapping(value="QPaging.bo", produces = "application/json; charset=utf8")
@@ -182,11 +190,11 @@ public class BoardPageController {
 			System.out.println(list.get(i).getRegist_date());
 		}*/
 		
-		//System.out.println(list);
+		System.out.println(list);
 		
 		for(int i = 0 ; i < list.size() ; i++){
 			list.get(i).setrCount(bs.selectReplyCount(list.get(i).getBid()));
-			list.get(i).setCreate_date(list.get(i).getCreate_date().substring(10));
+			list.get(i).setCreate_date(list.get(i).getCreate_date().substring(0, 10));
 		}
 		
 		mv.addObject("list", list);
