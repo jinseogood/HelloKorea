@@ -410,7 +410,7 @@
 							output = "";
 							output += "<div class='tm-home-box-3' id='detailHover'>";
 							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+","+cid+");'>";
-							if(data[i].firstimage == null){
+							/* if(data[i].firstimage == null){
 								//hotelImageLoad(contentid);
 								$.ajax({
 									url:"hotelImageLoad.sub",
@@ -430,7 +430,7 @@
 								});
 							}else{
 								output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
-							}
+							} */
 							output += "</div>";
 							output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
 							output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
@@ -637,8 +637,7 @@
 							output = "";
 							output += "<div class='tm-home-box-3' id='detailHover'>";
 							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+","+cid+");'>";
-							if(data[i].firstimage == null){
-								//hotelImageLoad(contentid);
+							/* if(data[i].firstimage == null){
 								$.ajax({
 									url:"hotelImageLoad.sub",
 									type:"get",
@@ -656,7 +655,7 @@
 								});
 							}else{
 								output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
-							}
+							} */
 							output += "</div>";
 							output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
 							output += "<p class='tm-home-box-3-description' id='infoTextArea'>";

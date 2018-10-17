@@ -1162,7 +1162,7 @@
 			}
 		
 			$(function(){
-				$.ajax({
+				/* $.ajax({
 					url:"mainThemeShopping.tm",
 					type:"GET",
 					dataType:"json",
@@ -1401,11 +1401,11 @@
 					error:function(data){
 						console.log(data);
 					}
-				});
+				}); */
 			}
 			
 			function beautyTheme(){
-				$.ajax({
+				/* $.ajax({
 					url:"mainThemeBeauty.tm",
 					type:"GET",
 					dataType:"json",
@@ -1521,11 +1521,11 @@
 					error:function(data){
 						console.log(data);
 					}
-				});
+				}); */
 			}
 			
 			function classicTheme(){
-				$.ajax({
+				/* $.ajax({
 					url:"mainThemeClassic.tm",
 					type:"GET",
 					dataType:"json",
@@ -1641,11 +1641,11 @@
 					error:function(data){
 						console.log(data);
 					}
-				});
+				}); */
 			}
 			
 			function leisureTheme(){
-				$.ajax({
+				/* $.ajax({
 					url:"mainThemeLeisure.tm",
 					type:"GET",
 					dataType:"json",
@@ -1760,7 +1760,7 @@
 					error:function(data){
 						console.log(data);
 					}
-				});
+				}); */
 			}
 			
 			
