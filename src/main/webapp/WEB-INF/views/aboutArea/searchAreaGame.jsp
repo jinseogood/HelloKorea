@@ -70,7 +70,7 @@
 					var areaCode1;
 					var areaCode;
 					//var sigunguCode = ${param.sigunguCode};
-					//var sigunguCode1 = "";
+					var sigunguCode1;
 					var sigunguCode;
 					//var contenttypeid = ${param.contenttypeid};
 					var contenttypeid1;
@@ -92,7 +92,7 @@
 							sigunguCode = sessionStorage.getItem("sigunguCode");
 						}
 						if(sessionStorage.getItem("contenttypeid") == 0){
-							contenttypeid = "";
+							contenttypeid = 28;
 						}else{
 							contenttypeid = sessionStorage.getItem("contenttypeid");
 						}
@@ -210,24 +210,41 @@
 							}
 						});
 					}
-					
-					function btnGood(contenttypeid, contentid){
+					</script>
+					<c:if test="${!empty sessionScope.loginUser}">
+					<script>
+					function btnGood(contenttypeid, contentid, cid){
 						console.log(contenttypeid);
 						console.log(contentid);
-						$.ajax({
-							url:"dibsGame.good",
-							type:"GET",
-							data:{contenttypeid:contenttypeid, contentid:contentid},
-							success:function(data){
-								if(data > 0){
-									deleteDibsGame(contentid);
-								}else{
-									insertDibsGame(contentid);
+						
+							$.ajax({
+								url:"dibsHotel.good",
+								type:"GET",
+								data:{contenttypeid:contenttypeid, contentid:contentid, cid:cid},
+								success:function(data){
+									// 1일시, 이미 찜한 목록 => delete요청.
+									// 0일시, 새로 찜에 추가 => insert요청.
+									if(data > 0){
+										deleteDibsHotel(contentid, cid);
+									}else{
+										insertDibsHotel(contentid, cid);
+									}
+								},
+								error:function(data){
+									console.log(data);
 								}
-							}
-						});
+							});
 					}
-					
+					</script>
+					</c:if>
+					<c:if test="${empty sessionScope.loginUser}">
+					<script>
+						function btnGood(contenttypeid, contentid, cid){
+							alert("로그인이 필요한 서비스입니다.");
+						}
+					</script>
+					</c:if>
+					<script>
 					function insertDibsGame(contentid){
 						$.ajax({
 							url:"insertDibsGame.good",
@@ -468,7 +485,7 @@
 								console.log("condition : " + cat1);
 								console.log("condition : " + cat2);
 								console.log("condition : " + cat3);
-								searchGameCondition(contenttypeid, areaCode1, sigunguCode1, cat1, cat2, cat3);
+								searchGameCondition(contenttypeid, areaCode1, sigunguCode1, cat1, cat2, cat3, pageNo);
 								
 							});
 							
