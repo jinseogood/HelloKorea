@@ -1159,7 +1159,7 @@
 							},error:function(data){
 								alert(data.msg); 
 							}
-						})
+						});
 				}else{
 					alert("본인 글에는 (도움이 되었어요)를 할 수 없습니다");
 				}
@@ -1190,7 +1190,7 @@
 							},error:function(data){
 								alert(data.msg);
 							}
-						})
+						});
 				}else{
 					alert("본인 글에는 (도움이 되었어요)를 할 수 없습니다");
 				}
@@ -1250,7 +1250,7 @@
 				},error:function(data){
 					
 				}
-			})
+			});
 		}
 		
 		function insertA(element){
@@ -1273,7 +1273,7 @@
 						},error:function(data){
 							console.log(data);
 						}
-				})
+				});
 			}else{
 				alert("로그인이 필요한 서비스 입니다.");
 			}
@@ -1324,8 +1324,9 @@
     		var ref_id = $(element).parent().children().eq(1).val();
     		var r_level = 1;
 
-    		if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')})
+    		if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')}){
     			window.open('reportWrite.bo?m_id='+m_id+'&ref_id='+ref_id+'&r_level='+r_level, 'reportWrite', 'height=380, width=450, top=80, left=400 resizable=none, scrollbars=no');
+    		}
     		else{
     			alert("로그인이 필요한 서비스 입니다.");
     		}

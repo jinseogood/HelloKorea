@@ -214,18 +214,18 @@ function insertA(element){
 	
 	console.log(b);
 	console.log(a);
-	$.ajax({
-			url:"insertA.bo",
-			type:"post",
-			data:{text:a, bid:b},
-			dataType:"json",
-			success:function(data){
-				$(element).parent().parent().children().eq(1).val("");
-				location.reload();
-			},error:function(data){
-				console.log(data);
-			}
-	})
+		$.ajax({
+				url:"insertA.bo",
+				type:"post",
+				data:{text:a, bid:b},
+				dataType:"json",
+				success:function(data){
+					$(element).parent().parent().children().eq(1).val("");
+					location.reload();
+				},error:function(data){
+					console.log(data);
+				}
+		});
 	}else{
 		alert('로그인이 필요한 서비스입니다.');
 	}
@@ -252,7 +252,7 @@ function RUp(element){
 					},error:function(data){
 						alert(data.msg);
 					}
-				})
+				});
 		}else{
 			alert("본인 글에는 (도움이 되었어요)를 할 수 없습니다");
 		}
@@ -283,7 +283,7 @@ function AUp(element){
 					},error:function(data){
 						alert(data.msg);
 					}
-				})
+				});
 		}else{
 			alert("본인 글에는 (도움이 되었어요)를 할 수 없습니다");
 		}
