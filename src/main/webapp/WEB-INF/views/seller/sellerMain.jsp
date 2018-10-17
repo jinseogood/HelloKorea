@@ -83,7 +83,7 @@
 				<div class="sm-st clearfix">
 					<span class="sm-st-icon st-violet"><i class="fa fa-bed"></i></span>
 					<div class="sm-st-info">
-						<span><a href="manageProduct.pay">업체 관리</a></span>
+						<span><a href="manageProduct.sell">업체 관리</a></span>
 					</div>
 				</div>
 			</div>
@@ -96,10 +96,10 @@
 			<div class="col-md-8">
 				<!--earning graph start-->
 				<section class="panel">
-				<header class="panel-heading">금월 매출 통계</header>
-				<div class="panel-body">
-					<canvas id="linechart" width="600" height="330"></canvas>
-				</div>
+					<header class="panel-heading">금월 매출 통계</header>
+					<div class="panel-body">
+						<canvas id="linechart" width="600" height="330"></canvas>
+					</div>
 				</section>
 				<!--earning graph end-->
 				<!--earning graph start-->
