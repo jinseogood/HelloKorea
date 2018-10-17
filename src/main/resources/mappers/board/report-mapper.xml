@@ -21,6 +21,9 @@
      	  SELECT R_RECORD_ID, REASON, R_DATE, R_LEVEL, M_ID, R_TARGET, REF_ID, RESULT
      	  FROM REPORT_HISTORY
      	  WHERE REF_ID = #{ref_id}
+     	  AND R_LEVEL = #{r_level}
+     	  AND R_TARGET = #{r_target}
+     	  AND M_ID = #{m_id}
      </select>
      
      <!-- 신고인서트 -->

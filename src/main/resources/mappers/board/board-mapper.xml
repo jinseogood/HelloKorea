@@ -18,8 +18,17 @@
           <result property="m_id" column="M_ID"/>
           <result property="origin_id" column="ORIGIN_ID"/>
           <result property="travel_date" column="TRAVEL_DATE"/>
+          <result property="national" column="NATIONAL"/>
+          <result property="nickname" column="NICKNAME"/>
+          <result property="interesting" column="INTEREST"/>
+          <result property="help_count" column="HELP_COUNT"/>
+          <result property="board_count" column="BOARD_COUNT"/>
+          <result property="reply_count" column="REPLY_COUNT"/>
+          <result property="attach" column="CHANGE_NAME"/>
+          <result property="create_date" column="CREATE_DATE"/>
+
      </resultMap>
-     
+	
      <!-- 리뷰 인서트************2 -->
      <insert id="insertReviewBoard" parameterType="_int">
           INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, '타이틀',
@@ -33,9 +42,18 @@
          WHERE bid = (SELECT MAX(BID) FROM BOARD WHERE M_ID = #{m_id})
      </update>
      
-     <select id = "selectReview" resultMap = "BoardResultSet">
-     	SELECT BID, TITLE, TEXT, BOARD_TYPE , REGIST_DATE, STATUS, MODIFY_DATE, GRADE, LIKEY, M_ID, ORIGIN_ID
-     	FROM BOARD WHERE BOARD_TYPE = 1
+     <!-- SELECT BID, TITLE, TEXT, BOARD_TYPE , REGIST_DATE, STATUS, MODIFY_DATE, GRADE, LIKEY, M_ID, ORIGIN_ID
+     	FROM BOARD WHERE BOARD_TYPE = 1 AND ORIGIN_ID = #{ origin_id } -->
+     <select id = "selectReview" resultMap = "BoardResultSet" >
+     	SELECT B.BID, B.TITLE, B.TEXT, B.BOARD_TYPE, B.REGIST_DATE, B.STATUS, B.MODIFY_DATE, B.GRADE, B.LIKEY,
+     			 B.M_ID, B.ORIGIN_ID, M.REGIST_DATE AS CREATE_DATE, M.NICKNAME, M.INTEREST, M.NATIONAL, A.CHANGE_NAME,
+     			 (SELECT COUNT(*) FROM THUMBS_UP WHERE STATUS = 'Y' AND T_TARGET = B.M_ID) AS HELP_COUNT,
+                 (SELECT COUNT(*) FROM BOARD WHERE M_ID = B.M_ID) AS BOARD_COUNT,
+                 (SELECT COUNT(*) FROM REPLY WHERE M_ID = B.M_ID) AS REPLY_COUNT
+		FROM BOARD B
+		JOIN MEMBER M ON(B.M_ID = M.M_ID)
+		JOIN ATTACHMENT A ON(M.M_ID = A.REF_ID)
+		WHERE BOARD_TYPE = 1 AND ORIGIN_ID = #{origin_id} AND A_LEVEL = 2
      </select>
      
      <select id = "selectReviewCount2" parameterType="_int" resultType = "_int">
@@ -44,10 +62,11 @@
      </select>
 
      <!-- 리뷰 내역 수 조회용 -->
-     <select id= "selectReviewCount" resultType = "_int">
+     <select id= "selectReviewCount" resultType = "_int" parameterType="_int">
      	SELECT COUNT(*)
      	FROM BOARD 
      	WHERE BOARD_TYPE = 1
+     	AND ORIGIN_ID = #{ origin_id }
      </select>
      
      <!-- 리뷰 삭제(취소시 미리 인서트해놓은 것) -->
@@ -56,8 +75,8 @@
      	WHERE BID = (SELECT MAX(BID) FROM BOARD WHERE M_ID = #{mid})
      </delete>
      <select id = "selectQ" resultMap = "BoardResultSet">
-     	SELECT BID, TEXT, BOARD_TYPE, REGIST_DATE, STATUS, MODIFY_DATE, GRADE, LIKEY, M_ID, ORIGIN_ID
-     	FROM BOARD WHERE BOARD_TYPE = 2
+     	SELECT BID, TITLE, TEXT, BOARD_TYPE , REGIST_DATE, STATUS, MODIFY_DATE, GRADE, LIKEY, M_ID, ORIGIN_ID
+     	FROM BOARD WHERE BOARD_TYPE = 2 AND ORIGIN_ID = #{ origin_id }
      </select>
      
      <!-- Q작성 인서트 -->
@@ -67,10 +86,11 @@
      </insert>
      
      <!-- Q내역 수 조회용 -->
-     <select id= "selectQCount" resultType = "_int">
+     <select id= "selectQCount" resultType = "_int" parameterType="_int">
      	SELECT COUNT(*)
      	FROM BOARD 
      	WHERE BOARD_TYPE = 2
+     	AND ORIGIN_ID = #{ origin_id }
      </select>
      <select id = "selectReviewDetail" parameterType="_int" resultMap = "BoardResultSet">
      	SELECT BID, TITLE, TEXT, BOARD_TYPE, REGIST_DATE, STATUS, MODIFY_DATE, GRADE, LIKEY, M_ID, ORIGIN_ID, TRAVEL_DATE
@@ -86,5 +106,9 @@
      				 AND STATUS ='Y')
      	WHERE BID = #{ref_id}			 
      </update>
+     
+     <!-- <select id = "allinfo" parameterType="_int" resultMap="">
+     
+     </select> -->
      
 </mapper>

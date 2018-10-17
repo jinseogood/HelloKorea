@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.hello.board.model.service.BoardService;
 import com.kh.hello.board.model.vo.Board;
@@ -38,7 +39,7 @@ public class SubPageController {
 	}
 	
 	@RequestMapping("detailHotel")
-	public String detailHotelView(Model model, PageInfo p){
+	public String detailHotelView(Model model, PageInfo p/*, @RequestParam int contentid*/){
 		
 		//리뷰 페이징
 		ArrayList<Board> list = null;
@@ -49,7 +50,7 @@ public class SubPageController {
 		
 		PageInfo pi = null;
 
-		int listCount = bs.selectReviewCount();
+		/*int listCount = bs.selectReviewCount();
 		pi = Pagination2.getPageInfo(p.getCurrentPage(), listCount);
 		list= bs.selectReview(pi);	
 		
@@ -57,7 +58,7 @@ public class SubPageController {
 			model.addAttribute("list", list);
 			model.addAttribute("pi", pi);
 			model.addAttribute("listCount", listCount);
-		}
+		}*/
 		
 		//Q 페이징
 		ArrayList<Board> list2 = null;
@@ -68,7 +69,7 @@ public class SubPageController {
 		
 		PageInfo pi2 = null;
 		
-		int listCount2 = bs.selectQCount();
+		/*int listCount2 = bs.selectQCount();
 		pi2 = Pagination2.getPageInfo(p.getCurrentPage(), listCount2);
 		list2 = bs.selectQ(pi2);
 		
@@ -76,7 +77,7 @@ public class SubPageController {
 			model.addAttribute("list2", list2);
 			model.addAttribute("pi2", pi2);
 			model.addAttribute("listCount2", listCount2);
-		}
+		}*/
 		
 		ArrayList<Reply> listQAnswer = bs.selectQAnswer();
 		

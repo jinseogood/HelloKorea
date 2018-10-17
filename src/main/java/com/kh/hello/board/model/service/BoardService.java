@@ -23,15 +23,15 @@ public interface BoardService{
 
 	int updateBoard(Board b);
 
-	ArrayList<Board> selectReview(PageInfo pi);
+	ArrayList<Board> selectReview(PageInfo pi, int contentid);
 
-	int selectReviewCount();
+	int selectReviewCount(int contentid);
 
 	int insertQ(Board b);
 
-	int selectQCount();
+	int selectQCount(int contentid);
 
-	ArrayList<Board> selectQ(PageInfo pi);
+	ArrayList<Board> selectQ(PageInfo pi, int contentid);
 
 	int insertA(Reply r);
 
