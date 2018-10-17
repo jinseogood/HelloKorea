@@ -35,34 +35,9 @@
 					<div class="col-lg-3 col-md-3 col-sm-3"><hr></div>	
 				</div>
 					<div class="col-lg-3 col-md-3 col-sm-3">
-					<!-- <div class="festivalSearchArea">
-						<select name="festivalYear" style="width:80px; height:25px;">
-							<option>------</option>
-							<option value="2018">2018년</option>
-							<option value="2019">2019년</option>
-							<option value="2020">2020년</option>
-						</select>
-						
-						<select name="festivalMonth" style="width:80px; height:25px;">
-							<option>------</option>
-							<option value="jan">01월</option>
-							<option value="feb">02월</option>
-							<option value="mar">03월</option>
-							<option value="apr">04월</option>
-							<option value="may">05월</option>
-							<option value="jun">06월</option>
-							<option value="july">07월</option>
-							<option value="aug">08월</option>
-							<option value="sep">09월</option>
-							<option value="oct">10월</option>
-							<option value="nov">11월</option>
-							<option value="dec">12월</option>
-						</select>
-					</div> -->	
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6"></div>
 					<div class="col-lg-3 col-md-3 col-sm-3" align="right">
-						<!-- <span class="tm-section-title" style="font-size:20px;">정렬 : <a href="#">이름</a> <a href="#">평점</a></span> -->
 					</div>	
 					<br><br>
 				<div class="col-lg-3" align="left">
@@ -73,8 +48,6 @@
 						<br>
 						<input type="radio" class="gameSearch" id="festival" value="1" name="festivalgroup" style="width:15px; height:15px;"/>
 						<label for="festival" class="gameSearchText">&nbsp;&nbsp;축제</label><br>
-						<!-- <input type="radio" class="gameSearch" id="landmark" value="2" name="festivalgroup" style="width:15px; height:15px;"/>
-						<label for="landmark" class="gameSearchText">&nbsp;&nbsp;랜드마크</label><br> -->
 						<input type="radio" class="gameSearch" id="shopping" value="3" name="festivalgroup" style="width:15px; height:15px;"/>
 						<label for="shopping" class="gameSearchText">&nbsp;&nbsp;쇼핑</label><br>
 						<input type="radio" class="gameSearch" id="musium" value="4" name="festivalgroup" style="width:15px; height:15px;"/>
@@ -87,8 +60,6 @@
 						<label for="culture" class="gameSearchText">&nbsp;&nbsp;문화시설</label><br>
 						<input type="radio" class="gameSearch" id="reports" value="8" name="festivalgroup" style="width:15px; height:15px;"/>
 						<label for="reports" class="gameSearchText">&nbsp;&nbsp;레포츠</label><br>
-						<!-- <input type="radio" class="gameSearch" id="zoo" value="7" name="festivalgroup" style="width:15px; height:15px;"/>
-						<label for="zoo" class="gameSearchText">&nbsp;&nbsp;동물원/아쿠아리움</label><br> -->
 					</div>
 					
 					<br><br>
@@ -111,7 +82,7 @@
 					var cat2 = "";
 					var cat3 = "";
 					
-					function searchGamePage(){
+					function searchGamePage(pageNo){
 						if(sessionStorage.getItem("sigunguCode") == 0){
 							sigunguCode = "";
 						}
@@ -123,55 +94,89 @@
 							type:"GET",
 							data:{areaCode:areaCode, sigunguCode:sigunguCode, contenttypeid:contenttypeid},
 							dataType:"json",
+							async:false,
 							success:function(data){
 								console.log(data);
 								var myData = data.response.body.items.item;
 								var viewArea = $("#viewArea");
 								viewArea.html("");
+								
+								$pageBody = $(".pagination");
+								$pageBody.html("");
+								
+								var totalCount = data.response.body.totalCount;
+								var pOutput = "";
+								if(totalCount > 12){
+									var num = (totalCount / 12) + 0.9;
+									pOutput = "";
+									pOutput = "<li><a onclick='goFirst();'>[처음으로]</a></li>";
+									for(var pp = 1; pp < num; pp++){
+										pOutput += "<li><a onclick='goPage("+pp+")'>"+pp+"</a></li>";
+									}
+									pOutput += "<li><a onclick='goLast("+num+");'>[끝으로]</a></li>";
+									$pageBody.append(pOutput);
+								}
+								
 								var output = "";
 								if(myData == null){
 									output += "<div align='center'><h1>정보가 없습니다.</h1></div>";
 									document.getElementById("viewArea").innerHTML += output;
 								}else if(data.response.body.totalCount == 1){
-									contenttypeid = myData.contenttypeid;
-									contentid = myData.contentid;
-									output += "<div class='tm-home-box-3' id='detailHover'>";
-									output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
-									if(myData.firstimage == null){
-										output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
-									}else{
-										output += "<img src="+myData.firstimage+" alt='image' class='img-responsive1'/>";
-									}
-									output += "</div>";
-									output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
-									output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData.addr1+"</p>";
-									output += "<div class='tm-home-box-2-container'>";
-									output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-									output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
-									output += "</div></div></div>";
-									document.getElementById("viewArea").innerHTML += output;
-								}else{
-									for(var i in myData){
-										contenttypeid = myData[i].contenttypeid;
-										contentid = myData[i].contentid;
-										output = "";
+									if(data.response.body.items.item.firstimage != null){
+										contenttypeid = myData.contenttypeid;
+										contentid = myData.contentid;
 										output += "<div class='tm-home-box-3' id='detailHover'>";
 										output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
-										if(myData[i].firstimage == null){
-											output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
-										}else{
-											output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
-										}
+										output += "<img src="+myData.firstimage+" alt='image' class='img-responsive1'/>";
 										output += "</div>";
 										output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
-										output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData[i].addr1+"</p>";
+										output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+										output += "<span style='font-size:23px;'>"+myData.title+"</span><br>";
+										$.ajax({
+											url:"detailGameInformation.sub",
+											type:"GET",
+											data:{contenttypeid:contenttypeid, contentid:contentid},
+											dataType:"json",
+											async:false,
+											success:function(ddate){
+												var overview = ddate.response.body.items.item.overview;
+												if(overview.length > 190){
+													output += overview.substring(0, 191) + "...";
+												}else{
+													output += overview;
+												}
+											},error:function(ddate){console.log(ddate);}
+										});
+										output += "</p>";
 										output += "<div class='tm-home-box-2-container'>";
-										output += "<input type='hidden' value="+contenttypeid+">";
-										output += "<input type='hidden' value="+contentid+">";
 										output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-										output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
+										output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
 										output += "</div></div></div>";
 										document.getElementById("viewArea").innerHTML += output;
+									}
+								}else{
+									for(var i in myData){
+										if(myData[i].firstimage != null){
+											contenttypeid = myData[i].contenttypeid;
+											contentid = myData[i].contentid;
+											output = "";
+											output += "<div class='tm-home-box-3' id='detailHover'>";
+											output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+											output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
+											output += "</div>";
+											output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+											output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+											output += "<span style='font-size:23px;'>"+myData[i].title+"</span><br>";
+											
+											output += "</p>";
+											output += "<div class='tm-home-box-2-container'>";
+											output += "<input type='hidden' value="+contenttypeid+">";
+											output += "<input type='hidden' value="+contentid+">";
+											output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+											output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
+											output += "</div></div></div>";
+											document.getElementById("viewArea").innerHTML += output;
+										}
 									}
 								}
 								
@@ -285,7 +290,7 @@
 							$(".gameSearch").click(function(){
 								checkvalue = $("input[type=radio][name=festivalgroup]:checked").val();
 								console.log(checkvalue);
-								if(checkvalue == 1){
+								if(checkvalue == "1"){
 									sessionStorage.removeItem("contenttypeid");
 									contenttypeid1 = sessionStorage.setItem("contenttypeid", 15);
 									contenttypeid = sessionStorage.getItem("contenttypeid");
@@ -294,7 +299,7 @@
 									cat1 = "A02";
 									cat2 = "A0207";
 									cat3 = "";
-								}else if(checkvalue == 3){
+								}else if(checkvalue == "3"){
 									sessionStorage.removeItem("contenttypeid");
 									contenttypeid1 = sessionStorage.setItem("contenttypeid", 38);
 									contenttypeid = sessionStorage.getItem("contenttypeid");
@@ -304,7 +309,7 @@
 									cat2 = "A0401";
 									cat3 = "";
 									//$(".tm-section-title1").text("인천 쇼핑");
-								}else if(checkvalue == 4){
+								}else if(checkvalue == "4"){
 									sessionStorage.removeItem("contenttypeid");
 									contenttypeid1 = sessionStorage.setItem("contenttypeid", 14);
 									contenttypeid = sessionStorage.getItem("contenttypeid");
@@ -313,7 +318,7 @@
 									cat1 = "A02";
 									cat2 = "A0206";
 									cat3 = "A02060100";
-								}else if(checkvalue == 5){
+								}else if(checkvalue == "5"){
 									sessionStorage.removeItem("contenttypeid");
 									contenttypeid1 = sessionStorage.setItem("contenttypeid", 12);
 									contenttypeid = sessionStorage.getItem("contenttypeid");
@@ -322,7 +327,7 @@
 									cat1 = "A02";
 									cat2 = "A0202";
 									cat3 = "A02020600";
-								}else if(checkvalue == 6){
+								}else if(checkvalue == "6"){
 									sessionStorage.removeItem("contenttypeid");
 									contenttypeid1 = sessionStorage.setItem("contenttypeid", 12);
 									contenttypeid = sessionStorage.getItem("contenttypeid");
@@ -331,7 +336,7 @@
 									cat1 = "A02";
 									cat2 = "A0202";
 									cat3 = "A02020300";
-								}else if(checkvalue == 7){
+								}else if(checkvalue == "7"){
 									sessionStorage.removeItem("contenttypeid");
 									contenttypeid1 = sessionStorage.setItem("contenttypeid", 14);
 									contenttypeid = sessionStorage.getItem("contenttypeid");
@@ -340,7 +345,7 @@
 									cat1 = "A02";
 									cat2 = "";
 									cat3 = "";
-								}else if(checkvalue ==8){
+								}else if(checkvalue == "8"){
 									sessionStorage.removeItem("contenttypeid");
 									contenttypeid1 = sessionStorage.setItem("contenttypeid", 28);
 									contenttypeid = sessionStorage.getItem("contenttypeid");
@@ -350,7 +355,7 @@
 									cat2 = "";
 									cat3 = "";
 								}
-								console.log("condition : " + contenttypeid1);
+								console.log("condition : " + contenttypeid);
 								console.log("condition : " + areaCode1);
 								console.log("condition : " + sigunguCode1);
 								console.log("condition : " + cat1);
@@ -599,7 +604,11 @@
 			    </div>
 			</div>
 		</div>
-		
+		<div class="pagingBtnArea col-lg-12" align="center">
+			<ul class="pagination">
+			
+			</ul>
+		</div>
 	</section>		
 	
 	<!-- white bg -->
