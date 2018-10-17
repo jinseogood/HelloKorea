@@ -25,15 +25,15 @@ public interface BoardDao {
 
 	int updateBoard(SqlSessionTemplate sqlSession, Board b);
 
-	ArrayList<Board> selectReview(SqlSessionTemplate sqlSession, PageInfo pi);
+	ArrayList<Board> selectReview(SqlSessionTemplate sqlSession, PageInfo pi, int contentid);
 
-	int selectReviewCount(SqlSessionTemplate sqlSession);
+	int selectReviewCount(SqlSessionTemplate sqlSession, int contentid);
 
 	int insertQ(SqlSessionTemplate sqlSession, Board b);
 
-	int selectQCount(SqlSessionTemplate sqlSession);
+	int selectQCount(SqlSessionTemplate sqlSession, int contentid);
 
-	ArrayList<Board> selectQ(SqlSessionTemplate sqlSession, PageInfo pi);
+	ArrayList<Board> selectQ(SqlSessionTemplate sqlSession, PageInfo pi, int contentid);
 
 	int selectA(SqlSessionTemplate sqlSession, Reply r);
 

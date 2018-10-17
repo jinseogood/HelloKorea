@@ -65,20 +65,20 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 	@Override
-	public ArrayList<Board> selectReview(SqlSessionTemplate sqlSession, PageInfo pi) {
+	public ArrayList<Board> selectReview(SqlSessionTemplate sqlSession, PageInfo pi, int origin_id) {
 		ArrayList<Board> list = null;
 		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
 		
-		list = (ArrayList)sqlSession.selectList("Board.selectReview", null, rowBounds);
+		list = (ArrayList)sqlSession.selectList("Board.selectReview", origin_id, rowBounds);
 		
 		return list;
 	}
 
 	@Override
-	public int selectReviewCount(SqlSessionTemplate sqlSession) {
+	public int selectReviewCount(SqlSessionTemplate sqlSession, int origin_id) {
 		
-		return sqlSession.selectOne("Board.selectReviewCount");
+		return sqlSession.selectOne("Board.selectReviewCount", origin_id);
 	}
 
 	@Override
@@ -88,18 +88,18 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 	@Override
-	public int selectQCount(SqlSessionTemplate sqlSession) {
+	public int selectQCount(SqlSessionTemplate sqlSession, int origin_id) {
 
-		return sqlSession.selectOne("Board.selectQCount");
+		return sqlSession.selectOne("Board.selectQCount", origin_id);
 	}
 
 	@Override
-	public ArrayList<Board> selectQ(SqlSessionTemplate sqlSession, PageInfo pi) {
+	public ArrayList<Board> selectQ(SqlSessionTemplate sqlSession, PageInfo pi, int origin_id) {
 		ArrayList<Board> list = null;
 		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
 		
-		list = (ArrayList)sqlSession.selectList("Board.selectQ", offset, rowBounds);
+		list = (ArrayList)sqlSession.selectList("Board.selectQ", origin_id, rowBounds);
 		
 		return list;
 	}

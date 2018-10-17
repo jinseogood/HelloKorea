@@ -150,11 +150,10 @@ public class BoardPageController {
 		ArrayList<Board> list2 = null;
 		PageInfo pi2 = null;
 		
-		int listCount2 = bs.selectQCount();
+		int listCount2 = bs.selectQCount(contentid);
 		pi2 = Pagination2.getPageInfo(page, listCount2);
-		list2 = bs.selectQ(pi2);
+		list2 = bs.selectQ(pi2, contentid);
 		ArrayList<Reply> listQAnswer = bs.selectQAnswer();
-		
 		
 		mv.addObject("list2", list2);
 		mv.addObject("pi2", pi2);
@@ -172,16 +171,18 @@ public class BoardPageController {
 		ArrayList<Board> list = null;
 		PageInfo pi = null;
 		//DateFormat df = new SimpleDateFormat("yyyy년 MM월 dd일");
-		
-		int listCount = bs.selectReviewCount();
+
+		int listCount = bs.selectReviewCount(contentid);
 		pi = Pagination2.getPageInfo(page, listCount);
-		list = bs.selectReview(pi);
+		list = bs.selectReview(pi, contentid);
 		
 		/*for(int i = 0 ; i < list.size() ; i++){
 			String tempDate = df.format(list.get(i).getRegist_date());
 			list.get(i).setRegist_date(tempDate);
 			System.out.println(list.get(i).getRegist_date());
 		}*/
+		
+		//System.out.println(list);
 		
 		for(int i = 0 ; i < list.size() ; i++){
 			list.get(i).setrCount(bs.selectReplyCount(list.get(i).getBid()));

@@ -73,17 +73,17 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public ArrayList<Board> selectReview(PageInfo pi) {
+	public ArrayList<Board> selectReview(PageInfo pi, int contentid) {
 		ArrayList<Board> list = null;
-		list = bd.selectReview(sqlSession, pi);
+		list = bd.selectReview(sqlSession, pi, contentid);
 		
 		return list;
 	}
 
 	@Override
-	public int selectReviewCount() {
+	public int selectReviewCount(int contentid) {
 		
-		return bd.selectReviewCount(sqlSession);
+		return bd.selectReviewCount(sqlSession, contentid);
 	}
 
 	@Override
@@ -93,15 +93,15 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int selectQCount() {
+	public int selectQCount(int contentid) {
 		
-		return bd.selectQCount(sqlSession);
+		return bd.selectQCount(sqlSession, contentid);
 	}
 
 	@Override
-	public ArrayList<Board> selectQ(PageInfo pi) {
+	public ArrayList<Board> selectQ(PageInfo pi, int contentid) {
 		
-		return bd.selectQ(sqlSession, pi);
+		return bd.selectQ(sqlSession, pi, contentid);
 	}
 
 	@Override
