@@ -951,9 +951,10 @@
 							output += "<h3 class='tm-about-box-1-title' style = 'margin-bottom:5px;'>Songs <span>( GOD )</span></h3>";
 							output += "<div class = 'member_info' style = 'border-radius: 10px; visibility:hidden; position:absolute; background-color:lightgray; left:-150px; top:5px; width:200px; height:200px; z-index:999;'>";
 							output += "<div><h3>"+review[i].nickname+"</h3></div>";
-							output += "<div style = 'text-align:right;'><button type = 'button'>메세지</button></div>";
+							output += "<div style = 'text-align:right;'><button class='btn btn-light' style='width:65px; height:30px;' type = 'button'>메세지</button></div>";
 							output += "<div class='info' style = 'text-align:left;'>회원가입시기 : "+review[i].create_date+"<br>";
 							output += "흥미 : "+review[i].interesting+", 국적 : "+review[i].national+"<br>";
+							output += "이메일 : "+review[i].email+"<br>";
 							output += "<i class='fa fa-thumbs-o-up' style = 'font-size:13px;'></i> "+review[i].help_count+"건의 도움되는 리뷰, 댓글<br>";
 							output += "<i class='fas fa-pen-square'></i> "+review[i].board_count+"건 포스팅<br>";
 							output += "<i class='fas fa-pen'></i> "+review[i].reply_count+"건의 도움글 작성";
