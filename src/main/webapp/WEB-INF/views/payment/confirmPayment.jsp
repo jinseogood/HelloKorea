@@ -97,6 +97,8 @@
 			<br>
 			<div class="title">주문정보</div>
 			<table id="orderInfo">
+				<input type="hidden" id="CID" value="${ r.cid }">
+				<input type="hidden" id="COID" value="${ r.contentid }">
 				<tr>
 					<th>주문번호</th>
 					<td width="250px">${ r.oid }</td>
@@ -156,7 +158,10 @@
 			location.href="userMypage.um";
 		}
 		function goProduct(){
-			location.href="detailHotel";
+			var cid=$("#CID").val();
+			var contentid=$("#COID").val();
+			
+			location.href="detailHotel?contenttypeid=32&cid=" + cid + "&contentid=" + contentid;
 		}
 	</script>
 	

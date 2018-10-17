@@ -26,6 +26,9 @@
       <result property="cAddress" column="C_ADDRESS"/>
       <result property="cName" column="C_NAME"/>
       <result property="price" column="R_PRICE"/>
+      <result property="cid" column="C_ID"/>
+      <result property="contentid" column="C_ORIGINID"/>
+      <result property="period" column="PERIOD"/>
    </resultMap>
 	
 	<!-- 예약 내역 전체 조회 리스트 카운트 -->
@@ -150,7 +153,7 @@
 	
 	<!-- 예약 확인 창 예악 정보 조회 -->
 	<select id="selectReservation" resultMap="reservation2ResultSet" parameterType="_int">
-		SELECT O_ID, C_NAME, R_TYPE, R_SDATE, R_EDATE
+		SELECT O_ID, C_ID, C_ORIGINID, C_NAME, R_TYPE, R_SDATE, R_EDATE
 		FROM RESERVATION
 		JOIN ROOM USING(R_ID)
 		JOIN COMPANY USING(C_ID)
@@ -167,8 +170,7 @@
 					  JOIN COMPANY USING(C_ID)
 					  WHERE M_ID = #{mId}
 					  AND PA_ID IS NOT NULL
-					  AND TO_CHAR(R_SDATE, 'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM')
-					  AND TO_CHAR(R_EDATE, 'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM'))
+					  AND TO_CHAR(R_SDATE, 'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM'))
 	</select>
 	
 	<!-- 판매자 마이페이지 메인 수익 조회 -->
@@ -180,8 +182,7 @@
 		JOIN ROOM USING(R_ID)
 		JOIN COMPANY USING(C_ID)
 		WHERE COMPANY.M_ID = #{mId}
-		AND TO_CHAR(R_SDATE, 'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM')
-		AND TO_CHAR(R_EDATE, 'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM')
+		AND TO_CHAR(PD_DATE, 'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM')
 	</select>
 	
 </mapper>

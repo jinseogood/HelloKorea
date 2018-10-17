@@ -93,11 +93,11 @@
 			<input type="hidden" name="quantity" value="${ reservation.oRcount }">
 			<input type="hidden" id="orderInfo" name="custom">
 			<input type="hidden" name="return" value="https://localhost:8443/hello/paymentConfirm.pay">
-			<input type="hidden" name="cancel_return" value="https://localhost:8443/hello/detailHotel">
+			<input type="hidden" name="cancel_return" value="https://localhost:8443/hello/detailHotel?cid=${ reservation.cid }&contentid=${ reservation.contentid }">
 			<input type="hidden" name="charset" value="UTF-8">
 			
 			<input type="hidden" id="oId" value="${ reservation.oid }">
-			<input type="hidden" id="price" value="${ param.price + (param.price * 0.1) }">
+			<input type="hidden" id="price" value="${ ((param.price * reservation.period) * 0.1) + (param.price * reservation.period) }">
 
 			<div class="orderArea">
 				<br>
@@ -430,14 +430,14 @@
 						</tr>
 						<tr>
 							<td><b>결제 금액</b></td>
-							<td colspan="2">₩ ${ param.price + (param.price * 0.1) }</td>
+							<td colspan="2">₩ ${ (param.price + (param.price * 0.1)) * reservation.period }</td>
 						</tr>
 						<tr>
 							<td colspan="3"><hr style="width:644px; border-style:dashed; border-width:2px; border-color:gold;"></td>
 						</tr>
 						<tr>
 							<td><b style="font-size:20px;">총 금액</b></td>
-							<td colspan="2"><b style="font-size:20px;" id="totalPrice">₩ ${ param.price + (param.price * 0.1) }</b></td>
+							<td colspan="2"><b style="font-size:20px;" id="totalPrice">₩ ${ (param.price + (param.price * 0.1)) * reservation.period }</b></td>
 						</tr>
 						<tr style="text-align:center;">
 							<td colspan="3">
@@ -473,7 +473,7 @@
 					</tr>
 					<tr height="40px">
 						<td>박</td>
-						<td style="text-align:right;">-</td>
+						<td style="text-align:right;">${ reservation.period }</td>
 					</tr>
 					<tr height="40px">
 						<td>인원 수</td>
@@ -481,15 +481,15 @@
 					</tr>
 					<tr height="40px">
 						<td>소계</td>
-						<td style="text-align:right;">₩ ${ param.price }</td>
+						<td style="text-align:right;">₩ ${ param.price * reservation.period }</td>
 					</tr>
 					<tr height="40px">
 						<td>세금 및 봉사료</td>
-						<td style="text-align:right;">₩ ${ param.price * 0.1 }</td>
+						<td style="text-align:right;">₩ ${ (param.price * reservation.period) * 0.1 }</td>
 					</tr>
 					<tr height="60px" style="background:lightgray;">
 						<th style="font-size:18px;">합계</th>
-						<th style="text-align:right; font-size:18px;">₩ ${ param.price + (param.price * 0.1) }</th>
+						<th style="text-align:right; font-size:18px;">₩ ${ ((param.price * reservation.period) * 0.1) + (param.price * reservation.period) }</th>
 					</tr>
 				</table>
 			</div>
