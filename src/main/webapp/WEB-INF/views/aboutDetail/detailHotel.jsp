@@ -179,7 +179,7 @@
 						output += "<h3>숙박정보</h3><br>";
 						output += "ㆍ <b>문의 및 안내</b> : "+myData.infocenterlodging+"<br>";
 						output += "ㆍ <b>규 모</b> : "+myData.scalelodging+"<br>";
-						output += "ㆍ <b>객실 수</b> : "+myData.roomcount+"<br>";
+						//output += "ㆍ <b>객실 수</b> : "+myData.roomcount+"<br>";
 						output += "ㆍ <b>객실 유형</b> : "+myData.roomtype+"<br>";
 						output += "ㆍ <b>주차 가능</b> : "+myData.parkinglodging+"<br>";
 						output += "ㆍ <b>조리 가능</b> : "+myData.chkcooking+"<br>";
@@ -226,16 +226,17 @@
 									rType = result[i].rType;
 									output = "";
 									output += "<tr class='detailRow'>";
-									if(myData[i].roomimg1 == null){
+									/* if(myData[i].roomimg1 == null){
 										output += "<td class='detailContent detailContent1'><img src='${contextPath}/resources/img/noImage.gif' class='roomIngTd' />";
 									}else{ 
 										output += "<td class='detailContent detailContent1'><img src="+myData[i].roomimg1+" class='roomImgTd' />";
-									}
+									} */
+									output += "<td> 호텔이미지 주석중입니다.";
 									output += "</td>";
 									output += "<td>";
 									output += "<h4><b>객실명 : "+result[i].rType+"</b></h4>";
 									output += "ㆍ 객실크기 : "+myData[i].roomsize1+" 평<br>";
-									output += "ㆍ 객실수 : "+myData[i].roomcount+"<br>";
+									//output += "ㆍ 객실수 : "+myData[i].roomcount+"<br>";
 									//output += "ㆍ 기준인원 : "+myData[i].roombasecount+" (최대인원 : "+myData[i].roommaxcount+")<br>";
 									output += "ㆍ 목욕시설 : "+myData[i].roombathfacility+"<br>";
 									output += "ㆍ 욕조 : "+myData[i].roombath+"<br>";
@@ -951,9 +952,10 @@
 							output += "<h3 class='tm-about-box-1-title' style = 'margin-bottom:5px;'>Songs <span>( GOD )</span></h3>";
 							output += "<div class = 'member_info' style = 'border-radius: 10px; visibility:hidden; position:absolute; background-color:lightgray; left:-150px; top:5px; width:200px; height:200px; z-index:999;'>";
 							output += "<div><h3>"+review[i].nickname+"</h3></div>";
-							output += "<div style = 'text-align:right;'><button type = 'button'>메세지</button></div>";
+							output += "<div style = 'text-align:right;'><button class='btn btn-light' style='width:65px; height:30px;' type = 'button'>메세지</button></div>";
 							output += "<div class='info' style = 'text-align:left;'>회원가입시기 : "+review[i].create_date+"<br>";
 							output += "흥미 : "+review[i].interesting+", 국적 : "+review[i].national+"<br>";
+							output += "이메일 : "+review[i].email+"<br>";
 							output += "<i class='fa fa-thumbs-o-up' style = 'font-size:13px;'></i> "+review[i].help_count+"건의 도움되는 리뷰, 댓글<br>";
 							output += "<i class='fas fa-pen-square'></i> "+review[i].board_count+"건 포스팅<br>";
 							output += "<i class='fas fa-pen'></i> "+review[i].reply_count+"건의 도움글 작성";

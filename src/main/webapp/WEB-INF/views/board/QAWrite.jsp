@@ -98,7 +98,7 @@ body{ margin:50px 0px; }
    
    
    <section class="container tm-home-section-1" id="more" style = "width:80%; padding:100px">
-   <form action="insertQ.bo" method = "post">
+   <form action="insertQ.bo?uri=${uri}" method = "post">
       <div class="row">
          
       </div> 

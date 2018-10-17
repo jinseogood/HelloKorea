@@ -38,19 +38,24 @@ public class BoardPageController {
 	@RequestMapping(value = "reviewWrite.bo")
 	public String reviewWrite(Model model, HttpServletRequest request, @RequestParam int contentid, @RequestParam int contenttypeid, @RequestParam int cid/*, @RequestParam("file") MultipartFile[] file*/){
 
-		System.out.println(contentid);
+		//System.out.println(contentid);
 		Board b = new Board();
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		b.setM_id(m.getmId());
 		b.setOrigin_id(contentid);
-		String referer = request.getHeader("Referer");
-
+		//String uri = referer.substring(0, referer.lastIndexOf("?"));
+		//referer.replaceAll("?", "&");
+		//System.out.println(uri);
 		int result = bs.insertBoard(b);
+		
+		String referer = request.getHeader("Referer");
 		
 		model.addAttribute("uri", referer);
 		model.addAttribute("contentid", contentid);
 		model.addAttribute("contenttypeid", contenttypeid);
 		model.addAttribute("cid", cid);
+		
+		
 		
 		return "board/reviewWrite";
 	}
@@ -141,14 +146,14 @@ public class BoardPageController {
 	
 	@RequestMapping(value="insertReview.bo")
 	public String insertReview(Model model, Board b, HttpServletRequest request, 
-			@RequestParam String uri,@RequestParam int contentid, @RequestParam int contenttypeid, @RequestParam int cid){
+			@RequestParam String uri, @RequestParam int contentid, @RequestParam int contenttypeid, @RequestParam int cid){
 		int result = 0;
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		b.setM_id(m.getmId());
 		//System.out.println(b);
 		result = bs.updateBoard(b);
-		System.out.println(uri);
-		System.out.println(contentid + " " + contenttypeid + " " + cid);
+		
+		uri+="&contenttypeid="+contenttypeid+"&cid="+cid;
 		return "redirect:"+uri;
 	}
 	
@@ -189,8 +194,7 @@ public class BoardPageController {
 			list.get(i).setRegist_date(tempDate);
 			System.out.println(list.get(i).getRegist_date());
 		}*/
-		
-		System.out.println(list);
+
 		
 		for(int i = 0 ; i < list.size() ; i++){
 			list.get(i).setrCount(bs.selectReplyCount(list.get(i).getBid()));
@@ -250,11 +254,18 @@ public class BoardPageController {
 
 	
 	@RequestMapping(value="QAWrite.bo")
-	public String QAWrite(Model model, HttpServletRequest request, @RequestParam int contentid){
+	public String QAWrite(Model model, HttpServletRequest request, @RequestParam int contentid, @RequestParam int contenttypeid, @RequestParam int cid){
 		Board b = new Board();
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		b.setM_id(m.getmId());
 		b.setOrigin_id(contentid);
+		
+		String referer = request.getHeader("Referer");
+		//System.out.println(referer);
+		model.addAttribute("uri", referer);
+		model.addAttribute("contentid", contentid);
+		model.addAttribute("contenttypeid", contenttypeid);
+		model.addAttribute("cid", cid);
 		
 		model.addAttribute("b", b);
 		
@@ -262,17 +273,18 @@ public class BoardPageController {
 	}
 	
 	@RequestMapping(value="insertQ.bo")
-	public String insertQ(Model model, Board b , HttpServletRequest request, @RequestParam int contentid){
+	public String insertQ(Model model, Board b , HttpServletRequest request,@RequestParam String uri, @RequestParam int contentid, @RequestParam int contenttypeid, @RequestParam int cid){
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		b.setM_id(m.getmId());
 		b.setOrigin_id(contentid);
 		
 		int result = 0;
 		result = bs.insertQ(b);
-		
+		//System.out.println(uri);
 		model.addAttribute("b", b);
-		
-		return "aboutDetail/detailHotel";
+		//System.out.println("insertReview.bo"+contentid + " " + contenttypeid + " " + cid);
+		uri+="&contenttypeid="+contenttypeid+"&cid="+cid;
+		return "redirect:"+uri;
 	}
 	
 	@RequestMapping(value="insertA.bo")
