@@ -13,11 +13,11 @@ public class AdminSchedulerDao {
 
 	//블랙리스트 해지 
 		//블랙리스트 이력내에서 업데이트
-		public int updateTerminateHistroy(SqlSession sqlSession) {
+		public int updateTerminateHistroy(SqlSessionTemplate sqlSession) {
 			return sqlSession.update("Blacklist.updateTerminateHistroy");
 		}
 
-		public int updateMemberStatus2(SqlSession sqlSession) {
+		public int updateMemberStatus2(SqlSessionTemplate sqlSession) {
 			return sqlSession.update("Blacklist.updateMemberStatus2");
 		}
 }

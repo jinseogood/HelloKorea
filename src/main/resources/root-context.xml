@@ -77,10 +77,12 @@
 	</tx:advice>
 	<tx:annotation-driven />
 	
-	<bean id="careerAlarmService" class="com.kh.hello.admin.controller.AdminSchedulerController" />
-    <task:scheduler id="gsScheduler" pool-size="10" />
-    <task:executor id="gsTaskExecutor" pool-size="10" />
-    <task:annotation-driven executor="gsTaskExecutor" scheduler="gsScheduler" />
+	
+	<bean id="schedulerController" class="com.kh.hello.admin.controller.AdminSchedulerController"/>
+    <task:scheduler id="blScheduler" pool-size="10" />
+    <task:executor id="blTaskExecutor" pool-size="10" />
+    <task:annotation-driven executor="blTaskExecutor" scheduler="blScheduler" /> 
+   
     
     <!-- Mail -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
@@ -112,5 +114,4 @@
 			</props>
 		</property>
 	</bean>
-
 </beans>
