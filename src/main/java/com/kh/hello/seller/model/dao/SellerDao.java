@@ -22,7 +22,7 @@ public interface SellerDao {
 	int selectReservationCount(int mId, SqlSessionTemplate sqlSession);
 	
 	//판매자 마이페이지 메인 수익 조회
-	double selectReservationPrice(int mId, SqlSessionTemplate sqlSession);
+	int selectReservationPrice(int mId, SqlSessionTemplate sqlSession);
 	
 	//업체명 중복 조회
 	int duplicationTitle(String title, SqlSessionTemplate sqlSession);

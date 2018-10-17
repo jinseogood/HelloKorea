@@ -577,6 +577,10 @@
 					$("#comNumCollect").hide();
 					$("#comNumWrong").show();
 				}
+				else if (sRegNo.length == 0){
+					$("#comNumCollect").hide();
+					$("#comNumWrong").show();
+				}
 				else{
 					$("#comNumWrong").hide();
 					$("#comNumCollect").show();
@@ -596,33 +600,19 @@
 			    chkSum += Math.floor(c2.charAt(0)) + Math.floor(c2.charAt(1)); 
 			    remander = (10 - (chkSum % 10)) % 10;
 			    
-			    if (Math.floor(bizID.charAt(9)) == remander){
+			    if (Math.floor(bizID.charAt(9)) != remander){
+			    	$("#perNumCollect").hide();
+			    	$("#perNumWrong").show();
+			    }
+			    else if(bizID.length == 0){
+			    	$("#perNumCollect").hide();
+			    	$("#perNumWrong").show();
+			    }
+			    else{
 			    	$("#perNumWrong").hide();
 			    	$("#perNumCollect").show();
 			    	$("#addForm").attr("action", "addCompany.sell");
 			    }
-			    else{
-			    	$("#perNumCollect").hide();
-			    	$("#perNumWrong").show();
-			    }
-			});
-			
-			$(".rType2").hide();
-			$(".rType3").hide();
-			$(".plus2").hide();
-			
-			$("#roomPlus1").click(function(){
-				$(".plus1").hide();
-				$(".rType2").show();
-				$(".plus2").show();
-				$("#roomType2").attr("required", "true");
-				$("#roomPrice2").attr("required", "true");
-			});
-			$("#roomPlus2").click(function(){
-				$(".plus2").hide();
-				$(".rType3").show();
-				$("#roomType3").attr("required", "true");
-				$("#roomPrice3").attr("required", "true");
 			});
 			
 			$("#sellerType").click(function(){
@@ -1078,8 +1068,7 @@
 						if(company.length > 0){
 							for(var i=0;i<company.length;i++){
 								var output="";
-								/* output += "<tr><td><a onclick=\"valueSetting("+ company[i].contentid + ", '" + company[i].title + "', '" + company[i].tel + "', '" + company[i].addr1 + "', '" + i + "');\" data-dismiss='modal'><b><font style='font-size:13px;'>" + company[i].title + "</font></b></a><br>"; */
-								output += "<tr><td><a onclick=\"valueSetting("+ company[i].contentid + ", '" + company[i].title + "', '" + company[i].tel + "', '" + company[i].addr1 + "', '" + i + "');\" data-dismiss='none'><b><font style='font-size:13px;'>" + company[i].title + "</font></b></a><br>";
+								output += "<tr><td><a onclick=\"valueSetting("+ company[i].contentid + ", '" + company[i].title + "', '" + company[i].tel + "', '" + company[i].addr1 + "', '" + i + "');\" data-dismiss='modal'><b><font style='font-size:13px;'>" + company[i].title + "</font></b></a><br>";
 								output += "<font style='font-size:11px;'>" + company[i].addr1 + "</font></td></tr>";
 								$tableBody.append(output);
 							}
@@ -1098,8 +1087,7 @@
 						}
 						else{
 							var output="";
-							/* output += "<tr><td><a onclick=\"valueSetting("+ company.contentid + ", '" + company.title + "', '" + company.tel + "', '" + company.addr1 + "', '" + i + "');\" data-dismiss='modal'><b><font style='font-size:13px;'>" + company.title + "</font></b></a><br>"; */
-							output += "<tr><td><a onclick=\"valueSetting("+ company.contentid + ", '" + company.title + "', '" + company.tel + "', '" + company.addr1 + "', '" + i + "');\" data-dismiss='none'><b><font style='font-size:13px;'>" + company.title + "</font></b></a><br>";
+							output += "<tr><td><a onclick=\"valueSetting("+ company.contentid + ", '" + company.title + "', '" + company.tel + "', '" + company.addr1 + "', '" + i + "');\" data-dismiss='modal'><b><font style='font-size:13px;'>" + company.title + "</font></b></a><br>";
 							output += "<font style='font-size:11px;'>" + company.addr1 + "</font></td></tr>";
 							$tableBody.append(output);
 							
@@ -1147,13 +1135,10 @@
 					
 					if(data == 1){
 						alert("이미 등록된 업체 입니다.");
-						/* $("#resultTable tr").eq(i).find("a").attr("data-dismiss", "none"); */
+						$("#resultTable tr").find("a").eq(i).attr("data-dismiss", "none");
+						console.log($("#resultTable tr").find("a").eq(i).text());
 					}
 					else{
-						console.log(i);
-						console.log($("#resultTable tr").eq(i).find("a").text());
-						console.log($("#resultTable tr").eq(i).find("a"));
-						$("#resultTable tr").eq(i).find("a").attr("data-dismiss", "modal");
 						$("#contentId").attr("value", contentId);
 						$("#companyName").attr("value", title);
 						$("#companyPhone").attr("value", tel);

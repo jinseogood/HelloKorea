@@ -159,7 +159,7 @@
 					</c:if>
 					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 						<c:if test="${ p eq pi.currentPage }">
-							<li><a href="#">${ p }</a></li>	
+							<li><a href="#" style="background-color:#ddd;">${ p }</a></li>	
 						</c:if>
 						<c:if test="${ p ne pi.currentPage }">
 							<c:url var="listCheck" value="manageProduct.sell">

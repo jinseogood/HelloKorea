@@ -40,7 +40,7 @@ public class SellerServiceImpl implements SellerService{
 	
 	//판매자 마이페이지 메인 수익 조회
 	@Override
-	public double selectReservationPrice(int mId) {
+	public int selectReservationPrice(int mId) {
 		return sd.selectReservationPrice(mId, sqlSession);
 	}
 	

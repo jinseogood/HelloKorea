@@ -102,13 +102,15 @@
 					</div>
 				</section>
 				<!--earning graph end-->
-				<!--earning graph start-->
+				
+				<!--user graph start-->
 				<section class="panel">
 					<header class="panel-heading">금월 이용자 통계</header>
 					<div class="panel-body">
 						<canvas id="linechart" width="600" height="330"></canvas>
 					</div>
 				</section>
+				<!--user graph end-->
 			</div>
 			
 			<div class="col-lg-4">

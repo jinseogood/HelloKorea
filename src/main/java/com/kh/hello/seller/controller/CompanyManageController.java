@@ -49,7 +49,7 @@ public class CompanyManageController {
 		int reservationCount=ss.selectReservationCount(m.getmId());
 		
 		//수익 조회
-		double totalPrice=ss.selectReservationPrice(m.getmId());
+		int totalPrice=ss.selectReservationPrice(m.getmId());
 		
 		if(reservationCount >= 0 && totalPrice >= 0){
 			model.addAttribute("rCount", reservationCount);

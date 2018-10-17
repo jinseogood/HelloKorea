@@ -20,7 +20,7 @@ public interface SellerService {
 	int selectReservationCount(int mId);
 	
 	//판매자 메인페이지 메인 수익 조회
-	double selectReservationPrice(int mId);
+	int selectReservationPrice(int mId);
 	
 	//업체명 중복 조회
 	int duplicationTitle(String title);

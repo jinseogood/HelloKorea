@@ -32,7 +32,7 @@
 	}
 	#itemTable{
 		width:650px;
-		height:120px;
+		height:100px;
 		border-top:1px solid lightgray;
 		border-bottom:1px solid lightgray;
 		border-left:1px solid lightgray;
@@ -69,6 +69,10 @@
 		height:400px;
 		border:1px solid lightgray;
 	}
+	#checkIcon{
+		width:20px;
+		height:20px;
+	}
 </style>
 </head>
 <body>
@@ -89,7 +93,7 @@
 			<input type="hidden" name="quantity" value="${ reservation.oRcount }">
 			<input type="hidden" id="orderInfo" name="custom">
 			<input type="hidden" name="return" value="https://localhost:8443/hello/paymentConfirm.pay">
-			<input type="hidden" name="cancel_return" value="https://localhost:8443/hello/paymentDetailView.pay">
+			<input type="hidden" name="cancel_return" value="https://localhost:8443/hello/detailHotel">
 			<input type="hidden" name="charset" value="UTF-8">
 			
 			<input type="hidden" id="oId" value="${ reservation.oid }">
@@ -103,14 +107,20 @@
 				<div class="itemDetail" align="center">
 					<table id="itemTable" border="1">
 						<tr>
-							<td width="200px" style="text-align:center;">업체명 보여줄 곳</td>
 							<td width="350px" colspan="2">
 								<font style="font-size:16px; font-weight:bold;">${ reservation.roomName }</font>
 								<br>
+								<font style="font-size:12px;">${ reservation.cName }</font>
+								<br>
 								<font style="font-size:10px;">${ reservation.cAddress }</font>
 							</td>
+							<td width="200px">
+								<img id="checkIcon" src="${ contextPath }/resources/img/checkIcon.png"> 입실 2일 전까지 취소 가능!
+								<br>
+								<img id="checkIcon" src="${ contextPath }/resources/img/checkIcon.png"> 환불 수수료 없음!
+							</td>
 							<td width="100px" style="text-align:center;">
-								<b style="font-size:16px;">₩${ param.price }/</b><sub>박</sub>
+								<b style="font-size:16px;">₩ ${ param.price }/</b><sub>박</sub>
 							</td>
 						</tr>
 					</table>
@@ -420,14 +430,14 @@
 						</tr>
 						<tr>
 							<td><b>결제 금액</b></td>
-							<td colspan="2">₩${ param.price + (param.price * 0.1) }</td>
+							<td colspan="2">₩ ${ param.price + (param.price * 0.1) }</td>
 						</tr>
 						<tr>
 							<td colspan="3"><hr style="width:644px; border-style:dashed; border-width:2px; border-color:gold;"></td>
 						</tr>
 						<tr>
 							<td><b style="font-size:20px;">총 금액</b></td>
-							<td colspan="2"><b style="font-size:20px;" id="totalPrice">₩${ param.price + (param.price * 0.1) }</b></td>
+							<td colspan="2"><b style="font-size:20px;" id="totalPrice">₩ ${ param.price + (param.price * 0.1) }</b></td>
 						</tr>
 						<tr style="text-align:center;">
 							<td colspan="3">
@@ -455,7 +465,7 @@
 					</tr>
 					<tr height="40px">
 						<td>1박 요금</td>
-						<td style="text-align:right;">${ param.price }</td>
+						<td style="text-align:right;">₩ ${ param.price }</td>
 					</tr>
 					<tr height="40px">
 						<td>객실 수</td>
@@ -463,7 +473,7 @@
 					</tr>
 					<tr height="40px">
 						<td>박</td>
-						<td style="text-align:right;">1</td>
+						<td style="text-align:right;">-</td>
 					</tr>
 					<tr height="40px">
 						<td>인원 수</td>
@@ -471,15 +481,15 @@
 					</tr>
 					<tr height="40px">
 						<td>소계</td>
-						<td style="text-align:right;">₩${ param.price }</td>
+						<td style="text-align:right;">₩ ${ param.price }</td>
 					</tr>
 					<tr height="40px">
 						<td>세금 및 봉사료</td>
-						<td style="text-align:right;">₩${ param.price * 0.1 }</td>
+						<td style="text-align:right;">₩ ${ param.price * 0.1 }</td>
 					</tr>
 					<tr height="60px" style="background:lightgray;">
 						<th style="font-size:18px;">합계</th>
-						<th style="text-align:right; font-size:18px;">₩${ param.price + (param.price * 0.1) }</th>
+						<th style="text-align:right; font-size:18px;">₩ ${ param.price + (param.price * 0.1) }</th>
 					</tr>
 				</table>
 			</div>
@@ -598,13 +608,12 @@
 			});
 		}
 		
-		var totalPrice=0;
+		var totalPrice=$("#price").val();
 		
 		function calPrice(){
-			var price=$("#price").val();
 			var point=$("#point").val();
 			
-			totalPrice=price - point;
+			totalPrice=totalPrice - point;
 			
 			$("#totalPrice").html("₩" + totalPrice);
 		}
@@ -623,7 +632,7 @@
 			
 			var orderName=fName + " " + lName;
 			var orderEmail=$("#orderEmail").val();
-			var orderTel=nation + tel;
+			var orderTel=nation + " " + tel;
 			
 			var point=$("#point").val();
 			var pMethod;
@@ -657,6 +666,7 @@
 			}
 			else{
 				console.log(point);
+				console.log(totalPrice);
 				$("#orderInfo").attr("value", (mId + "," + orderName + "," + orderTel + "," + orderEmail + "," + pMethod + "," + point + "," + oId + "," + totalPrice));
 				$("#orderPrice").attr("value", (totalPrice * 0.00088));
 				$("#payPalForm").attr("action", "https://www.sandbox.paypal.com/cgi-bin/webscr");

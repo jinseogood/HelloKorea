@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.kh.hello.company.model.vo.Reservation2;
 import com.kh.hello.payment.model.vo.PayDetail;
 import com.kh.hello.payment.model.vo.Payment;
 import com.kh.hello.seller.model.vo.SellerReservation;
@@ -26,7 +27,7 @@ public interface PaymentDao {
 	int updateReservation(int oId, SqlSessionTemplate sqlSession);
 
 	//결제 확인창에 보여 줄 예약 정보 조회
-	SellerReservation selectReservation(int paId, SqlSessionTemplate sqlSession);
+	Reservation2 selectReservation(int paId, SqlSessionTemplate sqlSession);
 
 	//회원 포인트 조회
 	int selectUserPoint(int mId, SqlSessionTemplate sqlSession);

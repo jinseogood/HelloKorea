@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.hello.company.model.vo.Reservation2;
 import com.kh.hello.payment.model.vo.PayDetail;
 import com.kh.hello.payment.model.vo.Payment;
 import com.kh.hello.seller.model.vo.SellerReservation;
@@ -49,7 +50,7 @@ public class PaymentDaoImpl implements PaymentDao{
 
 	//결제 확인 창에 보여 줄 예약 정보 조회
 	@Override
-	public SellerReservation selectReservation(int paId, SqlSessionTemplate sqlSession) {
+	public Reservation2 selectReservation(int paId, SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("SellerReservation.selectReservation", paId);
 	}
 
