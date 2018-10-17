@@ -19,10 +19,14 @@ public class Reservation2 implements Serializable{
 	private String cAddress;		//업체주소
 	private String cName;			//업체이름
 	private double price;			//가격
+	private int cid;				//업체번호
+	private int contentid;			//고유아이디
+	private int period;				//숙박기간
 	
 	public Reservation2(){}
 
-	public Reservation2(int oid, Date rSdate, Date rEdate, int people, int oRcount, int rid, int paId, String roomName, String cAddress, String cName, double price) {
+	public Reservation2(int oid, Date rSdate, Date rEdate, int people, int oRcount, int rid, int paId, String roomName, String cAddress, 
+			String cName, double price, int cid, int contentid, int period) {
 		super();
 		this.oid = oid;
 		this.rSdate = rSdate;
@@ -35,6 +39,9 @@ public class Reservation2 implements Serializable{
 		this.cAddress = cAddress;
 		this.cName = cName;
 		this.price = price;
+		this.cid = cid;
+		this.contentid = contentid;
+		this.period = period;
 	}
 
 	public int getOid() {
@@ -125,12 +132,39 @@ public class Reservation2 implements Serializable{
 		this.price = price;
 	}
 
+	public int getCid() {
+		return cid;
+	}
+
+	public void setCid(int cid) {
+		this.cid = cid;
+	}
+
+	public int getContentid() {
+		return contentid;
+	}
+
+	public void setContentid(int contentid) {
+		this.contentid = contentid;
+	}
+
+	public int getPeriod() {
+		return period;
+	}
+
+	public void setPeriod(int period) {
+		this.period = period;
+	}
+
 	@Override
 	public String toString() {
 		return "Reservation2 [oid=" + oid + ", rSdate=" + rSdate + ", rEdate=" + rEdate + ", people=" + people
 				+ ", oRcount=" + oRcount + ", rid=" + rid + ", paId=" + paId + ", roomName=" + roomName + ", cAddress="
-				+ cAddress + ", cName=" + cName + ", price=" + price + "]";
+				+ cAddress + ", cName=" + cName + ", price=" + price + ", cid=" + cid + ", contentid=" + contentid
+				+ ", period=" + period + "]";
 	}
+
+
 
 
 

@@ -226,7 +226,7 @@
 							output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
 							output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData.addr1+"</p>";
 							output += "<div class='tm-home-box-2-container'>";
-							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 							output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
 							output += "</div></div></div>";
 							document.getElementById("viewArea").innerHTML += output;
@@ -246,7 +246,7 @@
 								output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
 								output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData[i].addr1+"</p>";
 								output += "<div class='tm-home-box-2-container'>";
-								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 								output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
 								output += "</div></div></div>";
 								document.getElementById("viewArea").innerHTML += output;
@@ -290,7 +290,7 @@
 							output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
 							output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData.addr1+"</p>";
 							output += "<div class='tm-home-box-2-container'>";
-							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 							output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
 							output += "</div></div></div>";
 							document.getElementById("viewArea").innerHTML += output;
@@ -310,7 +310,7 @@
 								output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
 								output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData[i].addr1+"</p>";
 								output += "<div class='tm-home-box-2-container'>";
-								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 								output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
 								output += "</div></div></div>";
 								document.getElementById("viewArea").innerHTML += output;
@@ -354,7 +354,7 @@
 							output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
 							output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData.addr1+"</p>";
 							output += "<div class='tm-home-box-2-container'>";
-							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 							output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
 							output += "</div></div></div>";
 							document.getElementById("viewArea").innerHTML += output;
@@ -376,7 +376,7 @@
 								output += "<div class='tm-home-box-2-container'>";
 								output += "<input type='hidden' value="+contenttypeid+">";
 								output += "<input type='hidden' value="+contentid+">";
-								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 								output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
 								output += "</div></div></div>";
 								document.getElementById("viewArea").innerHTML += output;
@@ -452,9 +452,16 @@
 							});
 							output += "</p>";
 							output += "<div class='tm-home-box-2-container'>";
-							output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 							output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'>";
 							output += "<span class='tm-home-box-2-description box-3' onclick='detailView("+contentid+","+contenttypeid+","+cid+");'>";
+							if(data[i].grade == 0){
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+							}
 							if(data[i].grade > 0 && data[i].grade <= 0.5){
 								output += "<i class='far fa-star-half-alt' style='font-size:20px;'></i>";
 								output += "<i class='far fa-star' style='font-size:20px;'></i>";
@@ -554,10 +561,8 @@
 							// 0일시, 새로 찜에 추가 => insert요청.
 							if(data > 0){
 								deleteDibsHotel(contentid, cid);
-								
 							}else{
 								insertDibsHotel(contentid, cid);
-								$(this).children("i").addClass("fa fa-heart");
 							}
 						},
 						error:function(data){
@@ -598,6 +603,7 @@
 					data:{contenttypeid:contenttypeid, contentid:contentid},
 					success:function(data){
 						alert("찜 목록에서 삭제되었습니다.");
+						
 					},
 					error:function(data){
 						console.log(data);
@@ -631,7 +637,7 @@
 							output = "";
 							output += "<div class='tm-home-box-3' id='detailHover'>";
 							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+","+cid+");'>";
-							/* if(data[i].firstimage == null){
+							if(data[i].firstimage == null){
 								//hotelImageLoad(contentid);
 								$.ajax({
 									url:"hotelImageLoad.sub",
@@ -650,7 +656,7 @@
 								});
 							}else{
 								output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
-							} */
+							}
 							output += "</div>";
 							output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
 							output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
@@ -672,9 +678,16 @@
 							});
 							output += "</p>";
 							output += "<div class='tm-home-box-2-container'>";
-							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 							output += "<a onclick='detailView("+contentid+","+contenttypeid+","+cid+");' class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'>";
 							output += "<span class='tm-home-box-2-description box-3'>";
+							if(data[i].grade == 0){
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+							}
 							if(data[i].grade > 0 && data[i].grade <= 0.5){
 								output += "<i class='far fa-star-half-alt' style='font-size:20px;'></i>";
 								output += "<i class='far fa-star' style='font-size:20px;'></i>";
@@ -758,12 +771,10 @@
 				});
 			}
 			
-			
 		
 			$(function(){
 				
 				searchHotelPage();
-				
 				$(".hotelSearchMoney").click(function(){
 					var value = $("input[name=hotelSearchConditionMoney]:checked").val();
 					console.log(value);
@@ -774,6 +785,10 @@
 					var value = $("input[name=hotelAvg]:checked").val();
 					console.log(value);
 					orderByHotel(value);
+				});
+				
+				$(".goodBtn").click(function(){
+					
 				});
 				
 			});
