@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.hello.admin.model.dao.AdminSchedulerDao;
@@ -14,12 +16,13 @@ import com.kh.hello.admin.model.vo.Blacklist;
 
 @Service
 public class AdminSchedulerService {
-
+@Autowired
+private AdminSchedulerDao asd;
+@Autowired
+private SqlSessionTemplate sqlSession;
 	//블랙리스트 해제 모듈
 	public int terminateBlacklist() {
 		int result = 0;
-		AdminSchedulerDao asd = new AdminSchedulerDao();
-		SqlSession sqlSession = getSqlSession();
 		//블랙리스트 해지 대상자 검색
 		//블랙리스트 이력에 해지이력 넣기
 		int result1 = asd.updateTerminateHistroy(sqlSession);
@@ -34,7 +37,7 @@ public class AdminSchedulerService {
 		return result;
 	}
 
-	public static SqlSession getSqlSession(){
+	/*public static SqlSession getSqlSession(){
 		SqlSession session = null;
 		
 		try {
@@ -48,5 +51,5 @@ public class AdminSchedulerService {
 		}
 		
 		return session;
-	}
+	}*/
 }
