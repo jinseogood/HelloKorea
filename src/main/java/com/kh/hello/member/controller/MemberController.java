@@ -257,11 +257,11 @@ public class MemberController {
 	               	if(result == null){
 	                	m.setEmail(userProfile.getEmail());
 	                	m.setNickname(userProfile.getName());
-	                	m.setSnsId(userProfile.getId());
+	                	m.setSnsId(snsId);
 	                	
-	                	int result1 = ms.insertFacebook(m);
+	                	int facebokLogin = ms.insertFacebook(m);
 	                	
-	                	if(result1 >0){
+	                	if(facebokLogin >0){
 	                		int mid = ms.selectMemberSequence();
 	                		model.addAttribute("mid", mid);
 	                		return "member/addUserInfo";
@@ -316,8 +316,8 @@ public class MemberController {
  
         //return "common/menubar";
     }
-    @RequestMapping(value = "/googleSignInCallback.me", method = { RequestMethod.GET, RequestMethod.POST })
-    public String doSessionAssignActionPage(HttpServletRequest request) throws Exception {
+    @RequestMapping(value = "googleSignInCallback.me", method = { RequestMethod.GET, RequestMethod.POST })
+    public String doSessionAssignActionPage(HttpServletRequest request,Member m, Model model) throws Exception {
  
         String code = request.getParameter("code");
  
@@ -331,7 +331,7 @@ public class MemberController {
         if (expireTime != null && expireTime < System.currentTimeMillis()) {
             accessToken = accessGrant.getRefreshToken();
             System.out.printf("accessToken is expired. refresh token = {}", accessToken);
- 
+            
         }
  
         Connection<Google> connection = googleConnectionFactory.createConnection(accessGrant);
@@ -344,7 +344,34 @@ public class MemberController {
         System.out.println("User Name : " + profile.getDisplayName());
         System.out.println("User Email : " + profile.getAccountEmail());
         System.out.println("User Profile : " + profile.getImageUrl());
- 
+        System.out.println(profile.getEmailAddresses());
+        
+        String snsId = profile.getId();
+        
+        HashMap<String,Object> snsInfo = new HashMap<String,Object>();
+        snsInfo.put("platForm", "google");
+        snsInfo.put("snsId", snsId);
+        
+        Member result = ms.selectSnsChceck(snsInfo);
+        
+        if(result ==null){
+        	m.setSnsId(snsId);
+        	m.setNickname(profile.getDisplayName());
+        	m.setEmail(profile.getAccountEmail());
+        	
+        	int googleLoigin = ms.insertGoogole(m);
+        	
+        	if(googleLoigin >0){
+        		int mid = ms.selectMemberSequence();
+        		model.addAttribute("mid", mid);
+        		return "member/addUserInfo";
+        	}
+        }else{
+        	model.addAttribute("loginUser", result);
+			System.out.println("로그인 성공");
+        	return "main/mainHotel";
+        }
+        
         // Access Token 취소
         try {
             System.out.println("Closing Token....");

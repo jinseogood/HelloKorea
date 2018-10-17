@@ -124,6 +124,12 @@ public class MemberDaoImpl implements MemberDao {
 		return list;
 	}
 
+	@Override
+	public int insertGoogole(Member m, SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("Member.insertGoogole", m);
+	}
+
 
 
 

@@ -58,6 +58,8 @@ public interface MemberDao {
 	
 	//활동내역
 	ArrayList<BoardAndReply> selectboreList(int mId, SqlSessionTemplate sqlSession);
+	//구글
+	int insertGoogole(Member m, SqlSessionTemplate sqlSession);
 
 
 	
