@@ -74,10 +74,10 @@
 					var sigunguCode;
 					//var contenttypeid = ${param.contenttypeid};
 					var contenttypeid1;
-					var contenttypeid = sessionStorage.getItem("contenttypeid");
+					var contenttypeid;// = sessionStorage.getItem("contenttypeid");
 					//var pageNo = ${param.pageNo};
 					var areaCode = sessionStorage.getItem("areaCode");
-					var sigunguCode = sessionStorage.getItem("sigunguCode");
+					var sigunguCode;// = sessionStorage.getItem("sigunguCode");
 					var pageNo = sessionStorage.getItem("pageNo");
 					var checkvalue = "";
 					var cat1 = "";
@@ -88,6 +88,13 @@
 						console.log("오세여?");
 						if(sessionStorage.getItem("sigunguCode") == 0){
 							sigunguCode = "";
+						}else{
+							sigunguCode = sessionStorage.getItem("sigunguCode");
+						}
+						if(sessionStorage.getItem("contenttypeid") == 0){
+							contenttypeid = "";
+						}else{
+							contenttypeid = sessionStorage.getItem("contenttypeid");
 						}
 						if(sessionStorage.getItem("cat3") == 0){
 							cat3 = "";
@@ -272,11 +279,11 @@
 						location.href="${contextPath}/detailGame?contentid="+contentid+"&contenttypeid="+contenttypeid;
 					}
 					
-					function searchGameCondition(contenttypeid1, areaCode1, sigunguCode1, cat1, cat2, cat3, pageNo){
+					function searchGameCondition(contenttypeid, areaCode, sigunguCode, cat1, cat2, cat3, pageNo){
 						$.ajax({
 							url:"searchGameCondition.sub",
 							type:"GET",
-							data:{contenttypeid:contenttypeid1, areaCode:areaCode1, sigunguCode:sigunguCode1, cat1:cat1, cat2:cat2, cat3:cat3, pageNo:pageNo},
+							data:{contenttypeid:contenttypeid, areaCode:areaCode, sigunguCode:sigunguCode, cat1:cat1, cat2:cat2, cat3:cat3, pageNo:pageNo},
 							dataType:"json",
 							success:function(data){
 								console.log("gameSearchCondition");
