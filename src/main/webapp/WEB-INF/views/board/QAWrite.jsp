@@ -98,7 +98,7 @@ body{ margin:50px 0px; }
    
    
    <section class="container tm-home-section-1" id="more" style = "width:80%; padding:100px">
-   <form action="insertQ.bo" method = "post">
+   <form action="insertQ.bo?uri=${uri}" method = "post">
       <div class="row">
          
       </div> 
@@ -114,12 +114,12 @@ body{ margin:50px 0px; }
       		<div class="row">		
       		
 			</div>
-         	<div class="col-lg-6" style = "align:center">
+         	<div class="col-lg-6 main_img" style = "align:center">
               	 <img src="${ contextPath }/resources/img/about-1.jpg" alt="image" style = "width:100%; height:270px" />
             </div>
          	<div class="col-lg-6" style = "display:table;">
          		<div style = "vertical-align:middle; display:table-cell; height:270px">
-         			<span><h1>바이스로이 발리</h1></span>
+         			<span class="main_title"><h1>바이스로이 발리</h1></span>
          			<br>
          			<div style = "padding-top:50px">
          				<span>Jln. Lanyahan, Br. Nagi, Ubud 80571, Indonesia</span>
@@ -155,9 +155,36 @@ body{ margin:50px 0px; }
    <jsp:include page="../common/footer.jsp"/>
 
 <script>
-	/* function test(){
-		location.href="starTest.bo";
-	} */
+	var contenttypeid = ${ param.contenttypeid };
+	var contentid = ${param.contentid};
+	var cid = ${param.cid};
+	
+	$(function(){
+		$.ajax({
+			url:"detailHotelInformation.sub",
+			type:"GET",
+			data:{contenttypeid:contenttypeid, contentid:contentid},
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+				var myData = data.response.body.items.item;
+				var output = "";
+				$(".main_title").html("");
+				$(".main_title").text(myData.title);
+				if(myData.firstimage == null){
+					output = "<img src='${contextPath}/resources/img/noImage.gif' alt='image' style = 'width:100%; height:270px' />";
+				}else{
+					output = "<img src="+myData.firstimage+" alt='image' style = 'width:100%; height:270px' />";
+				}
+
+				$(".main_img").html(output);
+
+			},
+			error:function(data){
+				console.log(data);
+			}
+		});
+	});
 </script>
 </body>
 </html>

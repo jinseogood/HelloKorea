@@ -66,7 +66,7 @@
     				<span class="sm-st-icon st-red"><i class="fa fa-check-square-o"></i></span>
     				<div class="sm-st-info">
     					<span><a href="reservation.sell">${ rCount }건</a></span>
-       					예약 내역
+       					이번달 예약 내역
     				</div>
     			</div>
     		</div>
@@ -75,7 +75,7 @@
 					<span class="sm-st-icon st-blue"><i class="fa fa-dollar"></i></span>
 					<div class="sm-st-info">
 						<span><a href="manageRevenue.sell">${ tPrice } 원</a></span>
-						이번달 수익
+						이번달 예상 수익
 					</div>
 				</div>
 			</div>
@@ -96,9 +96,9 @@
 			<div class="col-md-8">
 				<!--earning graph start-->
 				<section class="panel">
-					<header class="panel-heading">금월 매출 통계</header>
+					<header class="panel-heading">업체 평점 통계</header>
 					<div class="panel-body">
-						<canvas id="linechart" width="600" height="330"></canvas>
+						<div id="goodSTAT" style="width:800px;height:450px;" align="center"></div>
 					</div>
 				</section>
 				<!--earning graph end-->
@@ -107,7 +107,7 @@
 				<section class="panel">
 					<header class="panel-heading">금월 이용자 통계</header>
 					<div class="panel-body">
-						<canvas id="linechart" width="600" height="330"></canvas>
+						<div id="visitSTAT" style="width:800px;height:450px;" align="center"></div>
 					</div>
 				</section>
 				<!--user graph end-->

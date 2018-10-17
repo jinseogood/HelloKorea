@@ -32,53 +32,45 @@
 		height:80px;
 		float:right;
 	}
+	
 	#loginDiv { /* 팝업창 css */
 		top: 0px;
 		position: absolute;
-		width: 430px;
-		height: 600px; 
+		width: 400px;
+		height: 420px; 
 		display: none;
 		border: none;
 		background:#FAFAFA;
 		border-radius:10px;
 	}
 	
-	#snsBtn {
-		margin-left: auto;
-		margin-right: auto;
-		width: 300px;
-		height: 150px;
-		margin-top: 15px;
+	#loginModal{
+		width: 400px;
+		height: 300px;
+		margin-left:auto;
+		margin-right:auto;
 	}
-
- 	#emailBtn {
-		width: 300px;
-		height: 50px;
-		margin-top: 10px;
-		border: none;
-	} 
 	
-	 #emailLoginDiv {
+	#inModal{
+		height:280px;
+	}
+	
+	#emailLoginDiv {
 		top: 0px;
 		position: absolute;
-		width: 430px;
-		height: 600px; 
+		width: 400px;
+		height: 450px; 
 		display: none;
 		border: none;
 		background:#FAFAFA;
 		border-radius:10px;
-	} 
-	.col-md-3{
-	 width: 361.5px;
-	 height: 464px;
-	 margin-left:30px;
-	
 	}
+	
 	#sllerJoinDiv{
 		top: 0px;
 		position: absolute;
-		width: 430px;
-		height: 600px; 
+		width: 400px;
+		height: 450px; 
 		display: none;
 		border: none;
 		background:#FAFAFA;
@@ -88,32 +80,45 @@
 	#userJoinDiv {
 		top: 0px;
 		position: absolute;
-		width: 430px;
-		height: 600px; 
+		width: 400px;
+		height: 450px; 
 		display: none;
 		border: none;
 		background:#FAFAFA;
 		border-radius:10px;
 	}
-
-	#loginBtn{
-		width: 100px;
-		margin-left: 15px;
-		height: 30px;
+	
+	#btnDiv {
+		margin-left: auto;
+		margin-right: auto;
+		width: 300px;
+		height: 200px;
+		margin-top: 15px;
 	}
+
+ 	#emailBtn {
+		width: 250px;
+		height: 50px;
+		margin-top: 10px;
+		border: none;
+		border-radius:7px;
+	} 
+	
 	#btnJoinFacebook{
+		width:250px;
 		height:50px;
 		border:solid 1px #2E64FE;
 		background:#FAFAFA;
 		color:#2E64FE
 	}
+	
 	#btnJoinGoogle{
+		width:250px;
 		height:50px;
 		margin-top:10px;
 		border:solid 1px #DF0101;
 		background:#FAFAFA;
 		color:#DF0101;
-		
 	}
 
 </style>
@@ -164,122 +169,128 @@
   		</div>
   	</div>
 
-		<!-- 모달 -->
-	  <div id="loginDiv" class="modal fade" role="dialog">
-        <div class="page-header">
-         <h3 align="center">Welcom HelloKorea</h3>
-        </div>
-        <div class="col-md-3">
-         	<div class="login-box well">
-         	<div id="snsBtn">
-			<button  id="btnJoinFacebook"class="btn btn-primary btn-round" style="width: 100%;"><i class="fa fa-facebook" aria-hidden="true"></i>Facebook Login</button>
-			<button id="btnJoinGoogle" class="btn btn-primary btn-round" style="width: 100%;"> <i class="fa fa-google" aria-hidden="true"></i>Google Login</button>
-			</div>
-			<hr/>
-			<div id="email">
-			<button id="emailBtn" data-toggle="modal" data-target="#emailLoginDiv">이메일로계속하기</button>
+	<!-- 모달 -->
+	<div id="loginDiv" class="modal fade" role="dialog">
+    	<div class="page-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 align="center">Welcome to HelloKorea</h3>
 		</div>
-		 </div>
-        </div>
-      </div>
+		<div id="loginModal" class="col-md-3" align="center">
+			<div id="inModal" class="login-box well" align="center">
+				<div id="btnDiv">
+					<button id="btnJoinFacebook"class="btn btn-primary btn-round"><i class="fa fa-facebook" aria-hidden="true"></i>&nbsp;&nbsp;Facebook Login</button>
+					<button id="btnJoinGoogle" class="btn btn-primary btn-round"> <i class="fa fa-google" aria-hidden="true"></i>&nbsp;&nbsp;Google Login</button>
+					<hr/>
+					<button id="emailBtn" data-toggle="modal" data-target="#emailLoginDiv">이메일로계속하기</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	
 	<!--자회원 로그인 폼  -->
-	  <div id="emailLoginDiv" class="modal fade" role="dialog">
-        <div class="page-header" align="center">
-          <h3>회원가입하기 </h3>
-          <label>더 많은 정보를 확인하세요 !</label>
-        </div>
-        <div class="col-md-3">
-          <div class="login-box well">
-        	<form action="login.me" method="post">
-            <legend>로그인</legend>
-            <div class="form-group">
-                <label for="username-email">이메일 or 아이디</label>
-                <input name="email" value='' id="email" placeholder="E-mail" type="text" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label for="password">비밀번호</label>
-                <input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" value="Login" />
-            </div>
-            <span class='text-center'><a href="/bbs/index.php?mid=index&act=dispMemberFindAccount" class="text-sm">비밀번호 찾기</a></span>
-            <hr />
-        </form>
-            <div class="form-group">
-            	<label>회원가입을 안 하셨나요?</label>
-                <a class="userJoinBtn" data-toggle="modal" data-target="#userJoinDiv">회원가입</a>
-            </div>
-          </div>
-        </div>
-      </div>
+	<div id="emailLoginDiv" class="modal fade" role="dialog">
+		<div class="page-header" align="center">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3>로그인 </h3>
+			<label>더 많은 정보를 확인하세요 !</label>
+		</div>
+		<div id="loginModal" class="col-md-3">
+			<div id="inModal" class="login-box well">
+				<form action="login.me" method="post">
+					<legend>로그인</legend>
+					<div class="form-group">
+						<label for="username-email">이메일 or 아이디</label>
+						<input name="email" value='' id="email" placeholder="E-mail" type="text" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label for="password">비밀번호</label>
+						<input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
+					</div>
+					<div class="form-group">
+						<input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" value="Login" />
+					</div>
+					<span class='text-center'><a href="/bbs/index.php?mid=index&act=dispMemberFindAccount" class="text-sm">비밀번호 찾기</a></span>
+					<hr />
+				</form>
+				<div class="form-group">
+					<label>회원가입을 안 하셨나요?</label>
+					<a class="userJoinBtn" data-toggle="modal" data-target="#userJoinDiv">회원가입</a>
+				</div>
+			</div>
+		</div>
+	</div>
 
-		<!-- 유저회원가입 -->
-	  <div id="userJoinDiv" class="modal fade" role="dialog">
-        <div class="page-header" align="center">
-          <h2>회원가입</h2>
-        </div>
-        <div class="col-md-3">
-          <div class="login-box well">
-        	<form action="insertUser.me" method="post">
-            <legend>로그인</legend>
-            <div class="form-group">
-                <label for="username-email">이메일 or 아이디</label>
-                <input name="email" value='' id="email" placeholder="E-mail" type="text" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label for="password">비밀번호</label>
-                <input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
-            </div>
-            <hr />
-            <div class="form-group">
-                <input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" />
-            </div>
-        </form>
-            <div class="form-group">
-            	<label>판매자 등록은 여기로 </label>
-                <a id="sellerJoinBtn" data-toggle="modal" data-target="#sllerJoinDiv">판매자 회원가입</a>
-            </div>
-          </div>
-        </div>
-      </div>
+	<!-- 유저회원가입 -->
+	<div id="userJoinDiv" class="modal fade" role="dialog">
+		<div class="page-header" align="center">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3>회원가입하기 </h3>
+			<label>더 많은 정보를 확인하세요 !</label>
+		</div>
+		<div id="loginModal" class="col-md-3">
+			<div id="inModal" class="login-box well">
+				<form action="insertUser.me" method="post">
+					<legend>로그인</legend>
+					<div class="form-group">
+						<label for="username-email">이메일 or 아이디</label>
+						<input name="email" value='' id="email" placeholder="E-mail" type="text" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label for="password">비밀번호</label>
+						<input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
+					</div>
+					<hr />
+					<div class="form-group">
+						<input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" />
+					</div>
+				</form>
+				<div class="form-group">
+					<label>판매자 등록은 여기로 </label>
+					<a id="sellerJoinBtn" data-toggle="modal" data-target="#sllerJoinDiv">판매자 회원가입</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<!-- seller -->
-	  <div id="sllerJoinDiv" class="modal fade" role="dialog">
-        <div class="page-header" align="center">
-          <h2>판매자 가입</h2>
-        </div>
-        <div class="col-md-3">
-          <div class="login-box well">
-        	<form action="insertSeller.me" method="post">
-            <legend>로그인</legend>
-            <div class="form-group">
-                <label for="email">이메일 </label>
-                <input name="email" value='' id="email" placeholder="E-mail" type="text" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label for="password">비밀번호</label>
-                <input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
-            </div>
-            <hr />
-            <div class="form-group">
-                <input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" />
-            </div>
-        </form>
-          </div>
-        </div>
-      </div>
+	<div id="sllerJoinDiv" class="modal fade" role="dialog">
+		<div class="page-header" align="center">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3>판매자 가입 </h3>
+			<label>손쉽게 등록하여 판매하세요 !</label>
+		</div>
+		<div id="loginModal" class="col-md-3">
+			<div id="inModal" class="login-box well">
+				<form action="insertSeller.me" method="post">
+					<legend>로그인</legend>
+					<div class="form-group">
+						<label for="email">이메일 </label>
+						<input name="email" value='' id="email" placeholder="E-mail" type="text" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label for="password">비밀번호</label>
+						<input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
+					</div>
+					<hr />
+					<div class="form-group">
+						<input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 
 	<script>
-  		function googleTranslateElementInit() {
-  	  		new google.translate.TranslateElement({pageLanguage: 'ko'}, 'google_translate_element');
-  	  		jQuery('.goog-logo-link').css('display', 'none');
-        	jQuery('.goog-te-gadget').css('font-size', '0');
-  		}
-  		function openMsg(){
-  			var mId = $("#msgBtn").val(); 
-  	    	window.open('receiveMessageView?mId='+mId, 'Hello', 'width=480px, height=580px, top=80px, left=400px');
-  	    }
+		function googleTranslateElementInit() {
+			new google.translate.TranslateElement({pageLanguage: 'ko'}, 'google_translate_element');
+			jQuery('.goog-logo-link').css('display', 'none');
+			jQuery('.goog-te-gadget').css('font-size', '0');
+		}
+		
+		function openMsg(){
+			var mId = $("#msgBtn").val(); 
+			window.open('receiveMessageView?mId='+mId, 'Hello', 'width=480px, height=580px, top=80px, left=400px');
+		}
   		
   		$("#loginOpen").click(function(event){
   	    	console.log('작동');
@@ -335,7 +346,7 @@
 			$("body").css("overflow","hidden"); 
 		});
   		
-  	</script>
+	</script>
 	 <script>
 		$("#loginOpen").click(function(){
 			$.ajax({
@@ -399,7 +410,7 @@
 			})
 		});
  		
- 		</script>
+ 	</script>
   		
 </body>
 </html>
