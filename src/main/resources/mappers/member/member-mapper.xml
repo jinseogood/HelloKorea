@@ -44,7 +44,7 @@
 	<!-- 페이스북 -->
 	<insert id="insertFacebook" parameterType="Member">
 		INSERT INTO MEMBER(M_ID,PLATFORM_TYPE,M_TYPE,REGIST_DATE,STATUS,EMAIL,NICKNAME,SNS_ID)
-		VALUES (SEQ_M_ID.NEXTVAL,'facebook','2',SYSDATE,'Y',#{email},#{nickname},#{snsId})
+		VALUES (SEQ_M_ID.NEXTVAL,'facebook','1',SYSDATE,'Y',#{email},#{nickname},#{snsId})
 	</insert>
 	
 	<update id="updateAddUser">
@@ -106,6 +106,6 @@
 	<!-- 구글 -->
 	<insert id="insertGoogole" parameterType="Member">
 	INSERT INTO MEMBER(M_ID,PLATFORM_TYPE,M_TYPE,REGIST_DATE,STATUS,EMAIL,NICKNAME,SNS_ID)
-	VALUES (SEQ_M_ID.NEXTVAL,'google','2',SYSDATE,'Y',#{email},#{nickname},#{snsId})
+	VALUES (SEQ_M_ID.NEXTVAL,'google','1',SYSDATE,'Y',#{email},#{nickname},#{snsId})
 	</insert>
 </mapper>

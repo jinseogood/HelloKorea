@@ -18,6 +18,7 @@
 <link href="${ contextPath }/resources/css/bootstrap-datetimepicker.min.css" rel="stylesheet">  
 <link href="${ contextPath }/resources/css/flexslider.css" rel="stylesheet">
 <link href="${ contextPath }/resources/css/templatemo-style.css" rel="stylesheet">
+
 <title>Insert title here</title>
 <style>
 @font-face { font-family: 'BMJUA'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff'); font-weight: normal; font-style: normal; }
@@ -33,21 +34,15 @@
 	}
 	#loginDiv { /* 팝업창 css */
 		top: 0px;
-		
 		position: absolute;
-		width: 450px;
-		height: 420px;
+		width: 430px;
+		height: 600px; 
 		display: none;
-		background: white;
 		border: none;
+		background:#FAFAFA;
+		border-radius:10px;
 	}
 	
-	.loginBtn1 {
-		width: 300px;
-		height: 50px;
-		margin-top: 10px;
-		border: none;
-	}
 	#snsBtn {
 		margin-left: auto;
 		margin-right: auto;
@@ -55,132 +50,70 @@
 		height: 150px;
 		margin-top: 15px;
 	}
-	
-	#email {
-		margin-left: auto;
-		margin-right: auto;
-		width: 300px;
-		height: 100px;
-	}
-	
 
-	
-	#topDiv {
-		width: 450px;
-		height: 90px;
-		margin-top: 0px;
-	}
-	
-	#closeBtn {
-		width: 30px;
-		height: 30px;
-		margin-left: 390px;
-		margin-top: 10px;
-		background: none;
-		border: none;
-	}
-	
-	#closeBtn1 {
-		width: 30px;
-		height: 30px;
-		margin-left: 390px;
-		margin-top: 10px;
-		background: none;
-		border: none;
-	}
-	#closeBtn2 {
-		width: 30px;
-		height: 30px;
-		margin-left: 390px;
-		margin-top: 10px;
-	 	background: none;
-		border: none;
-	}
-	#closeBtn3 {
-		width: 30px;
-		height: 30px;
-		margin-left: 390px;
-		margin-top: 10px;
-		background: none;
-		border: none;
-	}
-	#closeBtn4 {
-		width: 30px;
-		height: 30px;
-		margin-left: 390px;
-		margin-top: 10px;
-		background: none;
-		border: none;
-	}
-	#emailBtn {
+ 	#emailBtn {
 		width: 300px;
 		height: 50px;
 		margin-top: 10px;
 		border: none;
-	}
+	} 
 	
-	#emailDiv {
+	 #emailLoginDiv {
 		top: 0px;
 		position: absolute;
-		width: 450px;
-		height: 420px;
+		width: 430px;
+		height: 600px; 
 		display: none;
-		background: white;
 		border: none;
+		background:#FAFAFA;
+		border-radius:10px;
+	} 
+	.col-md-3{
+	 width: 361.5px;
+	 height: 464px;
+	 margin-left:30px;
+	
 	}
-	#sellerDiv{
+	#sllerJoinDiv{
 		top: 0px;
 		position: absolute;
-		width: 450px;
-		height: 420px;
+		width: 430px;
+		height: 600px; 
 		display: none;
-		background: white;
 		border: none;
+		background:#FAFAFA;
+		border-radius:10px;
 	}
 	
-	#emailTable {
-		margin-left: auto;
-		margin-right: auto;
-		margin-top: 30px;
-	}
-	
-	.inputStyle{
-		width: 300px;
-		height: 40px;
-		margin-top: 5px;
-		margin-bottom: 5px;
-	}
-		
-	#joinBtn1 {
-	   width: 100px;
-	   margin-left: 15px;
-	   height: 30px;
-	}
-	#joinBtn {
-		width: 100px;
-		margin-left: 15px;
-		height: 30px;
-		border:none;
-	}
-	
-	#joinDiv {
+	#userJoinDiv {
 		top: 0px;
 		position: absolute;
-		width: 450px;
-		height: 420px;
+		width: 430px;
+		height: 600px; 
 		display: none;
-		background: white;
 		border: none;
+		background:#FAFAFA;
+		border-radius:10px;
 	}
-	#joinInsert{
-		margin-top:30px;
-		margin-right:auto;
-		margin-left:auto;	
-	}
+
 	#loginBtn{
 		width: 100px;
 		margin-left: 15px;
 		height: 30px;
+	}
+	#btnJoinFacebook{
+		height:50px;
+		border:solid 1px #2E64FE;
+		background:#FAFAFA;
+		color:#2E64FE
+	}
+	#btnJoinGoogle{
+		height:50px;
+		margin-top:10px;
+		border:solid 1px #DF0101;
+		background:#FAFAFA;
+		color:#DF0101;
+		
 	}
 
 </style>
@@ -231,115 +164,111 @@
   		</div>
   	</div>
 
-	<!--모달  -->
-	<div id="loginDiv" class="modal fade" role="dialog">
-		<div id="topDiv">
-			<button id="closeBtn">X</button>
-			<label style="width: 180px; font-size: 30px;">Hello Korea</label>
-		</div>
-		<div id="snsBtn">
+		<!-- 모달 -->
+	  <div id="loginDiv" class="modal fade" role="dialog">
+        <div class="page-header">
+         <h3 align="center">Welcom HelloKorea</h3>
+        </div>
+        <div class="col-md-3">
+         	<div class="login-box well">
+         	<div id="snsBtn">
 			<button  id="btnJoinFacebook"class="btn btn-primary btn-round" style="width: 100%;"><i class="fa fa-facebook" aria-hidden="true"></i>Facebook Login</button>
 			<button id="btnJoinGoogle" class="btn btn-primary btn-round" style="width: 100%;"> <i class="fa fa-google" aria-hidden="true"></i>Google Login</button>
-		</div>
-		<hr style="	width: 400px;
-		border: solid #D8D8D8 1px;">
-		<div id="email">
-			<button id="emailBtn" data-toggle="modal" data-target="#emailDiv">이메일로계속하기</button>
-		</div>
-	</div>
-	<div id="emailDiv" class="modal fade" role="dialog">
-		<div id="topDiv">
-			<button id="closeBtn1">X</button>
-			<label style="width: 50px; font-size: 30px;">LOGIN</label>
-		</div>
-		<form action="login.me" method="post">
-			<table id="emailTable">
-				<tr>
-					<th>Email</th>
-				</tr>
-				<tr>
-					<td><input type="text" id="userId" name="email" class="inputStyle"></td>
-				</tr>
-				<tr>
-					<th>Password</th>
-				</tr>
-				<tr>
-					<td><input type="password" id="userPwd" name="password" class="inputStyle"></td>
-				</tr>
-			</table>
-			<hr style="	width: 400px;border: solid #D8D8D8 1px;">
-			<div align="center">
-				<button class="loginBtn1">로그인</button>
 			</div>
-		</form>
-		<div align="center">
-		<label>계정이 없으신 가요?
-			<button id="joinBtn" data-toggle="modal" data-target="#joinDiv"class="loginBtn">회원가입</button>
-		</label>
-		
+			<hr/>
+			<div id="email">
+			<button id="emailBtn" data-toggle="modal" data-target="#emailLoginDiv">이메일로계속하기</button>
 		</div>
-	</div>
+		 </div>
+        </div>
+      </div>
+	
+	<!--자회원 로그인 폼  -->
+	  <div id="emailLoginDiv" class="modal fade" role="dialog">
+        <div class="page-header" align="center">
+          <h3>회원가입하기 </h3>
+          <label>더 많은 정보를 확인하세요 !</label>
+        </div>
+        <div class="col-md-3">
+          <div class="login-box well">
+        	<form action="login.me" method="post">
+            <legend>로그인</legend>
+            <div class="form-group">
+                <label for="username-email">이메일 or 아이디</label>
+                <input name="email" value='' id="email" placeholder="E-mail" type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="password">비밀번호</label>
+                <input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" value="Login" />
+            </div>
+            <span class='text-center'><a href="/bbs/index.php?mid=index&act=dispMemberFindAccount" class="text-sm">비밀번호 찾기</a></span>
+            <hr />
+        </form>
+            <div class="form-group">
+            	<label>회원가입을 안 하셨나요?</label>
+                <a class="userJoinBtn" data-toggle="modal" data-target="#userJoinDiv">회원가입</a>
+            </div>
+          </div>
+        </div>
+      </div>
 
-	<div id="joinDiv" class="modal fade" role="dialog">
-		<div id="topDiv">
-			<button id="closeBtn2">X</button>
-			<label style="width: 50px; font-size: 30px;">JOIN</label> <br> <label
-				style="width: 200px; hegiht: 30px; font-size: 15px;">Membership
-				is free!</label>
-		</div>
-		<div id="joinInsert">
-			<form action="insertUser.me" method="post" id="insertForm">
-				<table align="center">
-					<tr>
-						<th>Email</th>
-					</tr>
-					<tr>
-						<td><input type="email" name="email" id="userEmail" class="inputStyle"></td>
-					</tr>
-					<tr>
-						<th>Password</th>
-					</tr>
-					<tr>
-						<td><input type="password" name="password" id="userPassword" class="inputStyle"></td>
-					</tr>
-				</table>
-				<div align="center">
-					<button class="loginBtn1">회원가입하기</button>
-				</div>
-			</form>
-			
-			<div align="center">
-				<label>판매자등록은 여기로
-					<button class="loginBtn" id="joinBtn1" data-toggle="modal" data-target="#sellerDiv">판매자등록</button>
-				</label>
-			</div>
-		</div>
-	</div>
-	<div id="sellerDiv" class="modal fade" role="dialog">
-		<div id="topDiv">
-			<button id="closeBtn3">X</button>
-			<label style="width: 50px; font-size: 30px;">SELLERJOIN</label>
-		</div>
-		<form action="insertSeller.me" method="post">
-			<table align="center">
-				<tr>
-					<th>Email</th>
-				</tr>
-				<tr>
-					<td><input type="email" name="email" class="inputStyle"></td>
-				</tr>
-				<tr>
-					<th>Password</th>
-				</tr>
-				<tr>
-					<td><input type="password" name="password" class="inputStyle"></td>
-				</tr>
-			</table>
-			<div align="center">
-				<button class="loginBtn1">판매자회원가입</button>
-			</div>
-		</form>
-	</div>
+		<!-- 유저회원가입 -->
+	  <div id="userJoinDiv" class="modal fade" role="dialog">
+        <div class="page-header" align="center">
+          <h2>회원가입</h2>
+        </div>
+        <div class="col-md-3">
+          <div class="login-box well">
+        	<form action="insertUser.me" method="post">
+            <legend>로그인</legend>
+            <div class="form-group">
+                <label for="username-email">이메일 or 아이디</label>
+                <input name="email" value='' id="email" placeholder="E-mail" type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="password">비밀번호</label>
+                <input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
+            </div>
+            <hr />
+            <div class="form-group">
+                <input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" />
+            </div>
+        </form>
+            <div class="form-group">
+            	<label>판매자 등록은 여기로 </label>
+                <a id="sellerJoinBtn" data-toggle="modal" data-target="#sllerJoinDiv">판매자 회원가입</a>
+            </div>
+          </div>
+        </div>
+      </div>
+	<!-- seller -->
+	  <div id="sllerJoinDiv" class="modal fade" role="dialog">
+        <div class="page-header" align="center">
+          <h2>판매자 가입</h2>
+        </div>
+        <div class="col-md-3">
+          <div class="login-box well">
+        	<form action="insertSeller.me" method="post">
+            <legend>로그인</legend>
+            <div class="form-group">
+                <label for="email">이메일 </label>
+                <input name="email" value='' id="email" placeholder="E-mail" type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="password">비밀번호</label>
+                <input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
+            </div>
+            <hr />
+            <div class="form-group">
+                <input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" />
+            </div>
+        </form>
+          </div>
+        </div>
+      </div>
 
 	<script>
   		function googleTranslateElementInit() {
@@ -373,59 +302,37 @@
 		$("#emailBtn").click(function(event){
 			$("#loginDiv").hide();
 			$(".modal-backdrop").hide();
-			$("#emailDiv").show();
-		  	        
-		  	         
-			$("#emailDiv").css({
-				"top": (($(window).height()-$("#emailDiv").outerHeight())/1.5+$(window).scrollTop())+"px",
-				"left": (($(window).width()-$("#emailDiv").outerWidth())/2+$(window).scrollLeft())+"px"
+			$("#emailLoginDiv").show();
+			$("#emailLoginDiv").css({
+				"top": (($(window).height()-$("#emailLoginDiv").outerHeight())/1.5+$(window).scrollTop())+"px",
+				"left": (($(window).width()-$("#emailLoginDiv").outerWidth())/2+$(window).scrollLeft())+"px"
 			});
 			$("body").css("overflow","hidden");
 		
-			$("#closeBtn1").click(function(event){
-				$("#loginDiv").hide();
-				$("#emailDiv").hide(); 
-				$(".modal-backdrop").hide();
-				$("body").css("overflow","auto");
-		  	       
-			});
 		});
 		  	  
-		$("#joinBtn").click(function(event){
-		        
-			$("#emailDiv").hide();
-			$(".modal-backdrop").hide();
-			$("#joinDiv").show();
-			$("#joinDiv").css({
-				"top": (($(window).height()-$("#loginDiv").outerHeight())/1.5+$(window).scrollTop())+"px",
-				"left": (($(window).width()-$("#loginDiv").outerWidth())/2+$(window).scrollLeft())+"px"
+		$(".userJoinBtn").click(function(event){
+			$("#emailLoginDiv").hide();
+			 $(".modal-backdrop").hide(); 
+			$("#userJoinDiv").show();
+			$("#userJoinDiv").css({
+				"top": (($(window).height()-$("#userJoinDiv").outerHeight())/1.5+$(window).scrollTop())+"px",
+				"left": (($(window).width()-$("#userJoinDiv").outerWidth())/2+$(window).scrollLeft())+"px"
 			});
 			$("body").css("overflow","hidden");
-		     
-			$("#closeBtn2").click(function(event){
-				$("#joinDiv").hide();
-				$("#emailDiv").hide(); 
-				$(".modal-backdrop").hide();
-				$("body").css("overflow","auto");
-			});
+		
 		});
 		  	
-		$("#joinBtn1").click(function(){
-			$("#joinDiv").hide();
+		$("#sellerJoinBtn").click(function(){
+			$("#userJoinDiv").hide();
 			$(".modal-backdrop").hide();
-			$("#sellerDiv").show();
-			$("#sellerDiv").css({
-				"top": (($(window).height()-$("#loginDiv").outerHeight())/1.5+$(window).scrollTop())+"px",
-				"left": (($(window).width()-$("#loginDiv").outerWidth())/2+$(window).scrollLeft())+"px"
+			$("#sllerJoinDiv").show();
+			$("#sllerJoinDiv").css({
+				"top": (($(window).height()-$("#sllerJoinDiv").outerHeight())/1.5+$(window).scrollTop())+"px",
+				"left": (($(window).width()-$("#sllerJoinDiv").outerWidth())/2+$(window).scrollLeft())+"px"
 			});
 		         
-			$("body").css("overflow","hidden");
-			$("#closeBtn3").click(function(event){
-				$("#joinDiv").hide();
-				$("#sellerDiv").hide(); 
-				$(".modal-backdrop").hide();
-				$("body").css("overflow","auto");
-			});
+			$("body").css("overflow","hidden"); 
 		});
   		
   	</script>
@@ -475,56 +382,7 @@
 		
 	
 	</script>
-  <!-- 	<script>
-		(function(d, s, id) {
-		  var js, fjs = d.getElementsByTagName(s)[0];
-		  if (d.getElementById(id)) return;
-		  js = d.createElement(s); js.id = id;
-		  js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v3.1&appId=2078468609042330&autoLogAppEvents=1';
-		  fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-		
-		function fbLogin() {
-			// 로그인 여부 체크
-			FB.getLoginStatus(function(response) {
-
-				if (response.status === 'connected') {
-					FB.api('/me', function(res) {
-						// 제일 마지막에 실행
-						console.log("Success Login : " + response.name);
-						// alert("Success Login : " + response.name);
-					});
-				} else if (response.status === 'not_authorized') {
-					// 사람은 Facebook에 로그인했지만 앱에는 로그인하지 않았습니다.
-					alert('앱에 로그인해야 이용가능한 기능입니다.');
-				} else {
-					// 그 사람은 Facebook에 로그인하지 않았으므로이 앱에 로그인했는지 여부는 확실하지 않습니다.
-					alert('페이스북에 로그인해야 이용가능한 기능입니다.');
-				}
-			}, true); // 중복실행방지
-		}
-
-		window.fbAsyncInit = function() {
-			FB.init({
-				appId   : '2078468609042330',
-				cookie  : true,
-				xfbml   : true,
-				version : 'v3.1'
-			});
-		};
-
-		(function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id)) return;
-			js = d.createElement(s); js.id = id;
-			// ko_KR 을 en_US 로 바꾸면 영문으로 로그인버튼을 사용할 수 있어요.
-			js.src = "//connect.facebook.net/ko_KR/sdk.js";
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-		</script>-->
- 		
- 		
- 		<script> 
+ 	<script> 
  		$("#loginOpen").click(function(){
 			$.ajax({
 				url:"google.me",

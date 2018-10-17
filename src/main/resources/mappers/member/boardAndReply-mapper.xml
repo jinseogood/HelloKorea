@@ -20,6 +20,12 @@
 	RIGHT JOIN BOARD B ON (B.BID=R.BID)
 	WHERE B.M_ID= #{mId}
 	</select>
+	<select id="selectReplyCount" resultType="_int" parameterType="_int">
+		SELECT COUNT(R.BID)
+		FROM REPLY R
+		JOIN BOARD B  ON(B.M_ID=R.M_ID)
+		WHERE R.M_ID=#{mId}
+	</select>
    
   
 </mapper>

@@ -62,6 +62,9 @@ public interface MemberService {
 	ArrayList<BoardAndReply> selectboreList(int mId);
 	//구글로그인
 	int insertGoogole(Member m);
+	
+	//댓글갯수
+	int selectReplyCount(int mId);
 
 	
 	
