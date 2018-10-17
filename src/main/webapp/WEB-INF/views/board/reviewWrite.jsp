@@ -98,7 +98,7 @@ body{ margin:50px 0px; }
    
    
    <section class="container tm-home-section-1" id="more" style = "width:80%; padding:100px">
-   <form action="insertReview.bo" method = "post" encType = "multipart/form-data">
+   <form action="insertReview.bo?uri=${ uri }&contentid=${contentid}&contenttypeid=${contenttypeid}&cid=${cid}" method = "post" encType = "multipart/form-data">
       <div class="row">
          
       </div> 

@@ -949,7 +949,7 @@
 							output += "<div class='tm-about-box-1' style = 'height:220px; padding:10px 10px;'>";
 							output += "<a onclick = member_info(this);><img src='${ contextPath }/resources/img/about-4.jpg' alt='img' class='tm-about-box-1-img' style = 'margin:0 auto 10px;'></a>";
 							output += "<h3 class='tm-about-box-1-title' style = 'margin-bottom:5px;'>Songs <span>( GOD )</span></h3>";
-							output += "<div class = 'member_info' style = 'visibility:hidden; position:absolute; background-color:lightgray; left:-150px; top:-15px; width:200px; height:200px; z-index:999;'>";
+							output += "<div class = 'member_info' style = 'border-radius: 10px; visibility:hidden; position:absolute; background-color:lightgray; left:-150px; top:5px; width:200px; height:200px; z-index:999;'>";
 							output += "<div><h3>"+review[i].nickname+"</h3></div>";
 							output += "<div style = 'text-align:right;'><button type = 'button'>메세지</button></div>";
 							output += "<div class='info' style = 'text-align:left;'>회원가입시기 : "+review[i].create_date+"<br>";
@@ -1280,7 +1280,7 @@
 	
 		function review(){
 			if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')})
- 				location.href="reviewWrite.bo?contentid="+contentid;
+ 				location.href="reviewWrite.bo?contentid="+contentid+"&contenttypeid="+contenttypeid+"&cid="+cid;
 			else{
 				alert("로그인이 필요한 서비스 입니다.");
 			}
@@ -1288,7 +1288,7 @@
 		
 		function qa(){
 			if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')})
-				location.href="QAWrite.bo?contentid="+contentid;
+				location.href="QAWrite.bo?contentid="+contentid+"&contenttypeid="+contenttypeid+"&cid="+cid;
 			else{
 				alert("로그인이 필요한 서비스 입니다.");
 			}
