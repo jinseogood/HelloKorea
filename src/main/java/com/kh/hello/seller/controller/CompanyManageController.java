@@ -800,10 +800,10 @@ public class CompanyManageController {
 			}
 			else{
 				if(searchWord.equals("입금대기")){
-					searchWord="P";
+					searchWord="W";
 				}
 				else if(searchWord.equals("입금완료")){
-					searchWord="R";
+					searchWord="O";
 				}
 				r.setStatus(searchWord);
 			}
@@ -814,10 +814,10 @@ public class CompanyManageController {
 		}
 			
 		/*for(int i=0;i<list.size();i++){
-			if(list.get(i).getStatus().equals("P")){
+			if(list.get(i).getStatus().equals("W")){
 				list.get(i).setStatus("입금대기");
 			}
-			else if(list.get(i).getStatus().equals("R")){
+			else if(list.get(i).getStatus().equals("O")){
 				list.get(i).setStatus("입금완료");
 			}
 		}*/
