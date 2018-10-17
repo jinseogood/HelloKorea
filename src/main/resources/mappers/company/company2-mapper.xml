@@ -16,10 +16,10 @@
    
    <!-- 호텔 조회 -->
    <select id="selectList" resultMap="company2ResultSet">
-   		SELECT C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID, AVG(GRADE) as GRADE
-   		FROM COMPANY C, BOARD B
-   		WHERE C.C_ORIGINID = B.ORIGIN_ID
-   		AND C_ADDRESS LIKE '%' || #{areaName} || '%'
+   		SELECT C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID, NVL(AVG(GRADE),0) as GRADE
+   		FROM COMPANY C
+   		LEFT JOIN BOARD B ON (C.C_ORIGINID = B.ORIGIN_ID)
+   		WHERE C_ADDRESS LIKE '%' || #{areaName} || '%'
    		<if test="sigunguName != null">
    			AND C_ADDRESS LIKE '%' || #{sigunguName} || '%'
    		</if>
@@ -28,10 +28,10 @@
    
    <!-- 이름순 정렬 -->
    <select id="selectListOrderName" resultMap="company2ResultSet">
-   	SELECT C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID, AVG(GRADE) as GRADE
-   	FROM COMPANY C, BOARD B
-   	WHERE C.C_ORIGINID = B.ORIGIN_ID
-   	AND C_ADDRESS LIKE '%' || #{areaName} || '%'
+   	SELECT C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID, NVL(AVG(GRADE),0) as GRADE
+   	FROM COMPANY C
+   	LEFT JOIN BOARD B ON (C.C_ORIGINID = B.ORIGIN_ID)
+   	WHERE C_ADDRESS LIKE '%' || #{areaName} || '%'
    	<if test="sigunguName != null">
    		AND C_ADDRESS LIKE '%' || #{sigunguName} || '%'
    	</if>
@@ -41,11 +41,10 @@
    
    <!-- 평점 높은순으로 정렬 -->
    <select id="selectListOrderByGrade" resultMap="company2ResultSet">
-   	SELECT C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID, AVG(GRADE) as GRADE
-   	FROM BOARD B, COMPANY C
-   	WHERE C.C_ORIGINID = B.ORIGIN_ID
-   	AND BOARD_TYPE = 1
-   	AND C_ADDRESS LIKE '%' || #{areaName} || '%'
+   	SELECT C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID, NVL(AVG(GRADE),0) as GRADE
+   	FROM COMPANY C
+   	LEFT JOIN BOARD B ON (C.C_ORIGINID = B.ORIGIN_ID)
+   	WHERE C_ADDRESS LIKE '%' || #{areaName} || '%'
    	AND C_ADDRESS LIKE '%' || #{sigunguName} || '%'
    	GROUP BY C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID
    	ORDER BY GRADE DESC
@@ -53,11 +52,11 @@
    
    <!-- 가격대 1번 정렬 -->
    <select id="selectListOrderMoney1" resultMap="company2ResultSet">
-   	SELECT DISTINCT C.C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID, AVG(GRADE) as GRADE
-   	FROM COMPANY C, BOARD B, ROOM R
-   	WHERE C.C_ORIGINID = B.ORIGIN_ID
-   	AND C.C_ID = R.C_ID
-   	AND R_PRICE BETWEEN 1000 AND 9900
+   	SELECT DISTINCT C.C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID, NVL(AVG(GRADE),0) as GRADE
+   	FROM COMPANY C
+   	LEFT JOIN BOARD B ON (C.C_ORIGINID = B.ORIGIN_ID)
+   	JOIN ROOM R ON (C.C_ID = R.C_ID)
+   	WHERE R_PRICE BETWEEN 1000 AND 9900
    	AND C_ADDRESS LIKE '%' || #{areaName} || '%'
    	AND C_ADDRESS LIKE '%' || #{sigunguName} || '%'
    	GROUP BY C.C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID
@@ -67,10 +66,10 @@
    <!-- 가격대 2번 정렬 -->
     <select id="selectListOrderMoney2" resultMap="company2ResultSet">
    	SELECT DISTINCT C.C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID, AVG(GRADE) as GRADE
-   	FROM COMPANY C, BOARD B, ROOM R
-   	WHERE C.C_ORIGINID = B.ORIGIN_ID
-   	AND C.C_ID = R.C_ID
-   	AND R_PRICE BETWEEN 10000 AND 99000
+   	FROM COMPANY C
+	LEFT JOIN BOARD B ON (C.C_ORIGINID = B.ORIGIN_ID)
+	JOIN ROOM R ON (C.C_ID = R.C_ID)
+   	WHERE R_PRICE BETWEEN 10000 AND 99000
    	AND C_ADDRESS LIKE '%' || #{areaName} || '%'
    	AND C_ADDRESS LIKE '%' || #{sigunguName} || '%'
    	GROUP BY C.C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID
@@ -80,10 +79,10 @@
    <!-- 가격대 3번 정렬 -->
    <select id="selectListOrderMoney3" resultMap="company2ResultSet">
    	SELECT DISTINCT C.C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID, AVG(GRADE) as GRADE
-   	FROM COMPANY C, BOARD B, ROOM R
-   	WHERE C.C_ORIGINID = B.ORIGIN_ID
-   	AND C.C_ID = R.C_ID
-   	AND R_PRICE > 100000
+   	FROM COMPANY C
+	LEFT JOIN BOARD B ON (C.C_ORIGINID = B.ORIGIN_ID)
+	JOIN ROOM R ON (C.C_ID = R.C_ID)
+   	WHERE R_PRICE > 100000
    	AND C_ADDRESS LIKE '%' || #{areaName} || '%'
    	AND C_ADDRESS LIKE '%' || #{sigunguName} || '%'
    	GROUP BY C.C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID
@@ -93,10 +92,9 @@
    <!-- 평점 2점 이상 정렬 -->
    <select id="selectListOrderByTwoAvg" resultMap="company2ResultSet">
    	SELECT C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID, AVG(GRADE) as GRADE
-   	FROM BOARD B, COMPANY C
-   	WHERE C.C_ORIGINID = B.ORIGIN_ID
-   	AND BOARD_TYPE = 1
-   	AND C_ADDRESS LIKE '%' || #{areaName} || '%'
+   	FROM COMPANY C
+   	LEFT JOIN BOARD B ON (C.C_ORIGINID = B.ORIGIN_ID)
+   	WHERE C_ADDRESS LIKE '%' || #{areaName} || '%'
    	AND C_ADDRESS LIKE '%' || #{sigunguName} || '%'
    	AND GRADE >= 2
    	GROUP BY C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID
@@ -106,10 +104,9 @@
    <!-- 평점 3점 이상 정렬 -->
    <select id="selectListOrderByThreeAvg" resultMap="company2ResultSet">
    	SELECT C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID, AVG(GRADE) as GRADE
-   	FROM BOARD B, COMPANY C
-   	WHERE C.C_ORIGINID = B.ORIGIN_ID
-   	AND BOARD_TYPE = 1
-   	AND C_ADDRESS LIKE '%' || #{areaName} || '%'
+   	FROM COMPANY C
+   	LEFT JOIN BOARD B ON (C.C_ORIGINID = B.ORIGIN_ID)
+   	WHERE C_ADDRESS LIKE '%' || #{areaName} || '%'
    	AND C_ADDRESS LIKE '%' || #{sigunguName} || '%'
    	AND GRADE >= 3
    	GROUP BY C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID
@@ -119,10 +116,9 @@
    <!-- 평점 4점 이상 정렬 -->
    <select id="selectListOrderByFourAvg" resultMap="company2ResultSet">
    	SELECT C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID, AVG(GRADE) as GRADE
-   	FROM BOARD B, COMPANY C
-   	WHERE C.C_ORIGINID = B.ORIGIN_ID
-   	AND BOARD_TYPE = 1
-   	AND C_ADDRESS LIKE '%' || #{areaName} || '%'
+   	FROM COMPANY C
+   	LEFT JOIN BOARD B ON (C.C_ORIGINID = B.ORIGIN_ID)
+   	WHERE C_ADDRESS LIKE '%' || #{areaName} || '%'
    	AND C_ADDRESS LIKE '%' || #{sigunguName} || '%'
    	AND GRADE >= 4
    	GROUP BY C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID
@@ -132,10 +128,9 @@
    <!-- 평점 4점 이상 정렬 -->
    <select id="selectListOrderByFiveAvg" resultMap="company2ResultSet">
    	SELECT C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID, AVG(GRADE) as GRADE
-   	FROM BOARD B, COMPANY C
-   	WHERE C.C_ORIGINID = B.ORIGIN_ID
-   	AND BOARD_TYPE = 1
-   	AND C_ADDRESS LIKE '%' || #{areaName} || '%'
+   	FROM COMPANY C
+   	LEFT JOIN BOARD B ON (C.C_ORIGINID = B.ORIGIN_ID)
+   	WHERE C_ADDRESS LIKE '%' || #{areaName} || '%'
    	AND C_ADDRESS LIKE '%' || #{sigunguName} || '%'
    	AND GRADE >= 4.5
    	GROUP BY C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID

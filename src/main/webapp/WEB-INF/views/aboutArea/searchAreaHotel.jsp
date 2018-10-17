@@ -17,7 +17,7 @@
 	#tm-home-box-2-link-1{width:50px;}
 	#tm-home-box-2-link-2{width:445px; display:inline-block;}
 	#dibsBtn{padding:20px; width:55px; height:60px;}
-	#infoTextArea{height:175px; padding:10px 20px 44px; overflow:auto; text-align:left; }
+	#infoTextArea{height:175px; padding:10px 20px 44px; text-align:left; }
 	.img-responsive1{width:250px; height:225px;}
 	.oderByClass{cursor:pointer;}
 </style>
