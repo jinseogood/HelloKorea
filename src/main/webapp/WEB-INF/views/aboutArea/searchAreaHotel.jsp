@@ -411,6 +411,9 @@
 							output += "<div class='tm-home-box-3' id='detailHover'>";
 							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+","+cid+");'>";
 							/* if(data[i].firstimage == null){
+
+								//hotelImageLoad(contentid);
+
 								$.ajax({
 									url:"hotelImageLoad.sub",
 									type:"get",

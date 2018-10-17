@@ -179,7 +179,7 @@
 						output += "<h3>숙박정보</h3><br>";
 						output += "ㆍ <b>문의 및 안내</b> : "+myData.infocenterlodging+"<br>";
 						output += "ㆍ <b>규 모</b> : "+myData.scalelodging+"<br>";
-						output += "ㆍ <b>객실 수</b> : "+myData.roomcount+"<br>";
+						//output += "ㆍ <b>객실 수</b> : "+myData.roomcount+"<br>";
 						output += "ㆍ <b>객실 유형</b> : "+myData.roomtype+"<br>";
 						output += "ㆍ <b>주차 가능</b> : "+myData.parkinglodging+"<br>";
 						output += "ㆍ <b>조리 가능</b> : "+myData.chkcooking+"<br>";
@@ -226,16 +226,17 @@
 									rType = result[i].rType;
 									output = "";
 									output += "<tr class='detailRow'>";
-									if(myData[i].roomimg1 == null){
+									/* if(myData[i].roomimg1 == null){
 										output += "<td class='detailContent detailContent1'><img src='${contextPath}/resources/img/noImage.gif' class='roomIngTd' />";
 									}else{ 
 										output += "<td class='detailContent detailContent1'><img src="+myData[i].roomimg1+" class='roomImgTd' />";
-									}
+									} */
+									output += "<td> 호텔이미지 주석중입니다.";
 									output += "</td>";
 									output += "<td>";
 									output += "<h4><b>객실명 : "+result[i].rType+"</b></h4>";
 									output += "ㆍ 객실크기 : "+myData[i].roomsize1+" 평<br>";
-									output += "ㆍ 객실수 : "+myData[i].roomcount+"<br>";
+									//output += "ㆍ 객실수 : "+myData[i].roomcount+"<br>";
 									//output += "ㆍ 기준인원 : "+myData[i].roombasecount+" (최대인원 : "+myData[i].roommaxcount+")<br>";
 									output += "ㆍ 목욕시설 : "+myData[i].roombathfacility+"<br>";
 									output += "ㆍ 욕조 : "+myData[i].roombath+"<br>";

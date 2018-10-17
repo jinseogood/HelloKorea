@@ -238,7 +238,7 @@
 						if(totalCount > 12){
 							var num = (totalCount / 12) + 0.9;
 							pOutput = "";
-							pOutput = "<li><a onclick='goFirst();'>[처음으로]</a></li>";
+							pOutput += "<li><a onclick='goFirst();'>[처음으로]</a></li>";
 							for(var pp = 1; pp < num; pp++){
 								pOutput += "<li><a onclick='goPage("+pp+");'>"+pp+"</a></li>";
 							}
