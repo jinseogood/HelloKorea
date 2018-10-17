@@ -56,14 +56,6 @@ public class AdminController {
 	@Autowired
 	private AdminService as;
 
-	//블랙리스트 해지 스케쥴러
-	//매일 9시 가동
-	@Scheduled(cron="00 08 15 * * ?") 
-	 public void terminateBlacklist(){
-		//int result = as.terminateBlackList();
-	    System.out.println("call : " +new Date());
-	 }
-	 
 	//관리자 마이페이지	
 	@RequestMapping("myPageView.ad")
 	public String myPageView(){

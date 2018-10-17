@@ -507,21 +507,6 @@ public class AdminServiceImpl implements AdminService{
 		return ad.selectExpirationList(sqlSession);
 	}
 
-	//블랙리스트 해제 모듈
-	@Transactional
-	@Override
-	public int terminateBlackList() {
-		int result = 0;
-		//블랙리스트 이력에 해지이력 넣기
-		int result1 = ad.updateTerminateHistroy(sqlSession);
-		//멤버 상태 업데이트
-		int result2 = ad.updateMemberStatus2(sqlSession);
-		if(result1 > 0 && result2 > 0){
-			result = 1;
-		}
-		return result;
-	}
-
 	//엑셀 다운로드
 	@Override
 	public ArrayList<Deposit> listExcelDownload() {
