@@ -693,7 +693,7 @@ public class SubInformationController {
 	
 	
 	@RequestMapping(value="searchAreaGame.sub")
-	public void searchAreaGame(HttpServletRequest request, HttpServletResponse response, @RequestParam int areaCode, @RequestParam int sigunguCode, @RequestParam int contenttypeid) throws IOException{
+	public void searchAreaGame(HttpServletRequest request, HttpServletResponse response, @RequestParam int areaCode, @RequestParam int sigunguCode, @RequestParam int contenttypeid, @RequestParam int pageNo) throws IOException{
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
@@ -715,7 +715,7 @@ public class SubInformationController {
 		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
 		parameter = parameter + "&" + "arrange=A";
 		parameter = parameter + "&" + "numOfRows=12";
-		parameter = parameter + "&" + "pageNo=1";
+		parameter = parameter + "&" + "pageNo="+pageNo;
 		parameter = parameter + "&" + "_type=json";
 		
 		addr = addr + serviceKey + parameter;
