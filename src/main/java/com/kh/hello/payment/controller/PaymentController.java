@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.hello.common.Email;
 import com.kh.hello.common.EmailSender;
+import com.kh.hello.company.model.vo.Reservation2;
 import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.payment.model.service.PaymentService;
 import com.kh.hello.payment.model.vo.PayDetail;
@@ -238,9 +239,9 @@ public class PaymentController {
 				Payment p=ps.selectPayInfo(mId);
 				ArrayList<PayDetail> pdList=ps.selectPayDetailInfo(p.getPaId());
 				
-				pdList.get(0).setPrice(paymentAmount);
+				//pdList.get(0).setPrice(paymentAmount);
 				
-				SellerReservation r=ps.selectReservation(p.getPaId());
+				Reservation2 r=ps.selectReservation(p.getPaId());
 				
 				/*int orderNum=1;
 				String orderDate=pdList.get(0).getPdDate();
@@ -263,6 +264,7 @@ public class PaymentController {
 				
 				model.addAttribute("p", p);
 				model.addAttribute("pdList", pdList);
+				model.addAttribute("r", r);
 				
 				return "payment/confirmPayment";
 			}

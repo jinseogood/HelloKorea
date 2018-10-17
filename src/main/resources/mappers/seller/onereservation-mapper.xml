@@ -14,13 +14,13 @@
 		<result property="oRCount" column="O_RCOUNT"/>
 		<result property="rId" column="R_ID"/>
 		<result property="rType" column="R_TYPE"/>
-		<result property="price" column="R_PRICE"/>
+		<result property="price" column="PRICE"/>
 		<result property="status" column="PD_TYPE"/>
 	</resultMap>
 	
 	<!-- 예약 상세 조회 -->	
 	<select id="selectOneReservation" resultMap="selleronereservationResultSet" parameterType="_int">
-		SELECT O_ID, C_NAME, TO_CHAR(R_SDATE, 'YYYY-MM-DD') R_SDATE, TO_CHAR(R_EDATE, 'YYYY-MM-DD') R_EDATE, PA_NAME, PEOPLE, O_RCOUNT, R_ID, R_TYPE, R_PRICE, PD_TYPE
+		SELECT O_ID, C_NAME, TO_CHAR(R_SDATE, 'YYYY-MM-DD') R_SDATE, TO_CHAR(R_EDATE, 'YYYY-MM-DD') R_EDATE, PA_NAME, PEOPLE, O_RCOUNT, R_ID, R_TYPE, PRICE, PD_TYPE
 		FROM RESERVATION
 		JOIN PAYMENT USING(PA_ID)
 		JOIN PAY_DETAIL USING(PA_ID)

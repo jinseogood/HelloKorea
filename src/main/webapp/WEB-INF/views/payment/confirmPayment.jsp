@@ -99,7 +99,7 @@
 			<table id="orderInfo">
 				<tr>
 					<th>주문번호</th>
-					<td width="250px">1</td>
+					<td width="250px">${ r.oid }</td>
 					<th width="150px">주문일자</th>
 					<td width="250px">${ pdList.get(0).pdDate }</td>
 				</tr>
@@ -120,10 +120,10 @@
 					<th width="200px">예약 일자</th>
 				</tr>
 				<tr>
-					<td style="border-right:1px solid lightgray;">abc</td>
-					<td style="border-right:1px solid lightgray;">abc</td>
-					<td style="text-align:center; border-right:1px solid lightgray;">${ pdList.get(0).price }</td>
-					<td style="text-align:center;">2018-10-08 - 2018-10-20</td>
+					<td style="border-right:1px solid lightgray;">${ r.cName }</td>
+					<td style="border-right:1px solid lightgray;">${ r.roomName }</td>
+					<td style="text-align:center; border-right:1px solid lightgray;">₩ ${ pdList.get(0).price }</td>
+					<td style="text-align:center;">${ r.rSdate } - ${ r.rEdate }</td>
 				</tr>
 			</table>
 			<br>

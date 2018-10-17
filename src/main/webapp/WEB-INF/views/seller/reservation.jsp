@@ -183,7 +183,7 @@
 					</c:if>
 					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 						<c:if test="${ p eq pi.currentPage }">
-							<li><a href="#">${ p }</a></li>	
+							<li><a href="#" style="background-color:#ddd;">${ p }</a></li>	
 						</c:if>
 						<c:if test="${ p ne pi.currentPage }">
 							<c:url var="listCheck" value="reservation.sell">
@@ -238,8 +238,8 @@
 		$(function(){
 			$("#datePicker").hide();
 			
-			$("#reservationTable td").click(function(){
-				var oId=$("#OID").val();
+			$("#reservationTable tbody tr").click(function(){
+				var oId=$(this).children().eq(0).val();
 				
 				$(this).attr({"data-toggle":"modal", "data-target":"#reservationDetailModal"});
 				

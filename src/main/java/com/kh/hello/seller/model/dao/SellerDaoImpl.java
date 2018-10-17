@@ -29,7 +29,7 @@ public class SellerDaoImpl implements SellerDao{
 	
 	//판매자 마이페이지 메인 수익 조회
 	@Override
-	public double selectReservationPrice(int mId, SqlSessionTemplate sqlSession) {
+	public int selectReservationPrice(int mId, SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("SellerReservation.selectReservationPrice", mId);
 	}
 	

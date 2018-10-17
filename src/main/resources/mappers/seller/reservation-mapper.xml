@@ -14,13 +14,27 @@
 		<result property="status" column="PD_TYPE"/>
 	</resultMap>
 	
+	<resultMap type="Reservation2" id="reservation2ResultSet">
+      <id property="oid" column="O_ID"/>
+      <result property="rSdate" column="R_SDATE"/>
+      <result property="rEdate" column="R_EDATE"/>
+      <result property="people" column="PEOPLE"/>
+      <result property="oRcount" column="O_RCOUNT"/>
+      <result property="rid" column="R_ID"/>
+      <result property="paId" column="PA_ID"/>
+      <result property="roomName" column="R_TYPE"/>
+      <result property="cAddress" column="C_ADDRESS"/>
+      <result property="cName" column="C_NAME"/>
+      <result property="price" column="R_PRICE"/>
+   </resultMap>
+	
 	<!-- 예약 내역 전체 조회 리스트 카운트 -->
 	<select id="getReservationListCount" resultType="_int" parameterType="_int">
 		SELECT COUNT(*)
 		FROM RESERVATION
 		JOIN PAYMENT USING(PA_ID)
 		JOIN PAY_DETAIL USING(PA_ID)
-		WHERE O_ID = (SELECT O_ID
+		WHERE O_ID IN (SELECT O_ID
         		      FROM RESERVATION
               		  JOIN ROOM USING(R_ID)
               		  JOIN COMPANY USING(C_ID)
@@ -36,7 +50,7 @@
 		JOIN PAY_DETAIL USING(PA_ID)
         JOIN ROOM USING(R_ID)
         JOIN COMPANY USING(C_ID)
-		WHERE O_ID = (SELECT O_ID
+		WHERE O_ID IN (SELECT O_ID
 					  FROM RESERVATION
 					  JOIN ROOM USING(R_ID)
 					  JOIN COMPANY USING(C_ID)
@@ -51,7 +65,7 @@
 		FROM RESERVATION
 		JOIN PAYMENT USING(PA_ID)
 		JOIN PAY_DETAIL USING(PA_ID)
-		WHERE O_ID = (SELECT O_ID
+		WHERE O_ID IN (SELECT O_ID
 					  FROM RESERVATION
 					  JOIN ROOM USING(R_ID)
 					  JOIN COMPANY USING(C_ID)
@@ -69,7 +83,7 @@
 		JOIN PAY_DETAIL USING(PA_ID)
         JOIN ROOM USING(R_ID)
         JOIN COMPANY USING(C_ID)
-		WHERE O_ID = (SELECT O_ID
+		WHERE O_ID IN (SELECT O_ID
 					  FROM RESERVATION
 					  JOIN ROOM USING(R_ID)
 					  JOIN COMPANY USING(C_ID)
@@ -86,7 +100,7 @@
 		FROM RESERVATION
 		JOIN PAYMENT USING(PA_ID)
 		JOIN PAY_DETAIL USING(PA_ID)
-		WHERE O_ID = (SELECT O_ID
+		WHERE O_ID IN (SELECT O_ID
 					  FROM RESERVATION
 					  JOIN ROOM USING(R_ID)
 					  JOIN COMPANY USING(C_ID)
@@ -110,7 +124,7 @@
 		JOIN PAY_DETAIL USING(PA_ID)
         JOIN ROOM USING(R_ID)
         JOIN COMPANY USING(C_ID)
-		WHERE O_ID = (SELECT O_ID
+		WHERE O_ID IN (SELECT O_ID
 					  FROM RESERVATION
 					  JOIN ROOM USING(R_ID)
 					  JOIN COMPANY USING(C_ID)
@@ -134,21 +148,31 @@
 		WHERE O_ID = #{oId}
 	</update>
 	
+	<!-- 예약 확인 창 예악 정보 조회 -->
+	<select id="selectReservation" resultMap="reservation2ResultSet" parameterType="_int">
+		SELECT O_ID, C_NAME, R_TYPE, R_SDATE, R_EDATE
+		FROM RESERVATION
+		JOIN ROOM USING(R_ID)
+		JOIN COMPANY USING(C_ID)
+		WHERE PA_ID = #{paId}
+	</select>
+	
 	<!-- 판매자 마이페이지 메인 예약 건수 조회 -->
 	<select id="selectReservationCount" resultType="_int" parameterType="_int">
 		SELECT NVL(COUNT(*), 0)
 		FROM RESERVATION
-		WHERE O_ID = (SELECT O_ID
+		WHERE O_ID IN (SELECT O_ID
 					  FROM RESERVATION
 					  JOIN ROOM USING(R_ID)
 					  JOIN COMPANY USING(C_ID)
 					  WHERE M_ID = #{mId}
+					  AND PA_ID IS NOT NULL
 					  AND TO_CHAR(R_SDATE, 'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM')
 					  AND TO_CHAR(R_EDATE, 'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM'))
 	</select>
 	
 	<!-- 판매자 마이페이지 메인 수익 조회 -->
-	<select id="selectReservationPrice" resultType="_double" parameterType="_int">
+	<select id="selectReservationPrice" resultType="_int" parameterType="_int">
 		SELECT NVL(SUM(PRICE), 0)
 		FROM PAY_DETAIL
 		JOIN PAYMENT USING(PA_ID)

@@ -2,6 +2,7 @@ package com.kh.hello.payment.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.hello.company.model.vo.Reservation2;
 import com.kh.hello.payment.model.vo.PayDetail;
 import com.kh.hello.payment.model.vo.Payment;
 import com.kh.hello.seller.model.vo.SellerReservation;
@@ -21,7 +22,7 @@ public interface PaymentService {
 	int updateReservation(int oId);
 
 	//결제 확인 창에 보여줄 예약 정보 조회
-	SellerReservation selectReservation(int paId);
+	Reservation2 selectReservation(int paId);
 
 	//회원 포인트 조회
 	int selectUserPoint(int mId);
