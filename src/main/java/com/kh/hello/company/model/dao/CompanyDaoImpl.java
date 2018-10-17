@@ -27,8 +27,12 @@ public class CompanyDaoImpl implements CompanyDao {
 
 //	객실주문 insert.
 	@Override
-	public int insertReservation(SqlSessionTemplate sqlSession, Reservation2 reservation) {
-		return sqlSession.insert("Reservation2.insertReservation", reservation);
+	public Reservation2 insertReservation(SqlSessionTemplate sqlSession, Reservation2 reservation) {
+		System.out.println("DAO까지 온 reservation : " + reservation);
+		sqlSession.insert("Reservation2.insertReservation", reservation);
+		Reservation2 res = new Reservation2();
+		res = sqlSession.selectOne("Reservation2.selectOneReservation", reservation);
+		return res;
 	}
 
 //	객실 insert 후 currval 구해오기.
@@ -85,6 +89,29 @@ public class CompanyDaoImpl implements CompanyDao {
 	@Override
 	public ArrayList<Company2> selectOrderByGrade(SqlSessionTemplate sqlSession, Company2 cp) {
 		return (ArrayList)sqlSession.selectList("Company2.selectListOrderByGrade", cp);
+	}
+
+//	평점 2점이상 조회
+	@Override
+	public ArrayList<Company2> selectOrderByTwoAvg(SqlSessionTemplate sqlSession, Company2 cp) {
+		return (ArrayList)sqlSession.selectList("Company2.selectListOrderByTwoAvg", cp);
+	}
+
+//	평점 3점이상 조회
+	@Override
+	public ArrayList<Company2> selectOrderByThreeAvg(SqlSessionTemplate sqlSession, Company2 cp) {
+		return (ArrayList)sqlSession.selectList("Company2.selectListOrderByThreeAvg", cp);
+	}
+
+//	평점 4점이상 조회
+	@Override
+	public ArrayList<Company2> selectOrderByFourAvg(SqlSessionTemplate sqlSession, Company2 cp) {
+		return (ArrayList)sqlSession.selectList("Company2.selectListOrderByFourAvg", cp);
+	}
+
+	@Override
+	public ArrayList<Company2> selectOrderByFiveAvg(SqlSessionTemplate sqlSession, Company2 cp) {
+		return (ArrayList)sqlSession.selectList("Company2.selectListOrderByFiveAvg", cp);
 	}
 
 

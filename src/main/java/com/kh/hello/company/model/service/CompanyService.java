@@ -28,6 +28,14 @@ public interface CompanyService {
 
 	ArrayList<Company2> selectOrderByGrade(Company2 cp);
 
+	ArrayList<Company2> selectOrderByTwoAvg(Company2 cp);
+
+	ArrayList<Company2> selectOrderByThreeAvg(Company2 cp);
+
+	ArrayList<Company2> selectOrderByFourAvg(Company2 cp);
+
+	ArrayList<Company2> selectOrderByFiveAvg(Company2 cp);
+
 
 
 

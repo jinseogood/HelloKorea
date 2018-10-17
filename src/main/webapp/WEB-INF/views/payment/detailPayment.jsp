@@ -488,8 +488,6 @@
 	
 	<jsp:include page="../common/footer.jsp"/>
 	<script>
-	console.log("${list[0]}");
-	console.log("${list[1]}");
 		$(function(){
 			
 			$("#fnameWTEXT").hide();

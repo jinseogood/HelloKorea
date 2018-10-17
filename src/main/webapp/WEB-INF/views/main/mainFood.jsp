@@ -423,6 +423,7 @@
 					if(sigunguCode == 0 && cat3 == 0){
 						location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
 					}else{
+						cat3 = "";
 						location.href="${contextPath}/areaFoodView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&cat3="+cat3;
 					}
 				}else if(areaCode == 3){

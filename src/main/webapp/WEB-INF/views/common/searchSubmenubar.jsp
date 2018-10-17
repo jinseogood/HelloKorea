@@ -77,6 +77,11 @@
 				}else{
 					sigunguCode = sessionStorage.getItem("sigunguCode");
 				}
+				if(sessionStorage.getItem("cat3") != ""){
+					sessionStorage.removeItem("cat3");
+					sessionStorage.setItem("cat3", "");
+					cat3 = sessionStorage.getItem("cat3");
+				}
 				
 				location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 			}
