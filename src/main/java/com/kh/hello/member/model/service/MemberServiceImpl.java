@@ -156,6 +156,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
+	@Override
+	public int insertGoogole(Member m) {
+		// TODO Auto-generated method stub
+		return md.insertGoogole(m,sqlSession);
+	}
+
+
 
 
 
