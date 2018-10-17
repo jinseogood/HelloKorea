@@ -51,9 +51,6 @@ public class CompanyManageController {
 		//수익 조회
 		double totalPrice=ss.selectReservationPrice(m.getmId());
 		
-		System.out.println("reservationCount : " + reservationCount);
-		System.out.println("totalPrice : " + totalPrice);
-		
 		if(reservationCount >= 0 && totalPrice >= 0){
 			model.addAttribute("rCount", reservationCount);
 			model.addAttribute("tPrice", totalPrice);
@@ -775,7 +772,7 @@ public class CompanyManageController {
 	//수익 관리
 	@RequestMapping("manageRevenue.sell")
 	public String manageRevenue(Model model, HttpServletRequest request, PageInfo p, String searchParam, String searchWord, String fromDate, String toDate){
-		/*Member m=(Member)request.getSession().getAttribute("loginUser");
+		Member m=(Member)request.getSession().getAttribute("loginUser");
 		
 		if(p.getCurrentPage() == 0){
 			p.setCurrentPage(1);
@@ -816,17 +813,17 @@ public class CompanyManageController {
 			list=ss.selectSearchWordRevenueList(m.getmId(), r, pi);
 		}
 			
-		for(int i=0;i<list.size();i++){
+		/*for(int i=0;i<list.size();i++){
 			if(list.get(i).getStatus().equals("P")){
 				list.get(i).setStatus("입금대기");
 			}
 			else if(list.get(i).getStatus().equals("R")){
 				list.get(i).setStatus("입금완료");
 			}
-		}
-			
+		}*/
+		
 		model.addAttribute("list", list);
-		model.addAttribute("pi", pi);*/
+		model.addAttribute("pi", pi);
 		
 		return "seller/manageRevenue";
 	}

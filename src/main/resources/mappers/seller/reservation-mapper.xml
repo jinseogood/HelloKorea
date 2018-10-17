@@ -42,6 +42,7 @@
 					  JOIN COMPANY USING(C_ID)
 					  WHERE M_ID = #{mId})
         AND PD_METHOD LIKE 'C'
+        ORDER BY R_SDATE DESC, R_EDATE DESC
 	</select>
 	
 	<!-- 예약 기간 검색 리스트 카운트 -->
@@ -76,6 +77,7 @@
 		AND TO_CHAR(R_SDATE, 'YYYY-MM-DD') <![CDATA[>]]>= '${list.get(1)}'
 		AND TO_CHAR(R_EDATE, 'YYYY-MM-DD') <![CDATA[<]]>= '${list.get(2)}'
 		AND PD_METHOD LIKE 'C'
+		ORDER BY R_SDATE DESC, R_EDATE DESC
 	</select>
 	
 	<!-- 예약 검색 내역 리스트 카운트 -->
@@ -122,6 +124,7 @@
 			</otherwise>
 		</choose>
 		AND PD_METHOD LIKE 'C'
+		ORDER BY R_SDATE DESC, R_EDATE DESC
 	</select>
 	
 	<!-- 예약 정보에 결제 번호 추가 -->

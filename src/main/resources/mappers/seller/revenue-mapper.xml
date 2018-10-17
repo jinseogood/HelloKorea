@@ -8,23 +8,22 @@
 		<id property="dhId" column="DH_ID"/>
 		<result property="cId" column="C_ID"/>
 		<result property="cName" column="C_NAME"/>
-		<result property="rCount" column="O_ID"/>
+		<result property="rCount" column="RCOUNT"/>
 		<result property="rDate" column="D_DATE"/>
 		<result property="price" column="PRICE"/>
 	</resultMap>
 	
 	<!-- 수익 전체 조회 리스트 카운트 -->
-	<!-- <select id="getRevenueListCount" parameterType="_int">
+	<select id="getRevenueListCount" resultType="_int" parameterType="_int">
 		SELECT COUNT(*)
 		FROM DEPOSIT_HISTORY
 		JOIN COMPANY USING(C_ID)
 		WHERE M_ID = #{mId}
-		GROUP BY TO_CHAR(D_DATE, 'YYYY-MM')
-	</select> -->
+	</select>
 	
 	<!-- 수익 전체 조회 리스트 -->
-	<!-- <select id="selectRevenueList" resultMap="revenueResultSet" parameterType="_int">
-		SELECT DH_ID, C_ID, C_NAME, TO_CHAR(D_DATE, 'YYYY-MM') D_DATE, SUM(PRICE)
+	<select id="selectRevenueList" resultMap="revenueResultSet" parameterType="_int">
+		SELECT DH_ID, C_ID, C_NAME, COUNT(DISTINCT RESERVATION.O_ID) RCOUNT, TO_CHAR(D_DATE, 'YYYY-MM') D_DATE, SUM(PRICE) PRICE
 		FROM DEPOSIT_HISTORY
 		JOIN COMPANY USING(C_ID)
 		JOIN ROOM USING(C_ID)
@@ -32,16 +31,66 @@
 		JOIN PAYMENT USING(PA_ID)
 		JOIN PAY_DETAIL USING(PA_ID)
 		WHERE COMPANY.M_ID = #{mId}
-		GROUP BY DH_ID, C_ID, C_NAME, TO_CHAR(D_DATE, 'YYYY-MM'), O_ID, PA_ID
-	</select> -->
+		GROUP BY DH_ID, C_ID, O_ID, C_NAME, TO_CHAR(D_DATE, 'YYYY-MM')
+		ORDER BY D_DATE DESC
+	</select>
 	
 	<!-- 수익 기간 검색 조회 리스트 카운트 -->
+	<select id="getSearchDateRevenueListCount" resultType="_int" parameterType="arraylist">
+		SELECT COUNT(*)
+		FROM DEPOSIT_HISTORY
+		JOIN COMPANY USING(C_ID)
+		WHERE M_ID = ${list.get(0)}
+		AND TO_CHAR(D_DATE, 'YYYY-MM-DD') <![CDATA[>]]>= '${list.get(1)}'
+		AND TO_CHAR(D_DATE, 'YYYY-MM-DD') <![CDATA[<]]>= '${list.get(2)}'
+	</select>
 	
 	<!-- 수익 기간 검색 조회 리스트 -->
+	<select id="selectSearchDateRevenueList" resultMap="revenueResultSet" parameterType="arraylist">
+		SELECT DH_ID, C_ID, C_NAME, COUNT(DISTINCT RESERVATION.O_ID) RCOUNT, TO_CHAR(D_DATE, 'YYYY-MM') D_DATE, SUM(PRICE) PRICE
+		FROM DEPOSIT_HISTORY
+		JOIN COMPANY USING(C_ID)
+		JOIN ROOM USING(C_ID)
+		JOIN RESERVATION USING(R_ID)
+		JOIN PAYMENT USING(PA_ID)
+		JOIN PAY_DETAIL USING(PA_ID)
+		WHERE COMPANY.M_ID = ${list.get(0)}
+		AND TO_CHAR(D_DATE, 'YYYY-MM-DD') <![CDATA[>]]>= '${list.get(1)}'
+		AND TO_CHAR(D_DATE, 'YYYY-MM-DD') <![CDATA[<]]>= '${list.get(2)}'
+		GROUP BY DH_ID, C_ID, O_ID, C_NAME, TO_CHAR(D_DATE, 'YYYY-MM')
+		ORDER BY D_DATE DESC
+	</select>
 	
 	<!-- 수익 검색 조회 리스트 카운트 -->
+	<select id="getSearchWordRevenueListCount" resultType="_int" parameterType="arraylist">
+		SELECT COUNT(*)
+		FROM DEPOSIT_HISTORY
+		JOIN COMPANY USING(C_ID)
+		WHERE M_ID = ${list.get(0)}
+		<choose>
+			<when test="list.get(1).cName != null">
+				AND C_NAME LIKE '%' || '${list.get(1).cName}' || '%'
+			</when>
+		</choose>
+	</select>
 	
 	<!-- 수익 검색 조회 리스트 -->
-	
+	<select id="selectSearchWordRevenueList" resultMap="revenueResultSet" parameterType="arraylist">
+		SELECT DH_ID, C_ID, C_NAME, COUNT(DISTINCT RESERVATION.O_ID) RCOUNT, TO_CHAR(D_DATE, 'YYYY-MM') D_DATE, SUM(PRICE) PRICE
+		FROM DEPOSIT_HISTORY
+		JOIN COMPANY USING(C_ID)
+		JOIN ROOM USING(C_ID)
+		JOIN RESERVATION USING(R_ID)
+		JOIN PAYMENT USING(PA_ID)
+		JOIN PAY_DETAIL USING(PA_ID)
+		WHERE COMPANY.M_ID = ${list.get(0)}
+		<choose>
+			<when test="list.get(1).cName != null">
+				AND C_NAME LIKE '%' || '${list.get(1).cName}' || '%'
+			</when>
+		</choose>
+		GROUP BY DH_ID, C_ID, O_ID, C_NAME, TO_CHAR(D_DATE, 'YYYY-MM')
+		ORDER BY D_DATE DESC
+	</select>
 	
 </mapper>
