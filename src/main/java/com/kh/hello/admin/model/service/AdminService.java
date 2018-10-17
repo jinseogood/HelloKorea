@@ -2,10 +2,10 @@ package com.kh.hello.admin.model.service;
       
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.hello.admin.model.vo.Approval;
 import com.kh.hello.admin.model.vo.Blacklist;
@@ -25,7 +25,7 @@ import com.kh.hello.admin.model.vo.Report;
 import com.kh.hello.admin.model.vo.Reservation;
 import com.kh.hello.admin.model.vo.SalesStatistics;
 import com.kh.hello.message.model.vo.Message;
-   
+@Transactional   
 public interface AdminService {
 
 	int getReservationListCount();
