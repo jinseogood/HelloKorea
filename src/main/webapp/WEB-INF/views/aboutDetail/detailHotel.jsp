@@ -947,8 +947,18 @@
 							output += "<div class='row line_b'>";
 							output += "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-12' style = 'height:220px'>";
 							output += "<div class='tm-about-box-1' style = 'height:220px; padding:10px 10px;'>";
-							output += "<a href='#'><img src='${ contextPath }/resources/img/about-4.jpg' alt='img' class='tm-about-box-1-img' style = 'margin:0 auto 10px;'></a>";
+							output += "<a onclick = member_info(this);><img src='${ contextPath }/resources/img/about-4.jpg' alt='img' class='tm-about-box-1-img' style = 'margin:0 auto 10px;'></a>";
 							output += "<h3 class='tm-about-box-1-title' style = 'margin-bottom:5px;'>Songs <span>( GOD )</span></h3>";
+							output += "<div class = 'member_info' style = 'visibility:hidden; position:absolute; background-color:lightgray; left:-150px; top:-15px; width:200px; height:200px; z-index:999;'>";
+							output += "<div><h3>"+review[i].nickname+"</h3></div>";
+							output += "<div style = 'text-align:right;'><button type = 'button'>메세지</button></div>";
+							output += "<div class='info' style = 'text-align:left;'>회원가입시기 : "+review[i].create_date+"<br>";
+							output += "흥미 : "+review[i].interesting+", 국적 : "+review[i].national+"<br>";
+							output += "<i class='fa fa-thumbs-o-up' style = 'font-size:13px;'></i> "+review[i].help_count+"건의 도움되는 리뷰, 댓글<br>";
+							output += "<i class='fas fa-pen-square'></i> "+review[i].board_count+"건 포스팅<br>";
+							output += "<i class='fas fa-pen'></i> "+review[i].reply_count+"건의 도움글 작성";
+							output += "</div>";
+							output += "</div>";
 							output += "<div class='gray-text'>";
 							output += "<a href='#' class='tm-social-icon'><i class='fa fa-twitter'></i></a>";
 							output += "<a href='#' class='tm-social-icon'><i class='fa fa-facebook'></i></a>";
@@ -958,6 +968,7 @@
 							output += "</div>";
 							output += "</div>";
 							output += "<div class='col-lg-9 col-md-9 col-sm-6 col-xs-12 line_l' style = 'height:220px; padding-bottom:10px;' ><br>";
+							
 							output += "<div><span class='StarBar'>";
 							
 							if(review[i].grade == 0.0){
@@ -1085,6 +1096,15 @@
 					console.log(data);
 				}
 			});
+		}
+
+		function member_info(element){
+		
+			if($(element).parent().children().eq(2).css("visibility") == "visible"){
+				$(element).parent().children().eq(2).css("visibility", "hidden");
+			}else{
+				$(element).parent().children().eq(2).css("visibility", "visible");
+			}	
 		}
 		
 		function goPrev(page){
