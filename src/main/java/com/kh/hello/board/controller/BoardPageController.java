@@ -186,6 +186,7 @@ public class BoardPageController {
 		
 		for(int i = 0 ; i < list.size() ; i++){
 			list.get(i).setrCount(bs.selectReplyCount(list.get(i).getBid()));
+			list.get(i).setCreate_date(list.get(i).getCreate_date().substring(10));
 		}
 		
 		mv.addObject("list", list);
