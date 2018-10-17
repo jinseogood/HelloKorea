@@ -1,28 +1,16 @@
 package com.kh.hello.admin.model.service;
        
 import java.io.File;
-import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.ibatis.session.ResultContext;
-import org.apache.ibatis.session.ResultHandler;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.hello.admin.controller.ExcelRead;
@@ -41,13 +29,13 @@ import com.kh.hello.admin.model.vo.NationalStatistics;
 import com.kh.hello.admin.model.vo.PlatformStatistics;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
-import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.admin.model.vo.Question;
 import com.kh.hello.admin.model.vo.Report;
 import com.kh.hello.admin.model.vo.Reservation;
 import com.kh.hello.admin.model.vo.SalesStatistics;
 import com.kh.hello.message.model.vo.Message;
 @Service
+@Transactional
 public class AdminServiceImpl implements AdminService{
 	@Autowired
     private SqlSessionTemplate sqlSession;
@@ -153,7 +141,7 @@ public class AdminServiceImpl implements AdminService{
 
 	//신고 블랙리스트 등록
 	@Override
-	@Transactional(propagation=Propagation.REQUIRED, isolation=Isolation.SERIALIZABLE, rollbackFor={Exception.class})
+	@Transactional
 	public int updateBlacklist(Report r, Blacklist b) {
         int result = -99;
 		
@@ -277,7 +265,7 @@ public class AdminServiceImpl implements AdminService{
 
 	//문의 답변 발송
 	@Override
-	@Transactional(propagation=Propagation.REQUIRED, isolation=Isolation.SERIALIZABLE, rollbackFor={Exception.class})
+	@Transactional
 	public int insertAnswerMsg(Message m) {
 		int result= -99;
 		int result1 = ad.insertAnswerMsg(sqlSession, m);
@@ -366,7 +354,7 @@ public class AdminServiceImpl implements AdminService{
 
 	//업체 해지
 	@Override
-	@Transactional(propagation=Propagation.REQUIRED, isolation=Isolation.SERIALIZABLE, rollbackFor={Exception.class})
+	@Transactional
 	public int terminateCompany(String crId, String content) {
 		int result= -99;
 		int result1 = ad.updateCompanyStatus(sqlSession, crId);
@@ -520,7 +508,7 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	//블랙리스트 해제 모듈
-	@Transactional(propagation=Propagation.REQUIRED, isolation=Isolation.SERIALIZABLE, rollbackFor={Exception.class})
+	@Transactional
 	@Override
 	public int terminateBlackList() {
 		int result = 0;
