@@ -110,7 +110,6 @@ public interface AdminService {
 	int selectUnapprovedCompanyCount();
 	ArrayList<CompanyDetails> selectExpirationList();
 	
-	int terminateBlackList();
 	ArrayList<Deposit> listExcelDownload();
 	void excelUpload(File destFile) throws Exception;
 

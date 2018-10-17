@@ -117,8 +117,6 @@ public interface AdminDao {
 	ArrayList<CompanyDetails> selectExpirationList(SqlSessionTemplate sqlSession);
 	
 	
-	int updateTerminateHistroy(SqlSessionTemplate sqlSession);
-	int updateMemberStatus2(SqlSessionTemplate sqlSession);
 	ArrayList<Deposit> listExcelDownload(SqlSessionTemplate sqlSession);
 	void excelUpload(SqlSessionTemplate sqlSession, ArrayList<Deposit> list);
 	
