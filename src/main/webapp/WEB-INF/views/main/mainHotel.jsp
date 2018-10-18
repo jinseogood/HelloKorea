@@ -1,6 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -1084,8 +1085,8 @@
 					<a class="themeAreaSelect" onclick="shoppingTheme();">쇼핑</a> | 
 					<a class="themeAreaSelect" onclick="beautyTheme();">뷰티</a> | 
 					<a class="themeAreaSelect" onclick="classicTheme();">전통</a> | 
-					<a class="themeAreaSelect" onclick="leisureTheme();">레져</a> | 
-					<a class="themeAreaSelect" onclick="koreaWaveTheme();">한류</a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<a class="themeAreaSelect" onclick="leisureTheme();">레져</a> <!-- | 
+					<a class="themeAreaSelect" onclick="koreaWaveTheme();">한류</a> -->&nbsp;&nbsp;&nbsp;&nbsp;
 				</div><br>
 			</div>
 			<div class="col-lg-6">
@@ -1153,13 +1154,72 @@
 		<div class="col-lg-12" align="center">
 			<input type="button" class="btn themeBtn" value="테마여행 더보기" onclick="location.href='${contextPath}/themeMain'">
 		</div>
-		
+		<c:if test="${!empty sessionScope.loginUser}">
+		<script>
+		function btnGood(contenttypeid, contentid, cid){
+			console.log(contenttypeid);
+			console.log(contentid);
+			
+				$.ajax({
+					url:"dibsHotel.good",
+					type:"GET",
+					data:{contenttypeid:contenttypeid, contentid:contentid, cid:cid},
+					success:function(data){
+						// 1일시, 이미 찜한 목록 => delete요청.
+						// 0일시, 새로 찜에 추가 => insert요청.
+						if(data > 0){
+							deleteDibsHotel(contentid, cid);
+						}else{
+							insertDibsHotel(contentid, cid);
+						}
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+		}
+		</script>
+		</c:if>
+		<c:if test="${empty sessionScope.loginUser}">
+		<script>
+			function btnGood(contenttypeid, contentid, cid){
+				alert("로그인이 필요한 서비스입니다.");
+			}
+		</script>
+		</c:if>
 		<script>
 		
-			function btnGood(){
-				var contentId = $(this).parent().children("input").val();
-				console.log(contentId);
-			}
+		function insertDibsHotel(contentid, cid){
+			$.ajax({
+				url:"insertDibsHotel.good",
+				type:"GET",
+				data:{contenttypeid:contenttypeid, contentid:contentid, cid:cid},
+				success:function(data){
+					if(data > 0){
+						alert("찜 목록에 추가되었습니다.");
+					}
+				},
+				error:function(data){
+					console.log(data);
+				}
+			});
+		}
+		
+		function deleteDibsHotel(contentid){
+			$.ajax({
+				url:"deleteDibsHotel.good",
+				type:"GET",
+				data:{contenttypeid:contenttypeid, contentid:contentid},
+				success:function(data){
+					alert("찜 목록에서 삭제되었습니다.");
+					
+				},
+				error:function(data){
+					console.log(data);
+				}
+			});
+		}
+			
 		
 			$(function(){
 				/* $.ajax({
@@ -1401,8 +1461,8 @@
 					error:function(data){
 						console.log(data);
 					}
-				}); */
-			}
+				});
+			} */
 			
 			function beautyTheme(){
 				/* $.ajax({
