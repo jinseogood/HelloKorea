@@ -1,0 +1,25 @@
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Good">
+   
+   <resultMap type="Good2" id="Good2ResultSet">
+   	<id property="lid" column="L_ID"/>
+   	<result property="lType" column="LTYPE"/>
+   	<result property="originId" column="ORIGIN_ID"/>
+   	<result property="endDate" column="END_DATE"/>
+   	<result property="mid" column="M_ID"/>
+   </resultMap>
+   
+   <!-- 동일한 찜 있는지 확인 -->
+   <select id="selectOneDibsCheck" parameterType="Good2" resultType="_int">
+   	SELECT COUNT(*)
+   	FROM GOOD
+   	WHERE M_ID = #{mid}
+   	AND ORIGIN_ID = #{originId}
+   </select>
+	
+	
+</mapper>

@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Good">
+   
    <resultMap type="Good" id="GoodResultSet">
    	<id property="lid" column="L_ID"/>
    	<result property="lType" column="L_TYPE" />
@@ -30,7 +31,6 @@
    	WHERE M_ID = #{mid}
    	AND ORIGIN_ID = #{originId}
    </delete>
-   
 	
 	
 </mapper>

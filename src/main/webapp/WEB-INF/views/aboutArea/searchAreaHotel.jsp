@@ -444,8 +444,6 @@
 								dataType:"json",
 								async:false,
 								success:function(ddate){
-									console.log("오버뷰");
-									console.log(ddate);
 									var overview = ddate.response.body.items.item.overview;
 									var reg = /<br\s*[\/]?>/g;
 										overview = overview.replace(reg, " ");
@@ -794,8 +792,6 @@
 			}
 			
 		
-			var dCount = 1;
-			var dCount1 = 1;
 			$(function(){
 				
 				searchHotelPage();
