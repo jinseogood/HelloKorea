@@ -184,12 +184,12 @@ public class PaymentController {
 				if(orderInfo[4].equals("pc")){
 					PayDetail pd=new PayDetail();
 					pd.setPdType("P");
-					pd.setPrice(Double.parseDouble(orderInfo[7]));
+					pd.setPrice(Integer.parseInt(orderInfo[7]));
 					pd.setPdMethod("C");
 					
 					PayDetail pd2=new PayDetail();
 					pd2.setPdType("P");
-					pd2.setPrice(Double.parseDouble(orderInfo[5]));
+					pd2.setPrice(Integer.parseInt(orderInfo[5]));
 					pd2.setPdMethod("P");
 					
 					pdList.add(pd);
@@ -199,7 +199,7 @@ public class PaymentController {
 				else{
 					PayDetail pd=new PayDetail();
 					pd.setPdType("P");
-					pd.setPrice(Double.parseDouble(orderInfo[7]));
+					pd.setPrice(Integer.parseInt(orderInfo[7]));
 					pd.setPdMethod("C");
 					
 					pdList.add(pd);
@@ -213,6 +213,14 @@ public class PaymentController {
 					int rUpdate=ps.updateReservation(Integer.parseInt(orderInfo[6]));
 					
 					if(rUpdate > 0){
+						/*int rPoint=ps.insertPoint(Integer.parseInt(orderInfo[0]), Integer.parseInt(orderInfo[5]));
+						
+						if(rPoint > 0){
+							result=1;
+						}
+						else{
+							result=0;
+						}*/
 						result=1;
 					}
 					else{

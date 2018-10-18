@@ -60,4 +60,13 @@ public class PaymentDaoImpl implements PaymentDao{
 		return sqlSession.selectOne("Payment.selectUserPoint", mId);
 	}
 
+	//포인트 이력 추가
+	@Override
+	public int insertPoint(int mId, int price, SqlSessionTemplate sqlSession) {
+		ArrayList<Object> list=new ArrayList<Object>();
+		list.add(mId);
+		list.add(price);
+		return sqlSession.insert("PayDetail.insertPoint", list);
+	}
+
 }

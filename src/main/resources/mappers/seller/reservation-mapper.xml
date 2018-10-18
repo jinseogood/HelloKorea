@@ -175,14 +175,14 @@
 	
 	<!-- 판매자 마이페이지 메인 수익 조회 -->
 	<select id="selectReservationPrice" resultType="_int" parameterType="_int">
-		SELECT NVL(SUM(PRICE), 0)
+		SELECT NVL(ROUND(SUM(PRICE) * 0.85), 0)
 		FROM PAY_DETAIL
 		JOIN PAYMENT USING(PA_ID)
 		JOIN RESERVATION USING(PA_ID)
 		JOIN ROOM USING(R_ID)
 		JOIN COMPANY USING(C_ID)
 		WHERE COMPANY.M_ID = #{mId}
-		AND TO_CHAR(PD_DATE, 'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM')
+		AND TO_CHAR(R_EDATE, 'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM')
 	</select>
 	
 </mapper>

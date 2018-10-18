@@ -32,4 +32,7 @@ public interface PaymentDao {
 	//회원 포인트 조회
 	int selectUserPoint(int mId, SqlSessionTemplate sqlSession);
 
+	//포인트 이력 추가
+	int insertPoint(int mId, int point, SqlSessionTemplate sqlSession);
+
 }

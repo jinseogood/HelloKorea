@@ -74,4 +74,10 @@ public class PaymentServiceImpl implements PaymentService{
 		return pd.selectUserPoint(mId, sqlSession);
 	}
 
+	//포인트 이력 추가
+	@Override
+	public int insertPoint(int mId, int point) {
+		return pd.insertPoint(mId, point, sqlSession);
+	}
+
 }
