@@ -14,6 +14,8 @@ import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.seller.model.dao.SellerDao;
 import com.kh.hello.seller.model.vo.Company;
+import com.kh.hello.seller.model.vo.CompanyGoodStat;
+import com.kh.hello.seller.model.vo.CompanySaleStat;
 import com.kh.hello.seller.model.vo.OneProduct;
 import com.kh.hello.seller.model.vo.Registration;
 import com.kh.hello.seller.model.vo.RegistrationHistory;
@@ -42,6 +44,18 @@ public class SellerServiceImpl implements SellerService{
 	@Override
 	public int selectReservationPrice(int mId) {
 		return sd.selectReservationPrice(mId, sqlSession);
+	}
+	
+	//판매자 마이페이지 메인 업체 평점 통계
+	@Override
+	public ArrayList<CompanyGoodStat> selectGoodStats(int mId) {
+		return sd.selectGoodStats(mId, sqlSession);
+	}
+	
+	//판매자 마이페이지 메인 수익 통계
+	@Override
+	public ArrayList<CompanySaleStat> selectSaleStats(int mId) {
+		return sd.selectSaleStats(mId, sqlSession);
 	}
 	
 	//업체명 중복 조회

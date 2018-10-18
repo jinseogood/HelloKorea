@@ -15,6 +15,16 @@
 		<result property="companyAddress" column="C_ADDRESS"/>
 		<result property="mId" column="M_ID"/>
 	</resultMap>
+	
+	<resultMap type="CompanyGoodStat" id="companygoodstatResultSet">
+		<id property="cName" column="C_NAME"/>
+		<result property="good" column="GOOD"/>
+	</resultMap>
+	
+	<resultMap type="CompanySaleStat" id="companysalestatResultSet">
+		<id property="month" column="MONTH"/>
+		<result property="price" column="PRICE"/>
+	</resultMap>
    
 	<!-- 업체명 중복 확인 -->
 	<select id="duplicationTitle" resultType="_int" parameterType="string">
@@ -28,5 +38,23 @@
 		INSERT INTO COMPANY (C_ID, C_ORIGINID, C_TYPE, CP_RNUM, C_RNUM, C_NAME, C_PHONE, C_ADDRESS, M_ID) 
 		VALUES (SEQ_C_ID.NEXTVAL, #{contentId}, #{sellerType}, #{companyNum}, #{personalNum}, #{companyName}, #{companyPhone}, #{companyAddress}, #{mId})
 	</insert>
+	
+	<!-- 업체 평점 통계 -->
+	<select id="selectGoodStats" resultMap="companygoodstatResultSet" parameterType="_int">
+		SELECT C_NAME, AVG(GRADE) GOOD
+		FROM BOARD
+		JOIN COMPANY ON(C_ORIGINID = ORIGIN_ID)
+		WHERE COMPANY.M_ID = #{mId}
+		GROUP BY C_NAME
+	</select>
+	
+	<!-- 수익 통계 -->
+	<select id="selectSaleStats" resultMap="companysalestatResultSet" parameterType="_int">
+		SELECT TO_CHAR(D_DATE, 'MM') MONTH, D_AMOUNT PRICE
+		FROM DEPOSIT_HISTORY
+		JOIN COMPANY USING(C_ID)
+		WHERE M_ID = #{mId}
+		AND TO_CHAR(D_DATE, 'MM') = TO_CHAR(ADD_MONTHS(SYSDATE, -1), 'MM')
+	</select>
 	
 </mapper>

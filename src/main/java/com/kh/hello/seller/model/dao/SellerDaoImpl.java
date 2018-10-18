@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.seller.model.vo.Company;
+import com.kh.hello.seller.model.vo.CompanyGoodStat;
+import com.kh.hello.seller.model.vo.CompanySaleStat;
 import com.kh.hello.seller.model.vo.OneProduct;
 import com.kh.hello.seller.model.vo.Registration;
 import com.kh.hello.seller.model.vo.RegistrationHistory;
@@ -31,6 +33,18 @@ public class SellerDaoImpl implements SellerDao{
 	@Override
 	public int selectReservationPrice(int mId, SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("SellerReservation.selectReservationPrice", mId);
+	}
+	
+	//판매자 마이페이지 메인 업체 평점 통계
+	@Override
+	public ArrayList<CompanyGoodStat> selectGoodStats(int mId, SqlSessionTemplate sqlSession) {
+		return (ArrayList) sqlSession.selectList("Company.selectGoodStats", mId);
+	}
+	
+	//판매자 마이페이지 메인 수익 통계
+	@Override
+	public ArrayList<CompanySaleStat> selectSaleStats(int mId, SqlSessionTemplate sqlSession) {
+		return (ArrayList) sqlSession.selectList("Company.selectSaleStats", mId);
 	}
 	
 	//업체명 중복 조회

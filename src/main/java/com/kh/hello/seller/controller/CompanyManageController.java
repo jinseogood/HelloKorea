@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.hello.common.Attachment;
@@ -24,6 +26,8 @@ import com.kh.hello.common.PageInfo;
 import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.seller.model.service.SellerService;
 import com.kh.hello.seller.model.vo.Company;
+import com.kh.hello.seller.model.vo.CompanyGoodStat;
+import com.kh.hello.seller.model.vo.CompanySaleStat;
 import com.kh.hello.seller.model.vo.OneProduct;
 import com.kh.hello.seller.model.vo.Registration;
 import com.kh.hello.seller.model.vo.RegistrationHistory;
@@ -64,6 +68,34 @@ public class CompanyManageController {
 		}
 		
 		
+	}
+	
+	//판매자 마이페이지 메인 업체 평점 통계
+	@RequestMapping(value="selectGoodStats.sell")
+	public @ResponseBody HashMap<String, Object> selectGoodStats(HttpServletRequest request, HttpServletResponse response){
+		Member m=(Member) request.getSession().getAttribute("loginUser");
+		
+		ArrayList<CompanyGoodStat> list=ss.selectGoodStats(m.getmId());
+		
+		HashMap<String, Object> hmap=new HashMap<String, Object>();
+		
+		hmap.put("goodList", list);
+		
+		return hmap;
+	}
+	
+	//판매자 마이페이지 메인 수익 통계
+	@RequestMapping(value="selectSaleStats.sell")
+	public @ResponseBody HashMap<String, Object> selectSaleStats(HttpServletRequest request, HttpServletResponse response){
+		Member m=(Member) request.getSession().getAttribute("loginUser");
+		
+		ArrayList<CompanySaleStat> list=ss.selectSaleStats(m.getmId());
+			
+		HashMap<String, Object> hmap=new HashMap<String, Object>();
+			
+		hmap.put("saleList", list);
+			
+		return hmap;
 	}
 	
 	//업체 등록
