@@ -207,14 +207,18 @@ public class PaymentController {
 				
 				int rInsert=ps.insertAllPayment(p, pdList);
 				
-				//System.out.println("rInsert : " + rInsert);
+				System.out.println("rInsert : " + rInsert);
 				
 				if(rInsert > 0){
 					int rUpdate=ps.updateReservation(Integer.parseInt(orderInfo[6]));
 					
+					System.out.println("rUpdate : " + rUpdate);
+					
 					if(rUpdate > 0){
 						if(pdList.size() == 2){
 							int rPoint=ps.insertPoint(Integer.parseInt(orderInfo[0]), Integer.parseInt(orderInfo[5]));
+							
+							System.out.println("rPoint : " + rPoint);
 							
 							if(rPoint > 0){
 								result=1;

@@ -619,6 +619,7 @@
 		}
 		
 		var totalPrice=$("#price").val();
+		totalPrice=parseInt(totalPrice);
 		
 		function calPrice(){
 			var point=$("#point").val();
