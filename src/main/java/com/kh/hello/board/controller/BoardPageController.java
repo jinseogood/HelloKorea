@@ -120,7 +120,7 @@ public class BoardPageController {
     }
 	
 	@RequestMapping(value="deleteAllUpload.bo")
-	public String deleteAllUpload(HttpServletRequest request){
+	public String deleteAllUpload(HttpServletRequest request,@RequestParam String uri, @RequestParam int contentid, @RequestParam int contenttypeid, @RequestParam int cid){
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		FileDeleteUpload fileDeleteUpload = new FileDeleteUpload();
 		int result = 0;
@@ -137,8 +137,8 @@ public class BoardPageController {
 			result = bs.deleteAllUpload(m.getmId());
 			result1 = bs.deletePrevReview(m.getmId());
 		}
-		
-		return "main/mainHotel";
+		uri+="&contenttypeid="+contenttypeid+"&cid="+cid;
+		return "redirect:"+uri;
 	}
 	
 	@RequestMapping(value="insertReview.bo")
@@ -147,7 +147,19 @@ public class BoardPageController {
 		int result = 0;
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		b.setM_id(m.getmId());
+		b.setOrigin_id(contentid);
 		result = bs.updateBoard(b);
+		
+		if(result > 0){
+			int result1 = 0;
+			result1 = bs.selectPoint(b);
+			if(result1 > 0){
+				
+			}else{
+				int result2 = 0;
+				result2 = bs.insertPoint(b);
+			}
+		}
 		
 		uri+="&contenttypeid="+contenttypeid+"&cid="+cid;
 		return "redirect:"+uri;
@@ -165,6 +177,24 @@ public class BoardPageController {
 		}else{
 			mv.addObject("msg", "에러입니다.");
 		}
+
+		return mv;
+	}
+	
+	@RequestMapping(value="reviewBool.bo")
+	public ModelAndView reviewBool(@RequestParam int contentid, HttpServletResponse response, HttpServletRequest request){
+		response.setContentType("text/html; charset=UTF-8");
+		ModelAndView mv = new ModelAndView("jsonView");
+		
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		
+		int result = 0;
+		Board b = new Board();
+		b.setOrigin_id(contentid);
+		b.setM_id(m.getmId());
+		result = bs.reviewBool(b);
+		
+		mv.addObject("result", result);
 		
 		return mv;
 	}
@@ -420,8 +450,20 @@ public class BoardPageController {
 				int result1 = bs.updateThumbs(thumb);
 				int result2 = bs.updateReply(reply_id);
 				count = bs.selectThumbsCount(thumb);
+				if(count == 5){
+					int resultA = 0 ;
+					resultA = bs.selectPointA(thumb);
+						
+					if(resultA == 0){
+						System.out.println("와야댐");
+					}
+				}else{
+					System.out.println("카운트아직안됨");
+				}
+				
 				if(result1 > 0 && result2 >0){
 					mv.addObject("msg", "도움이 되었어요 되었습니다.");
+					//System.out.println("카운트아직안됨");
 					mv.addObject("thumbsCount", count);
 				}else{
 					mv.addObject("msg", "에러입니다.");
@@ -437,7 +479,7 @@ public class BoardPageController {
 				mv.addObject("thumbsCount", count);
 			}else{
 				mv.addObject("msg", "에러입니다.");
-			} 
+			}
 		}
 		
 		return mv;

@@ -284,15 +284,13 @@ body{ margin:50px 0px; }
    <jsp:include page="../common/footer.jsp"/>
 
 <script>
-	/* function test(){
-		location.href="starTest.bo";
-	} */
+
 	var contenttypeid = ${ param.contenttypeid };
 	var contentid = ${param.contentid};
 	var cid = ${param.cid};
-	
+
 	function cancel(){
-		location.href="deleteAllUpload.bo";
+		location.href="deleteAllUpload.bo?uri=${uri}&contentid="+contentid;
 	}	
 	
 	$(function(){

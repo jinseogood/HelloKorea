@@ -224,5 +224,29 @@ public class BoardServiceImpl implements BoardService{
 		
 		return bd.updateReview(sqlSession, b);
 	}
+
+	@Override
+	public int reviewBool(Board b) {
+
+		return bd.reviweBool(sqlSession, b);
+	}
+
+	@Override
+	public int insertPoint(Board b) {
+		
+		return bd.insertPoint(sqlSession, b);
+	}
+
+	@Override
+	public int selectPoint(Board b) {
+
+		return bd.selectPoint(sqlSession, b);
+	}
+
+	@Override
+	public int selectPointA(Thumbs thumb) {
+	
+		return bd.selectPointA(sqlSession, thumb);
+	}
  
 }

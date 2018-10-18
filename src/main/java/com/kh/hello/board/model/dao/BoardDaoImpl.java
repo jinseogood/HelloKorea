@@ -222,6 +222,30 @@ public class BoardDaoImpl implements BoardDao{
 	public int updateReview(SqlSessionTemplate sqlSession, Board b) {
 		
 		return sqlSession.update("Board.updateReview", b);
+	}
+
+	@Override
+	public int reviweBool(SqlSessionTemplate sqlSession, Board b) {
+		
+		return sqlSession.selectOne("Board.reviewBool", b);
+	}
+
+	@Override
+	public int insertPoint(SqlSessionTemplate sqlSession, Board b) {
+		
+		return sqlSession.insert("Point.insertPoint", b);
+	}
+
+	@Override
+	public int selectPoint(SqlSessionTemplate sqlSession, Board b) {
+
+		return sqlSession.selectOne("Point.selectPoint", b);
+	}
+
+	@Override
+	public int selectPointA(SqlSessionTemplate sqlSession, Thumbs thumb) {
+
+		return sqlSession.selectOne("Point.selectPointA", thumb);
 	} 
 
 }
