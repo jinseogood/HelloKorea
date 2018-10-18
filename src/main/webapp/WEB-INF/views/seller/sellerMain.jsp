@@ -76,7 +76,7 @@
 					<span class="sm-st-icon st-blue"><i class="fa fa-dollar"></i></span>
 					<div class="sm-st-info">
 						<span><a href="manageRevenue.sell">${ tPrice } 원</a></span>
-						이번달 예상 수익
+						다음달 예상 수익
 					</div>
 				</div>
 			</div>

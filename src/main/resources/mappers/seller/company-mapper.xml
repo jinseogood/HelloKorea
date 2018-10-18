@@ -73,7 +73,7 @@
 		FROM DEPOSIT_HISTORY
 		JOIN COMPANY USING(C_ID)
 		WHERE M_ID = #{mId}
-		AND TO_CHAR(D_DATE, 'MM') = TO_CHAR(ADD_MONTHS(SYSDATE, -1), 'MM')
+		AND TO_CHAR(D_DATE, 'MM') <![CDATA[<]]>= TO_CHAR(SYSDATE, 'MM')
 	</select>
 	
 	<!-- 업체 승인 메시지 -->

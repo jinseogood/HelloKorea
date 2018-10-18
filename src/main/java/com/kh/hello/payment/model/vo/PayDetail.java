@@ -9,13 +9,13 @@ public class PayDetail implements java.io.Serializable{
 	private int pdId;
 	private String pdDate;
 	private String pdType;
-	private double price;
+	private int price;
 	private String pdMethod;
 	private int paId;
 	
 	public PayDetail(){}
 
-	public PayDetail(int pdId, String pdDate, String pdType, double price, String pdMethod, int paId) {
+	public PayDetail(int pdId, String pdDate, String pdType, int price, String pdMethod, int paId) {
 		super();
 		this.pdId = pdId;
 		this.pdDate = pdDate;
@@ -49,11 +49,11 @@ public class PayDetail implements java.io.Serializable{
 		this.pdType = pdType;
 	}
 
-	public double getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 

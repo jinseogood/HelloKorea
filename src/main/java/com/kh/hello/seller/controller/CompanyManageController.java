@@ -858,11 +858,11 @@ public class CompanyManageController {
 				r.setcName(searchWord);
 			}
 			else{
-				if(searchWord.equals("입금대기")){
-					searchWord="W";
+				if(searchWord.equals("입금전")){
+					searchWord="B";
 				}
 				else if(searchWord.equals("입금완료")){
-					searchWord="O";
+					searchWord="A";
 				}
 				r.setStatus(searchWord);
 			}
@@ -872,14 +872,14 @@ public class CompanyManageController {
 			list=ss.selectSearchWordRevenueList(m.getmId(), r, pi);
 		}
 			
-		/*for(int i=0;i<list.size();i++){
-			if(list.get(i).getStatus().equals("W")){
-				list.get(i).setStatus("입금대기");
+		for(int i=0;i<list.size();i++){
+			if(list.get(i).getStatus().equals("B")){
+				list.get(i).setStatus("입금전");
 			}
-			else if(list.get(i).getStatus().equals("O")){
+			else if(list.get(i).getStatus().equals("A")){
 				list.get(i).setStatus("입금완료");
 			}
-		}*/
+		}
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);

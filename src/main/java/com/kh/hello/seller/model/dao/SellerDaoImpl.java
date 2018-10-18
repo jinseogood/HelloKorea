@@ -319,7 +319,24 @@ public class SellerDaoImpl implements SellerDao{
 	public ArrayList<Revenue> selectRevenueList(int mId, PageInfo pi, SqlSessionTemplate sqlSession) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getLimit());
-		return (ArrayList) sqlSession.selectList("Revenue.selectRevenueList", mId, rowBounds);
+		ArrayList<Revenue> list=(ArrayList) sqlSession.selectList("Revenue.selectRevenueList", mId, rowBounds);
+		
+		for(int i=0;i<list.size();i++){
+			ArrayList<Object> infoList=new ArrayList<Object>();
+			infoList.add(list.get(i).getcId());
+			infoList.add(list.get(i).getrDate());
+			
+			int sResult=sqlSession.selectOne("Revenue.selectRSList", infoList);
+			
+			if(sResult > 0){
+				list.get(i).setStatus("A");
+			}
+			else{
+				list.get(i).setStatus("B");
+			}
+		}
+		
+		return list;
 	}
 
 	//수익 기간 검색 조회 리스트 카운트
@@ -342,7 +359,25 @@ public class SellerDaoImpl implements SellerDao{
 		list.add(mId);
 		list.add(fromDate);
 		list.add(toDate);
-		return (ArrayList) sqlSession.selectList("Revenue.selectSearchDateRevenueList", list, rowBounds);
+		
+		ArrayList<Revenue> resultList=(ArrayList) sqlSession.selectList("Revenue.selectSearchDateRevenueList", list, rowBounds);
+		
+		for(int i=0;i<resultList.size();i++){
+			ArrayList<Object> infoList=new ArrayList<Object>();
+			infoList.add(resultList.get(i).getcId());
+			infoList.add(resultList.get(i).getrDate());
+			
+			int sResult=sqlSession.selectOne("Revenue.selectRSList", infoList);
+			
+			if(sResult > 0){
+				resultList.get(i).setStatus("A");
+			}
+			else{
+				resultList.get(i).setStatus("B");
+			}
+		}
+		
+		return resultList;
 	}
 
 	//수익 검색 조회 리스트 카운트
@@ -363,7 +398,25 @@ public class SellerDaoImpl implements SellerDao{
 		ArrayList<Object> list=new ArrayList<Object>();
 		list.add(mId);
 		list.add(r);
-		return (ArrayList) sqlSession.selectList("Revenue.selectSearchWordRevenueList", list, rowBounds);
+		
+		ArrayList<Revenue> resultList=(ArrayList) sqlSession.selectList("Revenue.selectSearchWordRevenueList", list, rowBounds);
+		
+		for(int i=0;i<resultList.size();i++){
+			ArrayList<Object> infoList=new ArrayList<Object>();
+			infoList.add(resultList.get(i).getcId());
+			infoList.add(resultList.get(i).getrDate());
+			
+			int sResult=sqlSession.selectOne("Revenue.selectRSList", infoList);
+			
+			if(sResult > 0){
+				resultList.get(i).setStatus("A");
+			}
+			else{
+				resultList.get(i).setStatus("B");
+			}
+		}
+		
+		return resultList;
 	}
 
 }
