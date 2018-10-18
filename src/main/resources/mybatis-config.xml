@@ -34,6 +34,8 @@
           <typeAlias type="com.kh.hello.seller.model.vo.SellerReservation" alias="SellerReservation"/>
           <typeAlias type="com.kh.hello.seller.model.vo.SellerOneReservation" alias="SellerOneReservation"/>
           <typeAlias type="com.kh.hello.seller.model.vo.Revenue" alias="Revenue"/>
+          <typeAlias type="com.kh.hello.seller.model.vo.CompanyGoodStat" alias="CompanyGoodStat"/>
+          <typeAlias type="com.kh.hello.seller.model.vo.CompanySaleStat" alias="CompanySaleStat"/>
           <typeAlias type="com.kh.hello.board.model.vo.Board" alias="Board"/>
           <typeAlias type="com.kh.hello.board.model.vo.Reply" alias="Reply"/>
 		  <typeAlias type="com.kh.hello.board.model.vo.Report" alias="rReport"/>

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.seller.model.vo.Company;
+import com.kh.hello.seller.model.vo.CompanyGoodStat;
+import com.kh.hello.seller.model.vo.CompanySaleStat;
 import com.kh.hello.seller.model.vo.OneProduct;
 import com.kh.hello.seller.model.vo.Registration;
 import com.kh.hello.seller.model.vo.RegistrationHistory;
@@ -21,6 +23,12 @@ public interface SellerService {
 	
 	//판매자 메인페이지 메인 수익 조회
 	int selectReservationPrice(int mId);
+	
+	//판매자 마이페이지 메인 업체 평점 통계
+	ArrayList<CompanyGoodStat> selectGoodStats(int mId);
+	
+	//판매자 마이페이지 메인 수익 통계
+	ArrayList<CompanySaleStat> selectSaleStats(int mId);
 	
 	//업체명 중복 조회
 	int duplicationTitle(String title);

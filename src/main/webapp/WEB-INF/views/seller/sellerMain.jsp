@@ -29,19 +29,14 @@
     <!-- Theme style -->
     <link href="${ contextPath }/resources/css/style.css" rel="stylesheet" type="text/css" />
 
-
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         
-          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
           
-
-          <style type="text/css">
-
-          </style>
-      </head>
+</head>
 
 <body>
 	<jsp:include page="../common/menubar.jsp"/>
@@ -65,7 +60,7 @@
     			<div class="sm-st clearfix">
     				<span class="sm-st-icon st-red"><i class="fa fa-check-square-o"></i></span>
     				<div class="sm-st-info">
-    					<span><a href="reservation.sell">${ rCount }건</a></span>
+    					<span><a href="reservation.sell">${ rCount } 건</a></span>
        					이번달 예약 내역
     				</div>
     			</div>
@@ -97,85 +92,135 @@
 				<!--earning graph start-->
 				<section class="panel">
 					<header class="panel-heading">업체 평점 통계</header>
-					<div class="panel-body">
-						<div id="goodSTAT" style="width:800px;height:450px;" align="center"></div>
+					<div class="panel-body" style="height:350px; margin-left:auto; margin-right:auto;">
+						<div id="goodSTAT" style="width:100%;height:100%;" align="center"></div>
 					</div>
 				</section>
 				<!--earning graph end-->
 				
+				<script>
+					google.charts.load('current', {packages: ['corechart', 'bar']});
+					google.charts.setOnLoadCallback(goodStats);
+					
+					function goodStats(){
+						
+						$.ajax({
+							url:"selectGoodStats.sell",
+							type:"POST",
+							success:function(data){
+								console.log(data);
+								
+								var goodArr=[["업체명","평점", { role: 'style' }]];
+								
+								for(var i=1; i <= data.goodList.length; i++){
+									goodArr[i] = [data.goodList[i-1].cName, data.goodList[i-1].good, 'color:gold; opacity:0.1'];
+								}
+								
+								var options={
+									vAxis: {minValue: 0, ticks:[0, 1, 2, 3, 4, 5]}
+								};
+								
+								var data = google.visualization.arrayToDataTable(goodArr);
+								
+								var chart = new google.visualization.ColumnChart(document.getElementById('goodSTAT'));
+
+								chart.draw(data, options);
+								
+							},
+							error:function(data){
+								console.log(data);
+							}
+						});
+					}
+				</script>
+				
 				<!--user graph start-->
 				<section class="panel">
-					<header class="panel-heading">금월 이용자 통계</header>
-					<div class="panel-body">
-						<div id="visitSTAT" style="width:800px;height:450px;" align="center"></div>
+					<header class="panel-heading">수익 통계</header>
+					<div class="panel-body" style="height:350px; margin-left:auto; margin-right:auto;">
+						<div id="depositSTAT" style="width:100%;height:100%;" align="center"></div>
 					</div>
 				</section>
 				<!--user graph end-->
+				
+				<script>
+					google.charts.load('current', {packages: ['corechart', 'bar']});
+					google.charts.setOnLoadCallback(goodStats);
+					
+					function goodStats(){
+						
+						$.ajax({
+							url:"selectSaleStats.sell",
+							type:"POST",
+							success:function(data){
+								console.log(data);
+								
+								var saleArr=[["월","원"]];
+								
+								for(var i=1; i <= data.saleList.length; i++){
+									saleArr[i] = [data.saleList[i-1].month + "월", data.saleList[i-1].price];
+								}
+								
+								var options={
+									vAxis: {minValue: 0}
+								};
+								
+								var data = google.visualization.arrayToDataTable(saleArr);
+								
+								var chart = new google.visualization.AreaChart(document.getElementById('depositSTAT'));
+
+								chart.draw(data, options);
+								
+							},
+							error:function(data){
+								console.log(data);
+							}
+						});
+					}
+				</script>
+				
 			</div>
 			
 			<div class="col-lg-4">
 				<!--chat start-->
 				<section class="panel">
-					<header class="panel-heading">안내</header>
+					<header class="panel-heading">제휴 승인 결과 안내</header>
 					<div class="panel-body" id="noti-box">
-						<div class="alert alert-block alert-danger">
-							<button data-dismiss="alert" class="close close-sm" type="button">
-								<i class="fa fa-times"></i>
-							</button>
-							<strong>Oh snap!</strong> Change a few things up and try submitting again.
-						</div>
 						<div class="alert alert-success">
 							<button data-dismiss="alert" class="close close-sm" type="button">
 								<i class="fa fa-times"></i>
 							</button>
-							<strong>Well done!</strong> You successfully read this important alert message.
 						</div>
 						<div class="alert alert-info">
 							<button data-dismiss="alert" class="close close-sm" type="button">
 								<i class="fa fa-times"></i>
 							</button>
-							<strong>Heads up!</strong> This alert needs your attention, but it's not super important.
-						</div>
-						<div class="alert alert-warning">
-							<button data-dismiss="alert" class="close close-sm" type="button">
-								<i class="fa fa-times"></i>
-							</button>
-							<strong>Warning!</strong> Best check yo self, you're not looking too good.
-						</div>
-						<div class="alert alert-block alert-danger">
-							<button data-dismiss="alert" class="close close-sm" type="button">
-								<i class="fa fa-times"></i>
-							</button>
-							<strong>Oh snap!</strong> Change a few things up and try submitting again.
-						</div>
-						<div class="alert alert-success">
-							<button data-dismiss="alert" class="close close-sm" type="button">
-								<i class="fa fa-times"></i>
-							</button>
-							<strong>Well done!</strong> You successfully read this important alert message.
-						</div>
-						<div class="alert alert-info">
-							<button data-dismiss="alert" class="close close-sm" type="button">
-								<i class="fa fa-times"></i>
-							</button>
-							<strong>Heads up!</strong> This alert needs your attention, but it's not super important.
-						</div>
-						<div class="alert alert-warning">
-							<button data-dismiss="alert" class="close close-sm" type="button">
-								<i class="fa fa-times"></i>
-							</button>
-							<strong>Warning!</strong> Best check yo self, you're not looking too good.
 						</div>
 					</div>
 				</section>
-
 			</div>
+			
+			<script>
+				/* $(function(){
+					$.ajax({
+						url:"selectNotice.sell",
+						type:"POST",
+						success:function(data){
+							console.log(data);
+						},
+						error:function(data){
+							console.log(data);
+						}
+					});
+				}); */
+			</script>
+			
 		</div>
 	</div>
 
 	<jsp:include page="../common/footer.jsp"/>
 	
-	        <!-- jQuery 2.0.2 -->
+	    <%--     <!-- jQuery 2.0.2 -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script src="${ contextPath }/resources/js/jquery.min.js" type="text/javascript"></script>
 
@@ -267,7 +312,7 @@
 		
 		            });
 		            // Chart.defaults.global.responsive = true;
-		</script>
+		</script> --%>
 
 </body>
 </html>
