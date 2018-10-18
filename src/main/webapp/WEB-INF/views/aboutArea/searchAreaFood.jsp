@@ -213,7 +213,16 @@
 					cat3 = sessionStorage.getItem("cat3");
 					console.log(checkValue);
 					searchFoodCondition(areaCode, sigunguCode, cat3);
-				})
+				});
+				$(".goodBtn").click(function(){
+					if($(this).children("i").hasClass("fa fa-heart tm-home-box-2-icon border-right") == true){
+						$(this).children("i").removeClass("fa fa-heart tm-home-box-2-icon border-right");
+						$(this).children("i").addClass("fa fa-heart-o tm-home-box-2-icon border-right");
+					}else if($(this).children("i").hasClass("fa fa-heart-o tm-home-box-2-icon border-right") == true){
+						$(this).children("i").removeClass("fa fa-heart-o tm-home-box-2-icon border-right");
+						$(this).children("i").addClass("fa fa-heart tm-home-box-2-icon border-right");
+					}
+				});
 			});
 			
 			function searchFoodCondition(areaCode, sigunguCode, cat3, PageNo){
@@ -269,6 +278,8 @@
 								async:false,
 								success:function(ddate){
 									var overview = ddate.response.body.items.item.overview;
+									var reg = /<br\s*[\/]?>/g;
+										overview = overview.replace(reg, " ");
 									if(overview.length > 190){
 										output += overview.substring(0, 191) + "...";
 									}else{
@@ -304,6 +315,8 @@
 										async:false,
 										success:function(ddate){
 											var overview = ddate.response.body.items.item.overview;
+											var reg = /<br\s*[\/]?>/g;
+												overview = overview.replace(reg, " ");
 											if(overview.length > 190){
 												output += overview.substring(0, 191) + "...";
 											}else{
@@ -388,6 +401,8 @@
 									async:false,
 									success:function(ddate){
 										var overview = ddate.response.body.items.item.overview;
+										var reg = /<br\s*[\/]?>/g;
+											overview = overview.replace(reg, " ");
 										if(overview.length > 190){
 											output += overview.substring(0, 191) + "...";
 										}else{
@@ -397,8 +412,23 @@
 								});
 								output += "</p>";
 								output += "<div class='tm-home-box-2-container'>";
-								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-								output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
+								/* $.ajax({
+									url:"dibsCheckFG.good",
+									type:"GET",
+									data:{contentid:contentid},
+									dataType:"json",
+									async:false,
+									success:function(ddatte){
+										if(ddatte == 0){
+											output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+										}else{
+											output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+										}
+									},error:function(ddatte){console.log(ddatte);}
+								}); */
+								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+								output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'>";
+								output += "<span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
 								output += "</div></div></div>";
 								document.getElementById("viewArea").innerHTML += output;
 							}
@@ -432,8 +462,23 @@
 									});
 									output += "</p>";
 									output += "<div class='tm-home-box-2-container'>";
-									output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-									output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
+									/* $.ajax({
+										url:"dibsCheck.good",
+										type:"GET",
+										data:{contentid:contentid},
+										dataType:"json",
+										async:false,
+										success:function(ddatte){
+											if(ddatte == 0){
+												output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+											}else{
+												output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+											}
+										},error:function(ddatte){console.log(ddatte);}
+									}); */
+									output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+									output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'>";
+									output += "<span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
 									output += "</div></div></div>";
 									document.getElementById("viewArea").innerHTML += output;
 								}

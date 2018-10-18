@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.hello.good.model.service.GoodService;
 import com.kh.hello.good.model.service.GoodServiceImpl;
 import com.kh.hello.good.model.vo.Good;
+import com.kh.hello.good.model.vo.Good2;
 import com.kh.hello.member.model.vo.Member;
 
 @Controller
@@ -221,7 +222,18 @@ public class GoodController {
 	}
 	
 	
-	
+	@RequestMapping(value="dibsCheckFG.good")
+	public void dibsheckFG(HttpServletRequest request, HttpServletResponse response, @RequestParam int contentid) throws IOException{
+		String user = String.valueOf(((Member)(request.getSession().getAttribute("loginUser"))).getmId());
+		int userNo = Integer.parseInt(user);
+		int result = -99;
+		Good2 gg = new Good2();
+		gg.setMid(userNo);
+		gg.setOriginId(contentid);
+		
+		result = gs.selectOneDibsCheckFG(gg);
+		response.getWriter().println(result);
+	}
 	
 	
 	

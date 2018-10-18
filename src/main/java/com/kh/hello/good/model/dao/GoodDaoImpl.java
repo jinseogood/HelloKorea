@@ -4,6 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.hello.good.model.vo.Good;
+import com.kh.hello.good.model.vo.Good2;
 
 @Repository
 public class GoodDaoImpl implements GoodDao {
@@ -25,6 +26,12 @@ public class GoodDaoImpl implements GoodDao {
 	public int deleteOneDibs(SqlSessionTemplate sqlSession, Good gg) {
 		return sqlSession.delete("Good.deleteOneDibsHotel", gg);
 	}
+
+	@Override
+	public int selectOneDibsCheckFG(SqlSessionTemplate sqlSession, Good2 gg) {
+		return sqlSession.selectOne("Good.selectOneDibsCheck", gg);
+	}
+
 	
 	
 	

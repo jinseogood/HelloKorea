@@ -14,8 +14,10 @@
 	.img-responsive2{width:100%; height:auto;}
 	.themeBtn{width:250px; height:60px; background-color:#00aef0; color:white;}
 	#themeText{height:164px; overflow:hidden; padding:30px 30px 54px;}
-	.mainSearchArea{font-size:15px; width:150px; height:60px; color:black;}
-	.subSearchArea{font-size:15px; width:150px; height:60px; color:black;}
+	.mainSearchArea{font-size:15px; width:300px; height:60px; color:black; background-color:rgba(255, 255, 255, 0.6);
+	                border:none;border-radius:5px;}
+	.subSearchArea{font-size:15px; width:300px; height:60px; color:black; background-color:rgba(255, 255, 255, 0.6);
+	               border:none;border-radius:5px;}
 	#searchAreaBox{position:absolute; text-align:center; top:10%; z-index:3;}
 	.areaSearchBtn{height:60px;}
 	.themeAreaSelect{cursor:pointer; color:blue;}
@@ -335,7 +337,7 @@
 			  			<option value="3">서귀포시</option>
 			  			<option value="4">제주시</option>
 			  		</select>
-					<input type="button" class="tm-banner-link areaSearchBtn" value="검색">
+					<input type="button" class="tm-banner-link areaSearchBtn" value="검색" style="border-radius:5px;width:150px;">
 		</div>
 		
 		<div class="flexslider flexslider-banner">
@@ -346,14 +348,14 @@
 					<p class="tm-banner-subtitle"></p>
 					
 				</div>
-		      <img src="${ contextPath }/resources/img/jeju-beach.jpg" alt="Image" />
+		      <img src="${ contextPath }/resources/img/jeju-beach2.png" alt="Image" />
 		    </li>
 		    <li>
 			    <div class="tm-banner-inner">
 					<h1 class="tm-banner-title"><span class="tm-yellow-text"></span></h1>
 					<p class="tm-banner-subtitle"></p>
 				</div>
-		      <img src="${ contextPath }/resources/img/anapji.png" alt="Image" />
+		      <img src="${ contextPath }/resources/img/anapji2.png" alt="Image" />
 		    </li>
 		  </ul>
 		</div>

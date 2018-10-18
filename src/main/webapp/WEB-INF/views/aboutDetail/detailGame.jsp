@@ -76,7 +76,7 @@
 			<div id="google-map"></div>
 		</div>
 		<div class="col-lg-5 col-md-6">
-			<div>
+			<div class="weatherMap">
 				날씨정보닷<br>
 				날씨정보닷<br>
 				날씨정보닷<br>
@@ -124,6 +124,7 @@
 						myData.mapx = parseFloat(myData.mapx);
 					}
 					initialize(myData.mapy, myData.mapx, myData.title);
+					//weatherMap(myData.mapy, myData.mapx);
 				},
 				error:function(data){
 					console.log(data);
@@ -227,6 +228,21 @@
 				}
 			});
 		}
+		
+		
+		/* function weatherMap(mapy, mapx){
+			var url = "api.openweathermap.org/data/2.5/forecast?lat="+mapy+"&lon="+mapx+"&appid=49736052d2b9402c5764e0f24834cf25";
+			var request = new XMLHttpRequest();
+			request.overrideMimeType("application/json");
+			request.open('GET', url, true);
+			
+			request.onreadystatechagne = runction(){
+				if(request.readyState == 4 && request.status == "200"){
+					callback(request.responseText);
+				}
+			};
+			request.send(null);
+		} */
 		
 		$(function(){//output += "ㆍ <b></b> : ""<br>";
 			detailGameInfo();
