@@ -103,8 +103,8 @@ body { overflow-x: hidden; }
 .tm-banner-subtitle { font-size: 34px; }
 .tm-yellow-text { color: #FCDD44; }
 .tm-banner-link {
-	background: rgba(252, 221, 68, 0.39) none repeat scroll 0% 0%;
-	border: 1px solid #D2B731;
+	background: rgba(0, 174, 240, 0.39) none repeat scroll 0% 0%;
+	/* border: 1px solid #D2B731; */
 	color: #FFF;
 	font-weight: 600;
 	display: inline-block;
@@ -114,7 +114,7 @@ body { overflow-x: hidden; }
 }
 .tm-banner-link:hover,
 .tm-banner-link:focus {
-	background: rgba(252, 221, 68, 1);
+	background: rgba(0, 174, 240, 1);
 	color: #000;
 }
 .flexslider.flexslider-banner {

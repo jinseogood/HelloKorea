@@ -16,7 +16,7 @@
 	#themeText{height:164px; overflow:hidden; padding:30px 30px 54px;}
 	.mainSearchArea{font-size:15px; width:150px; height:60px; color:black;}
 	.subSearchArea{font-size:15px; width:150px; height:60px; color:black;}
-	#searchAreaBox{position:absolute; text-align:center; top:18%; z-index:3;}
+	#searchAreaBox{position:absolute; text-align:center; top:10%; z-index:3;}
 	.areaSearchBtn{height:60px;}
 	.themeAreaSelect{cursor:pointer; color:blue;}
 	.themeAreaSelect:hover{color:#00aef0;}
@@ -346,14 +346,14 @@
 					<p class="tm-banner-subtitle"></p>
 					
 				</div>
-		      <img src="${ contextPath }/resources/img/hanok1.jpg" style="width:1903px; height:769.11px;" alt="Image" />
+		      <img src="${ contextPath }/resources/img/jeju-beach.jpg" alt="Image" />
 		    </li>
 		    <li>
 			    <div class="tm-banner-inner">
 					<h1 class="tm-banner-title"><span class="tm-yellow-text"></span></h1>
 					<p class="tm-banner-subtitle"></p>
 				</div>
-		      <img src="${ contextPath }/resources/img/namsan.PNG" style="width:1903px; height:769.11px;" alt="Image" />
+		      <img src="${ contextPath }/resources/img/anapji.png" alt="Image" />
 		    </li>
 		  </ul>
 		</div>
