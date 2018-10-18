@@ -104,6 +104,7 @@ body { overflow-x: hidden; }
 .tm-yellow-text { color: #FCDD44; }
 .tm-banner-link {
 	background: rgba(0, 174, 240, 0.39) none repeat scroll 0% 0%;
+	border:none;
 	/* border: 1px solid #D2B731; */
 	color: #FFF;
 	font-weight: 600;
@@ -115,7 +116,7 @@ body { overflow-x: hidden; }
 .tm-banner-link:hover,
 .tm-banner-link:focus {
 	background: rgba(0, 174, 240, 1);
-	color: #000;
+	color: #FFFFFF;
 }
 .flexslider.flexslider-banner {
 	max-width: 100%;
@@ -126,7 +127,7 @@ body { overflow-x: hidden; }
 	text-align: center;
 }
 .flexslider.flexslider-banner .flex-direction-nav a:before {
-	color: #FCDD44;
+	color:rgba(255, 255, 255, 0.6);
 }
 .flex-direction-nav a {
 	height: 50px;
