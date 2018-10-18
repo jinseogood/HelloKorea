@@ -73,7 +73,7 @@
 			function areaGame(){
 				areaCode = sessionStorage.getItem("areaCode");
 				if(sessionStorage.getItem("sigunguCode") == 0){
-					sigunguCode = 0;
+					sigunguCode = "";
 				}else{
 					sigunguCode = sessionStorage.getItem("sigunguCode");
 				}
@@ -81,6 +81,9 @@
 					sessionStorage.removeItem("cat3");
 					sessionStorage.setItem("cat3", "");
 					cat3 = sessionStorage.getItem("cat3");
+				}
+				if(sessionStorage.getItem("contenttypeid") == 0){
+					contenttypeid = 15;
 				}
 				
 				location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;

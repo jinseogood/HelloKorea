@@ -207,6 +207,19 @@ public class GoodController {
 		response.getWriter().println(result);
 	}
 	
+	@RequestMapping(value="dibsCheck.good")
+	public void dibsCheck(HttpServletRequest request, HttpServletResponse response, @RequestParam int contentid) throws IOException{
+		String user = String.valueOf(((Member)(request.getSession().getAttribute("loginUser"))).getmId());
+		int userNo = Integer.parseInt(user);
+		int result = -99;
+		Good gg = new Good();
+		gg.setMid(userNo);
+		gg.setOriginId(contentid);
+		
+		result = gs.selectOneDibs(gg);
+		response.getWriter().println(result);
+	}
+	
 	
 	
 	

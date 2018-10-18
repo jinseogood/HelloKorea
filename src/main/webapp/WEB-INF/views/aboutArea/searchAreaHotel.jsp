@@ -454,7 +454,22 @@
 							});
 							output += "</p>";
 							output += "<div class='tm-home-box-2-container'>";
-							output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							$.ajax({
+								url:"dibsCheck.good",
+								type:"GET",
+								data:{contentid:contentid},
+								dataType:"json",
+								async:false,
+								success:function(ddatte){
+									console.log("성공?");console.log(ddatte);
+									if(ddatte == 0){
+										output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtns' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+									}else{
+										output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+									}
+								},error:function(ddatte){console.log(ddatte);}
+							});
+							//output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 							output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'>";
 							output += "<span class='tm-home-box-2-description box-3' onclick='detailView("+contentid+","+contenttypeid+","+cid+");'>";
 							if(data[i].grade == 0){
@@ -773,6 +788,8 @@
 			}
 			
 		
+			var dCount = 1;
+			var dCount1 = 1;
 			$(function(){
 				
 				searchHotelPage();
@@ -788,8 +805,23 @@
 					orderByHotel(value);
 				});
 				
+				$(".goodBtns").click(function(){
+					if($(this).children("i").hasClass("fa fa-heart-o tm-home-box-2-icon border-right") == true){
+						$(this).children("i").removeClass("fa fa-heart-o tm-home-box-2-icon border-right");
+						$(this).children("i").addClass("fa fa-heart tm-home-box-2-icon border-right");
+					}else if($(this).children("i").hasClass("fa fa-heart tm-home-box-2-icon border-right") == true){
+						$(this).children("i").removeClass("fa fa-heart tm-home-box-2-icon border-right");
+						$(this).children("i").addClass("fa fa-heart-o tm-home-box-2-icon border-right");
+					}
+				});
 				$(".goodBtn").click(function(){
-					
+					if($(this).children("i").hasClass("fa fa-heart tm-home-box-2-icon border-right") == true){
+						$(this).children("i").removeClass("fa fa-heart tm-home-box-2-icon border-right");
+						$(this).children("i").addClass("fa fa-heart-o tm-home-box-2-icon border-right");
+					}else if($(this).children("i").hasClass("fa fa-heart-o tm-home-box-2-icon border-right") == true){
+						$(this).children("i").removeClass("fa fa-heart-o tm-home-box-2-icon border-right");
+						$(this).children("i").addClass("fa fa-heart tm-home-box-2-icon border-right");
+					}
 				});
 				
 			});
