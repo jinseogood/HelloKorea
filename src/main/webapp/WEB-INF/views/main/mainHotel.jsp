@@ -13,8 +13,8 @@
 	.img-responsive2{width:100%; height:auto;}
 	.themeBtn{width:250px; height:60px; background-color:#00aef0; color:white;}
 	#themeText{height:164px; overflow:hidden; padding:30px 30px 54px;}
-	.mainSearchArea{font-size:15px; width:150px; height:60px; background-color:#00aef0; color:white;}
-	.subSearchArea{font-size:15px; width:150px; height:60px; background-color:#00aef0; color:white;}
+	.mainSearchArea{font-size:15px; width:150px; height:60px; color:black;}
+	.subSearchArea{font-size:15px; width:150px; height:60px; color:black;}
 	#searchAreaBox{position:absolute; text-align:center; top:18%; z-index:3;}
 	.areaSearchBtn{height:60px;}
 	.themeAreaSelect{cursor:pointer; color:blue;}
