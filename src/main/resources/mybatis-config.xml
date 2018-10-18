@@ -51,6 +51,7 @@
 		  <typeAlias type="com.kh.hello.company.model.vo.Room2" alias="Room2"/>
 		  <typeAlias type="com.kh.hello.company.model.vo.Reservation2" alias="Reservation2"/>
 		  <typeAlias type="com.kh.hello.company.model.vo.Reservations" alias="Reservations"/>
+		  <typeAlias type="com.kh.hello.good.model.vo.Good2" alias="Good2"/>
       </typeAliases>
   
       <mappers>
@@ -89,6 +90,7 @@
           <mapper resource="mappers/company/room2-mapper.xml"/>
           <mapper resource="mappers/company/reservation2-mapper.xml"/>
           <mapper resource="mappers/company/reservations-mapper.xml"/>
+          <mapper resource="mappers/good/good2-mapper.xml"/>
       </mappers> 
   
   </configuration>

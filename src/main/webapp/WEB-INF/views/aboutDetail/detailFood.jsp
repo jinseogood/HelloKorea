@@ -136,7 +136,11 @@
 					}else{
 						for(var i in myData){
 							count++;
-							output += "<img src="+myData[i].originimgurl+" alt='image' class='secondImg' />";
+							if(typeof(myData[i].originimgurl) == 'undefined'){
+								output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='secondImg' />";
+							}else{
+								output += "<img src="+myData[i].originimgurl+" alt='image' class='secondImg' />";
+							}
 							if(count == 2){break;}
 						}
 					}
