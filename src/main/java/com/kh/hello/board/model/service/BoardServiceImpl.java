@@ -212,5 +212,11 @@ public class BoardServiceImpl implements BoardService{
 		
 		return bd.selectReplyCount(sqlSession, bid);
 	}
+
+	@Override
+	public int deleteReview(int bid) {
+
+		return bd.deleteReview(sqlSession, bid);
+	}
  
 }

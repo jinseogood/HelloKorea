@@ -71,4 +71,6 @@ public interface BoardDao {
 
 	int selectReplyCount(SqlSessionTemplate sqlSession, int bid);
 
+	int deleteReview(SqlSessionTemplate sqlSession, int bid);
+
 }

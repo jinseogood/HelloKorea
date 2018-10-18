@@ -800,7 +800,6 @@
 	
 	<script>
 	
-	
 		function QPaging(page){
 			console.log("page : " + page);
 			
@@ -842,8 +841,19 @@
 							output += "<div class='row line_b'>";
 							output += "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-12' style = 'height:auto'>";
 							output += "<div class='tm-about-box-1' style = 'height:220px; padding:10px 10px;'>";
-							output += "<a href='#'><img src='${ contextPath }/resources/img/about-4.jpg' alt='img' class='tm-about-box-1-img' style = 'margin:0 auto 10px;'></a>";
+							output += "<a onclick = member_info(this);><img src='${ contextPath }/resources/img/about-4.jpg' alt='img' class='tm-about-box-1-img' style = 'margin:0 auto 10px;'></a>";
 							output += "<h3 class='tm-about-box-1-title' style = 'margin-bottom:5px;'>Songs <span>( GOD )</span></h3>";
+							output += "<div class = 'member_info' style = 'border-radius: 10px; visibility:hidden; position:absolute; background-color:lightgray; left:-133px; top:-10px; width:200px; height:200px; z-index:999;'>";
+							output += "<div><h3>"+Q[i].nickname+"</h3></div>";
+							output += "<div style = 'text-align:right;'><button class='btn btn-light' style='width:65px; height:30px;' type = 'button'>메세지</button></div>";
+							output += "<div class='info' style = 'text-align:left;'>회원가입시기 : "+Q[i].create_date+"<br>";
+							output += "흥미 : "+Q[i].interesting+", 국적 : "+Q[i].national+"<br>";
+							output += "이메일 : "+Q[i].email+"<br>";
+							output += "<i class='fa fa-thumbs-o-up' style = 'font-size:13px;'></i> "+Q[i].help_count+"건의 도움되는 리뷰, 댓글<br>";
+							output += "<i class='fas fa-pen-square'></i> "+Q[i].board_count+"건 포스팅<br>";
+							output += "<i class='fas fa-pen'></i> "+Q[i].reply_count+"건의 도움글 작성";
+							output += "</div>";
+							output += "</div>";
 							output += "<div class='gray-text'>";
 							output += "<a href='#' class='tm-social-icon'><i class='fa fa-twitter'></i></a>";
 							output += "<a href='#' class='tm-social-icon'><i class='fa fa-facebook'></i></a>";
@@ -854,7 +864,11 @@
 							output += "</div>";	
 							output += "<div class='col-lg-9 col-md-9 col-sm-6 col-xs-12 line_l' style = 'height:auto;' ><br>";
 							output += "<div class='summary' style = 'padding-top:10px; font-size:18px'>";
-							output += Q[i].text+"<span></div><br>";
+							output += Q[i].text+"<span>";
+							/* if(Q[i].m_id == ${sessionScope.loginUser.mId}){
+								output += "<span style='float:right'><button type = 'button' style = 'width:47px; height:31px;' class='btn btn-danger'>수정</button>&nbsp;<button type = 'button' style = 'width:47px; height:31px;' class='btn btn-danger'>삭제</button></span>";
+							} */
+							output += "</div><br>";
 							output += "<div style = 'padding-top:1px' >";
 							output += "<div class='fa' style = 'width:100%'>";
 							output += "<span class='ReviewUpDate' style = 'padding-top:5px'>";
@@ -950,7 +964,7 @@
 							output += "<div class='tm-about-box-1' style = 'height:220px; padding:10px 10px;'>";
 							output += "<a onclick = member_info(this);><img src='${ contextPath }/resources/img/about-4.jpg' alt='img' class='tm-about-box-1-img' style = 'margin:0 auto 10px;'></a>";
 							output += "<h3 class='tm-about-box-1-title' style = 'margin-bottom:5px;'>Songs <span>( GOD )</span></h3>";
-							output += "<div class = 'member_info' style = 'border-radius: 10px; visibility:hidden; position:absolute; background-color:lightgray; left:-150px; top:5px; width:200px; height:200px; z-index:999;'>";
+							output += "<div class = 'member_info' style = 'border-radius: 10px; visibility:hidden; position:absolute; background-color:lightgray; left:-133px; top:-10px; width:200px; height:200px; z-index:999;'>";
 							output += "<div><h3>"+review[i].nickname+"</h3></div>";
 							output += "<div style = 'text-align:right;'><button class='btn btn-light' style='width:65px; height:30px;' type = 'button'>메세지</button></div>";
 							output += "<div class='info' style = 'text-align:left;'>회원가입시기 : "+review[i].create_date+"<br>";
@@ -1061,7 +1075,11 @@
 								output += "<i class='fas fa-star' style = 'font-size:20px'></i>";
 							}
 							output += "</span>&nbsp;&nbsp;";
-							output += "<span class='ReviewUpDate'>리뷰 게시 날짜 : "+review[i].regist_date+"</span></div>";
+							output += "<span class='ReviewUpDate'>리뷰 게시 날짜 : "+review[i].regist_date+"</span>";
+							if(review[i].m_id == ${sessionScope.loginUser.mId}){
+								output += "<span style='float:right'><button type = 'button' style = 'width:47px; height:31px;' class='btn btn-danger'>수정</button>&nbsp;<button type = 'button' style = 'width:47px; height:31px;' class='btn btn-danger' onclick=deleteR("+review[i].bid+")>삭제</button></span>";
+							}	
+							output += "</div>";
 							output += "<div class='ReviewTitle' style = 'font-size:20px; cursor:pointer; padding-top:10px;'><a onclick='goDetail("+review[i].bid+")'><span>"+review[i].title+"</span></a></div>";
 							output += "<div class='summary' style = 'padding-top:10px;'><p>"+review[i].text+"</p><span><a style = 'font-weight:bold' onclick = 'goDetail("+review[i].bid+")'>자세히 보기</a></span></div>";
 							output += "<div style = 'padding-top:20px;'><div class='fa' style = 'width:100%;'>";
@@ -1099,6 +1117,25 @@
 				}
 			});
 		}
+		
+		function deleteR(element){
+			var bid = element;
+
+				$.ajax({
+					url:"deleteReview.bo",
+					type:"post",
+					data:{bid:bid},
+					dataType:"json",
+					success:function(data){
+						reviewPaging(1);
+						alert(data.msg);
+							
+					},error:function(data){
+						alert(data.msg); 
+					}
+				});			
+		}
+		
 
 		function member_info(element){
 		

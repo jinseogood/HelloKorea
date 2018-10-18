@@ -210,6 +210,12 @@ public class BoardDaoImpl implements BoardDao{
 	public int selectReplyCount(SqlSessionTemplate sqlSession, int bid) {
 		
 		return sqlSession.selectOne("Reply.selectReplyCount", bid);
+	}
+
+	@Override
+	public int deleteReview(SqlSessionTemplate sqlSession, int bid) {
+
+		return sqlSession.delete("Board.deleteReview", bid);
 	} 
 
 }
