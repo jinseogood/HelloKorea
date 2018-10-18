@@ -44,6 +44,7 @@
           <typeAlias type="com.kh.hello.board.model.vo.Reply" alias="Reply"/>
 		  <typeAlias type="com.kh.hello.board.model.vo.Report" alias="rReport"/>
 		  <typeAlias type="com.kh.hello.board.model.vo.Thumbs" alias="Thumbs"/>
+		  <typeAlias type="com.kh.hello.board.model.vo.Point" alias="Point"/>
           <typeAlias type="com.kh.hello.good.model.vo.Good" alias="Good"/>
           <typeAlias type="com.kh.hello.payment.model.vo.Payment" alias="Payment"/>
           <typeAlias type="com.kh.hello.payment.model.vo.PayDetail" alias="PayDetail"/>
@@ -51,6 +52,7 @@
 		  <typeAlias type="com.kh.hello.company.model.vo.Room2" alias="Room2"/>
 		  <typeAlias type="com.kh.hello.company.model.vo.Reservation2" alias="Reservation2"/>
 		  <typeAlias type="com.kh.hello.company.model.vo.Reservations" alias="Reservations"/>
+		  <typeAlias type="com.kh.hello.good.model.vo.Good2" alias="Good2"/>
       </typeAliases>
   
       <mappers>
@@ -81,6 +83,7 @@
           <mapper resource="mappers/board/reply-mapper.xml"/>
           <mapper resource="mappers/board/report-mapper.xml"/>
           <mapper resource="mappers/board/thumbs-mapper.xml"/>
+          <mapper resource="mappers/board/point-mapper.xml"/>
           <mapper resource="mappers/good/good-mapper.xml" />
           <mapper resource="mappers/good/good-mapper.xml"/>
           <mapper resource="mappers/payment/payment-mapper.xml"/>
@@ -89,6 +92,7 @@
           <mapper resource="mappers/company/room2-mapper.xml"/>
           <mapper resource="mappers/company/reservation2-mapper.xml"/>
           <mapper resource="mappers/company/reservations-mapper.xml"/>
+          <mapper resource="mappers/good/good2-mapper.xml"/>
       </mappers> 
   
   </configuration>

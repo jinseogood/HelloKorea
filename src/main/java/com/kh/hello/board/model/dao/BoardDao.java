@@ -75,4 +75,12 @@ public interface BoardDao {
 
 	int updateReview(SqlSessionTemplate sqlSession, Board b);
 
+	int reviweBool(SqlSessionTemplate sqlSession, Board b);
+
+	int insertPoint(SqlSessionTemplate sqlSession, Board b);
+
+	int selectPoint(SqlSessionTemplate sqlSession, Board b);
+
+	int selectPointA(SqlSessionTemplate sqlSession, Thumbs thumb);
+
 }

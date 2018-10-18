@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.hello.good.model.dao.GoodDao;
 import com.kh.hello.good.model.vo.Good;
+import com.kh.hello.good.model.vo.Good2;
 
 @Service
 public class GoodServiceImpl implements GoodService {
@@ -35,6 +36,12 @@ public class GoodServiceImpl implements GoodService {
 	public int deleteDibsHotel(Good gg) {
 		return gd.deleteOneDibs(sqlSession, gg);
 	}
+
+	@Override
+	public int selectOneDibsCheckFG(Good2 gg) {
+		return gd.selectOneDibsCheckFG(sqlSession, gg);
+	}
+
 	
 	
 	
