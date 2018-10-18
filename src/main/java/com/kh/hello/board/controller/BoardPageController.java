@@ -157,6 +157,22 @@ public class BoardPageController {
 		return "redirect:"+uri;
 	}
 	
+	@RequestMapping(value="deleteReview.bo")
+	public ModelAndView deleteReview(@RequestParam int bid, HttpServletResponse response){
+		response.setContentType("text/html; charset=UTF-8");
+		ModelAndView mv = new ModelAndView("jsonView");
+		int result = 0;
+		result = bs.deleteReview(bid);
+		
+		if(result > 0){
+			mv.addObject("msg", "리뷰가 삭제 되었습니다.");
+		}else{
+			mv.addObject("msg", "에러입니다.");
+		}
+		
+		return mv;
+	}
+	
 	@RequestMapping(value="QPaging.bo", produces = "application/json; charset=utf8")
 	public ModelAndView QPaging(HttpServletResponse response, @RequestParam int page, ModelAndView mv, @RequestParam int contentid){
 		response.setContentType("text/html; charset=UTF-8");
@@ -167,6 +183,10 @@ public class BoardPageController {
 		pi2 = Pagination2.getPageInfo(page, listCount2);
 		list2 = bs.selectQ(pi2, contentid);
 		ArrayList<Reply> listQAnswer = bs.selectQAnswer();
+		
+		for(int i = 0 ; i < list2.size() ; i++){
+			list2.get(i).setCreate_date(list2.get(i).getCreate_date().substring(0, 10));
+		}
 		
 		mv.addObject("list2", list2);
 		mv.addObject("pi2", pi2);

@@ -34,6 +34,11 @@
           INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, '타이틀',
                                        '텍스트', 1, SYSDATE, 'Y', SYSDATE, null, 0, #{m_id}, #{origin_id}, '여행일자')
      </insert>
+     <delete id="deleteReview" parameterType="_int">
+     	  DELETE FROM BOARD
+     	  WHERE BID = #{bid}
+     	  AND BOARD_TYPE = 1
+     </delete>
      
      <!-- 리뷰 업데이트(실질적 글작성) -->
      <update id="updateReviewBoard" parameterType="Board">

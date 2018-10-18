@@ -385,7 +385,7 @@
             
             div.children().last().find('.progress-bar').css({'width':'100%'});
             div.children().last().animate({"opacity":"toggle"}, 1000, function(){
-                $("#" + __options.response).prepend($('<p/>').append(response));
+                //$("#" + __options.response).prepend($('<p/>').append(response));
                 div.append($('<p/>').append(deleteButton)).append($('<p/>').append('&nbsp;'));
                 $().addEffect(deleteButton.fadeIn());
             });
