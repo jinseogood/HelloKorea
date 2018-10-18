@@ -30,9 +30,9 @@
 	
 	<!-- 회원 포인트 조회 -->
 	<select id="selectUserPoint" resultType="_int" parameterType="_int">
-		SELECT NVL(SUM((SELECT AMOUNT FROM POINT WHERE M_ID = #{mId} AND P_TYPE LIKE 'A')), 0) - NVL(SUM((SELECT AMOUNT FROM POINT WHERE M_ID = #{mId} AND P_TYPE LIKE 'U')), 0)
+		SELECT NVL((SELECT SUM(AMOUNT) FROM POINT WHERE M_ID = #{mId} AND P_TYPE LIKE 'A'), 0) - NVL((SELECT SUM(AMOUNT) FROM POINT WHERE M_ID = #{mId} AND P_TYPE LIKE 'U'), 0)
 		FROM POINT
-		WHERE M_ID = #{mId}
+		GROUP BY M_ID
 	</select>
    
 </mapper>

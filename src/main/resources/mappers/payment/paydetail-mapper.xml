@@ -22,7 +22,7 @@
 	<!-- 포인트 사용 이력 등록 -->
 	<insert id="insertPoint" parameterType="arraylist">
 		INSERT INTO POINT(P_ID, P_TYPE, P_DATE, AMOUNT, M_ID, PD_ID, REPLY_ID, PA_TYPE)
-		VALUES (SEQ_P_ID.NEXTVAL, 'U', SYSDATE, 100, 1, SEQ_PD_ID.CURRVAL, SEQ_O_ID.CURRVAL, '0')
+		VALUES (SEQ_P_ID.NEXTVAL, 'U', SYSDATE, ${list.get(1)}, ${list.get(0)}, SEQ_PD_ID.CURRVAL, SEQ_O_ID.CURRVAL, '0')
 	</insert>
 	
 	<!-- 결제 완료 페이지에 보여 줄 결제 상세 정보 조회 -->

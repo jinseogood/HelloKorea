@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Hello Korea | Seller</title>
 <style>
 	input{
 		border-radius:5px;
@@ -109,7 +110,7 @@
 						</tr>
 						<tr>
 							<th>객실 가격</th>
-							<td><input type="hidden" name="roomPrice" value="${ op.roomPrice }">${ op.roomPrice }</td>
+							<td><input type="hidden" name="roomPrice" value="${ op.roomPrice }"><fmt:formatNumber value="${ op.roomPrice }" pattern="#,###"/> 원</td>
 							<th>정원</th>
 							<td><input type="hidden" name="roomPeople" value="${ op.roomPeople }">${ op.roomPeople }명</td>
 						</tr>

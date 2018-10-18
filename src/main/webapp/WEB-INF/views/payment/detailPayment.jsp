@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Hello Korea | Payment</title>
 <style>
 	.main{
 		width:1000px;
@@ -92,9 +93,13 @@
 			<input type="hidden" id="orderPrice" name="amount">
 			<input type="hidden" name="quantity" value="${ reservation.oRcount }">
 			<input type="hidden" id="orderInfo" name="custom">
-			<input type="hidden" name="return" value="https://localhost:8443/hello/paymentConfirm.pay">
-			<input type="hidden" name="cancel_return" value="https://localhost:8443/hello/detailHotel?cid=${ reservation.cid }&contentid=${ reservation.contentid }">
 			<input type="hidden" name="charset" value="UTF-8">
+			<!-- 개인 테스트 용 -->
+			<%-- <input type="hidden" name="return" value="https://localhost:8443/hello/paymentConfirm.pay">
+			<input type="hidden" name="cancel_return" value="https://localhost:8443/hello/detailHotel?cid=${ reservation.cid }&contentid=${ reservation.contentid }"> --%>
+			<!-- 다른 IP이용 시 -->
+			<input type="hidden" name="return" value="https://192.168.219.106:8443/hello/paymentConfirm.pay">
+			<input type="hidden" name="cancel_return" value="https://192.168.219.106:8443/hello/detailHotel?cid=${ reservation.cid }&contentid=${ reservation.contentid }">
 			
 			<input type="hidden" id="oId" value="${ reservation.oid }">
 			<input type="hidden" id="price" value="${ ((param.price * reservation.period) * 0.1) + (param.price * reservation.period) }">
@@ -108,11 +113,11 @@
 					<table id="itemTable" border="1">
 						<tr>
 							<td width="350px" colspan="2">
-								<font style="font-size:16px; font-weight:bold;">${ reservation.roomName }</font>
+								<font style="font-size:20px; font-weight:bold;">${ reservation.roomName }</font>
 								<br>
-								<font style="font-size:12px;">${ reservation.cName }</font>
+								<font style="font-size:14px;">${ reservation.cName }</font>
 								<br>
-								<font style="font-size:10px;">${ reservation.cAddress }</font>
+								<font style="font-size:12px;">${ reservation.cAddress }</font>
 							</td>
 							<td width="200px">
 								<img id="checkIcon" src="${ contextPath }/resources/img/checkIcon.png"> 입실 2일 전까지 취소 가능!
@@ -120,7 +125,7 @@
 								<img id="checkIcon" src="${ contextPath }/resources/img/checkIcon.png"> 환불 수수료 없음!
 							</td>
 							<td width="100px" style="text-align:center;">
-								<b style="font-size:16px;">₩ ${ param.price }/</b><sub>박</sub>
+								<b style="font-size:16px;">₩ <fmt:formatNumber value="${ param.price }" pattern="#,###"/>/</b><sub>박</sub>
 							</td>
 						</tr>
 					</table>
@@ -430,14 +435,14 @@
 						</tr>
 						<tr>
 							<td><b>결제 금액</b></td>
-							<td colspan="2">₩ ${ (param.price + (param.price * 0.1)) * reservation.period }</td>
+							<td colspan="2">₩ <fmt:formatNumber value="${ ((param.price * reservation.period) * 0.1) + (param.price * reservation.period) }" pattern="#,###"/></td>
 						</tr>
 						<tr>
 							<td colspan="3"><hr style="width:644px; border-style:dashed; border-width:2px; border-color:gold;"></td>
 						</tr>
 						<tr>
 							<td><b style="font-size:20px;">총 금액</b></td>
-							<td colspan="2"><b style="font-size:20px;" id="totalPrice">₩ ${ (param.price + (param.price * 0.1)) * reservation.period }</b></td>
+							<td colspan="2"><b style="font-size:20px;" id="totalPrice">₩ <fmt:formatNumber value="${ ((param.price * reservation.period) * 0.1) + (param.price * reservation.period) }" pattern="#,###"/></b></td>
 						</tr>
 						<tr style="text-align:center;">
 							<td colspan="3">
@@ -458,14 +463,14 @@
 				<table id="priceTable">
 					<tr height="100px" style="border-bottom:1px solid lightgray;">
 						<th colspan="2">
-							<font style="font-size:16px;">${ reservation.roomName }</font>
+							<font style="font-size:18px;">${ reservation.roomName }</font>
 							<br>
-							<font style="font-size:10px; font-weight:normal;">${ reservation.rSdate } - ${ reservation.rEdate }</font>
+							<font style="font-size:16px; font-weight:normal;">${ reservation.rSdate } - ${ reservation.rEdate }</font>
 						</th>
 					</tr>
 					<tr height="40px">
 						<td>1박 요금</td>
-						<td style="text-align:right;">₩ ${ param.price }</td>
+						<td style="text-align:right;">₩ <fmt:formatNumber value="${ param.price }" pattern="#,###"/></td>
 					</tr>
 					<tr height="40px">
 						<td>객실 수</td>
@@ -481,15 +486,15 @@
 					</tr>
 					<tr height="40px">
 						<td>소계</td>
-						<td style="text-align:right;">₩ ${ param.price * reservation.period }</td>
+						<td style="text-align:right;">₩ <fmt:formatNumber value="${ param.price * reservation.period }" pattern="#,###"/></td>
 					</tr>
 					<tr height="40px">
 						<td>세금 및 봉사료</td>
-						<td style="text-align:right;">₩ ${ (param.price * reservation.period) * 0.1 }</td>
+						<td style="text-align:right;">₩ <fmt:formatNumber value="${ (param.price * reservation.period) * 0.1 }" pattern="#,###"/></td>
 					</tr>
 					<tr height="60px" style="background:lightgray;">
 						<th style="font-size:18px;">합계</th>
-						<th style="text-align:right; font-size:18px;">₩ ${ ((param.price * reservation.period) * 0.1) + (param.price * reservation.period) }</th>
+						<th style="text-align:right; font-size:18px;">₩ <fmt:formatNumber value="${ ((param.price * reservation.period) * 0.1) + (param.price * reservation.period) }" pattern="#,###"/></th>
 					</tr>
 				</table>
 			</div>
@@ -601,6 +606,11 @@
 					$pointBody.html('');
 					
 					$pointBody.append(data);
+					
+					if(data == 0){
+						$("#point").attr("disabled", "disabled");
+					}
+					
 				},
 				error:function(data){
 					console.log(data);
