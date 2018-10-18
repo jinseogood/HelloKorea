@@ -444,7 +444,11 @@
 								dataType:"json",
 								async:false,
 								success:function(ddate){
+									console.log("오버뷰");
+									console.log(ddate);
 									var overview = ddate.response.body.items.item.overview;
+									var reg = /<br\s*[\/]?>/g;
+										overview = overview.replace(reg, " ");
 									if(overview.length > 190){
 										output += overview.substring(0, 191) + "...";
 									}else{
@@ -452,6 +456,7 @@
 									}
 								},error:function(ddate){console.log(ddate);}
 							});
+							output += "<br><span style='font-size:20px;'>최저가 : "+"\\"+data[i].minPrice+"원 ~</span>";
 							output += "</p>";
 							output += "<div class='tm-home-box-2-container'>";
 							$.ajax({
@@ -461,9 +466,8 @@
 								dataType:"json",
 								async:false,
 								success:function(ddatte){
-									console.log("성공?");console.log(ddatte);
 									if(ddatte == 0){
-										output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtns' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+										output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 									}else{
 										output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 									}
@@ -561,7 +565,6 @@
 					}
 				});
 			}
-			
 			</script>
 			<c:if test="${!empty sessionScope.loginUser}">
 			<script>
@@ -685,6 +688,8 @@
 								async:false,
 								success:function(ddate){
 									var overview = ddate.response.body.items.item.overview;
+									var reg = /<br\s*[\/]?>/g;
+									overview = overview.replace(reg, " ");
 									if(overview.length > 190){
 										output += overview.substring(0, 191) + "...";
 									}else{
@@ -692,6 +697,7 @@
 									}
 								},error:function(ddate){console.log(ddate);}
 							});
+							output += "<br><span style='font-size:20px;'>최저가 : "+"\\"+data[i].minPrice+"원 ~</span>";
 							output += "</p>";
 							output += "<div class='tm-home-box-2-container'>";
 							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
@@ -805,7 +811,7 @@
 					orderByHotel(value);
 				});
 				
-				$(".goodBtns").click(function(){
+				/* $(".goodBtns").click(function(){
 					if($(this).children("i").hasClass("fa fa-heart-o tm-home-box-2-icon border-right") == true){
 						$(this).children("i").removeClass("fa fa-heart-o tm-home-box-2-icon border-right");
 						$(this).children("i").addClass("fa fa-heart tm-home-box-2-icon border-right");
@@ -813,7 +819,7 @@
 						$(this).children("i").removeClass("fa fa-heart tm-home-box-2-icon border-right");
 						$(this).children("i").addClass("fa fa-heart-o tm-home-box-2-icon border-right");
 					}
-				});
+				}); */
 				$(".goodBtn").click(function(){
 					if($(this).children("i").hasClass("fa fa-heart tm-home-box-2-icon border-right") == true){
 						$(this).children("i").removeClass("fa fa-heart tm-home-box-2-icon border-right");
