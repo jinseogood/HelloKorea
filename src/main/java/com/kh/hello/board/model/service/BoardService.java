@@ -69,6 +69,8 @@ public interface BoardService{
 
 	int selectReplyCount(int bid);
 
-	int deleteReview(int bid); 
+	int deleteReview(int bid);
+
+	int updateReview(Board b); 
 
 } 

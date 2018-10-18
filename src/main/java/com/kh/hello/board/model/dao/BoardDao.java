@@ -73,4 +73,6 @@ public interface BoardDao {
 
 	int deleteReview(SqlSessionTemplate sqlSession, int bid);
 
+	int updateReview(SqlSessionTemplate sqlSession, Board b);
+
 }
