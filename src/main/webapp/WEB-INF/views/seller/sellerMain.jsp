@@ -35,6 +35,12 @@
 	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	
+	<style>
+		#noti-box{
+			height:760px;
+		}
+	</style>
           
 </head>
 
@@ -184,35 +190,65 @@
 			<div class="col-lg-4">
 				<!--chat start-->
 				<section class="panel">
-					<header class="panel-heading">제휴 승인 결과 안내</header>
+					<header class="panel-heading">알림 메시지</header>
 					<div class="panel-body" id="noti-box">
-						<div class="alert alert-success">
-							<button data-dismiss="alert" class="close close-sm" type="button">
-								<i class="fa fa-times"></i>
-							</button>
-						</div>
-						<div class="alert alert-info">
-							<button data-dismiss="alert" class="close close-sm" type="button">
-								<i class="fa fa-times"></i>
-							</button>
-						</div>
+					
 					</div>
 				</section>
 			</div>
 			
 			<script>
-				/* $(function(){
+				$(function(){
 					$.ajax({
 						url:"selectNotice.sell",
 						type:"POST",
 						success:function(data){
 							console.log(data);
+							
+							$noticeBody=$("#noti-box");
+							$noticeBody.html('');
+							
+							var output="";
+							
+							if(data.okList.length > 0){
+								for(var i=0;i<data.okList.length;i++){
+									output += "<div class='alert alert-success'>";
+									output += "<button data-dismiss='alert' class='close close-sm' type='button'><i class='fa fa-times'></i></button>";
+									output += "<strong>" + data.okList[i].cName + "</strong>";
+									output += " 업체가 " + data.okList[i].apDate + " 에 제휴 승인 되었습니다.</div>";
+								}
+							}
+							
+							if(data.qList.length > 0){
+								for(var i=0;i<data.qList.length;i++){
+									output += "<div class='alert alert-info'>";
+									output += "<button data-dismiss='alert' class='close close-sm' type='button'><i class='fa fa-times'></i></button>";
+									output += "<strong onclick='goDetail(" + data.qList[i].cId + ", " + data.qList[i].contentId + ")'>" + data.qList[i].cName + "</strong>";
+									output += " 의 새 문의가 " + data.qList[i].count + " 건 등록 되었습니다.</div>";
+								}
+							}
+							
+							if(data.rList.length > 0){
+								for(var i=0;i<data.rList.length;i++){
+									output += "<div class='alert alert-warning'>";
+									output += "<button data-dismiss='alert' class='close close-sm' type='button'><i class='fa fa-times'></i></button>";
+									output += "<strong onclick='goDetail(" + data.rList[i].cId + ", " + data.rList[i].contentId + ")'>" + data.rList[i].cName + "</strong>";
+									output += " 의 새 리뷰가 " + data.rList[i].count + " 건 등록 되었습니다.</div>";
+								}
+							}
+							
+							$noticeBody.append(output);
+							
 						},
 						error:function(data){
 							console.log(data);
 						}
 					});
-				}); */
+				});
+				
+				function goDetail(cId, contentId){
+					location.href="detailHotel?cid=" + cId + "&contentid=" + contentId + "&contenttypeid=32";
+				}
 			</script>
 			
 		</div>
