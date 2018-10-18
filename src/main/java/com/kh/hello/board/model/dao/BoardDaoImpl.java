@@ -216,6 +216,12 @@ public class BoardDaoImpl implements BoardDao{
 	public int deleteReview(SqlSessionTemplate sqlSession, int bid) {
 
 		return sqlSession.delete("Board.deleteReview", bid);
+	}
+
+	@Override
+	public int updateReview(SqlSessionTemplate sqlSession, Board b) {
+		
+		return sqlSession.update("Board.updateReview", b);
 	} 
 
 }

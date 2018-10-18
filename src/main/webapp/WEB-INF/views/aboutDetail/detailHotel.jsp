@@ -842,7 +842,7 @@
 							output += "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-12' style = 'height:auto'>";
 							output += "<div class='tm-about-box-1' style = 'height:220px; padding:10px 10px;'>";
 							output += "<a onclick = member_info(this);><img src='${ contextPath }/resources/img/about-4.jpg' alt='img' class='tm-about-box-1-img' style = 'margin:0 auto 10px;'></a>";
-							output += "<h3 class='tm-about-box-1-title' style = 'margin-bottom:5px;'>Songs <span>( GOD )</span></h3>";
+							output += "<h3 class='tm-about-box-1-title' style = 'margin-bottom:5px;'>"+Q[i].nickname+"<span>( "+Q[i].national+" )</span></h3>";
 							output += "<div class = 'member_info' style = 'border-radius: 10px; visibility:hidden; position:absolute; background-color:lightgray; left:-133px; top:-10px; width:200px; height:200px; z-index:999;'>";
 							output += "<div><h3>"+Q[i].nickname+"</h3></div>";
 							output += "<div style = 'text-align:right;'><button class='btn btn-light' style='width:65px; height:30px;' type = 'button'>메세지</button></div>";
@@ -865,9 +865,6 @@
 							output += "<div class='col-lg-9 col-md-9 col-sm-6 col-xs-12 line_l' style = 'height:auto;' ><br>";
 							output += "<div class='summary' style = 'padding-top:10px; font-size:18px'>";
 							output += Q[i].text+"<span>";
-							/* if(Q[i].m_id == ${sessionScope.loginUser.mId}){
-								output += "<span style='float:right'><button type = 'button' style = 'width:47px; height:31px;' class='btn btn-danger'>수정</button>&nbsp;<button type = 'button' style = 'width:47px; height:31px;' class='btn btn-danger'>삭제</button></span>";
-							} */
 							output += "</div><br>";
 							output += "<div style = 'padding-top:1px' >";
 							output += "<div class='fa' style = 'width:100%'>";
@@ -963,7 +960,7 @@
 							output += "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-12' style = 'height:220px'>";
 							output += "<div class='tm-about-box-1' style = 'height:220px; padding:10px 10px;'>";
 							output += "<a onclick = member_info(this);><img src='${ contextPath }/resources/img/about-4.jpg' alt='img' class='tm-about-box-1-img' style = 'margin:0 auto 10px;'></a>";
-							output += "<h3 class='tm-about-box-1-title' style = 'margin-bottom:5px;'>Songs <span>( GOD )</span></h3>";
+							output += "<h3 class='tm-about-box-1-title' style = 'margin-bottom:5px;'>"+review[i].nickname+"<span>( "+review[i].national+" )</span></h3>";
 							output += "<div class = 'member_info' style = 'border-radius: 10px; visibility:hidden; position:absolute; background-color:lightgray; left:-133px; top:-10px; width:200px; height:200px; z-index:999;'>";
 							output += "<div><h3>"+review[i].nickname+"</h3></div>";
 							output += "<div style = 'text-align:right;'><button class='btn btn-light' style='width:65px; height:30px;' type = 'button'>메세지</button></div>";
@@ -1077,7 +1074,7 @@
 							output += "</span>&nbsp;&nbsp;";
 							output += "<span class='ReviewUpDate'>리뷰 게시 날짜 : "+review[i].regist_date+"</span>";
 							if(review[i].m_id == ${sessionScope.loginUser.mId}){
-								output += "<span style='float:right'><button type = 'button' style = 'width:47px; height:31px;' class='btn btn-danger'>수정</button>&nbsp;<button type = 'button' style = 'width:47px; height:31px;' class='btn btn-danger' onclick=deleteR("+review[i].bid+")>삭제</button></span>";
+								output += "<span style='float:right'><button type = 'button' style = 'width:47px; height:31px;' class='btn btn-danger' onclick = 'updateR("+review[i].bid+")'>수정</button>&nbsp;<button type = 'button' style = 'width:47px; height:31px;' class='btn btn-danger' onclick=deleteR("+review[i].bid+")>삭제</button></span>";
 							}	
 							output += "</div>";
 							output += "<div class='ReviewTitle' style = 'font-size:20px; cursor:pointer; padding-top:10px;'><a onclick='goDetail("+review[i].bid+")'><span>"+review[i].title+"</span></a></div>";
@@ -1120,20 +1117,31 @@
 		
 		function deleteR(element){
 			var bid = element;
-
-				$.ajax({
-					url:"deleteReview.bo",
-					type:"post",
-					data:{bid:bid},
-					dataType:"json",
-					success:function(data){
-						reviewPaging(1);
-						alert(data.msg);
+			var msg = confirm("정말 삭제하시겠습니까?");
+				if(msg == true){
+					$.ajax({
+						url:"deleteReview.bo",
+						type:"post",
+						data:{bid:bid},
+						dataType:"json",
+						success:function(data){
+							reviewPaging(1);
+							alert(data.msg);
 							
-					},error:function(data){
-						alert(data.msg); 
-					}
-				});			
+						},error:function(data){
+							alert(data.msg); 
+						}
+					});	
+				}
+		}
+		
+		function updateR(element){
+			var bid = element;
+			var msg = confirm("정말 수정하시겠습니까?");
+			
+			if(msg == true){
+				location.href = "updateR.bo?bid="+bid+"&contentid="+contentid+"&contenttypeid="+contenttypeid+"&cid="+cid;
+			}	
 		}
 		
 

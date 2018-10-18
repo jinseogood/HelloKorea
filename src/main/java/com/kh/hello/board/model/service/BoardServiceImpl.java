@@ -218,5 +218,11 @@ public class BoardServiceImpl implements BoardService{
 
 		return bd.deleteReview(sqlSession, bid);
 	}
+
+	@Override
+	public int updateReview(Board b) {
+		
+		return bd.updateReview(sqlSession, b);
+	}
  
 }

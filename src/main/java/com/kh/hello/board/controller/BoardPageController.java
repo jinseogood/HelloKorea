@@ -36,16 +36,13 @@ public class BoardPageController {
 	private BoardService bs;
 	
 	@RequestMapping(value = "reviewWrite.bo")
-	public String reviewWrite(Model model, HttpServletRequest request, @RequestParam int contentid, @RequestParam int contenttypeid, @RequestParam int cid/*, @RequestParam("file") MultipartFile[] file*/){
+	public String reviewWrite(Model model, HttpServletRequest request, @RequestParam int contentid, @RequestParam int contenttypeid, @RequestParam int cid){
 
-		//System.out.println(contentid);
 		Board b = new Board();
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		b.setM_id(m.getmId());
 		b.setOrigin_id(contentid);
-		//String uri = referer.substring(0, referer.lastIndexOf("?"));
-		//referer.replaceAll("?", "&");
-		//System.out.println(uri);
+
 		int result = bs.insertBoard(b);
 		
 		String referer = request.getHeader("Referer");
@@ -150,7 +147,6 @@ public class BoardPageController {
 		int result = 0;
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		b.setM_id(m.getmId());
-		//System.out.println(b);
 		result = bs.updateBoard(b);
 		
 		uri+="&contenttypeid="+contenttypeid+"&cid="+cid;
@@ -198,23 +194,15 @@ public class BoardPageController {
 	}
 	
 	@RequestMapping(value="reviewPaging.bo", produces = "application/json; charset=utf8")
-	public ModelAndView reviewPaging(/*Model model, */HttpServletResponse response, @RequestParam int page, @RequestParam int contentid, ModelAndView mv){
-		//ModelAndView mv = new ModelAndView();
+	public ModelAndView reviewPaging(HttpServletResponse response, @RequestParam int page, @RequestParam int contentid, ModelAndView mv){
+
 		response.setContentType("text/html; charset=UTF-8");
 		ArrayList<Board> list = null;
 		PageInfo pi = null;
-		//DateFormat df = new SimpleDateFormat("yyyy년 MM월 dd일");
 
 		int listCount = bs.selectReviewCount(contentid);
 		pi = Pagination2.getPageInfo(page, listCount);
 		list = bs.selectReview(pi, contentid);
-		
-		/*for(int i = 0 ; i < list.size() ; i++){
-			String tempDate = df.format(list.get(i).getRegist_date());
-			list.get(i).setRegist_date(tempDate);
-			System.out.println(list.get(i).getRegist_date());
-		}*/
-
 		
 		for(int i = 0 ; i < list.size() ; i++){
 			list.get(i).setrCount(bs.selectReplyCount(list.get(i).getBid()));
@@ -226,49 +214,6 @@ public class BoardPageController {
 		mv.addObject("listCount", listCount);
 		mv.setViewName("jsonView");
 
-		/*System.out.println(list);
-		PrintWriter out;
-		try {
-			out = response.getWriter();
-			
-			out.println(list);
-			out.println(pi);
-			
-			JSONArray ja = new JSONArray();
-			JSONObject json1 = new JSONObject();
-			JSONObject json2 = new JSONObject();
-			for(Board review : list){
-				json1=new JSONObject();
-				
-				json1.put("bid", review.getBid());
-				json1.put("title", URLEncoder.encode(review.getTitle(), "UTF-8"));
-				json1.put("text", URLEncoder.encode(review.getText(), "UTF-8"));
-				json1.put("board_type", review.getBoard_type());
-				json1.put("regist_date", review.getRegist_date());
-				json1.put("status", URLEncoder.encode(review.getStatus(), "UTF-8"));
-				json1.put("modify_date", review.getModify_date());
-				json1.put("grade", review.getGrade());
-				json1.put("likey", review.getLikey());
-				json1.put("m_id", review.getM_id());
-				
-				
-				ja.add(json1);
-			}
-			
-			json2.put("currentPage", pi.getCurrentPage());
-			json2.put("listCount", pi.getListCount());
-			json2.put("limit", pi.getLimit());
-			json2.put("maxPage", pi.getMaxPage());
-			json2.put("startPage", pi.getStartPage());
-			json2.put("endPage", pi.getEndPage());
-			
-			ja.add(json2);
-			
-			out.print(ja);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 		return mv;
 	}
 
@@ -281,7 +226,7 @@ public class BoardPageController {
 		b.setOrigin_id(contentid);
 		
 		String referer = request.getHeader("Referer");
-		//System.out.println(referer);
+
 		model.addAttribute("uri", referer);
 		model.addAttribute("contentid", contentid);
 		model.addAttribute("contenttypeid", contenttypeid);
@@ -300,9 +245,8 @@ public class BoardPageController {
 		
 		int result = 0;
 		result = bs.insertQ(b);
-		//System.out.println(uri);
 		model.addAttribute("b", b);
-		//System.out.println("insertReview.bo"+contentid + " " + contenttypeid + " " + cid);
+
 		uri+="&contenttypeid="+contenttypeid+"&cid="+cid;
 		return "redirect:"+uri;
 	}
@@ -349,17 +293,44 @@ public class BoardPageController {
 	
 	@RequestMapping(value="reviewDetail.bo")
 	public String reviewDetail(Model model, @RequestParam int bid, HttpServletRequest request){
-		//Member m = (Member)request.getSession().getAttribute("loginUser");
+
 		Board b = bs.selectReviewDetail(bid);
 		ArrayList<Attachment> a = bs.selectAttachDetail(bid);
 		ArrayList<Reply> listRAnswer = bs.selectRAnswer(bid);
 		
-		System.out.println(b);
 		model.addAttribute("b", b);
 		model.addAttribute("a", a);
 		model.addAttribute("listRAnswer", listRAnswer);
 		
 		return "board/reviewDetail";
+	}
+	
+	@RequestMapping(value="updateR.bo")
+	public String updateR(Model model, @RequestParam int bid, HttpServletRequest request, @RequestParam int contentid, @RequestParam int contenttypeid, @RequestParam int cid){
+		Board b = bs.selectReviewDetail(bid);
+		model.addAttribute("b", b);
+		
+		String referer = request.getHeader("Referer");
+		
+		model.addAttribute("uri", referer);
+		model.addAttribute("contentid", contentid);
+		model.addAttribute("contenttypeid", contenttypeid);
+		model.addAttribute("cid", cid);
+		model.addAttribute("bid", bid);
+		
+		return "board/updateReview";
+	}
+	
+	@RequestMapping(value="updateReview.bo")
+	public String updateReview(HttpServletRequest request, Board b, Model model, @RequestParam String uri, @RequestParam int contentid, @RequestParam int contenttypeid,
+			@RequestParam int cid, @RequestParam int bid){
+		int result = 0;
+		b.setBid(bid);
+		
+		result = bs.updateReview(b);
+		
+		uri+="&contenttypeid="+contenttypeid+"&cid="+cid;
+		return "redirect:"+uri;
 	}
 	
 	@RequestMapping(value="thumbsR.bo")
