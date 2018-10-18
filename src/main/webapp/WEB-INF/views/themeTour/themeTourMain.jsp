@@ -15,7 +15,7 @@
 	#tm-home-box-2-link-1{width:50px;}
 	#tm-home-box-2-link-2{width:445px; display:inline-block;}
 	#dibsBtn{padding:15px; width:50px; height:50px;}
-	#infoTextArea{height:175px; padding:10px 20px 44px; overflow:auto; text-align:left; }
+	#infoTextArea{height:175px; padding:10px 20px 44px; text-align:left; }
 	.img-responsive1{width:250px; height:225px;}
 </style>
 </head>
@@ -159,10 +159,10 @@
 				console.log("checkvalue : " + checkvalue);
 				if(checkvalue == "shopping"){
 					sigunguCode = "";
-					contenttypeid;
-					cat1 = "";
+					contenttypeid = 38;
+					cat1 = "A04";
 					cat2 = "A0401";
-					cat3 = "A04010600";
+					cat3 = "A04010400";
 					pageNo = 1;
 				}else if(checkvalue == "beauty"){
 					
@@ -195,6 +195,7 @@
 				type:"GET",
 				data:{areaCode:areaCode, sigunguCode:sigunguCode, contenttypeid:contenttypeid, cat1:cat1, cat2:cat2, cat3:cat3, pageNo:pageNo},
 				dataType:"json",
+				async:false,
 				success:function(data){
 					console.log("성공");
 					console.log(data);
@@ -230,7 +231,24 @@
 									output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1' />";
 									output += "</div>";
 									output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
-									output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData[i].addr1+"</p>";
+									output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+									output += "<span style='font-size:23px;'>"+myData[i].title+"</span><br>";
+									$.ajax({
+										url:"detailGameInformation.sub",
+										type:"GET",
+										data:{contenttypeid:contenttypeid, contentid:contentid},
+										dataType:"json",
+										async:false,
+										success:function(ddate){
+											var overview = ddate.response.body.items.item.overview;
+											if(overview.length > 190){
+												output += overview.substring(0, 191) + "...";
+											}else{
+												output += overview;
+											}
+										},error:function(ddate){console.log(ddate);}
+									});
+									output += "</p>";
 									output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 									output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
 									output += "</div></div></div>";
@@ -244,7 +262,55 @@
 									output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1 />'";
 									output += "</div>";
 									output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
-									output += "<p class='tm-home-box-3-description' id='infoTextArea'>"+myData[i].addr1+"</p>";
+									output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+									output += "<span style='font-size:23px;'>"+myData[i].title+"</span><br>";
+									$.ajax({
+										url:"detailGameInformation.sub",
+										type:"GET",
+										data:{contenttypeid:contenttypeid, contentid:contentid},
+										dataType:"json",
+										async:false,
+										success:function(ddate){
+											var overview = ddate.response.body.items.item.overview;
+											if(overview.length > 190){
+												output += overview.substring(0, 191) + "...";
+											}else{
+												output += overview;
+											}
+										},error:function(ddate){console.log(ddate);}
+									});
+									output += "</p>";									
+									output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+									output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
+									output += "</div></div></div>";
+									document.getElementById("viewArea").innerHTML += output;
+								}else if(myData[i].contenttypeid == 38){
+									contenttypeid = myData[i].contenttypeid;
+									contentid = myData[i].contentid;
+									output = "";
+									output += "<div class='tm-home-box-3' id='detailHover'>";
+									output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+									output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1 />'";
+									output += "</div>";
+									output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+									output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+									output += "<span style='font-size:23px;'>"+myData[i].title+"</span><br>";
+									$.ajax({
+										url:"detailGameInformation.sub",
+										type:"GET",
+										data:{contenttypeid:contenttypeid, contentid:contentid},
+										dataType:"json",
+										async:false,
+										success:function(ddate){
+											var overview = ddate.response.body.items.item.overview;
+											if(overview.length > 190){
+												output += overview.substring(0, 191) + "...";
+											}else{
+												output += overview;
+											}
+										},error:function(ddate){console.log(ddate);}
+									});
+									output += "</p>";
 									output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 									output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
 									output += "</div></div></div>";
