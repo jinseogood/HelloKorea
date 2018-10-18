@@ -11,6 +11,7 @@ import com.kh.hello.common.Attachment;
 import com.kh.hello.member.model.vo.BoardAndReply;
 import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.member.model.vo.MemberGoods;
+import com.kh.hello.member.model.vo.MemberReservation;
 @Repository
 public class MemberDaoImpl implements MemberDao {
 
@@ -134,6 +135,14 @@ public class MemberDaoImpl implements MemberDao {
 	public int selectReplyCount(int mId, SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("BoardAndReply.selectReplyCount", mId);
+	}
+	
+	//예약내역
+	@Override
+	public ArrayList<MemberReservation> selectReservationHistory(int mId, SqlSessionTemplate sqlSession) {
+		ArrayList<MemberReservation> list =(ArrayList)sqlSession.selectList("MemberReservation.selectReservationHistory",mId);
+		
+		return list;
 	}
 
 

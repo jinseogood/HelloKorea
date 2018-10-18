@@ -21,6 +21,7 @@ import com.kh.hello.member.model.service.MemberService;
 import com.kh.hello.member.model.vo.BoardAndReply;
 import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.member.model.vo.MemberGoods;
+import com.kh.hello.member.model.vo.MemberReservation;
 
 @Controller
 @SessionAttributes("loginUser")
@@ -137,6 +138,22 @@ public class UserController {
 		model.addAttribute("boreList", boreList);
 		model.addAttribute("replyCount",replyCount);
 		return  "userMypage/activities";
+		
+	}
+	//예약내역
+	@RequestMapping(value="reservationHistory.um")
+	public String selectReservationHistory(Model model,HttpServletRequest request){
+		
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		
+		int mId = m.getmId();
+		
+		ArrayList<MemberReservation>reservationList = ms.selectReservationHistory(mId);
+		
+		
+		
+		model.addAttribute("reservationList", reservationList);
+		return "userMypage/reservationHistory";
 		
 	}
 }
