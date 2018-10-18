@@ -27,8 +27,7 @@
                               JOIN ROOM RO ON(RE.R_ID=RO.R_ID)
                               JOIN COMPANY C ON(RO.C_ID=C.C_ID)
                               JOIN MEMBER M ON(C.M_ID=M.M_ID)
-                              WHERE PD_METHOD = 'C'
-                              AND TO_CHAR(RE.R_EDATE,'YYYYMM') = TO_CHAR(ADD_MONTHS(SYSDATE,-1),'YYYYMM')
+                              WHERE TO_CHAR(RE.R_EDATE,'YYYYMM') = TO_CHAR(ADD_MONTHS(SYSDATE,-1),'YYYYMM')
                               AND PA_ID NOT IN ( SELECT PA_ID
                                                  FROM PAY_DETAIL
                                                  WHERE PD_TYPE = 'R'))                    
@@ -51,8 +50,7 @@
                        JOIN ROOM RO ON(RE.R_ID=RO.R_ID)
                        JOIN COMPANY C ON(RO.C_ID=C.C_ID)
                        JOIN MEMBER M ON(C.M_ID=M.M_ID)
-                       WHERE PD_METHOD = 'C'
-                       AND TO_CHAR(RE.R_EDATE,'YYYYMM') = TO_CHAR(ADD_MONTHS(SYSDATE,-1),'YYYYMM')
+                       WHERE TO_CHAR(RE.R_EDATE,'YYYYMM') = TO_CHAR(ADD_MONTHS(SYSDATE,-1),'YYYYMM')
                        AND PA_ID NOT IN ( SELECT PA_ID
                                           FROM PAY_DETAIL
                                           WHERE PD_TYPE = 'R'))                    
@@ -77,8 +75,7 @@
                               JOIN ROOM RO ON(RE.R_ID=RO.R_ID)
                               JOIN COMPANY C ON(RO.C_ID=C.C_ID)
                               JOIN MEMBER M ON(C.M_ID=M.M_ID)
-                              WHERE PD_METHOD = 'C'
-                              AND TO_CHAR(RE.R_EDATE,'YYYYMM') = TO_CHAR(ADD_MONTHS(SYSDATE,-1),'YYYYMM')
+                              WHERE TO_CHAR(RE.R_EDATE,'YYYYMM') = TO_CHAR(ADD_MONTHS(SYSDATE,-1),'YYYYMM')
                               AND PD_ID IN ( SELECT PD_ID
                                              FROM PAY_DETAIL
                                              GROUP BY PD_ID
@@ -109,8 +106,7 @@
                        JOIN ROOM RO ON(RE.R_ID=RO.R_ID)
                        JOIN COMPANY C ON(RO.C_ID=C.C_ID)
                        JOIN MEMBER M ON(C.M_ID=M.M_ID)
-                       WHERE PD_METHOD = 'C'
-                       AND TO_CHAR(RE.R_EDATE,'YYYYMM') = TO_CHAR(ADD_MONTHS(SYSDATE,-1),'YYYYMM')
+                       WHERE TO_CHAR(RE.R_EDATE,'YYYYMM') = TO_CHAR(ADD_MONTHS(SYSDATE,-1),'YYYYMM')
                        AND PD_ID IN ( SELECT PD_ID
                                       FROM PAY_DETAIL
                                       GROUP BY PD_ID
@@ -228,8 +224,7 @@
                        JOIN ROOM RO ON(RE.R_ID=RO.R_ID)
                        JOIN COMPANY C ON(RO.C_ID=C.C_ID)
                        JOIN MEMBER M ON(C.M_ID=M.M_ID)
-                       WHERE PD_METHOD = 'C'
-                       AND TO_CHAR(RE.R_EDATE,'YYYYMM') = TO_CHAR(ADD_MONTHS(SYSDATE,-1),'YYYYMM')
+                       WHERE TO_CHAR(RE.R_EDATE,'YYYYMM') = TO_CHAR(ADD_MONTHS(SYSDATE,-1),'YYYYMM')
                        AND PA_ID NOT IN ( SELECT PA_ID
                                           FROM PAY_DETAIL
                                           WHERE PD_TYPE = 'R'))                    
