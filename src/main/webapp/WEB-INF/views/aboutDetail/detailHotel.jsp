@@ -1327,7 +1327,23 @@
 	
 		function review(){
 			if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')})
- 				location.href="reviewWrite.bo?contentid="+contentid+"&contenttypeid="+contenttypeid+"&cid="+cid;
+				$.ajax({
+					url:"reviewBool.bo",
+					type:"post",
+					data:{contentid:contentid},
+					dataType:"json",
+					success:function(data){
+						var result = data.result;
+						if(result > 0){
+		 					location.href="reviewWrite.bo?contentid="+contentid+"&contenttypeid="+contenttypeid+"&cid="+cid;								
+						}else{
+							alert("실 이용객만 리뷰 작성이 가능합니다.");
+						}
+					},error:function(data){
+						console.log(data);
+					}
+			});
+
 			else{
 				alert("로그인이 필요한 서비스 입니다.");
 			}

@@ -71,6 +71,14 @@ public interface BoardService{
 
 	int deleteReview(int bid);
 
-	int updateReview(Board b); 
+	int updateReview(Board b);
+
+	int reviewBool(Board b);
+
+	int insertPoint(Board b);
+
+	int selectPoint(Board b);
+
+	int selectPointA(Thumbs thumb); 
 
 } 
