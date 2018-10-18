@@ -9,6 +9,7 @@ import com.kh.hello.common.Attachment;
 import com.kh.hello.member.model.vo.BoardAndReply;
 import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.member.model.vo.MemberGoods;
+import com.kh.hello.member.model.vo.MemberReservation;
 
 public interface MemberDao {
 
@@ -62,6 +63,9 @@ public interface MemberDao {
 	int insertGoogole(Member m, SqlSessionTemplate sqlSession);
 	//댓글갯수
 	int selectReplyCount(int mId, SqlSessionTemplate sqlSession);
+	
+	//예약내역
+	ArrayList<MemberReservation> selectReservationHistory(int mId, SqlSessionTemplate sqlSession);
 
 
 	

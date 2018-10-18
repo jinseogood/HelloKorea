@@ -8,6 +8,7 @@ import com.kh.hello.member.model.exception.LoginException;
 import com.kh.hello.member.model.vo.BoardAndReply;
 import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.member.model.vo.MemberGoods;
+import com.kh.hello.member.model.vo.MemberReservation;
 
 public interface MemberService {
 
@@ -65,6 +66,10 @@ public interface MemberService {
 	
 	//댓글갯수
 	int selectReplyCount(int mId);
+	
+	
+	//예약내역
+	ArrayList<MemberReservation> selectReservationHistory(int mId);
 
 	
 	

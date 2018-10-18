@@ -21,10 +21,10 @@
 
 <title>Insert title here</title>
 <style>
-@font-face { font-family: 'BMJUA'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'NanumSquare'; src: url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css') .nanumsquare; font-weight: normal; font-style: normal; }
 	
 	body, div, p, a, h1,h2,h3,h4, input, select {
-		font-family: BMJUA,meiryo,BMJUA !important
+		font-family: 'NanumSquare', sans-serif !important;
 	}
 	
 	#menuIconArea{

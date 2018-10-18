@@ -15,6 +15,7 @@ import com.kh.hello.member.model.dao.MemberDao;
 import com.kh.hello.member.model.vo.BoardAndReply;
 import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.member.model.vo.MemberGoods;
+import com.kh.hello.member.model.vo.MemberReservation;
 @Service
 public class MemberServiceImpl implements MemberService {
 	@Autowired private SqlSessionTemplate sqlSession;
@@ -167,6 +168,13 @@ public class MemberServiceImpl implements MemberService {
 	public int selectReplyCount(int mId) {
 		// TODO Auto-generated method stub
 		return md.selectReplyCount(mId,sqlSession);
+	}
+
+
+	@Override
+	public ArrayList<MemberReservation> selectReservationHistory(int mId) {
+		// TODO Auto-generated method stub
+		return md.selectReservationHistory(mId,sqlSession);
 	}
 
 
