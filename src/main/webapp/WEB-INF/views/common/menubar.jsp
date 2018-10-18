@@ -107,19 +107,32 @@
 	#btnJoinFacebook{
 		width:250px;
 		height:50px;
+		/* background:#2E64FE;
+		border:solid 1px #FAFAFA;
+		color:#FAFAFA; */
 		border:solid 1px #2E64FE;
 		background:#FAFAFA;
-		color:#2E64FE
+		color:#2E64FE;
 	}
 	
 	#btnJoinGoogle{
 		width:250px;
 		height:50px;
 		margin-top:10px;
+		/* border:solid 1px #FAFAFA;
+		background:#DF0101;
+		color:#FAFAFA; */
 		border:solid 1px #DF0101;
 		background:#FAFAFA;
 		color:#DF0101;
 	}
+
+#close1, #close2, #close3{
+     margin-right:3%;
+}
+.page-header{
+    margin-top:5%;
+}
 
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
@@ -170,10 +183,11 @@
   	</div>
 
 	<!-- 모달 -->
-	<div id="loginDiv" class="modal fade" role="dialog">
+	<div id="loginDiv" class="modal fade" role="dialog" style="height:400px;">
     	<div class="page-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h3 align="center">Welcome to HelloKorea</h3>
+			<button type="button" class="close" data-dismiss="modal" id="close1">&times;</button>
+			<br>
+			<h3 align="center">&nbsp;&nbsp;&nbsp;&nbsp;Welcome to Hello Korea</h3>
 		</div>
 		<div id="loginModal" class="col-md-3" align="center">
 			<div id="inModal" class="login-box well" align="center">
@@ -181,25 +195,25 @@
 					<button id="btnJoinFacebook"class="btn btn-primary btn-round"><i class="fa fa-facebook" aria-hidden="true"></i>&nbsp;&nbsp;Facebook Login</button>
 					<button id="btnJoinGoogle" class="btn btn-primary btn-round"> <i class="fa fa-google" aria-hidden="true"></i>&nbsp;&nbsp;Google Login</button>
 					<hr/>
-					<button id="emailBtn" data-toggle="modal" data-target="#emailLoginDiv">이메일로계속하기</button>
+					<button id="emailBtn" data-toggle="modal" data-target="#emailLoginDiv">이메일로 계속하기</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	
 	<!--자회원 로그인 폼  -->
-	<div id="emailLoginDiv" class="modal fade" role="dialog">
+	<div id="emailLoginDiv" class="modal fade" role="dialog" style="height:450px;">
 		<div class="page-header" align="center">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h3>로그인 </h3>
+			<button type="button" class="close" data-dismiss="modal" id="close2">&times;</button>
+			<h3>&nbsp;&nbsp;&nbsp;&nbsp;로그인 </h3>
 			<label>더 많은 정보를 확인하세요 !</label>
 		</div>
 		<div id="loginModal" class="col-md-3">
-			<div id="inModal" class="login-box well">
+			<div id="inModal" class="login-box well" style="height:230px;">
 				<form action="login.me" method="post">
-					<legend>로그인</legend>
+					
 					<div class="form-group">
-						<label for="username-email">이메일 or 아이디</label>
+						<label for="username-email">이메일 </label>
 						<input name="email" value='' id="email" placeholder="E-mail" type="text" class="form-control" />
 					</div>
 					<div class="form-group">
@@ -209,60 +223,61 @@
 					<div class="form-group">
 						<input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" value="Login" />
 					</div>
-					<span class='text-center'><a href="/bbs/index.php?mid=index&act=dispMemberFindAccount" class="text-sm">비밀번호 찾기</a></span>
-					<hr />
-				</form>
+				</form><br>
+					<hr/>
 				<div class="form-group">
 					<label>회원가입을 안 하셨나요?</label>
-					<a class="userJoinBtn" data-toggle="modal" data-target="#userJoinDiv">회원가입</a>
+					<a class="userJoinBtn" data-toggle="modal" data-target="#userJoinDiv">회원가입</a><br>
+					<label>비밀번호를 잊으셨나요?</label>
+				    <a href="/bbs/index.php?mid=index&act=dispMemberFindAccount" class="text-sm">비밀번호 찾기</a>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<!-- 유저회원가입 -->
-	<div id="userJoinDiv" class="modal fade" role="dialog">
+	<div id="userJoinDiv" class="modal fade" role="dialog" style="height:420px;">
 		<div class="page-header" align="center">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h3>회원가입하기 </h3>
+			<button type="button" class="close" data-dismiss="modal" id="close3">&times;</button>
+			<h3>&nbsp;&nbsp;&nbsp;&nbsp;회원가입하기 </h3>
 			<label>더 많은 정보를 확인하세요 !</label>
 		</div>
 		<div id="loginModal" class="col-md-3">
-			<div id="inModal" class="login-box well">
+			<div id="inModal" class="login-box well" style="height:230px;">
 				<form action="insertUser.me" method="post">
-					<legend>로그인</legend>
+					
 					<div class="form-group">
-						<label for="username-email">이메일 or 아이디</label>
+						<label for="username-email">이메일</label>
 						<input name="email" value='' id="email" placeholder="E-mail" type="text" class="form-control" />
 					</div>
 					<div class="form-group">
 						<label for="password">비밀번호</label>
 						<input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
 					</div>
-					<hr />
 					<div class="form-group">
 						<input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" />
 					</div>
 				</form>
-				<div class="form-group">
+			</div>
+			
+				<div class="form-group" style="margin-left:3%;margin-right:3%;">
+				<hr />
 					<label>판매자 등록은 여기로 </label>
 					<a id="sellerJoinBtn" data-toggle="modal" data-target="#sllerJoinDiv">판매자 회원가입</a>
 				</div>
-			</div>
 		</div>
 	</div>
 	
 	<!-- seller -->
-	<div id="sllerJoinDiv" class="modal fade" role="dialog">
+	<div id="sllerJoinDiv" class="modal fade" role="dialog"  style="height:400px;">
 		<div class="page-header" align="center">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h3>판매자 가입 </h3>
+			<button type="button" class="close" data-dismiss="modal" id="close4">&times;</button>
+			<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;판매자 가입하기 </h3>
 			<label>손쉽게 등록하여 판매하세요 !</label>
 		</div>
 		<div id="loginModal" class="col-md-3">
-			<div id="inModal" class="login-box well">
+			<div id="inModal" class="login-box well" style="height:250px;">
 				<form action="insertSeller.me" method="post">
-					<legend>로그인</legend>
 					<div class="form-group">
 						<label for="email">이메일 </label>
 						<input name="email" value='' id="email" placeholder="E-mail" type="text" class="form-control" />
@@ -271,7 +286,6 @@
 						<label for="password">비밀번호</label>
 						<input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
 					</div>
-					<hr />
 					<div class="form-group">
 						<input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" />
 					</div>
