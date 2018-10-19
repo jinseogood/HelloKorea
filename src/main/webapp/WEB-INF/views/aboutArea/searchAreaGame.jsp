@@ -83,6 +83,8 @@
 					var cat1 = "";
 					var cat2 = "";
 					var cat3 = "";
+					var mapy;
+					var mapx;
 					
 					function searchGamePage(pageNo){
 						console.log("오세여?");
@@ -135,8 +137,10 @@
 									if(data.response.body.items.item.firstimage != null){
 										contenttypeid = myData.contenttypeid;
 										contentid = myData.contentid;
+										mapy = myData.mapy;
+										mapx = myData.mapx;
 										output += "<div class='tm-home-box-3' id='detailHover'>";
-										output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+										output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");'>";
 										output += "<img src="+myData.firstimage+" alt='image' class='img-responsive1'/>";
 										output += "</div>";
 										output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
@@ -160,7 +164,7 @@
 										output += "</p>";
 										output += "<div class='tm-home-box-2-container'>";
 										output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-										output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span onclick='detailView("+contentid+","+contenttypeid+");' class='tm-home-box-2-description box-3'>뭐를너야할까</span></a>";
+										output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");' class='tm-home-box-2-description box-3'>뭐를너야할까</span></a>";
 										output += "</div></div></div>";
 										document.getElementById("viewArea").innerHTML += output;
 									}
@@ -169,9 +173,11 @@
 										if(myData[i].firstimage != null){
 											contenttypeid = myData[i].contenttypeid;
 											contentid = myData[i].contentid;
+											mapy = myData[i].mapy;
+											mapx = myData[i].mapx;
 											output = "";
 											output += "<div class='tm-home-box-3' id='detailHover'>";
-											output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+											output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");'>";
 											output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
 											output += "</div>";
 											output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
@@ -197,7 +203,7 @@
 											output += "<input type='hidden' value="+contenttypeid+">";
 											output += "<input type='hidden' value="+contentid+">";
 											output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-											output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span onclick='detailView("+contentid+","+contenttypeid+");' class='tm-home-box-2-description box-3'>뭐를너야할까</span></a>";
+											output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");' class='tm-home-box-2-description box-3'>뭐를너야할까</span></a>";
 											output += "</div></div></div>";
 											document.getElementById("viewArea").innerHTML += output;
 										}
@@ -303,8 +309,8 @@
 						searchGamePage(pageNo);
 					}
 					
-					function detailView(contentid, contenttypeid){
-						location.href="${contextPath}/detailGame?contentid="+contentid+"&contenttypeid="+contenttypeid;
+					function detailView(contentid, contenttypeid, mapy, mapx){
+						location.href="${contextPath}/detailGame?contentid="+contentid+"&contenttypeid="+contenttypeid+"&mapy="+mapy+"&mapx="+mapx;
 					}
 					
 					function searchGameCondition(contenttypeid, areaCode, sigunguCode, cat1, cat2, cat3, pageNo){

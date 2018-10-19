@@ -222,20 +222,55 @@ public class GoodController {
 	}
 	
 	
-	@RequestMapping(value="dibsCheckFG.good")
-	public void dibsheckFG(HttpServletRequest request, HttpServletResponse response, @RequestParam int contentid) throws IOException{
+	@RequestMapping(value="dibsCheckStatus.good")
+	public void dibsCheckStatus(HttpServletRequest request, HttpServletResponse response, @RequestParam int contentid, @RequestParam int contenttypeid) throws IOException{
 		String user = String.valueOf(((Member)(request.getSession().getAttribute("loginUser"))).getmId());
 		int userNo = Integer.parseInt(user);
 		int result = -99;
-		Good2 gg = new Good2();
-		gg.setMid(userNo);
-		gg.setOriginId(contentid);
+		Good2 gg2 = new Good2();
+		gg2.setMid(userNo);
+		gg2.setOriginId(contentid);
 		
-		result = gs.selectOneDibsCheckFG(gg);
+		result = gs.dibsCheckStatus(gg2);
 		response.getWriter().println(result);
 	}
 	
+	@RequestMapping(value="insertDibsInfo.good")
+	public void insertDibsInfo(HttpServletRequest request, HttpServletResponse response, @RequestParam int contentid, @RequestParam int contenttypeid) throws IOException{
+		String user = String.valueOf(((Member)(request.getSession().getAttribute("loginUser"))).getmId());
+		int userNo = Integer.parseInt(user);
+		int result = -99;
+		Good2 gg2 = new Good2();
+		gg2.setMid(userNo);
+		gg2.setOriginId(contentid);
+		if(contenttypeid == 38){
+			gg2.setlType("쇼핑");
+		}else if(contenttypeid == 12){
+			gg2.setlType("관광지");
+		}else if(contenttypeid == 14){
+			gg2.setlType("문화시설");
+		}else if(contenttypeid == 15){
+			gg2.setlType("행사");
+		}else if(contenttypeid == 28){
+			gg2.setlType("레포츠");
+		}
+		
+		result = gs.insertDibsInfo(gg2);
+		response.getWriter().println(result);
+	}
 	
+	@RequestMapping(value="deleteDibsInfo.good")
+	public void deleteDibsInfo(HttpServletRequest request, HttpServletResponse response, @RequestParam int contentid) throws IOException{
+		String user = String.valueOf(((Member)(request.getSession().getAttribute("loginUser"))).getmId());
+		int userNo = Integer.parseInt(user);
+		int result = -99;
+		Good2 gg2 = new Good2();
+		gg2.setMid(userNo);
+		gg2.setOriginId(contentid);
+		
+		result = gs.deleteDibsInfo(gg2);
+		response.getWriter().println(result);
+	}
 	
 	
 	

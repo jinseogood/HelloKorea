@@ -1158,29 +1158,6 @@
 		</div>
 		<c:if test="${!empty sessionScope.loginUser}">
 		<script>
-		function btnGood(contenttypeid, contentid){
-			console.log(contenttypeid);
-			console.log(contentid);
-			
-				$.ajax({
-					url:"dibsHotel.good",
-					type:"GET",
-					data:{contenttypeid:contenttypeid, contentid:contentid},
-					success:function(data){
-						// 1일시, 이미 찜한 목록 => delete요청.
-						// 0일시, 새로 찜에 추가 => insert요청.
-						if(data > 0){
-							deleteDibsHotel(contentid, cid);
-						}else{
-							insertDibsHotel(contentid, cid);
-						}
-					},
-					error:function(data){
-						console.log(data);
-					}
-				});
-		}
-		
 		$(function(){
 			$(".goodBtn").click(function(){
 				if($(this).children("i").hasClass("fa fa-heart tm-home-box-2-icon border-right") == true){
@@ -1192,22 +1169,49 @@
 				}
 			});
 		});
+		
+		function btnGood(contenttypeid, contentid){
+			console.log(contenttypeid);
+			console.log(contentid);
+			
+				$.ajax({
+					url:"dibsCheckStatus.good",
+					type:"GET",
+					data:{contenttypeid:contenttypeid, contentid:contentid},
+					success:function(data){
+						// 1일시, 이미 찜한 목록 => delete요청.
+						// 0일시, 새로 찜에 추가 => insert요청.
+						console.log("오긴와?");
+						console.log(data);
+						if(data > 0){
+							deleteDibsInfo(contentid, contenttypeid);
+						}else{
+							insertDibsInfo(contentid, contenttypeid);
+						}
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+		}
+		
+		
 		</script>
 		</c:if>
 		<c:if test="${empty sessionScope.loginUser}">
 		<script>
-			function btnGood(contenttypeid, contentid, cid){
+			function btnGood(contenttypeid, contentid){
 				alert("로그인이 필요한 서비스입니다.");
 			}
 		</script>
 		</c:if>
 		<script>
 		
-		function insertDibsHotel(contentid, cid){
+		function insertDibsInfo(contentid, contenttypeid){
 			$.ajax({
-				url:"insertDibsHotel.good",
+				url:"insertDibsInfo.good",
 				type:"GET",
-				data:{contenttypeid:contenttypeid, contentid:contentid, cid:cid},
+				data:{contenttypeid:contenttypeid, contentid:contentid},
 				success:function(data){
 					if(data > 0){
 						alert("찜 목록에 추가되었습니다.");
@@ -1219,9 +1223,9 @@
 			});
 		}
 		
-		function deleteDibsHotel(contentid){
+		function deleteDibsInfo(contentid, contenttypeid){
 			$.ajax({
-				url:"deleteDibsHotel.good",
+				url:"deleteDibsInfo.good",
 				type:"GET",
 				data:{contenttypeid:contenttypeid, contentid:contentid},
 				success:function(data){
@@ -1236,9 +1240,7 @@
 		
 		function detailView(contentid, contenttypeid){
 			console.log("컨텐츠타입 : " + contenttypeid);
-			if(contenttypeid == 38){
 				location.href="${contextPath}/detailGame?contentid="+contentid+"&contenttypeid="+contenttypeid;
-			}
 		}
 			
 		
@@ -1929,10 +1931,10 @@
 			  $(this).tab('show')
 			});
 
-        	$('.date').datetimepicker({
+        	/* $('.date').datetimepicker({
             	format: 'MM/DD/YYYY'
             });
-            $('.date-time').datetimepicker();
+            $('.date-time').datetimepicker(); */
 
 			// https://css-tricks.com/snippets/jquery/smooth-scrolling/
 		  	$('a[href*=#]:not([href=#])').click(function() {

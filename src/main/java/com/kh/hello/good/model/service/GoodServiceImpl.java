@@ -38,9 +38,20 @@ public class GoodServiceImpl implements GoodService {
 	}
 
 	@Override
-	public int selectOneDibsCheckFG(Good2 gg) {
-		return gd.selectOneDibsCheckFG(sqlSession, gg);
+	public int dibsCheckStatus(Good2 gg2) {
+		return gd.dibsCheckStatus(sqlSession,gg2);
 	}
+
+	@Override
+	public int insertDibsInfo(Good2 gg2) {
+		return gd.insertDibsInfo(sqlSession, gg2);
+	}
+
+	@Override
+	public int deleteDibsInfo(Good2 gg2) {
+		return gd.deleteDibsInfo(sqlSession, gg2);
+	}
+
 
 	
 	

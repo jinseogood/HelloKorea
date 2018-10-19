@@ -28,10 +28,21 @@ public class GoodDaoImpl implements GoodDao {
 	}
 
 	@Override
-	public int selectOneDibsCheckFG(SqlSessionTemplate sqlSession, Good2 gg) {
-		return sqlSession.selectOne("Good.selectOneDibsCheck", gg);
+	public int dibsCheckStatus(SqlSessionTemplate sqlSession, Good2 gg2) {
+		return sqlSession.selectOne("Good2.selectOnedibsCheckStatus", gg2);
 	}
 
+	@Override
+	public int insertDibsInfo(SqlSessionTemplate sqlSession, Good2 gg2) {
+		return sqlSession.insert("Good2.insertDibsInfo", gg2);
+	}
+
+	@Override
+	public int deleteDibsInfo(SqlSessionTemplate sqlSession, Good2 gg2) {
+		return sqlSession.delete("Good2.deleteDibsInfo", gg2);
+	}
+
+	
 	
 	
 	
