@@ -9,7 +9,6 @@
    	<id property="lid" column="L_ID"/>
    	<result property="lType" column="L_TYPE" />
    	<result property="originId" column="ORIGIN_ID" />
-   	<result property="endDate" column="END_DATE" />
    	<result property="mid" column="M_ID" />
    	<result property="cid" column="C_ID" />
    </resultMap>
@@ -23,7 +22,7 @@
    </select>
    
    <insert id="insertOneDibsHotel" parameterType="Good">
-   	INSERT INTO GOOD VALUES(SEQ_L_ID.NEXTVAL, #{lType}, #{originId}, NULL, #{mid}, #{cid})
+   	INSERT INTO GOOD VALUES(SEQ_L_ID.NEXTVAL, #{lType}, #{originId}, #{mid}, #{cid})
    </insert>
    
    <delete id="deleteOneDibsHotel" parameterType="Good">

@@ -281,6 +281,22 @@
 							});
 							output += "</p>";
 							output += "<div class='tm-home-box-2-container'>";
+							/* $.ajax({
+								url:"dibsCheckStatus.good",
+								type:"GET",
+								data:{contenttypeid:contenttypeid, contentid:contentid},
+								async:false,
+								success:function(ddatta){
+									if(ddatta > 0){
+										output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+									}else{
+										output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+									}
+								},
+								error:function(ddatta){
+									console.log(ddatta);
+								}
+							}); */
 							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 							output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
 							output += "</div></div></div>";
@@ -318,6 +334,22 @@
 									});
 									output += "</p>";
 									output += "<div class='tm-home-box-2-container'>";
+									/* $.ajax({
+										url:"dibsCheckStatus.good",
+										type:"GET",
+										data:{contenttypeid:contenttypeid, contentid:contentid},
+										async:false,
+										success:function(ddatta){
+											if(ddatta > 0){
+												output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+											}else{
+												output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+											}
+										},
+										error:function(ddatta){
+											console.log(ddatta);
+										}
+									}); */
 									output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 									output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
 									output += "</div></div></div>";
@@ -405,18 +437,20 @@
 								output += "</p>";
 								output += "<div class='tm-home-box-2-container'>";
 								/* $.ajax({
-									url:"dibsCheckFG.good",
+									url:"dibsCheckStatus.good",
 									type:"GET",
-									data:{contentid:contentid},
-									dataType:"json",
+									data:{contenttypeid:contenttypeid, contentid:contentid},
 									async:false,
-									success:function(ddatte){
-										if(ddatte == 0){
-											output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+									success:function(ddatta){
+										if(ddatta > 0){
+											output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 										}else{
-											output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+											output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 										}
-									},error:function(ddatte){console.log(ddatte);}
+									},
+									error:function(ddatta){
+										console.log(ddatta);
+									}
 								}); */
 								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 								output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'>";
@@ -455,18 +489,20 @@
 									output += "</p>";
 									output += "<div class='tm-home-box-2-container'>";
 									/* $.ajax({
-										url:"dibsCheck.good",
+										url:"dibsCheckStatus.good",
 										type:"GET",
-										data:{contentid:contentid},
-										dataType:"json",
+										data:{contenttypeid:contenttypeid, contentid:contentid},
 										async:false,
-										success:function(ddatte){
-											if(ddatte == 0){
-												output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+										success:function(data){
+											if(data > 0){
+												output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 											}else{
-												output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+												output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 											}
-										},error:function(ddatte){console.log(ddatte);}
+										},
+										error:function(data){
+											console.log(data);
+										}
 									}); */
 									output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 									output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'>";
@@ -486,21 +522,23 @@
 			</script>
 			<c:if test="${!empty sessionScope.loginUser}">
 			<script>
-			function btnGood(contenttypeid, contentid, cid){
+			function btnGood(contenttypeid, contentid){
 				console.log(contenttypeid);
 				console.log(contentid);
 				
 					$.ajax({
-						url:"dibsHotel.good",
+						url:"dibsCheckStatus.good",
 						type:"GET",
-						data:{contenttypeid:contenttypeid, contentid:contentid, cid:cid},
+						data:{contenttypeid:contenttypeid, contentid:contentid},
 						success:function(data){
 							// 1일시, 이미 찜한 목록 => delete요청.
 							// 0일시, 새로 찜에 추가 => insert요청.
+							console.log("오긴와?");
+							console.log(data);
 							if(data > 0){
-								deleteDibsHotel(contentid, cid);
+								deleteDibsInfo(contentid, contenttypeid);
 							}else{
-								insertDibsHotel(contentid, cid);
+								insertDibsInfo(contentid, contenttypeid);
 							}
 						},
 						error:function(data){
@@ -532,9 +570,9 @@
 			</c:if>
 			<script>
 			
-			function insertDibsFood(contentid){
+			function insertDibsInfo(contentid, contenttypeid){
 				$.ajax({
-					url:"insertDibsFood.good",
+					url:"insertDibsInfo.good",
 					type:"GET",
 					data:{contenttypeid:contenttypeid, contentid:contentid},
 					success:function(data){
@@ -548,15 +586,14 @@
 				});
 			}
 			
-			function deleteDibsFood(contentid){
+			function deleteDibsInfo(contentid, contenttypeid){
 				$.ajax({
-					url:"deleteDibsFood.good",
+					url:"deleteDibsInfo.good",
 					type:"GET",
 					data:{contenttypeid:contenttypeid, contentid:contentid},
 					success:function(data){
-						if(data > 0){
-							alert("찜 목록에서 삭제되었습니다.");
-						}
+						alert("찜 목록에서 삭제되었습니다.");
+						
 					},
 					error:function(data){
 						console.log(data);

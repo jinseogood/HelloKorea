@@ -13,7 +13,11 @@ public interface GoodDao {
 
 	int deleteOneDibs(SqlSessionTemplate sqlSession, Good gg);
 
-	int selectOneDibsCheckFG(SqlSessionTemplate sqlSession, Good2 gg);
+	int dibsCheckStatus(SqlSessionTemplate sqlSession, Good2 gg2);
+
+	int insertDibsInfo(SqlSessionTemplate sqlSession, Good2 gg2);
+
+	int deleteDibsInfo(SqlSessionTemplate sqlSession, Good2 gg2);
 
 
 }

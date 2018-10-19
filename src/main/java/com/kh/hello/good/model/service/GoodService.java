@@ -11,7 +11,11 @@ public interface GoodService {
 
 	int deleteDibsHotel(Good gg);
 
-	int selectOneDibsCheckFG(Good2 gg);
+	int dibsCheckStatus(Good2 gg2);
+
+	int insertDibsInfo(Good2 gg2);
+
+	int deleteDibsInfo(Good2 gg2);
 
 
 }

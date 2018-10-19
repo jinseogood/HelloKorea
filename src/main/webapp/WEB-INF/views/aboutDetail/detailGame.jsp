@@ -76,7 +76,7 @@
 			<div id="google-map"></div>
 		</div>
 		<div class="col-lg-5 col-md-6">
-			<div class="weatherMap">
+			<div class="weatherMap" id="weatherArea">
 				날씨정보닷<br>
 				날씨정보닷<br>
 				날씨정보닷<br>
@@ -209,6 +209,18 @@
 						output += "ㆍ <b>이용요금</b> : "+myData.usetimefestival+"<br>";
 						output += "ㆍ <b>부대행사</b> : "+myData.subevent+"<br>";
 						gInfo.html(output);
+					}else if(myData.contenttypeid == 38){
+						output += "<h3>쇼핑</h3><br>";
+						output += "ㆍ <b>문의 및 안내</b> : "+myData.infocentershopping+"<br>";
+						output += "ㆍ <b>규모</b> : "+myData.scaleshopping+"<br>";
+						//output += "ㆍ <b>개장기간</b> : "+myData.openperiod+"<br>";
+						output += "ㆍ <b>영업시간</b> : "+myData.opentime+"<br>";
+						output += "ㆍ <b>쉬는날</b> : "+myData.opendateshopping+"<br>";
+						output += "ㆍ <b>매장안내</b> : "+myData.shopguide+"<br>";
+						output += "ㆍ <b>주차시설</b> : "+myData.parkingshopping+"<br>";
+						output += "ㆍ <b>유모차대여여부</b> : "+myData.chkbabycarriageshopping+"<br>";
+						output += "ㆍ <b>애완동물 동반 가능 여부</b> : "+myData.chkpetshopping+"<br>";
+						gInfo.html(output);
 					}else{
 						output += "<h3>레포츠</h3><br>";
 						output += "ㆍ <b>문의 및 안내</b> : "+myData.infocenterleports+"<br>";
@@ -229,9 +241,28 @@
 			});
 		}
 		
+		var mapy = ${param.mapy};
+		var mapx = ${param.mapx};
+		console.log("mapy : " + mapy);
+		console.log("mapx : " + mapx);
+		
+		function weatherMap(mapy, mapx){
+			console.log("펑션y : " + mapy);
+			console.log("펑션x : " + mapx);
+			$.ajax({
+				url:"weatherMap.sub",
+				type:"GET",
+				data:{mapy:mapy, mapx:mapx},
+				dataType:"json",
+				success:function(data){
+					console.log('날씨성공');
+					console.log(data);
+				},error:function(data){console.log("날씨에러");console.log(data);}
+			});
+		}
 		
 		/* function weatherMap(mapy, mapx){
-			var url = "api.openweathermap.org/data/2.5/forecast?lat="+mapy+"&lon="+mapx+"&appid=49736052d2b9402c5764e0f24834cf25";
+			var url = "http://api.openweathermap.org/data/2.5/weather?lat="+mapy+"&lon="+mapx+"&appid=49736052d2b9402c5764e0f24834cf25";
 			var request = new XMLHttpRequest();
 			request.overrideMimeType("application/json");
 			request.open('GET', url, true);
@@ -242,9 +273,19 @@
 				}
 			};
 			request.send(null);
+			window.onload = function(){
+				parseWeather();
+			}
+		}
+		function parseWeather(){
+			loadJSON(function(response){
+				var jsonData = JSON.parse(response);
+				document.getElementById("weatherArea").innerHTML = jsonData;
+			});
 		} */
 		
 		$(function(){//output += "ㆍ <b></b> : ""<br>";
+			weatherMap();
 			detailGameInfo();
 			detailGameImage();
 			detailGameIntro();

@@ -467,7 +467,7 @@
 							output += "<br><span style='font-size:20px;'>최저가 : " + curIcon + " " + numberWithCommas((data[i].minPrice/currency)) + " ~</span>";
 							output += "</p>";
 							output += "<div class='tm-home-box-2-container'>";
-							/* $.ajax({
+							$.ajax({
 								url:"dibsCheck.good",
 								type:"GET",
 								data:{contentid:contentid},
@@ -480,8 +480,8 @@
 										output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 									}
 								},error:function(ddatte){console.log(ddatte);}
-							}); */
-							output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							});
+							//output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 							output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'>";
 							output += "<span class='tm-home-box-2-description box-3' onclick='detailView("+contentid+","+contenttypeid+","+cid+");'>";
 							if(data[i].grade == 0){
