@@ -246,6 +246,12 @@ public class BoardDaoImpl implements BoardDao{
 	public int selectPointA(SqlSessionTemplate sqlSession, Thumbs thumb) {
 
 		return sqlSession.selectOne("Point.selectPointA", thumb);
+	}
+
+	@Override
+	public int insertPointA(SqlSessionTemplate sqlSession, Thumbs thumb) {
+	
+		return sqlSession.insert("Point.insertPointA", thumb);
 	} 
 
 }

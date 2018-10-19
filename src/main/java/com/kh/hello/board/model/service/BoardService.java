@@ -79,6 +79,8 @@ public interface BoardService{
 
 	int selectPoint(Board b);
 
-	int selectPointA(Thumbs thumb); 
+	int selectPointA(Thumbs thumb);
+
+	int insertPointA(Thumbs thumb); 
 
 } 
