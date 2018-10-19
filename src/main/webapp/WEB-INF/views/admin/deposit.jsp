@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -165,7 +166,7 @@ table.type09 td {
         <th scope="row">${d.cId}</th>
         <td>${d.cName}</td>
         <td>${d.bankNum}</td>
-        <td>${d.dAmount}원</td>
+        <td><fmt:formatNumber value="${d.dAmount}" pattern="#,###"/>원</td>
         <td>${d.dDate}</td>
         <%-- <td><button class="btn btn-success" onclick="makeDeposit(${d.cId},${d.dAmount})">입금하기</button></td> --%>
     </tr>

@@ -129,10 +129,24 @@
      	WHERE BOARD_TYPE = 2
      	AND ORIGIN_ID = #{ origin_id }
      </select>
-     <select id = "selectReviewDetail" parameterType="_int" resultMap = "BoardResultSet">
+     <!-- <select id = "selectReviewDetail" parameterType="_int" resultMap = "BoardResultSet">
      	SELECT BID, TITLE, TEXT, BOARD_TYPE, REGIST_DATE, STATUS, MODIFY_DATE, GRADE, LIKEY, M_ID, ORIGIN_ID, TRAVEL_DATE
      	FROM BOARD
      	WHERE BID = #{ bid } 
+     </select> -->
+     
+     <select id = "selectReviewDetail" parameterType="_int" resultMap = "BoardResultSet">
+     	SELECT DISTINCT B.BID, B.TITLE, B.TEXT, B.BOARD_TYPE, B.REGIST_DATE, B.STATUS, B.MODIFY_DATE, B.GRADE, B.LIKEY,
+     			 B.M_ID, B.ORIGIN_ID, M.REGIST_DATE AS CREATE_DATE, M.NICKNAME, M.INTEREST, M.NATIONAL, M.EMAIL, B.TRAVEL_DATE,
+     			 (SELECT COUNT(*) FROM THUMBS_UP WHERE STATUS = 'Y' AND T_TARGET = B.M_ID) AS HELP_COUNT,
+                 (SELECT COUNT(*) FROM BOARD WHERE M_ID = B.M_ID) AS BOARD_COUNT,
+                 (SELECT COUNT(*) FROM REPLY WHERE M_ID = B.M_ID) AS REPLY_COUNT,
+                 (SELECT CHANGE_NAME FROM ATTACHMENT A WHERE A_LEVEL=2 AND B.M_ID = A.REF_ID) AS CHANGE_NAME
+		FROM BOARD B
+		JOIN MEMBER M ON(B.M_ID = M.M_ID)
+		JOIN ATTACHMENT A ON(M.M_ID = A.REF_ID)
+		WHERE B.BID = #{bid}
+
      </select>
      
      <update id = "updateThumbsReview" parameterType="_int">
@@ -144,8 +158,12 @@
      	WHERE BID = #{ref_id}			 
      </update>
      
-     <!-- <select id = "allinfo" parameterType="_int" resultMap="">
-     
-     </select> -->
+     <select id = "selectBestReview" parameterType="_int" resultMap="BoardResultSet">
+     	SELECT BID, TITLE, TEXT, BOARD_TYPE, REGIST_DATE, STATUS, MODIFY_DATE, GRADE, LIKEY, M_ID, ORIGIN_ID, TRAVEL_DATE
+     	FROM (SELECT BID, TITLE, TEXT, BOARD_TYPE, REGIST_DATE, STATUS, MODIFY_DATE, GRADE, LIKEY, M_ID, ORIGIN_ID, TRAVEL_DATE
+     		  FROM BOARD
+     		  ORDER BY LIKEY DESC)
+		WHERE ROWNUM <![CDATA[<]]>= 3
+     </select>
      
 </mapper>

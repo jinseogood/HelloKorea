@@ -18,12 +18,6 @@
 <link href="${ contextPath }/resources/css/templatemo-style.css" rel="stylesheet">
 <title>Message</title>
 <style>
-
-@font-face { font-family: 'Chosunilbo_myungjo'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Chosunilbo_myungjo.woff') format('woff'); font-weight: normal; font-style: normal; }
-	
-	body, div, p, a, h1,h2,h3,h4, input, select {
-		font-family: Chosunilbo_myungjo,meiryo,Chosunilbo_myungjo !important
-	}
 .msgTable{
    width:80%;
    margin-left:auto;
@@ -50,19 +44,10 @@ th, td {
     border-style:dotted;
     border-radius: 10px;
 } 
-
-.title{
-    width:100%;
-    height:45px;
-    background-color:#00aef0;
-    color:white;
-}
 </style>
 </head>
 <body>
-<div class="title">
-<h2>&nbsp;&nbsp;&nbsp;Message</h2>
-</div>
+<jsp:include page="../message/messageMenubar.jsp"/>
 <div class="outline">
 <div class="header">
 
