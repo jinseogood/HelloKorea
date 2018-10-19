@@ -49,7 +49,7 @@
 					
 					<div class="col-lg-12 col-md-12 col-sm-12" align="left">
 					<span class="tm-section-title" style="font-size:20px; border-bottom:1px solid #ccc;"><b>정렬 기준</b></span>
-						<br><br>
+						<br>
 						<!-- <a class="orderByClass" onclick="orderByHotel('name');">이름</a> -->
 						<a class="oderByClass" style="font-size:18px;">인기 순</a><br>
 						<a class="oderByClass" style="font-size:18px;">가격 낮은 순</a><br>

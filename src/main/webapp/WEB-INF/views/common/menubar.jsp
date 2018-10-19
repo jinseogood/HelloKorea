@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script type="text/javascript" src="${ contextPath }/resources/js/jquery-1.11.2.min.js"></script>      		<!-- jQuery -->
 <script type="text/javascript" src="${ contextPath }/resources/js/bootstrap.min.js"></script>					<!-- bootstrap js -->
 <script type="text/javascript" src="${ contextPath }/resources/js/jquery.flexslider-min.js"></script>			<!-- flexslider js -->
@@ -21,11 +20,11 @@
 
 <title>Insert title here</title>
 <style>
-@font-face { font-family: 'NanumSquare'; src: url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css') .nanumsquare; font-weight: normal; font-style: normal; }
+@font-face { font-family: 'Youth'; font-style: normal; font-weight: 400; src: url('//cdn.jsdelivr.net/korean-webfonts/1/orgs/othrs/kywa/Youth/Youth.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/orgs/othrs/kywa/Youth/Youth.woff') format('woff'); } .youth * { font-family: 'Youth', sans-serif; }
 	
 	body, div, p, a, h1,h2,h3,h4, input, select {
-		font-family: 'NanumSquare', sans-serif !important;
-	}
+		font-family: 'Youth' !important;
+	}  
 	
 	#menuIconArea{
 		width:135px;
@@ -174,7 +173,7 @@
 							    <a onclick="openMsg()" id="newMsg"><img src="${ contextPath }/resources/img/msgIcon2.png" style="width:38px;height:38px;"></a>
 								<a class="logout" href="logout.me"><img src="${ contextPath }/resources/img/logoutIcon.png" style="width:30px;height:30px;margin-left:1%;"></a>
 							</c:if>
-								<div id="google_translate_element"></div>
+								
 				  		</div>
 					</nav>		
 	  			</div>				
@@ -295,11 +294,7 @@
 	</div>
 
 	<script>
-		function googleTranslateElementInit() {
-			new google.translate.TranslateElement({pageLanguage: 'ko'}, 'google_translate_element');
-			jQuery('.goog-logo-link').css('display', 'none');
-			jQuery('.goog-te-gadget').css('font-size', '0');
-		}
+		
 		
 		function openMsg(){
 			var mId = $("#msgBtn").val(); 
