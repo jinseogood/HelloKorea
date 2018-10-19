@@ -27,7 +27,8 @@
 	<jsp:include page="../common/searchMenubar.jsp"/>
 	<jsp:include page="../common/searchSubmenubar.jsp"/>
 	
-	<input type="hidden" id="CUR" value="${ sessionScope.cur }">
+	<input type="hidden" id="CURICON" value="${ sessionScope.cur.get(0) }">
+	<input type="hidden" id="CUR" value="${ sessionScope.cur.get(1) }">
 	
 	<section class="container tm-home-section-1" id="more">
 		<div class="container">
@@ -147,9 +148,14 @@
 		</div>
 		<script>
 			
+			var curIcon = $("#CURICON").val();
 			var currency = $("#CUR").val();
-			currency=parseInt(currency);
-			console.log(typeof(currency));
+			console.log(currency);
+			currency=currency.replace(",", ".");
+			console.log(currency);
+			currency=parseFloat(currency);
+			
+			console.log(curIcon);
 			console.log(currency);
 		
 			if(sessionStorage.getItem("areaCode") == 1){
@@ -458,7 +464,7 @@
 								},error:function(ddate){console.log(ddate);}
 							});
 					
-							output += "<br><span style='font-size:20px;'>최저가 : "+"\\"+(data[i].minPrice/currency)+"원 ~</span>";
+							output += "<br><span style='font-size:20px;'>최저가 : " + curIcon + " " + numberWithCommas((data[i].minPrice/currency)) + " ~</span>";
 							output += "</p>";
 							output += "<div class='tm-home-box-2-container'>";
 							/* $.ajax({
@@ -566,6 +572,11 @@
 						console.log(data);
 					}
 				});
+			}
+			function numberWithCommas(x){
+				//var x=x.slice(1, x.length-5);
+				x=x.toFixed(3);
+				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			}
 			</script>
 			<c:if test="${!empty sessionScope.loginUser}">
