@@ -37,10 +37,10 @@
 			var contenttypeid;// = sessionStorage.getItem("contenttypeid");
 			var pageNo;// = sessionStorage.getItem("pageNo");
 			var cat3;// = sessionStorage.getItem("cat3");
-			//console.log("서브메뉴바 areaCode : " + areaCode);
-			//console.log("서브메뉴바 sigunguCode : " + sigunguCode);
-			//console.log("서브메뉴바 contenttypeid : " + contenttypeid);
-			//console.log("서브메뉴바 cat3 : " + cat3);
+			console.log("서브메뉴바 areaCode : " + sessionStorage.getItem("areaCode"));
+			console.log("서브메뉴바 sigunguCode : " + sessionStorage.getItem("sigunguCode"));
+			console.log("서브메뉴바 contenttypeid : " + sessionStorage.getItem("contenttypeid"));
+			console.log("서브메뉴바 cat3 : " + sessionStorage.getItem("cat3"));
 			
 			function areaAll(){
 				areaCode = sessionStorage.getItem("areaCode");
@@ -63,7 +63,7 @@
 				}else{
 					sigunguCode = sessionStorage.getItem("sigunguCode");
 				}
-				if(sessionStorage.getItem("cat3") == ""){
+				if(sessionStorage.getItem("cat3") == null){
 					cat3 = "";
 				}else{
 					cat3 = sessionStorage.getItem("cat3");
@@ -77,14 +77,15 @@
 				}else{
 					sigunguCode = sessionStorage.getItem("sigunguCode");
 				}
-				if(sessionStorage.getItem("cat3") != ""){
+				if(sessionStorage.getItem("cat3") != null){
 					sessionStorage.removeItem("cat3");
 					sessionStorage.setItem("cat3", "");
 					cat3 = sessionStorage.getItem("cat3");
 				}
-				if(sessionStorage.getItem("contenttypeid") == 0){
-					contenttypeid = 15;
+				if(sessionStorage.getItem("contenttypeid") == null){
+					contenttypeid = 12;
 				}
+				pageNo = 1;
 				
 				location.href="${contextPath}/areaGameView.main?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&pageNo="+pageNo+"&contenttypeid="+contenttypeid;
 			}

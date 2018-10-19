@@ -724,9 +724,12 @@ public class SubInformationController {
 	
 	
 	@RequestMapping(value="searchAreaGame.sub")
-	public void searchAreaGame(HttpServletRequest request, HttpServletResponse response, @RequestParam int areaCode, @RequestParam int sigunguCode, @RequestParam String contenttypeid, @RequestParam int pageNo) throws IOException{
+	public void searchAreaGame(HttpServletRequest request, HttpServletResponse response, @RequestParam int areaCode, @RequestParam String sigunguCode, @RequestParam int contenttypeid, @RequestParam int pageNo) throws IOException{
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
+		if(sigunguCode == null){
+			sigunguCode = "";
+		}
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=";
 

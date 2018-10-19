@@ -159,7 +159,7 @@
 										});
 										output += "</p>";
 										output += "<div class='tm-home-box-2-container'>";
-										output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+										output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 										output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span onclick='detailView("+contentid+","+contenttypeid+");' class='tm-home-box-2-description box-3'>뭐를너야할까</span></a>";
 										output += "</div></div></div>";
 										document.getElementById("viewArea").innerHTML += output;
@@ -196,7 +196,7 @@
 											output += "<div class='tm-home-box-2-container'>";
 											output += "<input type='hidden' value="+contenttypeid+">";
 											output += "<input type='hidden' value="+contentid+">";
-											output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+											output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 											output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span onclick='detailView("+contentid+","+contenttypeid+");' class='tm-home-box-2-description box-3'>뭐를너야할까</span></a>";
 											output += "</div></div></div>";
 											document.getElementById("viewArea").innerHTML += output;
@@ -235,6 +235,17 @@
 								}
 							});
 					}
+					$(functon(){
+						$(".goodBtn").click(function(){
+							if($(this).children("i").hasClass("fa fa-heart tm-home-box-2-icon border-right") == true){
+								$(this).children("i").removeClass("fa fa-heart tm-home-box-2-icon border-right");
+								$(this).children("i").addClass("fa fa-heart-o tm-home-box-2-icon border-right");
+							}else if($(this).children("i").hasClass("fa fa-heart-o tm-home-box-2-icon border-right") == true){
+								$(this).children("i").removeClass("fa fa-heart-o tm-home-box-2-icon border-right");
+								$(this).children("i").addClass("fa fa-heart tm-home-box-2-icon border-right");
+							}
+						});
+					});
 					</script>
 					</c:if>
 					<c:if test="${empty sessionScope.loginUser}">
@@ -356,7 +367,7 @@
 										});
 										output += "</p>";
 										output += "<div class='tm-home-box-2-container'>";
-										output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+										output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 										output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
 										output += "</div></div></div>";
 										document.getElementById("viewArea").innerHTML += output;
@@ -393,7 +404,7 @@
 											output += "<div class='tm-home-box-2-container'>";
 											output += "<input type='hidden' value="+contenttypeid+">";
 											output += "<input type='hidden' value="+contentid+">";
-											output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+											output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 											output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
 											output += "</div></div></div>";
 											document.getElementById("viewArea").innerHTML += output;
@@ -488,6 +499,8 @@
 								searchGameCondition(contenttypeid, areaCode1, sigunguCode1, cat1, cat2, cat3, pageNo);
 								
 							});
+							
+							
 							
 							/* $(".festivalSearchArea").hide();
 							
