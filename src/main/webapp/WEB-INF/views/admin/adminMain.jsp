@@ -171,7 +171,7 @@
 				success:function(data){
 				$("#reportCount").text(data.reportCount + '건');
 				$("#questionCount").text(data.questionCount + '건');
-				$("#thisMonthProfit").text(data.profit + '원');
+				$("#thisMonthProfit").text(data.profit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '원');
 				$("#companyCount").text(data.companyCount + '건');
 				console.log(data.expirationList);
 				$(".alert").hide();
