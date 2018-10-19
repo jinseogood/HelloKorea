@@ -55,11 +55,11 @@ button {
 	<h4 align="center">You can get more information by entering
 		additional information!</h4>
 	<div id="mainDiv">
-		<form action="addUser.me" method="post">
+		<form action="addUser.me" method="post" id="userForm">
 			<table id="insertTable">
 
 				<tr>
-					<input type="hidden" name="mId" value="${mid}" />
+				 <input type="hidden" name="mId" value="${mid}" />
 					<th>닉네임</th>
 				</tr>
 				<tr>
@@ -72,7 +72,7 @@ button {
 				</tr>
 				<tr>
 					<td><select name="national" id="national">
-							<option>----</option>
+							<option value="-">----</option>
 							<option value="Ghana">Ghana</option>
 							<option value="Gabon">Gabon</option>
 							<option value="Guyana">Guyana</option>
@@ -203,7 +203,7 @@ button {
 				</tr>
 				<tr>
 					<td><select name="interest" id="interest">
-							<option>----</option>
+							<option value="-">----</option>
 							<option value="뷰티">beauty</option>
 							<option value="관광">tourism</option>
 							<option value="전통">tradition</option>
@@ -213,7 +213,7 @@ button {
 				</tr>
 			</table>
 			<div align="center">
-				<button>JOIN</button>
+				<button type="button" onclick="allCheck()">JOIN</button>
 			</div>
 		</form>
 	</div>
@@ -241,7 +241,19 @@ button {
 			
 			
 		}
-	
+		function allCheck(){
+			var national = $('#national').val();
+			var interest = $('#interest').val();
+			var nickname =$('#nickname').val();
+			
+			if(national == "-" && interest == "-"&&nickname==null){
+				alert("입력을 해야 회원가입이 가능합니다 ");
+			}else{
+				var form = $("userForm");
+				form.submit();
+			}
+			
+		}
 	
 	</script>
 </body>

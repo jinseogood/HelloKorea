@@ -75,14 +75,16 @@ public class UserController {
 		
 		Attachment a = new Attachment();
 		a.setOriginName(originName);
-		a.setChangeName(changeName);
+		a.setChangeName(changeName+ext);
 		a.setRefId(m.getmId());
 		a.setFilePath(filePath);
+		
 		
 		int result2 = ms.uploadprofile(a);
 		
 		try {
 			photo.transferTo(new File(filePath +"\\"+changeName +ext));
+			
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

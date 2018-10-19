@@ -12,87 +12,103 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <style>
-	.mainDiv{
-		margin-left:auto;
-		margin-right:auto;
-	}
-	#profileDiv{
-		margin-left:auto;
-		margin-right:auto;
-		width:500px;
-	}
-	#profileTable tr{
-		height:40px;
-		border-top:1px solid lightgray;
-		border-bottom:1px solid lightgray;
-	}
-	#profileTable th{
-		width:200px;
-		text-align:center;
-	}
-	.photoDiv{
+	body {
+    background-color: #e9ebee;
+}
+
+.card {
+    margin-top: 1em;
+  
+}
+
+/* IMG displaying */
+.person-card {
+    margin-top: 5em;
+    padding-top: 5em; 
+ 
+}
+
+.person-card .card-title{
+    text-align: center;
+}
+.person-card .person-img{
+    width: 10em;
+    position: absolute;
+    top: 12em;
+    left: 50%;
+    margin-left: -5em;
+    border-radius: 100%;
+    overflow: hidden;
+    background-color: white;
+}
+.container{
+	width:1400px !important;
+	margin-left: 0px  !important;
+	padding-left:0px  !important;
+	
+}
+#insertDiv{
 	margin-left:auto;
 	margin-right:auto;
-	width:128px;
-	height:128px;
-	}
-	
+	width:500px;
+	height:400px;
+	margin-top:3em;
+}
+
 
 </style>
 <body>
+	<div class="container">
 	<jsp:include page="../common/menubar.jsp"/>
-	<div class="mainDiv">
-		<jsp:include page="../common/userMenubar.jsp"/>
-		
-		<div id="profileDiv">
-			<c:if test="${a eq null }"> 
-			<div class="photoDiv">
-				<img src="${contextPath}/resources/img/user.png" id="myPhoto">
-			</div>
-			
-		</c:if>
-			<c:if test="${a ne null }">
-			 	<div  class="photoDiv">
-			 		<img src="${contextPath}/resources/uploadFiles/member/${changeName}" id="myPhoto">
-			 	</div>
-			</c:if>
-			
-			<form action="editProfile.um" method="post" encType="multipart/form-data">
-				<table id="profileTable">
-					<input type="hidden" value="${sessionScope.loginUser.mId}"name="mId">
-					
-					<tr>
-						<th>이메일</th>
-						<td><input type="email" readonly=""  value="${sessionScope.loginUser.email }"></td>
-					</tr>	
-					<tr>
-						<th>닉네임</th>
-						<td><input type="text" name="nickname"></td>
-						<td><a onclick="nicknameCheck()"></a></td>
-					</tr>	
-					<tr>
-						<th>국가</th>
-						<td><input type="text" name="national"></td>
-					</tr>
-					<tr>
-						<th>관심</th>
-						<td><input type="text" name="interest"></td>
-					</tr>	
-					<tr>
-						<th>프로필  사진</th>
-						<td><input type="file" name="photo"></td>
-					</tr>	
-				</table>	
-				<div align="center">
-					<button type="submit">완료</button>
-				</div>		
-			</form>		
-		</div>		
-	</div>
-	<script>
-		
+    <!-- Sign up form -->
+    <jsp:include page="../common/userMenubar.jsp"/>
+   
+    <form action="editProfile.um" method="post" encType="multipart/form-data" id="">
+        <!-- Sign up card -->
+        <div class="card person-card">
+     	
+            <div class="card-body">
+                <!-- Sex image -->
+               <c:if test="${a eq null }">  
+                <img id="img_sex" class="person-img"
+                    src="https://visualpharm.com/assets/217/Life%20Cycle-595b40b75ba036ed117d9ef0.svg">
+                </c:if>
+                <c:if test="${a ne null }">
+                 <img id="img_sex" class="person-img"
+                    src="${contextPath}/resources/uploadFiles/member/${changeName}">
+               	</c:if>
+                <!-- First row (on medium screen) -->
+            </div>
+        </div>
+        <div id="insertDiv">
+        <label align="center">개인정보를 수정 하실 수 있습니다 !</label>
+        <input type="hidden" value="${sessionScope.loginUser.mId}"name="mId">
+        	<div class="form-group">
+                 <label for="email" class="col-form-label">Email</label>
+                 <input type="email" class="form-control" id="email" placeholder="example@gmail.com" required>
+            </div>
+            <div class="form-group">
+                  <label for="tel" class="col-form-label">Phone number</label>
+                  <input type="text" class="form-control" id="tel" placeholder="+33 6 99 99 99 99" required>
+             </div>
+       		 <div class="form-group">
+                  <label for="tel" class="col-form-label">Phone number</label>
+                  <input type="text" class="form-control" id="tel" placeholder="+33 6 99 99 99 99" required>
+             </div>
+             <div class="form-group">
+                  <label for="tel" class="col-form-label">Phone number</label>
+                  <input type="text" class="form-control" id="tel" placeholder="+33 6 99 99 99 99" required>
+             </div>
+             <div class="form-group">
+                  <label for="tel" class="col-form-label">Phone number</label>
+                  <input type="text" class="form-control" id="tel" placeholder="+33 6 99 99 99 99" required>
+             </div>
+        </div>
+        <div style="margin-top: 1em;">
+            <button type="button" class="btn btn-primary btn-lg btn-block">Sign up !</button>
+        </div>
+        </form>
+</div>
 	
-	
-	</script>
 </body>
 </html>
