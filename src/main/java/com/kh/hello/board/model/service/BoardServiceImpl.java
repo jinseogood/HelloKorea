@@ -254,5 +254,11 @@ public class BoardServiceImpl implements BoardService{
 		
 		return bd.insertPointA(sqlSession, thumb);
 	}
+
+	@Override
+	public ArrayList<Board> selectBestReview(int contentid) {
+
+		return bd.selectBestReview(sqlSession, contentid);
+	}
  
 }
