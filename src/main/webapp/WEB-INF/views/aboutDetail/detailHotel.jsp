@@ -835,15 +835,9 @@
 					$pageBody = $(".paging2 ul");
 					$pageBody.html('');
 					
-					console.log(data.list2);
-					console.log(data.list2[0].bid);
-					console.log(data.pi2);
-					
 					var Q = data.list2;
-					console.log(Q.length);
 					var p2 = data.pi2;
 					var QAnswer = data.listQAnswer;
-					console.log(data.listQAnswer);
 					
 					$pageTitle = $(".tm-section-title2");
 					$pageTitle.html('');
@@ -946,7 +940,6 @@
 				data:{page:page,contentid:contentid},
 				dataType:"json",
 				success:function(data){
-					console.log("오나");
 					console.log(data);
 					
 					$divBody = $(".new_line");
@@ -960,24 +953,62 @@
 					
 					$star = $(".star_rating");
 					$star.html('');
-					
+					var listcount = data.listCount;
 					var gCount = data.gCount;
+					var width1 = (gCount[0] / listcount) * 100;
+					var width2 = (gCount[1] / listcount) * 100;
+					var width3 = (gCount[2] / listcount) * 100;
+					var width4 = (gCount[3] / listcount) * 100;
+					var width5 = (gCount[4] / listcount) * 100;
 					var starOut = "";
-					
-					console.log(gCount);
-					console.log("오긴오나")
-					
+					starOut += "<div style = 'margin-bottom:6px; height:14px;'>";
+	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; width:29%; heigth:10px; float:left;'>";
+	             	starOut += "<div style = 'height:14px; margin-top:4px;'>매우좋음</div>";	
+	             	starOut += "</div>";
+	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; background:gray; width:69%; heigth:14px; float:left; margin-top:6px;'>";
+	             	starOut += "<div style='background:blue; width:"+width1+"%; height:14px;'></div>";
+	             	starOut += "</div>";
+	             	starOut += "</div>";
+	             	starOut += "<div style = 'margin-bottom:9px; height:14px;'>";
+	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; width:29%; heigth:10px; float:left;'>";
+	             	starOut += "<div style = 'height:14px; margin-top:9px;'>좋&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;음</div>";	
+	             	starOut += "</div>";
+	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; background:gray; width:69%; heigth:14px; float:left; margin-top:12px;'>";
+	             	starOut += "<div style='background:blue; width:"+width2+"%; height:14px;'></div>";
+	             	starOut += "</div>";
+	             	starOut += "</div>";
+	             	starOut += "<div style = 'margin-bottom:9px; height:14px;'>";
+	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; width:29%; heigth:10px; float:left;'>";
+	             	starOut += "<div style = 'height:14px; margin-top:9px;'>보&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;통</div>";	
+	             	starOut += "</div>";
+	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; background:gray; width:69%; heigth:14px; float:left; margin-top:12px;'>";
+	             	starOut += "<div style='background:blue; width:"+width3+"%; height:14px;'></div>";
+	             	starOut += "</div>";
+	             	starOut += "</div>";
+	             	starOut += "<div style = 'margin-bottom:9px; height:14px;'>";
+	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; width:29%; heigth:10px; float:left;'>";
+	             	starOut += "<div style = 'height:14px; margin-top:9px;'>불&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;만</div>";	
+	             	starOut += "</div>";
+	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; background:gray; width:69%; heigth:14px; float:left; margin-top:12px;'>";
+	             	starOut += "<div style='background:blue; width:"+width4+"%; height:14px;'></div>";
+	             	starOut += "</div>";
+	             	starOut += "</div>";
+	             	starOut += "<div style = 'margin-bottom:9px; height:14px;'>";
+	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; width:29%; heigth:10px; float:left;'>";
+	             	starOut += "<div style = 'height:14px; margin-top:9px;'>매우불만</div>";	
+	             	starOut += "</div>";
+	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; background:gray; width:69%; heigth:14px; float:left; margin-top:12px;'>";
+	             	starOut += "<div style='background:blue; width:"+width5+"%; height:14px;'></div>";
+	             	starOut += "</div>";
+	             	starOut += "</div>";
+
+	             	$star.append(starOut);
 					var count1 = data.listCount;
 					$pageTitle.append("R E V I E W ("+count1+")");
 					
-					console.log(data.list);
-					console.log(data.list[0].bid);
-					console.log(data.pi);
-					
 					var review = data.list;
 					console.log(review.length);
-					var p = data.pi;
-					
+					var p = data.pi;			
 					
 					if(review.length > 0){
 						for(var i = 0 ; i < review.length; i++){

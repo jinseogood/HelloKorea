@@ -87,4 +87,6 @@ public interface BoardDao {
 
 	ArrayList<Board> selectBestReview(SqlSessionTemplate sqlSession, int contentid);
 
+	ArrayList<Board> selectReview(SqlSessionTemplate sqlSession, int contentid);
+
 }

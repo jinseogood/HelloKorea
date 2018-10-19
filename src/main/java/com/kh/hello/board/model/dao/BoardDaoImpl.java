@@ -258,6 +258,12 @@ public class BoardDaoImpl implements BoardDao{
 	public ArrayList<Board> selectBestReview(SqlSessionTemplate sqlSession, int contentid) {
 
 		return (ArrayList)sqlSession.selectList("Board.selectBestReview", contentid);
+	}
+
+	@Override
+	public ArrayList<Board> selectReview(SqlSessionTemplate sqlSession, int contentid) {
+		
+		return (ArrayList)sqlSession.selectList("Board.selectReview2", contentid);
 	} 
 
 }
