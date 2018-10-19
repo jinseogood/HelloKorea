@@ -233,12 +233,25 @@ public class BoardPageController {
 		int listCount = bs.selectReviewCount(contentid);
 		pi = Pagination2.getPageInfo(page, listCount);
 		list = bs.selectReview(pi, contentid);
+		int[] gCount = new int[5];
 		
 		for(int i = 0 ; i < list.size() ; i++){
 			list.get(i).setrCount(bs.selectReplyCount(list.get(i).getBid()));
 			list.get(i).setCreate_date(list.get(i).getCreate_date().substring(0, 10));
+			if(list.get(i).getGrade() >= 0.0 && list.get(i).getGrade() < 1.0){
+				gCount[0]++;
+			}else if(list.get(i).getGrade() >= 1.0 && list.get(i).getGrade() < 2.0){
+				gCount[1]++;
+			}else if(list.get(i).getGrade() >= 2.0 && list.get(i).getGrade() < 3.0){
+				gCount[2]++;
+			}else if(list.get(i).getGrade() >= 3.0 && list.get(i).getGrade() < 4.0){
+				gCount[3]++;
+			}else{
+				gCount[4]++;
+			}
 		}
 		
+		mv.addObject("gCount", gCount);
 		mv.addObject("list", list);
 		mv.addObject("pi", pi);
 		mv.addObject("listCount", listCount);
@@ -526,6 +539,19 @@ public class BoardPageController {
 		}else{
 			mv.addObject("msg", "본인 글은 신고할 수 없습니다.");
 		}
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="bestReview")
+	public ModelAndView bestReview(Model model, HttpServletResponse response, @RequestParam int contentid){
+		response.setContentType("text/html; charset=UTF-8");
+		ModelAndView mv = new ModelAndView("jsonView");
+		
+		ArrayList<Board> list = new ArrayList<Board>();
+		list = bs.selectBestReview(contentid);
+		
+		mv.addObject("bestReviewList", list);
 		
 		return mv;
 	}

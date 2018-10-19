@@ -85,4 +85,6 @@ public interface BoardDao {
 
 	int insertPointA(SqlSessionTemplate sqlSession, Thumbs thumb);
 
+	ArrayList<Board> selectBestReview(SqlSessionTemplate sqlSession, int contentid);
+
 }

@@ -81,6 +81,8 @@ public interface BoardService{
 
 	int selectPointA(Thumbs thumb);
 
-	int insertPointA(Thumbs thumb); 
+	int insertPointA(Thumbs thumb);
+
+	ArrayList<Board> selectBestReview(int contentid); 
 
 } 

@@ -252,6 +252,12 @@ public class BoardDaoImpl implements BoardDao{
 	public int insertPointA(SqlSessionTemplate sqlSession, Thumbs thumb) {
 	
 		return sqlSession.insert("Point.insertPointA", thumb);
+	}
+
+	@Override
+	public ArrayList<Board> selectBestReview(SqlSessionTemplate sqlSession, int contentid) {
+
+		return (ArrayList)sqlSession.selectList("Board.selectBestReview", contentid);
 	} 
 
 }
