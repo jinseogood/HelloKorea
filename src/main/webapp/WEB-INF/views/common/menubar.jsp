@@ -296,7 +296,7 @@
 
 	<script>
 		function googleTranslateElementInit() {
-			new google.translate.TranslateElement({pageLanguage: 'ko'}, 'google_translate_element');
+			new google.translate.TranslateElement({pageLanguage: 'ko', multilanguagePage: true}, 'google_translate_element');
 			jQuery('.goog-logo-link').css('display', 'none');
 			jQuery('.goog-te-gadget').css('font-size', '0');
 		}
