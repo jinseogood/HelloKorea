@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Hello Korea | Seller</title>
 <style>
 	input{
 		border-radius:5px;

@@ -213,15 +213,19 @@ public class PaymentController {
 					int rUpdate=ps.updateReservation(Integer.parseInt(orderInfo[6]));
 					
 					if(rUpdate > 0){
-						/*int rPoint=ps.insertPoint(Integer.parseInt(orderInfo[0]), Integer.parseInt(orderInfo[5]));
-						
-						if(rPoint > 0){
-							result=1;
+						if(pdList.size() == 2){
+							int rPoint=ps.insertPoint(Integer.parseInt(orderInfo[0]), Integer.parseInt(orderInfo[5]));
+							
+							if(rPoint > 0){
+								result=1;
+							}
+							else{
+								result=0;
+							}
 						}
 						else{
-							result=0;
-						}*/
-						result=1;
+							result=1;
+						}
 					}
 					else{
 						result=0;

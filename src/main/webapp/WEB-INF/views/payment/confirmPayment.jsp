@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Hello Korea | Confirm</title>
 <style>
 	.main{
 		height:800px;
@@ -124,7 +125,7 @@
 				<tr>
 					<td style="border-right:1px solid lightgray;">${ r.cName }</td>
 					<td style="border-right:1px solid lightgray;">${ r.roomName }</td>
-					<td style="text-align:center; border-right:1px solid lightgray;">₩ ${ pdList.get(0).price }</td>
+					<td style="text-align:center; border-right:1px solid lightgray;">₩ <fmt:formatNumber value="${ pdList.get(0).price }" pattern="#,###"/></td>
 					<td style="text-align:center;">${ r.rSdate } - ${ r.rEdate }</td>
 				</tr>
 			</table>

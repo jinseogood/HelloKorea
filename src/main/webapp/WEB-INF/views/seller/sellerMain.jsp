@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Director | Dashboard</title>
+    <title>Hello Korea | Seller</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <meta name="description" content="Developed By M Abdur Rokib Promy">
     <meta name="keywords" content="Admin, Bootstrap 3, Template, Theme, Responsive">
@@ -75,7 +76,7 @@
 				<div class="sm-st clearfix">
 					<span class="sm-st-icon st-blue"><i class="fa fa-dollar"></i></span>
 					<div class="sm-st-info">
-						<span><a href="manageRevenue.sell">${ tPrice } 원</a></span>
+						<span><a href="manageRevenue.sell"><fmt:formatNumber value="${ tPrice }" pattern="#,###"/> 원</a></span>
 						다음달 예상 수익
 					</div>
 				</div>
@@ -118,12 +119,19 @@
 								
 								var goodArr=[["업체명","평점", { role: 'style' }]];
 								
-								for(var i=1; i <= data.goodList.length; i++){
-									goodArr[i] = [data.goodList[i-1].cName, data.goodList[i-1].good, 'color:gold; opacity:0.1'];
+								if(data.goodList.length > 0){
+									for(var i=1; i <= data.goodList.length; i++){
+										goodArr[i] = [data.goodList[i-1].cName, data.goodList[i-1].good, 'color:gold; opacity:0.8'];
+									}
+								}
+								else{
+									goodArr[1]=['-',0,'color:gold; opacity:0.1'];
 								}
 								
 								var options={
-									vAxis: {minValue: 0, ticks:[0, 1, 2, 3, 4, 5]}
+									colors: ['gold'],										
+									bar: {groupWidth : '20%'},										
+									vAxis: {minValue: 0, ticks: [0, 1, 2, 3, 4, 5]}
 								};
 								
 								var data = google.visualization.arrayToDataTable(goodArr);
@@ -151,9 +159,9 @@
 				
 				<script>
 					google.charts.load('current', {packages: ['corechart', 'bar']});
-					google.charts.setOnLoadCallback(goodStats);
+					google.charts.setOnLoadCallback(saleStats);
 					
-					function goodStats(){
+					function saleStats(){
 						
 						$.ajax({
 							url:"selectSaleStats.sell",
@@ -163,17 +171,23 @@
 								
 								var saleArr=[["월","원"]];
 								
-								for(var i=1; i <= data.saleList.length; i++){
-									saleArr[i] = [data.saleList[i-1].month + "월", data.saleList[i-1].price];
+								if(data.saleList.length > 0){
+									for(var i=1; i <= data.saleList.length; i++){
+										saleArr[i] = [data.saleList[i-1].month + "월", data.saleList[i-1].price];
+									}
+								}
+								else{
+									saleArr[1] = ['-',0];
 								}
 								
 								var options={
-									vAxis: {minValue: 0}
+									vAxis: {minValue: 0},
+									series: {0:{color:'tomato'}}
 								};
 								
 								var data = google.visualization.arrayToDataTable(saleArr);
 								
-								var chart = new google.visualization.AreaChart(document.getElementById('depositSTAT'));
+								var chart = new google.visualization.LineChart(document.getElementById('depositSTAT'));
 
 								chart.draw(data, options);
 								
@@ -215,7 +229,7 @@
 									output += "<div class='alert alert-success'>";
 									output += "<button data-dismiss='alert' class='close close-sm' type='button'><i class='fa fa-times'></i></button>";
 									output += "<strong>" + data.okList[i].cName + "</strong>";
-									output += " 업체가 " + data.okList[i].apDate + " 에 제휴 승인 되었습니다.</div>";
+									output += " 업체가 <strong>" + data.okList[i].apDate + "</strong> 에 제휴 승인 되었습니다.</div>";
 								}
 							}
 							
@@ -224,7 +238,7 @@
 									output += "<div class='alert alert-info'>";
 									output += "<button data-dismiss='alert' class='close close-sm' type='button'><i class='fa fa-times'></i></button>";
 									output += "<strong onclick='goDetail(" + data.qList[i].cId + ", " + data.qList[i].contentId + ")'>" + data.qList[i].cName + "</strong>";
-									output += " 의 새 문의가 " + data.qList[i].count + " 건 등록 되었습니다.</div>";
+									output += " 의 <strong>새 문의가 " + data.qList[i].count + " 건</strong> 등록 되었습니다.</div>";
 								}
 							}
 							
@@ -233,7 +247,7 @@
 									output += "<div class='alert alert-warning'>";
 									output += "<button data-dismiss='alert' class='close close-sm' type='button'><i class='fa fa-times'></i></button>";
 									output += "<strong onclick='goDetail(" + data.rList[i].cId + ", " + data.rList[i].contentId + ")'>" + data.rList[i].cName + "</strong>";
-									output += " 의 새 리뷰가 " + data.rList[i].count + " 건 등록 되었습니다.</div>";
+									output += " 의 <strong>새 리뷰가 " + data.rList[i].count + " 건</strong> 등록 되었습니다.</div>";
 								}
 							}
 							
