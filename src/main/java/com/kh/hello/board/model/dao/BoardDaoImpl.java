@@ -264,6 +264,18 @@ public class BoardDaoImpl implements BoardDao{
 	public ArrayList<Board> selectReview(SqlSessionTemplate sqlSession, int contentid) {
 		
 		return (ArrayList)sqlSession.selectList("Board.selectReview2", contentid);
+	}
+
+	@Override
+	public int deleteAllUploadUpdate(SqlSessionTemplate sqlSession, int bid) {
+
+		return sqlSession.delete("Attachment.deleteAllUploadUpdate", bid);
+	}
+
+	@Override
+	public int insertAttachment2(SqlSessionTemplate sqlSession, Attachment a) {
+
+		return sqlSession.insert("Attachment.insertAttachment2", a);
 	} 
 
 }

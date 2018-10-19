@@ -505,7 +505,7 @@
        		   <div class="col-lg-4 col-md-4 col-sm-4 title1"><h2 class="tm-section-title1">R E V I E W (${ listCount })</h2></div>
       		   <div class="col-lg-8 col-md-8 col-sm-8"><hr></div>
 	      	   <div style = "height:200px; width:100%; position:relative; text-align:center">
-	      	   		<div class = "star_rating br1" style = "display:inline-block; width:280px; height:200px; padding-top:50px; padding-left:70px; text-align:left; float:left;">
+	      	   		<div class = "star_rating br1" style = "display:inline-block; width:310px; height:200px; padding-top:50px; padding-left:50px; text-align:left; float:left;">
 	      	   			<c:set var="num1" value="20"/>
              			<c:set var="num2" value="3" />
              
@@ -859,7 +859,7 @@
 							output += "<div style = 'text-align:right;'><button class='btn btn-light' style='width:65px; height:30px;' type = 'button'>메세지</button></div>";
 							output += "<div class='info' style = 'text-align:left;'>회원가입시기 : "+Q[i].create_date+"<br>";
 							output += "흥미 : "+Q[i].interesting+", 국적 : "+Q[i].national+"<br>";
-							output += "이메일 : "+Q[i].email+"<br>";
+							output += "E-MAIL : "+Q[i].email+"<br>";
 							output += "<i class='fa fa-thumbs-o-up' style = 'font-size:13px;'></i> "+Q[i].help_count+"건의 도움되는 리뷰, 댓글<br>";
 							output += "<i class='fas fa-pen-square'></i> "+Q[i].board_count+"건 포스팅<br>";
 							output += "<i class='fas fa-pen'></i> "+Q[i].reply_count+"건의 도움글 작성";
@@ -955,51 +955,56 @@
 					$star.html('');
 					var listcount = data.listCount;
 					var gCount = data.gCount;
-					var width1 = (gCount[0] / listcount) * 100;
-					var width2 = (gCount[1] / listcount) * 100;
+					var width5 = (gCount[0] / listcount) * 100;
+					var width4 = (gCount[1] / listcount) * 100;
 					var width3 = (gCount[2] / listcount) * 100;
-					var width4 = (gCount[3] / listcount) * 100;
-					var width5 = (gCount[4] / listcount) * 100;
+					var width2 = (gCount[3] / listcount) * 100;
+					var width1 = (gCount[4] / listcount) * 100;
 					var starOut = "";
 					starOut += "<div style = 'margin-bottom:6px; height:14px;'>";
 	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; width:29%; heigth:10px; float:left;'>";
 	             	starOut += "<div style = 'height:14px; margin-top:4px;'>매우좋음</div>";	
 	             	starOut += "</div>";
-	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; background:gray; width:69%; heigth:14px; float:left; margin-top:6px;'>";
+	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; background:gray; width:58%; heigth:14px; float:left; margin-top:6px;'>";
 	             	starOut += "<div style='background:blue; width:"+width1+"%; height:14px;'></div>";
 	             	starOut += "</div>";
+	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; height:14px; margin-top:4px;'>&nbsp;("+gCount[4]+")</div>";
 	             	starOut += "</div>";
 	             	starOut += "<div style = 'margin-bottom:9px; height:14px;'>";
 	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; width:29%; heigth:10px; float:left;'>";
 	             	starOut += "<div style = 'height:14px; margin-top:9px;'>좋&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;음</div>";	
 	             	starOut += "</div>";
-	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; background:gray; width:69%; heigth:14px; float:left; margin-top:12px;'>";
+	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; background:gray; width:58%; heigth:14px; float:left; margin-top:12px;'>";
 	             	starOut += "<div style='background:blue; width:"+width2+"%; height:14px;'></div>";
 	             	starOut += "</div>";
+	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; height:14px; margin-top:10px;'>&nbsp;("+gCount[3]+")</div>";
 	             	starOut += "</div>";
 	             	starOut += "<div style = 'margin-bottom:9px; height:14px;'>";
 	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; width:29%; heigth:10px; float:left;'>";
 	             	starOut += "<div style = 'height:14px; margin-top:9px;'>보&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;통</div>";	
 	             	starOut += "</div>";
-	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; background:gray; width:69%; heigth:14px; float:left; margin-top:12px;'>";
+	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; background:gray; width:58%; heigth:14px; float:left; margin-top:12px;'>";
 	             	starOut += "<div style='background:blue; width:"+width3+"%; height:14px;'></div>";
 	             	starOut += "</div>";
+	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; height:14px; margin-top:13px;'>&nbsp;("+gCount[2]+")</div>";
 	             	starOut += "</div>";
 	             	starOut += "<div style = 'margin-bottom:9px; height:14px;'>";
 	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; width:29%; heigth:10px; float:left;'>";
 	             	starOut += "<div style = 'height:14px; margin-top:9px;'>불&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;만</div>";	
 	             	starOut += "</div>";
-	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; background:gray; width:69%; heigth:14px; float:left; margin-top:12px;'>";
+	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; background:gray; width:58%; heigth:14px; float:left; margin-top:12px;'>";
 	             	starOut += "<div style='background:blue; width:"+width4+"%; height:14px;'></div>";
 	             	starOut += "</div>";
+	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; height:14px; margin-top:15px;'>&nbsp;("+gCount[1]+")</div>";
 	             	starOut += "</div>";
 	             	starOut += "<div style = 'margin-bottom:9px; height:14px;'>";
 	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; width:29%; heigth:10px; float:left;'>";
 	             	starOut += "<div style = 'height:14px; margin-top:9px;'>매우불만</div>";	
 	             	starOut += "</div>";
-	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; background:gray; width:69%; heigth:14px; float:left; margin-top:12px;'>";
+	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; background:gray; width:58%; heigth:14px; float:left; margin-top:12px;'>";
 	             	starOut += "<div style='background:blue; width:"+width5+"%; height:14px;'></div>";
 	             	starOut += "</div>";
+	             	starOut += "<div class='progressbar-wrap' style='display:inline-block; height:14px; margin-top:18px;'>&nbsp;("+gCount[0]+")</div>";
 	             	starOut += "</div>";
 
 	             	$star.append(starOut);
@@ -1023,7 +1028,7 @@
 							output += "<div style = 'text-align:right;'><button class='btn btn-light' style='width:65px; height:30px;' type = 'button'>메세지</button></div>";
 							output += "<div class='info' style = 'text-align:left;'>회원가입시기 : "+review[i].create_date+"<br>";
 							output += "흥미 : "+review[i].interesting+", 국적 : "+review[i].national+"<br>";
-							output += "이메일 : "+review[i].email+"<br>";
+							output += "E-MAIL : "+review[i].email+"<br>";
 							output += "<i class='fa fa-thumbs-o-up' style = 'font-size:13px;'></i> "+review[i].help_count+"건의 도움되는 리뷰, 댓글<br>";
 							output += "<i class='fas fa-pen-square'></i> "+review[i].board_count+"건 포스팅<br>";
 							output += "<i class='fas fa-pen'></i> "+review[i].reply_count+"건의 도움글 작성";

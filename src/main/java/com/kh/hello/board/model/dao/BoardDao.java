@@ -89,4 +89,8 @@ public interface BoardDao {
 
 	ArrayList<Board> selectReview(SqlSessionTemplate sqlSession, int contentid);
 
+	int deleteAllUploadUpdate(SqlSessionTemplate sqlSession, int bid);
+
+	int insertAttachment2(SqlSessionTemplate sqlSession, Attachment a);
+
 }

@@ -97,14 +97,53 @@ public class BoardPageController {
         
         int result1 = bs.insertAttachment(a);
         
-        return new Response(result);	
+        return new Response(result);	  
+    }
+	
+	@RequestMapping(value="/upload2.bo", method=RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public Response handleFileUpload2(@RequestParam("file") MultipartFile[] file, HttpServletRequest request, @RequestParam int bid) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+
+        List<String> result = new ArrayList<String>();
+        FileUpload fileUpload = new FileUpload();
+        for (int i = 0; i < file.length; i++) {
+            result.add(fileUpload.process(file[i], root));
+        }
+        Attachment a = new Attachment();
+        a.setOriginName(fileUpload.originalName());
+        a.setFilePath(root + "\\uploadFiles\\board\\"+fileUpload.changeName());
+        a.setChangeName(fileUpload.changeName());
+        a.setStatus("Y");
+        a.setaLevel(0);
+        a.setRefId(bid);
+        Member m = (Member)request.getSession().getAttribute("loginUser");
         
+        int result1 = bs.insertAttachment2(a);
         
+        return new Response(result);	  
     }
 	
 	@RequestMapping(value="/deleteUpload.bo")
     @ResponseBody
     public Response handleFileDeleteUpload(HttpServletRequest request) {
+		String changeFileName = request.getParameter("response1");
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		
+        List<String> result = new ArrayList<String>();
+        FileDeleteUpload fileDeleteUpload = new FileDeleteUpload();
+        result.add(fileDeleteUpload.process(changeFileName, root));
+
+        //선택삭제
+        int result1 = bs.deleteAttachment(changeFileName);
+        
+        return new Response(result);
+    }
+	
+	@RequestMapping(value="/deleteUpload2.bo")
+    @ResponseBody
+    public Response handleFileDeleteUpload2(HttpServletRequest request) {
 		String changeFileName = request.getParameter("response1");
 		Member m = (Member)request.getSession().getAttribute("loginUser");
 		String root = request.getSession().getServletContext().getRealPath("resources");
@@ -359,7 +398,8 @@ public class BoardPageController {
 	public String updateR(Model model, @RequestParam int bid, HttpServletRequest request, @RequestParam int contentid, @RequestParam int contenttypeid, @RequestParam int cid){
 		Board b = bs.selectReviewDetail(bid);
 		model.addAttribute("b", b);
-		
+		int result1 = 0;
+		result1 = bs.deleteAllUploadUpdate(bid);
 		String referer = request.getHeader("Referer");
 		
 		model.addAttribute("uri", referer);
@@ -375,10 +415,10 @@ public class BoardPageController {
 	public String updateReview(HttpServletRequest request, Board b, Model model, @RequestParam String uri, @RequestParam int contentid, @RequestParam int contenttypeid,
 			@RequestParam int cid, @RequestParam int bid){
 		int result = 0;
+		
 		b.setBid(bid);
-		
 		result = bs.updateReview(b);
-		
+			
 		uri+="&contenttypeid="+contenttypeid+"&cid="+cid;
 		return "redirect:"+uri;
 	}
