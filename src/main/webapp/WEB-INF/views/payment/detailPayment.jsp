@@ -95,11 +95,11 @@
 			<input type="hidden" id="orderInfo" name="custom">
 			<input type="hidden" name="charset" value="UTF-8">
 			<!-- 개인 테스트 용 -->
-			<%-- <input type="hidden" name="return" value="https://localhost:8443/hello/paymentConfirm.pay">
-			<input type="hidden" name="cancel_return" value="https://localhost:8443/hello/detailHotel?cid=${ reservation.cid }&contentid=${ reservation.contentid }"> --%>
+			<input type="hidden" name="return" value="https://localhost:8443/hello/paymentConfirm.pay">
+			<input type="hidden" name="cancel_return" value="https://localhost:8443/hello/detailHotel?cid=${ reservation.cid }&contentid=${ reservation.contentid }">
 			<!-- 다른 IP이용 시 -->
-			<input type="hidden" name="return" value="https://192.168.219.106:8443/hello/paymentConfirm.pay">
-			<input type="hidden" name="cancel_return" value="https://192.168.219.106:8443/hello/detailHotel?cid=${ reservation.cid }&contentid=${ reservation.contentid }">
+			<%-- <input type="hidden" name="return" value="https://192.168.219.106:8443/hello/paymentConfirm.pay">
+			<input type="hidden" name="cancel_return" value="https://192.168.219.106:8443/hello/detailHotel?cid=${ reservation.cid }&contentid=${ reservation.contentid }"> --%>
 			
 			<input type="hidden" id="oId" value="${ reservation.oid }">
 			<input type="hidden" id="price" value="${ ((param.price * reservation.period) * 0.1) + (param.price * reservation.period) }">
