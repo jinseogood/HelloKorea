@@ -118,9 +118,19 @@ body{ margin:50px 0px; }
       		<div class="row line_b" >
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style = "height:auto">
                <div class="tm-about-box-1" style = "height:220px; padding:10px 10px">
-                  <a href="#"><img src="${ contextPath }/resources/img/about-4.jpg" alt="img" class="tm-about-box-1-img" style = "margin:0 auto 10px"></a>
+                  <a onclick = "member_info(this);"><img src="${ contextPath }/resources/img/about-4.jpg" alt="img" class="tm-about-box-1-img" style = "margin:0 auto 10px"></a>
                   <h3 class="tm-about-box-1-title" style = "margin-bottom:5px">${ b.nickname }<span>( ${ b.national })</span></h3>
-                  <!-- <p class="margin-bottom-15 gray-text">Proin gravida nibhvell aliquet. Aenean sollicitudin bibum auctor nisi elit.</p> -->
+                  <div class = 'member_info' style = 'border-radius: 10px; visibility:hidden; position:absolute; background-color:lightgray; left:-133px; top:-10px; width:200px; height:200px; z-index:999;'>
+				  <div><h3>${b.nickname}</h3></div>
+				  <div style = 'text-align:right;'><button class='btn btn-light' style='width:65px; height:30px;' type = 'button'>메세지</button></div>
+						<div class='info' style = 'text-align:left;'>회원가입시기 : ${b.create_date}<br>
+							흥미 : ${b.interesting}, 국적 : ${b.national}<br>
+							이메일 : ${b.email}<br>
+							<i class='fa fa-thumbs-o-up' style = 'font-size:13px;'></i> ${b.help_count}건의 도움되는 리뷰, 댓글<br>
+							<i class='fas fa-pen-square'></i>${b.board_count}건 포스팅<br>
+							<i class='fas fa-pen'></i>${b.reply_count}건의 도움글 작성
+							</div>
+							</div>
                   <div class="gray-text">
                      <a href="#" class="tm-social-icon"><i class="fa fa-twitter"></i></a>
                      <a href="#" class="tm-social-icon"><i class="fa fa-facebook"></i></a>
@@ -206,6 +216,14 @@ body{ margin:50px 0px; }
    <jsp:include page="../common/footer.jsp"/>
 
 <script>
+function member_info(element){
+	
+	if($(element).parent().children().eq(2).css("visibility") == "visible"){
+		$(element).parent().children().eq(2).css("visibility", "hidden");
+	}else{
+		$(element).parent().children().eq(2).css("visibility", "visible");
+	}	
+}
 
 function insertA(element){
 	if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')}){

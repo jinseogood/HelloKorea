@@ -228,27 +228,32 @@ public class BoardPageController {
 
 		response.setContentType("text/html; charset=UTF-8");
 		ArrayList<Board> list = null;
+		ArrayList<Board> AllList = null;
 		PageInfo pi = null;
 
 		int listCount = bs.selectReviewCount(contentid);
 		pi = Pagination2.getPageInfo(page, listCount);
 		list = bs.selectReview(pi, contentid);
 		int[] gCount = new int[5];
+		AllList = bs.selectReview(contentid);
 		
-		for(int i = 0 ; i < list.size() ; i++){
-			list.get(i).setrCount(bs.selectReplyCount(list.get(i).getBid()));
-			list.get(i).setCreate_date(list.get(i).getCreate_date().substring(0, 10));
-			if(list.get(i).getGrade() >= 0.0 && list.get(i).getGrade() < 1.0){
+		for(int i = 0 ; i < AllList.size() ; i++){
+			if(AllList.get(i).getGrade() >= 0.0 && AllList.get(i).getGrade() < 1.0){
 				gCount[0]++;
-			}else if(list.get(i).getGrade() >= 1.0 && list.get(i).getGrade() < 2.0){
+			}else if(AllList.get(i).getGrade() >= 1.0 && AllList.get(i).getGrade() < 2.0){
 				gCount[1]++;
-			}else if(list.get(i).getGrade() >= 2.0 && list.get(i).getGrade() < 3.0){
+			}else if(AllList.get(i).getGrade() >= 2.0 && AllList.get(i).getGrade() < 3.0){
 				gCount[2]++;
-			}else if(list.get(i).getGrade() >= 3.0 && list.get(i).getGrade() < 4.0){
+			}else if(AllList.get(i).getGrade() >= 3.0 && AllList.get(i).getGrade() < 4.0){
 				gCount[3]++;
 			}else{
 				gCount[4]++;
 			}
+		}
+		
+		for(int i = 0 ; i < list.size() ; i++){
+			list.get(i).setrCount(bs.selectReplyCount(list.get(i).getBid()));
+			list.get(i).setCreate_date(list.get(i).getCreate_date().substring(0, 10));
 		}
 		
 		mv.addObject("gCount", gCount);
@@ -341,6 +346,8 @@ public class BoardPageController {
 		ArrayList<Attachment> a = bs.selectAttachDetail(bid);
 		ArrayList<Reply> listRAnswer = bs.selectRAnswer(bid);
 		
+		b.setCreate_date(b.getCreate_date().substring(0, 10));
+
 		model.addAttribute("b", b);
 		model.addAttribute("a", a);
 		model.addAttribute("listRAnswer", listRAnswer);
