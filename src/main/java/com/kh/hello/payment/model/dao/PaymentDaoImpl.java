@@ -62,10 +62,11 @@ public class PaymentDaoImpl implements PaymentDao{
 
 	//포인트 이력 추가
 	@Override
-	public int insertPoint(int mId, int price, SqlSessionTemplate sqlSession) {
+	public int insertPoint(int mId, int point, SqlSessionTemplate sqlSession) {
+		System.out.println("mId : " + mId + ", point : " + point);
 		ArrayList<Object> list=new ArrayList<Object>();
 		list.add(mId);
-		list.add(price);
+		list.add(point);
 		return sqlSession.insert("PayDetail.insertPoint", list);
 	}
 

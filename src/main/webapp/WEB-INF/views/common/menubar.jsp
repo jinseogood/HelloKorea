@@ -294,7 +294,7 @@
 	</div>
 
 	<script>
-		
+
 		
 		function openMsg(){
 			var mId = $("#msgBtn").val(); 

@@ -233,12 +233,25 @@ public class BoardPageController {
 		int listCount = bs.selectReviewCount(contentid);
 		pi = Pagination2.getPageInfo(page, listCount);
 		list = bs.selectReview(pi, contentid);
+		int[] gCount = new int[5];
 		
 		for(int i = 0 ; i < list.size() ; i++){
 			list.get(i).setrCount(bs.selectReplyCount(list.get(i).getBid()));
 			list.get(i).setCreate_date(list.get(i).getCreate_date().substring(0, 10));
+			if(list.get(i).getGrade() >= 0.0 && list.get(i).getGrade() < 1.0){
+				gCount[0]++;
+			}else if(list.get(i).getGrade() >= 1.0 && list.get(i).getGrade() < 2.0){
+				gCount[1]++;
+			}else if(list.get(i).getGrade() >= 2.0 && list.get(i).getGrade() < 3.0){
+				gCount[2]++;
+			}else if(list.get(i).getGrade() >= 3.0 && list.get(i).getGrade() < 4.0){
+				gCount[3]++;
+			}else{
+				gCount[4]++;
+			}
 		}
 		
+		mv.addObject("gCount", gCount);
 		mv.addObject("list", list);
 		mv.addObject("pi", pi);
 		mv.addObject("listCount", listCount);
@@ -385,7 +398,7 @@ public class BoardPageController {
 				int result2 = bs.updateThumbsReview(ref_id);
 				count = bs.selectThumbsCount(thumb);
 					if(result1 > 0 && result2 >0){
-						mv.addObject("msg", "도움이 되었어요가 취소되었습니다.");
+						mv.addObject("msg", "좋아요가 취소되었습니다.");
 						mv.addObject("thumbsCount", count);
 					}else{
 						mv.addObject("msg", "에러입니다.");
@@ -396,7 +409,7 @@ public class BoardPageController {
 				int result2 = bs.updateThumbsReview(ref_id);
 				count = bs.selectThumbsCount(thumb);
 				if(result1 > 0 && result2 >0){
-					mv.addObject("msg", "도움이 되었어요 되었습니다.");
+					mv.addObject("msg", "좋아요 되었습니다.");
 					mv.addObject("thumbsCount", count);
 				}else{
 					mv.addObject("msg", "에러입니다.");
@@ -408,7 +421,7 @@ public class BoardPageController {
 			int result2 = bs.updateThumbsReview(ref_id);
 			count = bs.selectThumbsCount(thumb);
 			if(result1 > 0 && result2 >0){
-				mv.addObject("msg", "도움이 되었어요 되었습니다.");
+				mv.addObject("msg", "좋아요 되었습니다.");
 				mv.addObject("thumbsCount", count);
 			}else{
 				mv.addObject("msg", "에러입니다.");
@@ -450,20 +463,18 @@ public class BoardPageController {
 				int result1 = bs.updateThumbs(thumb);
 				int result2 = bs.updateReply(reply_id);
 				count = bs.selectThumbsCount(thumb);
-				if(count == 5){
-					int resultA = 0 ;
-					resultA = bs.selectPointA(thumb);
-						
-					if(resultA == 0){
-						System.out.println("와야댐");
-					}
-				}else{
-					System.out.println("카운트아직안됨");
-				}
-				
+		
 				if(result1 > 0 && result2 >0){
+					if(count == 5){
+						int resultA = 0 ;
+						resultA = bs.selectPointA(thumb);
+							
+						if(resultA == 0){
+							int resultAA = 0;
+							resultAA = bs.insertPointA(thumb);
+						}
+					}					
 					mv.addObject("msg", "도움이 되었어요 되었습니다.");
-					//System.out.println("카운트아직안됨");
 					mv.addObject("thumbsCount", count);
 				}else{
 					mv.addObject("msg", "에러입니다.");
@@ -528,6 +539,19 @@ public class BoardPageController {
 		}else{
 			mv.addObject("msg", "본인 글은 신고할 수 없습니다.");
 		}
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="bestReview")
+	public ModelAndView bestReview(Model model, HttpServletResponse response, @RequestParam int contentid){
+		response.setContentType("text/html; charset=UTF-8");
+		ModelAndView mv = new ModelAndView("jsonView");
+		
+		ArrayList<Board> list = new ArrayList<Board>();
+		list = bs.selectBestReview(contentid);
+		
+		mv.addObject("bestReviewList", list);
 		
 		return mv;
 	}

@@ -28,7 +28,7 @@
                       		 JOIN COMPANY C ON(RO.C_ID=C.C_ID)
                       		 JOIN MEMBER M ON(C.M_ID=M.M_ID)
                       		 WHERE C.M_ID = #{mId}
-                      		 AND TO_CHAR(RE.R_EDATE,'YYYYMM') = TO_CHAR(ADD_MONTHS(SYSDATE,-1),'YYYYMM')
+                      		 AND TO_CHAR(RE.R_EDATE,'YYYYMM') <![CDATA[<]]>= TO_CHAR(SYSDATE,'YYYYMM')
                       		 AND PA_ID NOT IN ( SELECT PA_ID
                                          		FROM PAY_DETAIL
                                          		WHERE PD_TYPE = 'R'))                    
@@ -49,7 +49,7 @@
                       JOIN COMPANY C ON(RO.C_ID=C.C_ID)
                       JOIN MEMBER M ON(C.M_ID=M.M_ID)
                       WHERE C.M_ID = #{mId}
-                      AND TO_CHAR(RE.R_EDATE,'YYYYMM') = TO_CHAR(ADD_MONTHS(SYSDATE,-1),'YYYYMM')
+                      AND TO_CHAR(RE.R_EDATE,'YYYYMM') <![CDATA[<]]>= TO_CHAR(SYSDATE,'YYYYMM')
                       AND PA_ID NOT IN ( SELECT PA_ID
                                          FROM PAY_DETAIL
                                          WHERE PD_TYPE = 'R'))                    
@@ -120,8 +120,14 @@
 								<when test="list.get(1).cName != null">
 									AND C_NAME LIKE '%' || '${list.get(1).cName}' || '%'
 								</when>
+								<when test="list.get(1).status.equals('A')">
+									AND C.C_ID IN (SELECT C_ID FROM DEPOSIT_HISTORY JOIN COMPANY USING(C_ID) WHERE M_ID = ${list.get(0)} AND TO_CHAR(D_DATE, 'YYYYMM') = TO_CHAR(SYSDATE, 'YYYYMM'))
+								</when>
+								<otherwise>
+									AND C.C_ID NOT IN (SELECT C_ID FROM DEPOSIT_HISTORY JOIN COMPANY USING(C_ID) WHERE M_ID = ${list.get(0)} AND TO_CHAR(D_DATE, 'YYYYMM') = TO_CHAR(SYSDATE, 'YYYYMM'))
+								</otherwise>
 							</choose>
-                       		AND TO_CHAR(RE.R_EDATE,'YYYYMM') = TO_CHAR(ADD_MONTHS(SYSDATE,-1),'YYYYMM')
+                       		AND TO_CHAR(RE.R_EDATE,'YYYYMM') <![CDATA[<]]>= TO_CHAR(SYSDATE,'YYYYMM')
                        		AND PA_ID NOT IN ( SELECT PA_ID
                                           	   FROM PAY_DETAIL
                                           	   WHERE PD_TYPE = 'R'))                    
@@ -146,14 +152,14 @@
 					  	<when test="list.get(1).cName != null">
 							AND C_NAME LIKE '%' || '${list.get(1).cName}' || '%'
 						</when>
-						<when test="list.get(1).status.equals('A')">
+						<when test='list.get(1).status.equals("A")'>
 							AND C.C_ID IN (SELECT C_ID FROM DEPOSIT_HISTORY JOIN COMPANY USING(C_ID) WHERE M_ID = ${list.get(0)} AND TO_CHAR(D_DATE, 'YYYYMM') = TO_CHAR(SYSDATE, 'YYYYMM'))
 						</when>
 						<otherwise>
 							AND C.C_ID NOT IN (SELECT C_ID FROM DEPOSIT_HISTORY JOIN COMPANY USING(C_ID) WHERE M_ID = ${list.get(0)} AND TO_CHAR(D_DATE, 'YYYYMM') = TO_CHAR(SYSDATE, 'YYYYMM'))
 						</otherwise>
 					  </choose>
-					  AND TO_CHAR(RE.R_EDATE,'YYYYMM') = TO_CHAR(ADD_MONTHS(SYSDATE,-1),'YYYYMM')
+					  AND TO_CHAR(RE.R_EDATE,'YYYYMM') <![CDATA[<]]>= TO_CHAR(SYSDATE,'YYYYMM')
 					  AND PA_ID NOT IN ( SELECT PA_ID
 										 FROM PAY_DETAIL
 										 WHERE PD_TYPE = 'R'))                    
@@ -162,11 +168,11 @@
 	</select>
 	
 	<!-- 수익 상태 확인 -->
-	<select id="selectRSList" resultType="_int" parameterType="arraylist">
+	<select id="selectRSList" resultType="_int" parameterType="_int">
 		SELECT COUNT(*)
 		FROM DEPOSIT_HISTORY
-		WHERE C_ID = ${list.get(0)}
-		AND TO_CHAR(D_DATE, 'YYYY-MM') = '${list.get(1)}'
+		WHERE C_ID = #{cId}
+		AND TO_CHAR(D_DATE, 'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM')
 	</select>
 	
 </mapper>

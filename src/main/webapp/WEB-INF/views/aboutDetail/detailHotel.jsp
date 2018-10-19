@@ -504,7 +504,24 @@
          <div class="tm-section-header section-margin-top">
        		   <div class="col-lg-4 col-md-4 col-sm-4 title1"><h2 class="tm-section-title1">R E V I E W (${ listCount })</h2></div>
       		   <div class="col-lg-8 col-md-8 col-sm-8"><hr></div>
-	      	   <div style = "height:200px; width:100%; position:relative">
+	      	   <div style = "height:200px; width:100%; position:relative; text-align:center">
+	      	   		<div class = "star_rating br1" style = "display:inline-block; width:280px; height:200px; padding-top:50px; padding-left:70px; text-align:left; float:left;">
+	      	   			<c:set var="num1" value="20"/>
+             			<c:set var="num2" value="3" />
+             
+						<div style = "margin-bottom:2px;">
+             			<div class="progressbar-wrap" style="display:inline-block; width:29%; heigth:10px; float:left;">
+             				<div style = "height:14px;">매우좋음</div>		
+             			</div>
+             			<div class="progressbar-wrap" style="display:inline-block; background:gray; width:69%; heigth:14px; float:left; margin-top:2px;">
+                        	<div style="background:blue; width:${(num2 / num1) * 100 }%; height:14px;"></div>
+                        </div>
+                        </div>
+
+	      	   		</div> 
+	      	   		<div class ="best_review br1" style = "display:inline-block; width:600px; height:200px; padding-top:50px; padding-left:70px; text-align:left; float:left;">
+	      	   			
+	      	   		</div>
 	      	   		<button type="button" class="btn btn-secondary" 
 	      	   			style = "position:absolute; right:10px; bottom:10px"
 	      	   			onclick="review()">리뷰 쓰기</button>
@@ -941,6 +958,15 @@
 					$pageTitle = $(".tm-section-title1");
 					$pageTitle.html('');
 					
+					$star = $(".star_rating");
+					$star.html('');
+					
+					var gCount = data.gCount;
+					var starOut = "";
+					
+					console.log(gCount);
+					console.log("오긴오나")
+					
 					var count1 = data.listCount;
 					$pageTitle.append("R E V I E W ("+count1+")");
 					
@@ -1342,7 +1368,7 @@
 					},error:function(data){
 						console.log(data);
 					}
-			});
+				});
 
 			else{
 				alert("로그인이 필요한 서비스 입니다.");
@@ -1398,9 +1424,34 @@
     		location.href = "reviewDetail.bo?bid="+ bid;
     	}
     	
+    	function bestReview(){   		
+    		$.ajax({
+    			url:"bestReview.bo",
+    			type:"post",
+    			data:{contentid:contentid},
+    			dataType:"json",
+    			success:function(data){
+    				$best = $('.best_review');
+    				$best.html('');
+    				var rBest = data.bestReviewList;
+    				var output = "";
+    				
+    				for(var i = 0 ; i < rBest.length ; i++){
+    					output += "<div style = 'border-bottom: 1px solid #ccc; cursor:pointer;' onclick = 'goDetail("+rBest[i].bid+")'><h3>BEST "+(i+1)+". "+ rBest[i].title+"</div><br>";
+    				}
+      	   			
+      	   			$best.append(output);
+    			},error:function(data){
+    				
+    			}
+    		})
+
+    	}
+    	
     	$(function(){
     		QPaging(1);
 			reviewPaging(1);
+			bestReview();
     	});
     	
 		$(function() {

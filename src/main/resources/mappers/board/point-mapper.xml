@@ -39,4 +39,9 @@
      	AND REPLY_ID = #{ref_id}
      	AND PA_TYPE = 2
      </select>
+     
+     <insert id = "insertPointA" parameterType = "Thumbs">
+     	INSERT INTO POINT VALUES(SEQ_P_ID.NEXTVAL, 'A', SYSDATE, 100, #{t_target},
+     							0, #{ref_id}, '2')
+     </insert>
 </mapper>

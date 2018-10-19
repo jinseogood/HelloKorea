@@ -28,6 +28,7 @@
 	<jsp:include page="../common/searchMenubar.jsp"/>
 	<jsp:include page="../common/searchSubmenubar.jsp"/>
 	
+	<input type="hidden" id="CUR" value="${ sessionScope.cur }">
 	
 	<section class="container tm-home-section-1" id="more">
 		<div class="container">
@@ -167,6 +168,11 @@
 			</div>
 		<script>
 			
+			var currency = $("#CUR").val();
+			currency=parseInt(currency);
+			console.log(typeof(currency));
+			console.log(currency);
+		
 			if(sessionStorage.getItem("areaCode") == 1){
 				$(".tm-section-title1").text("서울 호텔");
 			}else if(sessionStorage.getItem("areaCode") == 2){
@@ -482,7 +488,8 @@
 									}
 								},error:function(ddate){console.log(ddate);}
 							});
-							output += "<br><span style='font-size:20px;'>최저가 : "+"\\"+data[i].minPrice+"원 ~</span>";
+					
+							output += "<br><span style='font-size:20px;'>최저가 : "+"\\"+(data[i].minPrice/currency)+"원 ~</span>";
 							output += "</p>";
 							output += "<div class='tm-home-box-2-container'>";
 							$.ajax({

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Hello Korea | Seller</title>
 <style>
 	.content{
 		width:1100px;
@@ -268,9 +268,9 @@
 							output += "<th style='border-right:3px solid orangered;'>객실 수</th><td><p>" + rDetail[i].oRCount + " 개</p></td></tr>";
 							tPrice += rDetail[i].price;
 						}
-						
+						console.log(typeof(tPrice));
 						output += "<tr><th>인원 수</th><td colspan='3'><p>" + rDetail[0].people + " 명</p></td></tr>";
-						output += "<tr><th>금액</th><td><p>" + tPrice + " 원</p></td>";
+						output += "<tr><th>금액</th><td><p>" + numberWithCommas(tPrice) + " 원</p></td>";
 						if(rDetail[0].status == "P"){
 							output += "<th>상태</th><td>결제완료</td></tr>";	
 						}
@@ -302,6 +302,9 @@
 				$('.input-group #searchParam').val(param);
 			});
 		});
+		function numberWithCommas(x){
+			return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
 	</script>
 </body>
 </html>
