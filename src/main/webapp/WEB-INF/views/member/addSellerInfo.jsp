@@ -42,25 +42,26 @@ input[type='text']{
 	<input type="hidden" class="input-sm" id="client_secret" name="client_secret" value="8096f01f6b2048d789198a7c3108950b">
 	<input type="hidden" class="input-sm" id="token" name="token">
 	<input type="hidden" class="input-sm" id="account_holder_info_type" name="account_holder_info_type">
-		<form action="addSeller.me" method="post">
+		
+		<form action="addSeller.me" method="post" id="sellerForm">
 			<table id="sellerTable">
 			<input type="hidden" name="mId" value="${mid}"/>
 				<tr>
 					<th>이름</th>
-					<td><input type="text" name="nickname" class="inputStyle"></td>
+					<td><input type="text" name="nickname" class="inputStyle" id="nickname"></td>
 				</tr>
 				<tr>
 					<th>휴대전화</th>
-					<td><input type="text" name="phone" class="inputStyle"></td>
+					<td><input type="text" name="phone" class="inputStyle" id="phone"></td>
 				</tr>
 				<tr>
 				<th>생년월일</th>
-				<td><input type="text" name="birthDay" size="6" maxlength="6" placeholder="생년월일 6자리를 입력하세요"></td>
+				<td><input type="text" name="birthDay" size="6" maxlength="6" placeholder="생년월일 6자리를 입력하세요" id="birthDay"></td>
 				
 				</tr>
 				<tr>
 					<th>계좌번호</th>
-					<td><input type="text" name="bankNum" placeholder="'-'없이 입력하세요"></td>
+					<td><input type="text" name="bankNum" placeholder="'-'없이 입력하세요" id="bankNum"></td>
 				</tr>
 					<input type="hidden" class="input-sm" id="tran_dtime" name="tran_dtime">
 					<input type="hidden" class="input-sm" id="bank_code_std" name="bank_code_std">
@@ -68,7 +69,7 @@ input[type='text']{
 					<th>Bankchoice</th>
 					<td>
 					<select id="bankcode">
-					<option>---</option>
+					<option value="-">---</option>
 					<option value="003">기업은행</option>
 				    <option value="004">국민은행</option>
 				    <option value="011">농협중앙회</option>
@@ -96,7 +97,7 @@ input[type='text']{
 				</tr>
 			</table>
 				<div align="center">
-					<button type="submit">회원가입하기</button>
+					<button type="button" onclick="allCheck()">회원가입하기</button>
 				</div>
 		</form>
 		
@@ -147,7 +148,24 @@ input[type='text']{
 		    	});
 			 });
 	
-	
+	function allCheck(){
+		 var nickname = $("nickname").val();
+		 var bankNum = $("bankCode").val();
+		 var phone = $("phone").val();
+		 var birth = $("birthDay").val();
+		 
+		 if(nickname==null&& bankNum=="-"&&phone==null&&birth==null){
+			 alert("정보를 모두 다 입력 하셔야 합니다");
+			 
+			 
+		 }else{
+			var form = $("sellerForm");
+			form.submit();
+			 
+		 }
+		 
+		 
+	}
 	</script>
 
 </body>

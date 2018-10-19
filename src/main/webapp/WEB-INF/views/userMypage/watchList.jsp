@@ -65,6 +65,16 @@
 	<jsp:include page="../common/menubar.jsp"/>
 	<div class="mainDiv">
 		<jsp:include page="../common/userMenubar.jsp"/>
+		<div class="row">
+                        <div class="col-md-12">
+                            <!--breadcrumbs start -->
+                            <ul class="breadcrumb">
+                                <li><a href="index.jsp"><i class="fa fa-home"></i> Home</a></li>
+                                <li><a>관심목록</a></li>
+                            </ul>
+                            <!--breadcrumbs end -->
+                        </div>
+                    </div>
 		<div role="tabpanel">
 
 		  <!-- Nav tabs -->
