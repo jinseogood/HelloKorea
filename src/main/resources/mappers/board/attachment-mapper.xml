@@ -21,7 +21,11 @@
           INSERT INTO ATTACHMENT VALUES(SEQ_FID.NEXTVAL, #{originName},
                                        #{filePath}, SYSDATE, #{changeName}, #{status}, #{aLevel}, SEQ_BID.CURRVAL)
      </insert>
-     
+     <!-- 리뷰사진 수정추가 -->
+     <insert id="insertAttachment2" parameterType="Attachment">
+          INSERT INTO ATTACHMENT VALUES(SEQ_FID.NEXTVAL, #{originName},
+                                       #{filePath}, SYSDATE, #{changeName}, #{status}, #{aLevel}, #{refId})
+     </insert>
      <!-- 리뷰사진 선택삭제 -->
      <delete id="deleteSelectReviewAttachment" parameterType="java.lang.String">
           DELETE FROM ATTACHMENT WHERE CHANGE_NAME = #{changeFileName}	
@@ -32,12 +36,10 @@
           DELETE FROM ATTACHMENT WHERE REF_ID = (SELECT MAX(BID) FROM BOARD WHERE M_ID = #{mId})	
      </delete>
      
-     <!-- 리뷰사진 상태 업데이트 -->
-     <!-- <update id="updateAttachment" parameterType="_int">
-         UPDATE MEMBER
-         SET STATUS = 'B'
-         WHERE M_ID = #{mId} 
-     </update> -->
+     <!-- 리뷰사진 수정시 일괄삭제 -->
+     <delete id="deleteAllUploadUpdate" parameterType="_int">
+          DELETE FROM ATTACHMENT WHERE REF_ID = #{bid}	
+     </delete>
      
      <!-- 리뷰사진 검색 검색 -->
      <select id="selectAttachment" parameterType="_int" resultMap="AttachmentResultSet">

@@ -125,7 +125,7 @@ body{ margin:50px 0px; }
 				  <div style = 'text-align:right;'><button class='btn btn-light' style='width:65px; height:30px;' type = 'button'>메세지</button></div>
 						<div class='info' style = 'text-align:left;'>회원가입시기 : ${b.create_date}<br>
 							흥미 : ${b.interesting}, 국적 : ${b.national}<br>
-							이메일 : ${b.email}<br>
+							E-MAIL : ${b.email}<br>
 							<i class='fa fa-thumbs-o-up' style = 'font-size:13px;'></i> ${b.help_count}건의 도움되는 리뷰, 댓글<br>
 							<i class='fas fa-pen-square'></i>${b.board_count}건 포스팅<br>
 							<i class='fas fa-pen'></i>${b.reply_count}건의 도움글 작성

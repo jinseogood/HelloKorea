@@ -266,5 +266,17 @@ public class BoardServiceImpl implements BoardService{
 		
 		return bd.selectReview(sqlSession, contentid);
 	}
+
+	@Override
+	public int deleteAllUploadUpdate(int bid) {
+
+		return bd.deleteAllUploadUpdate(sqlSession, bid);
+	}
+
+	@Override
+	public int insertAttachment2(Attachment a) {
+
+		return bd.insertAttachment2(sqlSession, a);
+	}
  
 }

@@ -85,6 +85,10 @@ public interface BoardService{
 
 	ArrayList<Board> selectBestReview(int contentid);
 
-	ArrayList<Board> selectReview(int contentid); 
+	ArrayList<Board> selectReview(int contentid);
+
+	int deleteAllUploadUpdate(int bid);
+
+	int insertAttachment2(Attachment a); 
 
 } 

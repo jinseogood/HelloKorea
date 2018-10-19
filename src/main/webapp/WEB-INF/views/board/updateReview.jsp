@@ -139,7 +139,7 @@ body{ margin:50px 0px; }
    					<script src="${ contextPath }/resources/js/rater.js" charset="utf-8"></script>
     				<script> 
     					var a = ${b.grade};	
-    	
+    					
     					(function($){
        				        $(document).ready(function(){
           				    var options = {
@@ -214,7 +214,52 @@ body{ margin:50px 0px; }
 						
         		</div>
         	</div>
-        	
+        	<div class="col-lg-12 col-md-12 col-sm-12" style="padding-top:40px"><hr>
+        		<span>공유하실 추억은 무엇인가요? (필요하신 사진은 다시 넣어주세요!)</span><br><br>
+            	
+        <div class="text-center text-primary">
+        </div>
+
+ 
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div id="consistentCoder" class="text-center"></div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="label label-info pull-right"><span class="countMe">0</span> files uploaded.</div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12"> </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 stageParent">
+            <div id="stage" class="stage"></div>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12"> </div>
+        <div id="response" class="text-center"></div>
+    
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="${ contextPath }/resources/js/ccFileUpload2.js"></script>
+    <script>
+    var bid = ${bid};
+    
+    	(function($){
+        $(document).ready(function(){
+            var options = {
+                    'name':'file',
+                    'uploadUrl':'upload2.bo?bid='+bid,
+                    'sync':false,
+                    'previews':'stage',
+                    'response':'response',
+                    'counter':'countMe',
+                    'columnClass':'col-md-3 text-center',
+                    'allowedFiles':['gif','png','jpg','jpeg','xlsx','.psd'],
+                    'allowedPreviews':['gif','png','jpg','jpeg'],
+                    'animSpeed':'fast'
+                  };
+            $("#consistentCoder").ccFileUpload(options);
+        });
+    	})(jQuery);
+    </script>
+        	</div>
         	
       </div>
 			<div class="col-lg-12 col-md-12 col-sm-12"><hr>
