@@ -155,6 +155,7 @@
 			console.log(currency);
 			currency=parseFloat(currency);
 			
+			console.log("여기가 cur");
 			console.log(curIcon);
 			console.log(currency);
 		
