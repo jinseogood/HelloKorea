@@ -385,7 +385,7 @@ public class BoardPageController {
 				int result2 = bs.updateThumbsReview(ref_id);
 				count = bs.selectThumbsCount(thumb);
 					if(result1 > 0 && result2 >0){
-						mv.addObject("msg", "도움이 되었어요가 취소되었습니다.");
+						mv.addObject("msg", "좋아요가 취소되었습니다.");
 						mv.addObject("thumbsCount", count);
 					}else{
 						mv.addObject("msg", "에러입니다.");
@@ -396,7 +396,7 @@ public class BoardPageController {
 				int result2 = bs.updateThumbsReview(ref_id);
 				count = bs.selectThumbsCount(thumb);
 				if(result1 > 0 && result2 >0){
-					mv.addObject("msg", "도움이 되었어요 되었습니다.");
+					mv.addObject("msg", "좋아요 되었습니다.");
 					mv.addObject("thumbsCount", count);
 				}else{
 					mv.addObject("msg", "에러입니다.");
@@ -408,7 +408,7 @@ public class BoardPageController {
 			int result2 = bs.updateThumbsReview(ref_id);
 			count = bs.selectThumbsCount(thumb);
 			if(result1 > 0 && result2 >0){
-				mv.addObject("msg", "도움이 되었어요 되었습니다.");
+				mv.addObject("msg", "좋아요 되었습니다.");
 				mv.addObject("thumbsCount", count);
 			}else{
 				mv.addObject("msg", "에러입니다.");
@@ -450,20 +450,18 @@ public class BoardPageController {
 				int result1 = bs.updateThumbs(thumb);
 				int result2 = bs.updateReply(reply_id);
 				count = bs.selectThumbsCount(thumb);
-				if(count == 5){
-					int resultA = 0 ;
-					resultA = bs.selectPointA(thumb);
-						
-					if(resultA == 0){
-						System.out.println("와야댐");
-					}
-				}else{
-					System.out.println("카운트아직안됨");
-				}
-				
+		
 				if(result1 > 0 && result2 >0){
+					if(count == 5){
+						int resultA = 0 ;
+						resultA = bs.selectPointA(thumb);
+							
+						if(resultA == 0){
+							int resultAA = 0;
+							resultAA = bs.insertPointA(thumb);
+						}
+					}					
 					mv.addObject("msg", "도움이 되었어요 되었습니다.");
-					//System.out.println("카운트아직안됨");
 					mv.addObject("thumbsCount", count);
 				}else{
 					mv.addObject("msg", "에러입니다.");
