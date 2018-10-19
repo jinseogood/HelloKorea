@@ -54,6 +54,10 @@
 		function changeCUR(){
 			var cur=$("#currency").val();
 			
+			if(cur == null || cur == "NO"){
+				cur="KRW";
+			}
+			
 			$.ajax({
 				url:"currencyCheck.pay",
 				type:"POST",
@@ -74,7 +78,7 @@
 					$.ajax({
 						url:"currencySetting.pay",
 						type:"POST",
-						data:{sCur:sCur},
+						data:{cur:cur, sCur:sCur},
 						success:function(data){
 							//console.log(data);
 							
