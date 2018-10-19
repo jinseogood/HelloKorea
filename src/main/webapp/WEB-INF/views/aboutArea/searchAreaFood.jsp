@@ -214,15 +214,7 @@
 					console.log(checkValue);
 					searchFoodCondition(areaCode, sigunguCode, cat3);
 				});
-				$(".goodBtn").click(function(){
-					if($(this).children("i").hasClass("fa fa-heart tm-home-box-2-icon border-right") == true){
-						$(this).children("i").removeClass("fa fa-heart tm-home-box-2-icon border-right");
-						$(this).children("i").addClass("fa fa-heart-o tm-home-box-2-icon border-right");
-					}else if($(this).children("i").hasClass("fa fa-heart-o tm-home-box-2-icon border-right") == true){
-						$(this).children("i").removeClass("fa fa-heart-o tm-home-box-2-icon border-right");
-						$(this).children("i").addClass("fa fa-heart tm-home-box-2-icon border-right");
-					}
-				});
+				
 			});
 			
 			function searchFoodCondition(areaCode, sigunguCode, cat3, PageNo){
@@ -516,6 +508,19 @@
 						}
 					});
 			}
+			
+			$(function(){
+				$(".goodBtn").click(function(){
+					if($(this).children("i").hasClass("fa fa-heart tm-home-box-2-icon border-right") == true){
+						$(this).children("i").removeClass("fa fa-heart tm-home-box-2-icon border-right");
+						$(this).children("i").addClass("fa fa-heart-o tm-home-box-2-icon border-right");
+					}else if($(this).children("i").hasClass("fa fa-heart-o tm-home-box-2-icon border-right") == true){
+						$(this).children("i").removeClass("fa fa-heart-o tm-home-box-2-icon border-right");
+						$(this).children("i").addClass("fa fa-heart tm-home-box-2-icon border-right");
+					}
+				});
+			});
+			
 			</script>
 			</c:if>
 			<c:if test="${empty sessionScope.loginUser}">

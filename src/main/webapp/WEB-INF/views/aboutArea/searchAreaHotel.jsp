@@ -5,15 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="${ contextPath }/resources/css/style.css" rel="stylesheet" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 <title>Hello Korea</title>
 <style>
 	#more{margin-top:5%;}
 	#detailClick:hover{cursor:pointer}
-	.hotelSearchText{font-size:15px;}
-	#detailHover{max-width:800px; height:300px;}
+	.hotelSearchText{font-size:20px;}
+	#detailHover{max-width:750px; height:225px;}
 	#detailInfo-1{max-width:500px;}
 	#tm-home-box-2-link-1{width:50px;}
 	#tm-home-box-2-link-2{width:445px; display:inline-block;}
@@ -23,7 +22,7 @@
 	.oderByClass{cursor:pointer;}
 </style>
 </head>
-<body style="background-color:#f1f2f7;">
+<body>
 	<!-- 지역의 호텔검색 Page. -->
 	<jsp:include page="../common/searchMenubar.jsp"/>
 	<jsp:include page="../common/searchSubmenubar.jsp"/>
@@ -32,33 +31,23 @@
 	<section class="container tm-home-section-1" id="more">
 		<div class="container">
 			<div class="row">
-			
-				<div class="tm-section-header section-margin-top" style="margin-top:20px;margin-bottom:30px;">
-				<div class="sm-st clearfix" >
-					<div class="col-lg-3 col-md-3 col-sm-3"></div>
+				<div class="tm-section-header section-margin-top">
+					<div class="col-lg-3 col-md-3 col-sm-3"><hr></div>
 					<div class="col-lg-6 col-md-6 col-sm-6"><h2 class="tm-section-title tm-section-title1">서울 호텔</h2></div>
-					<div class="col-lg-3 col-md-3 col-sm-3"></div>
-					 <div class="col-lg-6 col-md-6 col-sm-6"></div>
+					<div class="col-lg-3 col-md-3 col-sm-3"><hr></div>	
 				</div>
-				</div>
-				
-				
-				<div class="col-lg-3" align="left">
-					
-					<div class="sm-st clearfix" >
-					
-					<div class="col-lg-12 col-md-12 col-sm-12" align="left">
-					<span class="tm-section-title" style="font-size:20px; border-bottom:1px solid #ccc;"><b>정렬 기준</b></span>
-						<br><br>
-						<!-- <a class="orderByClass" onclick="orderByHotel('name');">이름</a> -->
-						<a class="oderByClass" style="font-size:18px;">인기 순</a><br>
-						<a class="oderByClass" style="font-size:18px;">가격 낮은 순</a><br>
-						<a class="oderByClass" onclick="orderByHotel('grade');" style="font-size:18px;">평점 높은 순</a><br><br>
-						
+					<div class="col-lg-3 col-md-3 col-sm-3">
+						<span class="tm-section-title" style="font-size:25px;"><b>호텔검색</b></span>
 					</div>
-					
+					<div class="col-lg-6 col-md-6 col-sm-6"></div>
+					<div class="col-lg-3 col-md-3 col-sm-3" align="right">
+						<span class="tm-section-title" style="font-size:20px;">정렬 : <a class="orderByClass" onclick="orderByHotel('name');">이름순</a> <a class="oderByClass" onclick="orderByHotel('grade');">평점높은순</a></span>
+					</div>	
+					<br><br>
+				<div class="col-lg-3" align="left">
+					<br>
 					<div class="col-lg-12 col-md-12 col-sm-12" align="left">
-						<span class="tm-section-title" style="font-size:20px; border-bottom:1px solid #ccc;"><b>가격</b></span>
+						<span class="tm-section-title" style="font-size:25px; border-bottom:1px solid #ccc;"><b>가격</b></span>
 						<br>
 						<input type="radio" class="hotelSearchMoney" value="1" id="price1" name="hotelSearchConditionMoney" style="width:17px; height:17px;"/>
 						<label for="price1" class="hotelSearchText">&nbsp;&nbsp;100,000 ~ 199,000</label><br>
@@ -71,7 +60,7 @@
 					<br><br>
 					
 					<div class="col-lg-12 col-md-12 col-sm-12" align="left">
-						<span class="tm-section-title" style="font-size:20px; border-bottom:1px solid #ccc;"><b>유형</b></span>
+						<span class="tm-section-title" style="font-size:25px; border-bottom:1px solid #ccc;"><b>유형</b></span>
 						<br>
 						<input type="radio" onclick="searchHotelGoodStay();" class="hotelSearchGoodStay" value="goodStay" id="goodStay" name="hotelSearchCondition" style="width:17px; height:17px;"/>
 						<label for="goodStay" class="hotelSearchText">&nbsp;&nbsp;굿스테이</label><br>
@@ -83,7 +72,7 @@
 					
 					<br>
 					<div class="col-lg-12 col-md-12 col-sm-12" align="left">
-						<span class="tm-section-title" style="font-size:20px; border-bottom:1px solid #ccc;"><b>평점</b></span>
+						<span class="tm-section-title" style="font-size:25px; border-bottom:1px solid #ccc;"><b>평점</b></span>
 						<br>
 						<input type="radio" class="hotelSearchAvg" value="fiveAvg" id="fiveStar" name="hotelAvg" style="width:15px; height:15px;"/>
 						<label for="fiveStar" class="hotelSearchText">&nbsp;&nbsp;★★★★★</label><br>
@@ -98,10 +87,8 @@
 					
 					
 				</div>
-				</div>
-				
-			<div class="col-lg-9" align="right" id="viewArea">
-				<%-- <div class="sm-st clearfix" >
+				<div class="col-lg-9" align="right" id="viewArea">
+					
 				    <div class="tm-home-box-3" id="detailHover">
 						<div class="tm-home-box-3-img-container" id="detailClick" onclick="location.href='${contextPath}/detailHotel'">
 							<img src="${ contextPath }/resources/img/index-09.jpg" alt="image" class="img-responsive1">	
@@ -112,26 +99,9 @@
 							<a href="#" class="tm-home-box-2-link" id="tm-home-box-2-link-1"><i class="fa fa-heart tm-home-box-2-icon border-right" id="dibsBtn"></i></a>
 							<a href="#" class="tm-home-box-2-link" id="tm-home-box-2-link-2"><span class="tm-home-box-2-description box-3">Travel</span></a>
 							<!-- <a href="#" class="tm-home-box-2-link" id="tm-home-box-2-link-1"><i class="fa fa-edit tm-home-box-2-icon border-left"></i></a> -->
-						    </div>						
-					    </div>
-					</div>
-				</div>
-				<div class="sm-st clearfix" >
-					<div class="tm-home-box-3" id="detailHover">
-						<div class="tm-home-box-3-img-container" id="detailClick" onclick="location.href='${contextPath}/detailHotel'">
-							<img src="${ contextPath }/resources/img/index-09.jpg" alt="image" class="img-responsive1">	
-						</div>						
-						<div class="tm-home-box-3-info" id="detailInfo-1">
-							<p class="tm-home-box-3-description" id="infoTextArea">Proin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsumProin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsumProin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsumProin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsumProin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsumProin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsumProin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsumProin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsumProin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsumProin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsumProin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum</p>
-					        <div class="tm-home-box-2-container">
-							<a href="#" class="tm-home-box-2-link" id="tm-home-box-2-link-1"><i class="fa fa-heart tm-home-box-2-icon border-right" id="dibsBtn"></i></a>
-							<a href="#" class="tm-home-box-2-link" id="tm-home-box-2-link-2"><span class="tm-home-box-2-description box-3">Travel</span></a>
-							<!-- <a href="#" class="tm-home-box-2-link" id="tm-home-box-2-link-1"><i class="fa fa-edit tm-home-box-2-icon border-left"></i></a> -->
-						    </div>
 						</div>
+						</div>						
 					</div>
-				</div>
-				<div class="sm-st clearfix" >
 					<div class="tm-home-box-3" id="detailHover">
 						<div class="tm-home-box-3-img-container" id="detailClick" onclick="location.href='${contextPath}/detailHotel'">
 							<img src="${ contextPath }/resources/img/index-09.jpg" alt="image" class="img-responsive1">	
@@ -142,11 +112,9 @@
 							<a href="#" class="tm-home-box-2-link" id="tm-home-box-2-link-1"><i class="fa fa-heart tm-home-box-2-icon border-right" id="dibsBtn"></i></a>
 							<a href="#" class="tm-home-box-2-link" id="tm-home-box-2-link-2"><span class="tm-home-box-2-description box-3">Travel</span></a>
 							<!-- <a href="#" class="tm-home-box-2-link" id="tm-home-box-2-link-1"><i class="fa fa-edit tm-home-box-2-icon border-left"></i></a> -->
-						    </div>
+						</div>
 						</div>						
 					</div>
-				</div>
-				<div class="sm-st clearfix" >
 					<div class="tm-home-box-3" id="detailHover">
 						<div class="tm-home-box-3-img-container" id="detailClick" onclick="location.href='${contextPath}/detailHotel'">
 							<img src="${ contextPath }/resources/img/index-09.jpg" alt="image" class="img-responsive1">	
@@ -157,14 +125,25 @@
 							<a href="#" class="tm-home-box-2-link" id="tm-home-box-2-link-1"><i class="fa fa-heart tm-home-box-2-icon border-right" id="dibsBtn"></i></a>
 							<a href="#" class="tm-home-box-2-link" id="tm-home-box-2-link-2"><span class="tm-home-box-2-description box-3">Travel</span></a>
 							<!-- <a href="#" class="tm-home-box-2-link" id="tm-home-box-2-link-1"><i class="fa fa-edit tm-home-box-2-icon border-left"></i></a> -->
-						    </div>
+						</div>
 						</div>						
 					</div>
-			    </div> --%>
-			</div>
-			
+					<div class="tm-home-box-3" id="detailHover">
+						<div class="tm-home-box-3-img-container" id="detailClick" onclick="location.href='${contextPath}/detailHotel'">
+							<img src="${ contextPath }/resources/img/index-09.jpg" alt="image" class="img-responsive1">	
+						</div>						
+						<div class="tm-home-box-3-info" id="detailInfo-1">
+							<p class="tm-home-box-3-description" id="infoTextArea">Proin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsumProin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsumProin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsumProin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsumProin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsumProin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsumProin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsumProin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsumProin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsumProin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsumProin gravida nibhvell velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum</p>
+					        <div class="tm-home-box-2-container">
+							<a href="#" class="tm-home-box-2-link" id="tm-home-box-2-link-1"><i class="fa fa-heart tm-home-box-2-icon border-right" id="dibsBtn"></i></a>
+							<a href="#" class="tm-home-box-2-link" id="tm-home-box-2-link-2"><span class="tm-home-box-2-description box-3">Travel</span></a>
+							<!-- <a href="#" class="tm-home-box-2-link" id="tm-home-box-2-link-1"><i class="fa fa-edit tm-home-box-2-icon border-left"></i></a> -->
+						</div>
+						</div>						
+					</div>
 			    </div>
 			</div>
+		</div>
 		<script>
 			
 			if(sessionStorage.getItem("areaCode") == 1){
@@ -237,7 +216,6 @@
 							contenttypeid = myData.contenttypeid;
 							contentid = myData.contentid;
 							output += "<div class='tm-home-box-3' id='detailHover'>";
-							output += "<div class='sm-st clearfix'>";
 							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
 							if(myData.firstimage == null){
 								output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
@@ -250,7 +228,7 @@
 							output += "<div class='tm-home-box-2-container'>";
 							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 							output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
-							output += "</div></div></div></div>";
+							output += "</div></div></div>";
 							document.getElementById("viewArea").innerHTML += output;
 						}else{
 							for(var i = 0; i < myData.length; i++){
@@ -258,7 +236,6 @@
 								contentid = myData[i].contentid;
 								output = "";
 								output += "<div class='tm-home-box-3' id='detailHover'>";
-								output += "<div class='sm-st clearfix'>";
 								output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
 								if(myData[i].firstimage == null){
 									output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
@@ -271,7 +248,7 @@
 								output += "<div class='tm-home-box-2-container'>";
 								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 								output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
-								output += "</div></div></div></div>";
+								output += "</div></div></div>";
 								document.getElementById("viewArea").innerHTML += output;
 							}
 						}
@@ -303,7 +280,6 @@
 							contenttypeid = myData.contenttypeid;
 							contentid = myData.contentid;
 							output += "<div class='tm-home-box-3' id='detailHover'>";
-							output += "<div class='sm-st clearfix'>";
 							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
 							if(myData.firstimage == null){
 								output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
@@ -316,7 +292,7 @@
 							output += "<div class='tm-home-box-2-container'>";
 							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 							output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
-							output += "</div></div></div></div>";
+							output += "</div></div></div>";
 							document.getElementById("viewArea").innerHTML += output;
 						}else{
 							for(var i = 0; i < myData.length; i++){
@@ -324,7 +300,6 @@
 								contentid = myData[i].contentid;
 								output = "";
 								output += "<div class='tm-home-box-3' id='detailHover'>";
-								output += "<div class='sm-st clearfix'>";
 								output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
 								if(myData[i].firstimage == null){
 									output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
@@ -337,7 +312,7 @@
 								output += "<div class='tm-home-box-2-container'>";
 								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 								output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
-								output += "</div></div></div></div>";
+								output += "</div></div></div>";
 								document.getElementById("viewArea").innerHTML += output;
 							}
 						}
@@ -369,7 +344,6 @@
 							contenttypeid = myData.contenttypeid;
 							contentid = myData.contentid;
 							output += "<div class='tm-home-box-3' id='detailHover'>";
-							output += "<div class='sm-st clearfix'>";
 							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
 							if(myData.firstimage == null){
 								output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
@@ -382,7 +356,7 @@
 							output += "<div class='tm-home-box-2-container'>";
 							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 							output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
-							output += "</div></div></div></div>";
+							output += "</div></div></div>";
 							document.getElementById("viewArea").innerHTML += output;
 						}else{
 							for(var i = 0; i < myData.length; i++){
@@ -390,7 +364,6 @@
 								contentid = myData[i].contentid;
 								output = "";
 								output += "<div class='tm-home-box-3' id='detailHover'>";
-								output += "<div class='sm-st clearfix'>";
 								output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
 								if(myData[i].firstimage == null){
 									output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
@@ -405,7 +378,7 @@
 								output += "<input type='hidden' value="+contentid+">";
 								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 								output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
-								output += "</div></div></div></div>";
+								output += "</div></div></div>";
 								document.getElementById("viewArea").innerHTML += output;
 							}
 						}
@@ -434,14 +407,10 @@
 						for(var i = 0; i < data.length; i++){
 							contentid = data[i].contentid;
 							cid = data[i].cid;
-							//output = "";
-							output += "<div class='tm-home-box-3' id='detailHover' style='margin-bottom:10px;'>";
-							output += "<div class='sm-st clearfix'>";
+							output = "";
+							output += "<div class='tm-home-box-3' id='detailHover'>";
 							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+","+cid+");'>";
 							/* if(data[i].firstimage == null){
-
-								//hotelImageLoad(contentid);
-
 								$.ajax({
 									url:"hotelImageLoad.sub",
 									type:"get",
@@ -485,7 +454,7 @@
 							output += "<br><span style='font-size:20px;'>최저가 : "+"\\"+data[i].minPrice+"원 ~</span>";
 							output += "</p>";
 							output += "<div class='tm-home-box-2-container'>";
-							$.ajax({
+							/* $.ajax({
 								url:"dibsCheck.good",
 								type:"GET",
 								data:{contentid:contentid},
@@ -498,8 +467,8 @@
 										output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 									}
 								},error:function(ddatte){console.log(ddatte);}
-							});
-							//output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							}); */
+							output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 							output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'>";
 							output += "<span class='tm-home-box-2-description box-3' onclick='detailView("+contentid+","+contenttypeid+","+cid+");'>";
 							if(data[i].grade == 0){
@@ -580,7 +549,7 @@
 								output += "<i class='fas fa-star' style='font-size:20px'></i>";
 							}
 							output += "</span></a>";
-							output += "</div></div></div></div>";
+							output += "</div></div></div>";
 							document.getElementById("viewArea").innerHTML += output;
 						}
 						
@@ -616,6 +585,18 @@
 						}
 					});
 			}
+			
+			$(function(){
+				$(".goodBtn").click(function(){
+					if($(this).children("i").hasClass("fa fa-heart tm-home-box-2-icon border-right") == true){
+						$(this).children("i").removeClass("fa fa-heart tm-home-box-2-icon border-right");
+						$(this).children("i").addClass("fa fa-heart-o tm-home-box-2-icon border-right");
+					}else if($(this).children("i").hasClass("fa fa-heart-o tm-home-box-2-icon border-right") == true){
+						$(this).children("i").removeClass("fa fa-heart-o tm-home-box-2-icon border-right");
+						$(this).children("i").addClass("fa fa-heart tm-home-box-2-icon border-right");
+					}
+				});
+			});
 			</script>
 			</c:if>
 			<c:if test="${empty sessionScope.loginUser}">
@@ -844,23 +825,15 @@
 						$(this).children("i").addClass("fa fa-heart-o tm-home-box-2-icon border-right");
 					}
 				}); */
-				$(".goodBtn").click(function(){
-					if($(this).children("i").hasClass("fa fa-heart tm-home-box-2-icon border-right") == true){
-						$(this).children("i").removeClass("fa fa-heart tm-home-box-2-icon border-right");
-						$(this).children("i").addClass("fa fa-heart-o tm-home-box-2-icon border-right");
-					}else if($(this).children("i").hasClass("fa fa-heart-o tm-home-box-2-icon border-right") == true){
-						$(this).children("i").removeClass("fa fa-heart-o tm-home-box-2-icon border-right");
-						$(this).children("i").addClass("fa fa-heart tm-home-box-2-icon border-right");
-					}
-				});
+				
 				
 			});
 		</script>
 	</section>		
 	
 	<!-- white bg -->
-	<!-- <section class="tm-white-bg section-padding-bottom">
-	</section> -->
+	<section class="tm-white-bg section-padding-bottom">
+	</section>
 	
 	<jsp:include page="../common/footer.jsp"/>
 	

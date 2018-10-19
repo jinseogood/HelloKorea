@@ -1158,14 +1158,14 @@
 		</div>
 		<c:if test="${!empty sessionScope.loginUser}">
 		<script>
-		function btnGood(contenttypeid, contentid, cid){
+		function btnGood(contenttypeid, contentid){
 			console.log(contenttypeid);
 			console.log(contentid);
 			
 				$.ajax({
 					url:"dibsHotel.good",
 					type:"GET",
-					data:{contenttypeid:contenttypeid, contentid:contentid, cid:cid},
+					data:{contenttypeid:contenttypeid, contentid:contentid},
 					success:function(data){
 						// 1일시, 이미 찜한 목록 => delete요청.
 						// 0일시, 새로 찜에 추가 => insert요청.
@@ -1180,6 +1180,18 @@
 					}
 				});
 		}
+		
+		$(function(){
+			$(".goodBtn").click(function(){
+				if($(this).children("i").hasClass("fa fa-heart tm-home-box-2-icon border-right") == true){
+					$(this).children("i").removeClass("fa fa-heart tm-home-box-2-icon border-right");
+					$(this).children("i").addClass("fa fa-heart-o tm-home-box-2-icon border-right");
+				}else if($(this).children("i").hasClass("fa fa-heart-o tm-home-box-2-icon border-right") == true){
+					$(this).children("i").removeClass("fa fa-heart-o tm-home-box-2-icon border-right");
+					$(this).children("i").addClass("fa fa-heart tm-home-box-2-icon border-right");
+				}
+			});
+		});
 		</script>
 		</c:if>
 		<c:if test="${empty sessionScope.loginUser}">
@@ -1221,9 +1233,17 @@
 				}
 			});
 		}
+		
+		function detailView(contentid, contenttypeid){
+			console.log("컨텐츠타입 : " + contenttypeid);
+			if(contenttypeid == 38){
+				location.href="${contextPath}/detailGame?contentid="+contentid+"&contenttypeid="+contenttypeid;
+			}
+		}
 			
 		
 			$(function(){
+				shoppingTheme();
 				/* $.ajax({
 					url:"mainThemeShopping.tm",
 					type:"GET",
@@ -1342,7 +1362,7 @@
 					error:function(data){
 						console.log(data);
 					}
-				});
+				}); */
 				
 			});
 			
@@ -1367,8 +1387,8 @@
 							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
 						}
 						output += "<div class='tm-home-box-2-container'>";
-						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1377,7 +1397,7 @@
 						console.log(data);
 					}
 				});
-				$.ajax({
+				/* $.ajax({
 					url:"mainThemeShopping2.tm",
 					type:"GET",
 					dataType:"json",
@@ -1397,8 +1417,8 @@
 							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
 						}
 						output += "<div class='tm-home-box-2-container'>";
-						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1426,8 +1446,8 @@
 							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
 						}
 						output += "<div class='tm-home-box-2-container'>";
-						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1455,16 +1475,16 @@
 							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
 						}
 						output += "<div class='tm-home-box-2-container'>";
-						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
 					error:function(data){
 						console.log(data);
 					}
-				});
-			} */
+				}); */
+			}
 			
 			function beautyTheme(){
 				/* $.ajax({
@@ -1487,8 +1507,8 @@
 							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
 						}
 						output += "<div class='tm-home-box-2-container'>";
-						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1517,8 +1537,8 @@
 							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
 						}
 						output += "<div class='tm-home-box-2-container'>";
-						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1546,8 +1566,8 @@
 							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
 						}
 						output += "<div class='tm-home-box-2-container'>";
-						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1575,8 +1595,8 @@
 							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
 						}
 						output += "<div class='tm-home-box-2-container'>";
-						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1607,8 +1627,8 @@
 							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
 						}
 						output += "<div class='tm-home-box-2-container'>";
-						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1637,8 +1657,8 @@
 							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
 						}
 						output += "<div class='tm-home-box-2-container'>";
-						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1666,8 +1686,8 @@
 							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
 						}
 						output += "<div class='tm-home-box-2-container'>";
-						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1695,8 +1715,8 @@
 							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
 						}
 						output += "<div class='tm-home-box-2-container'>";
-						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1727,8 +1747,8 @@
 							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
 						}
 						output += "<div class='tm-home-box-2-container'>";
-						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1756,8 +1776,8 @@
 							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
 						}
 						output += "<div class='tm-home-box-2-container'>";
-						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1785,8 +1805,8 @@
 							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
 						}
 						output += "<div class='tm-home-box-2-container'>";
-						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1814,8 +1834,8 @@
 							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
 						}
 						output += "<div class='tm-home-box-2-container'>";
-						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
