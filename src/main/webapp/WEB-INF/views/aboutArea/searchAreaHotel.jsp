@@ -419,7 +419,9 @@
 					}
 				});
 			}
-			
+			</script>
+			<c:if test="${!empty sessionScope.loginUser }">
+			<script>
 			 function searchHotelPage(){
 				$.ajax({
 					url:"searchHotelAreaPage.com",
@@ -593,8 +595,191 @@
 				});
 			}
 			</script>
+			</c:if>
+			<c:if test="${ empty sessionScope.loginUser }">
+			<script>
+			function searchHotelPage(){
+				$.ajax({
+					url:"searchHotelAreaPage.com",
+					type:"GET",
+					data:{areaCode:areaCode, sigunguCode:sigunguCode},
+					dataType:"json",
+					async:false,
+					success:function(data){
+						console.log("와줘");
+						console.log(data);
+						var viewArea = $("#viewArea");
+						viewArea.html("");
+						var titleArea = $("#tm-home-box-2-link-2");
+						var output = "";
+						var cid = 0;
+						for(var i = 0; i < data.length; i++){
+							contentid = data[i].contentid;
+							cid = data[i].cid;
+							output = "";
+							output += "<div class='tm-home-box-3' id='detailHover'>";
+							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+","+cid+");'>";
+							/* if(data[i].firstimage == null){
+								$.ajax({
+									url:"hotelImageLoad.sub",
+									type:"get",
+									data:{contentid:contentid},
+									dataType:"json",
+									async:false,
+									success:function(result){
+										console.log("이미지로드 펑션 ajax : ");
+										console.log(result);
+										if(result.response.body.items.item.firstimage != null){
+											output += "<img src="+result.response.body.items.item.firstimage+" alt='image' class='img-responsive1' />";
+										}else{
+											output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
+										}
+									},error:function(result){console.log(result);}
+								});
+							}else{
+								output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
+							} */
+							output += "</div>";
+							output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+							output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+							output += "<span style='font-size:23px;'>"+data[i].cName +"</span><br>";
+							$.ajax({
+								url:"detailHotelInformation.sub",
+								type:"GET",
+								data:{contenttypeid:contenttypeid, contentid:contentid},
+								dataType:"json",
+								async:false,
+								success:function(ddate){
+									var overview = ddate.response.body.items.item.overview;
+									var reg = /<br\s*[\/]?>/g;
+										overview = overview.replace(reg, " ");
+									if(overview.length > 190){
+										output += overview.substring(0, 191) + "...";
+									}else{
+										output += overview;
+									}
+								},error:function(ddate){console.log(ddate);}
+							});
+							output += "<br><span style='font-size:20px;'>최저가 : " + curIcon + " " + numberWithCommas((data[i].minPrice/currency)) + " ~</span>";
+							output += "</p>";
+							output += "<div class='tm-home-box-2-container'>";
+							output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							output += "<a class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'>";
+							output += "<span class='tm-home-box-2-description box-3' onclick='detailView("+contentid+","+contenttypeid+","+cid+");'>";
+							if(data[i].grade == 0){
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+							}
+							if(data[i].grade > 0 && data[i].grade <= 0.5){
+								output += "<i class='far fa-star-half-alt' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+							}
+							if(data[i].grade > 0.5 && data[i].grade <= 1){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 1 && data[i].grade <= 1.5){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star-half-alt' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 1.5 && data[i].grade <= 2){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 2 && data[i].grade <= 2.5){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star-half-alt' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 2.5 && data[i].grade <= 3){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 3 && data[i].grade <= 3.5){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star-half-alt' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 3.5 && data[i].grade <= 4){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 4 && data[i].grade <= 4.5){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star-half-alt' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 4.5 && data[i].grade <= 5){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+							}
+							output += "</span></a>";
+							output += "</div></div></div>";
+							document.getElementById("viewArea").innerHTML += output;
+						}
+						
+					},
+					error:function(data){
+						console.log("오지말아줘");
+						console.log(data);
+					}
+				});
+			}
+			</script>
+			</c:if>
+			<script>
+			function numberWithCommas(x){
+				//var x=x.slice(1, x.length-5);
+				x=x.toFixed(3);
+				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			}
+
+			</script>
 			<c:if test="${!empty sessionScope.loginUser}">
 			<script>
+			
+			$(function(){
+				$(".goodBtn").click(function(){
+					if($(this).children("i").hasClass("fa fa-heart tm-home-box-2-icon border-right") == true){
+						$(this).children("i").removeClass("fa fa-heart tm-home-box-2-icon border-right");
+						$(this).children("i").addClass("fa fa-heart-o tm-home-box-2-icon border-right");
+					}else if($(this).children("i").hasClass("fa fa-heart-o tm-home-box-2-icon border-right") == true){
+						$(this).children("i").removeClass("fa fa-heart-o tm-home-box-2-icon border-right");
+						$(this).children("i").addClass("fa fa-heart tm-home-box-2-icon border-right");
+					}
+				});
+			});
+			
 			function btnGood(contenttypeid, contentid, cid){
 				console.log(contenttypeid);
 				console.log(contentid);
@@ -617,18 +802,6 @@
 						}
 					});
 			}
-			
-			$(function(){
-				$(".goodBtn").click(function(){
-					if($(this).children("i").hasClass("fa fa-heart tm-home-box-2-icon border-right") == true){
-						$(this).children("i").removeClass("fa fa-heart tm-home-box-2-icon border-right");
-						$(this).children("i").addClass("fa fa-heart-o tm-home-box-2-icon border-right");
-					}else if($(this).children("i").hasClass("fa fa-heart-o tm-home-box-2-icon border-right") == true){
-						$(this).children("i").removeClass("fa fa-heart-o tm-home-box-2-icon border-right");
-						$(this).children("i").addClass("fa fa-heart tm-home-box-2-icon border-right");
-					}
-				});
-			});
 			</script>
 			</c:if>
 			<c:if test="${empty sessionScope.loginUser}">
@@ -673,7 +846,183 @@
 			function detailView(contentid,contenttypeid,cid){
 				location.href="${contextPath}/detailHotel?contentid="+contentid+"&contenttypeid="+contenttypeid+"&cid="+cid;
 			}
-			
+			</script>
+			<c:if test="${!empty sessionScope.loginUser }">
+			<script>
+			function orderByHotel(value){
+				console.log("value: " + value);
+				$.ajax({
+					url:"orderByHotel.com",
+					type:"GET",
+					data:{areaCode:areaCode, sigunguCode:sigunguCode, value:value},
+					dataType:"json",
+					async:false,
+					success:function(data){
+						console.log("와줘");
+						console.log(data);
+						var viewArea = $("#viewArea");
+						viewArea.html("");
+						var titleArea = $("#tm-home-box-2-link-2");
+						var output = "";
+						var cid = 0;
+						for(var i = 0; i < data.length; i++){
+							contentid = data[i].contentid;
+							cid = data[i].cid;
+							output = "";
+							output += "<div class='tm-home-box-3' id='detailHover'>";
+							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+","+cid+");'>";
+							/* if(data[i].firstimage == null){
+								$.ajax({
+									url:"hotelImageLoad.sub",
+									type:"get",
+									data:{contentid:contentid},
+									dataType:"json",
+									async:false,
+									success:function(result){
+										console.log(result);
+										if(result.response.body.items.item.firstimage != null){
+											output += "<img src="+result.response.body.items.item.firstimage+" alt='image' class='img-responsive1' />";
+										}else{
+											output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
+										}
+									},error:function(result){console.log(result);}
+								});
+							}else{
+								output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive1'>";
+							} */
+							output += "</div>";
+							output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+							output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+							output += "<span style='font-size:23px;'>"+data[i].cName +"</span><br>";
+							$.ajax({
+								url:"detailHotelInformation.sub",
+								type:"GET",
+								data:{contenttypeid:contenttypeid, contentid:contentid},
+								dataType:"json",
+								async:false,
+								success:function(ddate){
+									var overview = ddate.response.body.items.item.overview;
+									var reg = /<br\s*[\/]?>/g;
+									overview = overview.replace(reg, " ");
+									if(overview.length > 190){
+										output += overview.substring(0, 191) + "...";
+									}else{
+										output += overview;
+									}
+								},error:function(ddate){console.log(ddate);}
+							});
+							output += "<br><span style='font-size:20px;'>최저가 : "+"\\"+data[i].minPrice+"원 ~</span>";
+							output += "</p>";
+							output += "<div class='tm-home-box-2-container'>";
+							$.ajax({
+								url:"dibsCheck.good",
+								type:"GET",
+								data:{contentid:contentid},
+								dataType:"json",
+								async:false,
+								success:function(ddatte){
+									if(ddatte == 0){
+										output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+									}else{
+										output += "<a onclick='btnGood("+contenttypeid+","+contentid+","+cid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+									}
+								},error:function(ddatte){console.log(ddatte);}
+							});
+							//output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							output += "<a onclick='detailView("+contentid+","+contenttypeid+","+cid+");' class='tm-home-box-2-link titleZone' id='tm-home-box-2-link-2'>";
+							output += "<span class='tm-home-box-2-description box-3'>";
+							if(data[i].grade == 0){
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+							}
+							if(data[i].grade > 0 && data[i].grade <= 0.5){
+								output += "<i class='far fa-star-half-alt' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px;'></i>";
+							}
+							if(data[i].grade > 0.5 && data[i].grade <= 1){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 1 && data[i].grade <= 1.5){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star-half-alt' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 1.5 && data[i].grade <= 2){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 2 && data[i].grade <= 2.5){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star-half-alt' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 2.5 && data[i].grade <= 3){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 3 && data[i].grade <= 3.5){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star-half-alt' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 3.5 && data[i].grade <= 4){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='far fa-star' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 4 && data[i].grade <= 4.5){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star-half-alt' style='font-size:20px'></i>";
+							}
+							if(data[i].grade > 4.5 && data[i].grade <= 5){
+								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
+							}
+							output += "</span></a>";
+							output += "</div></div></div>";
+							document.getElementById("viewArea").innerHTML += output;
+						}
+					},
+					error:function(data){
+						console.log("오지말아줘");
+						console.log(data);
+					}
+				});
+			}
+			</script>
+			</c:if>
+			<c:if test="${empty sessionScope.loginUser }">
+			<script>
 			function orderByHotel(value){
 				console.log("value: " + value);
 				$.ajax({
@@ -822,7 +1171,6 @@
 							output += "</span></a>";
 							output += "</div></div></div>";
 							document.getElementById("viewArea").innerHTML += output;
-							//hotelImageLoad(contentid);
 						}
 					},
 					error:function(data){
@@ -831,8 +1179,10 @@
 					}
 				});
 			}
-			
+			</script>
+			</c:if>
 		
+			<script>
 			$(function(){
 				
 				searchHotelPage();
