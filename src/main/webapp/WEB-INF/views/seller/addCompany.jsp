@@ -534,6 +534,34 @@
 		var area=0;
 		var sigungu=0;
 		
+		function duplicationCPRNo(no){
+			var result;
+			
+			console.log(no);
+			console.log(typeof(no));
+			
+			$.ajax({
+				url:"duplicationCPRNo.sell",
+				type:"POST",
+				data:{no:no},
+				success:function(data){
+					console.log(data);
+					
+					if(data == 1){
+						result=0;
+					}
+					else{
+						result=1;
+					}
+					
+					return result;
+				},
+				error:function(data){
+					console.log(data);
+				}
+			});
+		}
+		
 		$(function(){
 			$(".comType").hide();
 			
@@ -556,10 +584,42 @@
 				var re = /-/g;
 				sRegNo = sRegNo.replace('-','');
 
-				if (sRegNo.length != 13){
-					$("#comNumWrong").show();
+				//중복검사
+				/* var cResult=duplicationCPRNo(sRegNo);
+				
+				console.log("cp : " + cResult);
+				
+				if(cResult == 1){
+					var arr_regno  = sRegNo.split("");
+					var arr_wt   = new Array(1,2,1,2,1,2,1,2,1,2,1,2);
+					var iSum_regno  = 0;
+					var iCheck_digit = 0;
+	
+					for (i = 0; i < 12; i++){
+						iSum_regno +=  eval(arr_regno[i]) * eval(arr_wt[i]);
+					}
+	
+					iCheck_digit = 10 - (iSum_regno % 10);
+	
+					iCheck_digit = iCheck_digit % 10;
+	
+					if (iCheck_digit != arr_regno[12]){
+						$("#comNumCollect").hide();
+						$("#comNumWrong").show();
+					}
+					else if (sRegNo.length != 13){
+						$("#comNumCollect").hide();
+						$("#comNumWrong").show();
+					}
+					else{
+						$("#comNumWrong").hide();
+						$("#comNumCollect").show();
+					}
 				}
-
+				else{
+					alert("법인등록번호 중복!");
+				} */
+				
 				var arr_regno  = sRegNo.split("");
 				var arr_wt   = new Array(1,2,1,2,1,2,1,2,1,2,1,2);
 				var iSum_regno  = 0;
@@ -577,7 +637,7 @@
 					$("#comNumCollect").hide();
 					$("#comNumWrong").show();
 				}
-				else if (sRegNo.length == 0){
+				else if (sRegNo.length != 13){
 					$("#comNumCollect").hide();
 					$("#comNumWrong").show();
 				}
@@ -585,6 +645,7 @@
 					$("#comNumWrong").hide();
 					$("#comNumCollect").show();
 				}
+
 			});
 
 			//사업자등록번호 유효성 검사			
@@ -593,7 +654,37 @@
 			    var checkID = new Array(1, 3, 7, 1, 3, 7, 1, 3, 5, 1); 
 			    var tmpBizID, i, chkSum=0, c2, remander; 
 			    bizID = bizID.replace(/-/gi,'');
-
+			    
+			    //중복검사
+			    /* var cResult=duplicationCPRNo(bizID);
+			    
+			    console.log("c : " + cResult);
+			    
+			    if(cResult == 1){
+				    for (i=0; i<=7; i++) chkSum += checkID[i] * bizID.charAt(i); 
+				    c2 = "0" + (checkID[8] * bizID.charAt(8));
+				    c2 = c2.substring(c2.length - 2, c2.length);
+				    chkSum += Math.floor(c2.charAt(0)) + Math.floor(c2.charAt(1)); 
+				    remander = (10 - (chkSum % 10)) % 10;
+				    
+				    if (Math.floor(bizID.charAt(9)) != remander){
+				    	$("#perNumCollect").hide();
+				    	$("#perNumWrong").show();
+				    }
+				    else if(bizID.length == 0){
+				    	$("#perNumCollect").hide();
+				    	$("#perNumWrong").show();
+				    }
+				    else{
+				    	$("#perNumWrong").hide();
+				    	$("#perNumCollect").show();
+				    	$("#addForm").attr("action", "addCompany.sell");
+				    }
+			    }
+			    else{
+			    	alert("사업자등록번호 중복!");
+			    } */
+			    
 			    for (i=0; i<=7; i++) chkSum += checkID[i] * bizID.charAt(i); 
 			    c2 = "0" + (checkID[8] * bizID.charAt(8));
 			    c2 = c2.substring(c2.length - 2, c2.length);
@@ -623,7 +714,6 @@
 					$("#companyFile").attr("required", "true");
 				}
 			});
-
 			
 			//상호 검색 모달
 			$("#sigungu1").hide();

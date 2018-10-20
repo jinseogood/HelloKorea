@@ -125,6 +125,41 @@ public class CompanyManageController {
 			
 	}
 	
+	//등록번호 중복확인
+	@RequestMapping(value="duplicationCPRNo.sell")
+	public void duplicationCPRNo(String no, HttpServletResponse response){
+		System.out.println(no);
+		
+		int noLength=no.length();
+		System.out.println(noLength);
+		
+		int checkResult=0;
+		
+		//사업자등록번호 중복 검사
+		if(noLength == 10){
+			checkResult=ss.duplicationCRNo(no);
+			System.out.println("crnum set checkResult : " + checkResult);
+		}
+		//법인등록번호 중복 검사
+		else{
+			checkResult=ss.duplicationCPRNo(no);
+			System.out.println("cprnum set checkResult : " + checkResult);
+		}
+		
+		System.out.println(checkResult);
+		
+		try {
+			PrintWriter out=response.getWriter();
+			out.print(checkResult);
+			
+			out.flush();
+			out.close();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	//업체 등록
 	@RequestMapping(value="addCompany.sell", method=RequestMethod.POST)
 	public String addCompany(Registration r, Model model, HttpServletRequest request, @RequestParam(name="companyFile", required=false)MultipartFile companyFile, @RequestParam(name="personalFile")MultipartFile personalFile){

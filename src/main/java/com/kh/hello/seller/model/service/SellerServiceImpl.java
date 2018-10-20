@@ -79,6 +79,18 @@ public class SellerServiceImpl implements SellerService{
 		return sd.selectQnAList(mId, sqlSession);
 	}
 	
+	//사업자등록번호 중복 조회
+	@Override
+	public int duplicationCRNo(String no) {
+		return sd.duplicationCRNo(no, sqlSession);
+	}
+
+	//법인등록번호 중복 조회
+	@Override
+	public int duplicationCPRNo(String no) {
+		return sd.duplicationCPRNo(no, sqlSession);
+	}
+	
 	//업체명 중복 조회
 	@Override
 	public int duplicationTitle(String title) {
