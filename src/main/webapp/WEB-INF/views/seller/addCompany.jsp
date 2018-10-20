@@ -120,9 +120,10 @@
 						<tr class="comType">
 							<th>법인사업자등록번호</th>
 							<td colspan="3"><input type="text" id="companyNum" name="companyNum" size="25"></td>
-							<td>
+							<td width="110px;">
 								<div id="comNumCollect"><img src="${ contextPath }/resources/img/checkOKIcon.png"></div>
 								<div id="comNumWrong"><img src="${ contextPath }/resources/img/checkFailIcon.png"></div>
+								<div id="comNumDup"><img src="${ contextPath }/resources/img/checkFailIcon.png"><font style="color:red; font-size:12px;"> 중복입니다.</font></div>
 							</td>
 						</tr>
 						<tr class="comType">
@@ -132,9 +133,10 @@
 						<tr>
 							<th>사업자등록번호</th>
 							<td colspan="3"><input type="text" id="personalNum" name="personalNum" size="25" required></td>
-							<td>
+							<td width="110px;">
 								<div id="perNumCollect"><img src="${ contextPath }/resources/img/checkOKIcon.png"></div>
 								<div id="perNumWrong"><img src="${ contextPath }/resources/img/checkFailIcon.png"></div>
+								<div id="perNumDup"><img src="${ contextPath }/resources/img/checkFailIcon.png"><font style="color:red; font-size:12px;"> 중복입니다.</font></div>
 							</td>
 						</tr>
 						<tr>
@@ -171,7 +173,7 @@
 						</tr>
 						<tr>
 							<td colspan="5" align="center">
-								<button type="reset" class="btn btn-default">취소</button>&nbsp;&nbsp;
+								<button type="button" class="btn btn-default" onclick="return backMain();">취소</button>&nbsp;&nbsp;
 								<button type="submit" class="btn btn-success">등록</button>
 							</td>
 						</tr>
@@ -534,18 +536,23 @@
 		var area=0;
 		var sigungu=0;
 		
+		function backMain(){
+			location.href="myPageView.sell";
+		}
+		
 		function duplicationCPRNo(no){
 			var result;
 			
-			console.log(no);
-			console.log(typeof(no));
+			//console.log(no);
+			//console.log(typeof(no));
 			
 			$.ajax({
 				url:"duplicationCPRNo.sell",
 				type:"POST",
+				async: false,
 				data:{no:no},
 				success:function(data){
-					console.log(data);
+					//console.log("duplicationCPRNo data : " + data);
 					
 					if(data == 1){
 						result=0;
@@ -554,12 +561,16 @@
 						result=1;
 					}
 					
-					return result;
+					//console.log("ajax in result : " + result);
 				},
 				error:function(data){
 					console.log(data);
 				}
 			});
+			
+			//console.log("ajax out result : " + result);
+			
+			return result;
 		}
 		
 		$(function(){
@@ -575,8 +586,10 @@
 			
 			$("#comNumCollect").hide();
 			$("#comNumWrong").hide();
+			$("#comNumDup").hide();
 			$("#perNumCollect").hide();
 			$("#perNumWrong").hide();
+			$("#perNumDup").hide();
 			
 			//법인등록번호 유효성 검사
 			$("#companyNum").blur(function isRegNo(){
@@ -584,42 +597,6 @@
 				var re = /-/g;
 				sRegNo = sRegNo.replace('-','');
 
-				//중복검사
-				/* var cResult=duplicationCPRNo(sRegNo);
-				
-				console.log("cp : " + cResult);
-				
-				if(cResult == 1){
-					var arr_regno  = sRegNo.split("");
-					var arr_wt   = new Array(1,2,1,2,1,2,1,2,1,2,1,2);
-					var iSum_regno  = 0;
-					var iCheck_digit = 0;
-	
-					for (i = 0; i < 12; i++){
-						iSum_regno +=  eval(arr_regno[i]) * eval(arr_wt[i]);
-					}
-	
-					iCheck_digit = 10 - (iSum_regno % 10);
-	
-					iCheck_digit = iCheck_digit % 10;
-	
-					if (iCheck_digit != arr_regno[12]){
-						$("#comNumCollect").hide();
-						$("#comNumWrong").show();
-					}
-					else if (sRegNo.length != 13){
-						$("#comNumCollect").hide();
-						$("#comNumWrong").show();
-					}
-					else{
-						$("#comNumWrong").hide();
-						$("#comNumCollect").show();
-					}
-				}
-				else{
-					alert("법인등록번호 중복!");
-				} */
-				
 				var arr_regno  = sRegNo.split("");
 				var arr_wt   = new Array(1,2,1,2,1,2,1,2,1,2,1,2);
 				var iSum_regno  = 0;
@@ -636,14 +613,28 @@
 				if (iCheck_digit != arr_regno[12]){
 					$("#comNumCollect").hide();
 					$("#comNumWrong").show();
+					$("#comNumDup").hide();
 				}
 				else if (sRegNo.length != 13){
 					$("#comNumCollect").hide();
 					$("#comNumWrong").show();
+					$("#comNumDup").hide();
 				}
 				else{
-					$("#comNumWrong").hide();
-					$("#comNumCollect").show();
+					//중복검사
+					var cResult=duplicationCPRNo(sRegNo);
+					
+					//console.log("CPRNum : " + cResult);
+					if(cResult == 1){
+						$("#comNumWrong").hide();
+						$("#comNumCollect").show();
+						$("#comNumDup").hide();
+					}
+					else{
+						$("#comNumDup").show();
+						$("#comNumCollect").hide();
+						$("#comNumWrong").hide();
+					}
 				}
 
 			});
@@ -655,36 +646,6 @@
 			    var tmpBizID, i, chkSum=0, c2, remander; 
 			    bizID = bizID.replace(/-/gi,'');
 			    
-			    //중복검사
-			    /* var cResult=duplicationCPRNo(bizID);
-			    
-			    console.log("c : " + cResult);
-			    
-			    if(cResult == 1){
-				    for (i=0; i<=7; i++) chkSum += checkID[i] * bizID.charAt(i); 
-				    c2 = "0" + (checkID[8] * bizID.charAt(8));
-				    c2 = c2.substring(c2.length - 2, c2.length);
-				    chkSum += Math.floor(c2.charAt(0)) + Math.floor(c2.charAt(1)); 
-				    remander = (10 - (chkSum % 10)) % 10;
-				    
-				    if (Math.floor(bizID.charAt(9)) != remander){
-				    	$("#perNumCollect").hide();
-				    	$("#perNumWrong").show();
-				    }
-				    else if(bizID.length == 0){
-				    	$("#perNumCollect").hide();
-				    	$("#perNumWrong").show();
-				    }
-				    else{
-				    	$("#perNumWrong").hide();
-				    	$("#perNumCollect").show();
-				    	$("#addForm").attr("action", "addCompany.sell");
-				    }
-			    }
-			    else{
-			    	alert("사업자등록번호 중복!");
-			    } */
-			    
 			    for (i=0; i<=7; i++) chkSum += checkID[i] * bizID.charAt(i); 
 			    c2 = "0" + (checkID[8] * bizID.charAt(8));
 			    c2 = c2.substring(c2.length - 2, c2.length);
@@ -694,15 +655,30 @@
 			    if (Math.floor(bizID.charAt(9)) != remander){
 			    	$("#perNumCollect").hide();
 			    	$("#perNumWrong").show();
+			    	$("#perNumDup").hide();
 			    }
 			    else if(bizID.length == 0){
 			    	$("#perNumCollect").hide();
 			    	$("#perNumWrong").show();
+			    	$("#perNumDup").hide();
 			    }
 			    else{
-			    	$("#perNumWrong").hide();
-			    	$("#perNumCollect").show();
-			    	$("#addForm").attr("action", "addCompany.sell");
+				    //중복검사
+			    	var cResult=duplicationCPRNo(bizID);
+			    	
+			    	//console.log("CRNum : " + cResult);
+			    	if(cResult == 1){
+				    	$("#perNumWrong").hide();
+				    	$("#perNumCollect").show();
+				    	$("#perNumDup").hide();
+				    	$("#addForm").attr("action", "addCompany.sell");
+			    	}
+			    	else{
+			    		$("#perNumCollect").hide();
+				    	$("#perNumDup").show();	
+				    	$("#perNumWrong").hide();
+			    	}
+			    	
 			    }
 			});
 			

@@ -71,9 +71,18 @@
 		height:400px;
 		border:1px solid lightgray;
 	}
+	#paypalTable{
+		width:280px;
+		height:100px;
+		border:1px solid lightgray;
+	}
 	#checkIcon{
 		width:20px;
 		height:20px;
+	}
+	#paypalLogo{
+		width:180px;
+		height:60px;
 	}
 </style>
 </head>
@@ -106,11 +115,11 @@
 			<input type="hidden" id="orderInfo" name="custom">
 			<input type="hidden" name="charset" value="UTF-8">
 			<!-- 개인 테스트 용 -->
-			<%-- <input type="hidden" name="return" value="https://localhost:8443/hello/paymentConfirm.pay">
-			<input type="hidden" name="cancel_return" value="https://localhost:8443/hello/detailHotel?contenttypeid=32&cid=${ reservation.cid }&contentid=${ reservation.contentid }"> --%>
+			<input type="hidden" name="return" value="https://localhost:8443/hello/paymentConfirm.pay">
+			<input type="hidden" name="cancel_return" value="https://localhost:8443/hello/detailHotel?contenttypeid=32&cid=${ reservation.cid }&contentid=${ reservation.contentid }">
 			<!-- 다른 IP이용 시 -->
-			<input type="hidden" name="return" value="https://192.168.219.106:8443/hello/paymentConfirm.pay">
-			<input type="hidden" name="cancel_return" value="https://192.168.219.106:8443/hello/detailHotel?contenttypeid=32&cid=${ reservation.cid }&contentid=${ reservation.contentid }">
+			<%-- <input type="hidden" name="return" value="https://192.168.219.106:8443/hello/paymentConfirm.pay">
+			<input type="hidden" name="cancel_return" value="https://192.168.219.106:8443/hello/detailHotel?contenttypeid=32&cid=${ reservation.cid }&contentid=${ reservation.contentid }"> --%>
 			
 			<input type="hidden" id="oId" value="${ reservation.oid }">
 			<input type="hidden" id="originPrice" value="${ ((param.price * reservation.period) * 0.1) + (param.price * reservation.period) }">
@@ -461,11 +470,12 @@
 						<tr>
 							<td width="80px"><b>포인트</b></td>
 							<td width="130px">
-								<input type="text" class="inputStyle" id="point" name="point" size="10" value="0" style="text-align:right;"> P
+								<input type="text" class="inputStyle" id="point" name="point" size="10" value="0" style="text-align:right;" disabled> P
 							</td>
 							<td>
 								<button type="button" class="btn btn-primary btn-sm" onclick="return pointCheck();">조회</button>
-								 ( <span id="pointView">0</span> P 보유 )
+								<div style="display:inline-block"> ( <span id="pointView">0</span> P 보유 ) </div>
+								<div id="pointError" style="display:inline-block"><font style="color:red; font-size:11px;">보유 포인트가 부족합니다.</font></div>
 							</td>
 						</tr>
 						<tr>
@@ -611,6 +621,18 @@
 					</tr>
 				</table>
 			</div>
+			<div id="paypalInfoArea" align="center">
+				<br>
+				<table id="paypalTable">
+					<tr>
+						<td>
+							<font style="font-size:15px; margin-left:2px;"><font style="color:red;">*</font> Payment System&nbsp;&nbsp;(USD)</font>
+							<br>
+							<img id="paypalLogo" src="${ contextPath }/resources/img/paypalLogo.png" style="margin-left:5px;">
+						</td>
+					</tr>
+				</table>
+			</div>
 		</div>
 	</div>
 	
@@ -646,6 +668,7 @@
 			$("#emailWTEXT").hide();
 			$("#telWTEXT").hide();
 			
+			$("#pointError").hide();
 			
 			$("#firstName").blur(function(){
 				fNameCheck();
@@ -746,6 +769,9 @@
 					if(data == 0){
 						$("#point").attr("disabled", "disabled");
 					}
+					else{
+						$("#point").attr("disabled", false);
+					}
 					
 				},
 				error:function(data){
@@ -764,14 +790,24 @@
 		totalPrice=parseInt(totalPrice);
 		
 		function calPrice(){
+			var userPoint=$("#pointView").text();
 			var point=$("#point").val();
 			
-			originPrice=originPrice - point;
-			totalPrice=totalPrice - point;
+			console.log("userP : " + userPoint);
+			console.log("textP : " + point);
 			
-			totalPrice=numberWithCommas(totalPrice);
-			
-			$("#totalPrice").html(" " + totalPrice);
+			if(parseInt(userPoint) >= parseInt(point)){
+				$("#pointError").hide();
+				originPrice=originPrice - point;
+				cPrice=totalPrice - point;
+				
+				cPrice=numberWithCommas(cPrice);
+				
+				$("#totalPrice").html(" " + cPrice);
+			}
+			else{
+				$("#pointError").show();
+			}
 		}
 		
 		function pay(){
