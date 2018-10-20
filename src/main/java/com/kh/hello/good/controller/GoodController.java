@@ -1,6 +1,7 @@
 package com.kh.hello.good.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.hello.good.model.service.GoodService;
-import com.kh.hello.good.model.service.GoodServiceImpl;
 import com.kh.hello.good.model.vo.Good;
 import com.kh.hello.good.model.vo.Good2;
 import com.kh.hello.member.model.vo.Member;
@@ -241,9 +241,6 @@ public class GoodController {
 		int userNo = Integer.parseInt(user);
 		int result = -99;
 		
-		System.out.println("컨뚜롤러 컨텐츠아디: " + contentid);
-		System.out.println("컨뚜롤러 컨텐츠타입아디 : " + contenttypeid);
-		
 		Good2 gg2 = new Good2();
 		gg2.setMid(userNo);
 		gg2.setOriginId(contentid);
@@ -260,7 +257,6 @@ public class GoodController {
 		}else if(contenttypeid == 39){
 			gg2.setlType("음식점");
 		}
-		System.out.println("서비스 가기전 Good2 : " + gg2);
 		result = gs.insertDibsInfo(gg2);
 		response.getWriter().println(result);
 	}
@@ -276,6 +272,14 @@ public class GoodController {
 		
 		result = gs.deleteDibsInfo(gg2);
 		response.getWriter().println(result);
+	}
+	
+	
+	@RequestMapping(value="dibsGradeInfo")
+	public void dibsGradeInfo(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		ArrayList<Good2> list = gs.dibsGradeInfo();
+		System.out.println(list);
+		response.getWriter().println(list);
 	}
 	
 	

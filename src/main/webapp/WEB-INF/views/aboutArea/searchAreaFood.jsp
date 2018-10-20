@@ -306,7 +306,6 @@
 							//output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 							output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'>";
 							output += "<span class='tm-home-box-2-description box-3'>";
-							
 							output += "</span></a>";
 							output += "</div></div></div>";
 							document.getElementById("viewArea").innerHTML += output;
@@ -487,6 +486,8 @@
 										async:false,
 										success:function(ddate){
 											var overview = ddate.response.body.items.item.overview;
+											var reg = /<br\s*[\/]?>/g;
+												overview = overview.replace(reg, " ");
 											if(overview.length > 190){
 												output += overview.substring(0, 191) + "...";
 											}else{
@@ -743,6 +744,8 @@
 										async:false,
 										success:function(ddate){
 											var overview = ddate.response.body.items.item.overview;
+											var reg = /<br\s*[\/]?>/g;
+												overview = overview.replace(reg, " ");
 											if(overview.length > 190){
 												output += overview.substring(0, 191) + "...";
 											}else{
