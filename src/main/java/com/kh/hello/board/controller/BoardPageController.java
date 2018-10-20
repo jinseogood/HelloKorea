@@ -324,6 +324,27 @@ public class BoardPageController {
 		return "board/QAWrite";
 	}
 	
+	@RequestMapping(value="QAWrite1.bo")
+	public String QAWrite1(Model model, HttpServletRequest request, @RequestParam int contentid, @RequestParam int contenttypeid,
+					@RequestParam double mapx, @RequestParam double mapy){
+		Board b = new Board();
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		b.setM_id(m.getmId());
+		b.setOrigin_id(contentid);
+		
+		String referer = request.getHeader("Referer");
+
+		model.addAttribute("uri", referer);
+		model.addAttribute("contentid", contentid);
+		model.addAttribute("contenttypeid", contenttypeid);
+		model.addAttribute("mapx", mapx);
+		model.addAttribute("mapy", mapy);
+		
+		model.addAttribute("b", b);
+		
+		return "board/QAWrite1";
+	}
+	
 	@RequestMapping(value="insertQ.bo")
 	public String insertQ(Model model, Board b , HttpServletRequest request,@RequestParam String uri, @RequestParam int contentid, @RequestParam int contenttypeid, @RequestParam int cid){
 		Member m = (Member)request.getSession().getAttribute("loginUser");
@@ -335,6 +356,20 @@ public class BoardPageController {
 		model.addAttribute("b", b);
 
 		uri+="&contenttypeid="+contenttypeid+"&cid="+cid;
+		return "redirect:"+uri;
+	}
+	
+	@RequestMapping(value="insertQ1.bo")
+	public String insertQ1(Model model, Board b , HttpServletRequest request,@RequestParam String uri, @RequestParam int contentid, @RequestParam int contenttypeid, @RequestParam double mapx, @RequestParam double mapy){
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		b.setM_id(m.getmId());
+		b.setOrigin_id(contentid);
+		
+		int result = 0;
+		result = bs.insertQ(b);
+		model.addAttribute("b", b);
+
+		uri+="&contenttypeid="+contenttypeid+"&mapx="+mapx+"&mapy="+mapy;
 		return "redirect:"+uri;
 	}
 	
