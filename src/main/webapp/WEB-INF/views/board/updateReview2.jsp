@@ -98,19 +98,19 @@ body{ margin:50px 0px; }
    
    
    <section class="container tm-home-section-1" id="more" style = "width:80%; padding:100px">
-   <form action="insertReview.bo?uri=${ uri }&contentid=${contentid}" method = "post" encType = "multipart/form-data">
+   <form action="updateReview2.bo?uri=${ uri }&conid=${contentid}&bid=${bid}" method = "post" encType = "multipart/form-data">
       <div class="row">
          
       </div> 
 
       <div class="tm-section-header section-margin-top" >
 					<div class="col-lg-4 col-md-3 col-sm-3"><hr></div>
-					<div class="col-lg-4 col-md-6 col-sm-6"><h2 class="tm-section-title">R E V I E W</h2></div>
+					<div class="col-lg-4 col-md-6 col-sm-6"><h2 class="tm-section-title">REVIEW-UPDATE</h2></div>
 					<div class="col-lg-4 col-md-3 col-sm-3"><hr></div>	
 	  </div>	
       <div id="google-map" style = "text-align:center; width:100%; height:1000px">
       
-      		<div class="col-lg-12 col-md-12 col-sm-12" style = "">
+      		<div class="col-lg-12 col-md-12 col-sm-12">
       		<div class="row">		
       		
 			</div>
@@ -128,17 +128,9 @@ body{ margin:50px 0px; }
         	</div>
         	</div>
         	<div class="col-lg-12 col-md-12 col-sm-12"><hr>
-           	 	<div style = "text-align:left; padding-bottom:20px; height:500px">
+           	 	<div style = "text-align:left; padding-bottom:20px; height:800px">
         			<span style = "margin-top:20px"><h3>이 시설에 대한 평가</h3></span>
         			<br>
-        			<!-- <span class="StarBar">
-            		<i class="fa fa-star" style = "font-size:30px"></i>
-            		<i class="fa fa-star" style = "font-size:30px"></i>
-            		<i class="fa fa-star" style = "font-size:30px"></i>
-            		<i class="fa fa-star" style = "font-size:30px"></i>
-            		<i class="fa fa-star" style = "font-size:30px"></i>
-            		
-            		</span> -->
             		
             		<div class="rate2"></div>
    					<input id="input2" type="text" name = "grade">
@@ -146,23 +138,23 @@ body{ margin:50px 0px; }
             		<script src="https://code.jquery.com/jquery-1.11.3.min.js" charset="utf-8"></script>
    					<script src="${ contextPath }/resources/js/rater.js" charset="utf-8"></script>
     				<script> 
-    					var a;	
-    	
+    					var a = ${b.grade};	
+    					
     					(function($){
        				        $(document).ready(function(){
           				    var options = {
          				       max_value: 5,
         				       step_size: 0.5,
        				           selected_symbol_type: 'fontawesome_star',
-       				           initial_value: 3,
+       				           initial_value: a,
       				           update_input_field_name: $("#input2")
             				}
             
            					$(".rate2").rate(options);
             				$(".rate2").on("change", function(ev, data){
-                				/* console.log(data.from, data.to); */
+                				/* console.log(data.from, data.to);
                 				a = data.to;
-                				//console.log(a);
+                				console.log(a); */
                 				
             				});
             				
@@ -176,22 +168,22 @@ body{ margin:50px 0px; }
             		<br>
             		<div>
             		<span>리뷰제목</span><br>
-            			<input type="text" id = "review_title" name = "title" placeholder="방문 목적이나 인상 깊었던 점에 대해 언급하세요." width = "80%">
+            			<input type="text" id = "review_title" name = "title" width = "80%" value = "${ b.title }">
             		</div>
             		<br>
             		<br>
             		<br>
             		<div>
             		<span>리뷰내용</span><br>
-            			<textarea style="resize: none;" name = "text" placeholder="객실 위치, 편의시설등에 대한 고객님의 경험을 공유하세요." rows="10" cols="50"></textarea>
+            			<textarea style="resize: none;" name = "text" rows="10" cols="50">${ b.text }</textarea>
             		</div>
             		<br>
             		<br>
             		<br>
-            		
+            		<div>
             		<span>여행시기는 언제였나요?</span><br><br>
             				<i class="fa fa-calendar" id = "btn_monthpicker" style = "font-size:40px; "></i><br><br>
-            				<input id="monthpicker" name="travel_date" type="text" style = "height:35px; box-sizing:border-box; text-align:center"/>
+            				<input id="monthpicker" value="${ b.travel_date }" name="travel_date" type="text" style = "height:35px; box-sizing:border-box; text-align:center"/>
 							<script type="text/javascript" src="${ contextPath }/resources/js/jquery-1.11.1.min.js"></script>
 							<script type="text/javascript" src="${ contextPath }/resources/js/jquery-ui.min.js"></script>
 							<script type="text/javascript" src="${ contextPath }/resources/js/jquery.mtz.monthpicker.js"></script>
@@ -217,17 +209,13 @@ body{ margin:50px 0px; }
 								});
 								})(jQuery);
 							</script>
-
+					</div>
 						
 						
         		</div>
         	</div>
-        	
-        	
-      </div>
         	<div class="col-lg-12 col-md-12 col-sm-12" style="padding-top:40px"><hr>
-        		<span>공유하실 추억은 무엇인가요? (선택사항)</span><br><br>
-            	<%-- <button type="button" class="btn btn-secondary" onclick="location.href='${contextPath}/starTest.bo'">사진첨부</button> --%>
+        		<span>공유하실 추억은 무엇인가요? (필요하신 사진은 다시 넣어주세요!)</span><br><br>
             	
         <div class="text-center text-primary">
         </div>
@@ -249,13 +237,15 @@ body{ margin:50px 0px; }
     
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="${ contextPath }/resources/js/ccFileUpload.js"></script>
+    <script src="${ contextPath }/resources/js/ccFileUpload2.js"></script>
     <script>
+    var bid = ${bid};
+    
     	(function($){
         $(document).ready(function(){
             var options = {
                     'name':'file',
-                    'uploadUrl':'upload.bo',
+                    'uploadUrl':'upload2.bo?bid='+bid,
                     'sync':false,
                     'previews':'stage',
                     'response':'response',
@@ -270,10 +260,13 @@ body{ margin:50px 0px; }
     	})(jQuery);
     </script>
         	</div>
-        	<div class="col-lg-12 col-md-12 col-sm-12"><hr>
-        		<input type="submit" class="btn btn-secondary" value = "확인">
-        		<button type="button" class="btn btn-secondary" onclick="cancel();">취소</button>
+        	
+      </div>
+			<div class="col-lg-12 col-md-12 col-sm-12"><hr>
+        		<input type="submit" class="btn btn-secondary" value = "수정">
+        		<button type="button" class="btn btn-secondary" onclick="cancel()">취소</button>
         	</div>
+        	
         	</form>
    </section>
    
@@ -282,18 +275,15 @@ body{ margin:50px 0px; }
      
    </section>
    <jsp:include page="../common/footer.jsp"/>
-   <script>
-   
-   </script>
 
 <script>
-
+	/* function test(){
+		location.href="starTest.bo";
+	} */
 	var contenttypeid = ${ param.contenttypeid };
 	var contentid = ${param.contentid};
-	var cid = ${param.cid};
-
+	
 	function cancel(){
-		//location.href="deleteAllUpload.bo?uri=${uri}&contentid="+contentid;
 		history.back();
 	}	
 	
