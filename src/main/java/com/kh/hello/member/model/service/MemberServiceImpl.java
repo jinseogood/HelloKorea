@@ -15,6 +15,7 @@ import com.kh.hello.member.model.dao.MemberDao;
 import com.kh.hello.member.model.vo.BoardAndReply;
 import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.member.model.vo.MemberGoods;
+import com.kh.hello.member.model.vo.MemberPoint;
 import com.kh.hello.member.model.vo.MemberReservation;
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -175,6 +176,13 @@ public class MemberServiceImpl implements MemberService {
 	public ArrayList<MemberReservation> selectReservationHistory(int mId) {
 		// TODO Auto-generated method stub
 		return md.selectReservationHistory(mId,sqlSession);
+	}
+
+
+	@Override
+	public ArrayList<MemberPoint> selectMemberPonit(int mId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

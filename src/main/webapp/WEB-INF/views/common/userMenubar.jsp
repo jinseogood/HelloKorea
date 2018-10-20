@@ -24,7 +24,7 @@
 				<ul>
 					<li><a href="userMypage.um">프로필수정</a></li>
 					<li><a href="reservationHistory.um">예약내역</a></li>
-					<li><a href="#">포인트내역</a></li>
+					<li><a href="pointHistory.um">포인트내역</a></li>
 					<li><a href="watchList.um">찜목록</a></li>
 					<li><a href="activities.um">활동내역</a></li>
 				</ul>

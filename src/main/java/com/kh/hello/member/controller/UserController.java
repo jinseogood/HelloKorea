@@ -21,6 +21,7 @@ import com.kh.hello.member.model.service.MemberService;
 import com.kh.hello.member.model.vo.BoardAndReply;
 import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.member.model.vo.MemberGoods;
+import com.kh.hello.member.model.vo.MemberPoint;
 import com.kh.hello.member.model.vo.MemberReservation;
 
 @Controller
@@ -36,11 +37,10 @@ public class UserController {
 		
 		int mId= m.getmId();
 		
-		System.out.println("mid : " + mId);
-		
 		Attachment a = ms.selectMemberProfile(mId);
 		System.out.println("a"+a);
 		if(a ==null){
+			model.addAttribute("m",m);
 			model.addAttribute("a", a);
 			model.addAttribute("mId", mId);
 			return "userMypage/editProfile";
@@ -48,6 +48,7 @@ public class UserController {
 			//Attachment a1 = ms.selectMemberProfile1(mId);
 			String changeName = a.getChangeName();
 			
+			model.addAttribute("m", m);
 			model.addAttribute("a", a);
 			model.addAttribute("changeName", changeName);
 			return "userMypage/editProfile";
@@ -95,7 +96,6 @@ public class UserController {
 		
 		
 		if(result >0){
-			
 			return "userMypage/editProfile";
 			
 		}else{
@@ -156,6 +156,20 @@ public class UserController {
 		
 		model.addAttribute("reservationList", reservationList);
 		return "userMypage/reservationHistory";
+		
+	}
+	//포인트 내역
+	@RequestMapping(value="pointHistory.um")
+	public String selectMemberPonit(Model model,HttpServletRequest request){
+		
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		int mId = m.getmId();
+		
+		ArrayList<MemberPoint>pointList = ms.selectMemberPonit(mId);
+		
+		
+		
+		return null;
 		
 	}
 }
