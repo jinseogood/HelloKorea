@@ -757,14 +757,7 @@
 			}
 			</script>
 			</c:if>
-			<script>
-			function numberWithCommas(x){
-				//var x=x.slice(1, x.length-5);
-				x=x.toFixed(3);
-				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-			}
-
-			</script>
+			
 			<c:if test="${!empty sessionScope.loginUser}">
 			<script>
 			
