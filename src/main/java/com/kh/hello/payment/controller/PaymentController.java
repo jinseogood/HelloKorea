@@ -119,8 +119,6 @@ public class PaymentController {
 			
 			int mId=0;
 			
-			double paymentAmount=0;
-
 			if (res.equals(RESPONSE_SUCCESS)) {
 
 				logger.info("페이팔서버로 부터 PDT유효성 요청이 성공했습니다.");
@@ -143,7 +141,7 @@ public class PaymentController {
 				//결제 상태
 				String paymentStatus = (String) vars.get(PARAM_PAYMENT_STATUS);
 				//결제 금액
-				paymentAmount = Double.parseDouble((String) vars.get(PARAM_MC_GROSS));
+				double paymentAmount = Double.parseDouble((String) vars.get(PARAM_MC_GROSS));
 				//통화
 				String paymentCurrency = (String) vars.get(PARAM_MC_CURRENCY);
 				//구매자 페이팔 이메일
@@ -169,9 +167,9 @@ public class PaymentController {
 				
 				mId=Integer.parseInt(orderInfo[0]);
 				
-				/*for(int i=0;i<orderInfo.length;i++){
+				for(int i=0;i<orderInfo.length;i++){
 					System.out.println("orderInfo[" + i + "] : " + orderInfo[i]);
-				}*/
+				}
 				
 				Payment p=new Payment();
 				p.setmId(Integer.parseInt(orderInfo[0]));
@@ -255,19 +253,23 @@ public class PaymentController {
 				Payment p=ps.selectPayInfo(mId);
 				ArrayList<PayDetail> pdList=ps.selectPayDetailInfo(p.getPaId());
 				
+				if(pdList.size() == 2){
+					pdList.get(0).setPrice(pdList.get(0).getPrice()-pdList.get(1).getPrice());
+				}
+				
 				//pdList.get(0).setPrice(paymentAmount);
 				
 				Reservation2 r=ps.selectReservation(p.getPaId());
 				
-				/*int orderNum=1;
+				//예약확인 메일 전송
+				/*int orderNum=r.getRid();
 				String orderDate=pdList.get(0).getPdDate();
 				String orderName=p.getPaName();
 				String orderPhone=p.getPaPhone();
-				String proCName="업체";
-				String proRName="객실";
+				String proCName=r.getcName();
+				String proRName=r.getRoomName();
 				double proPrice=pdList.get(0).getPrice();
 				
-				//예약확인 메일 전송
 				Email email=new Email();
 				email.setMailFrom("hellokoreamailservice@gmail.com");
 				email.setMailTo(p.getPaEmail());
@@ -276,7 +278,7 @@ public class PaymentController {
 				ApplicationContext context = new FileSystemXmlApplicationContext("D:/git/HelloKorea/src/main/resources/root-context.xml");
 				EmailSender es = (EmailSender) context.getBean("mailer");
 				
-				es.sendMail(email, orderNum, orderDate, orderName, orderPhone, proCName, proRName, proPrice);*/
+				es.sendMail(email, orderNum, orderDate, orderName, orderPhone, proCName, proRName, proPrice, request);*/
 				
 				model.addAttribute("p", p);
 				model.addAttribute("pdList", pdList);

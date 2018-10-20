@@ -26,6 +26,8 @@ public class CurrencyController {
 	public void currencyCheck(String cur, HttpServletResponse response){
 		response.setContentType("text/html; charset=utf-8");
 		
+		System.out.println("check cur : " + cur);
+		
 		String addr = "https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=";
         String serviceKey = "forZLoVVwIvqXCL19weyohSBqll9az59";
         String parameter = "";

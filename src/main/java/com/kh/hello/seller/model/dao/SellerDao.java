@@ -44,6 +44,12 @@ public interface SellerDao {
 	//판매자 마이페이지 메인 새 QnA 메시지
 	ArrayList<CompanyQnAResult> selectQnAList(int mId, SqlSessionTemplate sqlSession);
 	
+	//사업자등록번호 중복 조회
+	int duplicationCRNo(String no, SqlSessionTemplate sqlSession);
+
+	//법인등록번호 중복 조회
+	int duplicationCPRNo(String no, SqlSessionTemplate sqlSession);
+	
 	//업체명 중복 조회
 	int duplicationTitle(String title, SqlSessionTemplate sqlSession);
 
