@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
@@ -80,6 +81,16 @@
 	<jsp:include page="../common/searchMenubar.jsp"/>
 	<jsp:include page="../common/searchSubmenubar.jsp"/>
 	
+	<!-- 환율 적용 여부 검사 -->
+	<c:if test="${ sessionScope.cur != null }">
+		<input type="hidden" id="CURICON" value="${ sessionScope.cur.get(0) }">
+		<input type="hidden" id="CUR" value="${ sessionScope.cur.get(1) }">
+	</c:if>
+	<c:if test="${ sessionScope.cur == null }">
+		<input type="hidden" id="CURICON" value="₩">
+		<input type="hidden" id="CUR" value="1">
+	</c:if>
+	
 	<div class="main" align="center">
 		<form action="" method="post" id="payPalForm">
 			<input type="hidden" name="cmd" value="_xclick">
@@ -95,14 +106,27 @@
 			<input type="hidden" id="orderInfo" name="custom">
 			<input type="hidden" name="charset" value="UTF-8">
 			<!-- 개인 테스트 용 -->
-			<input type="hidden" name="return" value="https://localhost:8443/hello/paymentConfirm.pay">
-			<input type="hidden" name="cancel_return" value="https://localhost:8443/hello/detailHotel?cid=${ reservation.cid }&contentid=${ reservation.contentid }">
+			<%-- <input type="hidden" name="return" value="https://localhost:8443/hello/paymentConfirm.pay">
+			<input type="hidden" name="cancel_return" value="https://localhost:8443/hello/detailHotel?contenttypeid=32&cid=${ reservation.cid }&contentid=${ reservation.contentid }"> --%>
 			<!-- 다른 IP이용 시 -->
-			<%-- <input type="hidden" name="return" value="https://192.168.219.106:8443/hello/paymentConfirm.pay">
-			<input type="hidden" name="cancel_return" value="https://192.168.219.106:8443/hello/detailHotel?cid=${ reservation.cid }&contentid=${ reservation.contentid }"> --%>
+			<input type="hidden" name="return" value="https://192.168.219.106:8443/hello/paymentConfirm.pay">
+			<input type="hidden" name="cancel_return" value="https://192.168.219.106:8443/hello/detailHotel?contenttypeid=32&cid=${ reservation.cid }&contentid=${ reservation.contentid }">
 			
 			<input type="hidden" id="oId" value="${ reservation.oid }">
-			<input type="hidden" id="price" value="${ ((param.price * reservation.period) * 0.1) + (param.price * reservation.period) }">
+			<input type="hidden" id="originPrice" value="${ ((param.price * reservation.period) * 0.1) + (param.price * reservation.period) }">
+			
+			<c:if test="${ sessionScope.cur != null }">
+				<fmt:parseNumber value="${ sessionScope.cur.get(1) }" integerOnly="false" pattern="#.###" var="parseCur"/>
+					<c:if test="${ sessionScope.cur.get(0) == '¥' || sessionScope.cur.get(0) == 'Rp' }">
+						<input type="hidden" id="price" value="${ (((param.price * reservation.period) * 0.1) + (param.price * reservation.period)) / (parseCur * 10) }">
+					</c:if>
+					<c:if test="${ sessionScope.cur.get(0) != '¥' && sessionScope.cur.get(0) != 'Rp'  }">
+						<input type="hidden" id="price" value="${ (((param.price * reservation.period) * 0.1) + (param.price * reservation.period)) / parseCur }">
+					</c:if>
+			</c:if>
+			<c:if test="${ sessionScope.cur == null }">
+				<input type="hidden" id="price" value="${ ((param.price * reservation.period) * 0.1) + (param.price * reservation.period) }">
+			</c:if>
 
 			<div class="orderArea">
 				<br>
@@ -125,7 +149,18 @@
 								<img id="checkIcon" src="${ contextPath }/resources/img/checkIcon.png"> 환불 수수료 없음!
 							</td>
 							<td width="100px" style="text-align:center;">
-								<b style="font-size:16px;">₩ <fmt:formatNumber value="${ param.price }" pattern="#,###"/>/</b><sub>박</sub>
+								<c:if test="${ sessionScope.cur != null }">
+									<fmt:parseNumber value="${ sessionScope.cur.get(1) }" integerOnly="false" pattern="#.###" var="parseCur"/>
+									<c:if test="${ sessionScope.cur.get(0) == '¥' || sessionScope.cur.get(0) == 'Rp' }">
+										<b style="font-size:16px;">${ sessionScope.cur.get(0) } <fmt:formatNumber value="${ param.price / (parseCur * 10) }" pattern="#,###"/>/</b><sub>박</sub>
+									</c:if>
+									<c:if test="${ sessionScope.cur.get(0) != '¥' && sessionScope.cur.get(0) != 'Rp'  }">
+										<b style="font-size:16px;">${ sessionScope.cur.get(0) } <fmt:formatNumber value="${ param.price / parseCur }" pattern="#,###"/>/</b><sub>박</sub>
+									</c:if>
+								</c:if>
+								<c:if test="${ sessionScope.cur == null }">
+									<b style="font-size:16px;">₩ <fmt:formatNumber value="${ param.price }" pattern="#,###"/>/</b><sub>박</sub>
+								</c:if>
 							</td>
 						</tr>
 					</table>
@@ -435,14 +470,40 @@
 						</tr>
 						<tr>
 							<td><b>결제 금액</b></td>
-							<td colspan="2">₩ <fmt:formatNumber value="${ ((param.price * reservation.period) * 0.1) + (param.price * reservation.period) }" pattern="#,###"/></td>
+							
+							<c:if test="${ sessionScope.cur != null }">
+								<fmt:parseNumber value="${ sessionScope.cur.get(1) }" integerOnly="false" pattern="#.###" var="parseCur"/>
+								<c:if test="${ sessionScope.cur.get(0) == '¥' || sessionScope.cur.get(0) == 'Rp' }">
+									<td colspan="2">${ sessionScope.cur.get(0) } <fmt:formatNumber value="${ (((param.price * reservation.period) * 0.1) + (param.price * reservation.period)) / (parseCur * 10) }" pattern="#,###"/></td>
+								</c:if>
+								<c:if test="${ sessionScope.cur.get(0) != '¥' && sessionScope.cur.get(0) != 'Rp'  }">
+									<td colspan="2">${ sessionScope.cur.get(0) } <fmt:formatNumber value="${ (((param.price * reservation.period) * 0.1) + (param.price * reservation.period)) / parseCur }" pattern="#,###"/></td>
+								</c:if>
+							</c:if>
+							<c:if test="${ sessionScope.cur == null }">
+								<td colspan="2">₩ <fmt:formatNumber value="${ (((param.price * reservation.period) * 0.1) + (param.price * reservation.period)) }" pattern="#,###"/></td>
+							</c:if>
+							
 						</tr>
 						<tr>
 							<td colspan="3"><hr style="width:644px; border-style:dashed; border-width:2px; border-color:gold;"></td>
 						</tr>
 						<tr>
 							<td><b style="font-size:20px;">총 금액</b></td>
-							<td colspan="2"><b style="font-size:20px;" id="totalPrice">₩ <fmt:formatNumber value="${ ((param.price * reservation.period) * 0.1) + (param.price * reservation.period) }" pattern="#,###"/></b></td>
+							
+							<c:if test="${ sessionScope.cur != null }">
+								<fmt:parseNumber value="${ sessionScope.cur.get(1) }" integerOnly="false" pattern="#.###" var="parseCur"/>
+								<c:if test="${ sessionScope.cur.get(0) == '¥' || sessionScope.cur.get(0) == 'Rp' }">
+									<td colspan="2"><b style="font-size:20px;">${ sessionScope.cur.get(0) }</b><b style="font-size:20px;" id="totalPrice"> <fmt:formatNumber value="${ (((param.price * reservation.period) * 0.1) + (param.price * reservation.period)) / (parseCur * 10) }" pattern="#,###"/></b></td>
+								</c:if>
+								<c:if test="${ sessionScope.cur.get(0) != '¥' && sessionScope.cur.get(0) != 'Rp'  }">
+									<td colspan="2"><b style="font-size:20px;">${ sessionScope.cur.get(0) }</b><b style="font-size:20px;" id="totalPrice"> <fmt:formatNumber value="${ (((param.price * reservation.period) * 0.1) + (param.price * reservation.period)) / parseCur }" pattern="#,###"/></b></td>
+								</c:if>
+							</c:if>
+							<c:if test="${ sessionScope.cur == null }">
+								<td colspan="2"><b style="font-size:20px;">₩</b><b style="font-size:20px;" id="totalPrice"> <fmt:formatNumber value="${ (((param.price * reservation.period) * 0.1) + (param.price * reservation.period)) }" pattern="#,###"/></b></td>
+							</c:if>
+							
 						</tr>
 						<tr style="text-align:center;">
 							<td colspan="3">
@@ -470,7 +531,20 @@
 					</tr>
 					<tr height="40px">
 						<td>1박 요금</td>
-						<td style="text-align:right;">₩ <fmt:formatNumber value="${ param.price }" pattern="#,###"/></td>
+						
+						<c:if test="${ sessionScope.cur != null }">
+							<fmt:parseNumber value="${ sessionScope.cur.get(1) }" integerOnly="false" pattern="#.###" var="parseCur"/>
+							<c:if test="${ sessionScope.cur.get(0) == '¥' || sessionScope.cur.get(0) == 'Rp' }">
+								<td style="text-align:right;">${ sessionScope.cur.get(0) } <fmt:formatNumber value="${ param.price / (parseCur * 10) }" pattern="#,###"/></td>
+							</c:if>
+							<c:if test="${ sessionScope.cur.get(0) != '¥' && sessionScope.cur.get(0) != 'Rp'  }">
+								<td style="text-align:right;">${ sessionScope.cur.get(0) } <fmt:formatNumber value="${ param.price / parseCur }" pattern="#,###"/></td>
+							</c:if>
+						</c:if>
+						<c:if test="${ sessionScope.cur == null }">
+							<td style="text-align:right;">₩ <fmt:formatNumber value="${ param.price }" pattern="#,###"/></td>
+						</c:if>
+						
 					</tr>
 					<tr height="40px">
 						<td>객실 수</td>
@@ -486,15 +560,54 @@
 					</tr>
 					<tr height="40px">
 						<td>소계</td>
-						<td style="text-align:right;">₩ <fmt:formatNumber value="${ param.price * reservation.period }" pattern="#,###"/></td>
+						
+						<c:if test="${ sessionScope.cur != null }">
+							<fmt:parseNumber value="${ sessionScope.cur.get(1) }" integerOnly="false" pattern="#.###" var="parseCur"/>
+							<c:if test="${ sessionScope.cur.get(0) == '¥' || sessionScope.cur.get(0) == 'Rp' }">
+								<td style="text-align:right;">${ sessionScope.cur.get(0) } <fmt:formatNumber value="${ (param.price * reservation.period) / (parseCur * 10) }" pattern="#,###"/></td>
+							</c:if>
+							<c:if test="${ sessionScope.cur.get(0) != '¥' && sessionScope.cur.get(0) != 'Rp'  }">
+								<td style="text-align:right;">${ sessionScope.cur.get(0) } <fmt:formatNumber value="${ (param.price * reservation.period) / parseCur }" pattern="#,###"/></td>
+							</c:if>
+						</c:if>
+						<c:if test="${ sessionScope.cur == null }">
+							<td style="text-align:right;">₩ <fmt:formatNumber value="${ (param.price * reservation.period) }" pattern="#,###"/></td>
+						</c:if>
+						
 					</tr>
 					<tr height="40px">
 						<td>세금 및 봉사료</td>
-						<td style="text-align:right;">₩ <fmt:formatNumber value="${ (param.price * reservation.period) * 0.1 }" pattern="#,###"/></td>
+						
+						<c:if test="${ sessionScope.cur != null }">
+							<fmt:parseNumber value="${ sessionScope.cur.get(1) }" integerOnly="false" pattern="#.###" var="parseCur"/>
+							<c:if test="${ sessionScope.cur.get(0) == '¥' || sessionScope.cur.get(0) == 'Rp' }">
+								<td style="text-align:right;">${ sessionScope.cur.get(0) } <fmt:formatNumber value="${ ((param.price * reservation.period) * 0.1) / (parseCur * 10) }" pattern="#,###"/></td>
+							</c:if>
+							<c:if test="${ sessionScope.cur.get(0) != '¥' && sessionScope.cur.get(0) != 'Rp'  }">
+								<td style="text-align:right;">${ sessionScope.cur.get(0) } <fmt:formatNumber value="${ ((param.price * reservation.period) * 0.1) / parseCur }" pattern="#,###"/></td>
+							</c:if>
+						</c:if>
+						<c:if test="${ sessionScope.cur == null }">
+							<td style="text-align:right;">₩ <fmt:formatNumber value="${ ((param.price * reservation.period) * 0.1) }" pattern="#,###"/></td>
+						</c:if>
+						
 					</tr>
 					<tr height="60px" style="background:lightgray;">
 						<th style="font-size:18px;">합계</th>
-						<th style="text-align:right; font-size:18px;">₩ <fmt:formatNumber value="${ ((param.price * reservation.period) * 0.1) + (param.price * reservation.period) }" pattern="#,###"/></th>
+						
+						<c:if test="${ sessionScope.cur != null }">
+							<fmt:parseNumber value="${ sessionScope.cur.get(1) }" integerOnly="false" pattern="#.###" var="parseCur"/>
+							<c:if test="${ sessionScope.cur.get(0) == '¥' || sessionScope.cur.get(0) == 'Rp' }">
+								<th style="text-align:right; font-size:18px;">${ sessionScope.cur.get(0) } <fmt:formatNumber value="${ (((param.price * reservation.period) * 0.1) + (param.price * reservation.period)) / (parseCur * 10) }" pattern="#,###"/></td>
+							</c:if>
+							<c:if test="${ sessionScope.cur.get(0) != '¥' && sessionScope.cur.get(0) != 'Rp'  }">
+								<th style="text-align:right; font-size:18px;">${ sessionScope.cur.get(0) } <fmt:formatNumber value="${ (((param.price * reservation.period) * 0.1) + (param.price * reservation.period)) / parseCur }" pattern="#,###"/></td>
+							</c:if>
+						</c:if>
+						<c:if test="${ sessionScope.cur == null }">
+							<th style="text-align:right; font-size:18px;">₩ <fmt:formatNumber value="${ (((param.price * reservation.period) * 0.1) + (param.price * reservation.period)) }" pattern="#,###"/></td>
+						</c:if>
+						
 					</tr>
 				</table>
 			</div>
@@ -503,6 +616,29 @@
 	
 	<jsp:include page="../common/footer.jsp"/>
 	<script>
+	
+		// 환율 적용
+		var curIcon = $("#CURICON").val();
+		var currency = $("#CUR").val();
+		//console.log(currency);
+		//console.log(currency);
+		currency=parseFloat(currency);
+		
+		//console.log(curIcon);
+		//console.log(currency);
+		
+		if(curIcon == '¥'){
+			currency=currency/10;
+		}
+		if(curIcon == 'Rp'){
+			currency=currency/10;
+		}
+		
+		function numberWithCommas(x){
+			x=x.toFixed(0);
+			return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
+	
 		$(function(){
 			
 			$("#fnameWTEXT").hide();
@@ -618,15 +754,24 @@
 			});
 		}
 		
+		var originPrice=$("#originPrice").val();
 		var totalPrice=$("#price").val();
+		
+		console.log(originPrice);
+		console.log(totalPrice);
+		
+		originPrice=parseInt(originPrice);
 		totalPrice=parseInt(totalPrice);
 		
 		function calPrice(){
 			var point=$("#point").val();
 			
+			originPrice=originPrice - point;
 			totalPrice=totalPrice - point;
 			
-			$("#totalPrice").html("₩" + totalPrice);
+			totalPrice=numberWithCommas(totalPrice);
+			
+			$("#totalPrice").html(" " + totalPrice);
 		}
 		
 		function pay(){
@@ -678,8 +823,8 @@
 			else{
 				console.log(point);
 				console.log(totalPrice);
-				$("#orderInfo").attr("value", (mId + "," + orderName + "," + orderTel + "," + orderEmail + "," + pMethod + "," + point + "," + oId + "," + totalPrice));
-				$("#orderPrice").attr("value", (totalPrice * 0.00088));
+				$("#orderInfo").attr("value", (mId + "," + orderName + "," + orderTel + "," + orderEmail + "," + pMethod + "," + point + "," + oId + "," + originPrice));
+				$("#orderPrice").attr("value", (originPrice * 0.00088));
 				$("#payPalForm").attr("action", "https://www.sandbox.paypal.com/cgi-bin/webscr");
 				$("#payBtn").attr("type", "submit");
 			}

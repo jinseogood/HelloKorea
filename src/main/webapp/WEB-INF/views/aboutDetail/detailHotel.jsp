@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,6 +44,17 @@
 	<jsp:include page="../common/searchMenubar.jsp"/>
 	<jsp:include page="../common/searchSubmenubar.jsp"/>
 	
+
+	<!-- 환율 적용 여부 검사 -->
+	<c:if test="${ sessionScope.cur != null }">
+		<input type="hidden" id="CURICON" value="${ sessionScope.cur.get(0) }">
+		<input type="hidden" id="CUR" value="${ sessionScope.cur.get(1) }">
+	</c:if>
+	<c:if test="${ sessionScope.cur == null }">
+		<input type="hidden" id="CURICON" value="₩">
+		<input type="hidden" id="CUR" value="1">
+	</c:if>
+
 	
 
 	<!-- gray bg -->	
@@ -200,6 +211,29 @@
 			var rid = 0;
 			var price = 0;
 			var rType = "";
+			
+			// 환율 적용
+			var curIcon = $("#CURICON").val();
+			var currency = $("#CUR").val();
+			//console.log(currency);
+			//console.log(currency);
+			currency=parseFloat(currency);
+			
+			if(curIcon == '¥'){
+				currency=currency*10;
+			}
+			if(curIcon == 'Rp'){
+				currency=currency*10;
+			}
+			
+			//console.log(curIcon);
+			//console.log(currency);
+			
+			function numberWithCommas(x){
+				x=x.toFixed(0);
+				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			}
+			
 			function detailRoomInfo(){
 				console.log("detailRoomInfo : " + contenttypeid);
 				console.log("detailRoomInfo : " + contentid);
@@ -253,7 +287,8 @@
 									output += "<td>";
 									output += "ㆍ 정원 : "+myData[i].roombasecount+"명<br>";
 									output += "ㆍ 최대인원 : "+result[i].rLimit+"명<br>";
-									output += "ㆍ 가격 : " +result[i].rPrice +"원<br>";
+									//output += "ㆍ 가격 : "+result[i].rPrice+"원<br>";
+									output += "ㆍ 가격 : " + curIcon + " " + numberWithCommas((result[i].rPrice/currency)) + "<br>";
 									//output += "ㆍ 비수기 주중최소 : "+myData[i].roomoffseasonminfee1+" (성수기 : "+myData[i].roompeakseasonminfee1+")<br>";
 									//output += "ㆍ 비수기 주말최소 : "+myData[i].roomoffseasonminfee2+" (성수기 : "+myData[i].roompeakseasonminfee2+")<br>";
 									output += "</td>";

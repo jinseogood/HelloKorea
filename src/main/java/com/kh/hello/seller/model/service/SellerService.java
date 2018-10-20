@@ -42,6 +42,12 @@ public interface SellerService {
 	//판매자 마이페이지 메인 새 QnA 알림 메시지
 	ArrayList<CompanyQnAResult> selectQnAList(int mId);
 	
+	//사업자등록번호 중복 조회
+	int duplicationCRNo(String no);
+
+	//법인등록번호 중복 조회
+	int duplicationCPRNo(String no);
+	
 	//업체명 중복 조회
 	int duplicationTitle(String title);
 	

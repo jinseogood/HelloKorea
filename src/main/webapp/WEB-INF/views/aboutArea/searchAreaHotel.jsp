@@ -27,8 +27,15 @@
 	<jsp:include page="../common/searchMenubar.jsp"/>
 	<jsp:include page="../common/searchSubmenubar.jsp"/>
 	
-	<input type="hidden" id="CURICON" value="${ sessionScope.cur.get(0) }">
-	<input type="hidden" id="CUR" value="${ sessionScope.cur.get(1) }">
+	<!-- 환율 적용 여부 검사 -->
+	<c:if test="${ sessionScope.cur != null }">
+		<input type="hidden" id="CURICON" value="${ sessionScope.cur.get(0) }">
+		<input type="hidden" id="CUR" value="${ sessionScope.cur.get(1) }">
+	</c:if>
+	<c:if test="${ sessionScope.cur == null }">
+		<input type="hidden" id="CURICON" value="₩">
+		<input type="hidden" id="CUR" value="1">
+	</c:if>
 	
 	<section class="container tm-home-section-1" id="more">
 		<div class="container">
@@ -147,17 +154,28 @@
 			</div>
 		</div>
 		<script>
-			
+			// 환율 적용
 			var curIcon = $("#CURICON").val();
 			var currency = $("#CUR").val();
-			console.log(currency);
-			currency=currency.replace(",", ".");
-			console.log(currency);
+			//console.log(currency);
+			//console.log(currency);
 			currency=parseFloat(currency);
 			
-			console.log("여기가 cur");
-			console.log(curIcon);
-			console.log(currency);
+			if(curIcon == '¥'){
+				currency=currency*10;
+			}
+			if(curIcon == 'Rp'){
+				currency=currency*10;
+			}
+			
+			//console.log(curIcon);
+			//console.log(currency);
+			
+			function numberWithCommas(x){
+				x=x.toFixed(0);
+				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			}
+
 		
 			if(sessionStorage.getItem("areaCode") == 1){
 				$(".tm-section-title1").text("서울 호텔");
@@ -573,11 +591,6 @@
 						console.log(data);
 					}
 				});
-			}
-			function numberWithCommas(x){
-				//var x=x.slice(1, x.length-5);
-				x=x.toFixed(3);
-				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			}
 			</script>
 			<c:if test="${!empty sessionScope.loginUser}">

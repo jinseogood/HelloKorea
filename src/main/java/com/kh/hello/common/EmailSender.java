@@ -2,6 +2,8 @@ package com.kh.hello.common;
 
 import java.io.StringWriter;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -28,14 +30,20 @@ public class EmailSender {
 		this.velocityEngine = velocityEngine; 
 	}
 	
-	public void sendMail(Email mail, int orderNum, String orderDate, String orderName, String orderPhone, String proCName, String proRName, double proPrice) {
+	public void sendMail(Email mail, int orderNum, String orderDate, String orderName, String orderPhone, String proCName, String proRName, double proPrice, HttpServletRequest request) {
 		
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setFrom(mail.getMailFrom());
 		message.setTo(mail.getMailTo());
 		message.setSubject(mail.getMailSubject());
 		
-		Template template = velocityEngine.getTemplate("D:/git/HelloKorea/src/main/webapp/resources/templates/" + mail.getTemplateName());
+		String root=request.getSession().getServletContext().getRealPath("resources");
+		
+		String filePath=root + "\\templates\\";
+		
+		System.out.println("filePath : " + filePath);
+		
+		Template template = velocityEngine.getTemplate(filePath + mail.getTemplateName());
 		VelocityContext velocityContext = new VelocityContext();
 		velocityContext.put("orderNum", orderNum);
 		velocityContext.put("orderDate", orderDate);

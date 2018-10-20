@@ -68,6 +68,18 @@ public class SellerDaoImpl implements SellerDao{
 		return (ArrayList) sqlSession.selectList("Company.selectQnAList", mId);
 	}
 	
+	//사업자등록번호 중복 조회
+	@Override
+	public int duplicationCRNo(String no, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("Company.duplicationCRNo", no);
+	}
+
+	//법인등록번호 중복 조회
+	@Override
+	public int duplicationCPRNo(String no, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("Company.duplicationCPRNo", no);
+	}
+	
 	//업체명 중복 조회
 	@Override
 	public int duplicationTitle(String title, SqlSessionTemplate sqlSession) {

@@ -125,7 +125,20 @@
 				<tr>
 					<td style="border-right:1px solid lightgray;">${ r.cName }</td>
 					<td style="border-right:1px solid lightgray;">${ r.roomName }</td>
-					<td style="text-align:center; border-right:1px solid lightgray;">₩ <fmt:formatNumber value="${ pdList.get(0).price }" pattern="#,###"/></td>
+					
+					<c:if test="${ sessionScope.cur != null }">
+						<fmt:parseNumber value="${ sessionScope.cur.get(1) }" integerOnly="false" pattern="#.###" var="parseCur"/>
+						<c:if test="${ sessionScope.cur.get(0) == '¥' || sessionScope.cur.get(0) == 'Rp' }">
+							<td style="text-align:center; border-right:1px solid lightgray;">${ sessionScope.cur.get(0) } <fmt:formatNumber value="${ pdList.get(0).price / (parseCur * 10) }" pattern="#,###"/></td>
+						</c:if>
+						<c:if test="${ sessionScope.cur.get(0) != '¥' && sessionScope.cur.get(0) != 'Rp'  }">
+							<td style="text-align:center; border-right:1px solid lightgray;">${ sessionScope.cur.get(0) } <fmt:formatNumber value="${ pdList.get(0).price / parseCur }" pattern="#,###"/></td>
+						</c:if>
+					</c:if>
+					<c:if test="${ sessionScope.cur == null }">
+						<td style="text-align:center; border-right:1px solid lightgray;">₩ <fmt:formatNumber value="${ pdList.get(0).price }" pattern="#,###"/></td>
+					</c:if>
+					
 					<td style="text-align:center;">${ r.rSdate } - ${ r.rEdate }</td>
 				</tr>
 			</table>

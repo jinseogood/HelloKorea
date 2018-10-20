@@ -44,7 +44,21 @@
 		<result property="cName" column="C_NAME"/>
 		<result property="count" column="COUNT"/>
 	</resultMap>
-   
+	
+	<!-- 사업자등록번호 중복 확인 -->
+	<select id="duplicationCRNo" resultType="_int" parameterType="string">
+		SELECT COUNT(*)
+		FROM COMPANY
+		WHERE C_RNUM LIKE #{no}
+	</select>
+	
+	<!-- 법인등록번호 중복 확인 -->
+	<select id="duplicationCPRNo" resultType="_int" parameterType="string">
+		SELECT COUNT(*)
+		FROM COMPANY
+		WHERE CP_RNUM LIKE #{no}
+	</select>
+	
 	<!-- 업체명 중복 확인 -->
 	<select id="duplicationTitle" resultType="_int" parameterType="string">
 		SELECT COUNT(*)
