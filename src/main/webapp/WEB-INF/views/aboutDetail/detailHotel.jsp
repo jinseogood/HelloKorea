@@ -1226,6 +1226,7 @@
 						dataType:"json",
 						success:function(data){
 							reviewPaging(1);
+							bestReview();
 							alert(data.msg);
 							
 						},error:function(data){

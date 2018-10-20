@@ -98,7 +98,7 @@ body{ margin:50px 0px; }
    
    
    <section class="container tm-home-section-1" id="more" style = "width:80%; padding:100px">
-   <form action="insertQ1.bo?uri=${uri}" method = "post">
+   <form action="insertQ2.bo?uri=${uri}&conid=${contentid}" method = "post">
       <div class="row">
          
       </div> 
@@ -165,12 +165,11 @@ body{ margin:50px 0px; }
 	
 	$(function(){
 		$.ajax({
-			url:"detailGameInformation.sub",
+			url:"detailFoodInformation.sub",
 			type:"GET",
 			data:{contenttypeid:contenttypeid, contentid:contentid},
 			dataType:"json",
 			success:function(data){
-				console.log("안오냐");
 				var myData = data.response.body.items.item;
 				var output = "";
 				$(".main_title").html("");
