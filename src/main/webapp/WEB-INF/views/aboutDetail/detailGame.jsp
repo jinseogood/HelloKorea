@@ -72,10 +72,13 @@
 			<div class="col-lg-8 col-md-8 col-sm-8"><hr></div>	
 		</div>
 		</div>
-		<div class="col-lg-7 col-md-6">
+		<div class="col-lg-7 col-md-7">
 			<div id="google-map"></div>
 		</div>
-		<div class="col-lg-5 col-md-6">
+		
+		<div id="openweathermap-widget-15" class="col-lg-5"></div>
+			<script>window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];  window.myWidgetParam.push({id: 15,cityid: '1835848',appid: '49736052d2b9402c5764e0f24834cf25',units: 'metric',containerid: 'openweathermap-widget-15',  });  (function() {var script = document.createElement('script');script.async = true;script.charset = "utf-8";script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(script, s);  })();</script>
+		<!-- <div class="col-lg-5 col-md-5">
 			<div class="weatherMap" id="weatherArea">
 				날씨정보닷<br>
 				날씨정보닷<br>
@@ -87,7 +90,7 @@
 				날씨정보닷<br>
 				날씨정보닷<br>
 			</div>
-		</div>
+		</div> -->
 	</section>
 		<script>
 		var contentid = ${param.contentid};
@@ -241,22 +244,25 @@
 			});
 		}
 		
-		var mapy = ${param.mapy};
-		var mapx = ${param.mapx};
-		console.log("mapy : " + mapy);
-		console.log("mapx : " + mapx);
 		
-		function weatherMap(mapy, mapx){
+		function weatherMap(){
+			var mapy = ${param.mapy};
+			var mapx = ${param.mapx};
 			console.log("펑션y : " + mapy);
 			console.log("펑션x : " + mapx);
 			$.ajax({
-				url:"weatherMap.sub",
+				url:"weatherMapInfo.sub",
 				type:"GET",
 				data:{mapy:mapy, mapx:mapx},
 				dataType:"json",
 				success:function(data){
 					console.log('날씨성공');
 					console.log(data);
+					var weather = $("#weatherArea");
+					weather.html("");
+					weather.append(data.weather[0].description);
+					
+					
 				},error:function(data){console.log("날씨에러");console.log(data);}
 			});
 		}

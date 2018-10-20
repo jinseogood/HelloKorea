@@ -1008,47 +1008,7 @@ public class SubInformationController {
 		json.put("data", data);
 	}
 	
-	@RequestMapping(value="weatherMap.sub")
-	public void weatherMap(HttpServletRequest request, HttpServletResponse response, @RequestParam double mapy, @RequestParam double mapx){
-		URL url;
-		String result = null;
-		String Url_path = "http://api.openweathermap.org/data/2.5/weather?lat="+mapy+"&lon="+mapx+"&units=metric&APPID=49736052d2b9402c5764e0f24834cf25";
-		HttpURLConnection con = null;
-		
-		try{
-			url = new URL(Url_path);
-			
-			con = (HttpURLConnection)url.openConnection();
-			con.setRequestMethod("POST");
-			con.setRequestProperty("Cache-Control", "no-cache");
-			con.setRequestProperty("Content-Type", "application/json");
-			con.setRequestProperty("Accept", "application/json");
-			con.setDoOutput(true);
-			con.setDoInput(true);
-			
-			int responseCode = con.getResponseCode();
-			if(responseCode != 200){
-				throw new IOException("Post failed with error code " + responseCode);
-			}
-			
-			InputStreamReader tmp = new InputStreamReader(con.getInputStream(), "UTF-8");
-			BufferedReader reader = new BufferedReader(tmp);
-			StringBuilder builder = new StringBuilder();
-			
-			String str;
-			while((str = reader.readLine()) != null){
-				builder.append(str + "\n");
-			}
-			result = builder.toString();
-		}catch(Exception e){
-			e.getMessage();
-		}finally{
-			if(con != null){
-				con.disconnect();
-			}
-		}
-		
-	}
+	
 	
 	
 	

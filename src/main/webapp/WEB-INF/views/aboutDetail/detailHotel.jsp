@@ -44,6 +44,7 @@
 	<jsp:include page="../common/searchMenubar.jsp"/>
 	<jsp:include page="../common/searchSubmenubar.jsp"/>
 	
+
 	<!-- 환율 적용 여부 검사 -->
 	<c:if test="${ sessionScope.cur != null }">
 		<input type="hidden" id="CURICON" value="${ sessionScope.cur.get(0) }">
@@ -53,6 +54,7 @@
 		<input type="hidden" id="CURICON" value="₩">
 		<input type="hidden" id="CUR" value="1">
 	</c:if>
+
 	
 
 	<!-- gray bg -->	
@@ -103,6 +105,7 @@
 			var contentid = ${param.contentid};
 			var contenttypeid = ${param.contenttypeid};
 			var cid = ${param.cid};
+			
 			
 			function detailHotelInfo(){
 				console.log("deatilHotel : " + contenttypeid);
@@ -324,6 +327,7 @@
 					}
 				});//output += "ㆍ ";
 			}
+			
 			</script>
 			
 			<c:if test="${!empty sessionScope.loginUser}">

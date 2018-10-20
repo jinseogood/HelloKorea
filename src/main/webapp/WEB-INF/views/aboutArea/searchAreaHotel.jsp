@@ -175,6 +175,7 @@
 				x=x.toFixed(0);
 				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			}
+
 		
 			if(sessionStorage.getItem("areaCode") == 1){
 				$(".tm-section-title1").text("서울 호텔");
