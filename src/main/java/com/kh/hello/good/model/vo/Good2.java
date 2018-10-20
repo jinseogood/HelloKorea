@@ -10,18 +10,18 @@ public class Good2 implements java.io.Serializable{
 	private int lid;			//찜번호
 	private String lType;		//구분
 	private int originId;		//고유아이디
-	private Date endDate;		//종료일
 	private int mid;			//회원아이디
+	private int cid;
 	
 	public Good2(){}
 
-	public Good2(int lid, String lType, int originId, Date endDate, int mid) {
+	public Good2(int lid, String lType, int originId, int mid, int cid) {
 		super();
 		this.lid = lid;
 		this.lType = lType;
 		this.originId = originId;
-		this.endDate = endDate;
 		this.mid = mid;
+		this.cid = cid;
 	}
 
 	public int getLid() {
@@ -48,14 +48,6 @@ public class Good2 implements java.io.Serializable{
 		this.originId = originId;
 	}
 
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-
 	public int getMid() {
 		return mid;
 	}
@@ -64,12 +56,20 @@ public class Good2 implements java.io.Serializable{
 		this.mid = mid;
 	}
 
+	public int getCid() {
+		return cid;
+	}
+
+	public void setCid(int cid) {
+		this.cid = cid;
+	}
+
 	@Override
 	public String toString() {
-		return "Good2 [lid=" + lid + ", lType=" + lType + ", originId=" + originId + ", endDate=" + endDate + ", mid="
-				+ mid + "]";
+		return "Good2 [lid=" + lid + ", lType=" + lType + ", originId=" + originId + ", mid=" + mid + ", cid=" + cid
+				+ "]";
 	}
-	
+
 	
 
 }

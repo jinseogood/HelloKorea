@@ -240,6 +240,10 @@ public class GoodController {
 		String user = String.valueOf(((Member)(request.getSession().getAttribute("loginUser"))).getmId());
 		int userNo = Integer.parseInt(user);
 		int result = -99;
+		
+		System.out.println("컨뚜롤러 컨텐츠아디: " + contentid);
+		System.out.println("컨뚜롤러 컨텐츠타입아디 : " + contenttypeid);
+		
 		Good2 gg2 = new Good2();
 		gg2.setMid(userNo);
 		gg2.setOriginId(contentid);
@@ -253,8 +257,10 @@ public class GoodController {
 			gg2.setlType("행사");
 		}else if(contenttypeid == 28){
 			gg2.setlType("레포츠");
+		}else if(contenttypeid == 39){
+			gg2.setlType("음식점");
 		}
-		
+		System.out.println("서비스 가기전 Good2 : " + gg2);
 		result = gs.insertDibsInfo(gg2);
 		response.getWriter().println(result);
 	}

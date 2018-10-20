@@ -217,6 +217,10 @@
 				
 			});
 			
+			
+			</script>
+			<c:if test="${!empty sessionScope.loginUser }">
+			<script>
 			function searchFoodCondition(areaCode, sigunguCode, cat3, PageNo){
 				$.ajax({
 					url:"searchAreaFood.sub",
@@ -281,24 +285,29 @@
 							});
 							output += "</p>";
 							output += "<div class='tm-home-box-2-container'>";
-							/* $.ajax({
+							$.ajax({
 								url:"dibsCheckStatus.good",
 								type:"GET",
 								data:{contenttypeid:contenttypeid, contentid:contentid},
 								async:false,
 								success:function(ddatta){
+									console.log("ddatta오니?");
+									console.log(ddatta);
 									if(ddatta > 0){
-										output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+										output += "<a onclick='btnGood2("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 									}else{
-										output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+										output += "<a onclick='btnGood2("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 									}
 								},
 								error:function(ddatta){
 									console.log(ddatta);
 								}
-							}); */
-							output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-							output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
+							});
+							//output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'>";
+							output += "<span class='tm-home-box-2-description box-3'>";
+							
+							output += "</span></a>";
 							output += "</div></div></div>";
 							document.getElementById("viewArea").innerHTML += output;
 							}
@@ -334,23 +343,23 @@
 									});
 									output += "</p>";
 									output += "<div class='tm-home-box-2-container'>";
-									/* $.ajax({
+									$.ajax({
 										url:"dibsCheckStatus.good",
 										type:"GET",
 										data:{contenttypeid:contenttypeid, contentid:contentid},
 										async:false,
 										success:function(ddatta){
 											if(ddatta > 0){
-												output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+												output += "<a onclick='btnGood2("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 											}else{
-												output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+												output += "<a onclick='btnGood2("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 											}
 										},
 										error:function(ddatta){
 											console.log(ddatta);
 										}
-									}); */
-									output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+									});
+									//output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 									output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
 									output += "</div></div></div>";
 									document.getElementById("viewArea").innerHTML += output;
@@ -364,7 +373,6 @@
 					}
 				});
 			}
-			
 			
 			function searchFoodStore(pageNo){
 				console.log("searchFoodStore : " + areaCode);
@@ -436,23 +444,23 @@
 								});
 								output += "</p>";
 								output += "<div class='tm-home-box-2-container'>";
-								/* $.ajax({
+								$.ajax({
 									url:"dibsCheckStatus.good",
 									type:"GET",
 									data:{contenttypeid:contenttypeid, contentid:contentid},
 									async:false,
 									success:function(ddatta){
 										if(ddatta > 0){
-											output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+											output += "<a onclick='btnGood2("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 										}else{
-											output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+											output += "<a onclick='btnGood2("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 										}
 									},
 									error:function(ddatta){
 										console.log(ddatta);
 									}
-								}); */
-								output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+								});
+								//output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 								output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'>";
 								output += "<span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
 								output += "</div></div></div>";
@@ -488,23 +496,23 @@
 									});
 									output += "</p>";
 									output += "<div class='tm-home-box-2-container'>";
-									/* $.ajax({
+									$.ajax({
 										url:"dibsCheckStatus.good",
 										type:"GET",
 										data:{contenttypeid:contenttypeid, contentid:contentid},
 										async:false,
 										success:function(data){
 											if(data > 0){
-												output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+												output += "<a onclick='btnGood2("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 											}else{
-												output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+												output += "<a onclick='btnGood2("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 											}
 										},
 										error:function(data){
 											console.log(data);
 										}
-									}); */
-									output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+									});
+									//output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 									output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'>";
 									output += "<span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
 									output += "</div></div></div>";
@@ -518,11 +526,253 @@
 					}
 				});
 			}
-			
 			</script>
+			</c:if>
+			<c:if test="${ empty sessionScope.loginUser }">
+			<script>
+			function searchFoodCondition(areaCode, sigunguCode, cat3, PageNo){
+				$.ajax({
+					url:"searchAreaFood.sub",
+					type:"GET",
+					data:{areaCode:areaCode, sigunguCode:sigunguCode, cat3:cat3, pageNo:pageNo},
+					dataType:"json",
+					async:false,
+					success:function(data){
+						console.log("searchFood");
+						console.log(data);
+						var myData = data.response.body.items.item;
+						var viewArea = $("#viewArea");
+						viewArea.html("");
+						
+						$pageBody = $(".pagination");
+						$pageBody.html("");
+						
+						var totalCount = data.response.body.totalCount;
+						var pOutput = "";
+						if(totalCount > 12){
+							var num = (totalCount / 12) + 0.9;
+							pOutput = "";
+							pOutput += "<li><a onclick='goFirst();'>[처음으로]</a></li>";
+							for(var pp = 1; pp < num; pp++){
+								pOutput += "<li><a onclick='goPage("+pp+");'>"+pp+"</a></li>";
+							}
+							pOutput += "<li><a onclick='goLast("+num+");'>[끝으로]</a></li>";
+							$pageBody.append(pOutput);
+						}
+						
+						var output = "";
+						if(myData == null){
+							output += "<div align='center'><h1>정보가 없습니다.</h1></div>";
+							document.getElementById("viewArea").innerHTML += output;
+						}else if(data.response.body.totalCount == 1){
+							if(data.response.body.items.item.firstimage != null){
+							contenttypeid = myData.contenttypeid;
+							contentid = myData.contentid;
+							output += "<div class='tm-home-box-3' id='detailHover'>";
+							output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+							output += "<img src="+myData.firstimage+" alt='image' class='img-responsive1'>";
+							output += "</div>";
+							output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+							output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+							output += "<span style='font-size:23px;'>"+myData.title+"</span><br>";
+							$.ajax({
+								url:"detailFoodInformation.sub",
+								type:"GET",
+								data:{contenttypeid:contenttypeid, contentid:contentid},
+								dataType:"json",
+								async:false,
+								success:function(ddate){
+									var overview = ddate.response.body.items.item.overview;
+									var reg = /<br\s*[\/]?>/g;
+										overview = overview.replace(reg, " ");
+									if(overview.length > 190){
+										output += overview.substring(0, 191) + "...";
+									}else{
+										output += overview;
+									}
+								},error:function(ddate){console.log(ddate);}
+							});
+							output += "</p>";
+							output += "<div class='tm-home-box-2-container'>";
+							output += "<a onclick='btnGood2("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+							output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
+							output += "</div></div></div>";
+							document.getElementById("viewArea").innerHTML += output;
+							}
+						}else{
+							for(var i in myData){
+								if(myData[i].firstimage != null){
+									contenttypeid = myData[i].contenttypeid;
+									contentid = myData[i].contentid;
+									output = "";
+									output += "<div class='tm-home-box-3' id='detailHover'>";
+									output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+									output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
+									output += "</div>";
+									output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+									output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+									output += "<span style='font-size:23px;'>"+myData[i].title+"</span><br>";
+									$.ajax({
+										url:"detailFoodInformation.sub",
+										type:"GET",
+										data:{contenttypeid:contenttypeid, contentid:contentid},
+										dataType:"json",
+										async:false,
+										success:function(ddate){
+											var overview = ddate.response.body.items.item.overview;
+											var reg = /<br\s*[\/]?>/g;
+												overview = overview.replace(reg, " ");
+											if(overview.length > 190){
+												output += overview.substring(0, 191) + "...";
+											}else{
+												output += overview;
+											}
+										},error:function(ddate){console.log(ddate);}
+									});
+									output += "</p>";
+									output += "<div class='tm-home-box-2-container'>";
+									output += "<a onclick='btnGood2("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+									output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
+									output += "</div></div></div>";
+									document.getElementById("viewArea").innerHTML += output;
+								}
+							}
+						}
+						
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+			}
+			
+				function searchFoodStore(pageNo){
+				console.log("searchFoodStore : " + areaCode);
+				console.log("searchFoodStore : " + sigunguCode);
+				console.log("searchFoodStore : " + cat3);
+				if(sessionStorage.getItem("sigunguCode") == 0){
+					sigunguCode = "";
+				}
+				$.ajax({
+					url:"searchAreaFood.sub",
+					type:"GET",
+					data:{areaCode:areaCode, sigunguCode:sigunguCode, cat3:cat3, pageNo:pageNo},
+					dataType:"json",
+					async:false,
+					success:function(data){
+						console.log("searchFood");
+						console.log(data);
+						var myData = data.response.body.items.item;
+						var viewArea = $("#viewArea");
+						viewArea.html("");
+						
+						$pageBody = $(".pagination");
+						$pageBody.html("");
+						
+						var totalCount = data.response.body.totalCount;
+						var pOutput = "";
+						if(totalCount > 12){
+							var num = (totalCount / 12) + 0.9;
+							pOutput = "";
+							pOutput = "<li><a onclick='goFirst();'>[처음으로]</a></li>";
+							for(var pp = 1; pp < num; pp++){
+								pOutput += "<li><a onclick='goPage("+pp+");'>"+pp+"</a></li>";
+							}
+							pOutput += "<li><a onclick='goLast("+num+");'>[끝으로]</a></li>";
+							$pageBody.append(pOutput);
+						}
+						
+						var output = "";
+						if(myData == null){
+							output += "<div align='center'><h1>정보가 없습니다.</h1></div>";
+							document.getElementById("viewArea").innerHTML += output;
+						}else if(data.response.body.totalCount == 1){
+							if(data.response.body.items.item.firstimage != null){
+								contenttypeid = myData.contenttypeid;
+								contentid = myData.contentid;
+								output += "<div class='tm-home-box-3' id='detailHover'>";
+								output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+								output += "<img src="+myData.firstimage+" alt='image' class='img-responsive1'>";
+								output += "</div>";
+								output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+								output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+								output += "<span style='font-size:23px;'>"+myData.title+"</span><br>";
+								$.ajax({
+									url:"detailFoodInformation.sub",
+									type:"GET",
+									data:{contenttypeid:contenttypeid, contentid:contentid},
+									dataType:"json",
+									async:false,
+									success:function(ddate){
+										var overview = ddate.response.body.items.item.overview;
+										var reg = /<br\s*[\/]?>/g;
+											overview = overview.replace(reg, " ");
+										if(overview.length > 190){
+											output += overview.substring(0, 191) + "...";
+										}else{
+											output += overview;
+										}
+									},error:function(ddate){console.log(ddate);}
+								});
+								output += "</p>";
+								output += "<div class='tm-home-box-2-container'>";
+								output += "<a onclick='btnGood2("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+								output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'>";
+								output += "<span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
+								output += "</div></div></div>";
+								document.getElementById("viewArea").innerHTML += output;
+							}
+						}else{
+							for(var i in myData){
+								if(myData[i].firstimage != null){
+									contenttypeid = myData[i].contenttypeid;
+									contentid = myData[i].contentid;
+									output = "";
+									output += "<div class='tm-home-box-3' id='detailHover'>";
+									output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+									output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
+									output += "</div>";
+									output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+									output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+									output += "<span style='font-size:23px;'>"+myData[i].title+"</span><br>";
+									$.ajax({
+										url:"detailFoodInformation.sub",
+										type:"GET",
+										data:{contenttypeid:contenttypeid, contentid:contentid},
+										dataType:"json",
+										async:false,
+										success:function(ddate){
+											var overview = ddate.response.body.items.item.overview;
+											if(overview.length > 190){
+												output += overview.substring(0, 191) + "...";
+											}else{
+												output += overview;
+											}
+										},error:function(ddate){console.log(ddate);}
+									});
+									output += "</p>";
+									output += "<div class='tm-home-box-2-container'>";
+									output += "<a onclick='btnGood2("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+									output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'>";
+									output += "<span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
+									output += "</div></div></div>";
+									document.getElementById("viewArea").innerHTML += output;
+								}
+							}
+						}
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+			}
+			</script>
+			</c:if>
+			
+			
 			<c:if test="${!empty sessionScope.loginUser}">
 			<script>
-			function btnGood(contenttypeid, contentid){
+			function btnGood2(contenttypeid, contentid){
 				console.log(contenttypeid);
 				console.log(contentid);
 				
@@ -563,7 +813,7 @@
 			</c:if>
 			<c:if test="${empty sessionScope.loginUser}">
 			<script>
-				function btnGood(contenttypeid, contentid, cid){
+				function btnGood2(contenttypeid, contentid){
 					alert("로그인이 필요한 서비스입니다.");
 				}
 			</script>

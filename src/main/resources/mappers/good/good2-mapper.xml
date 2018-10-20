@@ -7,9 +7,10 @@
    
    <resultMap type="Good2" id="Good2ResultSet">
    	<id property="lid" column="L_ID"/>
-   	<result property="lType" column="LTYPE"/>
+   	<result property="lType" column="L_TYPE"/>
    	<result property="originId" column="ORIGIN_ID"/>
    	<result property="mid" column="M_ID"/>
+   	<result property="cid" column="C_ID"/>
    </resultMap>
    
    <!-- 동일한 찜 있는지 확인 // 호텔 외 다른유형들-->
@@ -22,7 +23,8 @@
    
    <!-- 인서트 -->
    <insert id="insertDibsInfo" parameterType="Good2">
-   	INSERT INTO GOOD VALUES(SEQ_L_ID.NEXTVAL, #{lType}, #{originId}, #{mid}, NULL)
+   	INSERT INTO GOOD(L_ID, L_TYPE, ORIGIN_ID, M_ID) 
+   	VALUES(SEQ_L_ID.NEXTVAL, #{lType}, #{originId}, #{mid})
    </insert>
    
    <!-- 딜리트 -->

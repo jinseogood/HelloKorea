@@ -11,30 +11,20 @@ public class Good implements Serializable{
 	private int lid;			//찜번호
 	private String lType;		//구분
 	private int originId;		//고유아이디
-	private Date endDate;		//종료일
 	private int mid;			//회원아이디
 	private int cid;			//업체아이디
 
 	public Good(){}
 
-	public Good(int lid, String lType, int originId, Date endDate, int mid, int cid) {
+	public Good(int lid, String lType, int originId, int mid, int cid) {
 		super();
 		this.lid = lid;
 		this.lType = lType;
 		this.originId = originId;
-		this.endDate = endDate;
 		this.mid = mid;
 		this.cid = cid;
 	}
 
-	public Good(int lid, String lType, int originId, Date endDate, int mid) {
-		super();
-		this.lid = lid;
-		this.lType = lType;
-		this.originId = originId;
-		this.endDate = endDate;
-		this.mid = mid;
-	}
 
 	public int getLid() {
 		return lid;
@@ -60,14 +50,6 @@ public class Good implements Serializable{
 		this.originId = originId;
 	}
 
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-
 	public int getMid() {
 		return mid;
 	}
@@ -86,9 +68,10 @@ public class Good implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Good [lid=" + lid + ", lType=" + lType + ", originId=" + originId + ", endDate=" + endDate + ", mid="
-				+ mid + ", cid=" + cid + "]";
+		return "Good [lid=" + lid + ", lType=" + lType + ", originId=" + originId + ", mid=" + mid + ", cid=" + cid
+				+ "]";
 	}
+
 	
 	
 
