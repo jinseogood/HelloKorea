@@ -248,11 +248,11 @@
 				}
 			});
 		}
-		
+		var mapy = ${param.mapy};
+		var mapx = ${param.mapx};
 		
 		function weatherMap(){
-			var mapy = ${param.mapy};
-			var mapx = ${param.mapx};
+			
 			console.log("펑션y : " + mapy);
 			console.log("펑션x : " + mapx);
 			$.ajax({
@@ -1079,7 +1079,7 @@
 			var msg = confirm("정말 수정하시겠습니까?");
 			
 			if(msg == true){
-				location.href = "updateR.bo?bid="+bid+"&contentid="+contentid+"&contenttypeid="+contenttypeid+"&cid="+cid;
+				location.href = "updateR1.bo?bid="+bid+"&contentid="+contentid+"&contenttypeid="+contenttypeid+"&mapx="+mapx+"&mapy="+mapy;
 			}	
 		}
 		
@@ -1266,7 +1266,7 @@
 	
 		function review(){
 			if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')})
-		 		location.href="reviewWrite.bo?contentid="+contentid+"&contenttypeid="+contenttypeid+"&mapx="+mapx+"&mapy="+mapy;								
+		 		location.href="reviewWrite1.bo?contentid="+contentid+"&contenttypeid="+contenttypeid+"&mapx="+mapx+"&mapy="+mapy;								
 			else{
 				alert("로그인이 필요한 서비스 입니다.");
 			}

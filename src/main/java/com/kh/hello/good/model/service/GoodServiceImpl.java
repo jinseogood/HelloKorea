@@ -1,5 +1,7 @@
 package com.kh.hello.good.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -50,6 +52,11 @@ public class GoodServiceImpl implements GoodService {
 	@Override
 	public int deleteDibsInfo(Good2 gg2) {
 		return gd.deleteDibsInfo(sqlSession, gg2);
+	}
+
+	@Override
+	public ArrayList<Good2> dibsGradeInfo() {
+		return gd.dibsGradeInfo(sqlSession);
 	}
 
 

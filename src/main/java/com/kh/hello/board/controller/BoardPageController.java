@@ -57,6 +57,47 @@ public class BoardPageController {
 		return "board/reviewWrite";
 	}
 	
+	@RequestMapping(value = "reviewWrite1.bo")
+	public String reviewWrite1(Model model, HttpServletRequest request, @RequestParam int contentid, @RequestParam int contenttypeid, @RequestParam double mapx, @RequestParam double mapy){
+
+		Board b = new Board();
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		b.setM_id(m.getmId());
+		b.setOrigin_id(contentid);
+
+		int result = bs.insertBoard(b);
+		
+		String referer = request.getHeader("Referer");
+		
+		model.addAttribute("uri", referer);
+		model.addAttribute("contentid", contentid);
+		model.addAttribute("contenttypeid", contenttypeid);
+		model.addAttribute("mapx", mapx);
+		model.addAttribute("mapy", mapy);
+		
+	
+		return "board/reviewWrite1";
+	}
+	
+	@RequestMapping(value = "reviewWrite2.bo")
+	public String reviewWrite2(Model model, HttpServletRequest request, @RequestParam int contentid, @RequestParam int contenttypeid){
+
+		Board b = new Board();
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		b.setM_id(m.getmId());
+		b.setOrigin_id(contentid);
+
+		int result = bs.insertBoard(b);
+		
+		String referer = request.getHeader("Referer");
+		
+		model.addAttribute("uri", referer);
+		model.addAttribute("contentid", contentid);
+		model.addAttribute("contenttypeid", contenttypeid);	
+	
+		return "board/reviewWrite2";
+	}
+	
 	@RequestMapping("reportWrite.bo")
 	public String reportWrite(Model model, @RequestParam String m_id, @RequestParam String ref_id, @RequestParam int r_level){
 		
@@ -204,6 +245,54 @@ public class BoardPageController {
 		return "redirect:"+uri;
 	}
 	
+	@RequestMapping(value="insertReview1.bo")
+	public String insertReview1(Model model, Board b, HttpServletRequest request, 
+			@RequestParam String uri, @RequestParam int contentid, @RequestParam int contenttypeid, @RequestParam double mapx, @RequestParam double mapy){
+		int result = 0;
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		b.setM_id(m.getmId());
+		b.setOrigin_id(contentid);
+		result = bs.updateBoard(b);
+		
+		if(result > 0){
+			int result1 = 0;
+			result1 = bs.selectPoint(b);
+			if(result1 > 0){
+				
+			}else{
+				int result2 = 0;
+				result2 = bs.insertPoint(b);
+			}
+		}
+		
+		uri+="&contenttypeid="+contenttypeid+"&mapx="+mapx+"&mapy="+mapy;
+		return "redirect:"+uri;
+	}
+	
+	@RequestMapping(value="insertReview2.bo")
+	public String insertReview2(Model model, Board b, HttpServletRequest request, 
+			@RequestParam String uri, @RequestParam int contentid, @RequestParam int contenttypeid){
+		int result = 0;
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		b.setM_id(m.getmId());
+		b.setOrigin_id(contentid);
+		result = bs.updateBoard(b);
+		
+		if(result > 0){
+			int result1 = 0;
+			result1 = bs.selectPoint(b);
+			if(result1 > 0){
+				
+			}else{
+				int result2 = 0;
+				result2 = bs.insertPoint(b);
+			}
+		}
+		
+		uri+="&contentid="+contentid;
+		return "redirect:"+uri;
+	}
+	
 	@RequestMapping(value="deleteReview.bo")
 	public ModelAndView deleteReview(@RequestParam int bid, HttpServletResponse response){
 		response.setContentType("text/html; charset=UTF-8");
@@ -345,6 +434,24 @@ public class BoardPageController {
 		return "board/QAWrite1";
 	}
 	
+	@RequestMapping(value="QAWrite2.bo")
+	public String QAWrite2(Model model, HttpServletRequest request, @RequestParam int contentid, @RequestParam int contenttypeid){
+		Board b = new Board();
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		b.setM_id(m.getmId());
+		b.setOrigin_id(contentid);
+		
+		String referer = request.getHeader("Referer");
+
+		model.addAttribute("uri", referer);
+		model.addAttribute("contentid", contentid);
+		model.addAttribute("contenttypeid", contenttypeid);
+		
+		model.addAttribute("b", b);
+		
+		return "board/QAWrite2";
+	}
+	
 	@RequestMapping(value="insertQ.bo")
 	public String insertQ(Model model, Board b , HttpServletRequest request,@RequestParam String uri, @RequestParam int contentid, @RequestParam int contenttypeid, @RequestParam int cid){
 		Member m = (Member)request.getSession().getAttribute("loginUser");
@@ -371,6 +478,21 @@ public class BoardPageController {
 
 		uri+="&contenttypeid="+contenttypeid+"&mapx="+mapx+"&mapy="+mapy;
 		return "redirect:"+uri;
+	}
+	
+	@RequestMapping(value="insertQ2.bo")
+	public String insertQ2(Model model, Board b , HttpServletRequest request,@RequestParam String uri, @RequestParam int conid){
+		Member m = (Member)request.getSession().getAttribute("loginUser");
+		b.setM_id(m.getmId());
+		b.setOrigin_id(conid);
+		
+		int result = 0;
+		result = bs.insertQ(b);
+		model.addAttribute("b", b);
+		
+		uri+="&contentid="+conid;
+		return "redirect:"+uri;
+
 	}
 	
 	@RequestMapping(value="insertA.bo")
@@ -444,6 +566,63 @@ public class BoardPageController {
 		model.addAttribute("bid", bid);
 		
 		return "board/updateReview";
+	}
+	
+	@RequestMapping(value="updateR1.bo")
+	public String updateR1(Model model, @RequestParam int bid, HttpServletRequest request, @RequestParam int contentid, @RequestParam int contenttypeid, @RequestParam double mapx, @RequestParam double mapy){
+		Board b = bs.selectReviewDetail(bid);
+		model.addAttribute("b", b);
+		int result1 = 0;
+		result1 = bs.deleteAllUploadUpdate(bid);
+		String referer = request.getHeader("Referer");
+		
+		model.addAttribute("uri", referer);
+		model.addAttribute("contentid", contentid);
+		model.addAttribute("contenttypeid", contenttypeid);
+		model.addAttribute("bid", bid);
+		model.addAttribute("mapx", mapx);
+		model.addAttribute("mapy", mapy);
+		
+		return "board/updateReview1";
+	}
+	
+	@RequestMapping(value="updateR2.bo")
+	public String updateR2(Model model, @RequestParam int bid, HttpServletRequest request, @RequestParam int contentid, @RequestParam int contenttypeid){
+		Board b = bs.selectReviewDetail(bid);
+		model.addAttribute("b", b);
+		int result1 = 0;
+		result1 = bs.deleteAllUploadUpdate(bid);
+		String referer = request.getHeader("Referer");
+		
+		model.addAttribute("uri", referer);
+		model.addAttribute("contentid", contentid);
+		model.addAttribute("contenttypeid", contenttypeid);
+		model.addAttribute("bid", bid);
+		
+		return "board/updateReview2";
+	}
+	
+	@RequestMapping(value="updateReview1.bo")
+	public String updateReview1(HttpServletRequest request, Board b, Model model, @RequestParam String uri, @RequestParam int contentid, @RequestParam int contenttypeid,
+			@RequestParam double mx, @RequestParam double my, @RequestParam int bid){
+		int result = 0;
+		System.out.println(bid);
+		b.setBid(bid);
+		result = bs.updateReview(b);
+			
+		uri+="&contenttypeid="+contenttypeid+"&mapx="+mx+"&mapy="+my;
+		return "redirect:"+uri;
+	}
+	
+	@RequestMapping(value="updateReview2.bo")
+	public String updateReview2(HttpServletRequest request, Board b, Model model, @RequestParam String uri, @RequestParam int conid, @RequestParam int bid){
+		int result = 0;
+		
+		b.setBid(bid);
+		result = bs.updateReview(b);
+			
+		uri+="&contentid="+conid;
+		return "redirect:"+uri;
 	}
 	
 	@RequestMapping(value="updateReview.bo")

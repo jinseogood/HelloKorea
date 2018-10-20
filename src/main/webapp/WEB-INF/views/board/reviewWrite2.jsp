@@ -98,7 +98,7 @@ body{ margin:50px 0px; }
    
    
    <section class="container tm-home-section-1" id="more" style = "width:80%; padding:100px">
-   <form action="insertReview.bo?uri=${ uri }&contentid=${contentid}" method = "post" encType = "multipart/form-data">
+   <form action="insertReview2.bo?uri=${ uri }&contenttypeid=${contenttypeid}" method = "post" encType = "multipart/form-data">
       <div class="row">
          
       </div> 
@@ -282,15 +282,11 @@ body{ margin:50px 0px; }
      
    </section>
    <jsp:include page="../common/footer.jsp"/>
-   <script>
-   
-   </script>
 
 <script>
 
 	var contenttypeid = ${ param.contenttypeid };
 	var contentid = ${param.contentid};
-	var cid = ${param.cid};
 
 	function cancel(){
 		//location.href="deleteAllUpload.bo?uri=${uri}&contentid="+contentid;
@@ -299,7 +295,7 @@ body{ margin:50px 0px; }
 	
 	$(function(){
 		$.ajax({
-			url:"detailHotelInformation.sub",
+			url:"detailFoodInformation.sub",
 			type:"GET",
 			data:{contenttypeid:contenttypeid, contentid:contentid},
 			dataType:"json",

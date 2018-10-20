@@ -1,5 +1,7 @@
 package com.kh.hello.good.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -40,6 +42,11 @@ public class GoodDaoImpl implements GoodDao {
 	@Override
 	public int deleteDibsInfo(SqlSessionTemplate sqlSession, Good2 gg2) {
 		return sqlSession.delete("Good2.deleteDibsInfo", gg2);
+	}
+
+	@Override
+	public ArrayList<Good2> dibsGradeInfo(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("Good2.dibsGradeInfo");
 	}
 
 	

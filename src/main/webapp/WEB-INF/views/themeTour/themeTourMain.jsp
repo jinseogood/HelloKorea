@@ -332,7 +332,7 @@
 			location.href="${contextPath}/detailGame?contentid="+contentid+"&contenttypeid="+contenttypeid;
 		}
 		
-		function goFirst(){
+		/* function goFirst(){
 			var pageNo = 1;
 			searchThemeCondition(pageNo);
 		}
@@ -345,44 +345,60 @@
 		function goLast(pageNo){
 			var pageNo = Math.floor(pageNo);
 			searchThemeCondition(pageNo);/////////페이지안너머가..처리
-		}
+		} */
 		
 		</script>
 		<c:if test="${!empty sessionScope.loginUser}">
 		<script>
-		function btnGood(contenttypeid, contentid){
+		function btnGood2(contenttypeid, contentid){
 			console.log(contenttypeid);
 			console.log(contentid);
-			$.ajax({
-				url:"dibsTheme.good",
-				type:"GET",
-				data:{contenttypeid:contenttypeid, contentid:contentid},
-				success:function(data){
-					if(data > 0){
-						deleteDibsTheme(contentid);
-					}else{
-						insertDibsTheme(contentid);
+			
+				$.ajax({
+					url:"dibsCheckStatus.good",
+					type:"GET",
+					data:{contenttypeid:contenttypeid, contentid:contentid},
+					success:function(data){
+						// 1일시, 이미 찜한 목록 => delete요청.
+						// 0일시, 새로 찜에 추가 => insert요청.
+						console.log("오긴와?");
+						console.log(data);
+						if(data > 0){
+							deleteDibsInfo(contentid, contenttypeid);
+						}else{
+							insertDibsInfo(contentid, contenttypeid);
+						}
+					},
+					error:function(data){
+						console.log(data);
 					}
-				},
-				error:function(data){
-					console.log(data);
+				});
+		}
+		$(function(){
+			$(".goodBtn").click(function(){
+				if($(this).children("i").hasClass("fa fa-heart tm-home-box-2-icon border-right") == true){
+					$(this).children("i").removeClass("fa fa-heart tm-home-box-2-icon border-right");
+					$(this).children("i").addClass("fa fa-heart-o tm-home-box-2-icon border-right");
+				}else if($(this).children("i").hasClass("fa fa-heart-o tm-home-box-2-icon border-right") == true){
+					$(this).children("i").removeClass("fa fa-heart-o tm-home-box-2-icon border-right");
+					$(this).children("i").addClass("fa fa-heart tm-home-box-2-icon border-right");
 				}
 			});
-		}
+		});
 		</script>
 		</c:if>
 		<c:if test="${ empty sessionScope.loginUser }">
 		<script>
-			function btnGood(contenttypeid, contentid){
+			function btnGood2(contenttypeid, contentid){
 				alert("로그인이 필요한 서비스입니다.");
 			}
 		</script>
 		</c:if>
 		<script>
-		function insertDibsTheme(contentid){
+		function insertDibsInfo(contentid, contenttypeid){
 			$.ajax({
-				url:"insertDibsTheme.good",
-				type:"GET",
+				url:"insertDibsInfo.good",
+				type:"get",
 				data:{contenttypeid:contenttypeid, contentid:contentid},
 				success:function(data){
 					if(data > 0){
@@ -395,9 +411,9 @@
 			});
 		}
 		
-		function deleteDibsTheme(contentid){
+		function deleteDibsInfo(contentid, contenttypeid){
 			$.ajax({
-				url:"deleteDibsTheme.good",
+				url:"deleteDibsGame.good",
 				type:"GET",
 				data:{contenttypeid:contenttypeid, contentid:contentid},
 				success:function(data){

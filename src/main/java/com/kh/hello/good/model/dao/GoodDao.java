@@ -1,5 +1,7 @@
 package com.kh.hello.good.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.hello.good.model.vo.Good;
@@ -18,6 +20,8 @@ public interface GoodDao {
 	int insertDibsInfo(SqlSessionTemplate sqlSession, Good2 gg2);
 
 	int deleteDibsInfo(SqlSessionTemplate sqlSession, Good2 gg2);
+
+	ArrayList<Good2> dibsGradeInfo(SqlSessionTemplate sqlSession);
 
 
 }

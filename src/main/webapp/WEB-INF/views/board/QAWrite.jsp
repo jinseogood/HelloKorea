@@ -143,7 +143,7 @@ body{ margin:50px 0px; }
       </div>          	
         	<div class="col-lg-12 col-md-12 col-sm-12"><hr>
         		<input type="submit" class="btn btn-secondary" value = "확인">
-        		<button type="button" class="btn btn-secondary">취소</button>
+        		<button type="button" class="btn btn-secondary" onclick = "cancel();">취소</button>
         	</div>
         	</form>
    </section>
@@ -153,6 +153,11 @@ body{ margin:50px 0px; }
      
    </section>
    <jsp:include page="../common/footer.jsp"/>
+   <script>
+   		function cancel(){
+   			history.back();
+   		}
+   </script>
 
 <script>
 	var contenttypeid = ${ param.contenttypeid };
