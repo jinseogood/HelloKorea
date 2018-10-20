@@ -27,6 +27,7 @@
 		  <typeAlias type="com.kh.hello.member.model.vo.MemberGoods" alias="MemberGoods"/>
 		  <typeAlias type="com.kh.hello.member.model.vo.BoardAndReply" alias="BoardAndReply"/>
 		  <typeAlias type="com.kh.hello.member.model.vo.MemberReservation" alias="MemberReservation"/>
+		  <typeAlias type="com.kh.hello.member.model.vo.MemberPoint" alias="MemberPoint"/>
           <typeAlias type="com.kh.hello.seller.model.vo.Company" alias="Company"/>
           <typeAlias type="com.kh.hello.seller.model.vo.Room" alias="Room"/>
           <typeAlias type="com.kh.hello.seller.model.vo.RegistrationHistory" alias="RH"/>
@@ -69,6 +70,7 @@
           <mapper resource="mappers/member/memberGoods-mapper.xml"/>
           <mapper resource="mappers/member/boardAndReply-mapper.xml"/>
           <mapper resource="mappers/member/memberReservation-mapper.xml"/>
+          <mapper resource="mappers/member/memberPoint-mapper.xml"/>
           <mapper resource="mappers/seller/company-mapper.xml"/>
           <mapper resource="mappers/seller/room-mapper.xml"/>
           <mapper resource="mappers/seller/rh-mapper.xml"/>

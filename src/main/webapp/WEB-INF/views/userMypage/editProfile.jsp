@@ -85,30 +85,56 @@
         <input type="hidden" value="${sessionScope.loginUser.mId}"name="mId">
         	<div class="form-group">
                  <label for="email" class="col-form-label">Email</label>
-                 <input type="email" class="form-control" id="email" placeholder="example@gmail.com" required>
+                 <input type="email" class="form-control" id="email" name="email" placeholder="${m.email }" readonly="">
             </div>
             <div class="form-group">
-                  <label for="tel" class="col-form-label">Phone number</label>
-                  <input type="text" class="form-control" id="tel" placeholder="+33 6 99 99 99 99" required>
+                  <label for="nickname" class="col-form-label">nickname</label>
+                  <input type="text" class="form-control" id="nickname" name="nickname"placeholder="${m.nickname }" required>
+             		<a onclick="nicknameCheck()">중복 체크 </a>
              </div>
        		 <div class="form-group">
-                  <label for="tel" class="col-form-label">Phone number</label>
-                  <input type="text" class="form-control" id="tel" placeholder="+33 6 99 99 99 99" required>
+                  <label for="national" class="col-form-label">national</label>
+                  <input type="text" class="form-control" name="national" id="national" placeholder="${m.national }" readonly="">
              </div>
              <div class="form-group">
-                  <label for="tel" class="col-form-label">Phone number</label>
-                  <input type="text" class="form-control" id="tel" placeholder="+33 6 99 99 99 99" required>
+                  <label for="profile" class="col-form-label">profile</label>
+                  <input type="file" class="form-control" id="profile" name="photo"  required>
              </div>
-             <div class="form-group">
-                  <label for="tel" class="col-form-label">Phone number</label>
-                  <input type="text" class="form-control" id="tel" placeholder="+33 6 99 99 99 99" required>
-             </div>
+             
         </div>
         <div style="margin-top: 1em;">
-            <button type="button" class="btn btn-primary btn-lg btn-block">Sign up !</button>
+            <button type="button" class="btn btn-primary btn-lg btn-block">수정 완료</button>
         </div>
         </form>
 </div>
+<script>
+	function nicknameCheck(){
+		var nickname = $("#nickname").val();
+		$.ajax({
+			url:"nicknameCheck.me",
+			type:"post",
+			data:{
+				nickname:nickname	
+			},
+			success: function(data){
+				if(data ==0){
+					alert("사용가능한 닉네임입니다");
+				}else{
+					alert("중복되는  닉네임입니다");
+				}
+			},
+			error:function(){
+				alert("실패");
+			}
+
+		});
+		
+		
+		
+	}
+	
+
+</script>
 	
 </body>
 </html>

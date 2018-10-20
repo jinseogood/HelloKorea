@@ -2,7 +2,7 @@ package com.kh.hello.member.model.vo;
 
 import java.sql.Date;
 
-public class MemberReservation {
+public class MemberReservation implements java.io.Serializable {
 	private int oId;
 	private String rSdate;
 	private String rEdate;

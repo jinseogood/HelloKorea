@@ -55,7 +55,7 @@ button {
 	<h4 align="center">You can get more information by entering
 		additional information!</h4>
 	<div id="mainDiv">
-		<form action="addUser.me" method="post" id="userForm">
+		<form action="addUser.me" method="post" id="userForm" name="userForm">
 			<table id="insertTable">
 
 				<tr>
@@ -246,10 +246,11 @@ button {
 			var interest = $('#interest').val();
 			var nickname =$('#nickname').val();
 			
-			if(national == "-" && interest == "-"&&nickname==null){
+			if(national == "-"&& interest == "-"){
 				alert("입력을 해야 회원가입이 가능합니다 ");
 			}else{
-				var form = $("userForm");
+				alert("회원가입을 축하드립니다 (메인으로이동)")
+				var form = $("#userForm");
 				form.submit();
 			}
 			
