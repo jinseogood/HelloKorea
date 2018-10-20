@@ -44,6 +44,7 @@
 	<jsp:include page="../common/searchMenubar.jsp"/>
 	<jsp:include page="../common/searchSubmenubar.jsp"/>
 	
+	
 
 	<!-- gray bg -->	
 	<section class="container tm-home-section-1" id="more">
@@ -93,6 +94,7 @@
 			var contentid = ${param.contentid};
 			var contenttypeid = ${param.contenttypeid};
 			var cid = ${param.cid};
+			
 			
 			function detailHotelInfo(){
 				console.log("deatilHotel : " + contenttypeid);
@@ -251,7 +253,7 @@
 									output += "<td>";
 									output += "ㆍ 정원 : "+myData[i].roombasecount+"명<br>";
 									output += "ㆍ 최대인원 : "+result[i].rLimit+"명<br>";
-									output += "ㆍ 가격 : "+result[i].rPrice+"원<br>";
+									output += "ㆍ 가격 : " +result[i].rPrice +"원<br>";
 									//output += "ㆍ 비수기 주중최소 : "+myData[i].roomoffseasonminfee1+" (성수기 : "+myData[i].roompeakseasonminfee1+")<br>";
 									//output += "ㆍ 비수기 주말최소 : "+myData[i].roomoffseasonminfee2+" (성수기 : "+myData[i].roompeakseasonminfee2+")<br>";
 									output += "</td>";
@@ -290,6 +292,7 @@
 					}
 				});//output += "ㆍ ";
 			}
+			
 			</script>
 			
 			<c:if test="${!empty sessionScope.loginUser}">

@@ -414,7 +414,7 @@ public class SubInformationController {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
-		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchStay?ServiceKey=";<<<<<<< 1019_th_2
+		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchStay?ServiceKey=";
 		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
 
 //		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
@@ -499,8 +499,8 @@ public class SubInformationController {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
-		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchStay?ServiceKey=";<<<<<<< 1019_th_2
-		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";=======
+		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchStay?ServiceKey=";
+		String serviceKey = "gjHNkA6CuLpGqjZjThqF2cAG485WmBKdnpGonBzSFk0L7qAnKuRm87jwXCq6%2BGv3WI2VRkHcp9Rzbiba1tjddQ%3D%3D";
 
 //		String serviceKey = "lRA2TOqa4t6rYolYZxl06EbeZ5c1VKWsPv%2BjrBNzVXZ0GMomnEtvsmyd%2FwtZecokCvivPgPd3gTKk4BogDnr5Q%3D%3D";
 //		String serviceKey = "VOojT%2FUVcidkM%2BUIsxUGc2mInFoFPlSOBUvkCvCqGLi1x7x3MYlKptGiWXnsFP6xPfgI9chYJ6MNNFvtIdZBXg%3D%3D";		//진서꺼
@@ -1008,47 +1008,7 @@ public class SubInformationController {
 		json.put("data", data);
 	}
 	
-	@RequestMapping(value="weatherMap.sub")
-	public void weatherMap(HttpServletRequest request, HttpServletResponse response, @RequestParam double mapy, @RequestParam double mapx){
-		URL url;
-		String result = null;
-		String Url_path = "http://api.openweathermap.org/data/2.5/weather?lat="+mapy+"&lon="+mapx+"&units=metric&APPID=49736052d2b9402c5764e0f24834cf25";
-		HttpURLConnection con = null;
-		
-		try{
-			url = new URL(Url_path);
-			
-			con = (HttpURLConnection)url.openConnection();
-			con.setRequestMethod("POST");
-			con.setRequestProperty("Cache-Control", "no-cache");
-			con.setRequestProperty("Content-Type", "application/json");
-			con.setRequestProperty("Accept", "application/json");
-			con.setDoOutput(true);
-			con.setDoInput(true);
-			
-			int responseCode = con.getResponseCode();
-			if(responseCode != 200){
-				throw new IOException("Post failed with error code " + responseCode);
-			}
-			
-			InputStreamReader tmp = new InputStreamReader(con.getInputStream(), "UTF-8");
-			BufferedReader reader = new BufferedReader(tmp);
-			StringBuilder builder = new StringBuilder();
-			
-			String str;
-			while((str = reader.readLine()) != null){
-				builder.append(str + "\n");
-			}
-			result = builder.toString();
-		}catch(Exception e){
-			e.getMessage();
-		}finally{
-			if(con != null){
-				con.disconnect();
-			}
-		}
-		
-	}
+	
 	
 	
 	
