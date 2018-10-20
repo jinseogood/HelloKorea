@@ -86,6 +86,11 @@
 					var mapy;
 					var mapx;
 					
+					
+					
+					</script>
+					<c:if test="${!empty sessionScope.loginUser}">
+					<script>
 					function searchGamePage(pageNo){
 						console.log("오세여?");
 						if(sessionStorage.getItem("sigunguCode") == 0){
@@ -154,6 +159,9 @@
 											async:false,
 											success:function(ddate){
 												var overview = ddate.response.body.items.item.overview;
+												var reg = /<br\s*[\/]?>/g;
+													overview = overview.replace(reg, " ");
+												var overview = ddate.response.body.items.item.overview;
 												if(overview.length > 190){
 													output += overview.substring(0, 191) + "...";
 												}else{
@@ -163,7 +171,22 @@
 										});
 										output += "</p>";
 										output += "<div class='tm-home-box-2-container'>";
-										output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+										$.ajax({
+											url:"dibsCheckStatus.good",
+											type:"GET",
+											data:{contenttypeid:contenttypeid, contentid:contentid},
+											async:false,
+											success:function(ddatta){
+												if(ddatta > 0){
+													output += "<a onclick='btnGood2("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+												}else{
+													output += "<a onclick='btnGood2("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+												}
+											},error:function(ddatta){
+												console.log(ddatta);
+											}
+										});
+										//output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 										output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");' class='tm-home-box-2-description box-3'>뭐를너야할까</span></a>";
 										output += "</div></div></div>";
 										document.getElementById("viewArea").innerHTML += output;
@@ -191,6 +214,8 @@
 												async:false,
 												success:function(ddate){
 													var overview = ddate.response.body.items.item.overview;
+													var reg = /<br\s*[\/]?>/g;
+														overview = overview.replace(reg, " ");
 													if(overview.length > 190){
 														output += overview.substring(0, 191) + "...";
 													}else{
@@ -200,9 +225,25 @@
 											});
 											output += "</p>";
 											output += "<div class='tm-home-box-2-container'>";
-											output += "<input type='hidden' value="+contenttypeid+">";
-											output += "<input type='hidden' value="+contentid+">";
-											output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+											$.ajax({
+												url:"dibsCheckStatus.good",
+												type:"GET",
+												data:{contenttypeid:contenttypeid, contentid:contentid},
+												async:false,
+												success:function(data){
+													if(data > 0){
+														output += "<a onclick='btnGood2("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+													}else{
+														output += "<a onclick='btnGood2("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+													}
+												},
+												error:function(data){
+													console.log(data);
+												}
+											});
+											//output += "<input type='hidden' value="+contenttypeid+">";
+											//output += "<input type='hidden' value="+contentid+">";
+											//output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 											output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");' class='tm-home-box-2-description box-3'>뭐를너야할까</span></a>";
 											output += "</div></div></div>";
 											document.getElementById("viewArea").innerHTML += output;
@@ -215,102 +256,6 @@
 								console.log(data);
 							}
 						});
-					}
-					</script>
-					<c:if test="${!empty sessionScope.loginUser}">
-					<script>
-					function btnGood(contenttypeid, contentid, cid){
-						console.log(contenttypeid);
-						console.log(contentid);
-						
-							$.ajax({
-								url:"dibsHotel.good",
-								type:"GET",
-								data:{contenttypeid:contenttypeid, contentid:contentid, cid:cid},
-								success:function(data){
-									// 1일시, 이미 찜한 목록 => delete요청.
-									// 0일시, 새로 찜에 추가 => insert요청.
-									if(data > 0){
-										deleteDibsHotel(contentid, cid);
-									}else{
-										insertDibsHotel(contentid, cid);
-									}
-								},
-								error:function(data){
-									console.log(data);
-								}
-							});
-					}
-					$(functon(){
-						$(".goodBtn").click(function(){
-							if($(this).children("i").hasClass("fa fa-heart tm-home-box-2-icon border-right") == true){
-								$(this).children("i").removeClass("fa fa-heart tm-home-box-2-icon border-right");
-								$(this).children("i").addClass("fa fa-heart-o tm-home-box-2-icon border-right");
-							}else if($(this).children("i").hasClass("fa fa-heart-o tm-home-box-2-icon border-right") == true){
-								$(this).children("i").removeClass("fa fa-heart-o tm-home-box-2-icon border-right");
-								$(this).children("i").addClass("fa fa-heart tm-home-box-2-icon border-right");
-							}
-						});
-					});
-					</script>
-					</c:if>
-					<c:if test="${empty sessionScope.loginUser}">
-					<script>
-						function btnGood(contenttypeid, contentid, cid){
-							alert("로그인이 필요한 서비스입니다.");
-						}
-					</script>
-					</c:if>
-					<script>
-					function insertDibsGame(contentid){
-						$.ajax({
-							url:"insertDibsGame.good",
-							type:"get",
-							data:{contenttypeid:contenttypeid, contentid:contentid},
-							success:function(data){
-								if(data > 0){
-									alert("찜 목록에 추가되었습니다.");
-								}
-							},
-							error:function(data){
-								console.log(data);
-							}
-						});
-					}
-					
-					function deleteDibsGame(contentid){
-						$.ajax({
-							url:"deleteDibsGame.good",
-							type:"GET",
-							data:{contenttypeid:contenttypeid, contentid:contentid},
-							success:function(data){
-								if(data > 0){
-									alert("찜 목록에서 삭제되었습니다.");
-								}
-							},
-							error:function(data){
-								console.log(data);
-							}
-						});
-					}
-					
-					function goFirst(){
-						var pageNo = 1;
-						searchGamePage(pageNo);
-					}
-					
-					function goPage(pageNo){
-						var pageNo = pageNo;
-						searchGamePage(pageNo);
-					}
-					
-					function goLast(pageNo){
-						var pageNo = Math.floor(pageNo);
-						searchGamePage(pageNo);
-					}
-					
-					function detailView(contentid, contenttypeid, mapy, mapx){
-						location.href="${contextPath}/detailGame?contentid="+contentid+"&contenttypeid="+contenttypeid+"&mapy="+mapy+"&mapx="+mapx;
 					}
 					
 					function searchGameCondition(contenttypeid, areaCode, sigunguCode, cat1, cat2, cat3, pageNo){
@@ -364,6 +309,8 @@
 											async:false,
 											success:function(ddate){
 												var overview = ddate.response.body.items.item.overview;
+												var reg = /<br\s*[\/]?>/g;
+													overview = overview.replace(reg, " ");
 												if(overview.length > 190){
 													output += overview.substring(0, 191) + "...";
 												}else{
@@ -373,8 +320,28 @@
 										});
 										output += "</p>";
 										output += "<div class='tm-home-box-2-container'>";
-										output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-										output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
+										$.ajax({
+											url:"dibsCheckStatus.good",
+											type:"GET",
+											data:{contenttypeid:contenttypeid, contentid:contentid},
+											async:false,
+											success:function(ddatta){
+												console.log("ddatta오니?");
+												console.log(ddatta);
+												if(ddatta > 0){
+													output += "<a onclick='btnGood2("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+												}else{
+													output += "<a onclick='btnGood2("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+												}
+											},
+											error:function(ddatta){
+												console.log(ddatta);
+											}
+										});
+										//output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+										output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'>";
+										output += "<span class='tm-home-box-2-description box-3'>";
+										output += "</span></a>";
 										output += "</div></div></div>";
 										document.getElementById("viewArea").innerHTML += output;
 									}
@@ -399,6 +366,8 @@
 												async:false,
 												success:function(ddate){
 													var overview = ddate.response.body.items.item.overview;
+													var reg = /<br\s*[\/]?>/g;
+														overview = overview.replace(reg, " ");
 													if(overview.length > 190){
 														output += overview.substring(0, 191) + "...";
 													}else{
@@ -408,9 +377,25 @@
 											});
 											output += "</p>";
 											output += "<div class='tm-home-box-2-container'>";
-											output += "<input type='hidden' value="+contenttypeid+">";
-											output += "<input type='hidden' value="+contentid+">";
-											output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+											$.ajax({
+												url:"dibsCheckStatus.good",
+												type:"GET",
+												data:{contenttypeid:contenttypeid, contentid:contentid},
+												async:false,
+												success:function(ddatta){
+													if(ddatta > 0){
+														output += "<a onclick='btnGood2("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+													}else{
+														output += "<a onclick='btnGood2("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+													}
+												},
+												error:function(ddatta){
+													console.log(ddatta);
+												}
+											});
+											//output += "<input type='hidden' value="+contenttypeid+">";
+											//output += "<input type='hidden' value="+contentid+">";
+											//output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 											output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
 											output += "</div></div></div>";
 											document.getElementById("viewArea").innerHTML += output;
@@ -423,6 +408,354 @@
 							}
 						});
 					}
+					
+					function btnGood2(contenttypeid, contentid){
+						console.log(contenttypeid);
+						console.log(contentid);
+						
+							$.ajax({
+								url:"dibsCheckStatus.good",
+								type:"GET",
+								data:{contenttypeid:contenttypeid, contentid:contentid},
+								success:function(data){
+									// 1일시, 이미 찜한 목록 => delete요청.
+									// 0일시, 새로 찜에 추가 => insert요청.
+									console.log("오긴와?");
+									console.log(data);
+									if(data > 0){
+										deleteDibsInfo(contentid, contenttypeid);
+									}else{
+										insertDibsInfo(contentid, contenttypeid);
+									}
+								},
+								error:function(data){
+									console.log(data);
+								}
+							});
+					}
+					$(function(){
+						$(".goodBtn").click(function(){
+							if($(this).children("i").hasClass("fa fa-heart tm-home-box-2-icon border-right") == true){
+								$(this).children("i").removeClass("fa fa-heart tm-home-box-2-icon border-right");
+								$(this).children("i").addClass("fa fa-heart-o tm-home-box-2-icon border-right");
+							}else if($(this).children("i").hasClass("fa fa-heart-o tm-home-box-2-icon border-right") == true){
+								$(this).children("i").removeClass("fa fa-heart-o tm-home-box-2-icon border-right");
+								$(this).children("i").addClass("fa fa-heart tm-home-box-2-icon border-right");
+							}
+						});
+					});
+					</script>
+					</c:if>
+					<c:if test="${empty sessionScope.loginUser}">
+					<script>
+						function btnGood2(contenttypeid, contentid, cid){
+							alert("로그인이 필요한 서비스입니다.");
+						}
+						
+						function searchGamePage(pageNo){
+							console.log("오세여?");
+							if(sessionStorage.getItem("sigunguCode") == 0){
+								sigunguCode = "";
+							}else{
+								sigunguCode = sessionStorage.getItem("sigunguCode");
+							}
+							if(sessionStorage.getItem("contenttypeid") == 0){
+								contenttypeid = 28;
+							}else{
+								contenttypeid = sessionStorage.getItem("contenttypeid");
+							}
+							if(sessionStorage.getItem("cat3") == 0){
+								cat3 = "";
+							}
+							$.ajax({
+								url:"searchAreaGame.sub",
+								type:"GET",
+								data:{areaCode:areaCode, sigunguCode:sigunguCode, contenttypeid:contenttypeid, pageNo:pageNo},
+								dataType:"json",
+								async:false,
+								success:function(data){
+									console.log(data);
+									var myData = data.response.body.items.item;
+									var viewArea = $("#viewArea");
+									viewArea.html("");
+									
+									$pageBody = $(".pagination");
+									$pageBody.html("");
+									
+									var totalCount = data.response.body.totalCount;
+									var pOutput = "";
+									if(totalCount > 12){
+										var num = (totalCount / 12) + 0.9;
+										pOutput = "";
+										pOutput = "<li><a onclick='goFirst();'>[처음으로]</a></li>";
+										for(var pp = 1; pp < num; pp++){
+											pOutput += "<li><a onclick='goPage("+pp+")'>"+pp+"</a></li>";
+										}
+										pOutput += "<li><a onclick='goLast("+num+");'>[끝으로]</a></li>";
+										$pageBody.append(pOutput);
+									}
+									
+									var output = "";
+									if(myData == null){
+										output += "<div align='center'><h1>정보가 없습니다.</h1></div>";
+										document.getElementById("viewArea").innerHTML += output;
+									}else if(data.response.body.totalCount == 1){
+										if(data.response.body.items.item.firstimage != null){
+											contenttypeid = myData.contenttypeid;
+											contentid = myData.contentid;
+											mapy = myData.mapy;
+											mapx = myData.mapx;
+											output += "<div class='tm-home-box-3' id='detailHover'>";
+											output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");'>";
+											output += "<img src="+myData.firstimage+" alt='image' class='img-responsive1'/>";
+											output += "</div>";
+											output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+											output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+											output += "<span style='font-size:23px;'>"+myData.title+"</span><br>";
+											$.ajax({
+												url:"detailGameInformation.sub",
+												type:"GET",
+												data:{contenttypeid:contenttypeid, contentid:contentid},
+												dataType:"json",
+												async:false,
+												success:function(ddate){
+													var overview = ddate.response.body.items.item.overview;
+													var reg = /<br\s*[\/]?>/g;
+														overview = overview.replace(reg, " ");
+													if(overview.length > 190){
+														output += overview.substring(0, 191) + "...";
+													}else{
+														output += overview;
+													}
+												},error:function(ddate){console.log(ddate);}
+											});
+											output += "</p>";
+											output += "<div class='tm-home-box-2-container'>";
+											output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+											output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");' class='tm-home-box-2-description box-3'>뭐를너야할까</span></a>";
+											output += "</div></div></div>";
+											document.getElementById("viewArea").innerHTML += output;
+										}
+									}else{
+										for(var i in myData){
+											if(myData[i].firstimage != null){
+												contenttypeid = myData[i].contenttypeid;
+												contentid = myData[i].contentid;
+												mapy = myData[i].mapy;
+												mapx = myData[i].mapx;
+												output = "";
+												output += "<div class='tm-home-box-3' id='detailHover'>";
+												output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");'>";
+												output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
+												output += "</div>";
+												output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+												output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+												output += "<span style='font-size:23px;'>"+myData[i].title+"</span><br>";
+												$.ajax({
+													url:"detailGameInformation.sub",
+													type:"GET",
+													data:{contenttypeid:contenttypeid, contentid:contentid},
+													dataType:"json",
+													async:false,
+													success:function(ddate){
+														var overview = ddate.response.body.items.item.overview;
+														var reg = /<br\s*[\/]?>/g;
+															overview = overview.replace(reg, " ");
+														if(overview.length > 190){
+															output += overview.substring(0, 191) + "...";
+														}else{
+															output += overview;
+														}
+													},error:function(ddate){console.log(ddate);}
+												});
+												output += "</p>";
+												output += "<div class='tm-home-box-2-container'>";
+												output += "<input type='hidden' value="+contenttypeid+">";
+												output += "<input type='hidden' value="+contentid+">";
+												output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+												output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");' class='tm-home-box-2-description box-3'>뭐를너야할까</span></a>";
+												output += "</div></div></div>";
+												document.getElementById("viewArea").innerHTML += output;
+											}
+										}
+									}
+									
+								},
+								error:function(data){
+									console.log(data);
+								}
+							});
+						}
+						
+						function searchGameCondition(contenttypeid, areaCode, sigunguCode, cat1, cat2, cat3, pageNo){
+							$.ajax({
+								url:"searchGameCondition.sub",
+								type:"GET",
+								data:{contenttypeid:contenttypeid, areaCode:areaCode, sigunguCode:sigunguCode, cat1:cat1, cat2:cat2, cat3:cat3, pageNo:pageNo},
+								dataType:"json",
+								success:function(data){
+									console.log("gameSearchCondition");
+									console.log(data);
+									var myData = data.response.body.items.item;
+									var viewArea = $("#viewArea");
+									viewArea.html("");
+									
+									$pageBody = $(".pagination");
+									$pageBody.html("");
+									
+									var totalCount = data.response.body.totalCount;
+									var pOutput = "";
+									if(totalCount > 12){
+										var num = (totalCount / 12) + 0.9;
+										pOutput = "";
+										pOutput += "<li><a onclick='goFirst();'>[처음으로]</a></li>";
+										for(var pp = 1; pp < num; pp++){
+											pOutput += "<li><a onclick='goPage("+pp+");'>"+pp+"</a></li>";
+										}
+										pOutput += "<li><a onclick='goLast("+num+");'>[끝으로]</a></li>";
+										$pageBody.append(pOutput);
+									}
+									var output = "";
+									if(myData == null){
+										output += "<div align='center'></h1>정보가 없습니다.</h1></div>";
+										document.getElementById("viewArea").innerHTML += output;
+									}else if(data.response.body.totalCount == 1){
+										if(data.response.body.items.item.firstimage != null){
+											contenttypeid = myData.contenttypeid;
+											contentid = myData.contentid;
+											output += "<div class='tm-home-box-3' id='detailHover'>";
+											output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+											output += "<img src="+myData.firstimage+" alt='image' class='img-responsive1'/>";
+											output += "</div>";
+											output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+											output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+											output += "<span style='font-size:23px;'>"+myData.title+"</span><br>";
+											$.ajax({
+												url:"detailGameInformation.sub",
+												type:"GET",
+												data:{contenttypeid:contenttypeid, contentid:contentid},
+												dataType:"json",
+												async:false,
+												success:function(ddate){
+													var overview = ddate.response.body.items.item.overview;
+													var reg = /<br\s*[\/]?>/g;
+														overview = overview.replace(reg, " ");
+													if(overview.length > 190){
+														output += overview.substring(0, 191) + "...";
+													}else{
+														output += overview;
+													}
+												},error:function(ddate){console.log(ddate);}
+											});
+											output += "</p>";
+											output += "<div class='tm-home-box-2-container'>";
+											output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+											output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
+											output += "</div></div></div>";
+											document.getElementById("viewArea").innerHTML += output;
+										}
+									}else{
+										for(var i in myData){
+											if(myData[i].firstimage != null){
+												contenttypeid = myData[i].contenttypeid;
+												contentid = myData[i].contentid;
+												output = "";
+												output += "<div class='tm-home-box-3' id='detailHover'>";
+												output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+												output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
+												output += "</div>";
+												output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+												output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+												output += "<span style='font-size:23px;'>" +myData[i].title+"</span><br>";
+												$.ajax({
+													url:"detailGameInformation.sub",
+													type:"GET",
+													data:{contenttypeid:contenttypeid, contentid:contentid},
+													dataType:"json",
+													async:false,
+													success:function(ddate){
+														var overview = ddate.response.body.items.item.overview;
+														var reg = /<br\s*[\/]?>/g;
+															overview = overview.replace(reg, " ");
+														if(overview.length > 190){
+															output += overview.substring(0, 191) + "...";
+														}else{
+															output += overview;
+														}
+													},error:function(ddate){console.log(ddate);}
+												});
+												output += "</p>";
+												output += "<div class='tm-home-box-2-container'>";
+												output += "<input type='hidden' value="+contenttypeid+">";
+												output += "<input type='hidden' value="+contentid+">";
+												output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+												output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
+												output += "</div></div></div>";
+												document.getElementById("viewArea").innerHTML += output;
+											}
+										}
+									}
+								},
+								error:function(data){
+									console.log(data);
+								}
+							});
+						}
+					</script>
+					</c:if>
+					<script>
+					function insertDibsInfo(contentid, contenttypeid){
+						$.ajax({
+							url:"insertDibsInfo.good",
+							type:"get",
+							data:{contenttypeid:contenttypeid, contentid:contentid},
+							success:function(data){
+								if(data > 0){
+									alert("찜 목록에 추가되었습니다.");
+								}
+							},
+							error:function(data){
+								console.log(data);
+							}
+						});
+					}
+					
+					function deleteDibsInfo(contentid, contenttypeid){
+						$.ajax({
+							url:"deleteDibsGame.good",
+							type:"GET",
+							data:{contenttypeid:contenttypeid, contentid:contentid},
+							success:function(data){
+								if(data > 0){
+									alert("찜 목록에서 삭제되었습니다.");
+								}
+							},
+							error:function(data){
+								console.log(data);
+							}
+						});
+					}
+					
+					function goFirst(){
+						var pageNo = 1;
+						searchGamePage(pageNo);
+					}
+					
+					function goPage(pageNo){
+						var pageNo = pageNo;
+						searchGamePage(pageNo);
+					}
+					
+					function goLast(pageNo){
+						var pageNo = Math.floor(pageNo);
+						searchGamePage(pageNo);
+					}
+					
+					function detailView(contentid, contenttypeid, mapy, mapx){
+						location.href="${contextPath}/detailGame?contentid="+contentid+"&contenttypeid="+contenttypeid+"&mapy="+mapy+"&mapx="+mapx;
+					}
+					
+					
 						
 					
 					$(function(){
