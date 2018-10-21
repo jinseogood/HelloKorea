@@ -893,8 +893,8 @@
 							output += "<a onclick = member_info(this);><img src='${ contextPath }/resources/img/about-4.jpg' alt='img' class='tm-about-box-1-img' style = 'margin:0 auto 10px;'></a>";
 							output += "<h3 class='tm-about-box-1-title' style = 'margin-bottom:5px;'>"+Q[i].nickname+"<span>( "+Q[i].national+" )</span></h3>";
 							output += "<div class = 'member_info' style = 'border-radius: 10px; visibility:hidden; position:absolute; background-color:lightgray; left:-133px; top:-10px; width:200px; height:200px; z-index:999;'>";
-							output += "<div><h3>"+Q[i].nickname+"</h3></div>";
-							output += "<div style = 'text-align:right;'><button class='btn btn-light' style='width:65px; height:30px;' type = 'button' onclick = 'goMessage("+Q[i].m_id+")'>메세지</button></div>";
+							output += "<div><h3>"+Q[i].nickname+"</h3><input type='hidden' id='receiveIdForq"+i+"' value="+Q[i].m_id+"><input type='hidden' id='nicknameForq"+i+"' value="+Q[i].nickname+"><input type='hidden' id='mIdForq' value="+${sessionScope.loginUser.mId}+"></div>";
+							output += "<div style = 'text-align:right;'><button class='btn btn-light' style='width:65px; height:30px;' type = 'button' onclick='openMsg2("+i+")'>메세지</button></div>";
 							output += "<div class='info' style = 'text-align:left;'>회원가입시기 : "+Q[i].create_date+"<br>";
 							output += "흥미 : "+Q[i].interesting+", 국적 : "+Q[i].national+"<br>";
 							output += "E-MAIL : "+Q[i].email+"<br>";
@@ -1062,8 +1062,8 @@
 							output += "<a onclick = member_info(this);><img src='${ contextPath }/resources/img/about-4.jpg' alt='img' class='tm-about-box-1-img' style = 'margin:0 auto 10px;'></a>";
 							output += "<h3 class='tm-about-box-1-title' style = 'margin-bottom:5px;'>"+review[i].nickname+"<span>( "+review[i].national+" )</span></h3>";
 							output += "<div class = 'member_info' style = 'border-radius: 10px; visibility:hidden; position:absolute; background-color:lightgray; left:-133px; top:-10px; width:200px; height:200px; z-index:999;'>";
-							output += "<div><h3>"+review[i].nickname+"</h3></div>";
-							output += "<div style = 'text-align:right;'><button class='btn btn-light' style='width:65px; height:30px;' type = 'button'>메세지</button></div>";
+							output += "<div><h3>"+review[i].nickname+"</h3><input type='hidden' id='receiveIdForMsg"+i+"' value="+review[i].m_id+"><input type='hidden' id='nicknameForMsg"+i+"' value="+review[i].nickname+"><input type='hidden' id='mIdForMsg' value="+${sessionScope.loginUser.mId}+"></div>";
+							output += "<div style = 'text-align:right;'><button class='btn btn-light' style='width:65px; height:30px;' type = 'button' onclick='openMsg("+i+")'>메세지</button></div>";
 							output += "<div class='info' style = 'text-align:left;'>회원가입시기 : "+review[i].create_date+"<br>";
 							output += "흥미 : "+review[i].interesting+", 국적 : "+review[i].national+"<br>";
 							output += "E-MAIL : "+review[i].email+"<br>";
@@ -1351,7 +1351,7 @@
 		
 		function QA(element){
 			var a = document.getElementById(element);
-			//a.style.display = "block";
+
 			if(a.style.display == "block"){
 				a.style.display = "none";
 			}else{
@@ -1386,21 +1386,17 @@
 					
 					var QAns = data.listQAnswer;
 					var output = "";
-					console.log(QAns);
-					
-					//output += "<div id = 'allQAV"+element+"' class = 'QAV' style = 'padding-top:5px;''>";
+
             		for(var j = 0 ; j < QAns.length ; j++){		            			
             			if(element == QAns[j].bid){
             				output += "<div class='summary' style = 'padding-top:10px; font-size:18px'>";
             				output += QAns[j].content+"</div>";
-            				//output += "<input type = 'hidden' value="+QAns[j].m_id+"><input type = 'hidden' value="+QAns[j].reply_id+">";
             				output += "<div><span class='ReviewUpDate' style = 'padding-top:5px'>"+QAns[j].modify_date+"</span>";
             				output += "<span>|</span> "+QAns[j].nickname+"님의 답변";
             				output += "<input type = 'hidden' value = "+QAns[j].m_id+"><input type = 'hidden' value = "+QAns[j].reply_id+"><i class='fa fa-thumbs-o-up' style = 'font-size:14px; padding-top:5px; cursor:pointer' onclick = AUp(this);>&nbsp;"+QAns[j].help_point+"</i>";
             				output += "<i class='fa fa-flag' style = 'font-size:12px; padding-top:5px; float:right;'><input type = 'hidden' value="+QAns[j].m_id+"><input type = 'hidden' value="+QAns[j].reply_id+"><a onclick='reportWriteA1(this);'> 신고하기</a></i></div>";
             			}
             		}
-            		//output += "</div>";
     				
             		$ABody.append(output);
 				},error:function(data){
@@ -1414,8 +1410,6 @@
 				var a = $(element).parent().children().eq(1).val();
 				var b = $(element).parent().children().eq(0).val();
 			
-				console.log(b);
-				console.log(a);
 				$.ajax({
 						url:"insertA.bo",
 						type:"post",
@@ -1424,7 +1418,6 @@
 						success:function(data){
 							QA(b);
 							$(element).parent().children().eq(1).val("");
-							//location.href = "https://127.0.0.1:8443/hello/detailHotel?contentid=142861&contenttypeid=32#";
 						
 						},error:function(data){
 							console.log(data);
@@ -1540,7 +1533,6 @@
     	
 		$(function() {
 
-			// https://css-tricks.com/snippets/jquery/smooth-scrolling/
 		  	$('a[href*=#]:not([href=#])').click(function() {
 			    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
 			      var target = $(this.hash);
@@ -1555,7 +1547,7 @@
 		  	});		  	
 		});
 		$(window).load(function(){
-			// Flexsliders
+
 		  	$('.flexslider.flexslider-banner').flexslider({
 			    controlNav: false
 		    });
@@ -1566,7 +1558,29 @@
 		  	});
 		});
 		
+		function openMsg(i){
+			var mId = $("#mIdForMsg").val();
+			var receiveId = $("#receiveIdForMsg"+i).val();
+			var nickname = $("#nicknameForMsg"+i).val();
+			
+			if(mId==receiveId){
+				alert('자신에게 메세지를 보낼 수 없습니다.');
+			}else{
+				window.open('sendView?mId='+mId+'&receiveId='+receiveId+'&nickname='+nickname, 'Hello', 'width=480px, height=580px, top=80px, left=400px');
+			}
+			
+		   }
 		
+		function openMsg2(i){
+			var mId = $("#mIdForq").val();
+			var receiveId = $("#receiveIdForq"+i).val();
+			var nickname = $("#nicknameForq"+i).val();
+			if(mId==receiveId){
+				alert('자신에게 메세지를 보낼 수 없습니다.');
+			}else{
+			window.open('sendView?mId='+mId+'&receiveId='+receiveId+'&nickname='+nickname, 'Hello', 'width=480px, height=580px, top=80px, left=400px');
+			}
+		   }
 	</script>
 </body>
 </html>

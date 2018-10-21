@@ -39,6 +39,9 @@ public class PaymentController {
 	@Autowired
 	private PaymentService ps;
 	
+	@Autowired
+	private EmailSender es;
+	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	private static String URL_PAYPAL_VALIDATE; // PDT데이터를 페이팔로 보낼 서버주소
@@ -167,9 +170,9 @@ public class PaymentController {
 				
 				mId=Integer.parseInt(orderInfo[0]);
 				
-				for(int i=0;i<orderInfo.length;i++){
+				/*for(int i=0;i<orderInfo.length;i++){
 					System.out.println("orderInfo[" + i + "] : " + orderInfo[i]);
-				}
+				}*/
 				
 				Payment p=new Payment();
 				p.setmId(Integer.parseInt(orderInfo[0]));
@@ -205,18 +208,18 @@ public class PaymentController {
 				
 				int rInsert=ps.insertAllPayment(p, pdList);
 				
-				System.out.println("rInsert : " + rInsert);
+				//System.out.println("rInsert : " + rInsert);
 				
 				if(rInsert > 0){
 					int rUpdate=ps.updateReservation(Integer.parseInt(orderInfo[6]));
 					
-					System.out.println("rUpdate : " + rUpdate);
+					//System.out.println("rUpdate : " + rUpdate);
 					
 					if(rUpdate > 0){
 						if(pdList.size() == 2){
 							int rPoint=ps.insertPoint(Integer.parseInt(orderInfo[0]), Integer.parseInt(orderInfo[5]));
 							
-							System.out.println("rPoint : " + rPoint);
+							//System.out.println("rPoint : " + rPoint);
 							
 							if(rPoint > 0){
 								result=1;
@@ -262,30 +265,28 @@ public class PaymentController {
 				Reservation2 r=ps.selectReservation(p.getPaId());
 				
 				//예약확인 메일 전송
-				/*int orderNum=r.getRid();
-				String orderDate=pdList.get(0).getPdDate();
-				String orderName=p.getPaName();
-				String orderPhone=p.getPaPhone();
-				String proCName=r.getcName();
-				String proRName=r.getRoomName();
-				double proPrice=pdList.get(0).getPrice();
-				
 				Email email=new Email();
 				email.setMailFrom("hellokoreamailservice@gmail.com");
 				email.setMailTo(p.getPaEmail());
-				email.setMailSubject(p.getPaName() + "님 예약 확인 메일입니다.");*/
+				email.setMailSubject("To. " + p.getPaName() + " Hello Korea !");
 				
-				//일반 메일
-				/*email.setMailContent("예약이 완료 되었습니다.");
-				EmailSender es=new EmailSender();
-				es.sendMailNormal(email);*/
+				String content="";
+				content+="<h2>Dear." + p.getPaName() + "</h2><br>";
+				content+="<h3>Thank you for Reservation.</h3><br>";
+				content+="The item you have reserved is the  <b>" + r.getcName() + "</b>  and is a  <b>";
+				content+=r.getRoomName() + "</b>  from <b>" + r.getrSdate() + " to " + r.getrEdate() + "</b> .<br><br>";
 				
-				//템플릿 메일
-				/*email.setTemplateName("emailtemplate.vm");
-				ApplicationContext context = new FileSystemXmlApplicationContext("D:/git/HelloKorea/src/main/resources/root-context.xml");
-				EmailSender es = (EmailSender) context.getBean("mailer");
+				content+="<font style='font-weight:bold; font-size:18px;'>Notice</font><br>";
+				content+="<ul><li>Check-in time starts at 3 PM</li>";
+				content+="<li>Cancellation is possible up to 2 days before Check-in date.</li></ul><br>";
+				content+="For questions, please contact <a href='mailto:hellokoreamailservice@gmail.com'>hellokoreamailservice@gmail.com</a><br>";
+				content+="Enjoy your trip! Thanks.<br><br>";
+				content+="<hr/>";
+				content+="Best Regards<br>";
+				content+="Hello Korea";
 				
-				es.sendMail(email, orderNum, orderDate, orderName, orderPhone, proCName, proRName, proPrice, request);*/
+				email.setMailContent(content);
+				es.sendMail(email);
 				
 				model.addAttribute("p", p);
 				model.addAttribute("pdList", pdList);

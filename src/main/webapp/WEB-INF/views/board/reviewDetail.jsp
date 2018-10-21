@@ -121,8 +121,13 @@ body{ margin:50px 0px; }
                   <a onclick = "member_info(this);"><img src="${ contextPath }/resources/img/about-4.jpg" alt="img" class="tm-about-box-1-img" style = "margin:0 auto 10px"></a>
                   <h3 class="tm-about-box-1-title" style = "margin-bottom:5px">${ b.nickname }<span>( ${ b.national })</span></h3>
                   <div class = 'member_info' style = 'border-radius: 10px; visibility:hidden; position:absolute; background-color:lightgray; left:-133px; top:-10px; width:200px; height:200px; z-index:999;'>
-				  <div><h3>${b.nickname}</h3></div>
-				  <div style = 'text-align:right;'><button class='btn btn-light' style='width:65px; height:30px;' type = 'button'>메세지</button></div>
+				  <div>
+				  <h3>${b.nickname}</h3>
+				  <input type="hidden" id="receiveIdForMsg" value="${b.m_id}">
+				  <input type="hidden" id="nicknameForMsg" value="${b.nickname}">
+				  <input type="hidden" id="mIdForMsg" value="${sessionScope.loginUser.mId}">
+				  </div>
+				  <div style = 'text-align:right;'><button class='btn btn-light' style='width:65px; height:30px;' type = 'button' onclick="openMsg()">메세지</button></div>
 						<div class='info' style = 'text-align:left;'>회원가입시기 : ${b.create_date}<br>
 							흥미 : ${b.interesting}, 국적 : ${b.national}<br>
 							E-MAIL : ${b.email}<br>
@@ -335,6 +340,13 @@ function reportWriteA(element){
 	}
 }
 
+
+   function openMsg(){
+	var mId = $("#mIdForMsg").val();
+	var receiveId = $("#receiveIdForMsg").val();
+	var nickname = $("#nicknameForMsg").val();
+	window.open('sendView?mId='+mId+'&receiveId='+receiveId+'&nickname='+nickname, 'Hello', 'width=480px, height=580px, top=80px, left=400px');
+   }
 </script>
 </body>
 </html>

@@ -153,6 +153,7 @@
 							<li><a href="hotelView">숙박</a></li>
 							<li><a href="foodView">음식점</a></li>
 							<li><a href="toursView">오락거리</a></li>
+							<!-- <li><a href="weather">날씨</a></li> -->
 						</ul>
 				  		<div id="menuIconArea">
 				  			<c:if test="${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('admin') }">

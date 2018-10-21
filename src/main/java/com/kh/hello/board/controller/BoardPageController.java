@@ -51,9 +51,7 @@ public class BoardPageController {
 		model.addAttribute("contentid", contentid);
 		model.addAttribute("contenttypeid", contenttypeid);
 		model.addAttribute("cid", cid);
-		
-		
-		
+	
 		return "board/reviewWrite";
 	}
 	
@@ -73,8 +71,7 @@ public class BoardPageController {
 		model.addAttribute("contentid", contentid);
 		model.addAttribute("contenttypeid", contenttypeid);
 		model.addAttribute("mapx", mapx);
-		model.addAttribute("mapy", mapy);
-		
+		model.addAttribute("mapy", mapy);	
 	
 		return "board/reviewWrite1";
 	}
@@ -100,23 +97,13 @@ public class BoardPageController {
 	
 	@RequestMapping("reportWrite.bo")
 	public String reportWrite(Model model, @RequestParam String m_id, @RequestParam String ref_id, @RequestParam int r_level){
-		
-		//System.out.println("m_id : " + m_id + " ref_id : " + ref_id);
+
 		model.addAttribute("r_level", r_level);
 		model.addAttribute("m_id", m_id);
 		model.addAttribute("ref_id", ref_id);
-		
-		//int result = bs.insertReport(m_id, ref_id);
-		
+	
 		return "common/reportWrite";
 	}
-	
-	
-	
-	/*@RequestMapping("starTest.bo")
-	public String starTest(){
-		return "board/test";
-	}*/
 	
 	@RequestMapping(value="/upload.bo", method=RequestMethod.POST, produces = "application/json")
     @ResponseBody
@@ -254,17 +241,6 @@ public class BoardPageController {
 		b.setOrigin_id(contentid);
 		result = bs.updateBoard(b);
 		
-		if(result > 0){
-			int result1 = 0;
-			result1 = bs.selectPoint(b);
-			if(result1 > 0){
-				
-			}else{
-				int result2 = 0;
-				result2 = bs.insertPoint(b);
-			}
-		}
-		
 		uri+="&contenttypeid="+contenttypeid+"&mapx="+mapx+"&mapy="+mapy;
 		return "redirect:"+uri;
 	}
@@ -277,17 +253,6 @@ public class BoardPageController {
 		b.setM_id(m.getmId());
 		b.setOrigin_id(contentid);
 		result = bs.updateBoard(b);
-		
-		if(result > 0){
-			int result1 = 0;
-			result1 = bs.selectPoint(b);
-			if(result1 > 0){
-				
-			}else{
-				int result2 = 0;
-				result2 = bs.insertPoint(b);
-			}
-		}
 		
 		uri+="&contentid="+contentid;
 		return "redirect:"+uri;
@@ -815,6 +780,11 @@ public class BoardPageController {
 		mv.addObject("bestReviewList", list);
 		
 		return mv;
+	}
+	
+	@RequestMapping(value="weather")
+	public String weather(Model model){
+		return "common/weather";
 	}
 
 }

@@ -106,7 +106,7 @@ label{
 						</div>
 						<label for="content" class="col-lg-2 col-sm-2 control-label">&nbsp;내용</label>
 						<div class="col-lg-10">
-							<textarea id="content" class="form-control" rows="5" placeholder="${m.content}" readonly></textarea>
+							<textarea id="content" class="form-control" rows="4" placeholder="${m.content}" readonly></textarea>
 						</div>
 						<div class="form-group" align="center" id="btnArea">
 						    <form action="sendView" method="post">
@@ -144,7 +144,18 @@ label{
          location.href="sendQuestionView?mId="+mId;
       }
       function report(){
-         confirm('정말 신고하시겠습니까?');
+         if(confirm('정말 신고하시겠습니까?')){
+        	var m_id = ${m.sendId};
+     		var ref_id = ${m.msgId};
+     		var r_level = 2;
+
+     		if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')}){
+     			window.open('reportWrite.bo?m_id='+m_id+'&ref_id='+ref_id+'&r_level='+r_level, 'reportWrite', 'height=380, width=450, top=80, left=400 resizable=none, scrollbars=no');
+     		}
+     		else{
+     			alert("로그인이 필요한 서비스 입니다.");
+     		}
+         }
       }
       function deleteMsg(){
     	  if (confirm('정말 삭제하시겠습니까?')) {
