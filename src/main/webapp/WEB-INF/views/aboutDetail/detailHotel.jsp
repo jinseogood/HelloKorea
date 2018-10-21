@@ -1351,7 +1351,7 @@
 		
 		function QA(element){
 			var a = document.getElementById(element);
-			//a.style.display = "block";
+
 			if(a.style.display == "block"){
 				a.style.display = "none";
 			}else{
@@ -1386,21 +1386,17 @@
 					
 					var QAns = data.listQAnswer;
 					var output = "";
-					console.log(QAns);
-					
-					//output += "<div id = 'allQAV"+element+"' class = 'QAV' style = 'padding-top:5px;''>";
+
             		for(var j = 0 ; j < QAns.length ; j++){		            			
             			if(element == QAns[j].bid){
             				output += "<div class='summary' style = 'padding-top:10px; font-size:18px'>";
             				output += QAns[j].content+"</div>";
-            				//output += "<input type = 'hidden' value="+QAns[j].m_id+"><input type = 'hidden' value="+QAns[j].reply_id+">";
             				output += "<div><span class='ReviewUpDate' style = 'padding-top:5px'>"+QAns[j].modify_date+"</span>";
             				output += "<span>|</span> "+QAns[j].nickname+"님의 답변";
             				output += "<input type = 'hidden' value = "+QAns[j].m_id+"><input type = 'hidden' value = "+QAns[j].reply_id+"><i class='fa fa-thumbs-o-up' style = 'font-size:14px; padding-top:5px; cursor:pointer' onclick = AUp(this);>&nbsp;"+QAns[j].help_point+"</i>";
             				output += "<i class='fa fa-flag' style = 'font-size:12px; padding-top:5px; float:right;'><input type = 'hidden' value="+QAns[j].m_id+"><input type = 'hidden' value="+QAns[j].reply_id+"><a onclick='reportWriteA1(this);'> 신고하기</a></i></div>";
             			}
             		}
-            		//output += "</div>";
     				
             		$ABody.append(output);
 				},error:function(data){
@@ -1414,8 +1410,6 @@
 				var a = $(element).parent().children().eq(1).val();
 				var b = $(element).parent().children().eq(0).val();
 			
-				console.log(b);
-				console.log(a);
 				$.ajax({
 						url:"insertA.bo",
 						type:"post",
@@ -1424,7 +1418,6 @@
 						success:function(data){
 							QA(b);
 							$(element).parent().children().eq(1).val("");
-							//location.href = "https://127.0.0.1:8443/hello/detailHotel?contentid=142861&contenttypeid=32#";
 						
 						},error:function(data){
 							console.log(data);
@@ -1540,7 +1533,6 @@
     	
 		$(function() {
 
-			// https://css-tricks.com/snippets/jquery/smooth-scrolling/
 		  	$('a[href*=#]:not([href=#])').click(function() {
 			    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
 			      var target = $(this.hash);
@@ -1555,7 +1547,7 @@
 		  	});		  	
 		});
 		$(window).load(function(){
-			// Flexsliders
+
 		  	$('.flexslider.flexslider-banner').flexslider({
 			    controlNav: false
 		    });
