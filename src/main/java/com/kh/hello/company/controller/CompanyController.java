@@ -632,10 +632,8 @@ public class CompanyController {
 		reservation.setrSdate(startDate);
 		reservation.setrEdate(endDate);
 		
-		System.out.println("가기 전 컨트롤러 reservation : " + reservation);
 		
 		reservation = cs.insertReservation(reservation);
-		System.out.println("모두 다녀온 컨트롤러 reservation : " + reservation);
 		
 		model.addAttribute("reservation", reservation);
 		
@@ -772,39 +770,30 @@ public class CompanyController {
 		
 		System.out.println("value : " + value);
 		if(value.equals("name")){//이름순정렬
-			System.out.println("value는 " + value + " 입니다.");
 			ArrayList<Company2> list = cs.selectOrderByName(cp);
 			response.getWriter().print(mapper.writeValueAsString(list));
 		}else if(value.equals("grade")){//평점..
-			System.out.println("value는 " + value + " 입니다.");
 			ArrayList<Company2> list = cs.selectOrderByGrade(cp);
 			response.getWriter().print(mapper.writeValueAsString(list));
 		}else if(value.equals("1")){//가격대 1번. 10만 ~ 19만9천
-			System.out.println("value는 " + value + " 입니다.");
 			ArrayList<Company2> list = cs.selectOrderByMoney1(cp);
 			response.getWriter().print(mapper.writeValueAsString(list));
 		}else if(value.equals("2")){//가격대2번. 20만 ~ 29만9천
-			System.out.println("value는 " + value + " 입니다.");
 			ArrayList<Company2> list = cs.selectOrderByMoney2(cp);
 			response.getWriter().print(mapper.writeValueAsString(list));
 		}else if(value.equals("3")){//가격대3번. 30만 ~
-			System.out.println("value는 " + value + " 입니다.");
 			ArrayList<Company2> list = cs.selectOrderByMoney3(cp);
 			response.getWriter().print(mapper.writeValueAsString(list));
 		}else if(value.equals("twoAvg")){
-			System.out.println("value는 " + value + " 입니다.");
 			ArrayList<Company2> list = cs.selectOrderByTwoAvg(cp);
 			response.getWriter().print(mapper.writeValueAsString(list));
 		}else if(value.equals("threeAvg")){
-			System.out.println("value는 " + value + " 입니다.");
 			ArrayList<Company2> list = cs.selectOrderByThreeAvg(cp);
 			response.getWriter().print(mapper.writeValueAsString(list));
 		}else if(value.equals("fourAvg")){
-			System.out.println("value는 " + value + " 입니다.");
 			ArrayList<Company2> list = cs.selectOrderByFourAvg(cp);
 			response.getWriter().print(mapper.writeValueAsString(list));			
 		}else if(value.equals("fiveAvg")){
-			System.out.println("value는 " + value + " 입니다.");
 			ArrayList<Company2> list = cs.selectOrderByFiveAvg(cp);
 			response.getWriter().print(mapper.writeValueAsString(list));
 		}
@@ -833,7 +822,16 @@ public class CompanyController {
 	}
 	
 	
-	
+	@RequestMapping(value="mainHotelData.com")
+	public void mainHotelData(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		ArrayList<Company2> list = new ArrayList<Company2>();
+		Company2 cp2 = new Company2();
+		list = cs.selectCompanyTop3(cp2);
+		System.out.println("다녀온 리스트 : " + list);
+		response.getWriter().println(list);
+	}
 	
 	
 	

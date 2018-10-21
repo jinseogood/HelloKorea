@@ -144,13 +144,6 @@ public class MainInformationController {
 	}
 	
 	
-	@RequestMapping(value="mainHotelData.com")
-	public void mainHotelData(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		
-	}
-	
-	
-	
 	@RequestMapping(value="mainThemeShopping.tm")
 	public void mainThemeShopping(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		request.setCharacterEncoding("UTF-8");
