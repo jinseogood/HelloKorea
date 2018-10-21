@@ -41,12 +41,12 @@
     overflow: hidden;
     background-color: white;
 }
-.container{
+/* .container{
 	width:1400px !important;
 	margin-left: 0px  !important;
 	padding-left:0px  !important;
 	
-}
+} */
 #insertDiv{
 	margin-left:auto;
 	margin-right:auto;

@@ -64,7 +64,7 @@
 				<tr>
 					<th width="80px">No</th>
 					<th width="150px">적립일</th>
-					<th width="100px">amount</th>
+					<th width="100px">적립 포인트</th>
 					<th width="150px">적립요소</th>
 					
 				</tr>

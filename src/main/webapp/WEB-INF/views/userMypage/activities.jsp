@@ -80,14 +80,14 @@
 					<tr>
 					<td>${item.bId }</td>
 					<td>${item.title }</td>
-					<c:if test="${item.boardType eq 0 }">
+					<c:if test="${item.boardType eq 1 }">
 					<td>리뷰</td>
 					</c:if>
-					<c:if test="${item.boardType eq 1 }">
+					<c:if test="${item.boardType eq 2 }">
 					<td>Q</td>
 					</c:if>
-					<td>${replyCount}</td>
 					<td>${item.likey }</td>
+					<td>${replyCount}</td>
 					</tr>
 					</tbody>
 				</c:if>

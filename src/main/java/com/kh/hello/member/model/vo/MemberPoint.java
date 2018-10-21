@@ -2,7 +2,7 @@ package com.kh.hello.member.model.vo;
 
 public class MemberPoint implements java.io.Serializable {
 	private int pId;
-	private String mId;
+	private int mId;
 	private String pDate;
 	private int amount;
 	private String paType;
@@ -13,7 +13,13 @@ public class MemberPoint implements java.io.Serializable {
 
 
 
-	public String getmId() {
+	public int getpId() {
+		return pId;
+	}
+
+
+
+	public int getmId() {
 		return mId;
 	}
 
@@ -37,7 +43,13 @@ public class MemberPoint implements java.io.Serializable {
 
 
 
-	public void setmId(String mId) {
+	public void setpId(int pId) {
+		this.pId = pId;
+	}
+
+
+
+	public void setmId(int mId) {
 		this.mId = mId;
 	}
 
@@ -59,18 +71,6 @@ public class MemberPoint implements java.io.Serializable {
 		this.paType = paType;
 	}
 
-	
-
-	public int getpId() {
-		return pId;
-	}
-
-
-
-	public void setpId(int pId) {
-		this.pId = pId;
-	}
-
 
 
 	@Override
@@ -79,8 +79,9 @@ public class MemberPoint implements java.io.Serializable {
 				+ paType + "]";
 	}
 
+	
 
-
+	
 
 	
 	

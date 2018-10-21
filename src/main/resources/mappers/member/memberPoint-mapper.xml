@@ -6,7 +6,6 @@
 <mapper namespace="MemberPoint">
 	<resultMap type="MemberPoint" id="MemberPointResultSet">
 		<id property="pId" column="P_ID" />
-		<result property="mId" column="M_ID" />
 		<result property="pDate" column="P_DATE" />
 		<result property="amount" column="AMOUNT" />
 		<result property="paType" column="PA_TYPE" />
@@ -15,7 +14,7 @@
 	<select id="selectMemberPonit" parameterType="_int" resultMap="MemberPointResultSet">
 	SELECT P_ID,P_DATE,AMOUNT,PA_TYPE
 	FROM POINT
-	WHERE M_ID=${mId}
+	WHERE M_ID=#{mId}
 	</select>
 
 </mapper>

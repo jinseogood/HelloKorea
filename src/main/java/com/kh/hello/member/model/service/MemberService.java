@@ -66,7 +66,7 @@ public interface MemberService {
 	int insertGoogole(Member m);
 	
 	//댓글갯수
-	int selectReplyCount(int mId);
+	int selectReplyCount(int mId,int bId);
 	
 	
 	//예약내역
@@ -74,6 +74,9 @@ public interface MemberService {
 	
 	//포인트내역
 	ArrayList<MemberPoint> selectMemberPonit(int mId);
+	
+	//활동내역 bId
+	int selectbId(int mId);
 
 	
 	

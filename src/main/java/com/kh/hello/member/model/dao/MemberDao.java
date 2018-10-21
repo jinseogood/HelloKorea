@@ -59,17 +59,19 @@ public interface MemberDao {
 	int nicknameCheck(String nickname, SqlSessionTemplate sqlSession);
 	
 	//활동내역
-	ArrayList<BoardAndReply> selectboreList(int mId, SqlSessionTemplate sqlSession);
+	ArrayList<BoardAndReply> selectboreList(int mId, SqlSessionTemplate sqlSession );
 	//구글
 	int insertGoogole(Member m, SqlSessionTemplate sqlSession);
 	//댓글갯수
-	int selectReplyCount(int mId, SqlSessionTemplate sqlSession);
+	int selectReplyCount(int mId, SqlSessionTemplate sqlSession,int bId);
 	
 	//예약내역
 	ArrayList<MemberReservation> selectReservationHistory(int mId, SqlSessionTemplate sqlSession);
 	
 	//포인트내역
 	ArrayList<MemberPoint> selectMemberPonit(int mId, SqlSessionTemplate sqlSession);
+	//활동내역
+	int selectbId(int mId, SqlSessionTemplate sqlSession);
 
 
 	

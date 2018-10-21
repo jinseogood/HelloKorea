@@ -133,7 +133,10 @@ public class UserController {
 		
 		System.out.println("boreList : "+boreList);
 		
-		int replyCount = ms.selectReplyCount(mId);
+		
+		int bId = ms.selectbId(mId);
+		
+		int replyCount = ms.selectReplyCount(mId,bId);
 		System.out.println("replyCount :"+replyCount);
 		
 		model.addAttribute("mId", mId);
