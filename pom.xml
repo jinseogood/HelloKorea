@@ -296,13 +296,6 @@
 			<artifactId>mail</artifactId>
 			<version>1.4</version>
 		</dependency>
-
-		<!-- Velocity -->
-		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity</artifactId>
-			<version>1.7</version>
-		</dependency>
 		
 		<!-- GSON -->
       <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
