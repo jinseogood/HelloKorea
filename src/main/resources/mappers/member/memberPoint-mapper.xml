@@ -12,6 +12,10 @@
 		<result property="paType" column="PA_TYPE" />
 	</resultMap>
 	
-
+	<select id="selectMemberPonit" parameterType="_int" resultMap="MemberPointResultSet">
+	SELECT P_ID,P_DATE,AMOUNT,PA_TYPE
+	FROM POINT
+	WHERE M_ID=${mId}
+	</select>
 
 </mapper>

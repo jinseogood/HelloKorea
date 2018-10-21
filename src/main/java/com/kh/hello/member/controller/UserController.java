@@ -96,7 +96,7 @@ public class UserController {
 		
 		
 		if(result >0){
-			return "userMypage/editProfile";
+			return "main/mainHotel";
 			
 		}else{
 			return "common/errorPage";
@@ -168,8 +168,8 @@ public class UserController {
 		ArrayList<MemberPoint>pointList = ms.selectMemberPonit(mId);
 		
 		
-		
-		return null;
+		model.addAttribute("pointList", pointList);
+		return "userMypage/pointHistory";
 		
 	}
 }

@@ -250,8 +250,8 @@ button {
 				alert("입력을 해야 회원가입이 가능합니다 ");
 			}else{
 				alert("회원가입을 축하드립니다 (메인으로이동)")
-				var form = $("#userForm");
-				form.submit();
+				$("#userForm").submit();
+				
 			}
 			
 		}

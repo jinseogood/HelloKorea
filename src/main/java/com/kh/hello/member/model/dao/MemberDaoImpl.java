@@ -11,6 +11,7 @@ import com.kh.hello.common.Attachment;
 import com.kh.hello.member.model.vo.BoardAndReply;
 import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.member.model.vo.MemberGoods;
+import com.kh.hello.member.model.vo.MemberPoint;
 import com.kh.hello.member.model.vo.MemberReservation;
 @Repository
 public class MemberDaoImpl implements MemberDao {
@@ -144,6 +145,22 @@ public class MemberDaoImpl implements MemberDao {
 		
 		return list;
 	}
+
+	@Override
+	public ArrayList<MemberPoint> selectMemberPonit(int mId, SqlSessionTemplate sqlSession) {
+		ArrayList<MemberPoint> list =(ArrayList)sqlSession.selectList("MemberPoint.selectMemberPonit", mId);
+		
+		
+		return list;
+	}
+
+	/*@Override
+	public ArrayList<MemberPoint> selectMemberPonit(int mId, SqlSessionTemplate sqlSession) {
+		ArrayList<MemberPoint> list =(ArrayList)sqlSession.selectList("MemberPoint.selectMemberPonit", mId);
+		
+		
+		return list;
+	}*/
 
 
 
