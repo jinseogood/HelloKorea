@@ -192,6 +192,13 @@ public class MemberServiceImpl implements MemberService {
 		return md.selectbId(mId, sqlSession);
 	}
 
+	//이메일체크
+	@Override
+	public int emailCheck(String email) {
+		// TODO Auto-generated method stub
+		return md.emailCheck(email,sqlSession);
+	}
+
 
 	
 

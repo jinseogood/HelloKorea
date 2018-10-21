@@ -24,10 +24,10 @@
 	.secondImg{width:262.5px; height:217px; display:inline-block;}
 	.contentArea{display:block;}
 	.detailHead{text-align:center; width:280px; height:40px; background-color:lightgray;}
-	.detailContent{height:350px; text-align:center;}
+	.detailContent{height:300px; text-align:center;}
 	.detailBottom{height:50px; text-align:center;}
 	.tm-about-box-1{padding:10px 10px;}
-	.roomImgTd{width:260px; height:300px;}
+	.roomImgTd{width:260px; height:280px;}
 	.QAV{display:none;}
 	.allQAV{display:none;}
 	.selectRoom{width:150px; height:45px;}
@@ -262,12 +262,12 @@
 									rType = result[i].rType;
 									output = "";
 									output += "<tr class='detailRow'>";
-									/* if(myData[i].roomimg1 == null){
+									if(myData[i].roomimg1 == null){
 										output += "<td class='detailContent detailContent1'><img src='${contextPath}/resources/img/noImage.gif' class='roomIngTd' />";
 									}else{ 
 										output += "<td class='detailContent detailContent1'><img src="+myData[i].roomimg1+" class='roomImgTd' />";
-									} */
-									output += "<td> 호텔이미지 주석중입니다.";
+									}
+									//output += "<td> 호텔이미지 주석중입니다.";
 									output += "</td>";
 									output += "<td>";
 									output += "<h4><b>객실명 : "+result[i].rType+"</b></h4>";
@@ -284,7 +284,7 @@
 									output += "ㆍ 세면도구 : "+myData[i].roomtoiletries+"<br>";
 									output += "ㆍ 드라이기 : "+myData[i].roomhairdryer+"<br>";
 									output += "</td>"
-									output += "<td>";
+									output += "<td style='font-size:30px;'>";
 									output += "ㆍ 정원 : "+myData[i].roombasecount+"명<br>";
 									output += "ㆍ 최대인원 : "+result[i].rLimit+"명<br>";
 									//output += "ㆍ 가격 : "+result[i].rPrice+"원<br>";
@@ -498,9 +498,9 @@
 		<div class="col-lg-12" >
 		 <form id="reservationRooms">
 			<div class="col-lg-12 dateArea" align="center">
-				<span>이용일자　　</span><jsp:include page="../common/datePicker.jsp"/>
+				<span style="font-size:30px;">이용일자　　</span><jsp:include page="../common/datePicker.jsp"/>
 			</div>
-		
+			
 			<table border="1" class="infoTable">
 				<thead>
 					<tr>

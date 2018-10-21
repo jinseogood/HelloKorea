@@ -72,6 +72,9 @@ public interface MemberDao {
 	ArrayList<MemberPoint> selectMemberPonit(int mId, SqlSessionTemplate sqlSession);
 	//활동내역
 	int selectbId(int mId, SqlSessionTemplate sqlSession);
+	
+	//이메일체크
+	int emailCheck(String email, SqlSessionTemplate sqlSession);
 
 
 	

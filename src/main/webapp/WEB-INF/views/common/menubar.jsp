@@ -255,7 +255,7 @@
 						<input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
 					</div>
 					<div class="form-group">
-						<input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" />
+						<input type="button" onclick="emailCheck()" class="btn btn-default btn-login-submit btn-block m-t-md" />
 					</div>
 				</form>
 			</div>
@@ -401,6 +401,24 @@
 			});
 		});
 		
+		function emailCheck(){
+			
+			$.ajax({
+				url:"emailCheck.me",
+				type:"post",
+				data:{email:email},
+				success:function(data){
+					if(data==0){
+						alert("추가정보창으로 이동");
+					}else{
+						alert("중복된 이메일");
+					}
+				},
+				error:function(){
+					alert("실패");
+				}
+			})
+		}
 	
 	</script>
  	<script> 
