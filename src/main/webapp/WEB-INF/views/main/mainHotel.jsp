@@ -338,7 +338,24 @@
 			  			<option value="4">제주시</option>
 			  		</select>
 					<input type="button" class="tm-banner-link areaSearchBtn" value="검색" style="border-radius:5px;width:150px;">
+					
+					<!-- <gcse:search></gcse:search> -->
+					
 		</div>
+		
+		<script>
+  		(function() {
+    		var cx = '002033127672061355041:qef2ymkgvm4';
+    		var gcse = document.createElement('script');
+    		gcse.type = 'text/javascript';
+    		gcse.async = true;
+    		gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    		var s = document.getElementsByTagName('script')[0];
+    		s.parentNode.insertBefore(gcse, s);
+  		})();
+		</script>
+		
+		
 		
 		<div class="flexslider flexslider-banner">
 		  <ul class="slides">
