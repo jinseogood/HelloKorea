@@ -36,6 +36,10 @@ public interface CompanyService {
 
 	ArrayList<Company2> selectOrderByFiveAvg(Company2 cp);
 
+	ArrayList<Company2> selectCompanyTop3(Company2 cp2);
+
+
+
 
 
 

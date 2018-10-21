@@ -1044,22 +1044,48 @@
 					console.log(data);
 				}
 			}); */
+			mainHotelData();
 		});
 		
 		function mainHotelData(){
-			var num = 3;
 			var rowArea = $("#rowArea");
 			rowArea.html("");
-			for(var i = 0; i < num; i++){
+			var output = "";
 				$.ajax({
 					url:"mainHotelData.com",
 					type:"GET",
+					async:false,
+					dataType:"json",
 					success:function(data){
 						console.log("성공?");
 						console.log(data);
+						for(var i = 0; i < 3; i++){
+							contenttypeid = 32;
+							contentid = data[i].contentid
+							cid = data[i].cid;
+							output = "";
+							output += "<div class='col-lg-4 col-md-4 col-sm-6' id='rowArea1'>";
+							output += "<div class='tm-home-box-1 tm-home-box-1-2 tm-home-box-1-center'>";
+							$.ajax({
+								url:"detailHotelImage.sub",
+								type:"GET",
+								data:{contentid:contentid},
+								dataType:"json",
+								async:false,
+								success:function(ddata){
+									output += "<img src="+ddata.response.body.items.item.firstimage+" alt='image' class='img-responsive0'/>";
+								},error:function(ddata){console.log(ddata);}
+							});
+							output += "<a href='#'>";
+							output += "<div class='tm-green-gradient-bg tm-city-price-container'>";
+							output += "<span>"+data[i].cName+"</span>";
+							output += "<span>"+data[i].grade+"</span>";
+							output += "</div></a></div></div>";
+							document.getElementById("rowArea").innerHTML += output;
+						}
 					},error:function(data){console.log("실패"); console.log(data);}
 				});
-			}
+			
 		}
 		
 	</script>

@@ -145,6 +145,17 @@
    	ORDER BY GRADE DESC 
    </select>
    
+   <!-- 메인용, 상위평점 3개뽑기 -->
+   <select id="selectListCompanyTop3" resultMap="company2ResultSet">
+   	SELECT C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, M_ID, GRADE
+   	FROM (SELECT C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID, NVL(AVG(GRADE), 0) AS GRADE
+   		  FROM COMPANY C
+   		  LEFT JOIN BOARD B ON (C_ORIGINID = ORIGIN_ID)
+   		  GROUP BY C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID
+   		  ORDER BY GRADE DESC)
+   	WHERE ROWNUM <![CDATA[<]]> 4
+   </select>
+   
    
    
    

@@ -7,9 +7,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.hello.company.model.dao.CompanyDao;
 import com.kh.hello.company.model.vo.Company2;
@@ -111,6 +108,16 @@ public class CompanyServiceImpl implements CompanyService {
 	public ArrayList<Company2> selectOrderByFiveAvg(Company2 cp) {
 		return cd.selectOrderByFiveAvg(sqlSession, cp);
 	}
+
+//	평점탑3
+	@Override
+	public ArrayList<Company2> selectCompanyTop3(Company2 cp2) {
+		return cd.selectCompanyTop3(sqlSession, cp2);
+	}
+
+
+
+
 
 
 
