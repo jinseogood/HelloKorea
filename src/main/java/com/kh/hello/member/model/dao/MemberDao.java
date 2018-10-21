@@ -9,6 +9,7 @@ import com.kh.hello.common.Attachment;
 import com.kh.hello.member.model.vo.BoardAndReply;
 import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.member.model.vo.MemberGoods;
+import com.kh.hello.member.model.vo.MemberPoint;
 import com.kh.hello.member.model.vo.MemberReservation;
 
 public interface MemberDao {
@@ -66,6 +67,9 @@ public interface MemberDao {
 	
 	//예약내역
 	ArrayList<MemberReservation> selectReservationHistory(int mId, SqlSessionTemplate sqlSession);
+	
+	//포인트내역
+	ArrayList<MemberPoint> selectMemberPonit(int mId, SqlSessionTemplate sqlSession);
 
 
 	

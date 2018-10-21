@@ -70,7 +70,7 @@
             <div class="card-body">
                 <!-- Sex image -->
                <c:if test="${a eq null }">  
-                <img id="img_sex" class="person-img"
+               <img id="img_sex" class="person-img"
                     src="https://visualpharm.com/assets/217/Life%20Cycle-595b40b75ba036ed117d9ef0.svg">
                 </c:if>
                 <c:if test="${a ne null }">
@@ -93,8 +93,12 @@
              		<a onclick="nicknameCheck()">중복 체크 </a>
              </div>
        		 <div class="form-group">
+                  <label for="interest" class="col-form-label">interest</label>
+                  <input type="text" class="form-control" name="interest" id="interest" placeholder="${m.interest }"/>
+             </div>
+              <div class="form-group">
                   <label for="national" class="col-form-label">national</label>
-                  <input type="text" class="form-control" name="national" id="national" placeholder="${m.national }" readonly="">
+                  <input type="text" class="form-control" name="national" id="national" placeholder="${m.national }" readonly=""/>
              </div>
              <div class="form-group">
                   <label for="profile" class="col-form-label">profile</label>
@@ -103,7 +107,7 @@
              
         </div>
         <div style="margin-top: 1em;">
-            <button type="button" class="btn btn-primary btn-lg btn-block">수정 완료</button>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">수정 완료</button>
         </div>
         </form>
 </div>

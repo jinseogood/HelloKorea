@@ -182,7 +182,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public ArrayList<MemberPoint> selectMemberPonit(int mId) {
 		// TODO Auto-generated method stub
-		return null;
+		return md.selectMemberPonit(mId,sqlSession);
 	}
 
 
