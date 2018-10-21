@@ -21,11 +21,18 @@
 	WHERE B.M_ID= #{mId}
 	</select>
 	<select id="selectReplyCount" resultType="_int" parameterType="_int">
-		SELECT COUNT(R.BID)
-		FROM REPLY R
-		JOIN BOARD B  ON(B.M_ID=R.M_ID)
-		WHERE R.M_ID=#{mId}
+	SELECT COUNT(*)
+      FROM REPLY R
+      JOIN BOARD B ON(B.BID=R.BID)
+      WHERE R.M_ID= #{mId}
+      AND B.BID = #{bId}
 	</select>
+	
    
+	<select id="selectbId" resultType="_int" parameterType="_int">
+		SELECT BID
+		FROM BOARD
+		WHERE M_ID =#{mId}
+	</select>
   
 </mapper>

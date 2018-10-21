@@ -86,8 +86,8 @@
 					<c:if test="${item.boardType eq 2 }">
 					<td>Q</td>
 					</c:if>
-					<td>${replyCount}</td>
 					<td>${item.likey }</td>
+					<td>${replyCount}</td>
 					</tr>
 					</tbody>
 				</c:if>

@@ -166,9 +166,9 @@ public class MemberServiceImpl implements MemberService {
 
 	//댓글갯수
 	@Override
-	public int selectReplyCount(int mId) {
+	public int selectReplyCount(int mId,int bId) {
 		// TODO Auto-generated method stub
-		return md.selectReplyCount(mId,sqlSession);
+		return md.selectReplyCount(mId,sqlSession,bId);
 	}
 
 
@@ -184,6 +184,16 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return md.selectMemberPonit(mId,sqlSession);
 	}
+
+
+	@Override
+	public int selectbId(int mId) {
+		// TODO Auto-generated method stub
+		return md.selectbId(mId, sqlSession);
+	}
+
+
+	
 
 
 

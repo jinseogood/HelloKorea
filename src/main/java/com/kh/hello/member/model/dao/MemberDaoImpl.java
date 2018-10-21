@@ -133,7 +133,7 @@ public class MemberDaoImpl implements MemberDao {
 	}
 	//댓글갯수
 	@Override
-	public int selectReplyCount(int mId, SqlSessionTemplate sqlSession) {
+	public int selectReplyCount(int mId, SqlSessionTemplate sqlSession,int bId) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("BoardAndReply.selectReplyCount", mId);
 	}
@@ -152,6 +152,12 @@ public class MemberDaoImpl implements MemberDao {
 		
 		
 		return list;
+	}
+
+	@Override
+	public int selectbId(int mId, SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("BoardAndReply.selectbId",mId);
 	}
 
 	/*@Override
