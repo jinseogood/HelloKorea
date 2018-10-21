@@ -43,7 +43,11 @@
 			console.log("서브메뉴바 cat3 : " + sessionStorage.getItem("cat3"));
 			
 			function areaAll(){
-				areaCode = sessionStorage.getItem("areaCode");
+				if(sessionStorage.getItem("areaCode") == null){
+					areaCode = 1;
+				}else{
+					areaCode = sessionStorage.getItem("areaCode");
+				}
 				location.href="${contextPath}/areaAllView.main?areaCode="+areaCode;
 			}
 			function areaHotel(){

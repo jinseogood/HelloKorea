@@ -34,7 +34,7 @@
 			  </ul>
 			</div>
 		</div>
-		<div class="tm-section-header section-margin-top">
+		<!-- <div class="tm-section-header section-margin-top">
 			<div class="col-lg-4 col-md-3 col-sm-3"><hr></div>
 			<div class="col-lg-4 col-md-6 col-sm-6"><h2 class="tm-section-title">여행지보기</h2></div>
 			<div class="col-lg-4 col-md-3 col-sm-3"><hr></div>	
@@ -42,7 +42,7 @@
 		
 		<div class="col-lg-12 col-md-12">
 			<div id="google-map"></div>
-		</div>
+		</div> -->
 	</section>
 		<script>
 			var areaCode = ${param.areaCode};
