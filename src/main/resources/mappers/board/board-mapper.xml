@@ -66,7 +66,7 @@
 		FROM BOARD B
 		JOIN MEMBER M ON(B.M_ID = M.M_ID)
 		WHERE BOARD_TYPE = 1 AND ORIGIN_ID = #{origin_id}
-		ORDER BY BID ASC
+		ORDER BY BID DESC
      </select>
      
      <select id = "selectReview2" resultMap = "BoardResultSet" parameterType="_int">
@@ -118,7 +118,7 @@
 		FROM BOARD B
 		JOIN MEMBER M ON(B.M_ID = M.M_ID)
 		WHERE BOARD_TYPE = 2 AND ORIGIN_ID = #{origin_id}
-		ORDER BY BID ASC
+		ORDER BY BID DESC
      </select>
      
      <!-- Q작성 인서트 -->

@@ -63,8 +63,24 @@
 		  new google.translate.TranslateElement({pageLanguage: 'ko'}, 'google_translate_element');
 		  jQuery('.goog-logo-link').css('display', 'none');
 		  jQuery('.goog-te-gadget').css('font-size', '0');
-		  var languageVal=jQuery('.goog-te-combo').val();
-		  console.log(languageVal);
+		  jQuery('.goog-te-combo').attr("onchange", "javascript:translateVal();");
+	  }
+	  
+	  function translateVal(){
+		  var tVal=$(".goog-te-combo").val();
+		  console.log("val : " + tVal);
+		  
+		  $.ajax({
+			 url:"translateVal",
+			 type:"POST",
+			 data:{tVal:tVal},
+			 success:function(data){
+				 console.log(data);
+			 },
+			 error:function(data){
+				 console.log(data);
+			 }
+		  });
 	  }
 	
 		function changeCUR(){

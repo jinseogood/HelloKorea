@@ -738,6 +738,7 @@ public class BoardPageController {
 		Report r = null;
 		r = bs.selectReport(report);
 		
+		
 		if(m.getmId() != report.getR_target()){
 			if(r != null){
 				if(r.getM_id().equals(report.getM_id())){
