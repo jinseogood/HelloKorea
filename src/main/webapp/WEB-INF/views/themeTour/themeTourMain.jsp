@@ -133,219 +133,117 @@
 						</div>						
 					</div>
 			    </div>
-			    <div class="col-lg-12" align="center">
-					<ul class="pagination">
-						
-					</ul>
-				</div>
 			</div>
 		</div>
 		
 	</section>		
 	<script>
 	var checkvalue = "";
-	var areaCode = 1;
-	var sigunguCode = "";
 	var contenttypeid;
+	var contentidvalue;
 	var contentid;
-	var cat1;
-	var cat2;
-	var cat3 = "";
+	var contentidd;
 	var pageNo;
+	var contenttypeidd = 38;
+	var contentidvalues = [2495482, 2505619, 132318, 132248, 132593, 2017158, 806322];
 	
 		$(function(){
+			
+			searchThemeCondition(contenttypeidd, contentidvalues);
+			
 			$(".themeSearch").click(function(){ // shopping, beauty, classic, leisure
 				checkvalue = $("input[type=radio][name=themeSelect]:checked").val();
 				console.log("checkvalue : " + checkvalue);
 				if(checkvalue == "shopping"){
-					sigunguCode = "";
 					contenttypeid = 38;
-					cat1 = "A04";
-					cat2 = "A0401";
-					cat3 = "A04010400";
-					pageNo = 1;
+					contentidvalue = [2495482, 2505619, 132318, 132248, 132593, 2017158, 806322];
+					console.log(contentidvalue);
 				}else if(checkvalue == "beauty"){
-					
+					contenttypeid = 38;
+					contentidvalue = [970046, 2497595, 987759, 987770, 1304854, 985355, 987806];
 				}else if(checkvalue == "classic"){
-					sigunguCode = "";
 					contenttypeid = 12;
-					cat1 = "A02";
-					cat2 = "A0201";
-					cat3 = "";
-					pageNo = 1;
+					contentidvalue = [126508, 126747, 126509, 127642, 126504, 126514, 126804];
 				}else if(checkvalue == "leisure"){
-					sigunguCode = "";
 					contenttypeid = 28;
-					cat1 = "A03";
-					cat2 = "A0302";
-					cat3 = "";
-					pageNo = 1;
+					contentidvalue = [131940, 2368508, 131794, 1750188, 1945525, 1904623, 1908140];
 				}
-				console.log("sigunguCode : " + sigunguCode);
-				console.log("cat1 : " + cat1);
-				console.log("cat2 : " + cat2);
-				console.log("cat3 : " + cat3);
-				searchThemeCondition(areaCode, sigunguCode, contenttypeid, cat1, cat2, cat3, pageNo);
+				searchThemeCondition(contenttypeid, contentidvalue);
 			});
 		});
-		
-		function searchThemeCondition(areaCode, sigunguCode, contenttypeid, cat1, cat2, cat3, pageNo){
-			$.ajax({
-				url:"themeSearchCondition.sub",
-				type:"GET",
-				data:{areaCode:areaCode, sigunguCode:sigunguCode, contenttypeid:contenttypeid, cat1:cat1, cat2:cat2, cat3:cat3, pageNo:pageNo},
-				dataType:"json",
-				async:false,
-				success:function(data){
-					console.log("성공");
-					console.log(data);
-					var myData = data.response.body.items.item;
-					var output = "";
-					var viewArea = $("#viewArea");
-					viewArea.html("");
-					
-					$pageBody = $(".pagination");
-					$pageBody.html("");
-					
-					var totalCount = data.response.body.totalCount;
-					var pOutput = "";
-					if(totalCount > 12){
-						var num = (totalCount / 12) + 0.9;
-						pOutput = "";
-						pOutput += "<li><a onclick='goFist();'>[처음으로]</a></li>";
-						for(var pp = 1; pp < num; pp++){
-							pOutput += "<li><a onclick='goPage("+pp+");'>"+pp+"</a></li>";
-						}
-						pOutput += "<li><a onclick='goLast("+num+");'>[끝으로]</a></li>";
-						$pageBody.append(pOutput);
-					}
-					
-						for(var i in myData){
-							if(myData[i].firstimage != null){
-								if(myData[i].contenttypeid == 12){
-									contenttypeid = myData[i].contenttypeid;
-									contentid = myData[i].contentid;
-									output = "";
-									output += "<div class='tm-home-box-3' id='detailHover'>";
-									output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
-									output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1' />";
-									output += "</div>";
-									output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
-									output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
-									output += "<span style='font-size:23px;'>"+myData[i].title+"</span><br>";
-									$.ajax({
-										url:"detailGameInformation.sub",
-										type:"GET",
-										data:{contenttypeid:contenttypeid, contentid:contentid},
-										dataType:"json",
-										async:false,
-										success:function(ddate){
-											var overview = ddate.response.body.items.item.overview;
-											if(overview.length > 190){
-												output += overview.substring(0, 191) + "...";
-											}else{
-												output += overview;
-											}
-										},error:function(ddate){console.log(ddate);}
-									});
-									output += "</p>";
-									output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-									output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
-									output += "</div></div></div>";
-									document.getElementById("viewArea").innerHTML += output;
-								}else if(myData[i].contenttypeid == 28){
-									contenttypeid = myData[i].contenttypeid;
-									contentid = myData[i].contentid;
-									output = "";
-									output += "<div class='tm-home-box-3' id='detailHover'>";
-									output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
-									output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1 />'";
-									output += "</div>";
-									output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
-									output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
-									output += "<span style='font-size:23px;'>"+myData[i].title+"</span><br>";
-									$.ajax({
-										url:"detailGameInformation.sub",
-										type:"GET",
-										data:{contenttypeid:contenttypeid, contentid:contentid},
-										dataType:"json",
-										async:false,
-										success:function(ddate){
-											var overview = ddate.response.body.items.item.overview;
-											if(overview.length > 190){
-												output += overview.substring(0, 191) + "...";
-											}else{
-												output += overview;
-											}
-										},error:function(ddate){console.log(ddate);}
-									});
-									output += "</p>";									
-									output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-									output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
-									output += "</div></div></div>";
-									document.getElementById("viewArea").innerHTML += output;
-								}else if(myData[i].contenttypeid == 38){
-									contenttypeid = myData[i].contenttypeid;
-									contentid = myData[i].contentid;
-									output = "";
-									output += "<div class='tm-home-box-3' id='detailHover'>";
-									output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
-									output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1 />'";
-									output += "</div>";
-									output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
-									output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
-									output += "<span style='font-size:23px;'>"+myData[i].title+"</span><br>";
-									$.ajax({
-										url:"detailGameInformation.sub",
-										type:"GET",
-										data:{contenttypeid:contenttypeid, contentid:contentid},
-										dataType:"json",
-										async:false,
-										success:function(ddate){
-											var overview = ddate.response.body.items.item.overview;
-											if(overview.length > 190){
-												output += overview.substring(0, 191) + "...";
-											}else{
-												output += overview;
-											}
-										},error:function(ddate){console.log(ddate);}
-									});
-									output += "</p>";
-									output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-									output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
-									output += "</div></div></div>";
-									document.getElementById("viewArea").innerHTML += output;
+	</script>
+	<c:if test="${!empty sessionScope.loginUser }">
+		<script>
+		function searchThemeCondition(contenttypeid, contentidvalue){
+			var viewArea = $("#viewArea");
+			viewArea.html("");
+			var output = "";
+			for(var i = 0; i < contentidvalue.length; i++){
+				contentidd = contentidvalue[i];
+				$.ajax({
+					url:"themeSearchCondition.sub",
+					type:"GET",
+					data:{contenttypeid:contenttypeid, contentid:contentidd},
+					dataType:"json",
+					async:false,
+					success:function(data){
+						console.log(data);
+						var myData = data.response.body.items.item;
+						output = "";
+						contenttypeid = myData.contenttypeid;
+						contentid = myData.contentid;
+						output += "<div class='tm-home-box-3' id='detailHover'>";
+						output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+","+myData.mapy+","+myData.mapx+");'>";
+						output += "<img src="+myData.firstimage+" alt='image' class='img-responsive1'/>";
+						output += "</div>";
+						output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+						output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+						output += "<span style='font-size:23px;'>"+myData.title+"</span><br>";
+						var overview = myData.overview;
+						var reg = /<br\s*[\/]?>/g;
+							overview = overview.replace(reg, " ");
+						if(overview.length > 190){
+							output += overview.substring(0, 191) + "...";
+						}else{
+							output += overview;
+						}	
+						output += "</p>";
+						output += "<div class='tm-home-box-2-container'>";
+						$.ajax({
+							url:"dibsCheckStatus.good",
+							type:"GET",
+							data:{contenttypeid:contenttypeid, contentid:contentid},
+							async:false,
+							success:function(ddatta){
+								console.log("ddatta오니?");
+								console.log(ddatta);
+								if(ddatta > 0){
+									output += "<a onclick='btnGood2("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+								}else{
+									output += "<a onclick='btnGood2("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
 								}
-								
+							},
+							error:function(ddatta){
+								console.log(ddatta);
 							}
-						}
-					
-					
-				},
-				error:function(data){
-					console.log(data);
-				}
-			});
+						});
+						//output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+						output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'>";
+						output += "<span class='tm-home-box-2-description box-3'>";
+						output += "</span></a>";
+						output += "</div></div></div>";
+						document.getElementById("viewArea").innerHTML += output;
+					},error:function(data){console.log(data);}
+				});
+			}
+		}
+		</script>
+		</c:if>
+		<script>
+		function detailView(contentid, contenttypeid, mapy, mapx){
+			location.href="${contextPath}/detailGame?contentid="+contentid+"&contenttypeid="+contenttypeid+"&mapy="+mapy+"&mapx="+mapx;
 		}
 		
-		function detailView(contentid, contenttypeid){
-			location.href="${contextPath}/detailGame?contentid="+contentid+"&contenttypeid="+contenttypeid;
-		}
-		
-		/* function goFirst(){
-			var pageNo = 1;
-			searchThemeCondition(pageNo);
-		}
-		
-		function goPage(pageNo){
-			var pageNo = pageNo;
-			searchThemeCondition(pageNo);
-		}
-		
-		function goLast(pageNo){
-			var pageNo = Math.floor(pageNo);
-			searchThemeCondition(pageNo);/////////페이지안너머가..처리
-		} */
 		
 		</script>
 		<c:if test="${!empty sessionScope.loginUser}">
@@ -392,6 +290,55 @@
 			function btnGood2(contenttypeid, contentid){
 				alert("로그인이 필요한 서비스입니다.");
 			}
+		</script>
+		</c:if>
+		<c:if test="${empty sessionScope.loginUser }">
+		<script>
+		function searchThemeCondition(contenttypeid, contentidvalue){
+			var viewArea = $("#viewArea");
+			viewArea.html("");
+			var output = "";
+			for(var i = 0; i < contentidvalue.length; i++){
+				contentidd = contentidvalue[i];
+				$.ajax({
+					url:"themeSearchCondition.sub",
+					type:"GET",
+					data:{contenttypeid:contenttypeid, contentid:contentidd},
+					dataType:"json",
+					async:false,
+					success:function(data){
+						console.log(data);
+						var myData = data.response.body.items.item;
+						output = "";
+						contenttypeid = myData.contenttypeid;
+						contentid = myData.contentid;
+						output += "<div class='tm-home-box-3' id='detailHover'>";
+						output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+","+myData.mapy+","+myData.mapx+");'>";
+						output += "<img src="+myData.firstimage+" alt='image' class='img-responsive1'/>";
+						output += "</div>";
+						output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
+						output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+						output += "<span style='font-size:23px;'>"+myData.title+"</span><br>";
+						var overview = myData.overview;
+						var reg = /<br\s*[\/]?>/g;
+							overview = overview.replace(reg, " ");
+						if(overview.length > 190){
+							output += overview.substring(0, 191) + "...";
+						}else{
+							output += overview;
+						}	
+						output += "</p>";
+						output += "<div class='tm-home-box-2-container'>";
+						output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
+						output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'>";
+						output += "<span class='tm-home-box-2-description box-3'>";
+						output += "</span></a>";
+						output += "</div></div></div>";
+						document.getElementById("viewArea").innerHTML += output;
+					},error:function(data){console.log(data);}
+				});
+			}
+		}
 		</script>
 		</c:if>
 		<script>

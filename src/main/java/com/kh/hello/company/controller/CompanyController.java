@@ -224,11 +224,374 @@ public class CompanyController {
 				cp.setSigunguName("울주군");
 			}
 		}else if(areaCode == 8){
-			cp.setAreaName("세종");
+			cp.setAreaName("세종특별자치시");
 			if(sigunguCode == 0){
 				cp.setSigunguName("");
 			}else if(sigunguCode == 1){
 				cp.setSigunguName("세종특별자치시");
+			}
+		}else if(areaCode == 31){
+			cp.setAreaName("경기도");
+			if(sigunguCode == 0){
+				cp.setSigunguName("");
+			}else if(sigunguCode == 1){
+				cp.setSigunguName("가평군");
+			}else if(sigunguCode == 2){
+				cp.setSigunguName("고양시");
+			}else if(sigunguCode == 3){
+				cp.setSigunguName("과천시");
+			}else if(sigunguCode == 4){
+				cp.setSigunguName("광명시");
+			}else if(sigunguCode == 5){
+				cp.setSigunguName("광주시");
+			}else if(sigunguCode == 6){
+				cp.setSigunguName("구리시");
+			}else if(sigunguCode == 7){
+				cp.setSigunguName("군포시");
+			}else if(sigunguCode == 8){
+				cp.setSigunguName("김포시");
+			}else if(sigunguCode == 9){
+				cp.setSigunguName("남양주시");
+			}else if(sigunguCode == 10){
+				cp.setSigunguName("동두천시");
+			}else if(sigunguCode == 11){
+				cp.setSigunguName("부천시");
+			}else if(sigunguCode == 12){
+				cp.setSigunguName("성남시");
+			}else if(sigunguCode == 13){
+				cp.setSigunguName("수원시");
+			}else if(sigunguCode == 14){
+				cp.setSigunguName("시흥시");
+			}else if(sigunguCode == 15){
+				cp.setSigunguName("안산시");
+			}else if(sigunguCode == 16){
+				cp.setSigunguName("안성시");
+			}else if(sigunguCode == 17){
+				cp.setSigunguName("안양시");
+			}else if(sigunguCode == 18){
+				cp.setSigunguName("양주시");
+			}else if(sigunguCode == 19){
+				cp.setSigunguName("양평군");
+			}else if(sigunguCode == 20){
+				cp.setSigunguName("여주시");
+			}else if(sigunguCode == 21){
+				cp.setSigunguName("연천군");
+			}else if(sigunguCode == 22){
+				cp.setSigunguName("오산시");
+			}else if(sigunguCode == 23){
+				cp.setSigunguName("용인시");
+			}else if(sigunguCode == 24){
+				cp.setSigunguName("의왕시");
+			}else if(sigunguCode == 25){
+				cp.setSigunguName("의정부시");
+			}else if(sigunguCode == 26){
+				cp.setSigunguName("이천시");
+			}else if(sigunguCode == 27){
+				cp.setSigunguName("파주시");
+			}else if(sigunguCode == 28){
+				cp.setSigunguName("평택시");
+			}else if(sigunguCode == 29){
+				cp.setSigunguName("포천시");
+			}else if(sigunguCode == 30){
+				cp.setSigunguName("하남시");
+			}else if(sigunguCode == 31){
+				cp.setSigunguName("화성시");
+			}
+		}else if(areaCode == 32){
+			cp.setAreaName("강원도");
+			if(sigunguCode == 0){
+				cp.setSigunguName("");
+			}else if(sigunguCode == 0){
+				cp.setSigunguName("");
+			}else if(sigunguCode == 1){
+				cp.setSigunguName("강릉시");
+			}else if(sigunguCode == 2){
+				cp.setSigunguName("고성군");
+			}else if(sigunguCode == 3){
+				cp.setSigunguName("동해시");
+			}else if(sigunguCode == 4){
+				cp.setSigunguName("삼척시");
+			}else if(sigunguCode == 5){
+				cp.setSigunguName("속초시");
+			}else if(sigunguCode == 6){
+				cp.setSigunguName("양구군");
+			}else if(sigunguCode == 7){
+				cp.setSigunguName("양양군");
+			}else if(sigunguCode == 8){
+				cp.setSigunguName("영월군");
+			}else if(sigunguCode == 9){
+				cp.setSigunguName("원주시");
+			}else if(sigunguCode == 11){
+				cp.setSigunguName("인제군");
+			}else if(sigunguCode == 11){
+				cp.setSigunguName("정성군");
+			}else if(sigunguCode == 12){
+				cp.setSigunguName("철원군");
+			}else if(sigunguCode == 13){
+				cp.setSigunguName("춘천시");
+			}else if(sigunguCode == 14){
+				cp.setSigunguName("태백시");
+			}else if(sigunguCode == 15){
+				cp.setSigunguName("평창군");
+			}else if(sigunguCode == 16){
+				cp.setSigunguName("홍천군");
+			}else if(sigunguCode == 17){
+				cp.setSigunguName("화천군");
+			}else if(sigunguCode == 18){
+				cp.setSigunguName("횡성군");
+			}
+		}else if(areaCode == 33){
+			cp.setAreaName("충청북도");
+			if(sigunguCode == 0){
+				cp.setSigunguName("");
+			}else if(sigunguCode == 1){
+				cp.setSigunguName("괴산군");
+			}else if(sigunguCode == 2){
+				cp.setSigunguName("단양군");
+			}else if(sigunguCode == 3){
+				cp.setSigunguName("보은군");
+			}else if(sigunguCode == 4){
+				cp.setSigunguName("영동군");
+			}else if(sigunguCode == 5){
+				cp.setSigunguName("옥천군");
+			}else if(sigunguCode == 6){
+				cp.setSigunguName("음성군");
+			}else if(sigunguCode == 7){
+				cp.setSigunguName("제천시");
+			}else if(sigunguCode == 8){
+				cp.setSigunguName("진천군");
+			}else if(sigunguCode == 9){
+				cp.setSigunguName("청원군");
+			}else if(sigunguCode == 10){
+				cp.setSigunguName("청주시");
+			}else if(sigunguCode == 11){
+				cp.setSigunguName("충주시");
+			}else if(sigunguCode == 12){
+				cp.setSigunguName("증평군");
+			}
+		}else if(areaCode == 34){
+			cp.setAreaName("충청남도");
+			if(sigunguCode == 0){
+				cp.setSigunguName("");
+			}else if(sigunguCode == 1){
+				cp.setSigunguName("공주시");
+			}else if(sigunguCode == 2){
+				cp.setSigunguName("금산군");
+			}else if(sigunguCode == 3){
+				cp.setSigunguName("논산시");
+			}else if(sigunguCode == 4){
+				cp.setSigunguName("당진시");
+			}else if(sigunguCode == 5){
+				cp.setSigunguName("보령시");
+			}else if(sigunguCode == 6){
+				cp.setSigunguName("부여군");
+			}else if(sigunguCode == 7){
+				cp.setSigunguName("서산시");
+			}else if(sigunguCode == 8){
+				cp.setSigunguName("서천군");
+			}else if(sigunguCode == 9){
+				cp.setSigunguName("아산시");
+			}else if(sigunguCode == 10){
+				cp.setSigunguName("예산군");
+			}else if(sigunguCode == 11){
+				cp.setSigunguName("천안시");
+			}else if(sigunguCode == 12){
+				cp.setSigunguName("청양군");
+			}else if(sigunguCode == 13){
+				cp.setSigunguName("태안군");
+			}else if(sigunguCode == 14){
+				cp.setSigunguName("홍성군");
+			}else if(sigunguCode == 15){
+				cp.setSigunguName("계룡시");
+			}
+		}else if(areaCode == 35){
+			cp.setAreaName("경상북도");
+			if(sigunguCode == 0){
+				cp.setSigunguName("");
+			}else if(sigunguCode == 1){
+				cp.setSigunguName("경산시");
+			}else if(sigunguCode == 2){
+				cp.setSigunguName("경주시");
+			}else if(sigunguCode == 3){
+				cp.setSigunguName("고령군");
+			}else if(sigunguCode == 4){
+				cp.setSigunguName("구미시");
+			}else if(sigunguCode == 5){
+				cp.setSigunguName("군위군");
+			}else if(sigunguCode == 6){
+				cp.setSigunguName("김천시");
+			}else if(sigunguCode == 7){
+				cp.setSigunguName("문경시");
+			}else if(sigunguCode == 8){
+				cp.setSigunguName("봉화군");
+			}else if(sigunguCode == 9){
+				cp.setSigunguName("상주시");
+			}else if(sigunguCode == 10){
+				cp.setSigunguName("성주군");
+			}else if(sigunguCode == 11){
+				cp.setSigunguName("안동시");
+			}else if(sigunguCode == 12){
+				cp.setSigunguName("영덕군");
+			}else if(sigunguCode == 13){
+				cp.setSigunguName("영양군");
+			}else if(sigunguCode == 14){
+				cp.setSigunguName("영주시");
+			}else if(sigunguCode == 15){
+				cp.setSigunguName("영천시");
+			}else if(sigunguCode == 16){
+				cp.setSigunguName("예천군");
+			}else if(sigunguCode == 17){
+				cp.setSigunguName("울릉군");
+			}else if(sigunguCode == 18){
+				cp.setSigunguName("울진군");
+			}else if(sigunguCode == 19){
+				cp.setSigunguName("의성군");
+			}else if(sigunguCode == 20){
+				cp.setSigunguName("청도군");
+			}else if(sigunguCode == 21){
+				cp.setSigunguName("청송군");
+			}else if(sigunguCode == 22){
+				cp.setSigunguName("칠곡군");
+			}else if(sigunguCode == 23){
+				cp.setSigunguName("포항시");
+			}
+		}else if(areaCode == 36){
+			cp.setAreaName("경상남도");
+			if(sigunguCode == 0){
+				cp.setSigunguName("");
+			}else if(sigunguCode == 1){
+				cp.setSigunguName("거제시");
+			}else if(sigunguCode == 2){
+				cp.setSigunguName("고창군");
+			}else if(sigunguCode == 3){
+				cp.setSigunguName("김해시");
+			}else if(sigunguCode == 4){
+				cp.setSigunguName("남해군");
+			}else if(sigunguCode == 5){
+				cp.setSigunguName("마산시");
+			}else if(sigunguCode == 6){
+				cp.setSigunguName("밀양시");
+			}else if(sigunguCode == 7){
+				cp.setSigunguName("사천시");
+			}else if(sigunguCode == 8){
+				cp.setSigunguName("산청군");
+			}else if(sigunguCode == 9){
+				cp.setSigunguName("양산시");
+			}else if(sigunguCode == 10){
+				cp.setSigunguName("의령군");
+			}else if(sigunguCode == 11){
+				cp.setSigunguName("진주시");
+			}else if(sigunguCode == 12){
+				cp.setSigunguName("진해시");
+			}else if(sigunguCode == 13){
+				cp.setSigunguName("창녕군");
+			}else if(sigunguCode == 14){
+				cp.setSigunguName("창원시");
+			}else if(sigunguCode == 15){
+				cp.setSigunguName("통영시");
+			}else if(sigunguCode == 16){
+				cp.setSigunguName("하동군");
+			}else if(sigunguCode == 17){
+				cp.setSigunguName("함안군");
+			}else if(sigunguCode == 18){
+				cp.setSigunguName("함양군");
+			}else if(sigunguCode == 19){
+				cp.setSigunguName("합천군");
+			}
+		}else if(areaCode == 37){
+			cp.setAreaName("전라북도");
+			if(sigunguCode == 0){
+				cp.setSigunguName("");
+			}else if(sigunguCode == 1){
+				cp.setSigunguName("고창군");
+			}else if(sigunguCode == 2){
+				cp.setSigunguName("군산시");
+			}else if(sigunguCode == 3){
+				cp.setSigunguName("김제시");
+			}else if(sigunguCode == 4){
+				cp.setSigunguName("남원시");
+			}else if(sigunguCode == 5){
+				cp.setSigunguName("무주군");
+			}else if(sigunguCode == 6){
+				cp.setSigunguName("부안군");
+			}else if(sigunguCode == 7){
+				cp.setSigunguName("순창군");
+			}else if(sigunguCode == 8){
+				cp.setSigunguName("완주군");
+			}else if(sigunguCode == 9){
+				cp.setSigunguName("익산시");
+			}else if(sigunguCode == 10){
+				cp.setSigunguName("임실군");
+			}else if(sigunguCode == 11){
+				cp.setSigunguName("장수군");
+			}else if(sigunguCode == 12){
+				cp.setSigunguName("전주시");
+			}else if(sigunguCode == 13){
+				cp.setSigunguName("정읍시");
+			}else if(sigunguCode == 14){
+				cp.setSigunguName("진안군");
+			}
+		}else if(areaCode == 38){
+			cp.setAreaName("전라남도");
+			if(sigunguCode == 0){
+				cp.setSigunguName("");
+			}else if(sigunguCode == 1){
+				cp.setSigunguName("강진군");
+			}else if(sigunguCode == 2){
+				cp.setSigunguName("고흥군");
+			}else if(sigunguCode == 3){
+				cp.setSigunguName("곡성군");
+			}else if(sigunguCode == 4){
+				cp.setSigunguName("광양시");
+			}else if(sigunguCode == 5){
+				cp.setSigunguName("구례군");
+			}else if(sigunguCode == 6){
+				cp.setSigunguName("나주시");
+			}else if(sigunguCode == 7){
+				cp.setSigunguName("담양군");
+			}else if(sigunguCode == 8){
+				cp.setSigunguName("목포시");
+			}else if(sigunguCode == 9){
+				cp.setSigunguName("무안군");
+			}else if(sigunguCode == 10){
+				cp.setSigunguName("보성군");
+			}else if(sigunguCode == 11){
+				cp.setSigunguName("순천시");
+			}else if(sigunguCode == 12){
+				cp.setSigunguName("신안군");
+			}else if(sigunguCode == 13){
+				cp.setSigunguName("여수시");
+			}else if(sigunguCode == 14){
+				cp.setSigunguName("영광군");
+			}else if(sigunguCode == 15){
+				cp.setSigunguName("영암군");
+			}else if(sigunguCode == 16){
+				cp.setSigunguName("완도군");
+			}else if(sigunguCode == 17){
+				cp.setSigunguName("장성군");
+			}else if(sigunguCode == 18){
+				cp.setSigunguName("장흥군");
+			}else if(sigunguCode == 19){
+				cp.setSigunguName("진도군");
+			}else if(sigunguCode == 20){
+				cp.setSigunguName("함평군");
+			}else if(sigunguCode == 21){
+				cp.setSigunguName("해남군");
+			}else if(sigunguCode == 22){
+				cp.setSigunguName("화순군");
+			}
+		}else if(areaCode == 39){
+			cp.setAreaName("제주도");
+			if(sigunguCode == 0){
+				cp.setSigunguName("");
+			}else if(sigunguCode == 1){
+				cp.setSigunguName("남제구군");
+			}else if(sigunguCode == 2){
+				cp.setSigunguName("북제주군");
+			}else if(sigunguCode == 3){
+				cp.setSigunguName("서귀포시");
+			}else if(sigunguCode == 4){
+				cp.setSigunguName("제주시");
 			}
 		}
 		ArrayList<Company2> list = cs.selectAllCompany(cp);
