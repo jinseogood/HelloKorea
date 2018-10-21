@@ -93,8 +93,8 @@
              		<a onclick="nicknameCheck()">중복 체크 </a>
              </div>
        		 <div class="form-group">
-                  <label for="national" class="col-form-label">national</label>
-                  <input type="text" class="form-control" name="national" id="national" placeholder="${m.national }" readonly="">
+                  <label for="interest" class="col-form-label">interest</label>
+                  <input type="text" class="form-control" name="interest" id="interest" placeholder="${m.interest }"/>
              </div>
              <div class="form-group">
                   <label for="profile" class="col-form-label">profile</label>
@@ -103,7 +103,7 @@
              
         </div>
         <div style="margin-top: 1em;">
-            <button type="button" class="btn btn-primary btn-lg btn-block">수정 완료</button>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">수정 완료</button>
         </div>
         </form>
 </div>

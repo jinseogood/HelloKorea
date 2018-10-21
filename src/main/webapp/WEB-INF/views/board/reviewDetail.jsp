@@ -197,7 +197,7 @@ body{ margin:50px 0px; }
             				<span class="ReviewUpDate" style = "padding-top:5px">
             					${ list.modify_date }
             				</span>
-            				<span>|</span> ${ list.bid }님의 답변
+            				<span>|</span> ${ list.nickname }님의 답변
             				<i class="fa fa-thumbs-o-up" style = "font-size:14px; padding-top:5px; cursor:pointer" onclick = "AUp(this);">&nbsp;${ list.help_point }</i>
             				<i class="fa fa-flag" style = "font-size:14px; padding-top:5px; float:right; cursor:pointer"><input type = "hidden" value = "${ list.m_id }"><input type = "hidden" value = "${ list.reply_id }"><a onclick="reportWriteA(this)"> 신고하기</a></i>
             				</div>

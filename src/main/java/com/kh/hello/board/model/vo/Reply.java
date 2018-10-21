@@ -13,8 +13,26 @@ public class Reply implements java.io.Serializable{
 	private int m_id;
 	private int bid;
 	private String email;
+	private String nickname;
 	
 	public Reply(){}
+
+	public Reply(int reply_id, String content, String regist_date, String modify_date, String regist_status,
+			int help_point, int m_id, int bid, String email, String nickname) {
+		super();
+		this.reply_id = reply_id;
+		this.content = content;
+		this.regist_date = regist_date;
+		this.modify_date = modify_date;
+		this.regist_status = regist_status;
+		this.help_point = help_point;
+		this.m_id = m_id;
+		this.bid = bid;
+		this.email = email;
+		this.nickname = nickname;
+	}
+
+
 
 	public Reply(int reply_id, String content, String regist_date, String modify_date, String regist_status,
 			int help_point, int m_id, int bid, String email) {
@@ -121,7 +139,15 @@ public class Reply implements java.io.Serializable{
 	public String toString() {
 		return "Reply [reply_id=" + reply_id + ", content=" + content + ", regist_date=" + regist_date
 				+ ", modify_date=" + modify_date + ", regist_status=" + regist_status + ", help_point=" + help_point
-				+ ", m_id=" + m_id + ", bid=" + bid + ", email=" + email + "]";
+				+ ", m_id=" + m_id + ", bid=" + bid + ", email=" + email + ", nickname=" + nickname + "]";
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	
 }
