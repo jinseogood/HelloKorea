@@ -96,7 +96,7 @@ public class UserController {
 		
 		
 		if(result >0){
-			return "main/mainHotel";
+			return "userMyPage/editProfile";
 			
 		}else{
 			return "common/errorPage";
@@ -154,7 +154,7 @@ public class UserController {
 		int mId = m.getmId();
 		
 		ArrayList<MemberReservation>reservationList = ms.selectReservationHistory(mId);
-		
+		System.out.println("reservation"+ reservationList);
 		
 		
 		model.addAttribute("reservationList", reservationList);

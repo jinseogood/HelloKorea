@@ -160,13 +160,13 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne("BoardAndReply.selectbId",mId);
 	}
 
-	/*@Override
-	public ArrayList<MemberPoint> selectMemberPonit(int mId, SqlSessionTemplate sqlSession) {
-		ArrayList<MemberPoint> list =(ArrayList)sqlSession.selectList("MemberPoint.selectMemberPonit", mId);
-		
-		
-		return list;
-	}*/
+	@Override
+	public int emailCheck(String email, SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("Member.emailCheck",email);
+	}
+
+
 
 
 

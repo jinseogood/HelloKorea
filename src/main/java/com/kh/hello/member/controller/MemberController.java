@@ -412,7 +412,25 @@ public class MemberController {
 		}
     }
     
-    
+    @RequestMapping(value="emailCheck.me")
+    public void emailCheck(String email,HttpServletResponse response){
+    	System.out.println(email);
+    	int result =ms.emailCheck(email);
+    	
+    	ObjectMapper mapper = new ObjectMapper();
+    	try {
+			response.getWriter().println(mapper.writeValueAsString(result));
+		} catch (JsonGenerationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
     
     
     
