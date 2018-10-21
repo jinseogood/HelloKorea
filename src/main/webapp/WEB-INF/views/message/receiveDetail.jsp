@@ -106,7 +106,7 @@ label{
 						</div>
 						<label for="content" class="col-lg-2 col-sm-2 control-label">&nbsp;내용</label>
 						<div class="col-lg-10">
-							<textarea id="content" class="form-control" rows="5" placeholder="${m.content}" readonly></textarea>
+							<textarea id="content" class="form-control" rows="4" placeholder="${m.content}" readonly></textarea>
 						</div>
 						<div class="form-group" align="center" id="btnArea">
 						    <form action="sendView" method="post">
