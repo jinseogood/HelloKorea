@@ -77,6 +77,8 @@ public interface MemberService {
 	
 	//활동내역 bId
 	int selectbId(int mId);
+	//이메일체크
+	int emailCheck(String email);
 
 	
 	
