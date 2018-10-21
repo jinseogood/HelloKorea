@@ -879,28 +879,28 @@ public class SubInformationController {
 	
 	
 	@RequestMapping(value="themeSearchCondition.sub")
-	public void themeSearchCondition(HttpServletRequest request, HttpServletResponse response, @RequestParam int areaCode, @RequestParam String sigunguCode, @RequestParam int contenttypeid, @RequestParam String cat1, @RequestParam String cat2, @RequestParam String cat3, @RequestParam int pageNo) throws IOException{
+	public void themeSearchCondition(HttpServletRequest request, HttpServletResponse response, @RequestParam int contenttypeid, @RequestParam int contentid) throws IOException{
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
-		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=";
-
-
+		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
 		String parameter = "";
+		System.out.println(contenttypeid);
+		System.out.println(contentid);
 		
 		PrintWriter out = response.getWriter();
 		parameter = parameter + "&" + "contentTypeId="+contenttypeid;
-		parameter = parameter + "&" + "areaCode="+areaCode;
-		parameter = parameter + "&" + "sigunguCode="+sigunguCode;
-		parameter = parameter + "&" + "cat1="+cat1;
-		parameter = parameter + "&" + "cat2="+cat2;
-		parameter = parameter + "&" + "cat3="+cat3;
-		parameter = parameter + "&" + "listYN=Y";
+		parameter = parameter + "&" + "contentId="+contentid;
 		parameter = parameter + "&" + "MobileOS=ETC";
 		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
-		parameter = parameter + "&" + "arrange=A";
-		parameter = parameter + "&" + "numOfRows=12";
-		parameter = parameter + "&" + "pageNo="+pageNo;
+		parameter = parameter + "&" + "defaultYN=Y";
+		parameter = parameter + "&" + "firstImageYN=Y";
+		parameter = parameter + "&" + "areaCodeYN=Y";
+		parameter = parameter + "&" + "catcodeYN=Y";
+		parameter = parameter + "&" + "addrinfoYN=Y";
+		parameter = parameter + "&" + "mapinfoYN=Y";
+		parameter = parameter + "&" + "overviewYN=Y";
+		parameter = parameter + "&" + "transGuideYN=Y";
 		parameter = parameter + "&" + "_type=json";
 		
 		addr = addr + serviceKey + parameter;

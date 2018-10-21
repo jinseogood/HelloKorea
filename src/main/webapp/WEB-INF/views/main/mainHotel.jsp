@@ -1029,6 +1029,22 @@
 			}); */
 		});
 		
+		function mainHotelData(){
+			var num = 3;
+			var rowArea = $("#rowArea");
+			rowArea.html("");
+			for(var i = 0; i < num; i++){
+				$.ajax({
+					url:"mainHotelData.com",
+					type:"GET",
+					success:function(data){
+						console.log("성공?");
+						console.log(data);
+					},error:function(data){console.log("실패"); console.log(data);}
+				});
+			}
+		}
+		
 	</script>
 	
 
