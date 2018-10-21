@@ -88,7 +88,8 @@ public class MessageController {
 		if(result > 0){
 			int listCount = ms.getSendMessageCount(m.getSendId());
 			PageInfo pi = Pagination.getPageInfo(1, listCount);		
-			ArrayList<Message> list = ms.selectSendMessage(m.getSendId(), pi); 
+			ArrayList<Message> list = ms.selectSendMessage(m.getSendId(), pi);
+			model.addAttribute("mId",m.getSendId());
 			model.addAttribute("list", list);
 			model.addAttribute("pi", pi);
 			return "message/sendMessage";
