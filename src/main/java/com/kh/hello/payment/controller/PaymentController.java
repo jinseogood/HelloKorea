@@ -273,8 +273,15 @@ public class PaymentController {
 				Email email=new Email();
 				email.setMailFrom("hellokoreamailservice@gmail.com");
 				email.setMailTo(p.getPaEmail());
-				email.setMailSubject(p.getPaName() + "님 예약 확인 메일입니다.");
-				email.setTemplateName("emailtemplate.vm");
+				email.setMailSubject(p.getPaName() + "님 예약 확인 메일입니다.");*/
+				
+				//일반 메일
+				/*email.setMailContent("예약이 완료 되었습니다.");
+				EmailSender es=new EmailSender();
+				es.sendMailNormal(email);*/
+				
+				//템플릿 메일
+				/*email.setTemplateName("emailtemplate.vm");
 				ApplicationContext context = new FileSystemXmlApplicationContext("D:/git/HelloKorea/src/main/resources/root-context.xml");
 				EmailSender es = (EmailSender) context.getBean("mailer");
 				

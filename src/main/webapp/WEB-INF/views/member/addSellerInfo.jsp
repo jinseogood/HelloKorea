@@ -159,8 +159,7 @@ input[type='text']{
 			 
 			 
 		 }else{
-			var form = $("#sellerForm");
-			form.submit();
+			$("#sellerForm").submit();
 			 
 		 }
 		 
