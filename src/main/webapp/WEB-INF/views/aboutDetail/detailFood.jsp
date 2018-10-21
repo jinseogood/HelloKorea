@@ -17,7 +17,6 @@
 <title>Hello Korea</title>
 <style>
 	#more{margin-top:5%;}
-	/* .firstImgArea{display:inline-block;} */
 	.imgArea{display:block;}
 	.firstImg{width:528px; height:435px;}
 	.secondImgArea{display:inline-block;}

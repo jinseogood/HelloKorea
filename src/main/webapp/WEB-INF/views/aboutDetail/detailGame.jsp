@@ -85,7 +85,7 @@
 		<div class="col-lg-7 col-md-7">
 			<div id="google-map"></div>
 		</div>
-		
+		<div id ="todaysWeather"></div>
 		<div id="openweathermap-widget-15" class="col-lg-5"></div>
 			<script>window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];  window.myWidgetParam.push({id: 15,cityid: '1835848',appid: '49736052d2b9402c5764e0f24834cf25',units: 'metric',containerid: 'openweathermap-widget-15',  });  (function() {var script = document.createElement('script');script.async = true;script.charset = "utf-8";script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(script, s);  })();</script>
 		<!-- <div class="col-lg-5 col-md-5">
@@ -256,7 +256,39 @@
 		var mapy = ${param.mapy};
 		var mapx = ${param.mapx};
 		
-		function weatherMap(){
+		/* function parseWeather() 
+        { 
+              loadJSON(function(response) 
+              {
+                  var jsonData = JSON.parse(response);
+                   document.getElementById("todaysWeather").innerHTML = jsonData["list"][0]["weather"][0]["main"];
+              });
+        }
+
+       function loadJSON(callback) //url의 json 데이터 불러오는 함수
+       {   
+          var url = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Busan,KR&cnt=7&APPID=4e95de8308c48e4d1d7d0596f92d4d4d";
+          var request = new XMLHttpRequest();
+          request.overrideMimeType("application/json");
+          request.open('GET', url, true);
+
+          request.onreadystatechange = function () 
+
+          {
+            if (request.readyState == 4 && request.status == "200") 
+            {
+              callback(request.responseText);
+            }
+          };
+          request.send(null);  
+      } 
+      window.onload = function()
+      {
+        parseWeather();
+      } */
+		
+		
+	 	function weatherMap(){
 			
 			console.log("펑션y : " + mapy);
 			console.log("펑션x : " + mapx);

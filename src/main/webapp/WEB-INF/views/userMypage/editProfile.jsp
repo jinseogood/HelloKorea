@@ -41,12 +41,12 @@
     overflow: hidden;
     background-color: white;
 }
-.container{
-	width:1400px !important;
-	margin-left: 0px  !important;
-	padding-left:0px  !important;
+ .container1{
+	width:100% !important;
+	/* margin-left:auto  !important;
+	padding-left:auto  !important; */
 	
-}
+} 
 #insertDiv{
 	margin-left:auto;
 	margin-right:auto;
@@ -58,7 +58,7 @@
 
 </style>
 <body>
-	<div class="container">
+	<div class="container1">
 	<jsp:include page="../common/menubar.jsp"/>
     <!-- Sign up form -->
     <jsp:include page="../common/userMenubar.jsp"/>
