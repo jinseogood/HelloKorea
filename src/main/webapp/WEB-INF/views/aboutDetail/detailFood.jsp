@@ -260,7 +260,7 @@
           var marker = new google.maps.Marker({ //마커 설정
               map : map,
               position : mapLocation, //마커 위치
-              icon : image,//마커 이미지
+              //icon : image,//마커 이미지
               title : title//가게이름..
           });
           /* var marker = new google.maps.Marker({

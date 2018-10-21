@@ -1055,34 +1055,9 @@
 					url:"mainHotelData.com",
 					type:"GET",
 					async:false,
-					dataType:"json",
 					success:function(data){
 						console.log("성공?");
-						console.log(data);
-						for(var i = 0; i < 3; i++){
-							contenttypeid = 32;
-							contentid = data[i].contentid
-							cid = data[i].cid;
-							output = "";
-							output += "<div class='col-lg-4 col-md-4 col-sm-6' id='rowArea1'>";
-							output += "<div class='tm-home-box-1 tm-home-box-1-2 tm-home-box-1-center'>";
-							$.ajax({
-								url:"detailHotelImage.sub",
-								type:"GET",
-								data:{contentid:contentid},
-								dataType:"json",
-								async:false,
-								success:function(ddata){
-									output += "<img src="+ddata.response.body.items.item.firstimage+" alt='image' class='img-responsive0'/>";
-								},error:function(ddata){console.log(ddata);}
-							});
-							output += "<a href='#'>";
-							output += "<div class='tm-green-gradient-bg tm-city-price-container'>";
-							output += "<span>"+data[i].cName+"</span>";
-							output += "<span>"+data[i].grade+"</span>";
-							output += "</div></a></div></div>";
-							document.getElementById("rowArea").innerHTML += output;
-						}
+						
 					},error:function(data){console.log("실패"); console.log(data);}
 				});
 			
@@ -1297,9 +1272,9 @@
 			});
 		}
 		
-		function detailView(contentid, contenttypeid){
+		function detailView(contentid, contenttypeid, mapy, mapx){
 			console.log("컨텐츠타입 : " + contenttypeid);
-				location.href="${contextPath}/detailGame?contentid="+contentid+"&contenttypeid="+contenttypeid;
+				location.href="${contextPath}/detailGame?contentid="+contentid+"&contenttypeid="+contenttypeid+"&mapy="+mapy+"&mapx=";
 		}
 			
 		
@@ -1449,7 +1424,7 @@
 						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
-						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+","+themeData.mapy+","+themeData.mapx+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1479,7 +1454,7 @@
 						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
-						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+","+themeData.mapy+","+themeData.mapx+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1508,7 +1483,7 @@
 						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
-						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+","+themeData.mapy+","+themeData.mapx+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1537,7 +1512,7 @@
 						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
-						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+","+themeData.mapy+","+themeData.mapx+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1569,7 +1544,7 @@
 						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
-						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+","+themeData.mapy+","+themeData.mapx+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1599,7 +1574,7 @@
 						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
-						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+","+themeData.mapy+","+themeData.mapx+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1628,7 +1603,7 @@
 						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
-						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+","+themeData.mapy+","+themeData.mapx+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1657,7 +1632,7 @@
 						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
-						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+","+themeData.mapy+","+themeData.mapx+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1689,7 +1664,7 @@
 						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
-						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+","+themeData.mapy+","+themeData.mapx+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1719,7 +1694,7 @@
 						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
-						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+","+themeData.mapy+","+themeData.mapx+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1748,7 +1723,7 @@
 						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
-						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+","+themeData.mapy+","+themeData.mapx+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1777,7 +1752,7 @@
 						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
-						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+","+themeData.mapy+","+themeData.mapx+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1809,7 +1784,7 @@
 						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
-						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+","+themeData.mapy+","+themeData.mapx+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1838,7 +1813,7 @@
 						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
-						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+","+themeData.mapy+","+themeData.mapx+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1867,7 +1842,7 @@
 						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
-						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+","+themeData.mapy+","+themeData.mapx+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1896,7 +1871,7 @@
 						}
 						output += "<div class='tm-home-box-2-container'>";
 						output += "<a onclick='btnGood("+themeData.contenttypeid+","+themeData.contentid+");' class='tm-home-box-2-link goodBtn'><i class='fa fa-heart-o tm-home-box-2-icon border-right'></i></a>";
-						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
+						output += "<a onclick='detailView("+themeData.contentid+","+themeData.contenttypeid+","+themeData.mapy+","+themeData.mapx+");' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
 						output += "</div></div>";
 						containerArea.html(output);
 					},
@@ -1913,70 +1888,6 @@
 	
 	<!-- white bg -->
 	<section class="tm-white-bg section-padding-bottom">
-		<div class="container">
-			<div class="row">
-				<div class="tm-section-header section-margin-top">
-					<div class="col-lg-4 col-md-3 col-sm-3"><hr></div>
-					<div class="col-lg-4 col-md-6 col-sm-6"><h2 class="tm-section-title">내용미정(커스터마이징 뷰 예정)</h2></div>
-					<div class="col-lg-4 col-md-3 col-sm-3"><hr></div>	
-				</div>
-				<div class="row">
-				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12">
-					<div class="tm-home-box-2">						
-						<img src="${ contextPath }/resources/img/index-03.jpg" alt="image" class="img-responsive2">
-						<h3>Proin Gravida Nibhvel Lorem Quis Bind</h3>
-						<p class="tm-date">28 March 2016</p>
-						<div class="tm-home-box-2-container">
-							<a href="#" class="tm-home-box-2-link"><i class="fa fa-heart tm-home-box-2-icon border-right"></i></a>
-							<a href="#" class="tm-home-box-2-link"><span class="tm-home-box-2-description">Travel</span></a>
-							<a href="#" class="tm-home-box-2-link"><i class="fa fa-edit tm-home-box-2-icon border-left"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12">
-					<div class="tm-home-box-2">						
-					    <img src="${ contextPath }/resources/img/index-04.jpg" alt="image" class="img-responsive2">
-						<h3>Proin Gravida Nibhvel Lorem Quis Bind</h3>
-						<p class="tm-date">26 March 2016</p>
-						<div class="tm-home-box-2-container">
-							<a href="#" class="tm-home-box-2-link"><i class="fa fa-heart tm-home-box-2-icon border-right"></i></a>
-							<a href="#" class="tm-home-box-2-link"><span class="tm-home-box-2-description">Travel</span></a>
-							<a href="#" class="tm-home-box-2-link"><i class="fa fa-edit tm-home-box-2-icon border-left"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12">
-					<div class="tm-home-box-2">						
-					    <img src="${ contextPath }/resources/img/index-05.jpg" alt="image" class="img-responsive2">
-						<h3>Proin Gravida Nibhvel Lorem Quis Bind</h3>
-						<p class="tm-date">24 March 2016</p>
-						<div class="tm-home-box-2-container">
-							<a href="#" class="tm-home-box-2-link"><i class="fa fa-heart tm-home-box-2-icon border-right"></i></a>
-							<a href="#" class="tm-home-box-2-link"><span class="tm-home-box-2-description">Travel</span></a>
-							<a href="#" class="tm-home-box-2-link"><i class="fa fa-edit tm-home-box-2-icon border-left"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12">
-					<div class="tm-home-box-2 tm-home-box-2-right">						
-					    <img src="${ contextPath }/resources/img/index-06.jpg" alt="image" class="img-responsive2">
-						<h3>Proin Gravida Nibhvel Lorem Quis Bind</h3>
-						<p class="tm-date">22 March 2016</p>
-						<div class="tm-home-box-2-container">
-							<a href="#" class="tm-home-box-2-link"><i class="fa fa-heart tm-home-box-2-icon border-right"></i></a>
-							<a href="#" class="tm-home-box-2-link"><span class="tm-home-box-2-description">Travel</span></a>
-							<a href="#" class="tm-home-box-2-link"><i class="fa fa-edit tm-home-box-2-icon border-left"></i></a>
-						</div>
-					</div>
-				</div>
-			</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<p class="home-description">Holiday is free Bootstrap v3.3.5 responsive template for tour and travel websites. You can download and use this layout for any purpose. You do not need to provide a credit link to us. If you have any question, feel free to <a href="http://www.facebook.com/templatemo" target="_parent">contact us</a>. Credit goes to <a rel="nofollow" href="http://unsplash.com" target="_parent">Unspash</a> for images used in this template.</p>					
-				</div>
-			</div>		
-		</div>
 	</section>
 	
 	<jsp:include page="../common/footer.jsp"/>

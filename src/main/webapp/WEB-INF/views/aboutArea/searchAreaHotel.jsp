@@ -50,12 +50,12 @@
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6"></div>
 					<div class="col-lg-3 col-md-3 col-sm-3" align="right">
-						<span class="tm-section-title" style="font-size:20px;">정렬 : <a class="orderByClass" onclick="orderByHotel('name');">이름순</a> <a class="oderByClass" onclick="orderByHotel('grade');">평점높은순</a></span>
+						<span class="tm-section-title" style="font-size:20px;">정렬 : <!-- <a class="orderByClass" onclick="orderByHotel('name');">이름순</a> --> <a class="oderByClass" onclick="orderByHotel('grade');">평점높은순</a></span>
 					</div>	
 					<br><br>
 				<div class="col-lg-3" align="left">
 					<br>
-					<div class="col-lg-12 col-md-12 col-sm-12" align="left">
+					<div class="col-lg-12 col-md-12 col-sm-12" align="left"><!-- 가격 낮은순// 평점높은순//  -->
 						<span class="tm-section-title" style="font-size:25px; border-bottom:1px solid #ccc;"><b>가격</b></span>
 						<br>
 						<input type="radio" class="hotelSearchMoney" value="1" id="price1" name="hotelSearchConditionMoney" style="width:17px; height:17px;"/>
@@ -80,7 +80,7 @@
 					</div>
 					
 					<br>
-					<div class="col-lg-12 col-md-12 col-sm-12" align="left">
+					<!-- <div class="col-lg-12 col-md-12 col-sm-12" align="left">
 						<span class="tm-section-title" style="font-size:25px; border-bottom:1px solid #ccc;"><b>평점</b></span>
 						<br>
 						<input type="radio" class="hotelSearchAvg" value="fiveAvg" id="fiveStar" name="hotelAvg" style="width:15px; height:15px;"/>
@@ -91,7 +91,7 @@
 						<label for="threeStar" class="hotelSearchText">&nbsp;&nbsp;★★★☆☆ 이상</label><br>
 						<input type="radio" class="hotelSearchAvg" value="twoAvg" id="twoStar" name="hotelAvg" style="width:15px; height:15px;"/>
 						<label for="twoStar" class="hotelSearchText">&nbsp;&nbsp;★★☆☆☆ 이상</label><br>
-					</div>
+					</div> -->
 					
 					
 					
@@ -557,7 +557,7 @@
 							if(data[i].grade > 3 && data[i].grade <= 3.5){
 								output += "<i class='fas fa-star' style='font-size:20px;'></i>";
 								output += "<i class='fas fa-star' style='font-size:20px'></i>";
-								output += "<i class='far fa-star' style='font-size:20px'></i>";
+								output += "<i class='fas fa-star' style='font-size:20px'></i>";
 								output += "<i class='fas fa-star-half-alt' style='font-size:20px'></i>";
 								output += "<i class='far fa-star' style='font-size:20px'></i>";
 							}
