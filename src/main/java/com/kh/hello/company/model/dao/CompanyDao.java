@@ -42,7 +42,10 @@ public interface CompanyDao {
 
 	ArrayList<Company2> selectOrderByFiveAvg(SqlSessionTemplate sqlSession, Company2 cp);
 
-	ArrayList<Company2> selectCompanyTop3(SqlSessionTemplate sqlSession, Company2 cp2);
+	ArrayList<Company2> selectCompanyTop3(SqlSessionTemplate sqlSession, Company2 cp);
+
+	Company2 selectGradeCheck(SqlSessionTemplate sqlSession, Company2 cp);
+
 
 
 

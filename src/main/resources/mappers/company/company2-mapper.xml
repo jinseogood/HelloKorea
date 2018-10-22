@@ -13,6 +13,7 @@
       <result property="mid" column="M_ID"/>
       <result property="grade" column="GRADE"/>
       <result property="minPrice" column="MINPRICE"/>
+      <result property="reviewCount" column="REVIEWCOUNT"/>
    </resultMap>
    
    <!-- 호텔 조회 -->
@@ -54,30 +55,28 @@
    	ORDER BY GRADE DESC
    </select>
    
-   <!-- 가격대 1번 정렬 -->
+   <!-- 가격낮은순 -->
    <select id="selectListOrderMoney1" resultMap="company2ResultSet">
-   	SELECT DISTINCT C.C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID, NVL(AVG(GRADE),0) as GRADE, MIN(R_PRICE) as MINPRICE
+   	SELECT DISTINCT C.C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID, NVL(AVG(GRADE), 0) AS GRADE, MIN(R_PRICE) AS MINPRICE
    	FROM COMPANY C
    	LEFT JOIN BOARD B ON (C.C_ORIGINID = B.ORIGIN_ID)
    	JOIN ROOM R ON (C.C_ID = R.C_ID)
-   	WHERE R_PRICE BETWEEN 1000 AND 9900
    	AND C_ADDRESS LIKE '%' || #{areaName} || '%'
    	AND C_ADDRESS LIKE '%' || #{sigunguName} || '%'
    	GROUP BY C.C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID
-   	ORDER BY C_NAME
+   	ORDER BY MINPRICE, C_NAME 
    </select>
    
-   <!-- 가격대 2번 정렬 -->
+   <!-- 평점높은순 -->
     <select id="selectListOrderMoney2" resultMap="company2ResultSet">
-   	SELECT DISTINCT C.C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID, AVG(GRADE) as GRADE, MIN(R_PRICE) as MINPRICE
+   	SELECT DISTINCT C.C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID, NVL(AVG(GRADE), 0) AS GRADE, MIN(R_PRICE) as MINPRICE
    	FROM COMPANY C
 	LEFT JOIN BOARD B ON (C.C_ORIGINID = B.ORIGIN_ID)
 	JOIN ROOM R ON (C.C_ID = R.C_ID)
-   	WHERE R_PRICE BETWEEN 10000 AND 99000
    	AND C_ADDRESS LIKE '%' || #{areaName} || '%'
    	AND C_ADDRESS LIKE '%' || #{sigunguName} || '%'
    	GROUP BY C.C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID
-   	ORDER BY C_NAME
+   	ORDER BY GRADE DESC
    </select>
    
    <!-- 가격대 3번 정렬 -->
@@ -147,13 +146,22 @@
    
    <!-- 메인용, 상위평점 3개뽑기 -->
    <select id="selectListCompanyTop3" resultMap="company2ResultSet">
-   	SELECT C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, M_ID, GRADE
-   	FROM (SELECT C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID, NVL(AVG(GRADE), 0) AS GRADE
+   	SELECT C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, M_ID, GRADE, REVIEWCOUNT
+   	FROM (SELECT C.C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID, NVL(AVG(GRADE), 0) AS GRADE, NVL(COUNT(ORIGIN_ID), 0) AS REVIEWCOUNT
    		  FROM COMPANY C
-   		  LEFT JOIN BOARD B ON (C_ORIGINID = ORIGIN_ID)
-   		  GROUP BY C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID
+   		  LEFT JOIN BOARD B ON (C.C_ORIGINID = B.ORIGIN_ID)
+   		  GROUP BY C.C_ID, C_ADDRESS, C_ORIGINID, C_NAME, C_PHONE, C.M_ID
    		  ORDER BY GRADE DESC)
    	WHERE ROWNUM <![CDATA[<]]> 4
+   </select>
+   
+   <!-- 음식점 오락거리 평점조회 -->
+   <select id="selectGradeCheck" parameterType="Company2" resultMap="company2ResultSet">
+   	SELECT C_ORIGINID, NVL(AVG(GRADE), 0) AS GRADE
+   	FROM COMPANY C
+   	LEFT JOIN BOARD B ON (C.C_ORIGINID = B.ORIGIN_ID)
+   	WHERE C_ORIGINID = #{contentid}
+   	GROUP BY C_ORIGINID
    </select>
    
    

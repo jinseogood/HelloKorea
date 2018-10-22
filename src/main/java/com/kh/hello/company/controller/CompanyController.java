@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kh.hello.company.model.service.CompanyService;
@@ -24,6 +25,8 @@ import com.kh.hello.company.model.vo.Reservation2;
 import com.kh.hello.company.model.vo.Reservations;
 import com.kh.hello.company.model.vo.Room2;
 import com.kh.hello.member.model.vo.Member;
+
+import net.sf.json.JSONObject;
 
 @Controller
 public class CompanyController {
@@ -775,10 +778,10 @@ public class CompanyController {
 		}else if(value.equals("grade")){//평점..
 			ArrayList<Company2> list = cs.selectOrderByGrade(cp);
 			response.getWriter().print(mapper.writeValueAsString(list));
-		}else if(value.equals("1")){//가격대 1번. 10만 ~ 19만9천
+		}else if(value.equals("1")){//가격낮은순----------------------------
 			ArrayList<Company2> list = cs.selectOrderByMoney1(cp);
 			response.getWriter().print(mapper.writeValueAsString(list));
-		}else if(value.equals("2")){//가격대2번. 20만 ~ 29만9천
+		}else if(value.equals("2")){//평점높은순----------------------------
 			ArrayList<Company2> list = cs.selectOrderByMoney2(cp);
 			response.getWriter().print(mapper.writeValueAsString(list));
 		}else if(value.equals("3")){//가격대3번. 30만 ~
@@ -826,14 +829,30 @@ public class CompanyController {
 	public void mainHotelData(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		ArrayList<Company2> list = new ArrayList<Company2>();
-		Company2 cp2 = new Company2();
-		list = cs.selectCompanyTop3(cp2);
-		System.out.println("다녀온 리스트 : " + list);
-		response.getWriter().println(list);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		Company2 cp = new Company2();
+		ArrayList<Company2> list = cs.selectCompanyTop3(cp);
+		
+		response.getWriter().print(mapper.writeValueAsString(list));
+//		JSONObject json = new JSONObject();
+//		json.put("list", list);
 	}
 	
 	
+	@RequestMapping(value="gradeCheck.com")
+	public void gradeCheck(HttpServletRequest request, HttpServletResponse response, @RequestParam String contentid) throws IOException{
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		Company2 cp = new Company2();
+		cp.setContentid(contentid);
+		
+		cp = cs.selectGradeCheck(cp);
+		System.out.println(cp);
+		response.getWriter().println(cp);
+		
+	}
 	
 	
 	

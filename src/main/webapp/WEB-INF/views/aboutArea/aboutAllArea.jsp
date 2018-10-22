@@ -10,6 +10,8 @@
 <style>
 	#more{margin-top:5%;}
 	.img-responsive2{width:254px; height:185px;}
+	.areaMainPicture{width:528px; height:435px;}
+	.goDetailView{cursor:pointer;}
 </style>
 </head>
 <body>
@@ -24,11 +26,11 @@
 			<div class="flexslider flexslider-about effect2">
 			  <ul class="slides">
 			    <li>
-			      <img src="${ contextPath }/resources/img/about-1.jpg" alt="image" />
+			      <img src="${ contextPath }/resources/img/about-01.jpg" alt="image" id="areaMainPicture" class="areaMainPicture"/>
 			      <div class="flex-caption">
 			      	<h2 class="slider-title"> </h2>
 			      	<h3 class="slider-subtitle"></h3>
-			      	<p class="slider-description">서울 소개입니다. 얄리얄리 얄라셩 얄라리 얄라</p>
+			      	<p class="slider-description"></p>
 			      </div>			      
 			    </li>
 			  </ul>
@@ -50,8 +52,12 @@
 			
 			if(areaCode == 1){
 				$(".flex-caption .slider-title").text("서울");
+				$(".slider-description").text("서울은 한국의 비즈니스와 문화의 중심지로, 불교 사원 너머로 고층 빌딩이 우뚝 솟은 곳입니다. 서울은 산업과 기술의 폭발적인 유입으로 세계적인 도시가 되었습니다. 남산 공원 정상에 세워진 N 서울 타워에서 서울을 한눈에 바라보십시오. 인사동의 찻집과 가게들이 한국의 맛을 살짝 보여준다면, 경복궁과 경복궁 박물관에서는 한국 문화를 좀 더 자세히 경험할 수 있습니다. 유네스코 세계 유산에도 등재된 창덕궁은 진정으로 고대 건축물의 훌륭한 예시라고 할 수 있습니다.");
+				$("#areaMainPicture").attr("src","${contextPath}/resources/img/seoulMianPicture.png");
 			}else if(areaCode == 2){
 				$(".flex-caption .slider-title").text("인천");
+				$(".slider-description").text("예술과 엔터테인먼트, 쇼핑, 역사와 자연 환경까지, 인천은 모든 것을 갖춘 곳입니다! 현재 인천에서는 2015년 완성을 목표로 한 대규모 부동산 및 도시 개발 사업이 진행되고 있습니다. 제17회 아시안 게임이 개최되는 2014년에는 많은 관광객이 인천을 방문할 것으로 예상됩니다. 국내 최대 규모의 지하상가로 꼽히는 부평 지하상가는 최신 유행 패션과 잡화, 브랜드 상품이 즐비하여 쇼핑객들에게 즐거움을 선사합니다. 자유 공원을 산책하며 근대사의 흔적을 짚어보고, 인천 상륙작전 기념관에도 방문해 봅시다. 국내 유일의 차이나타운에서는 본격적인 중국 요리를 맛볼 수 있으며, 기념품 가게도 있습니다. 바쁘게 돌아가는 도시 생활에서 잠시 벗어나고 싶을 때는, 인근 섬으로 페리를 타고 짧은 여행을 다녀오는 것도 좋습니다.");
+				$("#areaMainPicture").attr("src","");
 			}else if(areaCode == 3){
 				$(".flex-caption .slider-title").text("대전");
 			}else if(areaCode == 4){
@@ -111,6 +117,8 @@
 							for(var i = 0; i < myData.length; i++){
 								count++;
 								output = "";
+								contenttypeid = myData[i].contenttypeid;
+								contentid = myData[i].contentid;
 								output += "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12'>";
 								output += "<div class='tm-home-box-2'>";
 								if(myData[i].firstimage == null){
@@ -118,7 +126,7 @@
 								}else{
 									output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive2'>";
 								}
-								output += "<h3>"+myData[i].title+"</h3>";
+								output += "<h3 class='goDetailView' onclick='goHotelDetail("+contentid+","+contenttypeid+");'>"+myData[i].title+"</h3>";
 								output += "</div></div>";
 								document.getElementById("rowHotelArea").innerHTML += output;
 								if(count == 4){
@@ -132,6 +140,9 @@
 						console.log(data);
 					}
 				});
+			}
+			function goHotelDetail(contentid, contenttypeid){
+				location.href="${contextPath}/detailHotel?contentid="+contentid+"&contenttypeid="+contenttypeid;
 			}
 			
 			function aboutMainFood(){
@@ -149,6 +160,8 @@
 						var count = 0;
 						for(var i = 0; i < myData.length; i++){
 							count++;
+							contentid = myData[i].contentid;
+							contenttypeid = myData[i].contenttypeid;
 							output = "";
 							output += "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12'>";
 							output += "<div class='tm-home-box-2'>";
@@ -157,7 +170,7 @@
 							}else{
 								output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive2'>";
 							}
-							output += "<h3>"+myData[i].title+"</h3>";
+							output += "<h3 class='goDetailView' onclick='goDetailFood("+contenttypeid+","+contentid+");'>"+myData[i].title+"</h3>";
 							output += "</div></div>";
 							document.getElementById("rowFoodArea").innerHTML += output;
 							if(count == 4){
@@ -169,6 +182,9 @@
 						console.log(data);
 					}
 				});
+			}
+			function goDetailFood(contenttypeid, contentid){
+				location.href="${contextPath}/detailFood?contenttypeid="+contenttypeid+"&contentid="+contentid;
 			}
 			
 			function aboutMainGame(){
@@ -187,6 +203,10 @@
 						for (var i = 0; i < myData.length; i++){
 							count++;
 							output = "";
+							contenttypeid = myData[i].contenttypeid;
+							contentid = myData[i].contentid;
+							mapy = myData[i].mapy;
+							mapx = myData[i].mapx;
 							output += "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12'>";
 							output += "<div class='tm-home-box-2'>";
 							if(myData[i].firstimage == null){
@@ -194,7 +214,7 @@
 							}else{
 								output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive2'>";
 							}
-							output += "<h3>"+myData[i].title+"</h3>";
+							output += "<h3 class='goDetailView' onclick='goDetailGame("+contentid+","+contenttypeid+","+mapy+","+mapx+");'>"+myData[i].title+"</h3>";
 							output += "</div></div>";
 							document.getElementById("rowGameArea").innerHTML += output;
 							if(count == 4){
@@ -206,6 +226,9 @@
 						console.log(data);
 					}
 				});
+			}
+			function goDetailGame(contentid, contenttypeid, mapy, mapx){
+				location.href="${contextPath}/detailGame?contentid="+contentid+"&contenttypeid="+contenttypeid+"&mapy="+mapy+"&mapx="+mapx;
 			}
 			
 		

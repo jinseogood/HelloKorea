@@ -21,11 +21,12 @@ public class Company2 implements Serializable{
 	private String sigunguName;
 	private double grade;
 	private double minPrice;
+	private int reviewCount;
 	
 	public Company2(){}
 
 	public Company2(int cid, String contentid, String cAddress, String cName, String cRnum, String cPhone, String cType,
-			String cpRnum, int mid, int areaCode, int sigunguCode, String areaName, String sigunguName, double grade, double minPrice) {
+			String cpRnum, int mid, int areaCode, int sigunguCode, String areaName, String sigunguName, double grade, double minPrice, int reviewCount) {
 		super();
 		this.cid = cid;
 		this.contentid = contentid;
@@ -42,6 +43,7 @@ public class Company2 implements Serializable{
 		this.sigunguName = sigunguName;
 		this.grade = grade;
 		this.minPrice = minPrice;
+		this.reviewCount = reviewCount;
 	}
 
 	public int getCid() {
@@ -164,13 +166,24 @@ public class Company2 implements Serializable{
 		this.minPrice = minPrice;
 	}
 
+	public int getReviewCount() {
+		return reviewCount;
+	}
+
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
+	}
+
 	@Override
 	public String toString() {
 		return "Company2 [cid=" + cid + ", contentid=" + contentid + ", cAddress=" + cAddress + ", cName=" + cName
 				+ ", cRnum=" + cRnum + ", cPhone=" + cPhone + ", cType=" + cType + ", cpRnum=" + cpRnum + ", mid=" + mid
 				+ ", areaCode=" + areaCode + ", sigunguCode=" + sigunguCode + ", areaName=" + areaName
-				+ ", sigunguName=" + sigunguName + ", grade=" + grade + ", minPrice=" + minPrice + "]";
+				+ ", sigunguName=" + sigunguName + ", grade=" + grade + ", minPrice=" + minPrice + ", reviewCount="
+				+ reviewCount + "]";
 	}
+
+	
 
 
 

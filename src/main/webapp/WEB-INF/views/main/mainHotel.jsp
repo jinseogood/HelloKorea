@@ -976,91 +976,51 @@
 			});
 			
 			
-			/* $.ajax({
-				url:"mainHotel1.in",
-				type:"GET",
-				dataType:"json",
-				success:function(data){
-					var rowArea = $("#rowArea #rowArea1");
-					rowArea.html("");
-					var firstData = data.response.body.items.item;
-					var output = "";
-					output += "<div class='tm-home-box-1 tm-home-box-1-2 tm-home-box-1-center'>";
-					output += "<img src="+firstData.firstimage+" alt='image' class='img-responsive0'>";
-					output += "<a href='#'>";
-					output += "<div class='tm-green-gradient-bg tm-city-price-container'>";
-					output += "<span>"+firstData.title+"</span>";
-					output += "</div></a></div>";
-					rowArea.html(output);
-				},
-				error:function(data){
-					console.log("1fail..");
-					console.log(data);
-				}
-			});
-			
-			$.ajax({
-				url:"mainHotel2.in",
-				type:"GET",
-				dataType:"json",
-				success:function(data){
-					var rowArea = $("#rowArea #rowArea2");
-					rowArea.html("");
-					var firstData = data.response.body.items.item;
-					var output = "";
-					output += "<div class='tm-home-box-1 tm-home-box-1-2 tm-home-box-1-center'>";
-					output += "<img src="+firstData.firstimage+" alt='image' class='img-responsive0'>";
-					output += "<a href='#'>";
-					output += "<div class='tm-green-gradient-bg tm-city-price-container'>";
-					output += "<span>"+firstData.title+"</span>";
-					output += "</div></a></div>";
-					rowArea.html(output);
-				},
-				error:function(data){
-					console.log("fail..");
-					console.log(data);
-				}
-			});
-			
-			$.ajax({
-				url:"mainHotel3.in",
-				type:"GET",
-				dataType:"json",
-				success:function(data){
-					var rowArea = $("#rowArea #rowArea3");
-					rowArea.html("");
-					var firstData = data.response.body.items.item;
-					var output = "";
-					output += "<div class='tm-home-box-1 tm-home-box-1-2 tm-home-box-1-center'>";
-					output += "<img src="+firstData.firstimage+" alt='image' class='img-responsive0'>";
-					output += "<a href='#'>";
-					output += "<div class='tm-green-gradient-bg tm-city-price-container'>";
-					output += "<span>"+firstData.title+"</span>";
-					output += "</div></a></div>";
-					rowArea.html(output);
-				},
-				error:function(data){
-					console.log("fail..");
-					console.log(data);
-				}
-			}); */
 			mainHotelData();
 		});
 		
 		function mainHotelData(){
 			var rowArea = $("#rowArea");
 			rowArea.html("");
+			var contenttypeid = 32;
 			var output = "";
 				$.ajax({
 					url:"mainHotelData.com",
 					type:"GET",
 					async:false,
+					dataType:"json",
 					success:function(data){
 						console.log("성공?");
-						
+						console.log(data);
+						for(var i in data){
+							contentid = data[i].contentid;
+							cid = data[i].cid;
+							output = "";
+							output += "<div class='col-lg-4 col-md-4 col-sm-6'>";
+							output += "<div class='tm-home-box-1 tm-home-box-1-2 tm-home-box-1-center'>";
+							$.ajax({
+								url:"hotelImageLoad.sub",
+								type:"GET",
+								async:false,
+								dataType:"json",
+								data:{contentid:contentid},
+								success:function(ddata){
+									if(ddata.response.body.items.item.firstimage != null){
+										output += "<img src="+ddata.response.body.items.item.firstimage+" alt='image' class='img-responsive0'/>";
+									}else{
+										output += "<img src='${contextPath}/resources/img/noImage.gif' alt='image' class='img-responsive0' />";
+									}
+								},error:function(ddata){console.log(ddata);}
+							});
+							output += "<a onclick='detailView("+contentid+","+contenttypeid+","+cid+");'>";
+							output += "<div class='tm-green-gradient-bg tm-city-price-container'>";
+							output += "<span>"+data[i].cName+"</span>";
+							output += "<span>"+data[i].reviewCount+"건의 리뷰</span>";
+							output += "</div></a></div></div>";
+							document.getElementById("rowArea").innerHTML += output;
+						}
 					},error:function(data){console.log("실패"); console.log(data);}
 				});
-			
 		}
 		
 	</script>
@@ -1274,135 +1234,16 @@
 		
 		function detailView(contentid, contenttypeid, mapy, mapx){
 			console.log("컨텐츠타입 : " + contenttypeid);
-				location.href="${contextPath}/detailGame?contentid="+contentid+"&contenttypeid="+contenttypeid+"&mapy="+mapy+"&mapx=";
+				location.href="${contextPath}/detailGame?contentid="+contentid+"&contenttypeid="+contenttypeid+"&mapy="+mapy+"&mapx="+mapx;
 		}
 			
 		
 			$(function(){
 				shoppingTheme();
-				/* $.ajax({
-					url:"mainThemeShopping.tm",
-					type:"GET",
-					dataType:"json",
-					success:function(data){
-						console.log(data);
-						var themeData = data.response.body.items.item;
-						var containerArea = $("#subContainer1");
-						containerArea.html("");
-						var output = "";
-						output += "<div class='tm-home-box-3-img-container'>";
-						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
-						output += "</div>";
-						output += "<div class='tm-home-box-3-info'>";
-						if(themeData.overview.length > 1){
-							var overviewText = "";
-							overviewText = themeData.overview.substring(0, 110) + "...";
-							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
-						}
-						output += "<div class='tm-home-box-2-container'>";
-						output += "<input type='hidden' id='contentidValue' value="+themeData.contentid+">";
-						output += "<a onclick='btnGood();' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
-						output += "</div></div>";
-						containerArea.html(output);
-						console.log("컨텐츠아이디 : " + $("#contentidValue").val());
-					},
-					error:function(data){
-						console.log("fail..");
-						console.log(data);
-					}
-				});
-				$.ajax({
-					url:"mainThemeShopping2.tm",
-					type:"GET",
-					dataType:"json",
-					success:function(data){
-						console.log(data);
-						var themeData = data.response.body.items.item;
-						var containerArea = $("#subContainer2");
-						containerArea.html("");
-						var output = "";
-						output += "<div class='tm-home-box-3-img-container'>";
-						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
-						output += "</div>";
-						output += "<div class='tm-home-box-3-info'>";
-						if(themeData.overview.length > 1){
-							var overviewText = "";
-							overviewText = themeData.overview.substring(0, 110) + "...";
-							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
-						}
-						output += "<div class='tm-home-box-2-container'>";
-						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
-						output += "</div></div>";
-						containerArea.html(output);
-					},
-					error:function(data){
-						console.log(data);
-					}
-				});
-				$.ajax({
-					url:"mainThemeShopping3.tm",
-					type:"GET",
-					dataType:"json",
-					success:function(data){
-						console.log(data);
-						var themeData = data.response.body.items.item;
-						var containerArea = $("#subContainer3");
-						containerArea.html("");
-						var output = "";
-						output += "<div class='tm-home-box-3-img-container'>";
-						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
-						output += "</div>";
-						output += "<div class='tm-home-box-3-info'>";
-						if(themeData.overview.length > 1){
-							var overviewText = "";
-							overviewText = themeData.overview.substring(0, 110) + "...";
-							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
-						}
-						output += "<div class='tm-home-box-2-container'>";
-						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
-						output += "</div></div>";
-						containerArea.html(output);
-					},
-					error:function(data){
-						console.log(data);
-					}
-				});
-				$.ajax({
-					url:"mainThemeShopping4.tm",
-					type:"GET",
-					dataType:"json",
-					success:function(data){
-						console.log(data);
-						var themeData = data.response.body.items.item;
-						var containerArea = $("#subContainer4");
-						containerArea.html("");
-						var output = "";
-						output += "<div class='tm-home-box-3-img-container'>";
-						output += "<img src="+themeData.firstimage+" alt='image' class='img-responsive1'>";
-						output += "</div>";
-						output += "<div class='tm-home-box-3-info'>";
-						if(themeData.overview.length > 1){
-							var overviewText = "";
-							overviewText = themeData.overview.substring(0, 110) + "...";
-							output += "<p class='tm-home-box-3-description' id='themeText'>"+overviewText+"</p>";
-						}
-						output += "<div class='tm-home-box-2-container'>";
-						output += "<a href='#' class='tm-home-box-2-link'><i class='fa fa-heart tm-home-box-2-icon border-right'></i></a>";
-						output += "<a href='#' class='tm-home-box-2-link'><span class='tm-home-box-2-description box-3' style='width:244px;'>"+themeData.title+"</span>";
-						output += "</div></div>";
-						containerArea.html(output);
-					},
-					error:function(data){
-						console.log(data);
-					}
-				}); */
 				
 			});
 			
-			function shoppingTheme(){
+			/* function shoppingTheme(){
 				$.ajax({
 					url:"mainThemeShopping.tm",
 					type:"GET",
@@ -1879,7 +1720,7 @@
 						console.log(data);
 					}
 				});
-			}
+			} */
 			
 			
 		</script>

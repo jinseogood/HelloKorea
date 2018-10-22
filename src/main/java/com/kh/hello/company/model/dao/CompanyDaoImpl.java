@@ -115,9 +115,15 @@ public class CompanyDaoImpl implements CompanyDao {
 	}
 
 	@Override
-	public ArrayList<Company2> selectCompanyTop3(SqlSessionTemplate sqlSession, Company2 cp2) {
-		return (ArrayList)sqlSession.selectList("Company2.selectListCompanyTop3", cp2);
+	public ArrayList<Company2> selectCompanyTop3(SqlSessionTemplate sqlSession, Company2 cp) {
+		return (ArrayList)sqlSession.selectList("Company2.selectListCompanyTop3", cp);
 	}
+
+	@Override
+	public Company2 selectGradeCheck(SqlSessionTemplate sqlSession, Company2 cp) {
+		return sqlSession.selectOne("Company2.selectGradeCheck", cp);
+	}
+
 
 
 

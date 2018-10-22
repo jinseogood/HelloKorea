@@ -6,10 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 <title>Hello Korea</title>
 <style>
 	#more{margin-top:5%;}
-	#detailClick:hover{cursor:pointer}
+	/* #detailClick:hover{cursor:pointer} */
 	.gameSearchText{font-size:20px;}
 	#detailHover{max-width:750px;}
 	#detailInfo-1{max-width:500px;}
@@ -18,6 +19,7 @@
 	#dibsBtn{padding:15px; width:50px; height:50px;}
 	#infoTextArea{height:175px; padding:10px 20px 44px; text-align:left; }
 	.img-responsive1{width:250px; height:225px;}
+	.detailViewContent{cursor:pointer;}
 </style>
 </head>
 <body>
@@ -145,11 +147,11 @@
 										mapy = myData.mapy;
 										mapx = myData.mapx;
 										output += "<div class='tm-home-box-3' id='detailHover'>";
-										output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");'>";
+										output += "<div class='tm-home-box-3-img-container' id='detailClick'>";
 										output += "<img src="+myData.firstimage+" alt='image' class='img-responsive1'/>";
 										output += "</div>";
 										output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
-										output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+										output += "<p class='tm-home-box-3-description detailViewContent' onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");' id='infoTextArea'>";
 										output += "<span style='font-size:23px;'>"+myData.title+"</span><br>";
 										$.ajax({
 											url:"detailGameInformation.sub",
@@ -187,7 +189,27 @@
 											}
 										});
 										//output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-										output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");' class='tm-home-box-2-description box-3'>뭐를너야할까</span></a>";
+										output += "<a onclick='' class='tm-home-box-2-link' id='tm-home-box-2-link-2'>";
+										output += "<span onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");' class='tm-home-box-2-description box-3'>";
+										$.ajax({
+											url:"gradeCheck.com",
+											type:"GET",
+											data:{contentid:contentid},
+											dataType:"json",
+											async:false,
+											success:function(ddatta){console.log("success");
+												if(ddatta == null){
+													output += "<i class='far fa-star' style='font-size:20px;'></i>";
+													output += "<i class='far fa-star' style='font-size:20px;'></i>";
+													output += "<i class='far fa-star' style='font-size:20px;'></i>";
+													output += "<i class='far fa-star' style='font-size:20px;'></i>";
+													output += "<i class='far fa-star' style='font-size:20px;'></i>";
+												}
+											},error:function(ddatta){console.log("fail");
+												
+											}
+										});
+										output += "</span></a>";
 										output += "</div></div></div>";
 										document.getElementById("viewArea").innerHTML += output;
 									}
@@ -200,11 +222,11 @@
 											mapx = myData[i].mapx;
 											output = "";
 											output += "<div class='tm-home-box-3' id='detailHover'>";
-											output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");'>";
+											output += "<div class='tm-home-box-3-img-container' id='detailClick'>";
 											output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
 											output += "</div>";
 											output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
-											output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+											output += "<p class='tm-home-box-3-description detailViewContent' onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");' id='infoTextArea'>";
 											output += "<span style='font-size:23px;'>"+myData[i].title+"</span><br>";
 											$.ajax({
 												url:"detailGameInformation.sub",
@@ -241,10 +263,27 @@
 													console.log(data);
 												}
 											});
-											//output += "<input type='hidden' value="+contenttypeid+">";
-											//output += "<input type='hidden' value="+contentid+">";
-											//output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-											output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");' class='tm-home-box-2-description box-3'>뭐를너야할까</span></a>";
+											output += "<a onclick='' class='tm-home-box-2-link' id='tm-home-box-2-link-2'>";
+											output += "<span class='tm-home-box-2-description box-3'>";
+											$.ajax({
+												url:"gradeCheck.com",
+												type:"GET",
+												data:{contentid:contentid},
+												dataType:"json",
+												async:false,
+												success:function(ddatta){console.log("success");
+													if(ddatta == null){
+														output += "<i class='far fa-star' style='font-size:20px;'></i>";
+														output += "<i class='far fa-star' style='font-size:20px;'></i>";
+														output += "<i class='far fa-star' style='font-size:20px;'></i>";
+														output += "<i class='far fa-star' style='font-size:20px;'></i>";
+														output += "<i class='far fa-star' style='font-size:20px;'></i>";
+													}
+												},error:function(ddatta){console.log("fail");
+													
+												}
+											});
+											output += "</span></a>";
 											output += "</div></div></div>";
 											document.getElementById("viewArea").innerHTML += output;
 										}
@@ -294,12 +333,14 @@
 									if(data.response.body.items.item.firstimage != null){
 										contenttypeid = myData.contenttypeid;
 										contentid = myData.contentid;
+										mapy = myData.mapy;
+										mapx = myData.mapx;
 										output += "<div class='tm-home-box-3' id='detailHover'>";
-										output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+										output += "<div class='tm-home-box-3-img-container' id='detailClick'>";
 										output += "<img src="+myData.firstimage+" alt='image' class='img-responsive1'/>";
 										output += "</div>";
 										output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
-										output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+										output += "<p class='tm-home-box-3-description detailViewContent' onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");' id='infoTextArea'>";
 										output += "<span style='font-size:23px;'>"+myData.title+"</span><br>";
 										$.ajax({
 											url:"detailGameInformation.sub",
@@ -339,8 +380,26 @@
 											}
 										});
 										//output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-										output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'>";
+										output += "<a onclick='' class='tm-home-box-2-link' id='tm-home-box-2-link-2'>";
 										output += "<span class='tm-home-box-2-description box-3'>";
+										$.ajax({
+											url:"gradeCheck.com",
+											type:"GET",
+											data:{contentid:contentid},
+											dataType:"json",
+											async:false,
+											success:function(ddatta){console.log("success");
+												if(ddatta == null){
+													output += "<i class='far fa-star' style='font-size:20px;'></i>";
+													output += "<i class='far fa-star' style='font-size:20px;'></i>";
+													output += "<i class='far fa-star' style='font-size:20px;'></i>";
+													output += "<i class='far fa-star' style='font-size:20px;'></i>";
+													output += "<i class='far fa-star' style='font-size:20px;'></i>";
+												}
+											},error:function(ddatta){console.log("fail");
+												
+											}
+										});
 										output += "</span></a>";
 										output += "</div></div></div>";
 										document.getElementById("viewArea").innerHTML += output;
@@ -350,13 +409,15 @@
 										if(myData[i].firstimage != null){
 											contenttypeid = myData[i].contenttypeid;
 											contentid = myData[i].contentid;
+											mapy = myData[i].mapy;
+											mapx = myData[i].mapx;
 											output = "";
 											output += "<div class='tm-home-box-3' id='detailHover'>";
-											output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+											output += "<div class='tm-home-box-3-img-container' id='detailClick'>";
 											output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
 											output += "</div>";
 											output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
-											output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+											output += "<p class='tm-home-box-3-description detailViewContent' onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");' id='infoTextArea'>";
 											output += "<span style='font-size:23px;'>" +myData[i].title+"</span><br>";
 											$.ajax({
 												url:"detailGameInformation.sub",
@@ -393,10 +454,27 @@
 													console.log(ddatta);
 												}
 											});
-											//output += "<input type='hidden' value="+contenttypeid+">";
-											//output += "<input type='hidden' value="+contentid+">";
-											//output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-											output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
+											output += "<a onclick='' class='tm-home-box-2-link' id='tm-home-box-2-link-2'>";
+											output += "<span class='tm-home-box-2-description box-3'>";
+											$.ajax({
+												url:"gradeCheck.com",
+												type:"GET",
+												data:{contentid:contentid},
+												dataType:"json",
+												async:false,
+												success:function(ddatta){console.log("success");
+													if(ddatta == null){
+														output += "<i class='far fa-star' style='font-size:20px;'></i>";
+														output += "<i class='far fa-star' style='font-size:20px;'></i>";
+														output += "<i class='far fa-star' style='font-size:20px;'></i>";
+														output += "<i class='far fa-star' style='font-size:20px;'></i>";
+														output += "<i class='far fa-star' style='font-size:20px;'></i>";
+													}
+												},error:function(ddatta){console.log("fail");
+													
+												}
+											});
+											output += "</span></a>";
 											output += "</div></div></div>";
 											document.getElementById("viewArea").innerHTML += output;
 										}
@@ -506,11 +584,11 @@
 											mapy = myData.mapy;
 											mapx = myData.mapx;
 											output += "<div class='tm-home-box-3' id='detailHover'>";
-											output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");'>";
+											output += "<div class='tm-home-box-3-img-container' id='detailClick');'>";
 											output += "<img src="+myData.firstimage+" alt='image' class='img-responsive1'/>";
 											output += "</div>";
 											output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
-											output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+											output += "<p class='tm-home-box-3-description detailViewContent' onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");' id='infoTextArea'>";
 											output += "<span style='font-size:23px;'>"+myData.title+"</span><br>";
 											$.ajax({
 												url:"detailGameInformation.sub",
@@ -532,7 +610,27 @@
 											output += "</p>";
 											output += "<div class='tm-home-box-2-container'>";
 											output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-											output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");' class='tm-home-box-2-description box-3'>뭐를너야할까</span></a>";
+											output += "<a onclick='' class='tm-home-box-2-link' id='tm-home-box-2-link-2'>";
+											output += "<span class='tm-home-box-2-description box-3'>";
+											$.ajax({
+												url:"gradeCheck.com",
+												type:"GET",
+												data:{contentid:contentid},
+												dataType:"json",
+												async:false,
+												success:function(ddatta){console.log("success");
+													if(ddatta == null){
+														output += "<i class='far fa-star' style='font-size:20px;'></i>";
+														output += "<i class='far fa-star' style='font-size:20px;'></i>";
+														output += "<i class='far fa-star' style='font-size:20px;'></i>";
+														output += "<i class='far fa-star' style='font-size:20px;'></i>";
+														output += "<i class='far fa-star' style='font-size:20px;'></i>";
+													}
+												},error:function(ddatta){console.log("fail");
+													
+												}
+											});
+											output += "</span></a>";
 											output += "</div></div></div>";
 											document.getElementById("viewArea").innerHTML += output;
 										}
@@ -545,11 +643,11 @@
 												mapx = myData[i].mapx;
 												output = "";
 												output += "<div class='tm-home-box-3' id='detailHover'>";
-												output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");'>";
+												output += "<div class='tm-home-box-3-img-container' id='detailClick');'>";
 												output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
 												output += "</div>";
 												output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
-												output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+												output += "<p class='tm-home-box-3-description detailViewContent' onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");' id='infoTextArea'>";
 												output += "<span style='font-size:23px;'>"+myData[i].title+"</span><br>";
 												$.ajax({
 													url:"detailGameInformation.sub",
@@ -570,10 +668,28 @@
 												});
 												output += "</p>";
 												output += "<div class='tm-home-box-2-container'>";
-												output += "<input type='hidden' value="+contenttypeid+">";
-												output += "<input type='hidden' value="+contentid+">";
 												output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-												output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");' class='tm-home-box-2-description box-3'>뭐를너야할까</span></a>";
+												output += "<a onclick='' class='tm-home-box-2-link' id='tm-home-box-2-link-2'>";
+												output += "<span class='tm-home-box-2-description box-3'>";
+												$.ajax({
+													url:"gradeCheck.com",
+													type:"GET",
+													data:{contentid:contentid},
+													dataType:"json",
+													async:false,
+													success:function(ddatta){console.log("success");
+														if(ddatta == null){
+															output += "<i class='far fa-star' style='font-size:20px;'></i>";
+															output += "<i class='far fa-star' style='font-size:20px;'></i>";
+															output += "<i class='far fa-star' style='font-size:20px;'></i>";
+															output += "<i class='far fa-star' style='font-size:20px;'></i>";
+															output += "<i class='far fa-star' style='font-size:20px;'></i>";
+														}
+													},error:function(ddatta){console.log("fail");
+														
+													}
+												});
+												output += "</span></a>";
 												output += "</div></div></div>";
 												document.getElementById("viewArea").innerHTML += output;
 											}
@@ -623,12 +739,14 @@
 										if(data.response.body.items.item.firstimage != null){
 											contenttypeid = myData.contenttypeid;
 											contentid = myData.contentid;
+											mapy = myData.mapy;
+											mapx = myData.mapx;
 											output += "<div class='tm-home-box-3' id='detailHover'>";
-											output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+											output += "<div class='tm-home-box-3-img-container' id='detailClick'>";
 											output += "<img src="+myData.firstimage+" alt='image' class='img-responsive1'/>";
 											output += "</div>";
 											output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
-											output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+											output += "<p class='tm-home-box-3-description detailViewContent' onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");' id='infoTextArea'>";
 											output += "<span style='font-size:23px;'>"+myData.title+"</span><br>";
 											$.ajax({
 												url:"detailGameInformation.sub",
@@ -650,7 +768,27 @@
 											output += "</p>";
 											output += "<div class='tm-home-box-2-container'>";
 											output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-											output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData.title+"</span></a>";
+											output += "<a onclick='' class='tm-home-box-2-link' id='tm-home-box-2-link-2'>";
+											output += "<span class='tm-home-box-2-description box-3'>";
+											$.ajax({
+												url:"gradeCheck.com",
+												type:"GET",
+												data:{contentid:contentid},
+												dataType:"json",
+												async:false,
+												success:function(ddatta){console.log("success");
+													if(ddatta == null){
+														output += "<i class='far fa-star' style='font-size:20px;'></i>";
+														output += "<i class='far fa-star' style='font-size:20px;'></i>";
+														output += "<i class='far fa-star' style='font-size:20px;'></i>";
+														output += "<i class='far fa-star' style='font-size:20px;'></i>";
+														output += "<i class='far fa-star' style='font-size:20px;'></i>";
+													}
+												},error:function(ddatta){console.log("fail");
+													
+												}
+											});
+											output += "</span></a>";
 											output += "</div></div></div>";
 											document.getElementById("viewArea").innerHTML += output;
 										}
@@ -659,13 +797,15 @@
 											if(myData[i].firstimage != null){
 												contenttypeid = myData[i].contenttypeid;
 												contentid = myData[i].contentid;
+												mapy = myData[i].mapy;
+												mapx = myData[i].mapx;
 												output = "";
 												output += "<div class='tm-home-box-3' id='detailHover'>";
-												output += "<div class='tm-home-box-3-img-container' id='detailClick' onclick='detailView("+contentid+","+contenttypeid+");'>";
+												output += "<div class='tm-home-box-3-img-container' id='detailClick'>";
 												output += "<img src="+myData[i].firstimage+" alt='image' class='img-responsive1'>";
 												output += "</div>";
 												output += "<div class='tm-home-box-3-info' id='detailInfo-1'>";
-												output += "<p class='tm-home-box-3-description' id='infoTextArea'>";
+												output += "<p class='tm-home-box-3-description detailViewContent' onclick='detailView("+contentid+","+contenttypeid+","+mapy+","+mapx+");' id='infoTextArea'>";
 												output += "<span style='font-size:23px;'>" +myData[i].title+"</span><br>";
 												$.ajax({
 													url:"detailGameInformation.sub",
@@ -686,10 +826,28 @@
 												});
 												output += "</p>";
 												output += "<div class='tm-home-box-2-container'>";
-												output += "<input type='hidden' value="+contenttypeid+">";
-												output += "<input type='hidden' value="+contentid+">";
 												output += "<a onclick='btnGood("+contenttypeid+","+contentid+");' class='tm-home-box-2-link goodBtn' id='tm-home-box-2-link-1'><i class='fa fa-heart-o tm-home-box-2-icon border-right' id='dibsBtn'></i></a>";
-												output += "<a href='#' class='tm-home-box-2-link' id='tm-home-box-2-link-2'><span class='tm-home-box-2-description box-3'>"+myData[i].title+"</span></a>";
+												output += "<a onclick='' class='tm-home-box-2-link' id='tm-home-box-2-link-2'>";
+												output += "<span class='tm-home-box-2-description box-3'>";
+												$.ajax({
+													url:"gradeCheck.com",
+													type:"GET",
+													data:{contentid:contentid},
+													dataType:"json",
+													async:false,
+													success:function(ddatta){console.log("success");
+														if(ddatta == null){
+															output += "<i class='far fa-star' style='font-size:20px;'></i>";
+															output += "<i class='far fa-star' style='font-size:20px;'></i>";
+															output += "<i class='far fa-star' style='font-size:20px;'></i>";
+															output += "<i class='far fa-star' style='font-size:20px;'></i>";
+															output += "<i class='far fa-star' style='font-size:20px;'></i>";
+														}
+													},error:function(ddatta){console.log("fail");
+														
+													}
+												});
+												output += "</span></a>";
 												output += "</div></div></div>";
 												document.getElementById("viewArea").innerHTML += output;
 											}

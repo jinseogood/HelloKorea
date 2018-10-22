@@ -109,11 +109,16 @@ public class CompanyServiceImpl implements CompanyService {
 		return cd.selectOrderByFiveAvg(sqlSession, cp);
 	}
 
-//	평점탑3
 	@Override
-	public ArrayList<Company2> selectCompanyTop3(Company2 cp2) {
-		return cd.selectCompanyTop3(sqlSession, cp2);
+	public ArrayList<Company2> selectCompanyTop3(Company2 cp) {
+		return cd.selectCompanyTop3(sqlSession, cp);
 	}
+
+	@Override
+	public Company2 selectGradeCheck(Company2 cp) {
+		return cd.selectGradeCheck(sqlSession, cp);
+	}
+
 
 
 
