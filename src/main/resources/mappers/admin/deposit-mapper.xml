@@ -76,10 +76,9 @@
                               JOIN COMPANY C ON(RO.C_ID=C.C_ID)
                               JOIN MEMBER M ON(C.M_ID=M.M_ID)
                               WHERE TO_CHAR(RE.R_EDATE,'YYYYMM') = TO_CHAR(ADD_MONTHS(SYSDATE,-1),'YYYYMM')
-                              AND PD_ID IN ( SELECT PD_ID
-                                             FROM PAY_DETAIL
-                                             GROUP BY PD_ID
-                                             HAVING MOD(PD_ID,2) = 1))                    
+                              AND PA_ID NOT IN ( SELECT PA_ID
+                                          FROM PAY_DETAIL
+                                          WHERE PD_TYPE = 'R'))                    
                               GROUP BY C_ID) USING(C_ID)
                 WHERE C_ID NOT IN( SELECT C_ID
                                    FROM DEPOSIT_HISTORY
@@ -107,10 +106,9 @@
                        JOIN COMPANY C ON(RO.C_ID=C.C_ID)
                        JOIN MEMBER M ON(C.M_ID=M.M_ID)
                        WHERE TO_CHAR(RE.R_EDATE,'YYYYMM') = TO_CHAR(ADD_MONTHS(SYSDATE,-1),'YYYYMM')
-                       AND PD_ID IN ( SELECT PD_ID
-                                      FROM PAY_DETAIL
-                                      GROUP BY PD_ID
-                                      HAVING MOD(PD_ID,2) = 1))                    
+                       AND PA_ID NOT IN ( SELECT PA_ID
+                                          FROM PAY_DETAIL
+                                          WHERE PD_TYPE = 'R'))                  
                 GROUP BY C_ID) USING(C_ID)
          WHERE C_ID NOT IN( SELECT C_ID
                             FROM DEPOSIT_HISTORY
@@ -118,14 +116,14 @@
          <choose>
              <when test="cId != -99">
                  AND C_ID = #{cId}
-                 ORDER BY C_ID
+                 ORDER BY 1
              </when>
              <when test="cName != null">
                  AND C_NAME LIKE '%' || #{cName} || '%'
-                 ORDER BY C_ID
+                 ORDER BY 1
              </when>
              <otherwise>
-                 ORDER BY D_AMOUNT DESC
+                 ORDER BY 4 DESC
              </otherwise>
          </choose>
       </select>
@@ -151,7 +149,7 @@
           FROM DEPOSIT_HISTORY DH
           JOIN COMPANY C ON(DH.C_ID = C.C_ID)
           JOIN MEMBER M ON(C.M_ID = M.M_ID)
-          ORDER BY DH_ID
+          ORDER BY DH_ID DESC
       </select>
       
       <!-- 입금 내역 입금일 검색 카운트 -->
@@ -170,7 +168,7 @@
           JOIN COMPANY C ON(DH.C_ID = C.C_ID)
           JOIN MEMBER M ON(C.M_ID = M.M_ID)
           WHERE TO_CHAR(D_DATE,'YYYYMMDD') BETWEEN #{fromDate} AND #{toDate}
-          ORDER BY DH_ID
+          ORDER BY DH_ID DESC
       </select>
       <!-- 입금 내역 검색 카운트 -->
       <select id="selectSearchWordDepositHistroyListCount" resultType="_int">
@@ -199,11 +197,11 @@
           <choose>
              <when test="cId != -99">
                  AND DH.C_ID = #{cId}
-                 ORDER BY DH_ID
+                 ORDER BY DH_ID DESC
              </when>
              <when test="cName != null">
                  AND C.C_NAME LIKE '%' || #{cName} || '%'
-                 ORDER BY DH_ID
+                 ORDER BY DH_ID DESC
              </when>
              <otherwise>
                  ORDER BY D_AMOUNT DESC
@@ -213,7 +211,7 @@
       
       <!-- 엑셀 파일 셀렉 -->
       <select id="listExcelDownload" resultMap="depositResultSet">
-	      SELECT C_ID, C_NAME, BANK_NUM, ROUND(PRICE*0.85) AS D_AMOUNT, TO_CHAR(SYSDATE,'YYYY-MM') || '-05' AS D_DATE
+	     SELECT C_ID, C_NAME, BANK_NUM, ROUND(PRICE*0.85) AS D_AMOUNT, TO_CHAR(SYSDATE,'YYYY-MM') || '-05' AS D_DATE
          FROM COMPANY C
          JOIN MEMBER M ON(C.M_ID=M.M_ID)
          JOIN ( SELECT C_ID, SUM(PRICE) AS PRICE              

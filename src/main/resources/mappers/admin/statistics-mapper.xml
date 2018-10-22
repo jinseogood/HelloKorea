@@ -158,6 +158,7 @@
                      GROUP BY TO_CHAR(PD_DATE,'YYYY-MM')
                      ORDER BY TERM DESC) USING(TERM)
          WHERE ROWNUM <![CDATA[<]]>= 5
+         ORDER BY TERM DESC
      </select>
      
      <!-- 메인 이번달 수익 -->

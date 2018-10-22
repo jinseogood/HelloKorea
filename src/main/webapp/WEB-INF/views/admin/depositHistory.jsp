@@ -201,7 +201,7 @@ table.type09 td {
 <li><a>&laquo;</a></li>
             </c:if>
             <c:if test="${ pi.currentPage > 1 }">
-                <c:url var="dlistBack" value="selectDepositList.ad">
+                <c:url var="dlistBack" value="selectDepositHistoryList.ad">
                     <c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
                 </c:url>
                 <li><a href="${ dlistBack }">&laquo;</a></li>
@@ -211,7 +211,7 @@ table.type09 td {
                 <li><a href="#" style="background-color:#ddd;">${ p }</a></li>               
                 </c:if>
                 <c:if test="${ p ne pi.currentPage }">
-                    <c:url var="dlistCheck" value="selectDepositList.ad">
+                    <c:url var="dlistCheck" value="selectDepositHistoryList.ad">
                          <c:param name="currentPage" value="${ p }"/>
                     </c:url>
                     <li><a href="${ dlistCheck }">${ p }</a></li>  
@@ -221,7 +221,7 @@ table.type09 td {
                 <li><a>&raquo;</a></li>
             </c:if>
             <c:if test="${ pi.currentPage < pi.maxPage }">
-                <c:url var="dlistEnd" value="selectDepositList.ad">
+                <c:url var="dlistEnd" value="selectDepositHistoryList.ad">
                     <c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
                 </c:url>
                 <li><a href="${ dlistEnd }">&raquo;</a></li>

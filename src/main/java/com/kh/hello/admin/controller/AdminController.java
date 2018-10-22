@@ -975,7 +975,12 @@ public class AdminController {
 		HashMap<String, Object> hmap = new HashMap<String, Object>();
 		hmap.put("reportCount", reportCount);
 		hmap.put("questionCount", questionCount);
-		hmap.put("profit", list.get(0).getProfit());
+		if(list.size()==0){
+			hmap.put("profit", 0);
+		}else{
+			hmap.put("profit", list.get(0).getProfit());
+		}
+		
 		hmap.put("companyCount", companyCount);
 		hmap.put("expirationList", expirationList);
 		return hmap;
