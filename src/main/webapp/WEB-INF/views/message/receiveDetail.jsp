@@ -148,13 +148,17 @@ label{
         	var m_id = ${m.sendId};
      		var ref_id = ${m.msgId};
      		var r_level = 2;
-
-     		if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')}){
-     			window.open('reportWrite.bo?m_id='+m_id+'&ref_id='+ref_id+'&r_level='+r_level, 'reportWrite', 'height=380, width=450, top=80, left=400 resizable=none, scrollbars=no');
-     		}
-     		else{
-     			alert("로그인이 필요한 서비스 입니다.");
-     		}
+			
+     		if( m_id != 0 ){
+     			if(${ sessionScope.loginUser != null && sessionScope.loginUser.mType.equals('1')}){
+     				window.open('reportWrite.bo?m_id='+m_id+'&ref_id='+ref_id+'&r_level='+r_level, 'reportWrite', 'height=380, width=450, top=80, left=400 resizable=none, scrollbars=no');
+     			}
+     			else{
+     				alert("로그인이 필요한 서비스 입니다.");
+     			}
+     		}else{
+     			alert("관리자 메세지는 신고할 수 없습니다.");
+     		}	
          }
       }
       function deleteMsg(){

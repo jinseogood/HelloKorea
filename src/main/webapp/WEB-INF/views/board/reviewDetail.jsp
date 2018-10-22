@@ -92,8 +92,8 @@ body{ margin:50px 0px; }
 .stage{ min-height:220px; max-height:400px; overflow-y:auto; }
 .detailImgArea{
 	display:inline-block;
-	width:200px;
-	height:200px;
+	width:220px;
+	height:210px;
 }
 </style>
 </head>
@@ -118,7 +118,14 @@ body{ margin:50px 0px; }
       		<div class="row line_b" >
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style = "height:auto">
                <div class="tm-about-box-1" style = "height:220px; padding:10px 10px">
-                  <a onclick = "member_info(this);"><img src="${ contextPath }/resources/img/about-4.jpg" alt="img" class="tm-about-box-1-img" style = "margin:0 auto 10px"></a>
+                  <a onclick = "member_info(this);">
+                  	<c:if test="${ b.attach ne null }"> 	
+                  		<img src="${ contextPath }/resources/uploadFiles/member/${ b.attach }" alt="img" class="tm-about-box-1-img" style = "margin:0 auto 10px; width:140px; height:140px;">
+                  	</c:if>
+                  	<c:if test="${ b.attach eq null }"> 	
+                  		<img src="${ contextPath }/resources/img/about-4.jpg" alt="img" class="tm-about-box-1-img" style = "margin:0 auto 10px;">
+                  	</c:if>
+                  </a>
                   <h3 class="tm-about-box-1-title" style = "margin-bottom:5px">${ b.nickname }<span>( ${ b.national })</span></h3>
                   <div class = 'member_info' style = 'border-radius: 10px; visibility:hidden; position:absolute; background-color:lightgray; left:-133px; top:-10px; width:200px; height:200px; z-index:999;'>
 				  <div>
@@ -137,10 +144,6 @@ body{ margin:50px 0px; }
 							</div>
 							</div>
                   <div class="gray-text">
-                     <a href="#" class="tm-social-icon"><i class="fa fa-twitter"></i></a>
-                     <a href="#" class="tm-social-icon"><i class="fa fa-facebook"></i></a>
-                     <a href="#" class="tm-social-icon"><i class="fa fa-pinterest"></i></a>
-                     <a href="#" class="tm-social-icon"><i class="fa fa-google-plus"></i></a>
                   </div>
                </div>
             </div>

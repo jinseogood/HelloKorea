@@ -29,7 +29,7 @@
      <!-- 신고인서트 -->
      <insert id="insertReport" parameterType="rReport">
           INSERT INTO REPORT_HISTORY VALUES(SEQ_R_RECORD_ID.NEXTVAL, #{reason},
-                                       SYSDATE, #{r_level}, #{m_id}, #{r_target}, #{ref_id}, 'N')
+                                       SYSDATE, #{r_level}, #{m_id}, #{r_target}, #{ref_id}, NULL)
      </insert>
      
      <!-- 신고 업데이트 -->

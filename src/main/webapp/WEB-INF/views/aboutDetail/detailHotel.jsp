@@ -890,7 +890,11 @@
 							output += "<div class='row line_b'>";
 							output += "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-12' style = 'height:auto'>";
 							output += "<div class='tm-about-box-1' style = 'height:220px; padding:10px 10px;'>";
-							output += "<a onclick = member_info(this);><img src='${ contextPath }/resources/img/about-4.jpg' alt='img' class='tm-about-box-1-img' style = 'margin:0 auto 10px;'></a>";
+								if(Q[i].attach != null){
+									output += "<a onclick = member_info(this);><img src='${ contextPath }/resources/uploadFiles/member/"+Q[i].attach+"' alt='img' class='tm-about-box-1-img' style = 'margin:0 auto 10px; width:140px; height:140px;'></a>";
+								}else{
+									output += "<a onclick = member_info(this);><img src='${ contextPath }/resources/img/about-4.jpg' alt='img' class='tm-about-box-1-img' style = 'margin:0 auto 10px;'></a>";
+								}
 							output += "<h3 class='tm-about-box-1-title' style = 'margin-bottom:5px;'>"+Q[i].nickname+"<span>( "+Q[i].national+" )</span></h3>";
 							output += "<div class = 'member_info' style = 'border-radius: 10px; visibility:hidden; position:absolute; background-color:lightgray; left:-133px; top:-10px; width:200px; height:200px; z-index:999;'>";
 							output += "<div><h3>"+Q[i].nickname+"</h3><input type='hidden' id='receiveIdForq"+i+"' value="+Q[i].m_id+"><input type='hidden' id='nicknameForq"+i+"' value="+Q[i].nickname+"><input type='hidden' id='mIdForq' value="+${sessionScope.loginUser.mId}+"></div>";
@@ -904,10 +908,6 @@
 							output += "</div>";
 							output += "</div>";
 							output += "<div class='gray-text'>";
-							output += "<a href='#' class='tm-social-icon'><i class='fa fa-twitter'></i></a>";
-							output += "<a href='#' class='tm-social-icon'><i class='fa fa-facebook'></i></a>";
-							output += "<a href='#' class='tm-social-icon'><i class='fa fa-pinterest'></i></a>";
-							output += "<a href='#' class='tm-social-icon'><i class='fa fa-google-plus'></i></a>";
 							output += "</div>";
 							output += "</div>";
 							output += "</div>";	
@@ -1059,7 +1059,11 @@
 							output += "<div class='row line_b'>";
 							output += "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-12' style = 'height:220px'>";
 							output += "<div class='tm-about-box-1' style = 'height:220px; padding:10px 10px;'>";
-							output += "<a onclick = member_info(this);><img src='${ contextPath }/resources/img/about-4.jpg' alt='img' class='tm-about-box-1-img' style = 'margin:0 auto 10px;'></a>";
+							if(review[i].attach != null){
+								output += "<a onclick = member_info(this);><img src='${ contextPath }/resources/uploadFiles/member/"+review[i].attach+"' alt='img' class='tm-about-box-1-img' style = 'margin:0 auto 10px; width:140px; height:140px;'></a>";
+							}else{
+								output += "<a onclick = member_info(this);><img src='${ contextPath }/resources/img/about-4.jpg' alt='img' class='tm-about-box-1-img' style = 'margin:0 auto 10px;'></a>";
+							}
 							output += "<h3 class='tm-about-box-1-title' style = 'margin-bottom:5px;'>"+review[i].nickname+"<span>( "+review[i].national+" )</span></h3>";
 							output += "<div class = 'member_info' style = 'border-radius: 10px; visibility:hidden; position:absolute; background-color:lightgray; left:-133px; top:-10px; width:200px; height:200px; z-index:999;'>";
 							output += "<div><h3>"+review[i].nickname+"</h3><input type='hidden' id='receiveIdForMsg"+i+"' value="+review[i].m_id+"><input type='hidden' id='nicknameForMsg"+i+"' value="+review[i].nickname+"><input type='hidden' id='mIdForMsg' value="+${sessionScope.loginUser.mId}+"></div>";
@@ -1073,10 +1077,6 @@
 							output += "</div>";
 							output += "</div>";
 							output += "<div class='gray-text'>";
-							output += "<a href='#' class='tm-social-icon'><i class='fa fa-twitter'></i></a>";
-							output += "<a href='#' class='tm-social-icon'><i class='fa fa-facebook'></i></a>";
-							output += "<a href='#' class='tm-social-icon'><i class='fa fa-pinterest'></i></a>";
-							output += "<a href='#' class='tm-social-icon'><i class='fa fa-google-plus'></i></a>";
 							output += "</div>";
 							output += "</div>";
 							output += "</div>";

@@ -306,7 +306,7 @@ public class BoardPageController {
 		for(int i = 0 ; i < list2.size() ; i++){
 			list2.get(i).setCreate_date(list2.get(i).getCreate_date().substring(0, 10));
 		}
-		
+
 		mv.addObject("list2", list2);
 		mv.addObject("pi2", pi2);
 		mv.addObject("listCount2", listCount2);
