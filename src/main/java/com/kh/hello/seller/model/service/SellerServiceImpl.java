@@ -15,6 +15,9 @@ import com.kh.hello.common.PageInfo;
 import com.kh.hello.seller.model.dao.SellerDao;
 import com.kh.hello.seller.model.vo.Company;
 import com.kh.hello.seller.model.vo.CompanyGoodStat;
+import com.kh.hello.seller.model.vo.CompanyOKResult;
+import com.kh.hello.seller.model.vo.CompanyQnAResult;
+import com.kh.hello.seller.model.vo.CompanyReviewResult;
 import com.kh.hello.seller.model.vo.CompanySaleStat;
 import com.kh.hello.seller.model.vo.OneProduct;
 import com.kh.hello.seller.model.vo.Registration;
@@ -56,6 +59,24 @@ public class SellerServiceImpl implements SellerService{
 	@Override
 	public ArrayList<CompanySaleStat> selectSaleStats(int mId) {
 		return sd.selectSaleStats(mId, sqlSession);
+	}
+	
+	//판매자 마이페이지 메인 업체 승인 메시지
+	@Override
+	public ArrayList<CompanyOKResult> selectOKList(int mId) {
+		return sd.selectOKList(mId, sqlSession);
+	}
+	
+	//판매자 마이페이지 메인 새 리뷰 메시지
+	@Override
+	public ArrayList<CompanyReviewResult> selectReviewList(int mId) {
+		return sd.selectReviewList(mId, sqlSession);
+	}
+	
+	//판매자 마이페이지 메인 새 QnA 메시지
+	@Override
+	public ArrayList<CompanyQnAResult> selectQnAList(int mId) {
+		return sd.selectQnAList(mId, sqlSession);
 	}
 	
 	//업체명 중복 조회

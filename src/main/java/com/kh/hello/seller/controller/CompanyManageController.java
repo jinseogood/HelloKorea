@@ -27,6 +27,9 @@ import com.kh.hello.member.model.vo.Member;
 import com.kh.hello.seller.model.service.SellerService;
 import com.kh.hello.seller.model.vo.Company;
 import com.kh.hello.seller.model.vo.CompanyGoodStat;
+import com.kh.hello.seller.model.vo.CompanyOKResult;
+import com.kh.hello.seller.model.vo.CompanyQnAResult;
+import com.kh.hello.seller.model.vo.CompanyReviewResult;
 import com.kh.hello.seller.model.vo.CompanySaleStat;
 import com.kh.hello.seller.model.vo.OneProduct;
 import com.kh.hello.seller.model.vo.Registration;
@@ -67,7 +70,6 @@ public class CompanyManageController {
 			return "common/errorPage";
 		}
 		
-		
 	}
 	
 	//판매자 마이페이지 메인 업체 평점 통계
@@ -96,6 +98,31 @@ public class CompanyManageController {
 		hmap.put("saleList", list);
 			
 		return hmap;
+	}
+	
+	//판매자 마이페이지 메인 안내 메시지 조회
+	@RequestMapping(value="selectNotice.sell")
+	public @ResponseBody HashMap<String, Object> selectNotice(HttpServletRequest request){
+		Member m=(Member) request.getSession().getAttribute("loginUser");
+			
+		ArrayList<CompanyOKResult> okList=ss.selectOKList(m.getmId());
+		ArrayList<CompanyReviewResult> reviewList=ss.selectReviewList(m.getmId());
+		ArrayList<CompanyQnAResult> qnaList=ss.selectQnAList(m.getmId());
+		
+		HashMap<String, Object> hmap=new HashMap<String, Object>();
+		
+		if(okList != null){
+			hmap.put("okList", okList);
+		}
+		if(reviewList != null){
+			hmap.put("rList", reviewList);
+		}
+		if(qnaList != null){
+			hmap.put("qList", qnaList);
+		}
+		
+		return hmap;
+			
 	}
 	
 	//업체 등록

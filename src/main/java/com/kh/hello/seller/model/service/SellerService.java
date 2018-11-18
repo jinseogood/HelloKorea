@@ -6,6 +6,9 @@ import com.kh.hello.common.Attachment;
 import com.kh.hello.common.PageInfo;
 import com.kh.hello.seller.model.vo.Company;
 import com.kh.hello.seller.model.vo.CompanyGoodStat;
+import com.kh.hello.seller.model.vo.CompanyOKResult;
+import com.kh.hello.seller.model.vo.CompanyQnAResult;
+import com.kh.hello.seller.model.vo.CompanyReviewResult;
 import com.kh.hello.seller.model.vo.CompanySaleStat;
 import com.kh.hello.seller.model.vo.OneProduct;
 import com.kh.hello.seller.model.vo.Registration;
@@ -29,6 +32,15 @@ public interface SellerService {
 	
 	//판매자 마이페이지 메인 수익 통계
 	ArrayList<CompanySaleStat> selectSaleStats(int mId);
+	
+	//판매자 마이페이지 메인 업체 승인 메시지
+	ArrayList<CompanyOKResult> selectOKList(int mId);
+
+	//판매자 마이페이지 메인 새 리뷰 알림 메시지
+	ArrayList<CompanyReviewResult> selectReviewList(int mId);
+
+	//판매자 마이페이지 메인 새 QnA 알림 메시지
+	ArrayList<CompanyQnAResult> selectQnAList(int mId);
 	
 	//업체명 중복 조회
 	int duplicationTitle(String title);
